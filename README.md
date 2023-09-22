@@ -1,0 +1,1 @@
+Some writings, mainly exists to test quarto's userabiity.
