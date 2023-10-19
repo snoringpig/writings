@@ -1,5 +1,5 @@
 
 Some writings, mainly exists to test [Quarto](https://quarto.org/).
 
-- [Sampling](sampling.html)
-- [Break Nested For Loop](break_nested_for_loop.html)
+- [Inverse sampling transform](sampling.html)
+- [How to break nested for loop, elegantly](break_nested_for_loop.html)
