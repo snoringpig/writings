@@ -1,14 +1,7 @@
 project:
   type: website
+  output-dir: docs
   render:
-    - "README.qmd"
     - "blog.qmd"
     - "posts/*.qmd"
     - "!drafts.ipynb"
-
-website:
-  title: "today"
-  navbar:
-    left:
-      - href: README.qmd
-        text: Home
