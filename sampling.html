@@ -145,11 +145,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="application-uniform-sampling-on-a-disk" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="application-uniform-sampling-on-a-disk"><span class="header-section-number">2</span> Application: Uniform Sampling on a Disk</h2>
-<p>Assume we are looking at a unit disk.</p>
-<p>Then we take <span class="math inline">r\cos(\theta), r\sin(\theta)</span>, where</p>
+<p>Now, we want to perform uniform sampling on the unit disk. We use polar coordinates; more specifically, we take <span class="math inline">r\cos(\theta), r\sin(\theta)</span>, where</p>
 <ol type="1">
-<li>Sample <span class="math inline">r \in [0,1]</span> such that <span class="math inline">P(r) \propto r</span> (<span class="math inline">\Rightarrow</span> <span class="math inline">P(r) = 2r</span>)</li>
-<li>Sample <span class="math inline">\theta \sim U(0,2\pi)</span></li>
+<li><span class="math inline">r \in [0,1]</span> such that <span class="math inline">P(r) \propto r</span> (<span class="math inline">\Rightarrow</span> <span class="math inline">P(r) = 2r</span>)</li>
+<li><span class="math inline">\theta \sim U(0,2\pi)</span></li>
 </ol>
 <p>The key lies in 1., that is, how to sample <span class="math inline">r</span> such that <span class="math inline">P(r) = 2r</span>. Let <span class="math inline">X</span> be the random variable such that <span class="math inline">P(X = r) = r</span>. Then, <span class="math inline">F_X(x) = \int_0^x 2r\,dr = x^2</span>, and thus <span class="math inline">F_X^{-1}(y) = \sqrt{y}</span>.</p>
 <section id="code" class="level3" data-number="2.1">
@@ -182,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="sampling_files/figure-html/cell-2-output-1.png" width="389" height="389"></p>
+<p><img src="sampling_files/figure-html/cell-2-output-1.png" width="388" height="389"></p>
 </div>
 </div>
 </section>

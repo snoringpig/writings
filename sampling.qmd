@@ -30,14 +30,14 @@ $$
 Thus $X = F_X^{-1}(U)$.
 
 ## Application: Uniform Sampling on a Disk
-Assume we are looking at a unit disk.
+Now, we want to perform uniform sampling on the unit disk.
+We use polar coordinates; more specifically, we take $r\cos(\theta), r\sin(\theta)$, where
 
-Then we take $r\cos(\theta), r\sin(\theta)$, where
+1. $r \in [0,1]$ such that $P(r) \propto r$ ($\Rightarrow$ $P(r) = 2r$)
+2. $\theta \sim U(0,2\pi)$
 
-1. Sample $r \in [0,1]$ such that $P(r) \propto r$ ($\Rightarrow$ $P(r) = 2r$)
-2. Sample $\theta \sim U(0,2\pi)$
-
-The key lies in 1., that is, how to sample $r$ such that $P(r) = 2r$. Let $X$ be the random variable such that $P(X = r) = r$.
+The key lies in 1., that is, how to sample $r$ such that $P(r) = 2r$. 
+Let $X$ be the random variable such that $P(X = r) = r$.
 Then, $F_X(x) = \int_0^x 2r\,dr = x^2$, and thus $F_X^{-1}(y) = \sqrt{y}$.
 
 ### Code
