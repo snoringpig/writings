@@ -1,0 +1,14 @@
+project:
+  type: website
+  render:
+    - "README.qmd"
+    - "blog.qmd"
+    - "posts/*.qmd"
+    - "!drafts.ipynb"
+
+website:
+  title: "today"
+  navbar:
+    left:
+      - href: README.qmd
+        text: Home
