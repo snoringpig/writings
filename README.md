@@ -1,6 +1,5 @@
-# Blog
 
-Some writings, mainly to test [Quarto](https://quarto.org).
+Some writings, mainly exists to test quarto’s usabiity.
 
-- [Hpw to Break Nested For Loop](break_nested_for_loop.html)
-- [Inverse Sampling Trasnform](sampling.html)
+- [Sampling](sampling.html)
+- [Break Nested For Loop](break_nested_for_loop.html)
