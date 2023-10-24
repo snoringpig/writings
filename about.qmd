@@ -15,8 +15,6 @@ about:
   #     href: https://github.com
 
 ---
-
-Testing [Quarto](https://quarto.org)
 $$
 \int_{M}d\omega = \int_{\partial M}\omega
 $$

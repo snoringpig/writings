@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "A No Mand Land"
+  title: "No Man's Land"
   navbar:
     right:
       - about.qmd
