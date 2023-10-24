@@ -9,7 +9,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "A No Mand Land",
+    "title": "No Man's Land",
     "section": "",
     "text": "Date\n\n\nTitle\n\n\n\n\n\n\nOct 19, 2023\n\n\nInverse Sampling Transform\n\n\n\n\nSep 22, 2023\n\n\nHow to Break Nested For Loop\n\n\n\n\n\n\nNo matching items"
   },
@@ -67,6 +67,6 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Testing Quarto \\[\n\\int_{M}d\\omega = \\int_{\\partial M}\\omega\n\\]"
+    "text": "\\[\n\\int_{M}d\\omega = \\int_{\\partial M}\\omega\n\\]"
   }
 ]
