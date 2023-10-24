@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-10-19">
 
-<title>Inverse Sampling Transform</title>
+<title>A No Mand Land - Inverse Sampling Transform</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
@@ -74,11 +75,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -111,13 +112,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body>
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">A No Mand Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -165,16 +192,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Throughout this article, we use the following notations:</p>
 <ul>
 <li><span class="math inline">F_X</span>: the cumulative distribution of a random variable <span class="math inline">X</span></li>
-<li><span class="math inline">U = U(0,1)</span>: the uniform distribution function on <span class="math inline">[0,1]</span>.</li>
+<li><span class="math inline">U(a,b)</span>: the uniform distribution function on <span class="math inline">[a,b]</span>; <span class="math inline">U := U(0,1)</span></li>
 </ul>
 <section id="background" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="background"><span class="header-section-number">1</span> Background</h2>
-<p><strong>Claim.</strong> For any random variable <span class="math inline">X</span>, we have <span class="math display">
+<div id="prp-transform" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 </strong></span>For any random variable <span class="math inline">X</span>, we have <span class="math display">
     X = F_X^{-1}(U).
 </span></p>
-<p><em>Proof.</em> For any <span class="math inline">x</span>, we have <span class="math display">
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For any <span class="math inline">x</span>, we have <span class="math display">
     P(X \le x) = F_X(x) = P(U \le F_X(x)) = P(F_X^{-1}(U) \le x).
 </span> Thus <span class="math inline">X = F_X^{-1}(U)</span>.</p>
+</div>
 </section>
 <section id="application-uniform-sampling-on-a-disk" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="application-uniform-sampling-on-a-disk"><span class="header-section-number">2</span> Application: Uniform Sampling on a Disk</h2>
@@ -183,10 +214,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">r \in [0,1]</span> such that <span class="math inline">P(r) \propto r</span> (<span class="math inline">\Rightarrow</span> <span class="math inline">P(r) = 2r</span>)</li>
 <li><span class="math inline">\theta \sim U(0,2\pi)</span></li>
 </ol>
-<p>The key lies in 1., that is, how to sample <span class="math inline">r</span> such that <span class="math inline">P(r) = 2r</span>. Let <span class="math inline">X</span> be the random variable such that <span class="math inline">P(X = r) = r</span>. Then, <span class="math inline">F_X(x) = \int_0^x 2r\,dr = x^2</span>, and thus <span class="math inline">F_X^{-1}(y) = \sqrt{y}</span>.</p>
+<p>The key lies in 1., that is, how to sample <span class="math inline">r</span> such that <span class="math inline">P(r) = 2r</span>. Let <span class="math inline">X</span> be the random variable such that <span class="math inline">P(X = r) = 2r</span>. Then, <span class="math inline">F_X(x) = \int_0^x 2r\,dr = x^2</span>, and thus <span class="math inline">F_X^{-1}(y) = \sqrt{y}</span>.</p>
 <section id="code" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="code"><span class="header-section-number">2.1</span> Code</h3>
-<p>With above in mind, we sample <span class="math inline">10000</span> points on the unit disk, see <span class="citation" data-cites="uniform-sampling-unit-disk">@uniform-sampling-unit-disk</span></p>
+<p>With above in mind, we sample <span class="math inline">10000</span> points on the unit disk, see <a href="#fig-uniform-sampling-unit-disk">Figure&nbsp;1</a>.</p>
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -214,10 +245,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="uniform-sampling-unit-disk" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-uniform-sampling-unit-disk" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="sampling_files/figure-html/uniform-sampling-unit-disk-output-1.png" width="388" height="389" class="figure-img"></p>
-<figcaption class="figure-caption">Sampling 10000 points uniformly on the unit disk.</figcaption>
+<p><img src="sampling_files/figure-html/fig-uniform-sampling-unit-disk-output-1.png" width="389" height="389" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Sampling 10000 points uniformly on the unit disk.</figcaption>
 </figure>
 </div>
 </div>

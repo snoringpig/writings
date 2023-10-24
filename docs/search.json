@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "draft.html",
+    "href": "draft.html",
+    "title": "Uniform Sampling on a Unit Disk",
+    "section": "",
+    "text": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Sample the points\nN = 10000\ninv_cdf = lambda x: np.sqrt(x)\nR = np.vectorize(inv_cdf)(np.random.uniform(0, 1, N))\nT = np.random.uniform(0, 2*np.pi, N)\npoints = [(r * np.cos(t), r * np.sin(t)) for r, t in zip(R, T)]\n\n# 2. Make a scatter plot\nx, y = zip(*points)\nplt.scatter(x, y, s=1)\nplt.xticks([])\nplt.yticks([])\nax = plt.gca()\nax.set_aspect('equal')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nax.spines['bottom'].set_visible(False)\nax.spines['left'].set_visible(False)\nplt.show()"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "A No Mand Land",
+    "section": "",
+    "text": "Date\n\n\nTitle\n\n\n\n\n\n\nOct 19, 2023\n\n\nInverse Sampling Transform\n\n\n\n\nSep 22, 2023\n\n\nHow to Break Nested For Loop\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "posts/sampling.html",
     "href": "posts/sampling.html",
     "title": "Inverse Sampling Transform",
@@ -11,21 +25,14 @@
     "href": "posts/sampling.html#background",
     "title": "Inverse Sampling Transform",
     "section": "1 Background",
-    "text": "1 Background\nClaim. For any random variable X, we have \n    X = F_X^{-1}(U).\n\nProof. For any x, we have \n    P(X \\le x) = F_X(x) = P(U \\le F_X(x)) = P(F_X^{-1}(U) \\le x).\n Thus X = F_X^{-1}(U)."
+    "text": "1 Background\n\nProposition 1 For any random variable X, we have \n    X = F_X^{-1}(U).\n\n\n\nProof. For any x, we have \n    P(X \\le x) = F_X(x) = P(U \\le F_X(x)) = P(F_X^{-1}(U) \\le x).\n Thus X = F_X^{-1}(U)."
   },
   {
     "objectID": "posts/sampling.html#application-uniform-sampling-on-a-disk",
     "href": "posts/sampling.html#application-uniform-sampling-on-a-disk",
     "title": "Inverse Sampling Transform",
     "section": "2 Application: Uniform Sampling on a Disk",
-    "text": "2 Application: Uniform Sampling on a Disk\nNow, we want to perform uniform sampling on the unit disk. We use polar coordinates; more specifically, we take r\\cos(\\theta), r\\sin(\\theta), where\n\nr \\in [0,1] such that P(r) \\propto r (\\Rightarrow P(r) = 2r)\n\\theta \\sim U(0,2\\pi)\n\nThe key lies in 1., that is, how to sample r such that P(r) = 2r. Let X be the random variable such that P(X = r) = r. Then, F_X(x) = \\int_0^x 2r\\,dr = x^2, and thus F_X^{-1}(y) = \\sqrt{y}.\n\n2.1 Code\nWith above in mind, we sample 10000 points on the unit disk, see @uniform-sampling-unit-disk\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Sample the points\nN = 10000\ninv_cdf = lambda x: np.sqrt(x)\nR = np.vectorize(inv_cdf)(np.random.uniform(0, 1, N))\nT = np.random.uniform(0, 2*np.pi, N)\npoints = [(r * np.cos(t), r * np.sin(t)) for r, t in zip(R, T)]\n\n# 2. Make a scatter plot\nx, y = zip(*points)\nplt.scatter(x, y, s=1)\nplt.xticks([])\nplt.yticks([])\nax = plt.gca()\nax.set_aspect('equal')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nax.spines['bottom'].set_visible(False)\nax.spines['left'].set_visible(False)\nplt.show()\n\n\n\n\n\nSampling 10000 points uniformly on the unit disk."
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Writings",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\nTitle\n\n\n\n\n\n\nOct 19, 2023\n\n\nInverse Sampling Transform\n\n\n\n\nSep 22, 2023\n\n\nHow to Break Nested For Loop\n\n\n\n\n\n\nNo matching items"
+    "text": "2 Application: Uniform Sampling on a Disk\nNow, we want to perform uniform sampling on the unit disk. We use polar coordinates; more specifically, we take r\\cos(\\theta), r\\sin(\\theta), where\n\nr \\in [0,1] such that P(r) \\propto r (\\Rightarrow P(r) = 2r)\n\\theta \\sim U(0,2\\pi)\n\nThe key lies in 1., that is, how to sample r such that P(r) = 2r. Let X be the random variable such that P(X = r) = 2r. Then, F_X(x) = \\int_0^x 2r\\,dr = x^2, and thus F_X^{-1}(y) = \\sqrt{y}.\n\n2.1 Code\nWith above in mind, we sample 10000 points on the unit disk, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Sample the points\nN = 10000\ninv_cdf = lambda x: np.sqrt(x)\nR = np.vectorize(inv_cdf)(np.random.uniform(0, 1, N))\nT = np.random.uniform(0, 2*np.pi, N)\npoints = [(r * np.cos(t), r * np.sin(t)) for r, t in zip(R, T)]\n\n# 2. Make a scatter plot\nx, y = zip(*points)\nplt.scatter(x, y, s=1)\nplt.xticks([])\nplt.yticks([])\nax = plt.gca()\nax.set_aspect('equal')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nax.spines['bottom'].set_visible(False)\nax.spines['left'].set_visible(False)\nplt.show()\n\n\n\n\n\nFigure 1: Sampling 10000 points uniformly on the unit disk."
   },
   {
     "objectID": "posts/break_for.html",
@@ -54,5 +61,12 @@
     "title": "How to Break Nested For Loop",
     "section": "3 Triple Nested for Loop",
     "text": "3 Triple Nested for Loop\nOK, we’ve learnt enough. Now, let’s test it on a triple nested for loop!\n\nfor i in range(3):\n    for j in range(4):\n        for k in range(2):\n            print(i, j, k)\n            if (i,j,k) == (1,2,0):\n                break\n        else:\n            continue\n        break\n    else:\n        continue\n    break\n\n0 0 0\n0 0 1\n0 1 0\n0 1 1\n0 2 0\n0 2 1\n0 3 0\n0 3 1\n1 0 0\n1 0 1\n1 1 0\n1 1 1\n1 2 0"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Testing Quarto \\[\n\\int_{M}d\\omega = \\int_{\\partial M}\\omega\n\\]"
   }
 ]

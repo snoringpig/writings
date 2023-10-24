@@ -1,7 +1,15 @@
 project:
   type: website
   output-dir: docs
-  render:
-    - "blog.qmd"
-    - "posts/*.qmd"
-    - "!drafts.ipynb"
+
+website:
+  title: "A No Mand Land"
+  navbar:
+    right:
+      - about.qmd
+      # - icon: github
+      #   href: https://github.com/snoringpig
+format:
+  html:
+    theme: cosmo
+    css: styles.css
