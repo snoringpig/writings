@@ -1,4 +1,5 @@
 /.quarto/
 /posts/
+.DS_Store
 _quarto.yml
 draft.ipynb
