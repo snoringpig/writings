@@ -1,0 +1,88 @@
+---
+title: "How to Break Nested For Loop"
+date: 2023-09-22
+toc: true
+jupyter: python3
+number-sections: true
+highlight-style: monokai
+format:
+  html:
+    code-fold: false
+    html-math-method: katex
+categories: [code]
+---
+
+Using a few examples, we demonstrate how to conditionally break out of nested for loop using `for`-`else` clause.
+
+- While the same break logic can be achieved by iterating through `itertools.product`, sometimes, we do not just want to break, instead, we want more control (e.g. do some side index-dependent tasks).
+
+## Single Nested `for` Loop
+
+In a `for`-`else` clause, `else` is reached precisely when the `for` loop is not broken. 
+We give 2 examples to demonstrate this.
+
+```{python}
+for i in range(3):
+    if i == 4:
+        break
+else: # reached iff the for loop was broken
+    print("Finished for loop layer 1")
+```
+
+```{python}
+for i in range(3):
+    if i == 2:
+        break
+else: # reached iff the for loop was broken
+    print("Finished for loop layer 1")
+```
+
+## Double Nested `for` Loop
+
+Here, the program halts right after `(i,j)` reaches `(2,1)`, which is what we want.
+
+```{python}
+for i in range(4): # Layer 1
+    print(f"Layer 1 for i = {i}: start")
+    for j in range(3): # Layer 2
+        print(f"  {i} {j}")
+        if (i, j) == (2, 1):
+            break
+    else: # reached <=> for loop layer 2 was broken
+        print(f"  Layer 2 for i = {i}: finished")
+        continue # continuing for the enclosing for loop (layer 1), thus ignoring the "break"
+    break # reached <=> continue was not called <=> for loop layer 2 was broken
+```
+
+Here, no `continue` in the `else` part. 
+Thus, the program breaks unconditionally after finishing its job in the `i==0` round.
+
+```{python}
+for i in range(4):
+    print(f"Layer 1 for i = {i}: start")
+    for j in range(3):
+        print(f"  {i} {j}")
+        if (i, j) == (2, 1):
+            break
+    else: # reached <=> the for loop layer 2 was broken
+        print(f"  Layer 2 for i = {i}: completed")
+    break # always reached at i = 0
+```
+
+## Triple Nested `for` Loop
+
+OK, we've learnt enough. Now, let's test it on a triple nested `for` loop!
+```{python}
+for i in range(3):
+    for j in range(4):
+        for k in range(2):
+            print(i, j, k)
+            if (i,j,k) == (1,2,0):
+                break
+        else:
+            continue
+        break
+    else:
+        continue
+    break
+```

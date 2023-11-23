@@ -1,5 +1,6 @@
 /.quarto/
-/posts/
+posts/*
+!posts/*.qmd
 .DS_Store
 _quarto.yml
 draft.ipynb

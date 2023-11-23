@@ -1,0 +1,75 @@
+---
+title: "Inverse Sampling Transform"
+date: 2023-10-19
+toc: true
+jupyter: python3
+number-sections: true
+highlight-style: monokai
+format:
+  html:
+    code-fold: true
+    html-math-method: katex
+categories: [code]
+---
+
+Throughout this article, we use the following notations:
+
+- $F_X$: the cumulative distribution of a random variable $X$
+- $U(a,b)$: the uniform distribution function on $[a,b]$; $U := U(0,1)$
+
+## Background
+::: {#prp-transform} 
+For any random variable $X$, we have 
+$$
+    X = F_X^{-1}(U).
+$$
+:::
+
+::: {.proof}
+For any $x$, we have
+$$
+    P(X \le x) = F_X(x) = P(U \le F_X(x)) = P(F_X^{-1}(U) \le x).
+$$
+Thus $X = F_X^{-1}(U)$.
+:::
+
+## Application: Uniform Sampling on a Disk
+Now, we want to perform uniform sampling on the unit disk.
+We use polar coordinates; more specifically, we take $r\cos(\theta), r\sin(\theta)$, where
+
+1. $r \in [0,1]$ such that $P(r) \propto r$ ($\Rightarrow$ $P(r) = 2r$)
+2. $\theta \sim U(0,2\pi)$
+
+The key lies in 1., that is, how to sample $r$ such that $P(r) = 2r$. 
+Let $X$ be the random variable such that $P(X = r) = 2r$.
+Then, $F_X(x) = \int_0^x 2r\,dr = x^2$, and thus $F_X^{-1}(y) = \sqrt{y}$.
+
+### Code
+With above in mind, we sample $10000$ points on the unit disk, see @fig-uniform-sampling-unit-disk.
+```{python}
+#| label: fig-uniform-sampling-unit-disk
+#| fig-cap: "Sampling 10000 points uniformly on the unit disk."
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Sample the points
+N = 10000
+inv_cdf = lambda x: np.sqrt(x)
+R = np.vectorize(inv_cdf)(np.random.uniform(0, 1, N))
+T = np.random.uniform(0, 2*np.pi, N)
+points = [(r * np.cos(t), r * np.sin(t)) for r, t in zip(R, T)]
+
+# 2. Make a scatter plot
+x, y = zip(*points)
+plt.scatter(x, y, s=1)
+plt.xticks([])
+plt.yticks([])
+ax = plt.gca()
+ax.set_aspect('equal')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_visible(False)
+ax.spines['left'].set_visible(False)
+plt.show()
+```

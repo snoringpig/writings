@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/bicycle_wheel.html",
       "/posts/sampling.html",
       "/posts/break_for.html"
     ]

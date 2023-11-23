@@ -1,0 +1,95 @@
+---
+title: "A Bicycle Wheel"
+date: 2023-11-21
+number-sections: true
+format: 
+    html:
+        code-overflow: wrap
+        highlight-style: zenburn
+categories: [art]
+---
+
+Recently, I was introduced the book [The Bicycle Wheel](https://www.goodreads.com/en/book/show/733514), by the owner of a local bike shop. I was pretty intrigued by the spoke design of the wheel, and thus animated the wheel on the front page, using [p5.js](https://p5js.org/).
+
+![](images/wheel.gif){fig-align="center"}
+
+<details>
+<summary>Code</summary>
+
+```javascript
+
+function setup() {
+  createCanvas(400, 400);
+  
+  x_center = width/2;
+  y_center = height/2;
+  r_outer = width * (0.75/2);
+  r_inner = r_outer / 7.5;
+  width_rim = 12;
+  width_spoke = 2;
+  
+  t = 0;
+  speed = 0.01;
+}
+
+function draw() { // loop (by default)
+  translate(x_center, y_center);
+  t = t + speed;
+  rotate(t);
+  
+  // background(220);
+  background(213,181,156); // kraft paper
+  
+  noFill();
+  strokeWeight(width_rim);
+  // rim
+  circle(0, 0, 2 * r_outer); // rim
+  // hub
+  circle(0, 0, 2 * r_inner);
+  fill(0);
+  circle(0, 0, 0.25 * r_inner);
+  noFill();
+  
+  strokeWeight(width_spoke);
+  crossSpokesRealistic(9);
+}
+
+function crossSpokesRealistic(n_groups) {
+  let N_I = 2;
+  let N_O = 4;
+  let N_INNER = N_I * n_groups;
+  let N_OUTER = N_O * n_groups;
+  let START1 = 7;
+  let START2 = -2;
+  let outerAngles = Array.from({ length: N_OUTER }, (_, i) => map(i, 0, N_OUTER, 0, TWO_PI));
+  let innerAngles = Array.from({ length: N_INNER }, (_, i) => map(i, 0, N_INNER, 0, TWO_PI));
+  let params = [
+    [0, 7],
+    [0, 7 + 1],
+    [3, 1 + 1],
+    [3, 1]
+  ]
+  for (let k = 0; k < params.length; ++k) {
+    let param = params[k];
+    let start_inner = param[0];
+    let start_outer = param[1];
+    for (let i = 0; i < n_groups; ++i) {
+      let theta_inner = innerAngles[(start_inner + i * N_I) % N_INNER];
+      let theta_outer = outerAngles[(start_outer + i * N_O) % N_OUTER];
+      let x_inner = r_inner * cos(theta_inner);
+      let y_inner = r_inner * sin(theta_inner);
+      let x_outer = r_outer * cos(theta_outer);
+      let y_outer = r_outer * sin(theta_outer);
+      line(x_inner, y_inner, x_outer, y_outer);
+    }
+  }
+}
+
+function keyPressed() {
+  if (key === 's') {
+    saveGif('wheel', 20);
+  }
+}
+```
+
+</details>
