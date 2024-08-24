@@ -14,18 +14,18 @@
     "text": "Recently, I was introduced the book The Bicycle Wheel, by the owner of a local bike shop. I was pretty intrigued by the spoke design of the wheel, and thus animated the wheel on the front page, using p5.js.\n\n\n\n\n\n\n\nCode\n\n\nfunction setup() {\n  createCanvas(400, 400);\n  \n  x_center = width/2;\n  y_center = height/2;\n  r_outer = width * (0.75/2);\n  r_inner = r_outer / 7.5;\n  width_rim = 12;\n  width_spoke = 2;\n  \n  t = 0;\n  speed = 0.01;\n}\n\nfunction draw() { // loop (by default)\n  translate(x_center, y_center);\n  t = t + speed;\n  rotate(t);\n  \n  // background(220);\n  background(213,181,156); // kraft paper\n  \n  noFill();\n  strokeWeight(width_rim);\n  // rim\n  circle(0, 0, 2 * r_outer); // rim\n  // hub\n  circle(0, 0, 2 * r_inner);\n  fill(0);\n  circle(0, 0, 0.25 * r_inner);\n  noFill();\n  \n  strokeWeight(width_spoke);\n  crossSpokesRealistic(9);\n}\n\nfunction crossSpokesRealistic(n_groups) {\n  let N_I = 2;\n  let N_O = 4;\n  let N_INNER = N_I * n_groups;\n  let N_OUTER = N_O * n_groups;\n  let START1 = 7;\n  let START2 = -2;\n  let outerAngles = Array.from({ length: N_OUTER }, (_, i) =&gt; map(i, 0, N_OUTER, 0, TWO_PI));\n  let innerAngles = Array.from({ length: N_INNER }, (_, i) =&gt; map(i, 0, N_INNER, 0, TWO_PI));\n  let params = [\n    [0, 7],\n    [0, 7 + 1],\n    [3, 1 + 1],\n    [3, 1]\n  ]\n  for (let k = 0; k &lt; params.length; ++k) {\n    let param = params[k];\n    let start_inner = param[0];\n    let start_outer = param[1];\n    for (let i = 0; i &lt; n_groups; ++i) {\n      let theta_inner = innerAngles[(start_inner + i * N_I) % N_INNER];\n      let theta_outer = outerAngles[(start_outer + i * N_O) % N_OUTER];\n      let x_inner = r_inner * cos(theta_inner);\n      let y_inner = r_inner * sin(theta_inner);\n      let x_outer = r_outer * cos(theta_outer);\n      let y_outer = r_outer * sin(theta_outer);\n      line(x_inner, y_inner, x_outer, y_outer);\n    }\n  }\n}\n\nfunction keyPressed() {\n  if (key === 's') {\n    saveGif('wheel', 20);\n  }\n}"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "\\[\n\\int_{M}d\\omega = \\int_{\\partial M}\\omega\n\\]"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "No Man's Land",
     "section": "",
     "text": "Date\n\n\nTitle\n\n\n\n\n\n\nNov 21, 2023\n\n\nA Bicycle Wheel\n\n\n\n\nOct 19, 2023\n\n\nInverse Sampling Transform\n\n\n\n\nSep 22, 2023\n\n\nHow to Break Nested For Loop\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "\\[\n\\int_{M}d\\omega = \\int_{\\partial M}\\omega\n\\]"
   },
   {
     "objectID": "posts/break_for.html",

@@ -1,0 +1,23 @@
+---
+title: "A Tomato Plant"
+date: 2024-08-24
+number-sections: true
+format: 
+    html:
+        code-overflow: wrap
+        highlight-style: zenburn
+categories: [art]
+draft: true
+---
+
+# Arrival
+
+# Binary Stars
+![](images/Tomato Binary Star/PXL_20240704_151102436.jpg){fig-align="center" width=15%}
+![](images/Tomato Binary Star/PXL_20240706_151119852.jpg){fig-align="center" width=15%}
+![](images/Tomato Binary Star/PXL_20240707_160754640.jpg){fig-align="center" width=15%}
+![](images/Tomato Binary Star/PXL_20240708_033319008.jpg){fig-align="center" width=15%}
+![](images/Tomato Binary Star/PXL_20240708_145521310.jpg){fig-align="center" width=15%}
+![](images/Tomato Binary Star/PXL_20240709_005629078.jpg){fig-align="center" width=15%}
+
+# Revived
