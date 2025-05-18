@@ -1,0 +1,88 @@
+---
+title: "Shader Toy"
+date: 2025-05-18
+toc: true
+number-sections: true
+format: 
+    html:
+        code-overflow: wrap
+        highlight-style: zenburn
+categories: [art]
+draft: true
+---
+# Questions
+
+I have the following questions, and I'm sure all are known (so what?).
+
+1. How to render a scene pixel-by-pixel? Let's just start with a scene with a single *translucent, single-colored object* and *a single point light source* (if it helps, the light source can be set infinitely far away to simplify directional consideration). 
+A quick search suggests that what I'm looking for is a "fragment shader", and a playground for this is [Shadertoy](https://www.shadertoy.com/).
+1. To work on the aforementioned problem, we need some toy subjects. The first candidates that came into mind are (the 3D solids bounded by) the *low genus closed surfaces*. In particular, I want to work out the following:
+	1. An embedding of these surfaces in $\mathbb{R^3}$, and
+	1. A parametric surface representation of it
+	1. (The Gaussian curvature of points on it, under the Euclidean metric)
+1. (Math) By uniformization and Gauss-Bonnet, we know that each closed genus-$g$ surface (as a topological object) admits a unique constant curvature (Riemannian) metric. However, equipped with such a metric, 
+	1. Can we find a smooth embedding into $\mathbb{R^3}$?
+	1. If not, what is the largest $k$ such that we can find a $C^k$-embedding into $\mathbb{R}^3$?
+	1. For the extremal $k$ above,
+		- What is a constructive embedding?
+		- How to render it in the spirit of Q1?
+
+I'm curious to know the answers of all $g$'s, but let's work out the small cases first.
+
+# The Simplest Rendering Setup
+
+## Toy Object
+
+## Light Source
+
+# Low Genus Closed Surfaces and their Parametric Equations
+
+For each $g \in \{0, 1, 2\}$, we establish 
+
+* $\Sigma = \Sigma_g$, a smooth embedding of a closed genus-$g$ surface in $\mathbb{R}^3$.
+* A smooth map $f: \mathbb{R}^2 \to \Sigma$. 
+* Serveral smooth curves on it $\gamma: \mathbb{R} \to \Sigma$ (in preparation to compute the Gaussian curvature on some test points)
+
+::: {#wrn-1 .callout-warning}
+### On Curvature of the Euclidean genus-$g$ Surfaces
+
+The Euclidean metric on $\Sigma$ (i.e. the metric inherited from the Euclidean 3-space) is usually not constant curvature.
+::: 
+
+## Genus 0: 2-sphere
+$$
+	f(\theta, \phi) = (\sin(\theta)\cos(\phi), \sin(\theta)\sin(\phi), \cos(\theta))
+$$
+
+## Genus 1: 2-torus
+
+With $\theta$ as the angle revolving around the vertical axis, and $\phi$ as the angle wrt the center of the tube, we have 
+$$
+	f(\theta, \phi)
+	=
+	\begin{pmatrix}
+		\cos(\theta) & -\sin(\theta) & 0 \\
+		\sin(\theta) & \cos(\theta) & 0 \\
+		0 & 0 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		R + r\cos(\phi) \\ 
+		0 \\
+		r\sin(\phi) 
+	\end{pmatrix}
+	= 
+	\begin{pmatrix}
+		\cos(\theta) \cdot (R + r\cos(\phi)) \\
+		\sin(\theta) \cdot (R + r\cos(\phi)) \\
+		r\sin(\phi)
+	\end{pmatrix}
+$$
+
+A few curves:
+
+* "Inner curve": $\gamma_i$
+* "Outer curve": $\gamma_o$
+* "Tube-surrounding curve": $\gamma_s$  
+
+
+## Genus 2: 

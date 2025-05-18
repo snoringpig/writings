@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-09-21">
 
-<title>No Man’s Land</title>
+<title>No Man’s Land - Texas Hold’em Unlimited Rules, in Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,38 +101,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
   </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -128,17 +146,17 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">No Man’s Land</span>
     </a>
   </div>
@@ -149,7 +167,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -160,65 +178,192 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="art">art <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(2)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#rules" id="toc-rules" class="nav-link" data-scroll-target="#rules"><span class="header-section-number">2</span> Rules</a></li>
+  <li><a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries"><span class="header-section-number">3</span> Dictionaries</a>
+  <ul class="collapse">
+  <li><a href="#the-rounds" id="toc-the-rounds" class="nav-link" data-scroll-target="#the-rounds"><span class="header-section-number">3.1</span> The Rounds</a></li>
+  <li><a href="#the-players" id="toc-the-players" class="nav-link" data-scroll-target="#the-players"><span class="header-section-number">3.2</span> The Players</a></li>
+  <li><a href="#the-hand-ranking-and-the-respective-frequencies" id="toc-the-hand-ranking-and-the-respective-frequencies" class="nav-link" data-scroll-target="#the-hand-ranking-and-the-respective-frequencies"><span class="header-section-number">3.3</span> The Hand Ranking (and the respective frequencies)</a></li>
+  </ul></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code"><span class="header-section-number">4</span> Code</a></li>
+  <li><a href="#faq" id="toc-faq" class="nav-link" data-scroll-target="#faq"><span class="header-section-number">5</span> FAQ</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Texas Hold’em Unlimited Rules, in Python</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">code</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 21, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
 
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table">
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>Goal: Maximize profit.</p>
+<ul>
+<li><p>Could be due to fold early (to minimize loss)</p></li>
+<li><p>Could be winning the showdown</p></li>
+<li><p><label><input type="checkbox">Q: Respective frequencies (“throughout history”)?</label></p></li>
+</ul>
+</section>
+<section id="rules" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Rules</h1>
+<p>Denote <span class="math inline">r</span>, <span class="math inline">i</span>, <span class="math inline">p</span> as round, “around table”, player respectively. Then,</p>
+<ol type="1">
+<li><span class="math inline">B_{r,p} = \sum_i B_{r,i,p}</span>.</li>
+<li><span class="math inline">B_r \equiv B_{r,p}</span> for all players <span class="math inline">p</span> who continues after round <span class="math inline">r</span>.</li>
+<li>(Any bet limit? Re: fold, call, raise, check)</li>
+</ol>
+<p>The Pre-Flop Round:</p>
+<ol type="1">
+<li><span class="math inline">B_{1,1} &gt; 0</span> (a pre-fixed constant)</li>
+<li><span class="math inline">B_{1,2} = 2 \cdot B_{1,1}</span>.</li>
+</ol>
+<p>Community Cards 公共牌 (<span class="math inline">\ge 3</span>), Hole Cards 手牌 (<span class="math inline">2</span>)</p>
+</section>
+<section id="dictionaries" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Dictionaries</h1>
+<section id="the-rounds" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="the-rounds"><span class="header-section-number">3.1</span> The Rounds</h2>
+<table class="table">
 <thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
+<tr class="header">
+<th>Round</th>
+<th>Num_CC</th>
 </tr>
 </thead>
-<tbody class="list">
-<tr data-index="0" data-categories="art" data-listing-date-sort="1700553600000" data-listing-file-modified-sort="1700776315682" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="401" data-listing-title-sort="A Bicycle Wheel" data-listing-filename-sort="bicycle_wheel.qmd">
-<td>
-<span class="listing-date">Nov 21, 2023</span>
-</td>
-<td>
-<a href="./posts/bicycle_wheel.html" class="title listing-title">A Bicycle Wheel</a>
-</td>
+<tbody>
+<tr class="odd">
+<td>1. Pre-Flop</td>
+<td>0</td>
 </tr>
-<tr data-index="1" data-categories="code" data-listing-date-sort="1697698800000" data-listing-file-modified-sort="1698176751810" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="220" data-listing-title-sort="Inverse Sampling Transform" data-listing-filename-sort="sampling.qmd">
-<td>
-<span class="listing-date">Oct 19, 2023</span>
-</td>
-<td>
-<a href="./posts/sampling.html" class="title listing-title">Inverse Sampling Transform</a>
-</td>
+<tr class="even">
+<td>2. Flop</td>
+<td>3</td>
 </tr>
-<tr data-index="2" data-categories="code" data-listing-date-sort="1695366000000" data-listing-file-modified-sort="1697739315790" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="528" data-listing-title-sort="How to Break Nested For Loop" data-listing-filename-sort="break_for.qmd">
-<td>
-<span class="listing-date">Sep 22, 2023</span>
-</td>
-<td>
-<a href="./posts/break_for.html" class="title listing-title">How to Break Nested For Loop</a>
-</td>
+<tr class="odd">
+<td>3. Turn</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>4. River</td>
+<td>5</td>
 </tr>
 </tbody>
 </table>
-<div class="listing-no-matching d-none">
-No matching items
+</section>
+<section id="the-players" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="the-players"><span class="header-section-number">3.2</span> The Players</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Position (<span class="math inline">p</span>)</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Small Blind (SB)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Big Blind (BB)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Under The Gun (UTG)</td>
+</tr>
+<tr class="even">
+<td>-1</td>
+<td>Dealer</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-hand-ranking-and-the-respective-frequencies" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="the-hand-ranking-and-the-respective-frequencies"><span class="header-section-number">3.3</span> The Hand Ranking (and the respective frequencies)</h2>
+<ol type="1">
+<li>Royal Flush</li>
+<li>Flush</li>
+<li>Four of a Kind</li>
+</ol>
+</section>
+</section>
+<section id="code" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Code</h1>
+<div id="13a62cd6" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> comb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>N_SUITES <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>N_CARDS <span class="op">=</span> <span class="dv">13</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>N_HAND <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>n_all <span class="op">=</span> comb(<span class="dv">52</span>, <span class="dv">5</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>n_flush <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> comb(N_CARDS, N_HAND) <span class="co"># not quite, just upper bound</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>n_straight <span class="op">=</span> (N_CARDS<span class="op">-</span>N_HAND<span class="op">+</span><span class="dv">1</span>) <span class="op">*</span> <span class="bu">pow</span>(N_SUITES, N_HAND) <span class="co"># not quite, just upper bound</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>n_flush<span class="op">/</span>n_all, n_straight<span class="op">/</span>n_all <span class="co"># expecting approx. 1/4^4 (=1/256)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(0.0019807923169267707, 0.0035460337981346383)</code></pre>
 </div>
-</div></main> <!-- /main -->
+</div>
+<div id="1fd65917" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SB <span class="op">=</span> <span class="dv">1</span> <span class="co"># small blind amount</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bets <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="faq" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> FAQ</h1>
+<ol type="1">
+<li>Rules of 4 and 2? (Q: What?)</li>
+</ol>
+<ul>
+<li>4 from <span class="math inline">46 \times 2</span> ???</li>
+<li><span class="math inline">100/46 \approx 2</span></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

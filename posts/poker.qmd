@@ -1,0 +1,84 @@
+---
+title: "Texas Hold'em Unlimited Rules, in Python"
+date: 2024-09-21
+toc: true
+jupyter: python3
+number-sections: true
+highlight-style: monokai
+format:
+  html:
+    code-fold: true
+    html-math-method: katex
+categories: [code]
+draft: true
+---
+
+# Overview
+Goal: Maximize profit.
+
+- Could be due to fold early (to minimize loss)
+- Could be winning the showdown
+
+- [ ] Q: Respective frequencies ("throughout history")?
+
+# Rules
+Denote $r$, $i$, $p$ as round, "around table", player respectively.
+Then,
+
+1. $B_{r,p} = \sum_i B_{r,i,p}$.
+2. $B_r \equiv B_{r,p}$ for all players $p$ who continues after round $r$.
+3. (Any bet limit? Re: fold, call, raise, check) 
+
+The Pre-Flop Round:
+
+1. $B_{1,1} > 0$ (a pre-fixed constant)
+2. $B_{1,2} = 2 \cdot B_{1,1}$.
+
+Community Cards 公共牌 ($\ge 3$), Hole Cards 手牌 ($2$)
+
+# Dictionaries
+
+## The Rounds
+| Round      | Num_CC |
+| ----------- | ----------- |
+| 1. Pre-Flop      | 0       |
+| 2. Flop   | 3        |
+| 3. Turn   | 4        |
+| 4. River   | 5        |
+
+## The Players
+| Position ($p$)      | Name |
+| ----------- | ----------- |
+| 1 | Small Blind (SB)       |
+| 2   | Big Blind (BB)        |
+| 3   | Under The Gun (UTG)    |
+| -1  | Dealer |
+
+
+## The Hand Ranking (and the respective frequencies)
+1. Royal Flush 
+1. Flush
+1. Four of a Kind
+
+# Code
+```{python}
+from math import comb
+N_SUITES = 4
+N_CARDS = 13
+N_HAND = 5
+
+n_all = comb(52, 5)
+n_flush = 4 * comb(N_CARDS, N_HAND) # not quite, just upper bound
+n_straight = (N_CARDS-N_HAND+1) * pow(N_SUITES, N_HAND) # not quite, just upper bound
+n_flush/n_all, n_straight/n_all # expecting approx. 1/4^4 (=1/256)
+```
+
+```{python}
+SB = 1 # small blind amount
+bets = []
+```
+
+# FAQ
+1. Rules of 4 and 2? (Q: What?)
+- 4 from $46 \times 2$ ???
+- $100/46 \approx 2$

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-05-18">
 
-<title>No Man’s Land</title>
+<title>No Man’s Land - Shader Toy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,35 +67,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -128,17 +98,17 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">No Man’s Land</span>
     </a>
   </div>
@@ -149,7 +119,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -160,65 +130,157 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="art">art <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(2)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#questions" id="toc-questions" class="nav-link active" data-scroll-target="#questions"><span class="header-section-number">1</span> Questions</a></li>
+  <li><a href="#the-simplest-rendering-setup" id="toc-the-simplest-rendering-setup" class="nav-link" data-scroll-target="#the-simplest-rendering-setup"><span class="header-section-number">2</span> The Simplest Rendering Setup</a>
+  <ul class="collapse">
+  <li><a href="#toy-object" id="toc-toy-object" class="nav-link" data-scroll-target="#toy-object"><span class="header-section-number">2.1</span> Toy Object</a></li>
+  <li><a href="#light-source" id="toc-light-source" class="nav-link" data-scroll-target="#light-source"><span class="header-section-number">2.2</span> Light Source</a></li>
+  </ul></li>
+  <li><a href="#low-genus-closed-surfaces-and-their-parametric-equations" id="toc-low-genus-closed-surfaces-and-their-parametric-equations" class="nav-link" data-scroll-target="#low-genus-closed-surfaces-and-their-parametric-equations"><span class="header-section-number">3</span> Low Genus Closed Surfaces and their Parametric Equations</a>
+  <ul class="collapse">
+  <li><a href="#genus-0-2-sphere" id="toc-genus-0-2-sphere" class="nav-link" data-scroll-target="#genus-0-2-sphere"><span class="header-section-number">3.1</span> Genus 0: 2-sphere</a></li>
+  <li><a href="#genus-1-2-torus" id="toc-genus-1-2-torus" class="nav-link" data-scroll-target="#genus-1-2-torus"><span class="header-section-number">3.2</span> Genus 1: 2-torus</a></li>
+  <li><a href="#genus-2" id="toc-genus-2" class="nav-link" data-scroll-target="#genus-2"><span class="header-section-number">3.3</span> Genus 2:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Shader Toy</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">art</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 18, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
 
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="art" data-listing-date-sort="1700553600000" data-listing-file-modified-sort="1700776315682" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="401" data-listing-title-sort="A Bicycle Wheel" data-listing-filename-sort="bicycle_wheel.qmd">
-<td>
-<span class="listing-date">Nov 21, 2023</span>
-</td>
-<td>
-<a href="./posts/bicycle_wheel.html" class="title listing-title">A Bicycle Wheel</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="code" data-listing-date-sort="1697698800000" data-listing-file-modified-sort="1698176751810" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="220" data-listing-title-sort="Inverse Sampling Transform" data-listing-filename-sort="sampling.qmd">
-<td>
-<span class="listing-date">Oct 19, 2023</span>
-</td>
-<td>
-<a href="./posts/sampling.html" class="title listing-title">Inverse Sampling Transform</a>
-</td>
-</tr>
-<tr data-index="2" data-categories="code" data-listing-date-sort="1695366000000" data-listing-file-modified-sort="1697739315790" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="528" data-listing-title-sort="How to Break Nested For Loop" data-listing-filename-sort="break_for.qmd">
-<td>
-<span class="listing-date">Sep 22, 2023</span>
-</td>
-<td>
-<a href="./posts/break_for.html" class="title listing-title">How to Break Nested For Loop</a>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
+<section id="questions" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Questions</h1>
+<p>I have the following questions, and I’m sure all are known (so what?).</p>
+<ol type="1">
+<li>How to render a scene pixel-by-pixel? Let’s just start with a scene with a single <em>translucent, single-colored object</em> and <em>a single point light source</em> (if it helps, the light source can be set infinitely far away to simplify directional consideration). A quick search suggests that what I’m looking for is a “fragment shader”, and a playground for this is <a href="https://www.shadertoy.com/">Shadertoy</a>.</li>
+<li>To work on the aforementioned problem, we need some toy subjects. The first candidates that came into mind are (the 3D solids bounded by) the <em>low genus closed surfaces</em>. In particular, I want to work out the following:
+<ol type="1">
+<li>An embedding of these surfaces in <span class="math inline">\(\mathbb{R^3}\)</span>, and</li>
+<li>A parametric surface representation of it</li>
+<li>(The Gaussian curvature of points on it, under the Euclidean metric)</li>
+</ol></li>
+<li>(Math) By uniformization and Gauss-Bonnet, we know that each closed genus-<span class="math inline">\(g\)</span> surface (as a topological object) admits a unique constant curvature (Riemannian) metric. However, equipped with such a metric,
+<ol type="1">
+<li>Can we find a smooth embedding into <span class="math inline">\(\mathbb{R^3}\)</span>?</li>
+<li>If not, what is the largest <span class="math inline">\(k\)</span> such that we can find a <span class="math inline">\(C^k\)</span>-embedding into <span class="math inline">\(\mathbb{R}^3\)</span>?</li>
+<li>For the extremal <span class="math inline">\(k\)</span> above,
+<ul>
+<li>What is a constructive embedding?</li>
+<li>How to render it in the spirit of Q1?</li>
+</ul></li>
+</ol></li>
+</ol>
+<p>I’m curious to know the answers of all <span class="math inline">\(g\)</span>’s, but let’s work out the small cases first.</p>
+</section>
+<section id="the-simplest-rendering-setup" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The Simplest Rendering Setup</h1>
+<section id="toy-object" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="toy-object"><span class="header-section-number">2.1</span> Toy Object</h2>
+</section>
+<section id="light-source" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="light-source"><span class="header-section-number">2.2</span> Light Source</h2>
+</section>
+</section>
+<section id="low-genus-closed-surfaces-and-their-parametric-equations" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Low Genus Closed Surfaces and their Parametric Equations</h1>
+<p>For each <span class="math inline">\(g \in \{0, 1, 2\}\)</span>, we establish</p>
+<ul>
+<li><span class="math inline">\(\Sigma = \Sigma_g\)</span>, a smooth embedding of a closed genus-<span class="math inline">\(g\)</span> surface in <span class="math inline">\(\mathbb{R}^3\)</span>.</li>
+<li>A smooth map <span class="math inline">\(f: \mathbb{R}^2 \to \Sigma\)</span>.</li>
+<li>Serveral smooth curves on it <span class="math inline">\(\gamma: \mathbb{R} \to \Sigma\)</span> (in preparation to compute the Gaussian curvature on some test points)</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</div></main> <!-- /main -->
+<div class="callout-title-container flex-fill">
+<a href="" id="wrn-1"></a>Warning&nbsp;1: On Curvature of the Euclidean genus-<span class="math inline">\(g\)</span> Surfaces
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Euclidean metric on <span class="math inline">\(\Sigma\)</span> (i.e.&nbsp;the metric inherited from the Euclidean 3-space) is usually not constant curvature.</p>
+</div>
+</div>
+<section id="genus-0-2-sphere" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="genus-0-2-sphere"><span class="header-section-number">3.1</span> Genus 0: 2-sphere</h2>
+<p><span class="math display">\[
+    f(\theta, \phi) = (\sin(\theta)\cos(\phi), \sin(\theta)\sin(\phi), \cos(\theta))
+\]</span></p>
+</section>
+<section id="genus-1-2-torus" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="genus-1-2-torus"><span class="header-section-number">3.2</span> Genus 1: 2-torus</h2>
+<p>With <span class="math inline">\(\theta\)</span> as the angle revolving around the vertical axis, and <span class="math inline">\(\phi\)</span> as the angle wrt the center of the tube, we have <span class="math display">\[
+    f(\theta, \phi)
+    =
+    \begin{pmatrix}
+        \cos(\theta) &amp; -\sin(\theta) &amp; 0 \\
+        \sin(\theta) &amp; \cos(\theta) &amp; 0 \\
+        0 &amp; 0 &amp; 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        R + r\cos(\phi) \\
+        0 \\
+        r\sin(\phi)
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \cos(\theta) \cdot (R + r\cos(\phi)) \\
+        \sin(\theta) \cdot (R + r\cos(\phi)) \\
+        r\sin(\phi)
+    \end{pmatrix}
+\]</span></p>
+<p>A few curves:</p>
+<ul>
+<li>“Inner curve”: <span class="math inline">\(\gamma_i\)</span></li>
+<li>“Outer curve”: <span class="math inline">\(\gamma_o\)</span></li>
+<li>“Tube-surrounding curve”: <span class="math inline">\(\gamma_s\)</span></li>
+</ul>
+</section>
+<section id="genus-2" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="genus-2"><span class="header-section-number">3.3</span> Genus 2:</h2>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
