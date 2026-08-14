@@ -1,6 +1,7 @@
 /.quarto/
-posts/*
-!posts/*.qmd
+/_site/
+/docs/
+.venv/
+__pycache__/
 .DS_Store
-_quarto.yml
 draft.ipynb
