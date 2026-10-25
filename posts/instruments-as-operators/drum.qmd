@@ -1,0 +1,185 @@
+---
+title: "The drum"
+subtitle: "Part 5 of Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+---
+
+[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · [2 Clarinet](clarinet.qmd) · [3 Kalimba](kalimba.qmd) · [4 Piano](piano.qmd) · **5 Drum**
+
+The string's operator in two dimensions. The zeros of Bessel functions replace the whole numbers, and where you strike decides which modes speak.
+
+## Play it
+
+```{=html}
+<style>
+#head { max-width: 440px; aspect-ratio: 1; margin: 0 auto; height: auto; cursor: crosshair; }
+.patch text { font-family: var(--f-mono); font-size: 12px; fill: var(--ink); }
+.patch .sheet { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.patch .pull { stroke: var(--neg); stroke-width: 2; }
+.patch .ph { fill: var(--neg); }
+.patch .n { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+</style>
+```
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="head" aria-label="Drumhead. Tap anywhere to strike it there."></canvas>
+  <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="ten">Tension ×</label><input type="range" id="ten" min="0.5" max="2" step="0.05" value="1"><output id="teno">1.00</output></div>
+  <div class="readout" id="dRead" style="padding:0.4rem 0.25rem 0">Tap the head anywhere. The ring marks where we listen.</div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">The motion is the real superposition of the 40 lowest modes, slowed about 300 times. Strike dead center: only round modes appear. Strike on a nodal line of a mode and that mode stays silent.</p>
+</section>
+</div>
+```
+
+## Deriving the operator
+
+1. A drumhead is a sheet under tension $T$, measured as force per unit length of any cut through it, with mass $\sigma$ per unit area. Take a small patch $D$ of it.
+2. Along each piece $ds$ of the patch's edge, the outside sheet pulls with force $T\,ds$ along the surface. For small slopes its vertical part is $T\,\partial_n u\,ds$, where $\partial_n u$ is the slope in the outward direction.
+3. Adding these up and applying the divergence theorem gives the net vertical force,
+$$
+T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
+$$
+4. Newton's law for the patch is $\iint_D \sigma u_{tt}\,dA = T\iint_D \Delta u\,dA$. This holds for every patch, so the integrands agree.
+
+::: {.callout-tip appearance="simple"}
+## The drumhead's operator
+$$
+u_{tt} = -\mathcal{L}u,\qquad \mathcal{L} = -c^2\Delta,\qquad c^2 = T/\sigma,\qquad u = 0 \text{ on the rim}.
+$$
+:::
+
+In one dimension the patch is a segment, its edge is two endpoints, and step 3 is the fundamental theorem of calculus. That is Part 0's equation again.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <svg class="patch" viewBox="0 0 320 200" role="img" aria-label="A patch of the drumhead with tension pulling outward along its edge">
+      <ellipse class="sheet" cx="160" cy="105" rx="90" ry="45"/>
+      <line class="pull" x1="250" y1="105" x2="296" y2="88"/><path class="ph" d="M 290 82 L 302 86 L 293 95 Z"/>
+      <line class="pull" x1="70" y1="105" x2="26" y2="118"/><path class="ph" d="M 32 124 L 20 120 L 29 111 Z"/>
+      <line class="pull" x1="160" y1="60" x2="168" y2="18"/><path class="ph" d="M 162 22 L 169 10 L 174 23 Z"/>
+      <line class="pull" x1="160" y1="150" x2="150" y2="190"/><path class="ph" d="M 145 184 L 149 196 L 157 186 Z"/>
+      <line class="n" x1="250" y1="105" x2="300" y2="105"/>
+      <text x="138" y="110">patch D</text><text x="256" y="128">T ds</text>
+    </svg>
+    <p class="cap">Tension pulls outward all around the edge. Where the sheet bulges, the pulls tilt and their vertical parts add up to T times the Laplacian of u, per unit area.</p>
+  </div>
+</div>
+```
+
+## Spectrum
+
+Separating variables in polar coordinates gives standing waves $J_m(kr)\cos m\theta$ and $J_m(kr)\sin m\theta$, with $J_m$ a Bessel function; the second solution of Bessel's equation blows up at the center and is discarded. The rim condition is $J_m(ka) = 0$, so
+$$
+f_{m,n} = \frac{c\,j_{m,n}}{2\pi a},
+$$
+where $j_{m,n}$ is the $n$-th zero of $J_m$. These zeros are not evenly spaced and no common base frequency fits them, so the drum has no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, $\cos m\theta$ and $\sin m\theta$: the round head's symmetry, visible in the spectrum.
+
+A strike at $p$, heard at $q$, gives mode $k$ the weight $X_k(p)X_k(q)/\lVert X_k\rVert^2$, the eigen-expansion of a point kick. Tap a stem to see one mode on the drumhead and hear it alone.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <h3>Partials of the last strike · tap a stem</h3>
+    <svg class="spec" id="dSpec" viewBox="0 0 320 120" aria-label="Partials of the last strike"></svg>
+    <div class="readout" id="dSel"></div>
+  </div>
+</div>
+```
+
+[← Part 4, the piano](piano.qmd) · [Back to the series](index.qmd)
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, K = 40, MODES = C.DR.slice(0, K), RN = 200, GN = 130, MMAX = 0;
+  MODES.forEach(function (d) { MMAX = Math.max(MMAX, d.m); });
+  var RT = MODES.map(function (d) { var a = new Float32Array(RN + 1); for (var i = 0; i <= RN; i++) a[i] = C.J(d.m, d.j * i / RN); return a; });
+  var RI = new Int16Array(GN * GN), INSIDE = new Uint8Array(GN * GN), COS = [], SIN = [];
+  for (var m = 0; m <= MMAX; m++) { COS.push(new Float32Array(GN * GN)); SIN.push(new Float32Array(GN * GN)); }
+  for (var y = 0; y < GN; y++) for (var x = 0; x < GN; x++) {
+    var px = (x + 0.5) / GN * 2 - 1, py = 1 - (y + 0.5) / GN * 2, r = Math.hypot(px, py), th = Math.atan2(py, px), k = y * GN + x;
+    INSIDE[k] = r <= 1 ? 1 : 0; RI[k] = Math.min(RN, Math.round(r * RN));
+    for (var m = 0; m <= MMAX; m++) { COS[m][k] = Math.cos(m * th); SIN[m][k] = Math.sin(m * th); }
+  }
+  var U = new Float32Array(GN * GN);
+  var cv = document.getElementById("head"), ctx = cv.getContext("2d");
+  var off = document.createElement("canvas"); off.width = GN; off.height = GN;
+  var octx = off.getContext("2d"), img = octx.createImageData(GN, GN);
+  var tens = 1, strike = { r: 0.35, th: 0, t0: -1e9 }, solo = 1, soloT0 = 0, lastParts = null, sel = 1;
+  function F0() { return C.models.drum.F0 * Math.sqrt(tens); }
+
+  function hitDrum(r, th) {
+    strike = { r: r, th: th, t0: performance.now() }; solo = -1; sel = -1;
+    lastParts = C.models.drum.partials({ r: r, th: th });
+    C.play(C.render(C.toHz(lastParts, F0()), 2.6), 0.85);
+    dspec();
+    var top = lastParts.map(function (p, i) { return { i: i, a: Math.abs(p.amp) }; }).sort(function (a, b) { return b.a - a.a; }).slice(0, 3)
+      .map(function (o) { var d = lastParts[o.i].mode; return "(" + d.m + "," + d.n + ")"; }).join(" ");
+    document.getElementById("dRead").innerHTML = "struck at r = <b>" + r.toFixed(2) + "</b> a · loudest modes " + top + " · fundamental " + F0().toFixed(0) + " Hz";
+  }
+  cv.addEventListener("pointerdown", function (e) {
+    var b = cv.getBoundingClientRect(), x = ((e.clientX - b.left) / b.width) * 2 - 1, y = 1 - ((e.clientY - b.top) / b.height) * 2, r = Math.hypot(x, y);
+    if (r > 0.98) return;
+    hitDrum(r, Math.atan2(y, x));
+  });
+  var ten = document.getElementById("ten"), teno = document.getElementById("teno");
+  ten.addEventListener("input", function () { tens = parseFloat(ten.value); teno.textContent = tens.toFixed(2); });
+
+  function dspec() {
+    var p = lastParts || C.models.drum.partials({ r: strike.r, th: strike.th });
+    C.stems(document.getElementById("dSpec"), p, { W: 320, H: 120, rmax: 12, fs: 9, sw: 2.5, sel: sel, onPick: function (i) {
+      sel = i; dspec(); var d = p[i].mode; solo = MODES.indexOf(d); soloT0 = performance.now();
+      C.play(C.render([{ f: F0() * d.ratio, amp: 1, tau: 0.8 }], 1.4), 0.6);
+      document.getElementById("dSel").innerHTML = "mode (" + d.m + ", " + d.n + ") · j = <b>" + d.j.toFixed(4) + "</b> · <b>" + d.ratio.toFixed(3) + "</b>× · " + d.m + " nodal diameters, " + (d.n - 1) + " nodal circles";
+    } });
+  }
+
+  function frame(now) {
+    var d = C.fit(cv), W = cv.width, H = cv.height;
+    U.fill(0);
+    var tv = (now - (solo >= 0 ? soloT0 : strike.t0)) / 1000, maxA = 0;
+    for (var k = 0; k < K; k++) {
+      var M = MODES[k], amp;
+      if (solo >= 0) { if (k !== solo) continue; amp = C.reduce ? 1 : Math.cos(2 * Math.PI * Math.min(3, 0.5 * M.ratio) * tv); }
+      else {
+        if (tv > 8) continue;
+        var c = RT[k][Math.round(strike.r * RN)] / M.norm, w = 2 * Math.PI * 0.55 * M.ratio;
+        amp = c * Math.sin(w * tv + 1e-3) / M.ratio * Math.exp(-tv * (0.35 + 0.06 * M.ratio * M.ratio));
+      }
+      if (Math.abs(amp) < 1e-6) continue;
+      var R = RT[k], cm = Math.cos(M.m * strike.th), sm = Math.sin(M.m * strike.th), CM = COS[M.m], SM = SIN[M.m];
+      if (solo >= 0) { cm = 1; sm = 0; }
+      for (var p = 0; p < GN * GN; p++) { if (INSIDE[p]) U[p] += amp * R[RI[p]] * (CM[p] * cm + SM[p] * sm); }
+    }
+    for (var p = 0; p < GN * GN; p++) maxA = Math.max(maxA, Math.abs(U[p]));
+    var scale = solo >= 0 ? 1 / (maxA || 1) : 1 / 0.9, data = img.data, P = C.col["--pos"], N = C.col["--neg"], B = C.col["--panel"];
+    if (solo < 0) { if (!frame.peak || tv < 0.05) frame.peak = 0; frame.peak = Math.max(frame.peak, maxA); scale = 1 / (frame.peak || 1); }
+    for (var p = 0; p < GN * GN; p++) {
+      var o = 4 * p; if (!INSIDE[p]) { data[o + 3] = 0; continue; }
+      var v = U[p] * scale, c = v >= 0 ? P : N, a = Math.min(1, Math.abs(v));
+      data[o] = B[0] + (c[0] - B[0]) * a; data[o + 1] = B[1] + (c[1] - B[1]) * a; data[o + 2] = B[2] + (c[2] - B[2]) * a; data[o + 3] = 255;
+    }
+    octx.putImageData(img, 0, 0);
+    ctx.clearRect(0, 0, W, H); ctx.drawImage(off, 0, 0, W, H);
+    ctx.strokeStyle = C.rgb("--wood"); ctx.lineWidth = 6 * d; ctx.beginPath(); ctx.arc(W / 2, H / 2, W / 2 - 3 * d, 0, 2 * Math.PI); ctx.stroke();
+    var lx = W / 2 + C.LISTEN.r * Math.cos(C.LISTEN.th) * W / 2, ly = H / 2 - C.LISTEN.r * Math.sin(C.LISTEN.th) * H / 2;
+    ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 2 * d; ctx.beginPath(); ctx.arc(lx, ly, 7 * d, 0, 2 * Math.PI); ctx.stroke();
+    if (solo < 0 && strike.t0 > 0) {
+      var sx = W / 2 + strike.r * Math.cos(strike.th) * W / 2, sy = H / 2 - strike.r * Math.sin(strike.th) * H / 2;
+      ctx.fillStyle = C.rgb("--ink"); ctx.beginPath(); ctx.arc(sx, sy, 5 * d, 0, 2 * Math.PI); ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  C.onTheme(dspec);
+  dspec(); requestAnimationFrame(frame);
+})();
+</script>
+```
