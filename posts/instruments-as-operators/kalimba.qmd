@@ -1,16 +1,22 @@
 ---
 title: "The kalimba"
-subtitle: "Part 3 of Instruments as Operators"
+subtitle: "Clamped bars · Instruments as Operators"
 format:
   html:
     html-math-method: katex
     css: ins.css
+date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · [2 Clarinet](clarinet.qmd) · **3 Kalimba** · [4 Piano](piano.qmd) · [5 Drum](drum.qmd)
+[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: **Kalimba**, [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
 
 Take away the tension and keep only stiffness. A steel tine clamped at one end obeys a fourth-order equation, its overtones scatter far from the integers, and it still sounds pitched.
+
+::: {.callout-note appearance="simple"}
+## Family: clamped bars
+Harmonica reeds and the comb of a music box obey the same operator, $\kappa^2\partial_x^4$, with the same clamped–free boundary conditions. The kalimba and the [harmonica](harmonica.qmd) differ in constants (a steel tine versus a smaller brass reed) and, more importantly, in excitation: plucked versus blown. That difference decides whether you hear the bar's scattered overtones or exact harmonics.
+:::
 
 ## Play it
 
@@ -96,7 +102,7 @@ The tine sounds pitched anyway because its first overtone is weak, sits more tha
 </div>
 ```
 
-[← Part 2, the clarinet](clarinet.qmd) · [Part 4, the piano →](piano.qmd)
+[← The clarinet](clarinet.qmd) · [The harmonica →](harmonica.qmd)
 
 ```{=html}
 <script src="core.js"></script>

@@ -1,16 +1,22 @@
 ---
 title: "The clarinet"
-subtitle: "Part 2 of Instruments as Operators"
+subtitle: "Air columns · Instruments as Operators"
 format:
   html:
     html-math-method: katex
     css: ins.css
+date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · **2 Clarinet** · [3 Kalimba](kalimba.qmd) · [4 Piano](piano.qmd) · [5 Drum](drum.qmd)
+[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: **Clarinet** · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
 
 The violin's operator again, now acting on air pressure in a tube. Only the boundary condition at one end changes, and half the spectrum disappears.
+
+::: {.callout-note appearance="simple"}
+## Family: air columns
+The flute uses the same operator with a different boundary condition: open at both ends instead of closed at one. Stopped organ pipes and pan pipes are closed at one end like the clarinet, so they share its odd-harmonic spectrum. The switch in the demo moves between the two cases.
+:::
 
 ## Play it
 
@@ -68,7 +74,7 @@ Only odd multiples survive. A flute is open at both ends: $p = 0$ at both ends g
 
 Like the bow, the reed is a valve driven by the pressure it creates, so the oscillation is periodic and its partials sit exactly on $n f_1$. In the low register the even ones are weak, not zero. A real bore is not perfectly cylindrical and the bell matters; those refine the numbers, not the picture.
 
-[← Part 1, the violin](violin.qmd) · [Part 3, the kalimba →](kalimba.qmd)
+[← The violin](violin.qmd) · [The kalimba →](kalimba.qmd)
 
 ```{=html}
 <script src="core.js"></script>

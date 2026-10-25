@@ -155,6 +155,36 @@
       return out;
     }
   };
+  // Harmonica: a brass free reed, clamped at one end over a slot. Same operator and boundary conditions as the kalimba tine.
+  // Blown, the reed swings through its slot and chops the airflow into one puff per cycle; a periodic puff train has exact harmonics.
+  var PUFF = (function () {
+    var N = 512, x = [], out = [];
+    for (var i = 0; i < N; i++) { var th = 2 * Math.PI * i / N; x.push(Math.max(0, Math.sin(th) - 0.6)); }
+    for (var n = 1; n <= 30; n++) { var a = 0, b = 0; for (var i = 0; i < N; i++) { a += x[i] * Math.cos(2 * Math.PI * n * i / N); b += x[i] * Math.sin(2 * Math.PI * n * i / N); } out.push(Math.hypot(a, b) * 2 / N); }
+    var m = out[0]; return out.map(function (v) { return v / m; });
+  })();
+  M.harmonica = {
+    F0: 523.25,
+    partials: function (opt) {
+      opt = opt || {};
+      if (opt.plucked) return KM.map(function (m, i) { return { ratio: m.ratio, amp: m.amp, tau: [1.2, 0.08, 0.025, 0.01, 0.006][i] }; });
+      return PUFF.map(function (a, i) { return { ratio: i + 1, amp: a * Math.exp(-Math.pow((i + 1) / 16, 2)), tau: 10 }; });
+    }
+  };
+  // Rayleigh quotient for the first reed mode with a filed-down thickness profile h(x) = 1 - depth * bump(x - x0).
+  // omega^2 is proportional to (integral of E I phi''^2) / (integral of rho A phi^2), with I ~ h^3 and A ~ h.
+  C.reedRatio = function (x0, depth, width) {
+    var b = C.KB[0], sig = (Math.cosh(b) + Math.cos(b)) / (Math.sinh(b) + Math.sin(b)), N = 400;
+    var n0 = 0, d0 = 0, n1 = 0, d1 = 0;
+    for (var j = 0; j <= N; j++) {
+      var xi = j / N, x = b * xi, w = (j === 0 || j === N) ? 1 : (j % 2 ? 4 : 2);
+      var phi = Math.cosh(x) - Math.cos(x) - sig * (Math.sinh(x) - Math.sin(x));
+      var phi2 = Math.cosh(x) + Math.cos(x) - sig * (Math.sinh(x) + Math.sin(x));
+      var h = 1 - depth * Math.exp(-Math.pow((xi - x0) / (width || 0.08), 2));
+      n0 += w * phi2 * phi2; d0 += w * phi * phi; n1 += w * h * h * h * phi2 * phi2; d1 += w * h * phi * phi;
+    }
+    return Math.sqrt((n1 / n0) / (d1 / d0));
+  };
   C.wave = function (a, parts) {
     var N = parts.length, re = new Float32Array(N + 1), im = new Float32Array(N + 1);
     parts.forEach(function (p, i) { im[i + 1] = p.amp; });
@@ -194,11 +224,11 @@
     B: function (key, mult) { return 0.0004 * (mult == null ? 1 : mult) * Math.pow(2, (key - 60) / 12); },
     partials: function (opt) {
       opt = opt || {}; var B = opt.B == null ? 0.0004 : opt.B, f1 = opt.f1 || 261.63, out = [];
-      var tau1 = 4 * Math.pow(262 / f1, 0.6);
-      for (var n = 1; n <= 40; n++) {
+      var tau1 = 3 * Math.pow(262 / f1, 0.6), roll = opt.rolloff || 14;
+      for (var n = 1; n <= 60; n++) {
         var r = n * Math.sqrt((1 + B * n * n) / (1 + B));
         if (r * f1 > 16000) break;
-        out.push({ ratio: r, amp: Math.sin(n * Math.PI / 8) * Math.exp(-Math.pow(n / 14, 2)) * Math.exp(-Math.pow(r * f1 / 7000, 2)), tau: tau1 / (1 + 0.03 * n * n) });
+        out.push({ ratio: r, amp: Math.sin(n * Math.PI / 8) * Math.exp(-Math.pow(n / roll, 2)) * Math.exp(-Math.pow(r * f1 / 7000, 2)), tau: tau1 / (1 + 0.03 * n * n) });
       }
       return out;
     }

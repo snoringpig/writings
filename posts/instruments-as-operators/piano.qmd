@@ -1,42 +1,83 @@
 ---
 title: "The piano"
-subtitle: "Part 4 of Instruments as Operators"
+subtitle: "Stiff strings · Instruments as Operators"
 format:
   html:
     html-math-method: katex
     css: ins.css
+date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · [2 Clarinet](clarinet.qmd) · [3 Kalimba](kalimba.qmd) · **4 Piano** · [5 Drum](drum.qmd)
+[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: **Piano** · Membranes: [Drum](drum.qmd)
 
 A piano string is a violin string that is also a little bit of a kalimba tine. The two restoring forces add, and the overtones creep sharp.
+
+::: {.callout-note appearance="simple"}
+## Family: stiff strings
+Every real string is slightly stiff, so guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to shape how pianos are tuned.
+:::
 
 ## Play it
 
 ```{=html}
 <style>
-.kbd { position: relative; height: 170px; display: flex; user-select: none; -webkit-user-select: none; touch-action: none; }
-.kbd .w { flex: 1 1 0; min-width: 0; background: var(--paper); border: 1px solid var(--rule); border-radius: 0 0 6px 6px; display: flex; align-items: flex-end; justify-content: center; padding: 0 0 6px; font-family: var(--f-mono); font-size: 0.7rem; color: var(--muted); }
-.kbd .b { position: absolute; top: 0; height: 60%; background: var(--ink); border: 1px solid var(--ink); border-radius: 0 0 4px 4px; z-index: 2; padding: 0; min-height: 0; }
-.kbd button.on { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.kbdwrap { overflow-x: auto; overflow-y: hidden; border-radius: 6px; scrollbar-width: thin; }
+.kbd { position: relative; height: 150px; user-select: none; -webkit-user-select: none; touch-action: none; }
+.kbd .w, .kbd .b { position: absolute; top: 0; padding: 0; min-height: 0; border-radius: 0 0 5px 5px; font-family: var(--f-mono); font-size: 10px; display: flex; align-items: flex-end; justify-content: center; }
+.kbd .w { height: 100%; background: #fbfbf8; border: 1px solid var(--rule); color: #6a707c; padding-bottom: 5px; }
+.kbd .b { height: 60%; background: #1d2230; border: 1px solid #1d2230; color: #c8ccd6; z-index: 2; padding-bottom: 4px; }
+.kbd .w.win { background: #eef1fb; }
+.kbd .b.win { background: #2c3a6a; }
+.kbd .on { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+.pedals { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.pedals button { min-width: 7.5rem; border-radius: 6px 6px 14px 14px; font-size: 0.9rem; }
+.pedals button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pedals small { display: block; font-size: 0.75rem; opacity: 0.8; }
 </style>
 ```
 
 ```{=html}
 <div class="ins">
 <section class="instrument" aria-labelledby="play">
-  <div class="kbd" id="kbd" aria-label="Piano keyboard, C3 to C5"></div>
+  <div class="controls" style="padding:0 0.25rem 0.5rem">
+    <button id="octDown" aria-label="Move the computer-key window down an octave">◀ Octave (Z)</button>
+    <span class="readout" id="winRead"></span>
+    <button id="octUp" aria-label="Move the computer-key window up an octave">Octave (X) ▶</button>
+  </div>
+  <div class="kbdwrap" id="kbdwrap"><div class="kbd" id="kbd" aria-label="Piano keyboard, A0 to C8"></div></div>
+  <div class="pedals" style="padding:0.75rem 0.25rem 0" role="group" aria-label="Pedals">
+    <button id="pSoft" aria-pressed="false">Soft<small>left pedal</small></button>
+    <button id="pMute" aria-pressed="false">Practice mute<small>middle pedal</small></button>
+    <button id="pSus" aria-pressed="false">Sustain<small>right pedal · Space</small></button>
+  </div>
   <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="mult">Stiffness ×</label><input type="range" id="mult" min="0" max="12" step="0.5" value="1"><output id="multo">1.0</output></div>
-  <div class="readout" id="pRead" style="padding:0.4rem 0.25rem 0">Tap a key, or use the computer keys A W S E D F T G Y H U J K for C4 to C5.</div>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">At stiffness 0 every string is ideal and the partials sit on the integers. The default stiffness rises toward the treble, as on a real piano; its size here is illustrative.</p>
+  <div class="readout" id="pRead" style="padding:0.4rem 0.25rem 0">Hold keys to sound them; release to damp. Computer keys: A W S E D F T G Y H U J K O L P ; ' play the highlighted range.</div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Releasing a key drops its felt damper and the note stops. The top 20 keys have no dampers, as on a real piano. Sustain lifts every damper; Soft and Practice mute change how the hammer meets the string. The stiffness rises toward the treble; its size here is illustrative.</p>
 </section>
 </div>
 ```
 
+::: {.callout-important appearance="simple" icon="false"}
+## Reader question: why did the piano sound as if the sustain pedal were always down?
+Because releasing a key did nothing. The first version let every string ring until it died on its own, and that is exactly what the sustain pedal does. On a real piano each key lifts a felt damper off its strings; letting go drops the damper back and stops the note within a fraction of a second. The sustain pedal lifts all the dampers at once, so released notes keep ringing. The keyboard above now models both. The top 20 keys have no dampers at all, as on a real piano: those short strings die out quickly by themselves.
+:::
+
+## Dampers and pedals
+
+A piano has two or three pedals, and none of them touches the operator. They change only how the hammer excites the string, which sets the weights of the modes, and how fast the string loses energy. The frequencies stay where the operator put them.
+
+| Pedal | Usual name | What it does | In the model |
+|:--|:--|:--|:--|
+| right | sustain or damper pedal | lifts every damper, so notes ring after the key is released | released notes are not damped |
+| left | soft pedal (*una corda* on a grand) | on an upright, moves the hammers closer to the strings so they strike more gently; on a grand, shifts the action so each hammer strikes fewer strings with a softer part of its felt | quieter, and the high partials are weaker |
+| middle, on many uprights | practice or mute pedal | lowers a strip of felt between the hammers and the strings | much quieter and muffled: most high partials vanish |
+
+On a grand piano the middle pedal is usually the *sostenuto*, which keeps up only the dampers of keys already held down.
+
 ## Deriving the operator
 
-A piano wire is under heavy tension, like a violin string, and it is thick steel, so it also resists bending, like a kalimba tine. Forces per unit length simply add: the tension term from [Part 0](foundations.qmd) and the bending term from [Part 3](kalimba.qmd) give
+A piano wire is under heavy tension, like a violin string, and it is thick steel, so it also resists bending, like a kalimba tine. Forces per unit length simply add: the tension term from the [foundations](foundations.qmd) and the bending term from the [kalimba](kalimba.qmd) give
 $$
 \mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx}, \qquad\text{that is}\qquad \mathcal{L} = -c^2\partial_x^2 + \kappa^2\partial_x^4 .
 $$
@@ -58,7 +99,7 @@ The stiffness constant $B$ is small, but it multiplies $n^2$, so high partials r
     <h3>Partials of the last key</h3>
     <svg class="spec" id="pSpec" viewBox="0 0 320 120" aria-label="Partials of the last key played"></svg>
     <div class="readout" id="pPart"></div>
-    <p class="cap">Hammer at 1/8 of the length, so the 8th and 16th partials nearly vanish.</p>
+    <p class="cap">Hammer at 1/8 of the length, so the 8th and 16th partials nearly vanish. Try the soft and mute pedals: the stems shrink at the top, but none of them moves.</p>
   </div>
 </div>
 ```
@@ -77,54 +118,104 @@ A tuner sets an octave by listening for beats between the lower note's second pa
 </div>
 ```
 
-[← Part 3, the kalimba](kalimba.qmd) · [Part 5, the drum →](drum.qmd)
+[← The harmonica](harmonica.qmd) · [The drum →](drum.qmd)
 
 ```{=html}
 <script src="core.js"></script>
 <script>
 (function () {
   "use strict";
-  var C = Core, mult = 1, cache = {}, last = 60;
-  var KEYS = []; for (var k = 48; k <= 72; k++) KEYS.push(k);
+  var C = Core, mult = 1, cache = {}, last = 60, base = 60;
+  var LOW = 21, HIGH = 108, WK = 24, UNDAMPED = 89;
   var BLACK = { 1: 1, 3: 1, 6: 1, 8: 1, 10: 1 };
-  var kbd = document.getElementById("kbd"), whites = KEYS.filter(function (k) { return !BLACK[k % 12]; }), btn = {};
-  whites.forEach(function (k) {
-    var b = document.createElement("button"); b.type = "button"; b.className = "w"; b.dataset.key = k;
-    b.textContent = k % 12 === 0 ? C.noteName(C.mtof(k)).name : ""; b.setAttribute("aria-label", C.noteName(C.mtof(k)).name);
-    kbd.appendChild(b); btn[k] = b;
-  });
-  KEYS.forEach(function (k) {
-    if (!BLACK[k % 12]) return;
-    var wi = whites.indexOf(k - 1), b = document.createElement("button"); b.type = "button"; b.className = "b"; b.dataset.key = k;
+  var CODES = ["KeyA", "KeyW", "KeyS", "KeyE", "KeyD", "KeyF", "KeyT", "KeyG", "KeyY", "KeyH", "KeyU", "KeyJ", "KeyK", "KeyO", "KeyL", "KeyP", "Semicolon", "Quote"];
+  var LABEL = ["A", "W", "S", "E", "D", "F", "T", "G", "Y", "H", "U", "J", "K", "O", "L", "P", ";", "'"];
+  var ped = { sus: false, soft: false, mute: false }, held = {}, voices = {};
+  var kbd = document.getElementById("kbd"), wrap = document.getElementById("kbdwrap"), btn = {}, wi = 0;
+  for (var k = LOW; k <= HIGH; k++) if (!BLACK[k % 12]) wi++;
+  kbd.style.width = (wi * WK) + "px";
+  var x = 0;
+  for (var k = LOW; k <= HIGH; k++) {
+    var b = document.createElement("button"); b.type = "button"; b.dataset.key = k; b.tabIndex = -1;
     b.setAttribute("aria-label", C.noteName(C.mtof(k)).name);
-    b.style.left = "calc(" + ((wi + 1) / whites.length * 100) + "% - " + (0.3 / whites.length * 100) + "%)"; b.style.width = (0.6 / whites.length * 100) + "%";
+    if (BLACK[k % 12]) { b.className = "b"; b.style.left = (x * WK - WK * 0.31) + "px"; b.style.width = (WK * 0.62) + "px"; }
+    else { b.className = "w"; b.style.left = (x * WK) + "px"; b.style.width = WK + "px"; x++; }
     kbd.appendChild(b); btn[k] = b;
-  });
-  function partsFor(k, f1, m) { return C.models.piano.partials({ B: C.models.piano.B(k, m == null ? mult : m), f1: f1 || C.mtof(k) }); }
+  }
+  function labels() {
+    for (var k = LOW; k <= HIGH; k++) {
+      var i = k - base, inWin = i >= 0 && i < CODES.length, b = btn[k];
+      b.classList.toggle("win", inWin);
+      b.textContent = inWin ? LABEL[i] : (k % 12 === 0 ? C.noteName(C.mtof(k)).name : "");
+    }
+    document.getElementById("winRead").innerHTML = "computer keys: <b>" + C.noteName(C.mtof(base)).name + "–" + C.noteName(C.mtof(base + CODES.length - 1)).name + "</b>";
+    var el = btn[base]; if (el) wrap.scrollLeft = Math.max(0, parseFloat(el.style.left) - wrap.clientWidth / 2 + 4 * WK);
+  }
+  function shift(d) { base = Math.max(LOW + (12 - LOW % 12) % 12, Math.min(96, base + 12 * d)); labels(); }
+  document.getElementById("octDown").addEventListener("click", function () { shift(-1); });
+  document.getElementById("octUp").addEventListener("click", function () { shift(1); });
+
+  function opts() { return { rolloff: ped.mute ? 4.5 : (ped.soft ? 9 : 14) }; }
+  function partsFor(k, f1, m) { var o = opts(); o.B = C.models.piano.B(k, m == null ? mult : m); o.f1 = f1 || C.mtof(k); return C.models.piano.partials(o); }
   function buf(k) {
-    var id = k + ":" + mult;
-    if (!cache[id]) { var f = C.mtof(k); cache[id] = C.render(C.toHz(partsFor(k), f), Math.min(5, 1.5 + 3 * Math.pow(262 / f, 0.6))); }
+    var id = k + ":" + mult + ":" + ped.soft + ":" + ped.mute;
+    if (!cache[id]) {
+      var f = C.mtof(k), dur = Math.min(8, 1.5 + 3 * Math.pow(262 / f, 0.6)), b = C.render(C.toHz(partsFor(k), f), dur);
+      var d = b.getChannelData(0), n = Math.floor(0.3 * b.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n;
+      cache[id] = b;
+    }
     return cache[id];
   }
-  function strike(k) {
-    C.play(buf(k), 0.7); last = k; flash(k); pspec();
-    var B = C.models.piano.B(k, mult), nn = C.noteName(C.mtof(k));
-    document.getElementById("pRead").innerHTML = "<b>" + nn.name + "</b> · " + C.mtof(k).toFixed(1) + " Hz · B = <b>" + B.toExponential(1) + "</b>";
+  function level() { return 0.7 * (ped.soft ? 0.55 : 1) * (ped.mute ? 0.25 : 1); }
+  function damp(k, tc) {
+    var v = voices[k]; if (!v) return; var t = C.ac().currentTime;
+    v.g.gain.cancelScheduledValues(t); v.g.gain.setTargetAtTime(0, t, tc || 0.06); v.src.stop(t + 1); delete voices[k];
   }
-  function flash(k) { var b = btn[k]; if (!b) return; b.classList.add("on"); setTimeout(function () { b.classList.remove("on"); }, 180); }
-  var down = false, lastK = -1;
-  function keyAt(e) { var el = document.elementFromPoint(e.clientX, e.clientY); return el && el.dataset && el.dataset.key ? parseInt(el.dataset.key, 10) : -1; }
-  kbd.addEventListener("pointerdown", function (e) { e.preventDefault(); down = true; kbd.setPointerCapture(e.pointerId); var k = keyAt(e); lastK = k; if (k > 0) strike(k); });
-  kbd.addEventListener("pointermove", function (e) { if (!down) return; var k = keyAt(e); if (k > 0 && k !== lastK) strike(k); lastK = k; });
-  function up() { down = false; lastK = -1; }
+  function strike(k) {
+    if (k < LOW || k > HIGH) return;
+    var a = C.ac(); damp(k, 0.01);
+    var src = a.createBufferSource(), g = a.createGain(); src.buffer = buf(k); g.gain.value = level();
+    src.connect(g); g.connect(C.out); src.start(); voices[k] = { src: src, g: g };
+    src.onended = function () { if (voices[k] && voices[k].src === src) delete voices[k]; };
+    held[k] = true; btn[k].classList.add("on"); last = k; pspec();
+    var nn = C.noteName(C.mtof(k));
+    document.getElementById("pRead").innerHTML = "<b>" + nn.name + "</b> · " + C.mtof(k).toFixed(1) + " Hz · B = <b>" + C.models.piano.B(k, mult).toExponential(1) + "</b>" + (k >= UNDAMPED ? " · no damper" : "");
+  }
+  function release(k) {
+    if (!held[k]) return; delete held[k]; btn[k].classList.remove("on");
+    if (!ped.sus && k < UNDAMPED) damp(k);
+  }
+  function setPed(name, on) {
+    ped[name] = on; document.getElementById({ sus: "pSus", soft: "pSoft", mute: "pMute" }[name]).setAttribute("aria-pressed", on);
+    if (name === "sus" && !on) Object.keys(voices).forEach(function (k) { k = +k; if (!held[k] && k < UNDAMPED) damp(k); });
+    if (name !== "sus") pspec();
+  }
+  document.getElementById("pSus").addEventListener("click", function () { setPed("sus", !ped.sus); });
+  document.getElementById("pSoft").addEventListener("click", function () { setPed("soft", !ped.soft); });
+  document.getElementById("pMute").addEventListener("click", function () { setPed("mute", !ped.mute); });
+
+  var down = false, curK = -1;
+  function keyAt(e) { var el = document.elementFromPoint(e.clientX, e.clientY); return el && el.dataset && el.dataset.key ? +el.dataset.key : -1; }
+  kbd.addEventListener("pointerdown", function (e) { e.preventDefault(); down = true; kbd.setPointerCapture(e.pointerId); curK = keyAt(e); if (curK > 0) strike(curK); });
+  kbd.addEventListener("pointermove", function (e) { if (!down) return; var k = keyAt(e); if (k !== curK) { if (curK > 0) release(curK); if (k > 0) strike(k); curK = k; } });
+  function up() { down = false; if (curK > 0) release(curK); curK = -1; }
   kbd.addEventListener("pointerup", up); kbd.addEventListener("pointercancel", up);
-  kbd.addEventListener("click", function (e) { if (e.detail === 0 && e.target.dataset.key) strike(parseInt(e.target.dataset.key, 10)); });
-  var MAP = { a: 60, w: 61, s: 62, e: 63, d: 64, f: 65, t: 66, g: 67, y: 68, h: 69, u: 70, j: 71, k: 72 };
-  window.addEventListener("keydown", function (e) { if (e.repeat || e.metaKey || e.ctrlKey || e.target.tagName === "INPUT") return; var k = MAP[e.key.toLowerCase()]; if (k) strike(k); });
+  var codeKey = {};
+  window.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT")) return;
+    if (e.code === "Space") { e.preventDefault(); if (!e.repeat) setPed("sus", true); return; }
+    if (e.code === "KeyZ") { if (!e.repeat) shift(-1); return; }
+    if (e.code === "KeyX") { if (!e.repeat) shift(1); return; }
+    var i = CODES.indexOf(e.code); if (i < 0 || e.repeat) return;
+    e.preventDefault(); var k = base + i; codeKey[e.code] = k; strike(k);
+  });
+  window.addEventListener("keyup", function (e) {
+    if (e.code === "Space") { setPed("sus", false); return; }
+    var k = codeKey[e.code]; if (k != null) { delete codeKey[e.code]; release(k); }
+  });
 
   var ms = document.getElementById("mult"), mo = document.getElementById("multo");
   ms.addEventListener("input", function () { mult = parseFloat(ms.value); mo.textContent = mult.toFixed(1); pspec(); octRead(); });
-
   function pspec() {
     var p = partsFor(last);
     C.stems(document.getElementById("pSpec"), p, { W: 320, H: 120, rmax: 16, fs: 8, sw: 2, labelEvery: 2 });
@@ -140,12 +231,13 @@ A tuner sets an octave by listening for beats between the lower note's second pa
     var f = C.mtof(60), f5 = stretch ? f * r2(60) : 2 * f;
     var a = C.toHz(partsFor(60, f), f), b = C.toHz(partsFor(72, f5), f5);
     b.forEach(function (p) { p.amp *= 0.8; });
-    C.play(C.render(a.concat(b), 4.5), 0.8); flash(60); flash(72);
+    C.play(C.render(a.concat(b), 4.5), 0.8);
   }
   document.getElementById("o21").addEventListener("click", function () { octave(false); });
   document.getElementById("ost").addEventListener("click", function () { octave(true); });
   C.onTheme(pspec);
-  pspec(); octRead();
+  labels(); pspec(); octRead();
+  window.addEventListener("load", labels);
 })();
 </script>
 ```

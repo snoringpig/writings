@@ -1,16 +1,22 @@
 ---
 title: "The drum"
-subtitle: "Part 5 of Instruments as Operators"
+subtitle: "Membranes · Instruments as Operators"
 format:
   html:
     html-math-method: katex
     css: ins.css
+date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · [2 Clarinet](clarinet.qmd) · [3 Kalimba](kalimba.qmd) · [4 Piano](piano.qmd) · **5 Drum**
+[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: **Drum**
 
 The string's operator in two dimensions. The zeros of Bessel functions replace the whole numbers, and where you strike decides which modes speak.
+
+::: {.callout-note appearance="simple"}
+## Family: membranes
+Toms, snares and timpani share the operator $-c^2\Delta$ on a disk. They differ in constants (tension, size, head mass) and in what surrounds the head: a timpani's kettle loads the air and pulls its modes toward a harmonic series, which a tom lacks.
+:::
 
 ## Play it
 
@@ -53,7 +59,7 @@ u_{tt} = -\mathcal{L}u,\qquad \mathcal{L} = -c^2\Delta,\qquad c^2 = T/\sigma,\qq
 $$
 :::
 
-In one dimension the patch is a segment, its edge is two endpoints, and step 3 is the fundamental theorem of calculus. That is Part 0's equation again.
+In one dimension the patch is a segment, its edge is two endpoints, and step 3 is the fundamental theorem of calculus. That is the foundations' equation again.
 
 ```{=html}
 <div class="ins">
@@ -92,7 +98,7 @@ A strike at $p$, heard at $q$, gives mode $k$ the weight $X_k(p)X_k(q)/\lVert X_
 </div>
 ```
 
-[← Part 4, the piano](piano.qmd) · [Back to the series](index.qmd)
+[← The piano](piano.qmd) · [Back to the series](index.qmd)
 
 ```{=html}
 <script src="core.js"></script>

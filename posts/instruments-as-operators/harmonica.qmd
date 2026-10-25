@@ -1,0 +1,196 @@
+---
+title: "The chromatic harmonica"
+subtitle: "Clamped bars · Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+date-modified: 2026-10-25
+resources: [core.js, ins.css]
+---
+
+[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), **Harmonica** · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
+
+Each note is a small brass reed clamped at one end: the kalimba's operator, with the kalimba's boundary conditions. Blowing instead of plucking turns its scattered overtones into exact harmonics.
+
+::: {.callout-note appearance="simple"}
+## Family: clamped bars
+Same operator and boundary conditions as the [kalimba](kalimba.qmd). The constants differ, since a harmonica reed is a short, thin strip of brass, and so does the excitation: airflow instead of a thumb. That one difference is why a kalimba clinks and a harmonica sings.
+:::
+
+## Play it
+
+```{=html}
+<style>
+.harp { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3px; background: #8e96a3; padding: 6px; border-radius: 10px; user-select: none; -webkit-user-select: none; touch-action: none; }
+.harp .cell { display: grid; grid-template-rows: auto 1fr 1fr; gap: 3px; min-width: 0; }
+.harp .num { font-family: var(--f-mono); font-size: 10px; color: #f4f5f2; text-align: center; }
+.harp button { padding: 0; min-height: 3.2rem; min-width: 0; border-radius: 4px; font-family: var(--f-mono); font-size: 11px; border: 0; color: #1d2230; }
+.harp button.blow { background: #f4f1e8; }
+.harp button.draw { background: #dfe3ea; }
+.harp button.on { background: var(--accent); color: #fff; }
+.harp-legend { display: flex; justify-content: space-between; font-family: var(--f-ui); font-size: 0.8rem; color: var(--muted); padding: 0 0.25rem; }
+#slide.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+</style>
+```
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <div class="harp-legend"><span>blow (top row: keys 1 … =)</span><span>draw (bottom row: keys Q … ])</span></div>
+  <div class="harp" id="harp" aria-label="Twelve-hole chromatic harmonica in C"></div>
+  <div class="controls" style="padding:0.6rem 0.25rem 0">
+    <button id="slide">Slide (hold, or Space)</button>
+    <span class="readout" id="hRead">Press and hold a hole. Slide across holes to move between notes.</span>
+  </div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Twelve holes in solo tuning, from C4 up three octaves. Pushing the slide raises every note a semitone, by switching the air to a second set of reeds.</p>
+</section>
+</div>
+```
+
+## The operator
+
+A harmonica reed is a thin brass strip riveted at one end over a slot in a metal plate. It is a clamped–free bar, so everything derived for the [kalimba](kalimba.qmd) applies unchanged:
+$$
+u_{tt} = -\kappa^2 u_{xxxx}, \qquad u = u_x = 0 \text{ at the rivet}, \qquad u_{xx} = u_{xxx} = 0 \text{ at the tip}.
+$$
+
+The modes satisfy $\cos\beta L\cosh\beta L = -1$, with ratios $1 : 6.27 : 17.55$. For a rectangular reed of thickness $h$, $I = wh^3/12$ and $A = wh$, so $\kappa = h\sqrt{E/12\rho}$ and
+$$
+f_1 = \frac{(1.8751)^2}{2\pi}\cdot\frac{h}{L^2}\sqrt{\frac{E}{12\rho}} .
+$$
+
+Low reeds are long; high reeds are short. The width $w$ cancels, so it affects loudness, not pitch.
+
+## Same reed, two ways to drive it
+
+Pluck a reed and it rings like a kalimba tine: you hear its own modes at 1, 6.27 and 17.5 times the fundamental, and the overtones die almost at once. Blow it and the reed swings through its slot, opening and closing the air path once per cycle. What you hear is the chopped airflow, a train of puffs repeating at the reed's frequency. A periodic signal has only whole-number partials, so the sound is harmonic even though the reed's own overtones are not.
+
+This is the same mechanism as the violin's bow and the clarinet's reed: a steady push turned into a periodic oscillation. The difference here is that the reed's modes are far from harmonic, so you can hear the excitation, not the operator, set the overtones.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <div class="controls"><button id="pluckR">Pluck the C5 reed</button><button id="blowR" class="primary">Blow the C5 reed</button></div>
+    <svg class="spec" id="hSpec" viewBox="0 0 320 110" aria-label="Partials of the plucked or blown reed"></svg>
+    <p class="cap" id="hCap">Same operator, same boundary conditions, same reed. Only the excitation differs.</p>
+  </div>
+</div>
+```
+
+## Tuning a reed with a file
+
+Reed makers tune by scraping metal off, and where they scrape decides the direction. The Rayleigh quotient explains why. For the first mode,
+$$
+\omega^2 = \frac{\int_0^L EI\,(u'')^2\,dx}{\int_0^L \rho A\,u^2\,dx},
+$$
+with stiffness in the numerator and mass in the denominator. The first mode bends most near the rivet and moves most near the tip. Thinning the reed near the rivet removes stiffness where it counts and lowers the pitch; thinning it near the tip removes mass where it counts and raises it.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <div class="slider"><label for="fx">Where to file</label><input type="range" id="fx" min="0.02" max="0.98" step="0.01" value="0.1"><output id="fxo">base</output></div>
+    <div class="readout" id="fRead"></div>
+    <div class="controls"><button id="fPlay" class="primary">Blow the filed reed</button><button id="fOrig">Blow the original</button></div>
+    <p class="cap">Filing removes 25% of the thickness over about a tenth of the reed. The pitch change uses the unfiled mode shape in the Rayleigh quotient, which is accurate to first order.</p>
+  </div>
+</div>
+```
+
+## The chromatic slide
+
+A chromatic harmonica has two sets of reed chambers, the second tuned a semitone higher. Each hole has a blow reed and a draw reed in each set. Pushing the slide moves a perforated bar that closes one set and opens the other, so every note rises a semitone. In solo tuning, each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw.
+
+[← The kalimba](kalimba.qmd) · [The piano →](piano.qmd)
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  // solo tuning in C: [blow, draw] MIDI notes for holes 1..12
+  var HOLES = [];
+  for (var o = 0; o < 3; o++) {
+    var c = 60 + 12 * o;
+    HOLES.push([c, c + 2], [c + 4, c + 5], [c + 7, c + 9], [c + 12, c + 11]);
+  }
+  var BLOWC = ["Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal"];
+  var DRAWC = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight"];
+  var slide = false, cur = null, voice = null, wave = null;
+  var harp = document.getElementById("harp"), cells = [];
+  function label(k) { return C.noteName(C.mtof(k)).name.replace(/\d+$/, ""); }
+  HOLES.forEach(function (h, i) {
+    var cell = document.createElement("div"); cell.className = "cell";
+    var num = document.createElement("span"); num.className = "num"; num.textContent = i + 1;
+    var b = document.createElement("button"); b.type = "button"; b.className = "blow"; b.dataset.hole = i; b.dataset.dir = 0;
+    var d = document.createElement("button"); d.type = "button"; d.className = "draw"; d.dataset.hole = i; d.dataset.dir = 1;
+    cell.appendChild(num); cell.appendChild(b); cell.appendChild(d); harp.appendChild(cell); cells.push([b, d]);
+  });
+  function relabel() { HOLES.forEach(function (h, i) { cells[i][0].textContent = label(h[0] + (slide ? 1 : 0)); cells[i][1].textContent = label(h[1] + (slide ? 1 : 0)); }); }
+  function note(c) { return HOLES[c.hole][c.dir] + (slide ? 1 : 0); }
+  function getWave(a) { if (!wave) wave = C.wave(a, C.models.harmonica.partials()); return wave; }
+  function sound(c) {
+    var a = C.ac(), f = C.mtof(note(c)), t = a.currentTime;
+    if (!voice) {
+      var osc = a.createOscillator(), g = a.createGain(), lp = a.createBiquadFilter();
+      osc.setPeriodicWave(getWave(a)); osc.frequency.value = f; lp.type = "lowpass"; lp.frequency.value = 5000;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.28, t + 0.04);
+      osc.connect(lp); lp.connect(g); g.connect(C.out); osc.start(); voice = { osc: osc, g: g };
+    } else voice.osc.frequency.setTargetAtTime(f, t, 0.004);
+    var nn = C.noteName(f);
+    document.getElementById("hRead").innerHTML = "hole <b>" + (c.hole + 1) + "</b> " + (c.dir ? "draw" : "blow") + (slide ? " + slide" : "") + " · <b>" + nn.name + "</b> · " + f.toFixed(1) + " Hz";
+  }
+  function silence() { if (!voice) return; var t = C.ac().currentTime; voice.g.gain.cancelScheduledValues(t); voice.g.gain.setTargetAtTime(0, t, 0.03); voice.osc.stop(t + 0.3); voice = null; }
+  function light(c, on) { if (c) cells[c.hole][c.dir].classList.toggle("on", on); }
+  function set(c) { light(cur, false); cur = c; if (c) { light(c, true); sound(c); } else silence(); }
+  function at(e) { var el = document.elementFromPoint(e.clientX, e.clientY); return el && el.dataset && el.dataset.hole != null ? { hole: +el.dataset.hole, dir: +el.dataset.dir } : null; }
+  var down = false;
+  harp.addEventListener("pointerdown", function (e) { e.preventDefault(); down = true; harp.setPointerCapture(e.pointerId); set(at(e)); });
+  harp.addEventListener("pointermove", function (e) { if (!down) return; var c = at(e); if (c && (!cur || c.hole !== cur.hole || c.dir !== cur.dir)) set(c); });
+  function up() { down = false; set(null); }
+  harp.addEventListener("pointerup", up); harp.addEventListener("pointercancel", up);
+  function setSlide(on) { slide = on; document.getElementById("slide").classList.toggle("on", on); relabel(); if (cur) sound(cur); }
+  var sb = document.getElementById("slide");
+  sb.addEventListener("pointerdown", function (e) { e.preventDefault(); sb.setPointerCapture(e.pointerId); setSlide(true); });
+  sb.addEventListener("pointerup", function () { setSlide(false); }); sb.addEventListener("pointercancel", function () { setSlide(false); });
+  var keyCell = {};
+  window.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.code === "Space") { e.preventDefault(); if (!e.repeat) setSlide(true); return; }
+    var i = BLOWC.indexOf(e.code), dir = 0; if (i < 0) { i = DRAWC.indexOf(e.code); dir = 1; }
+    if (i < 0 || e.repeat) return; e.preventDefault(); keyCell[e.code] = true; set({ hole: i, dir: dir });
+  });
+  window.addEventListener("keyup", function (e) {
+    if (e.code === "Space") { setSlide(false); return; }
+    if (keyCell[e.code]) { delete keyCell[e.code]; set(null); }
+  });
+
+  // plucked vs blown
+  var mode = "blow";
+  function hspec() {
+    var p = C.models.harmonica.partials({ plucked: mode === "pluck" });
+    C.stems(document.getElementById("hSpec"), p, { W: 320, H: 110, rmax: 20, fs: 8, sw: 2, labelEvery: 2 });
+  }
+  function fadeOut(b, s) { var d = b.getChannelData(0), n = Math.floor(s * b.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return b; }
+  document.getElementById("pluckR").addEventListener("click", function () { mode = "pluck"; hspec(); C.play(C.render(C.toHz(C.models.harmonica.partials({ plucked: true }), 523.25), 2.0), 0.8); });
+  document.getElementById("blowR").addEventListener("click", function () { mode = "blow"; hspec(); C.play(fadeOut(C.render(C.toHz(C.models.harmonica.partials(), 523.25), 1.6), 0.25), 0.6); });
+
+  // reed filing
+  var fx = document.getElementById("fx"), fxo = document.getElementById("fxo");
+  function ratio() { return C.reedRatio(parseFloat(fx.value), 0.25, 0.06); }
+  function fRead() {
+    var x = parseFloat(fx.value), r = ratio(), cents = 1200 * Math.log2(r);
+    fxo.textContent = x < 0.2 ? "near the clamp" : x > 0.8 ? "near the tip" : (x * 100).toFixed(0) + "% along";
+    document.getElementById("fRead").innerHTML = "pitch change <b>" + (cents >= 0 ? "+" : "") + cents.toFixed(0) + "¢</b> · " + (cents < 0 ? "flatter" : "sharper");
+  }
+  fx.addEventListener("input", fRead);
+  function blowAt(f) { C.play(fadeOut(C.render(C.toHz(C.models.harmonica.partials(), f), 1.3), 0.25), 0.6); }
+  document.getElementById("fPlay").addEventListener("click", function () { blowAt(523.25 * ratio()); });
+  document.getElementById("fOrig").addEventListener("click", function () { blowAt(523.25); });
+
+  C.onTheme(hspec);
+  relabel(); hspec(); fRead();
+})();
+</script>
+```

@@ -2,6 +2,7 @@
 title: "Instruments as Operators"
 subtitle: "Newton's law gives an operator, its spectrum gives the frequencies, the way you play gives the sound"
 date: 2026-10-25
+date-modified: 2026-10-25
 categories: [math, music]
 format:
   html:
@@ -21,6 +22,20 @@ Every instrument in this series is worked out the same way, in three steps.
 2. **Spectrum.** Each eigenpair $\mathcal{L}X = \omega^2 X$ is a standing wave $X(x)\cos\omega t$. The eigenvalues fix which frequencies the instrument can make.
 3. **Sound.** How you play it, by bow, reed, hammer, thumb or stick, fixes how strongly each mode is excited. Whether the frequencies line up on whole-number multiples decides whether you hear a pitch.
 
+Start with the [foundations](foundations.qmd), which derive the string's equation from beads on a thread. Then pick any family below.
+
+## Families
+
+Instruments with the same operator and boundary conditions are the same mathematical object with different constants. Each family below shares one operator; the last column says what still differs inside it.
+
+| Family | Operator and boundary | Demos | What varies inside the family |
+|:--|:--|:--|:--|
+| Strings under tension | $-c^2\partial_x^2$, tied ends | [Violin](violin.qmd) | length, tension, mass per length; plucked (guitar, harp) or bowed (violin, cello) |
+| Air columns | $-c^2\partial_x^2$ on pressure | [Clarinet](clarinet.qmd), with a flute switch | the boundary condition: one end closed (clarinet, pan pipes) or both open (flute) |
+| Clamped bars | $\kappa^2\partial_x^4$, clamped base, free tip | [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) | steel tine or brass reed; plucked or blown, which decides whether you hear harmonics |
+| Stiff strings | $-c^2\partial_x^2 + \kappa^2\partial_x^4$, pinned ends | [Piano](piano.qmd) | stiffness, rising toward the treble |
+| Membranes | $-c^2\Delta$ on a disk | [Drum](drum.qmd) | tension and size; the air under a timpani head |
+
 ## Hear them side by side
 
 Gray lines are whole-number multiples of the fundamental. Stem height is how strongly each partial is excited.
@@ -31,35 +46,47 @@ Gray lines are whole-number multiples of the fundamental. Stem height is how str
   <div><span class="nm">Violin</span><svg class="mini" data-mini="violin" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="violin">—</span><button class="primary" data-play="violin">Play</button></div>
   <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">modes 1, 3, 5, 7, 9</span><button class="primary" data-play="clarinet">Play</button></div>
   <div><span class="nm">Kalimba</span><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="kalimba">—</span><button class="primary" data-play="kalimba">Play</button></div>
+  <div><span class="nm">Harmonica</span><svg class="mini" data-mini="harmonica" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="harmonica">—</span><button class="primary" data-play="harmonica">Play</button></div>
   <div><span class="nm">Piano</span><svg class="mini" data-mini="piano" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="piano">—</span><button class="primary" data-play="piano">Play</button></div>
   <div><span class="nm">Drum</span><svg class="mini" data-mini="drum" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="drum">—</span><button class="primary" data-play="drum">Play</button></div>
 </div>
 </div>
 ```
 
-## Reading path
+::: {.callout-important appearance="simple" icon="false"}
+## Reader question: is a musical note one frequency?
+No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is the repetition rate $f = 1/P$. Any periodic signal is a Fourier series $\sum_n b_n\cos(2\pi n f t + \phi_n)$, so one note contains $f, 2f, 3f, \dots$ at once. The fundamental sets the pitch and the weights $b_n$ set the timbre: a piano C4 and a violin C4 share $f$ and differ in their $b_n$. Removing the $f$ component does not change the pitch you hear, because the pattern still repeats every $1/f$ seconds. The precise correspondence is between a note and a period, not a single frequency.
+:::
 
-| Part | Instrument | Operator | What you can play |
-|:-----|:-----------|:---------|:------------------|
-| 0 | [Foundations](foundations.qmd) | $m\ddot u_j = \tfrac{T}{h}(u_{j+1}-2u_j+u_{j-1}) \to c^2u_{xx}$ | beads on a thread |
-| 1 | [Violin](violin.qmd) | $-c^2\partial_x^2$ | a bowed fingerboard |
-| 2 | [Clarinet](clarinet.qmd) | $-c^2\partial_x^2$, with $p_x = 0$ at the reed | tone holes and a register key |
-| 3 | [Kalimba](kalimba.qmd) | $\kappa^2\partial_x^4$ | seventeen tines |
-| 4 | [Piano](piano.qmd) | $-c^2\partial_x^2 + \kappa^2\partial_x^4$ | a keyboard with a stiffness knob |
-| 5 | [Drum](drum.qmd) | $-c^2\Delta$ | a drumhead you strike anywhere |
+::: {.callout-important appearance="simple" icon="false"}
+## Reader question: why should whole-number ratios matter for what we hear?
+A sum of frequencies repeats only if they are all whole-number multiples of one base frequency, and the ear hears that repetition rate as pitch. Two tones at ratio 2 repeat every cycle of the lower one. At ratio 1.5 they repeat every two cycles, so the pitch is an octave below the lower tone. At 1.59, the drum's first ratio, the pattern never lines up and there is no pitch to hear. Drag the ratio and listen.
+
+```{=html}
+<div class="ins">
+<div class="panel" style="margin:0.5rem 0 0">
+  <div class="controls"><button id="r2">String: 2×</button><button id="r159">Drum: 1.59×</button><button id="r15">1.5×</button><button id="rPlay" class="primary">Play</button></div>
+  <div class="slider"><label for="ratio">Ratio</label><input type="range" id="ratio" min="1" max="3" step="0.01" value="2"><output id="ratioOut">2.00×</output></div>
+  <div class="readout" id="ratioMsg"></div>
+  <canvas id="ratioWave" style="height:140px" aria-label="Sum of two tones over six cycles of the lower one"></canvas>
+  <p class="cap">Gray ticks mark cycles of the lower tone. Plotted: cos 2πt + 0.7 cos(2π·ratio·t).</p>
+</div>
+</div>
+```
+:::
 
 ## Comparison
 
-| | Violin | Clarinet | Kalimba | Piano | Drum |
-|:--|:--|:--|:--|:--|:--|
-| Restoring force | tension | air pressure | bending stiffness | tension + bending | tension, in 2D |
-| Newton's law on | a segment | a slab of air | a slice: torque, then force | a segment, both forces added | a patch, via the divergence theorem |
-| Operator | $-c^2\partial_x^2$ | $-c^2\partial_x^2$ on pressure | $\kappa^2\partial_x^4$ | $-c^2\partial_x^2+\kappa^2\partial_x^4$ | $-c^2\Delta$ |
-| Boundary | $u=0$ at both ends | $p_x=0$ at reed, $p=0$ at open end | $u=u'=0$ at clamp, $u''=u'''=0$ at tip | $u=u''=0$ at both ends | $u=0$ on the rim |
-| Eigen-condition | $\sin kL=0$ | $\cos kL=0$ | $\cos\beta L\cosh\beta L=-1$ | $\sin kL=0$ | $J_m(ka)=0$ |
-| $f_n/f_1$ | $n$ | $2n-1$ | $(\beta_n/\beta_1)^2$: 1, 6.27, 17.5 | $n\sqrt{(1+Bn^2)/(1+B)}$ | $j_{m,n}/j_{0,1}$: 1, 1.59, 2.14 |
-| Excitation | bow, sustained | reed, sustained | thumb pluck | felt hammer | stick |
-| Why it sounds as it does | periodic: exact harmonics | periodic, odd harmonics dominate: overblows a twelfth | overtones weak, far and brief: pitch survives | near-harmonic: pitch, stretched octaves | inharmonic and long-lived: a thud |
+| | Violin | Clarinet | Kalimba | Harmonica | Piano | Drum |
+|:--|:--|:--|:--|:--|:--|:--|
+| Restoring force | tension | air pressure | bending | bending | tension + bending | tension, in 2D |
+| Newton's law on | a segment | a slab of air | a slice: torque, then force | a slice, as for the kalimba | a segment, both forces added | a patch, via the divergence theorem |
+| Operator | $-c^2\partial_x^2$ | $-c^2\partial_x^2$ on pressure | $\kappa^2\partial_x^4$ | $\kappa^2\partial_x^4$ | $-c^2\partial_x^2+\kappa^2\partial_x^4$ | $-c^2\Delta$ |
+| Boundary | $u=0$ at both ends | $p_x=0$ at reed, $p=0$ at open end | $u=u'=0$ at clamp, $u''=u'''=0$ at tip | same as the kalimba | $u=u''=0$ at both ends | $u=0$ on the rim |
+| Eigen-condition | $\sin kL=0$ | $\cos kL=0$ | $\cos\beta L\cosh\beta L=-1$ | $\cos\beta L\cosh\beta L=-1$ | $\sin kL=0$ | $J_m(ka)=0$ |
+| Mode ratios | $n$ | $2n-1$ | 1, 6.27, 17.5 | 1, 6.27, 17.5 | $n\sqrt{(1+Bn^2)/(1+B)}$ | 1, 1.59, 2.14 |
+| Excitation | bow, sustained | reed, sustained | thumb pluck | airflow, sustained | felt hammer | stick |
+| What you hear | exact harmonics | odd harmonics dominate; overblows a twelfth | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
 
 ```{=html}
 <script src="core.js"></script>
@@ -69,30 +96,56 @@ Gray lines are whole-number multiples of the fundamental. Stem height is how str
   var C = Core, M = C.models;
   var DEF = {
     violin: function () { return M.violin.partials(); },
+    clarinet: function () { return M.clarinet.partials(); },
     kalimba: function () { return M.kalimba.partials(); },
+    harmonica: function () { return M.harmonica.partials(); },
     piano: function () { return M.piano.partials({ B: 0.0012 }); },
-    drum: function () { return M.drum.partials({ r: 0.35 }); },
-    clarinet: function () { return M.clarinet.partials(); }
+    drum: function () { return M.drum.partials({ r: 0.35 }); }
   };
+  var SUSTAINED = { violin: 1, clarinet: 1, harmonica: 1 };
   function draw() {
     document.querySelectorAll("svg[data-mini]").forEach(function (svg) {
       C.stems(svg, DEF[svg.getAttribute("data-mini")](), { W: 200, H: 58, rmax: 8, fs: 9, sw: 2, labelEvery: 2 });
     });
-    document.querySelectorAll("[data-ratios]").forEach(function (td) {
-      td.textContent = DEF[td.getAttribute("data-ratios")]().map(function (p) { return p.ratio; }).sort(function (a, b) { return a - b; }).slice(0, 5).map(function (r) { return r.toFixed(2); }).join(", ");
+    document.querySelectorAll("[data-ratios]").forEach(function (el) {
+      el.textContent = DEF[el.getAttribute("data-ratios")]().map(function (p) { return p.ratio; }).sort(function (a, b) { return a - b; }).slice(0, 4).map(function (r) { return r.toFixed(2); }).join(", ");
     });
   }
   function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
   document.querySelectorAll("[data-play]").forEach(function (b) {
     b.addEventListener("click", function () {
       var id = b.getAttribute("data-play"), f = M[id].F0, buf;
-      if (id === "violin" || id === "clarinet") buf = fadeOut(C.render(C.toHz(DEF[id](), f), 1.8), 0.4);
+      if (SUSTAINED[id]) buf = fadeOut(C.render(C.toHz(DEF[id](), f), 1.8), 0.4);
       else buf = C.render(C.toHz(DEF[id](), f), id === "piano" ? 3.2 : 2.6);
       C.play(buf, 0.8);
     });
   });
-  C.onTheme(draw);
-  draw();
+
+  var rs = document.getElementById("ratio"), ro = document.getElementById("ratioOut"), msg = document.getElementById("ratioMsg"), cv = document.getElementById("ratioWave");
+  function period(r) { for (var q = 1; q <= 4; q++) { var p = Math.round(r * q); if (Math.abs(p / q - r) < 0.003) return q; } return 0; }
+  function wave() {
+    var r = parseFloat(rs.value), q = period(r), d = C.fit(cv), W = cv.width, H = cv.height, ctx = cv.getContext("2d"), T = 6;
+    ro.textContent = r.toFixed(2) + "×";
+    msg.innerHTML = q ? "repeats every <b>" + q + "</b> cycle" + (q > 1 ? "s" : "") + " of the lower tone: a clear pitch" : "never lines up in this window: no clear pitch";
+    ctx.clearRect(0, 0, W, H); ctx.strokeStyle = C.rgb("--grid"); ctx.lineWidth = d;
+    for (var k = 0; k <= T; k++) { var x = k / T * W; ctx.beginPath(); ctx.moveTo(x, H - 8 * d); ctx.lineTo(x, H); ctx.stroke(); }
+    ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
+    ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = 2 * d; ctx.beginPath();
+    for (var i = 0; i <= W; i++) { var t = i / W * T, y = Math.cos(2 * Math.PI * t) + 0.7 * Math.cos(2 * Math.PI * r * t), py = H / 2 - y / 1.75 * (H / 2 - 10 * d); if (i) ctx.lineTo(i, py); else ctx.moveTo(i, py); }
+    ctx.stroke();
+  }
+  function setR(v) { rs.value = v; wave(); }
+  rs.addEventListener("input", wave);
+  document.getElementById("r2").addEventListener("click", function () { setR(2); });
+  document.getElementById("r159").addEventListener("click", function () { setR(1.59); });
+  document.getElementById("r15").addEventListener("click", function () { setR(1.5); });
+  document.getElementById("rPlay").addEventListener("click", function () {
+    var r = parseFloat(rs.value);
+    C.play(fadeOut(C.render([{ f: 220, amp: 1, tau: 10 }, { f: 220 * r, amp: 0.7, tau: 10 }], 2), 0.3), 0.7);
+  });
+  window.addEventListener("resize", wave);
+  C.onTheme(function () { draw(); wave(); });
+  draw(); wave();
 })();
 </script>
 ```

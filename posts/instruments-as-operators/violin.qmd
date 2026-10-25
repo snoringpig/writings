@@ -1,20 +1,26 @@
 ---
 title: "The violin"
-subtitle: "Part 1 of Instruments as Operators"
+subtitle: "Strings · Instruments as Operators"
 format:
   html:
     html-math-method: katex
     css: ins.css
+date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [0 Foundations](foundations.qmd) · **1 Violin** · [2 Clarinet](clarinet.qmd) · [3 Kalimba](kalimba.qmd) · [4 Piano](piano.qmd) · [5 Drum](drum.qmd)
+[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: **Violin** · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
 
-The string from Part 0, played two ways. Tension and length set the pitch; the bow forces the overtones onto exact whole numbers.
+The string from the foundations, played two ways. Tension and length set the pitch; the bow forces the overtones onto exact whole numbers.
+
+::: {.callout-note appearance="simple"}
+## Family: strings under tension
+Guitar, cello and harp strings obey the same operator, $-c^2\partial_x^2$ with tied ends. They differ only in the constants $L$, $T$ and $\mu$, which set $f_1$, and in how they are excited: plucked (guitar, harp) or bowed (violin, cello). Conceptually they are one instrument with different constants; the shape of the spectrum, whole-number multiples, is the same for all of them.
+:::
 
 ## Operator and spectrum
 
-A violin string is the continuum bead chain of [Part 0](foundations.qmd), so its operator is $-c^2\partial_x^2$ on $[0,L]$ with tied ends. Its eigenfunctions are $\sin(n\pi x/L)$, and the frequencies are
+A violin string is the continuum bead chain of the [foundations](foundations.qmd), so its operator is $-c^2\partial_x^2$ on $[0,L]$ with tied ends. Its eigenfunctions are $\sin(n\pi x/L)$, and the frequencies are
 $$
 f_n = \frac{n}{2L}\sqrt{\frac{T}{\mu}}, \qquad n = 1, 2, 3, \dots
 $$
@@ -45,7 +51,7 @@ $$
 u(x,t) = \sum_{n\ge1} \frac{A}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(n\omega_1 t).
 $$
 
-The motion repeats exactly every period, so its spectrum sits exactly on $n f_1$, and the force on the bridge falls off like $1/n$. A real string is slightly stiff and its own frequencies run a little sharp ([Part 4](piano.qmd)); the stick–slip cycle locks every partial to the period anyway. A pluck, by contrast, lets each mode ring freely at its own frequency and decay.
+The motion repeats exactly every period, so its spectrum sits exactly on $n f_1$, and the force on the bridge falls off like $1/n$. A real string is slightly stiff and its own frequencies run a little sharp ([the piano](piano.qmd)); the stick–slip cycle locks every partial to the period anyway. A pluck, by contrast, lets each mode ring freely at its own frequency and decay.
 
 ```{=html}
 <div class="ins">
@@ -62,7 +68,7 @@ The motion repeats exactly every period, so its spectrum sits exactly on $n f_1$
 
 The string barely moves any air. It rocks the bridge, which drives the wooden body, which radiates. Each link is linear, so it can change how loud each partial is but never move one. Toggle the body above while playing: the stems change height and stay put.
 
-[← Part 0, foundations](foundations.qmd) · [Part 2, the clarinet →](clarinet.qmd)
+[← Foundations](foundations.qmd) · [The clarinet →](clarinet.qmd)
 
 ```{=html}
 <script src="core.js"></script>
