@@ -1,0 +1,185 @@
+---
+title: "The kalimba"
+subtitle: "Part 3 of Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+---
+
+[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · [2 Clarinet](clarinet.qmd) · **3 Kalimba** · [4 Piano](piano.qmd) · [5 Drum](drum.qmd)
+
+Take away the tension and keep only stiffness. A steel tine clamped at one end obeys a fourth-order equation, its overtones scatter far from the integers, and it still sounds pitched.
+
+## Play it
+
+```{=html}
+<style>
+.slice text { font-family: var(--f-mono); font-size: 12px; fill: var(--ink); }
+.slice .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.slice .m { fill: none; stroke: var(--pos); stroke-width: 2; }
+.slice .v { stroke: var(--neg); stroke-width: 2; }
+.slice .vh { fill: var(--neg); }
+.slice .mh { fill: var(--pos); }
+.slice .ax { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+</style>
+```
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="kal" style="height:300px" aria-label="Seventeen kalimba tines. Tap a tine to pluck it; drag across tines for a glissando."></canvas>
+  <div class="controls" style="padding:0.5rem 0.25rem 0">
+    <label class="check"><input type="checkbox" id="keq"> Overtones ring as long as the fundamental</label>
+    <span class="readout" id="kRead">Tap a tine, or drag across several.</span>
+  </div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Tine lengths are drawn from the operator: frequency goes as 1/L², so each tine's length is the C4 tine's divided by the square root of its frequency ratio. Tick the box and pluck again to hear the same spectrum as a bell.</p>
+</section>
+</div>
+```
+
+## Deriving the operator
+
+1. Bend a thin bar. Fibers on the outside of the curve stretch and fibers on the inside compress. By Hooke's law their stresses add up to a *bending moment* proportional to the curvature, $M = EI\,u_{xx}$, where $E$ is Young's modulus of the steel and $I$ is the second moment of area of the cross-section.
+2. Cut out a slice of length $dx$. Its two faces carry moments and vertical shear forces. A thin slice has negligible rotational inertia, so its torques balance, which forces the shear to be the slope of the moment: $V = -M_x$.
+3. Vertical forces do not balance; their difference accelerates the slice. With density $\rho$ and area $A$, Newton's law reads $\rho A\,u_{tt} = V_x = -M_{xx}$. Substituting step 1 gives the operator below.
+4. The clamp forbids moving and tilting: $u = u_x = 0$ at the base. Nothing grips the tip, so it carries no moment and no shear: $u_{xx} = u_{xxx} = 0$ there.
+
+::: {.callout-tip appearance="simple"}
+## The tine's operator
+$$
+u_{tt} = -\kappa^2 u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho A}.
+$$
+:::
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <svg class="slice" viewBox="0 0 320 170" role="img" aria-label="A slice of the tine with bending moments and shear forces on both faces">
+      <line class="ax" x1="20" y1="85" x2="300" y2="85"/>
+      <rect class="bar" x="110" y="65" width="100" height="40" rx="2"/>
+      <path class="m" d="M 96 55 A 32 32 0 0 0 96 115"/><path class="mh" d="M 90 113 L 100 120 L 101 109 Z"/>
+      <path class="m" d="M 224 55 A 32 32 0 0 1 224 115"/><path class="mh" d="M 230 113 L 220 120 L 219 109 Z"/>
+      <line class="v" x1="110" y1="85" x2="110" y2="140"/><path class="vh" d="M 104 136 L 116 136 L 110 148 Z"/>
+      <line class="v" x1="210" y1="85" x2="210" y2="30"/><path class="vh" d="M 204 34 L 216 34 L 210 22 Z"/>
+      <text x="58" y="88">M</text><text x="248" y="88">M + dM</text>
+      <text x="118" y="150">V</text><text x="218" y="30">V + dV</text>
+      <text x="146" y="128">dx</text>
+    </svg>
+    <p class="cap">One slice of the tine. Moments (warm) bend it; shear forces (cool) push it up and down. Torque balance links them; force balance moves the slice.</p>
+  </div>
+</div>
+```
+
+## Spectrum
+
+A standing wave $X(x)\cos\omega t$ needs $X'''' = \beta^4 X$ with $\beta^4 = \omega^2/\kappa^2$. The solutions are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$. The four boundary conditions are four linear equations for the four coefficients, and they have a nonzero solution exactly when
+$$
+\cos\beta L\,\cosh\beta L = -1 .
+$$
+
+The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, computed live on this page. Since $\omega = \kappa\beta^2$, the frequency ratios are $(\beta_n/\beta_1)^2 = 1 : 6.27 : 17.55 : 34.39$. Bending makes frequency grow like the square of the wavenumber, so the overtones fly apart.
+
+The same formula gives $f_1 \propto 1/L^2$. Kalimba makers tune a tine by sliding it over the bridge to change its free length.
+
+The tine sounds pitched anyway because its first overtone is weak, sits more than two octaves up, and dies within a few hundredths of a second. The ear hears the fundamental with a short metallic click on top.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <h3>Modes of one tine · tap a stem</h3>
+    <svg class="spec" id="kSpec" viewBox="0 0 320 120" aria-label="Partials of a plucked tine"></svg>
+    <canvas id="kShape" style="height:140px" aria-label="Side view of the selected tine mode"></canvas>
+    <div class="readout" id="kSel"></div>
+  </div>
+</div>
+```
+
+[← Part 2, the clarinet](clarinet.qmd) · [Part 4, the piano →](piano.qmd)
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  var STEPS = [0, 2, 4, 5, 7, 9, 11];
+  var NOTES = [];
+  for (var i = 0; i < 17; i++) { var oct = Math.floor(i / 7), key = 60 + 12 * oct + STEPS[i % 7]; NOTES.push({ key: key, f: C.mtof(key), name: C.noteName(C.mtof(key)).name }); }
+  // positions: lowest in the center, then alternating left and right
+  var ORDER = new Array(17), center = 8;
+  for (var i = 0; i < 17; i++) { var off = Math.ceil(i / 2) * (i % 2 ? -1 : 1); ORDER[center + off] = i; }
+  var longOv = false, cache = {}, plucks = {};
+  var cv = document.getElementById("kal"), ctx = cv.getContext("2d");
+  function geom() {
+    var d = C.fit(cv), W = cv.width, H = cv.height, slot = W / 17, yb = H - 34 * d, Lmax = yb - 28 * d;
+    return { d: d, W: W, H: H, slot: slot, yb: yb, Lmax: Lmax };
+  }
+  function tineLen(g, n) { return g.Lmax * Math.sqrt(NOTES[0].f / NOTES[n].f); }
+  function buffer(n) {
+    var k = n + (longOv ? "L" : "S");
+    if (!cache[k]) cache[k] = C.render(C.toHz(C.models.kalimba.partials({ f1: NOTES[n].f, longOvertones: longOv }), NOTES[n].f), longOv ? 3.2 : 2.6);
+    return cache[k];
+  }
+  function pluck(n) {
+    C.play(buffer(n), 0.8); plucks[n] = performance.now();
+    var nn = NOTES[n]; document.getElementById("kRead").innerHTML = "<b>" + nn.name + "</b> · " + nn.f.toFixed(1) + " Hz · first overtone at " + (nn.f * C.KM[1].ratio).toFixed(0) + " Hz";
+  }
+  function hit(e) {
+    var r = cv.getBoundingClientRect(), g = geom(), px = (e.clientX - r.left) * g.d, py = (e.clientY - r.top) * g.d;
+    var slot = Math.max(0, Math.min(16, Math.floor(px / g.slot))), n = ORDER[slot];
+    return (py < g.yb + 20 * g.d && py > g.yb - tineLen(g, n) - 16 * g.d) ? n : -1;
+  }
+  var down = false, lastN = -1;
+  cv.addEventListener("pointerdown", function (e) { down = true; cv.setPointerCapture(e.pointerId); var n = hit(e); lastN = n; if (n >= 0) pluck(n); });
+  cv.addEventListener("pointermove", function (e) { if (!down) return; var n = hit(e); if (n >= 0 && n !== lastN) pluck(n); lastN = n; });
+  function up() { down = false; lastN = -1; }
+  cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+  document.getElementById("keq").addEventListener("change", function (e) { longOv = e.target.checked; kspec(); });
+
+  function draw(now) {
+    var g = geom(), d = g.d; ctx.clearRect(0, 0, g.W, g.H);
+    ctx.fillStyle = C.rgb("--wood", 0.45); ctx.fillRect(0, g.yb - 6 * d, g.W, g.H - g.yb + 6 * d);
+    ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace"; ctx.textAlign = "center";
+    for (var s = 0; s < 17; s++) {
+      var n = ORDER[s], L = tineLen(g, n), cx = (s + 0.5) * g.slot, w = Math.min(g.slot * 0.55, 14 * d), wob = 0;
+      var t0 = plucks[n];
+      if (t0 != null) { var dt = (now - t0) / 1000; if (dt < 2.5) wob = 3.5 * d * Math.exp(-dt * 2.2) * Math.sin(dt * 2 * Math.PI * 9); }
+      ctx.fillStyle = C.rgb(t0 != null && now - t0 < 600 ? "--accent" : "--metal");
+      ctx.beginPath();
+      ctx.moveTo(cx - w / 2, g.yb + 14 * d); ctx.lineTo(cx - w / 2 + wob * 0.2, g.yb - L + w / 2);
+      ctx.arc(cx + wob, g.yb - L + w / 2, w / 2, Math.PI, 0); ctx.lineTo(cx + w / 2, g.yb + 14 * d); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText(NOTES[n].name.replace(/\d/, ""), cx, g.yb - L - 6 * d);
+    }
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(0, g.yb - 3 * d, g.W, 6 * d);
+    drawShape(now);
+    requestAnimationFrame(draw);
+  }
+
+  var sel = 0, sv = document.getElementById("kShape"), sctx = sv.getContext("2d");
+  function kspec() {
+    var p = C.models.kalimba.partials({ longOvertones: longOv });
+    C.stems(document.getElementById("kSpec"), p, { W: 320, H: 120, rmax: 12, fs: 9, sw: 2.5, sel: sel, onPick: function (i) { sel = i; kspec(); tone(i); } });
+    var m = C.KM[sel];
+    document.getElementById("kSel").innerHTML = "mode " + (sel + 1) + " · βL = <b>" + m.beta.toFixed(4) + "</b> · ratio <b>" + m.ratio.toFixed(3) + "</b>× · " + (sel ? (Math.log2(m.ratio) * 12).toFixed(1) + " semitones up" : "fundamental");
+  }
+  function tone(i) { C.play(C.render([{ f: 440 * C.KM[i].ratio, amp: 1, tau: 0.6 }], 1.2), 0.6); }
+  function drawShape(now) {
+    var d = C.fit(sv), W = sv.width, H = sv.height, x0 = 22 * d, x1 = W - 14 * d, mid = H / 2, A = H * 0.36, f = C.KM[sel].shape, mx = 0;
+    for (var i = 0; i <= 120; i++) mx = Math.max(mx, Math.abs(f(i / 120)));
+    var ph = C.reduce ? 1 : Math.cos(2 * Math.PI * Math.min(3, 0.4 * Math.sqrt(C.KM[sel].ratio)) * now / 1000);
+    sctx.clearRect(0, 0, W, H);
+    sctx.strokeStyle = C.rgb("--grid"); sctx.lineWidth = d; sctx.beginPath(); sctx.moveTo(x0, mid); sctx.lineTo(x1, mid); sctx.stroke();
+    sctx.fillStyle = C.rgb("--ink"); sctx.fillRect(x0 - 12 * d, mid - 26 * d, 12 * d, 52 * d);
+    sctx.strokeStyle = C.rgb("--accent"); sctx.lineWidth = 3 * d; sctx.beginPath();
+    for (var i = 0; i <= 160; i++) { var xi = i / 160, y = mid - A * ph * f(xi) / mx, x = x0 + xi * (x1 - x0); if (i) sctx.lineTo(x, y); else sctx.moveTo(x, y); }
+    sctx.stroke();
+    sctx.fillStyle = C.rgb("--ink"); var prev = f(0.01);
+    for (var i = 2; i <= 160; i++) { var cur = f(i / 160); if (prev * cur < 0) { sctx.beginPath(); sctx.arc(x0 + (i - 0.5) / 160 * (x1 - x0), mid, 3.5 * d, 0, 2 * Math.PI); sctx.fill(); } prev = cur; }
+  }
+  C.onTheme(kspec);
+  kspec(); requestAnimationFrame(draw);
+})();
+</script>
+```

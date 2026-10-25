@@ -1,0 +1,168 @@
+---
+title: "The clarinet"
+subtitle: "Part 2 of Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+---
+
+[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · **2 Clarinet** · [3 Kalimba](kalimba.qmd) · [4 Piano](piano.qmd) · [5 Drum](drum.qmd)
+
+The violin's operator again, now acting on air pressure in a tube. Only the boundary condition at one end changes, and half the spectrum disappears.
+
+## Play it
+
+```{=html}
+<style>
+#blow { min-width: 9rem; min-height: 3rem; font-size: 1.05rem; touch-action: none; user-select: none; -webkit-user-select: none; }
+#blow.on { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+</style>
+```
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="pipe" style="height:150px" aria-label="Clarinet bore with six tone holes. Tap a hole to open or close it."></canvas>
+  <div class="controls" style="padding:0.6rem 0.25rem 0">
+    <button id="blow" class="primary">Hold to blow</button>
+    <button id="reg" aria-pressed="false">Register key</button>
+    <button id="tClar" aria-pressed="true">Closed at reed (clarinet)</button><button id="tFlute" aria-pressed="false">Open both ends (flute)</button>
+  </div>
+  <div class="controls" style="padding:0.5rem 0.25rem 0" id="fing" role="group" aria-label="Fingerings"></div>
+  <div class="readout" id="cRead" style="padding:0.5rem 0.25rem 0"></div>
+  <svg class="spec" id="cSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the sound"></svg>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Tap holes or pick a fingering, then hold the button (or the space bar; keys 1–7 change fingering). The shading inside the bore is the pressure of the sounding mode: dark at a pressure antinode, pale at a node. The first open hole acts as the end of the tube.</p>
+</section>
+</div>
+```
+
+## Deriving the operator
+
+1. Follow a thin slab of air in a tube of cross-section $A$. Let $\xi(x,t)$ be how far the air at $x$ has moved along the tube, and $p(x,t)$ the pressure above room pressure.
+2. The slab between $x$ and $x+dx$ has mass $\rho A\,dx$, and the pressure difference across it is the only force, so Newton's law reads $\rho\,\xi_{tt} = -p_x$.
+3. If the slab stretches by the fraction $\xi_x$, its pressure drops in proportion. Sound compresses air too quickly for heat to flow, so the constant is the adiabatic bulk modulus $K = \gamma P_0$, and $p = -K\,\xi_x$.
+4. Differentiate step 2 in $x$ and step 3 twice in $t$, and eliminate $\xi$.
+
+::: {.callout-tip appearance="simple"}
+## The air column's operator
+$$
+p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2 .
+$$
+:::
+
+5. At an open end the air meets the room, so $p = 0$. At the reed the opening is nearly shut, so the air cannot move: $\xi = 0$ there, and by step 2, $p_x = 0$.
+
+## Spectrum
+
+The condition $p_x(0) = 0$ at the reed leaves $X = \cos kx$, and $p(L) = 0$ at the open end requires $\cos kL = 0$. So
+$$
+k_n = \frac{(2n-1)\pi}{2L}, \qquad f_n = \frac{(2n-1)\,c}{4L}.
+$$
+
+Only odd multiples survive. A flute is open at both ends: $p = 0$ at both ends gives $\sin(n\pi x/L)$ and $f_n = nc/2L$, every multiple. Two consequences, both audible above:
+
+- **An octave lower.** The same tube sounds $c/4L$ closed at one end but $c/2L$ open at both. Switch the type and listen.
+- **A twelfth, not an octave.** The register key makes the tube jump to its next mode. For the clarinet that is $3f_1$, an octave plus a fifth; for the flute it is $2f_1$. This is why clarinet fingerings repeat a twelfth apart.
+
+Like the bow, the reed is a valve driven by the pressure it creates, so the oscillation is periodic and its partials sit exactly on $n f_1$. In the low register the even ones are weak, not zero. A real bore is not perfectly cylindrical and the bell matters; those refine the numbers, not the picture.
+
+[← Part 1, the violin](violin.qmd) · [Part 3, the kalimba →](kalimba.qmd)
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, CSOUND = 343, LTOT = 0.585;
+  var SEMIS = [11, 9, 7, 5, 4, 2]; // holes from the reed toward the bell
+  var HOLES = SEMIS.map(function (s) { return LTOT * Math.pow(2, -s / 12); });
+  var open = [false, false, false, false, false, false], reg = false, flute = false, voice = null;
+  var FING = [{ n: "1", s: 0 }, { n: "2", s: 2 }, { n: "3", s: 4 }, { n: "4", s: 5 }, { n: "5", s: 7 }, { n: "6", s: 9 }, { n: "7", s: 11 }];
+  function setFingering(s) { for (var i = 0; i < 6; i++) open[i] = s > 0 && SEMIS[i] <= s; update(); }
+  function Leff() { for (var i = 0; i < 6; i++) if (open[i]) return HOLES[i]; return LTOT; }
+  function modeN() { return reg ? 2 : 1; }
+  function freq() { var L = Leff(); return flute ? modeN() * CSOUND / (2 * L) : (2 * modeN() - 1) * CSOUND / (4 * L); }
+  function parts() { return C.models.clarinet.partials({ flute: flute }); }
+
+  var fing = document.getElementById("fing");
+  FING.forEach(function (fg) { var b = document.createElement("button"); b.type = "button"; b.textContent = fg.n; b.setAttribute("aria-label", "Fingering " + fg.n); b.addEventListener("click", function () { setFingering(fg.s); }); fing.appendChild(b); });
+
+  function startBlow() {
+    if (voice) return; var a = C.ac(), t = a.currentTime, osc = a.createOscillator(), g = a.createGain(), lp = a.createBiquadFilter();
+    osc.setPeriodicWave(C.wave(a, parts())); osc.frequency.value = freq();
+    lp.type = "lowpass"; lp.frequency.value = flute ? 3500 : 4500;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(flute ? 0.4 : 0.3, t + 0.06);
+    osc.connect(lp); lp.connect(g); g.connect(C.out); osc.start();
+    voice = { osc: osc, g: g, lp: lp }; document.getElementById("blow").classList.add("on");
+  }
+  function stopBlow() {
+    if (!voice) return; var t = C.ac().currentTime; voice.g.gain.cancelScheduledValues(t); voice.g.gain.setTargetAtTime(0, t, 0.04); voice.osc.stop(t + 0.4); voice = null;
+    document.getElementById("blow").classList.remove("on");
+  }
+  function update() {
+    if (voice) { var a = C.ac(); voice.osc.frequency.setTargetAtTime(freq(), a.currentTime, 0.01); voice.osc.setPeriodicWave(C.wave(a, parts())); voice.lp.frequency.value = flute ? 3500 : 4500; }
+    var f = freq(), nn = C.noteName(f), L = Leff();
+    document.getElementById("cRead").innerHTML = "sounding length <b>" + (L * 100).toFixed(1) + " cm</b> · mode " + (flute ? modeN() + " → " + modeN() + "c/2L" : modeN() + " → " + (2 * modeN() - 1) + "c/4L") + " · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? (nn.cents > 0 ? " +" : " ") + nn.cents + "¢" : "");
+    C.stems(document.getElementById("cSpec"), parts().slice(0, 12), { W: 320, H: 90, rmax: 12, fs: 8, sw: 2.5 });
+  }
+  var blow = document.getElementById("blow");
+  blow.addEventListener("pointerdown", function (e) { e.preventDefault(); blow.setPointerCapture(e.pointerId); startBlow(); });
+  blow.addEventListener("pointerup", stopBlow); blow.addEventListener("pointercancel", stopBlow);
+  window.addEventListener("keydown", function (e) {
+    if (e.target.tagName === "INPUT") return;
+    if (e.code === "Space") { e.preventDefault(); if (!e.repeat) startBlow(); }
+    var k = parseInt(e.key, 10); if (k >= 1 && k <= 7) setFingering(FING[k - 1].s);
+  });
+  window.addEventListener("keyup", function (e) { if (e.code === "Space") stopBlow(); });
+  var regB = document.getElementById("reg");
+  regB.addEventListener("click", function () { reg = !reg; regB.setAttribute("aria-pressed", reg); update(); });
+  function setType(fl) { flute = fl; document.getElementById("tClar").setAttribute("aria-pressed", !fl); document.getElementById("tFlute").setAttribute("aria-pressed", fl); update(); }
+  document.getElementById("tClar").addEventListener("click", function () { setType(false); });
+  document.getElementById("tFlute").addEventListener("click", function () { setType(true); });
+
+  var cv = document.getElementById("pipe"), ctx = cv.getContext("2d");
+  function geom() { var d = C.fit(cv), W = cv.width, H = cv.height, x0 = 30 * d, x1 = W - 16 * d; return { d: d, W: W, H: H, x0: x0, x1: x1, top: H * 0.32, bot: H * 0.68 }; }
+  function X(g, L) { return g.x0 + (g.x1 - g.x0) * L / LTOT; }
+  cv.addEventListener("pointerdown", function (e) {
+    var r = cv.getBoundingClientRect(), g = geom(), px = (e.clientX - r.left) * g.d, best = -1, bd = 26 * g.d;
+    HOLES.forEach(function (L, i) { var dx = Math.abs(X(g, L) - px); if (dx < bd) { bd = dx; best = i; } });
+    if (best >= 0) { open[best] = !open[best]; update(); }
+  });
+  function draw(now) {
+    var g = geom(), d = g.d, L = Leff(), xe = X(g, L), n = modeN();
+    ctx.clearRect(0, 0, g.W, g.H);
+    var ph = C.reduce || !voice ? 1 : Math.cos(2 * Math.PI * 0.8 * now / 1000);
+    for (var px = Math.floor(g.x0); px < g.x1; px += Math.max(1, Math.round(d))) {
+      var xx = (px - g.x0) / (g.x1 - g.x0) * LTOT, amp;
+      if (xx <= L) {
+        var u = xx / L;
+        amp = flute ? Math.sin(n * Math.PI * u) : Math.cos((2 * n - 1) * Math.PI * u / 2);
+        var v = amp * ph, c = v >= 0 ? C.col["--pos"] : C.col["--neg"];
+        ctx.fillStyle = C.rgb(c, Math.min(1, Math.abs(v)) * 0.85 + 0.05);
+      } else ctx.fillStyle = C.rgb("--grid", 0.5);
+      ctx.fillRect(px, g.top, Math.max(1, Math.round(d)), g.bot - g.top);
+    }
+    ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 2 * d; ctx.strokeRect(g.x0, g.top, g.x1 - g.x0, g.bot - g.top);
+    if (flute) { ctx.fillStyle = C.rgb("--paper"); ctx.fillRect(g.x0 - 2 * d, g.top + 2 * d, 4 * d, g.bot - g.top - 4 * d); }
+    else { ctx.fillStyle = C.rgb("--ink"); ctx.beginPath(); ctx.moveTo(g.x0, g.top); ctx.lineTo(g.x0 - 22 * d, (g.top + g.bot) / 2 - 3 * d); ctx.lineTo(g.x0 - 22 * d, (g.top + g.bot) / 2 + 3 * d); ctx.lineTo(g.x0, g.bot); ctx.closePath(); ctx.fill(); }
+    HOLES.forEach(function (Lh, i) {
+      var x = X(g, Lh), r = 9 * d;
+      ctx.beginPath(); ctx.arc(x, g.top - r - 6 * d, r, 0, 2 * Math.PI);
+      if (open[i]) { ctx.fillStyle = C.rgb("--paper"); ctx.fill(); ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 2 * d; ctx.stroke(); }
+      else { ctx.fillStyle = C.rgb("--ink"); ctx.fill(); }
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillRect(x - 1 * d, g.top - 6 * d, 2 * d, 6 * d);
+    });
+    ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = 2 * d; ctx.setLineDash([4 * d, 4 * d]);
+    ctx.beginPath(); ctx.moveTo(xe, g.top - 2 * d); ctx.lineTo(xe, g.bot + 14 * d); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace"; ctx.textAlign = "center";
+    ctx.fillText("effective end", xe, g.bot + 26 * d);
+    ctx.textAlign = "left"; ctx.fillText(flute ? "open" : "reed", 4 * d, g.bot + 26 * d);
+    requestAnimationFrame(draw);
+  }
+  C.onTheme(update);
+  update(); requestAnimationFrame(draw);
+})();
+</script>
+```

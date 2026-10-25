@@ -1,0 +1,235 @@
+---
+title: "The violin"
+subtitle: "Part 1 of Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+---
+
+[Series](index.qmd) · [0 Foundations](foundations.qmd) · **1 Violin** · [2 Clarinet](clarinet.qmd) · [3 Kalimba](kalimba.qmd) · [4 Piano](piano.qmd) · [5 Drum](drum.qmd)
+
+The string from Part 0, played two ways. Tension and length set the pitch; the bow forces the overtones onto exact whole numbers.
+
+## Operator and spectrum
+
+A violin string is the continuum bead chain of [Part 0](foundations.qmd), so its operator is $-c^2\partial_x^2$ on $[0,L]$ with tied ends. Its eigenfunctions are $\sin(n\pi x/L)$, and the frequencies are
+$$
+f_n = \frac{n}{2L}\sqrt{\frac{T}{\mu}}, \qquad n = 1, 2, 3, \dots
+$$
+
+The four strings share one length and differ in $T/\mu$, tuned to G3, D4, A4 and E5. A finger shortens the vibrating length, and since $f \propto 1/L$, stopping the string at a fraction $s$ of its length raises the pitch by a factor $1/(1-s)$. That is why the semitone markers below bunch together toward the bridge.
+
+## Play it
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="fiddle" style="height:260px" tabindex="0" aria-label="Violin fingerboard. Press and hold on a string to bow it; slide sideways to change the finger position."></canvas>
+  <div class="controls" style="padding:0.5rem 0.25rem 0">
+    <button id="mBow" aria-pressed="true">Bow (hold)</button><button id="mPizz" aria-pressed="false">Pizzicato (tap)</button>
+    <label class="check"><input type="checkbox" id="body" checked> Wooden body</label>
+    <span class="readout" id="vRead">Press and hold a string. Slide left and right to finger it.</span>
+  </div>
+  <svg class="spec" id="playSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the note being played, as heard through the body"></svg>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge is the nut, right edge the bridge. The ticks mark equal-tempered semitones, at fractions 1 − 2<sup>−k/12</sup> of the length. The stems are the partials you hear. The body is a linear filter, so switching it off or on changes their heights, never their positions. Its resonances here (about 280, 470, 550 and 2700 Hz) are approximate textbook values.</p>
+</section>
+</div>
+```
+
+## What the bow does
+
+The bow grips the string and drags it along (stick) until the string's tension tears it free and it flies back (slip). Helmholtz watched this through a vibration microscope and described the result in 1863: the string becomes two straight segments joined by one sharp corner, and the corner races around a lens-shaped path, once per period. In modal terms that shape is
+$$
+u(x,t) = \sum_{n\ge1} \frac{A}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(n\omega_1 t).
+$$
+
+The motion repeats exactly every period, so its spectrum sits exactly on $n f_1$, and the force on the bridge falls off like $1/n$. A real string is slightly stiff and its own frequencies run a little sharp ([Part 4](piano.qmd)); the stick–slip cycle locks every partial to the period anyway. A pluck, by contrast, lets each mode ring freely at its own frequency and decay.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <canvas id="helm" style="height:180px" aria-label="Slow-motion string shape"></canvas>
+    <div class="controls"><button id="hBow" aria-pressed="true">Bowed</button><button id="hPluck" aria-pressed="false">Plucked at 1/4</button></div>
+    <svg class="spec" id="vSpec" viewBox="0 0 320 110" aria-label="Partials of the bridge force"></svg>
+    <p class="cap">Slowed about 500 times. The faint lens is the envelope the corner traces. Stems: partials of the bridge force.</p>
+  </div>
+</div>
+```
+
+## The body
+
+The string barely moves any air. It rocks the bridge, which drives the wooden body, which radiates. Each link is linear, so it can change how loud each partial is but never move one. Toggle the body above while playing: the stems change height and stay put.
+
+[← Part 0, foundations](foundations.qmd) · [Part 2, the clarinet →](clarinet.qmd)
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  var OPEN = [{ n: "G3", f: 196.0 }, { n: "D4", f: 293.66 }, { n: "A4", f: 440.0 }, { n: "E5", f: 659.26 }];
+  var SMAX = 0.75, mode = "bow";
+  var cv = document.getElementById("fiddle"), ctx = cv.getContext("2d");
+  var active = null; // {si, s, t0}
+  var ringing = []; // pizz visuals {si, s, t0}
+
+  // ---------- audio voices ----------
+  var wave = null, voice = null;
+  function periodic(a) {
+    if (wave) return wave;
+    var N = 40, re = new Float32Array(N + 1), im = new Float32Array(N + 1);
+    for (var n = 1; n <= N; n++) im[n] = 1 / n;
+    wave = a.createPeriodicWave(re, im, { disableNormalization: false }); return wave;
+  }
+  function startBow(f) {
+    var a = C.ac(), t = a.currentTime, osc = a.createOscillator(), lfo = a.createOscillator(), lg = a.createGain(), g = a.createGain(), lp = a.createBiquadFilter();
+    osc.setPeriodicWave(periodic(a)); osc.frequency.value = f;
+    lfo.frequency.value = 5.6; lg.gain.value = 0; lfo.connect(lg); lg.connect(osc.frequency);
+    lp.type = "lowpass"; lp.frequency.value = 6000;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.32, t + 0.09);
+    lg.gain.setTargetAtTime(f * 0.005, t + 0.4, 0.25);
+    osc.connect(lp);
+    if (bodyOn) { var bc = C.bodyChain(a); lp.connect(bc.input); bc.output.connect(g); } else lp.connect(g);
+    g.connect(C.out); osc.start(); lfo.start();
+    voice = { osc: osc, lfo: lfo, lg: lg, g: g };
+  }
+  function moveBow(f) { if (!voice) return; var t = C.ac().currentTime; voice.osc.frequency.setTargetAtTime(f, t, 0.012); voice.lg.gain.setTargetAtTime(f * 0.005, t, 0.2); }
+  function stopBow() {
+    if (!voice) return; var a = C.ac(), t = a.currentTime;
+    voice.g.gain.cancelScheduledValues(t); voice.g.gain.setTargetAtTime(0, t, 0.07);
+    voice.osc.stop(t + 0.6); voice.lfo.stop(t + 0.6); voice = null;
+  }
+  function pizz(f) {
+    var parts = C.toHz(C.models.violin.partials({ pluck: 0.27 }), f), a = C.ac();
+    var src = a.createBufferSource(), g = a.createGain(); src.buffer = C.render(parts, 1.6); g.gain.value = 0.9;
+    if (bodyOn) { var bc = C.bodyChain(a); src.connect(bc.input); bc.output.connect(g); } else src.connect(g);
+    g.connect(C.out); src.start();
+  }
+  var bodyOn = true;
+  document.getElementById("body").addEventListener("change", function (e) { bodyOn = e.target.checked; if (lastF) playSpec(lastF); });
+  var lastF = 0;
+  function playSpec(f) {
+    lastF = f;
+    var p = (mode === "bow" ? C.models.violin.partials() : C.models.violin.partials({ pluck: 0.27 })).slice(0, 20)
+      .map(function (q) { return { ratio: q.ratio, amp: q.amp * (bodyOn ? C.bodyGain(q.ratio * f) : 1) }; });
+    C.stems(document.getElementById("playSpec"), p, { W: 320, H: 90, rmax: 20, fs: 8, sw: 2, labelEvery: 4 });
+  }
+
+  // ---------- geometry ----------
+  function geom() {
+    var d = C.fit(cv), W = cv.width, H = cv.height, xn = 34 * d, xb = W - 18 * d;
+    var lanes = OPEN.map(function (_, i) { return H * (0.2 + 0.2 * i); });
+    return { d: d, W: W, H: H, xn: xn, xb: xb, lanes: lanes };
+  }
+  function freqOf(si, s) { return OPEN[si].f / (1 - s); }
+  function locate(e) {
+    var r = cv.getBoundingClientRect(), g = geom(), px = (e.clientX - r.left) * g.d, py = (e.clientY - r.top) * g.d;
+    var si = 0, bd = 1e9; g.lanes.forEach(function (y, i) { if (Math.abs(y - py) < bd) { bd = Math.abs(y - py); si = i; } });
+    var s = Math.max(0, Math.min(SMAX, (px - g.xn) / (g.xb - g.xn)));
+    return { si: si, s: s };
+  }
+  function readout(si, s) {
+    var f = freqOf(si, s), nn = C.noteName(f);
+    playSpec(f);
+    document.getElementById("vRead").innerHTML = OPEN[si].n + " string · finger at <b>" + s.toFixed(3) + "</b> L · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? (nn.cents > 0 ? " +" : " ") + nn.cents + "¢" : "");
+  }
+  cv.addEventListener("pointerdown", function (e) {
+    var p = locate(e); cv.setPointerCapture(e.pointerId); readout(p.si, p.s);
+    if (mode === "bow") { active = { si: p.si, s: p.s, t0: performance.now() }; startBow(freqOf(p.si, p.s)); }
+    else { ringing.push({ si: p.si, s: p.s, t0: performance.now() }); pizz(freqOf(p.si, p.s)); }
+  });
+  cv.addEventListener("pointermove", function (e) {
+    if (!active) return; var p = locate(e); active.s = p.s; moveBow(freqOf(active.si, p.s)); readout(active.si, p.s);
+  });
+  function end() { if (active) { active = null; stopBow(); } }
+  cv.addEventListener("pointerup", end); cv.addEventListener("pointercancel", end);
+
+  function drawFiddle(now) {
+    var g = geom(), d = g.d; ctx.clearRect(0, 0, g.W, g.H);
+    ctx.fillStyle = C.rgb("--wood", 0.35); ctx.fillRect(g.xn, g.lanes[0] - 22 * d, (g.xb - g.xn) * 0.78, g.lanes[3] - g.lanes[0] + 44 * d);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(g.xn - 4 * d, g.lanes[0] - 26 * d, 4 * d, g.lanes[3] - g.lanes[0] + 52 * d);
+    ctx.fillRect(g.xb, g.lanes[0] - 26 * d, 3 * d, g.lanes[3] - g.lanes[0] + 52 * d);
+    ctx.font = (13 * d) + "px 'IBM Plex Mono', monospace"; ctx.textBaseline = "middle"; ctx.textAlign = "right";
+    for (var k = 1; k <= 24; k++) {
+      var s = 1 - Math.pow(2, -k / 12); if (s > SMAX) break;
+      var x = g.xn + s * (g.xb - g.xn), dot = [3, 5, 7, 12, 15, 17, 19, 24].indexOf(k) >= 0;
+      ctx.fillStyle = C.rgb("--muted", dot ? 0.9 : 0.45);
+      g.lanes.forEach(function (y) { ctx.fillRect(x - 0.75 * d, y - 9 * d, 1.5 * d, 18 * d); });
+      if (k === 12) { ctx.textAlign = "center"; ctx.fillText("octave", x, g.lanes[3] + 30 * d); ctx.textAlign = "right"; }
+    }
+    ringing = ringing.filter(function (r) { return now - r.t0 < 1400; });
+    OPEN.forEach(function (o, i) {
+      var y = g.lanes[i], w = (2.6 - 0.45 * i) * d;
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText(o.n, g.xn - 10 * d, y);
+      var vib = null;
+      if (active && active.si === i) vib = { s: active.s, a: 7 * d, decay: 1 };
+      ringing.forEach(function (r) { if (r.si === i) vib = { s: r.s, a: 8 * d, decay: Math.exp(-(now - r.t0) / 350) }; });
+      ctx.strokeStyle = C.rgb("--metal"); ctx.lineWidth = w;
+      if (!vib) { ctx.beginPath(); ctx.moveTo(g.xn, y); ctx.lineTo(g.xb, y); ctx.stroke(); return; }
+      var xf = g.xn + vib.s * (g.xb - g.xn);
+      ctx.beginPath(); ctx.moveTo(g.xn, y); ctx.lineTo(xf, y); ctx.stroke();
+      ctx.strokeStyle = C.rgb("--accent", 0.25); ctx.lineWidth = 2 * vib.a * vib.decay;
+      ctx.beginPath(); ctx.moveTo(xf, y);
+      for (var q = 1; q <= 60; q++) { var xi = q / 60; ctx.lineTo(xf + xi * (g.xb - xf), y); }
+      ctx.stroke();
+      ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = w;
+      var ph = Math.sin(now / 9);
+      ctx.beginPath(); ctx.moveTo(xf, y);
+      for (var q = 1; q <= 60; q++) { var xi = q / 60; ctx.lineTo(xf + xi * (g.xb - xf), y - vib.a * vib.decay * ph * Math.sin(Math.PI * xi)); }
+      ctx.stroke();
+      ctx.fillStyle = C.rgb("--ink"); ctx.beginPath(); ctx.arc(xf, y, 6 * d, 0, 2 * Math.PI); ctx.fill();
+    });
+  }
+
+  // ---------- Helmholtz motion ----------
+  var hv = document.getElementById("helm"), hctx = hv.getContext("2d"), hmode = "bow";
+  function shapeAt(xi, t) {
+    var s = 0;
+    for (var n = 1; n <= 40; n++) {
+      if (hmode === "bow") s += Math.sin(n * Math.PI * xi) * Math.sin(n * t) / (n * n);
+      else s += Math.sin(n * Math.PI * 0.25) * Math.sin(n * Math.PI * xi) * Math.cos(n * t) / (n * n);
+    }
+    return s;
+  }
+  var env = null;
+  function computeEnv() {
+    var v = [], mx = 0;
+    for (var i = 0; i <= 80; i++) { var m = 0; for (var k = 0; k < 96; k++) m = Math.max(m, Math.abs(shapeAt(i / 80, 2 * Math.PI * k / 96))); v.push(m); mx = Math.max(mx, m); }
+    env = { mode: hmode, v: v, max: mx || 1 };
+  }
+  function drawHelm(now) {
+    var d = C.fit(hv), W = hv.width, H = hv.height, x0 = 14 * d, x1 = W - 14 * d, mid = H / 2, A = H * 0.38;
+    hctx.clearRect(0, 0, W, H);
+    if (!env || env.mode !== hmode) computeEnv();
+    var nrm = env.max;
+    hctx.strokeStyle = C.rgb("--grid"); hctx.lineWidth = 1.5 * d; hctx.beginPath();
+    for (var i = 0; i <= 80; i++) { var y = mid - A * env.v[i] / nrm, x = x0 + (i / 80) * (x1 - x0); if (i) hctx.lineTo(x, y); else hctx.moveTo(x, y); }
+    for (var i = 80; i >= 0; i--) hctx.lineTo(x0 + (i / 80) * (x1 - x0), mid + A * env.v[i] / nrm);
+    hctx.closePath(); hctx.stroke();
+    hctx.fillStyle = C.rgb("--ink"); hctx.fillRect(x0 - 3 * d, mid - 16 * d, 3 * d, 32 * d); hctx.fillRect(x1, mid - 16 * d, 3 * d, 32 * d);
+    var t = C.reduce ? 1.1 : (now / 1000) * 2 * Math.PI * 0.45;
+    hctx.strokeStyle = C.rgb("--accent"); hctx.lineWidth = 2.5 * d; hctx.beginPath();
+    for (var i = 0; i <= 200; i++) { var xi = i / 200, y = mid - A * shapeAt(xi, t) / nrm; if (i) hctx.lineTo(x0 + xi * (x1 - x0), y); else hctx.moveTo(x0, y); }
+    hctx.stroke();
+  }
+  function vspec() {
+    var p = hmode === "bow" ? C.models.violin.partials() : C.models.violin.partials({ pluck: 0.25 });
+    C.stems(document.getElementById("vSpec"), p, { W: 320, H: 110, rmax: 12, fs: 9, sw: 2.5 });
+  }
+  function setH(m) { hmode = m; document.getElementById("hBow").setAttribute("aria-pressed", m === "bow"); document.getElementById("hPluck").setAttribute("aria-pressed", m !== "bow"); vspec(); }
+  document.getElementById("hBow").addEventListener("click", function () { setH("bow"); });
+  document.getElementById("hPluck").addEventListener("click", function () { setH("pluck"); });
+  function setM(m) { mode = m; document.getElementById("mBow").setAttribute("aria-pressed", m === "bow"); document.getElementById("mPizz").setAttribute("aria-pressed", m !== "bow"); }
+  document.getElementById("mBow").addEventListener("click", function () { setM("bow"); });
+  document.getElementById("mPizz").addEventListener("click", function () { setM("pizz"); });
+
+  C.onTheme(function () { vspec(); playSpec(lastF || 196); });
+  vspec(); playSpec(196);
+  function loop(now) { drawFiddle(now); drawHelm(now); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+})();
+</script>
+```
