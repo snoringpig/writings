@@ -116,12 +116,18 @@ Like the bow, the reed is a valve driven by the pressure it creates, so the osci
   var blow = document.getElementById("blow");
   blow.addEventListener("pointerdown", function (e) { e.preventDefault(); blow.setPointerCapture(e.pointerId); startBlow(); });
   blow.addEventListener("pointerup", stopBlow); blow.addEventListener("pointercancel", stopBlow);
+  // capture phase, so the page claims its keys before the blog's search shortcut sees them
+  function mine(e) { var k = parseInt(e.key, 10); return e.code === "Space" || (k >= 1 && k <= 7); }
   window.addEventListener("keydown", function (e) {
-    if (e.target.tagName === "INPUT") return;
-    if (e.code === "Space") { e.preventDefault(); if (!e.repeat) startBlow(); }
-    var k = parseInt(e.key, 10); if (k >= 1 && k <= 7) setFingering(FING[k - 1].s);
-  });
-  window.addEventListener("keyup", function (e) { if (e.code === "Space") stopBlow(); });
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT") || !mine(e)) return;
+    e.preventDefault(); e.stopPropagation(); if (e.repeat) return;
+    if (e.code === "Space") { startBlow(); return; }
+    setFingering(FING[parseInt(e.key, 10) - 1].s);
+  }, true);
+  window.addEventListener("keyup", function (e) {
+    if (!mine(e)) return; e.stopPropagation();
+    if (e.code === "Space") stopBlow();
+  }, true);
   var regB = document.getElementById("reg");
   regB.addEventListener("click", function () { reg = !reg; regB.setAttribute("aria-pressed", reg); update(); });
   function setType(fl) { flute = fl; document.getElementById("tClar").setAttribute("aria-pressed", !fl); document.getElementById("tFlute").setAttribute("aria-pressed", fl); update(); }

@@ -201,18 +201,25 @@ A tuner sets an octave by listening for beats between the lower note's second pa
   function up() { down = false; if (curK > 0) release(curK); curK = -1; }
   kbd.addEventListener("pointerup", up); kbd.addEventListener("pointercancel", up);
   var codeKey = {};
+  // capture phase, so the page claims its keys before the blog's search shortcut ("s", "f", "/") sees them
+  function mine(e) { return e.code === "Space" || e.code === "KeyZ" || e.code === "KeyX" || CODES.indexOf(e.code) >= 0; }
   window.addEventListener("keydown", function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT")) return;
-    if (e.code === "Space") { e.preventDefault(); if (!e.repeat) setPed("sus", true); return; }
-    if (e.code === "KeyZ") { if (!e.repeat) shift(-1); return; }
-    if (e.code === "KeyX") { if (!e.repeat) shift(1); return; }
-    var i = CODES.indexOf(e.code); if (i < 0 || e.repeat) return;
-    e.preventDefault(); var k = base + i; codeKey[e.code] = k; strike(k);
-  });
+    if (!mine(e)) return;
+    e.preventDefault(); e.stopPropagation();
+    if (e.repeat) return;
+    if (e.code === "Space") { setPed("sus", true); return; }
+    if (e.code === "KeyZ") { shift(-1); return; }
+    if (e.code === "KeyX") { shift(1); return; }
+    var k = base + CODES.indexOf(e.code); codeKey[e.code] = k; strike(k);
+  }, true);
   window.addEventListener("keyup", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT")) return;
+    if (!mine(e)) return;
+    e.preventDefault(); e.stopPropagation();
     if (e.code === "Space") { setPed("sus", false); return; }
     var k = codeKey[e.code]; if (k != null) { delete codeKey[e.code]; release(k); }
-  });
+  }, true);
 
   var ms = document.getElementById("mult"), mo = document.getElementById("multo");
   ms.addEventListener("input", function () { mult = parseFloat(ms.value); mo.textContent = mult.toFixed(1); pspec(); octRead(); });

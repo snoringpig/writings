@@ -155,16 +155,21 @@ A chromatic harmonica has two sets of reed chambers, the second tuned a semitone
   sb.addEventListener("pointerdown", function (e) { e.preventDefault(); sb.setPointerCapture(e.pointerId); setSlide(true); });
   sb.addEventListener("pointerup", function () { setSlide(false); }); sb.addEventListener("pointercancel", function () { setSlide(false); });
   var keyCell = {};
+  // capture phase, so the page claims its keys before the blog's search shortcut sees them
+  function mine(e) { return e.code === "Space" || BLOWC.indexOf(e.code) >= 0 || DRAWC.indexOf(e.code) >= 0; }
   window.addEventListener("keydown", function (e) {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.code === "Space") { e.preventDefault(); if (!e.repeat) setSlide(true); return; }
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT") || !mine(e)) return;
+    e.preventDefault(); e.stopPropagation(); if (e.repeat) return;
+    if (e.code === "Space") { setSlide(true); return; }
     var i = BLOWC.indexOf(e.code), dir = 0; if (i < 0) { i = DRAWC.indexOf(e.code); dir = 1; }
-    if (i < 0 || e.repeat) return; e.preventDefault(); keyCell[e.code] = true; set({ hole: i, dir: dir });
-  });
+    keyCell[e.code] = true; set({ hole: i, dir: dir });
+  }, true);
   window.addEventListener("keyup", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT") || !mine(e)) return;
+    e.preventDefault(); e.stopPropagation();
     if (e.code === "Space") { setSlide(false); return; }
     if (keyCell[e.code]) { delete keyCell[e.code]; set(null); }
-  });
+  }, true);
 
   // plucked vs blown
   var mode = "blow";
