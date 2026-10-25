@@ -9,13 +9,14 @@ date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: **Violin** · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
+::: {.series-nav}
+[Series](index.qmd) · [Foundations](foundations.qmd) · **Violin** · [Clarinet](clarinet.qmd) · [Kalimba](kalimba.qmd) · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · [Drum](drum.qmd)
+:::
 
 The string from the foundations, played two ways. Tension and length set the pitch; the bow forces the overtones onto exact whole numbers.
 
-::: {.callout-note appearance="simple"}
-## Family: strings under tension
-Guitar, cello and harp strings obey the same operator, $-c^2\partial_x^2$ with tied ends. They differ only in the constants $L$, $T$ and $\mu$, which set $f_1$, and in how they are excited: plucked (guitar, harp) or bowed (violin, cello). Conceptually they are one instrument with different constants; the shape of the spectrum, whole-number multiples, is the same for all of them.
+::: {.family}
+**Family: strings under tension.** Guitar, cello and harp strings obey the same operator, $-c^2\partial_x^2$ with tied ends. They differ only in the constants $L$, $T$ and $\mu$, which set $f_1$, and in how they are excited: plucked (guitar, harp) or bowed (violin, cello). Conceptually they are one instrument with different constants; the shape of the spectrum, whole-number multiples, is the same for all of them.
 :::
 
 ## Operator and spectrum

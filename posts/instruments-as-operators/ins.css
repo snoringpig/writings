@@ -32,3 +32,21 @@
 .ins .strip > div { background: var(--panel); border-radius: 10px; padding: 0.6rem 0.7rem; display: grid; gap: 0.35rem; }
 .ins .strip .nm { font-weight: 600; }
 .ins svg.mini { width: 100%; height: auto; display: block; }
+/* Quiet page furniture: series nav, family notes, key results, reader questions, the authorship note. */
+.series-nav { font-size: 0.85rem; color: var(--muted); margin: 0 0 1.25rem; line-height: 1.6; }
+.series-nav p { margin: 0; }
+.series-nav a { color: var(--muted); text-decoration: none; }
+.series-nav a:hover { color: var(--accent); }
+.series-nav strong { color: var(--ink); font-weight: 600; }
+.family { border-left: 2px solid var(--rule); padding: 0.1rem 0 0.1rem 0.9rem; margin: 0.75rem 0 1.5rem; color: var(--muted); font-size: 0.95rem; }
+.family p { margin: 0; }
+.result { border-left: 2px solid var(--accent); padding: 0.1rem 0 0.1rem 0.9rem; margin: 1rem 0 1.25rem; }
+.result p { margin: 0 0 0.25rem; }
+.qa { margin: 1rem 0; }
+.qa details { border-left: 2px solid var(--rule); padding: 0.15rem 0 0.15rem 0.9rem; }
+.qa summary { cursor: pointer; color: var(--muted); font-size: 0.95rem; list-style-position: outside; }
+.qa summary:hover { color: var(--ink); }
+.qa details[open] summary { color: var(--ink); margin-bottom: 0.4rem; }
+.qa .label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
+.made { font-size: 0.85rem; color: var(--muted); margin: 0 0 1.5rem; }
+.made p { margin: 0; }

@@ -9,13 +9,14 @@ date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: **Drum**
+::: {.series-nav}
+[Series](index.qmd) · [Foundations](foundations.qmd) · [Violin](violin.qmd) · [Clarinet](clarinet.qmd) · [Kalimba](kalimba.qmd) · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · **Drum**
+:::
 
 The string's operator in two dimensions. The zeros of Bessel functions replace the whole numbers, and where you strike decides which modes speak.
 
-::: {.callout-note appearance="simple"}
-## Family: membranes
-Toms, snares and timpani share the operator $-c^2\Delta$ on a disk. They differ in constants (tension, size, head mass) and in what surrounds the head: a timpani's kettle loads the air and pulls its modes toward a harmonic series, which a tom lacks.
+::: {.family}
+**Family: membranes.** Toms, snares and timpani share the operator $-c^2\Delta$ on a disk. They differ in constants (tension, size, head mass) and in what surrounds the head: a timpani's kettle loads the air and pulls its modes toward a harmonic series, which a tom lacks.
 :::
 
 ## Play it
@@ -52,8 +53,8 @@ T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
 $$
 4. Newton's law for the patch is $\iint_D \sigma u_{tt}\,dA = T\iint_D \Delta u\,dA$. This holds for every patch, so the integrands agree.
 
-::: {.callout-tip appearance="simple"}
-## The drumhead's operator
+::: {.result}
+**The drumhead's operator.**
 $$
 u_{tt} = -\mathcal{L}u,\qquad \mathcal{L} = -c^2\Delta,\qquad c^2 = T/\sigma,\qquad u = 0 \text{ on the rim}.
 $$

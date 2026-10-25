@@ -9,13 +9,14 @@ date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), **Harmonica** · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
+::: {.series-nav}
+[Series](index.qmd) · [Foundations](foundations.qmd) · [Violin](violin.qmd) · [Clarinet](clarinet.qmd) · [Kalimba](kalimba.qmd) · **Harmonica** · [Piano](piano.qmd) · [Drum](drum.qmd)
+:::
 
 Each note is a small brass reed clamped at one end: the kalimba's operator, with the kalimba's boundary conditions. Blowing instead of plucking turns its scattered overtones into exact harmonics.
 
-::: {.callout-note appearance="simple"}
-## Family: clamped bars
-Same operator and boundary conditions as the [kalimba](kalimba.qmd). The constants differ, since a harmonica reed is a short, thin strip of brass, and so does the excitation: airflow instead of a thumb. That one difference is why a kalimba clinks and a harmonica sings.
+::: {.family}
+**Family: clamped bars.** Same operator and boundary conditions as the [kalimba](kalimba.qmd). The constants differ, since a harmonica reed is a short, thin strip of brass, and so does the excitation: airflow instead of a thumb. That one difference is why a kalimba clinks and a harmonica sings.
 :::
 
 ## Play it

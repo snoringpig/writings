@@ -9,13 +9,14 @@ date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [Foundations](foundations.qmd) · Strings: [Violin](violin.qmd) · Air columns: **Clarinet** · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
+::: {.series-nav}
+[Series](index.qmd) · [Foundations](foundations.qmd) · [Violin](violin.qmd) · **Clarinet** · [Kalimba](kalimba.qmd) · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · [Drum](drum.qmd)
+:::
 
 The violin's operator again, now acting on air pressure in a tube. Only the boundary condition at one end changes, and half the spectrum disappears.
 
-::: {.callout-note appearance="simple"}
-## Family: air columns
-The flute uses the same operator with a different boundary condition: open at both ends instead of closed at one. Stopped organ pipes and pan pipes are closed at one end like the clarinet, so they share its odd-harmonic spectrum. The switch in the demo moves between the two cases.
+::: {.family}
+**Family: air columns.** The flute uses the same operator with a different boundary condition: open at both ends instead of closed at one. Stopped organ pipes and pan pipes are closed at one end like the clarinet, so they share its odd-harmonic spectrum. The switch in the demo moves between the two cases.
 :::
 
 ## Play it
@@ -51,8 +52,8 @@ The flute uses the same operator with a different boundary condition: open at bo
 3. If the slab stretches by the fraction $\xi_x$, its pressure drops in proportion. Sound compresses air too quickly for heat to flow, so the constant is the adiabatic bulk modulus $K = \gamma P_0$, and $p = -K\,\xi_x$.
 4. Differentiate step 2 in $x$ and step 3 twice in $t$, and eliminate $\xi$.
 
-::: {.callout-tip appearance="simple"}
-## The air column's operator
+::: {.result}
+**The air column's operator.**
 $$
 p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2 .
 $$

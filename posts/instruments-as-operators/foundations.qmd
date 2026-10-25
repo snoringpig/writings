@@ -9,7 +9,9 @@ date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · **Foundations** · Strings: [Violin](violin.qmd) · Air columns: [Clarinet](clarinet.qmd) · Clamped bars: [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) · Stiff strings: [Piano](piano.qmd) · Membranes: [Drum](drum.qmd)
+::: {.series-nav}
+[Series](index.qmd) · **Foundations** · [Violin](violin.qmd) · [Clarinet](clarinet.qmd) · [Kalimba](kalimba.qmd) · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · [Drum](drum.qmd)
+:::
 
 Build a string out of beads, apply Newton's law to one bead, and let the beads crowd together. The wave equation falls out, and so does the reason a string's overtones are whole numbers.
 
@@ -43,8 +45,8 @@ $$
 $$
 5. As $h \to 0$ the second difference divided by $h^2$ tends to $u_{xx}$, by Taylor's theorem. With $c^2 = T/\mu$ this is the wave equation.
 
-::: {.callout-tip appearance="simple"}
-## The string's operator
+::: {.result}
+**The string's operator.**
 $$
 u_{tt} = -\mathcal{L}u, \qquad \mathcal{L} = -c^2\partial_x^2, \qquad u(0) = u(L) = 0 .
 $$
@@ -63,14 +65,20 @@ The bead chain also has an exact spectrum. Its frequencies are $\omega_n = 2\sqr
 </div>
 ```
 
-::: {.callout-important appearance="simple" icon="false"}
-## Reader question: $u'' + k^2 u = 0$ has a single $k$. Where does an infinite list of frequencies come from?
+::: {.qa}
+<details><summary><span class="label">Reader question</span>$u'' + k^2 u = 0$ has a single $k$. Where does an infinite list of frequencies come from?</summary>
+
 In that equation $k$ was fixed in advance. The eigenvalue problem asks the reverse: for which $k$ does $u'' + k^2u = 0$ have a nonzero solution that also satisfies $u(0) = u(L) = 0$? The first condition leaves $u = \sin kx$, and the second needs $\sin kL = 0$, so $k = \pi/L, 2\pi/L, 3\pi/L, \dots$ Each $k$ gives one shape; the boundary conditions admit infinitely many of them. The count matches the degrees of freedom: the $N$ beads above have exactly $N$ frequencies, the continuous string has infinitely many, and a string with no ends at all would accept every $k$, a continuous spectrum.
+
+</details>
 :::
 
-::: {.callout-important appearance="simple" icon="false"}
-## Reader question: how is the shape $X_n(x)$ related to the factor $\cos(\omega_n t)$?
+::: {.qa}
+<details><summary><span class="label">Reader question</span>How is the shape $X_n(x)$ related to the factor $\cos(\omega_n t)$?</summary>
+
 Both come from separating variables. Substituting $u = X(x)\,T(t)$ into $u_{tt} = c^2 u_{xx}$ gives $T''/T = c^2X''/X$. The left side depends only on $t$ and the right only on $x$, so both equal one constant, $-\omega^2$. That splits the equation in two: $T'' = -\omega^2 T$, so $T = \cos(\omega t + \phi)$; and $c^2X'' = -\omega^2X$ with the boundary conditions, which only certain $\omega_n$ satisfy. The shared constant is the only link. The boundary conditions choose $X_n$, $X_n$ fixes $\omega_n$, and $\omega_n$ sets how fast that shape swells and shrinks. The time factor is a cosine for every instrument in this series, because every equation here is second order in time; everything instrument-specific lives in $X_n$.
+
+</details>
 :::
 
 The assumptions were small slopes, tension unchanged by stretching, no bending stiffness and no air. Each later instrument relaxes one of them.

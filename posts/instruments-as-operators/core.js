@@ -63,7 +63,62 @@
     var ramp = Math.floor(0.002 * SR); for (var n = 0; n < ramp; n++) d[n] *= n / ramp;
     var pk = 0; for (var n = 0; n < N; n++) pk = Math.max(pk, Math.abs(d[n]));
     var g = pk > 0 ? 0.8 / pk : 1; for (var n = 0; n < N; n++) d[n] *= g;
+    buf._gain = g;
     return buf;
+  };
+  // Like render, but each partial may start at a phase, with a fixed gain and no attack ramp or normalization.
+  C.renderRaw = function (parts, dur, gain) {
+    var a = C.ac(), SR = a.sampleRate, N = Math.max(1, Math.floor(dur * SR)), buf = a.createBuffer(1, N, SR), d = buf.getChannelData(0);
+    parts.forEach(function (p) {
+      if (p.f > SR / 2.3 || Math.abs(p.amp) < 1e-9) return;
+      var w = 2 * Math.PI * p.f / SR, c = Math.cos(w), s = Math.sin(w), x = Math.cos(p.phase || 0), y = Math.sin(p.phase || 0), e = p.amp * gain, dec = Math.exp(-1 / (p.tau * SR));
+      var n1 = Math.min(N, Math.ceil(p.tau * SR * 9));
+      for (var n = 0; n < n1; n++) { d[n] += e * x; var nx = x * c - y * s; y = x * s + y * c; x = nx; e *= dec; }
+    });
+    return buf;
+  };
+
+  // ---------- piano voices with per-mode damping ----------
+  // A damper felt pressing on [xd - w/2, xd + w/2] adds a damping term b(x) u_t. To first order each mode keeps its shape
+  // and frequency and gains a decay rate proportional to the average of X_n^2 = sin^2(n pi s) under the felt.
+  C.damperWeight = function (n, xd, w) {
+    var a = xd - w / 2, b = xd + w / 2, k = 2 * n * Math.PI;
+    return 1 - (Math.sin(k * b) - Math.sin(k * a)) / (k * w);
+  };
+  C.DAMPER = { xd: 0.12, w: 0.05, G: 15 };
+  var pcache = {};
+  C.pianoParts = function (k, mult, soft, mute) {
+    var f = C.mtof(k);
+    return C.toHz(C.models.piano.partials({ B: C.models.piano.B(k, mult), f1: f, rolloff: mute ? 4.5 : (soft ? 9 : 14) }), f);
+  };
+  C.pianoStrike = function (k, mult, soft, mute, level) {
+    var id = [k, mult, soft, mute].join(":"), parts = C.pianoParts(k, mult, soft, mute);
+    if (!pcache[id]) {
+      var f = C.mtof(k), dur = Math.min(8, 1.5 + 3 * Math.pow(262 / f, 0.6)), b = C.render(parts, dur);
+      var d = b.getChannelData(0), n = Math.floor(0.3 * b.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n;
+      pcache[id] = b;
+    }
+    var a = C.ac(), src = a.createBufferSource(), g = a.createGain(), t0 = a.currentTime;
+    src.buffer = pcache[id]; g.gain.value = level; src.connect(g); g.connect(C.out); src.start(t0);
+    return { k: k, src: src, g: g, t0: t0, parts: parts, norm: pcache[id]._gain, level: level, released: false };
+  };
+  // Crossfade a sounding voice into one whose modes decay at the damped rates. Returns the new voice.
+  C.pianoDamp = function (v, dmp) {
+    dmp = dmp || C.DAMPER;
+    var a = C.ac(), t1 = a.currentTime + 0.01, tau = t1 - v.t0, maxT = 0;
+    var rel = v.parts.map(function (p, i) {
+      var gam = dmp.G * C.damperWeight(i + 1, dmp.xd, dmp.w), tr = 1 / (1 / p.tau + gam);
+      maxT = Math.max(maxT, tr);
+      return { f: p.f, amp: p.amp * Math.exp(-tau / p.tau), tau: tr, phase: 2 * Math.PI * p.f * tau };
+    });
+    var buf = C.renderRaw(rel, Math.min(4, 7 * maxT), v.norm), src = a.createBufferSource(), g = a.createGain();
+    src.buffer = buf; g.gain.setValueAtTime(0, t1); g.gain.linearRampToValueAtTime(v.level, t1 + 0.006);
+    src.connect(g); g.connect(C.out); src.start(t1);
+    v.g.gain.cancelScheduledValues(t1); v.g.gain.setValueAtTime(v.level, t1); v.g.gain.linearRampToValueAtTime(0, t1 + 0.006); v.src.stop(t1 + 0.05);
+    return { k: v.k, src: src, g: g, t0: t1, parts: rel, norm: v.norm, level: v.level, released: true };
+  };
+  C.pianoStop = function (v, tc) {
+    var t = C.ac().currentTime; v.g.gain.cancelScheduledValues(t); v.g.gain.setTargetAtTime(0, t, tc || 0.01); v.src.stop(t + 0.2);
   };
   C.play = function (buf, gain) {
     var a = C.ac(), src = a.createBufferSource(), g = a.createGain();

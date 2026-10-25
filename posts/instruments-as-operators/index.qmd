@@ -11,9 +11,8 @@ format:
 resources: [core.js, ins.css]
 ---
 
-::: {.callout-note appearance="simple"}
-## How this was made
-The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.
+::: {.made}
+*How this was made.* The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.
 :::
 
 Every instrument in this series is worked out the same way, in three steps.
@@ -53,13 +52,17 @@ Gray lines are whole-number multiples of the fundamental. Stem height is how str
 </div>
 ```
 
-::: {.callout-important appearance="simple" icon="false"}
-## Reader question: is a musical note one frequency?
+::: {.qa}
+<details><summary><span class="label">Reader question</span>Is a musical note one frequency?</summary>
+
 No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is the repetition rate $f = 1/P$. Any periodic signal is a Fourier series $\sum_n b_n\cos(2\pi n f t + \phi_n)$, so one note contains $f, 2f, 3f, \dots$ at once. The fundamental sets the pitch and the weights $b_n$ set the timbre: a piano C4 and a violin C4 share $f$ and differ in their $b_n$. Removing the $f$ component does not change the pitch you hear, because the pattern still repeats every $1/f$ seconds. The precise correspondence is between a note and a period, not a single frequency.
+
+</details>
 :::
 
-::: {.callout-important appearance="simple" icon="false"}
-## Reader question: why should whole-number ratios matter for what we hear?
+::: {.qa}
+<details><summary><span class="label">Reader question</span>Why should whole-number ratios matter for what we hear?</summary>
+
 A sum of frequencies repeats only if they are all whole-number multiples of one base frequency, and the ear hears that repetition rate as pitch. Two tones at ratio 2 repeat every cycle of the lower one. At ratio 1.5 they repeat every two cycles, so the pitch is an octave below the lower tone. At 1.59, the drum's first ratio, the pattern never lines up and there is no pitch to hear. Drag the ratio and listen.
 
 ```{=html}
@@ -73,9 +76,13 @@ A sum of frequencies repeats only if they are all whole-number multiples of one 
 </div>
 </div>
 ```
+
+</details>
 :::
 
 ## Comparison
+
+<details><summary>Every instrument side by side: force, operator, boundary, eigen-condition, ratios, excitation</summary>
 
 | | Violin | Clarinet | Kalimba | Harmonica | Piano | Drum |
 |:--|:--|:--|:--|:--|:--|:--|
@@ -87,6 +94,8 @@ A sum of frequencies repeats only if they are all whole-number multiples of one 
 | Mode ratios | $n$ | $2n-1$ | 1, 6.27, 17.5 | 1, 6.27, 17.5 | $n\sqrt{(1+Bn^2)/(1+B)}$ | 1, 1.59, 2.14 |
 | Excitation | bow, sustained | reed, sustained | thumb pluck | airflow, sustained | felt hammer | stick |
 | What you hear | exact harmonics | odd harmonics dominate; overblows a twelfth | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
+
+</details>
 
 ```{=html}
 <script src="core.js"></script>
