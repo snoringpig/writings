@@ -1,0 +1,34 @@
+/* Styles for the interactive figures in the Instruments as Operators posts. */
+/* Layout: a reading column for derivations; instruments and demos break out to the full page width. */
+:root {
+  --paper: #ffffff; --panel: #f2f3f0; --ink: #1c2230; --muted: #586070; --rule: #d2d6ce;
+  --accent: #2e4bb0; --pos: #c9572f; --neg: #2b67b3; --grid: #c2c7bd; --wood: #b58a5a; --metal: #8e96a3;
+  --f-display: "Spectral", Georgia, "Times New Roman", serif;
+  --f-ui: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+.ins { font-size: 1rem; line-height: 1.5; color: var(--ink); }
+.ins * { box-sizing: border-box; }
+.ins h3 { font-family: var(--f-ui); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.4rem; }
+.ins .panel, .ins .instrument { background: var(--panel); border-radius: 10px; padding: 0.85rem; display: grid; gap: 0.6rem; min-width: 0; margin: 1rem 0 1.5rem; }
+.ins .cap { font-family: var(--f-ui); font-size: 0.88rem; color: var(--muted); margin: 0; line-height: 1.45; }
+.ins .controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.ins button { font-family: var(--f-ui); font-size: 0.95rem; color: var(--ink); background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 0.4rem 0.75rem; min-height: 2.3rem; cursor: pointer; }
+.ins button:hover { border-color: var(--muted); }
+.ins button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.ins button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.ins button:focus-visible, .ins input:focus-visible, .ins canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ins .slider { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; font-family: var(--f-ui); font-size: 0.92rem; color: var(--muted); }
+.ins .slider input[type=range] { flex: 1 1 10rem; min-width: 0; accent-color: var(--accent); }
+.ins .slider output { font-family: var(--f-mono); color: var(--ink); min-width: 4.5rem; font-variant-numeric: tabular-nums; }
+.ins label.check { font-family: var(--f-ui); font-size: 0.92rem; color: var(--muted); display: inline-flex; gap: 0.4rem; align-items: center; }
+.ins .readout { font-family: var(--f-mono); font-size: 0.86rem; font-variant-numeric: tabular-nums; color: var(--muted); min-height: 1.3em; }
+.ins .readout b { color: var(--ink); font-weight: 500; }
+.ins svg.spec { width: 100%; height: auto; display: block; }
+.ins svg.spec text, .ins svg.mini text { font-family: var(--f-mono); fill: var(--muted); }
+.ins canvas { display: block; width: 100%; touch-action: none; }
+.ins .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.75rem; }
+.ins .strip > div { background: var(--panel); border-radius: 10px; padding: 0.6rem 0.7rem; display: grid; gap: 0.35rem; }
+.ins .strip .nm { font-weight: 600; }
+.ins svg.mini { width: 100%; height: auto; display: block; }

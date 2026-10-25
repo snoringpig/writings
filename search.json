@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "No Man's Land",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Date\n\n\n\nTitle\n\n\n\n\n\n\n\n\nNov 21, 2023\n\n\nA Bicycle Wheel\n\n\n\n\n\n\nOct 19, 2023\n\n\nInverse Sampling Transform\n\n\n\n\n\n\nSep 22, 2023\n\n\nHow to Break Nested For Loop\n\n\n\n\n\n\nNo matching items"
+    "text": "\\[\n\\int_{M}d\\omega = \\int_{\\partial M}\\omega\n\\]"
   },
   {
     "objectID": "posts/sampling/index.html",
@@ -26,6 +26,223 @@
     "title": "Inverse Sampling Transform",
     "section": "2 Application: Uniform Sampling on a Disk",
     "text": "2 Application: Uniform Sampling on a Disk\nNow, we want to perform uniform sampling on the unit disk. We use polar coordinates; more specifically, we take r\\cos(\\theta), r\\sin(\\theta), where\n\nr \\in [0,1] such that P(r) \\propto r (\\Rightarrow P(r) = 2r)\n\\theta \\sim U(0,2\\pi)\n\nThe key lies in 1., that is, how to sample r such that P(r) = 2r. Let X be the random variable such that P(X = r) = 2r. Then, F_X(x) = \\int_0^x 2r\\,dr = x^2, and thus F_X^{-1}(y) = \\sqrt{y}.\n\n2.1 Code\nWith above in mind, we sample 10000 points on the unit disk, see Figure 1.\n\n\nCode\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# 1. Sample the points\nN = 10000\ninv_cdf = lambda x: np.sqrt(x)\nR = np.vectorize(inv_cdf)(np.random.uniform(0, 1, N))\nT = np.random.uniform(0, 2*np.pi, N)\npoints = [(r * np.cos(t), r * np.sin(t)) for r, t in zip(R, T)]\n\n# 2. Make a scatter plot\nx, y = zip(*points)\nplt.scatter(x, y, s=1)\nplt.xticks([])\nplt.yticks([])\nax = plt.gca()\nax.set_aspect('equal')\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nax.spines['bottom'].set_visible(False)\nax.spines['left'].set_visible(False)\nplt.show()\n\n\n\n\n\n\n\n\nFigure 1: Sampling 10000 points uniformly on the unit disk."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/violin.html",
+    "href": "posts/instruments-as-operators/violin.html",
+    "title": "The violin",
+    "section": "",
+    "text": "Series · 0 Foundations · 1 Violin · 2 Clarinet · 3 Kalimba · 4 Piano · 5 Drum\nThe string from Part 0, played two ways. Tension and length set the pitch; the bow forces the overtones onto exact whole numbers."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/violin.html#operator-and-spectrum",
+    "href": "posts/instruments-as-operators/violin.html#operator-and-spectrum",
+    "title": "The violin",
+    "section": "Operator and spectrum",
+    "text": "Operator and spectrum\nA violin string is the continuum bead chain of Part 0, so its operator is -c^2\\partial_x^2 on [0,L] with tied ends. Its eigenfunctions are \\sin(n\\pi x/L), and the frequencies are \nf_n = \\frac{n}{2L}\\sqrt{\\frac{T}{\\mu}}, \\qquad n = 1, 2, 3, \\dots\n\nThe four strings share one length and differ in T/\\mu, tuned to G3, D4, A4 and E5. A finger shortens the vibrating length, and since f \\propto 1/L, stopping the string at a fraction s of its length raises the pitch by a factor 1/(1-s). That is why the semitone markers below bunch together toward the bridge."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/violin.html#play-it",
+    "href": "posts/instruments-as-operators/violin.html#play-it",
+    "title": "The violin",
+    "section": "Play it",
+    "text": "Play it\n\n\n  \n  \n    Bow (hold)Pizzicato (tap)\n     Wooden body\n    Press and hold a string. Slide left and right to finger it.\n  \n  \n  Left edge is the nut, right edge the bridge. The ticks mark equal-tempered semitones, at fractions 1 − 2−k/12 of the length. The stems are the partials you hear. The body is a linear filter, so switching it off or on changes their heights, never their positions. Its resonances here (about 280, 470, 550 and 2700 Hz) are approximate textbook values."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/violin.html#what-the-bow-does",
+    "href": "posts/instruments-as-operators/violin.html#what-the-bow-does",
+    "title": "The violin",
+    "section": "What the bow does",
+    "text": "What the bow does\nThe bow grips the string and drags it along (stick) until the string’s tension tears it free and it flies back (slip). Helmholtz watched this through a vibration microscope and described the result in 1863: the string becomes two straight segments joined by one sharp corner, and the corner races around a lens-shaped path, once per period. In modal terms that shape is \nu(x,t) = \\sum_{n\\ge1} \\frac{A}{n^2}\\,\\sin\\frac{n\\pi x}{L}\\,\\sin(n\\omega_1 t).\n\nThe motion repeats exactly every period, so its spectrum sits exactly on n f_1, and the force on the bridge falls off like 1/n. A real string is slightly stiff and its own frequencies run a little sharp (Part 4); the stick–slip cycle locks every partial to the period anyway. A pluck, by contrast, lets each mode ring freely at its own frequency and decay.\n\n\n    \n    BowedPlucked at 1/4\n    \n    Slowed about 500 times. The faint lens is the envelope the corner traces. Stems: partials of the bridge force."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/violin.html#the-body",
+    "href": "posts/instruments-as-operators/violin.html#the-body",
+    "title": "The violin",
+    "section": "The body",
+    "text": "The body\nThe string barely moves any air. It rocks the bridge, which drives the wooden body, which radiates. Each link is linear, so it can change how loud each partial is but never move one. Toggle the body above while playing: the stems change height and stay put.\n← Part 0, foundations · Part 2, the clarinet →"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/clarinet.html",
+    "href": "posts/instruments-as-operators/clarinet.html",
+    "title": "The clarinet",
+    "section": "",
+    "text": "Series · 0 Foundations · 1 Violin · 2 Clarinet · 3 Kalimba · 4 Piano · 5 Drum\nThe violin’s operator again, now acting on air pressure in a tube. Only the boundary condition at one end changes, and half the spectrum disappears."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/clarinet.html#play-it",
+    "href": "posts/instruments-as-operators/clarinet.html#play-it",
+    "title": "The clarinet",
+    "section": "Play it",
+    "text": "Play it\n\n\n\n  \n  \n    Hold to blow\n    Register key\n    Closed at reed (clarinet)Open both ends (flute)\n  \n  \n  \n  \n  Tap holes or pick a fingering, then hold the button (or the space bar; keys 1–7 change fingering). The shading inside the bore is the pressure of the sounding mode: dark at a pressure antinode, pale at a node. The first open hole acts as the end of the tube."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/clarinet.html#deriving-the-operator",
+    "href": "posts/instruments-as-operators/clarinet.html#deriving-the-operator",
+    "title": "The clarinet",
+    "section": "Deriving the operator",
+    "text": "Deriving the operator\n\nFollow a thin slab of air in a tube of cross-section A. Let \\xi(x,t) be how far the air at x has moved along the tube, and p(x,t) the pressure above room pressure.\nThe slab between x and x+dx has mass \\rho A\\,dx, and the pressure difference across it is the only force, so Newton’s law reads \\rho\\,\\xi_{tt} = -p_x.\nIf the slab stretches by the fraction \\xi_x, its pressure drops in proportion. Sound compresses air too quickly for heat to flow, so the constant is the adiabatic bulk modulus K = \\gamma P_0, and p = -K\\,\\xi_x.\nDifferentiate step 2 in x and step 3 twice in t, and eliminate \\xi.\n\n\n\n\n\n\n\nTipThe air column’s operator\n\n\n\n\np_{tt} = c^2 p_{xx}, \\qquad c^2 = \\frac{K}{\\rho} \\approx (343\\ \\text{m/s})^2 .\n\n\n\n\nAt an open end the air meets the room, so p = 0. At the reed the opening is nearly shut, so the air cannot move: \\xi = 0 there, and by step 2, p_x = 0."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/clarinet.html#spectrum",
+    "href": "posts/instruments-as-operators/clarinet.html#spectrum",
+    "title": "The clarinet",
+    "section": "Spectrum",
+    "text": "Spectrum\nThe condition p_x(0) = 0 at the reed leaves X = \\cos kx, and p(L) = 0 at the open end requires \\cos kL = 0. So \nk_n = \\frac{(2n-1)\\pi}{2L}, \\qquad f_n = \\frac{(2n-1)\\,c}{4L}.\n\nOnly odd multiples survive. A flute is open at both ends: p = 0 at both ends gives \\sin(n\\pi x/L) and f_n = nc/2L, every multiple. Two consequences, both audible above:\n\nAn octave lower. The same tube sounds c/4L closed at one end but c/2L open at both. Switch the type and listen.\nA twelfth, not an octave. The register key makes the tube jump to its next mode. For the clarinet that is 3f_1, an octave plus a fifth; for the flute it is 2f_1. This is why clarinet fingerings repeat a twelfth apart.\n\nLike the bow, the reed is a valve driven by the pressure it creates, so the oscillation is periodic and its partials sit exactly on n f_1. In the low register the even ones are weak, not zero. A real bore is not perfectly cylindrical and the bell matters; those refine the numbers, not the picture.\n← Part 1, the violin · Part 3, the kalimba →"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/foundations.html",
+    "href": "posts/instruments-as-operators/foundations.html",
+    "title": "Foundations: from Newton to an operator",
+    "section": "",
+    "text": "Series · 0 Foundations · 1 Violin · 2 Clarinet · 3 Kalimba · 4 Piano · 5 Drum\nBuild a string out of beads, apply Newton’s law to one bead, and let the beads crowd together. The wave equation falls out, and so does the reason a string’s overtones are whole numbers."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/foundations.html#one-bead-two-pulls",
+    "href": "posts/instruments-as-operators/foundations.html#one-bead-two-pulls",
+    "title": "Foundations: from Newton to an operator",
+    "section": "One bead, two pulls",
+    "text": "One bead, two pulls\n\nPut N beads of mass m on a massless thread with tension T, spaced h apart, with both ends tied down. Let u_j be the height of bead j, and set u_0 = u_{N+1} = 0 for the tied ends.\nThe thread on the right pulls bead j along itself with force T. For small slopes its vertical part is T\\sin\\theta \\approx T\\tan\\theta = T(u_{j+1}-u_j)/h. The thread on the left contributes T(u_{j-1}-u_j)/h.\nNewton’s second law for bead j is therefore \nm\\,\\ddot u_j = \\frac{T}{h}\\left(u_{j+1} - 2u_j + u_{j-1}\\right).\n\n\nThe right side is a second difference: it measures how far bead j sits below the average of its neighbors. Drag a bead and watch the arrows.\n\n\n    \n    Beads N5\n    ReleaseReset to a pluckHear these beads\n    Arrows show the net vertical force on each bead, rescaled to stay visible as N grows. Drag any bead, then release."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/foundations.html#crowd-the-beads-together",
+    "href": "posts/instruments-as-operators/foundations.html#crowd-the-beads-together",
+    "title": "Foundations: from Newton to an operator",
+    "section": "Crowd the beads together",
+    "text": "Crowd the beads together\n\nFix the total length L = (N+1)h and the mass per length \\mu = m/h. Dividing the bead equation by m = \\mu h gives \n\\ddot u_j = \\frac{T}{\\mu}\\cdot\\frac{u_{j+1} - 2u_j + u_{j-1}}{h^2}.\n\nAs h \\to 0 the second difference divided by h^2 tends to u_{xx}, by Taylor’s theorem. With c^2 = T/\\mu this is the wave equation.\n\n\n\n\n\n\n\nTipThe string’s operator\n\n\n\n\nu_{tt} = -\\mathcal{L}u, \\qquad \\mathcal{L} = -c^2\\partial_x^2, \\qquad u(0) = u(L) = 0 .\n\n\n\nThe bead chain also has an exact spectrum. Its frequencies are \\omega_n = 2\\sqrt{T/mh}\\,\\sin\\big(n\\pi/2(N+1)\\big) for n = 1,\\dots,N. Slide N up: for small n the sine is nearly linear, and the stems land on the integer grid.\n\n\n    Spectrum of the bead chain\n    \n    \n    Gray lines are whole-number multiples of the lowest frequency. Stem height is how strongly the current shape excites each mode.\n  \n\nThe assumptions were small slopes, tension unchanged by stretching, no bending stiffness and no air. Each later instrument relaxes one of them."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/foundations.html#the-recipe-for-every-instrument",
+    "href": "posts/instruments-as-operators/foundations.html#the-recipe-for-every-instrument",
+    "title": "Foundations: from Newton to an operator",
+    "section": "The recipe for every instrument",
+    "text": "The recipe for every instrument\nEach part repeats two moves. The operator is the restoring force per unit mass, written as a function of the shape: tension gives -c^2\\partial_x^2, bending gives \\kappa^2\\partial_x^4, tension in a sheet gives -c^2\\Delta. The boundary conditions record what each support forbids.\n\n\n\n\n\n\n\n\n\nSupport\nWhat it forbids\nCondition\nWhere\n\n\n\n\ntied end\nmoving\nu = 0\nviolin\n\n\nclamp\nmoving and tilting\nu = 0,\\ u' = 0\nkalimba base\n\n\nfree tip\nbending moment and shear force\nu'' = 0,\\ u''' = 0\nkalimba tip\n\n\npin\nmoving and bending moment\nu = 0,\\ u'' = 0\npiano, idealized\n\n\nrim\nmoving\nu = 0 on the circle\ndrum\n\n\nopen end of a pipe\npressure above room pressure\np = 0\nclarinet bell, first open hole\n\n\nreed, nearly shut\nair moving\np_x = 0\nclarinet mouthpiece\n\n\n\nThen the spectrum of the operator fixes the frequencies, and the way the instrument is played fixes how much of each you hear.\nNext: Part 1, the violin →"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/piano.html",
+    "href": "posts/instruments-as-operators/piano.html",
+    "title": "The piano",
+    "section": "",
+    "text": "Series · 0 Foundations · 1 Violin · 2 Clarinet · 3 Kalimba · 4 Piano · 5 Drum\nA piano string is a violin string that is also a little bit of a kalimba tine. The two restoring forces add, and the overtones creep sharp."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/piano.html#play-it",
+    "href": "posts/instruments-as-operators/piano.html#play-it",
+    "title": "The piano",
+    "section": "Play it",
+    "text": "Play it\n\n\n\n  \n  Stiffness ×1.0\n  Tap a key, or use the computer keys A W S E D F T G Y H U J K for C4 to C5.\n  At stiffness 0 every string is ideal and the partials sit on the integers. The default stiffness rises toward the treble, as on a real piano; its size here is illustrative."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/piano.html#deriving-the-operator",
+    "href": "posts/instruments-as-operators/piano.html#deriving-the-operator",
+    "title": "The piano",
+    "section": "Deriving the operator",
+    "text": "Deriving the operator\nA piano wire is under heavy tension, like a violin string, and it is thick steel, so it also resists bending, like a kalimba tine. Forces per unit length simply add: the tension term from Part 0 and the bending term from Part 3 give \n\\mu\\,u_{tt} = T\\,u_{xx} - EI\\,u_{xxxx}, \\qquad\\text{that is}\\qquad \\mathcal{L} = -c^2\\partial_x^2 + \\kappa^2\\partial_x^4 .\n\nTreat the ends as pinned: they cannot move and transmit no bending moment, so u = u_{xx} = 0. Real piano strings are held closer to clamped, which shifts the numbers slightly but not the picture."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/piano.html#spectrum",
+    "href": "posts/instruments-as-operators/piano.html#spectrum",
+    "title": "The piano",
+    "section": "Spectrum",
+    "text": "Spectrum\nPinned ends make \\sin(n\\pi x/L) an eigenfunction of both terms at once. Substituting it gives \\omega^2 = c^2k^2 + \\kappa^2 k^4 with k = n\\pi/L, so \nf_n = n f_0\\sqrt{1 + Bn^2}, \\qquad B = \\frac{\\pi^2 EI}{T L^2}.\n\nThe stiffness constant B is small, but it multiplies n^2, so high partials run noticeably sharp. Since I grows like the fourth power of the wire’s diameter and B falls like 1/L^2, short thick treble strings are the stiffest.\n\n\n    Partials of the last key\n    \n    \n    Hammer at 1/8 of the length, so the 8th and 16th partials nearly vanish."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/piano.html#why-tuners-stretch-octaves",
+    "href": "posts/instruments-as-operators/piano.html#why-tuners-stretch-octaves",
+    "title": "The piano",
+    "section": "Why tuners stretch octaves",
+    "text": "Why tuners stretch octaves\nA tuner sets an octave by listening for beats between the lower note’s second partial and the upper note’s fundamental. Stiffness pushes that second partial above 2f_0, so a beat-free octave is slightly wider than 2 : 1. Repeated across the keyboard, this is stretch tuning: the top of a piano is tuned sharp of equal temperament, and the bottom flat.\n\n\n    C4 + C5, exactly 2 : 1C4 + C5, stretched\n    \n    Listen for the slow wobble in the 2 : 1 version. Raise the stiffness above to speed it up.\n  \n\n← Part 3, the kalimba · Part 5, the drum →"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "No Man's Land",
+    "section": "",
+    "text": "Date\n\n\n\nTitle\n\n\n\n\n\n\n\n\nOct 25, 2026\n\n\nInstruments as Operators\n\n\n\n\n\n\nNov 21, 2023\n\n\nA Bicycle Wheel\n\n\n\n\n\n\nOct 19, 2023\n\n\nInverse Sampling Transform\n\n\n\n\n\n\nSep 22, 2023\n\n\nHow to Break Nested For Loop\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/index.html",
+    "href": "posts/instruments-as-operators/index.html",
+    "title": "Instruments as Operators",
+    "section": "",
+    "text": "NoteHow this was made\n\n\n\nThe derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.\nEvery instrument in this series is worked out the same way, in three steps."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/index.html#hear-them-side-by-side",
+    "href": "posts/instruments-as-operators/index.html#hear-them-side-by-side",
+    "title": "Instruments as Operators",
+    "section": "Hear them side by side",
+    "text": "Hear them side by side\nGray lines are whole-number multiples of the fundamental. Stem height is how strongly each partial is excited.\n\n\n  Violin—Play\n  Clarinetmodes 1, 3, 5, 7, 9Play\n  Kalimba—Play\n  Piano—Play\n  Drum—Play"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/index.html#reading-path",
+    "href": "posts/instruments-as-operators/index.html#reading-path",
+    "title": "Instruments as Operators",
+    "section": "Reading path",
+    "text": "Reading path\n\n\n\nPart\nInstrument\nOperator\nWhat you can play\n\n\n\n\n0\nFoundations\nm\\ddot u_j = \\tfrac{T}{h}(u_{j+1}-2u_j+u_{j-1}) \\to c^2u_{xx}\nbeads on a thread\n\n\n1\nViolin\n-c^2\\partial_x^2\na bowed fingerboard\n\n\n2\nClarinet\n-c^2\\partial_x^2, with p_x = 0 at the reed\ntone holes and a register key\n\n\n3\nKalimba\n\\kappa^2\\partial_x^4\nseventeen tines\n\n\n4\nPiano\n-c^2\\partial_x^2 + \\kappa^2\\partial_x^4\na keyboard with a stiffness knob\n\n\n5\nDrum\n-c^2\\Delta\na drumhead you strike anywhere"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/index.html#comparison",
+    "href": "posts/instruments-as-operators/index.html#comparison",
+    "title": "Instruments as Operators",
+    "section": "Comparison",
+    "text": "Comparison\n\n\n\n\n\n\n\n\n\n\n\n\nViolin\nClarinet\nKalimba\nPiano\nDrum\n\n\n\n\nRestoring force\ntension\nair pressure\nbending stiffness\ntension + bending\ntension, in 2D\n\n\nNewton’s law on\na segment\na slab of air\na slice: torque, then force\na segment, both forces added\na patch, via the divergence theorem\n\n\nOperator\n-c^2\\partial_x^2\n-c^2\\partial_x^2 on pressure\n\\kappa^2\\partial_x^4\n-c^2\\partial_x^2+\\kappa^2\\partial_x^4\n-c^2\\Delta\n\n\nBoundary\nu=0 at both ends\np_x=0 at reed, p=0 at open end\nu=u'=0 at clamp, u''=u'''=0 at tip\nu=u''=0 at both ends\nu=0 on the rim\n\n\nEigen-condition\n\\sin kL=0\n\\cos kL=0\n\\cos\\beta L\\cosh\\beta L=-1\n\\sin kL=0\nJ_m(ka)=0\n\n\nf_n/f_1\nn\n2n-1\n(\\beta_n/\\beta_1)^2: 1, 6.27, 17.5\nn\\sqrt{(1+Bn^2)/(1+B)}\nj_{m,n}/j_{0,1}: 1, 1.59, 2.14\n\n\nExcitation\nbow, sustained\nreed, sustained\nthumb pluck\nfelt hammer\nstick\n\n\nWhy it sounds as it does\nperiodic: exact harmonics\nperiodic, odd harmonics dominate: overblows a twelfth\novertones weak, far and brief: pitch survives\nnear-harmonic: pitch, stretched octaves\ninharmonic and long-lived: a thud"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/drum.html",
+    "href": "posts/instruments-as-operators/drum.html",
+    "title": "The drum",
+    "section": "",
+    "text": "Series · 0 Foundations · 1 Violin · 2 Clarinet · 3 Kalimba · 4 Piano · 5 Drum\nThe string’s operator in two dimensions. The zeros of Bessel functions replace the whole numbers, and where you strike decides which modes speak."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/drum.html#play-it",
+    "href": "posts/instruments-as-operators/drum.html#play-it",
+    "title": "The drum",
+    "section": "Play it",
+    "text": "Play it\n\n\n\n  \n  Tension ×1.00\n  Tap the head anywhere. The ring marks where we listen.\n  The motion is the real superposition of the 40 lowest modes, slowed about 300 times. Strike dead center: only round modes appear. Strike on a nodal line of a mode and that mode stays silent."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/drum.html#deriving-the-operator",
+    "href": "posts/instruments-as-operators/drum.html#deriving-the-operator",
+    "title": "The drum",
+    "section": "Deriving the operator",
+    "text": "Deriving the operator\n\nA drumhead is a sheet under tension T, measured as force per unit length of any cut through it, with mass \\sigma per unit area. Take a small patch D of it.\nAlong each piece ds of the patch’s edge, the outside sheet pulls with force T\\,ds along the surface. For small slopes its vertical part is T\\,\\partial_n u\\,ds, where \\partial_n u is the slope in the outward direction.\nAdding these up and applying the divergence theorem gives the net vertical force, \nT\\oint_{\\partial D} \\partial_n u\\,ds = T\\iint_D \\Delta u\\,dA .\n\nNewton’s law for the patch is \\iint_D \\sigma u_{tt}\\,dA = T\\iint_D \\Delta u\\,dA. This holds for every patch, so the integrands agree.\n\n\n\n\n\n\n\nTipThe drumhead’s operator\n\n\n\n\nu_{tt} = -\\mathcal{L}u,\\qquad \\mathcal{L} = -c^2\\Delta,\\qquad c^2 = T/\\sigma,\\qquad u = 0 \\text{ on the rim}.\n\n\n\nIn one dimension the patch is a segment, its edge is two endpoints, and step 3 is the fundamental theorem of calculus. That is Part 0’s equation again.\n\n\n    \n      \n      \n      \n      \n      \n      \n      patch DT ds\n    \n    Tension pulls outward all around the edge. Where the sheet bulges, the pulls tilt and their vertical parts add up to T times the Laplacian of u, per unit area."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/drum.html#spectrum",
+    "href": "posts/instruments-as-operators/drum.html#spectrum",
+    "title": "The drum",
+    "section": "Spectrum",
+    "text": "Spectrum\nSeparating variables in polar coordinates gives standing waves J_m(kr)\\cos m\\theta and J_m(kr)\\sin m\\theta, with J_m a Bessel function; the second solution of Bessel’s equation blows up at the center and is discarded. The rim condition is J_m(ka) = 0, so \nf_{m,n} = \\frac{c\\,j_{m,n}}{2\\pi a},\n where j_{m,n} is the n-th zero of J_m. These zeros are not evenly spaced and no common base frequency fits them, so the drum has no clear pitch. Each frequency with m \\ge 1 belongs to two modes, \\cos m\\theta and \\sin m\\theta: the round head’s symmetry, visible in the spectrum.\nA strike at p, heard at q, gives mode k the weight X_k(p)X_k(q)/\\lVert X_k\\rVert^2, the eigen-expansion of a point kick. Tap a stem to see one mode on the drumhead and hear it alone.\n\n\n    Partials of the last strike · tap a stem\n    \n    \n  \n\n← Part 4, the piano · Back to the series"
+  },
+  {
+    "objectID": "posts/instruments-as-operators/kalimba.html",
+    "href": "posts/instruments-as-operators/kalimba.html",
+    "title": "The kalimba",
+    "section": "",
+    "text": "Series · 0 Foundations · 1 Violin · 2 Clarinet · 3 Kalimba · 4 Piano · 5 Drum\nTake away the tension and keep only stiffness. A steel tine clamped at one end obeys a fourth-order equation, its overtones scatter far from the integers, and it still sounds pitched."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/kalimba.html#play-it",
+    "href": "posts/instruments-as-operators/kalimba.html#play-it",
+    "title": "The kalimba",
+    "section": "Play it",
+    "text": "Play it\n\n\n\n  \n  \n     Overtones ring as long as the fundamental\n    Tap a tine, or drag across several.\n  \n  Tine lengths are drawn from the operator: frequency goes as 1/L², so each tine's length is the C4 tine's divided by the square root of its frequency ratio. Tick the box and pluck again to hear the same spectrum as a bell."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/kalimba.html#deriving-the-operator",
+    "href": "posts/instruments-as-operators/kalimba.html#deriving-the-operator",
+    "title": "The kalimba",
+    "section": "Deriving the operator",
+    "text": "Deriving the operator\n\nBend a thin bar. Fibers on the outside of the curve stretch and fibers on the inside compress. By Hooke’s law their stresses add up to a bending moment proportional to the curvature, M = EI\\,u_{xx}, where E is Young’s modulus of the steel and I is the second moment of area of the cross-section.\nCut out a slice of length dx. Its two faces carry moments and vertical shear forces. A thin slice has negligible rotational inertia, so its torques balance, which forces the shear to be the slope of the moment: V = -M_x.\nVertical forces do not balance; their difference accelerates the slice. With density \\rho and area A, Newton’s law reads \\rho A\\,u_{tt} = V_x = -M_{xx}. Substituting step 1 gives the operator below.\nThe clamp forbids moving and tilting: u = u_x = 0 at the base. Nothing grips the tip, so it carries no moment and no shear: u_{xx} = u_{xxx} = 0 there.\n\n\n\n\n\n\n\nTipThe tine’s operator\n\n\n\n\nu_{tt} = -\\kappa^2 u_{xxxx}, \\qquad \\kappa^2 = \\frac{EI}{\\rho A}.\n\n\n\n\n\n    \n      \n      \n      \n      \n      \n      \n      MM + dM\n      VV + dV\n      dx\n    \n    One slice of the tine. Moments (warm) bend it; shear forces (cool) push it up and down. Torque balance links them; force balance moves the slice."
+  },
+  {
+    "objectID": "posts/instruments-as-operators/kalimba.html#spectrum",
+    "href": "posts/instruments-as-operators/kalimba.html#spectrum",
+    "title": "The kalimba",
+    "section": "Spectrum",
+    "text": "Spectrum\nA standing wave X(x)\\cos\\omega t needs X'''' = \\beta^4 X with \\beta^4 = \\omega^2/\\kappa^2. The solutions are combinations of \\cos\\beta x, \\sin\\beta x, \\cosh\\beta x and \\sinh\\beta x. The four boundary conditions are four linear equations for the four coefficients, and they have a nonzero solution exactly when \n\\cos\\beta L\\,\\cosh\\beta L = -1 .\n\nThe roots are \\beta L = 1.8751,\\ 4.6941,\\ 7.8548,\\ 10.9955, \\dots, computed live on this page. Since \\omega = \\kappa\\beta^2, the frequency ratios are (\\beta_n/\\beta_1)^2 = 1 : 6.27 : 17.55 : 34.39. Bending makes frequency grow like the square of the wavenumber, so the overtones fly apart.\nThe same formula gives f_1 \\propto 1/L^2. Kalimba makers tune a tine by sliding it over the bridge to change its free length.\nThe tine sounds pitched anyway because its first overtone is weak, sits more than two octaves up, and dies within a few hundredths of a second. The ear hears the fundamental with a short metallic click on top.\n\n\n    Modes of one tine · tap a stem\n    \n    \n    \n  \n\n← Part 2, the clarinet · Part 4, the piano →"
   },
   {
     "objectID": "posts/break-for/index.html",
@@ -61,12 +278,5 @@
     "title": "A Bicycle Wheel",
     "section": "",
     "text": "Recently, I was introduced the book The Bicycle Wheel, by the owner of a local bike shop. I was pretty intrigued by the spoke design of the wheel, and thus animated the wheel on the front page, using p5.js.\n\n\n\n\n\n\n\nCode\n\n\nfunction setup() {\n  createCanvas(400, 400);\n  \n  x_center = width/2;\n  y_center = height/2;\n  r_outer = width * (0.75/2);\n  r_inner = r_outer / 7.5;\n  width_rim = 12;\n  width_spoke = 2;\n  \n  t = 0;\n  speed = 0.01;\n}\n\nfunction draw() { // loop (by default)\n  translate(x_center, y_center);\n  t = t + speed;\n  rotate(t);\n  \n  // background(220);\n  background(213,181,156); // kraft paper\n  \n  noFill();\n  strokeWeight(width_rim);\n  // rim\n  circle(0, 0, 2 * r_outer); // rim\n  // hub\n  circle(0, 0, 2 * r_inner);\n  fill(0);\n  circle(0, 0, 0.25 * r_inner);\n  noFill();\n  \n  strokeWeight(width_spoke);\n  crossSpokesRealistic(9);\n}\n\nfunction crossSpokesRealistic(n_groups) {\n  let N_I = 2;\n  let N_O = 4;\n  let N_INNER = N_I * n_groups;\n  let N_OUTER = N_O * n_groups;\n  let START1 = 7;\n  let START2 = -2;\n  let outerAngles = Array.from({ length: N_OUTER }, (_, i) =&gt; map(i, 0, N_OUTER, 0, TWO_PI));\n  let innerAngles = Array.from({ length: N_INNER }, (_, i) =&gt; map(i, 0, N_INNER, 0, TWO_PI));\n  let params = [\n    [0, 7],\n    [0, 7 + 1],\n    [3, 1 + 1],\n    [3, 1]\n  ]\n  for (let k = 0; k &lt; params.length; ++k) {\n    let param = params[k];\n    let start_inner = param[0];\n    let start_outer = param[1];\n    for (let i = 0; i &lt; n_groups; ++i) {\n      let theta_inner = innerAngles[(start_inner + i * N_I) % N_INNER];\n      let theta_outer = outerAngles[(start_outer + i * N_O) % N_OUTER];\n      let x_inner = r_inner * cos(theta_inner);\n      let y_inner = r_inner * sin(theta_inner);\n      let x_outer = r_outer * cos(theta_outer);\n      let y_outer = r_outer * sin(theta_outer);\n      line(x_inner, y_inner, x_outer, y_outer);\n    }\n  }\n}\n\nfunction keyPressed() {\n  if (key === 's') {\n    saveGif('wheel', 20);\n  }\n}"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "\\[\n\\int_{M}d\\omega = \\int_{\\partial M}\\omega\n\\]"
   }
 ]

@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/instruments-as-operators/index.html",
       "/posts/bicycle-wheel/index.html",
       "/posts/sampling/index.html",
       "/posts/break-for/index.html"
