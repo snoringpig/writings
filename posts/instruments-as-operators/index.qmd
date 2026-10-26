@@ -44,7 +44,7 @@ Here are six sounds that need explaining. Play them, and try to guess why each o
   </div>
   <div class="pcard">
     <p class="q">Why do these two sound so different?</p>
-    <p class="b">A kalimba tine and a harmonica reed are the same kind of bar, with the same [overtones](glossary.qmd#partial) far off the whole-number multiples.</p>
+    <p class="b">A kalimba tine and a harmonica reed are the same kind of bar, with the same <a href="glossary.html#partial">overtones</a> far off the whole-number multiples.</p>
     <div class="controls"><button data-g="kal">Kalimba tine, plucked</button><button data-g="harm">Harmonica reed, blown</button></div>
     <p class="go">Answered on <a href="kalimba.html">page 6</a> and <a href="harmonica.html">6b</a></p>
   </div>
@@ -56,7 +56,7 @@ Here are six sounds that need explaining. Play them, and try to guess why each o
   </div>
   <div class="pcard">
     <p class="q">Can you hear the shape of a drum?</p>
-    <p class="b">These two drums have different shapes. Played with every [mode](glossary.qmd#mode) equally loud, which no real strike does, they sound identical.</p>
+    <p class="b">These two drums have different shapes. Played with every <a href="glossary.html#mode">mode</a> equally loud, which no real strike does, they sound identical.</p>
     <div class="controls"><button data-g="gA">Drum A</button><button data-g="gB">Drum B</button></div>
     <p class="go">Answered on <a href="shape.html">page 9</a></p>
   </div>
@@ -68,8 +68,8 @@ And one question beyond the mathematics: did the instruments people built shape 
 
 ## Two ideas answer all six
 
-1. **An instrument's frequencies come from the [spectrum](glossary.qmd#spectrum) of an [operator].** The operator is a rule that takes a shape of the instrument, a bent string or a dented drumhead, and gives back the force pulling it back toward rest (per unit mass, and with a minus sign, so that the motion obeys $u_{tt} = -Au$). The shapes it only rescales are the instrument's [modes](glossary.qmd#mode); the rescaling factors are its [eigenvalues](glossary.qmd#eigenvalue), and the list of them is the spectrum. Each frequency is proportional to the square root of an eigenvalue. The simplest case is a loop of string, where the operator is minus the second derivative, $-d^2/d\theta^2$, and writing a shape in its modes is the [Fourier series](glossary.qmd#fourier-series).
-2. **A clear [pitch](glossary.qmd#pitch) means the frequencies you hear sit at, or very near, whole-number multiples of one frequency.** Then the sound repeats, and the repetition rate is the pitch. Since the frequencies come from the spectrum, whether they line up is decided by the operator and the instrument's shape. How you play decides how loud each frequency is, with one refinement: a steady bow or breath can lock the motion into exact repetition, close to one of the operator's frequencies, even when the operator's overtones are off the grid.
+1. **An instrument's frequencies come from the [spectrum](glossary.qmd#spectrum) of an [operator].** The operator is a rule that takes a shape of the instrument, a bent string or a dented drumhead, and gives back the force pulling it back toward rest (per unit mass, and with a minus sign, so that the motion obeys $u_{tt} = -Au$, where $u$ is the shape, $u_{tt}$ its [acceleration](glossary.qmd#partial-derivative) and $A$ the operator). The shapes it only rescales are the instrument's [modes](glossary.qmd#mode); the rescaling factors are its [eigenvalues](glossary.qmd#eigenvalue), and the list of them is the spectrum. Each frequency is proportional to the square root of an eigenvalue. The simplest case is a loop of string, where the operator is $-c^2\,d^2/d\theta^2$, minus the second derivative times a constant $c^2$, and writing a shape in its modes is the [Fourier series](glossary.qmd#fourier-series).
+2. **A clear [pitch](glossary.qmd#pitch) means the frequencies you hear sit at, or very near, whole-number multiples of one frequency, a frequency in the range we hear as pitch, from a few dozen to a few thousand hertz.** Then the sound repeats, or nearly repeats, and the repetition rate is the pitch. Since the frequencies come from the spectrum, whether they line up is decided by the operator and the instrument's shape. How you play decides how loud each frequency is, with one refinement: a steady bow or breath can lock the motion into exact repetition, close to one of the operator's frequencies, even when the operator's overtones are off the grid.
 
 [operator]: glossary.qmd#operator
 
@@ -86,19 +86,21 @@ Here for one puzzle? Each one above links to the page that answers it, and each 
 
 ## All pages
 
+In the table, $\partial_x$ means a derivative in $x$, so $-c^2\partial_x^2$ is the string's $-c^2\,d^2/dx^2$; $\kappa^2 = EI/\rho S$ is a bar's stiffness constant ([page 6](kalimba.qmd)); $\Delta$ is the [Laplacian](glossary.qmd#laplacian); [circulant](glossary.qmd#circulant) matrices and [Bessel](glossary.qmd#bessel) zeros are explained on pages 2 and 8.
+
 | Page | New idea | Operator | Frequencies |
 |:--|:--|:--|:--|
 | [0 · What is a note?](note.qmd) | a note is a sound that repeats; its partials are whole-number multiples | | $f, 2f, 3f, \dots$ |
 | [1 · One mass on a spring](oscillator.qmd) | one restoring force, one frequency | the number $k/m$ | $\sqrt{k/m}/2\pi$ |
 | [2 · Beads on a ring](ring.qmd) | many masses: eigenvectors of a matrix | circulant matrix | $\propto \sin(\pi k/N)$ |
-| [3 · The circle](circle.qmd) | the smallest operator spectrum; Fourier series | $-d^2/d\theta^2$ on a loop | $\propto n$, exactly |
+| [3 · The circle](circle.qmd) | the smallest operator spectrum; Fourier series | $-c^2\,d^2/d\theta^2$ on a loop | $\propto n$, exactly |
 | [4 · A string with ends](violin.qmd) | boundary conditions are part of the operator | $-c^2\,d^2/dx^2$, ends tied | $\propto n$ |
 | [5 · An air column](clarinet.qmd) | closing one end halves the lowest frequency and keeps only its odd multiples | the same, on pressure | $\propto 2n - 1$ |
-| [6 · Change the order](kalimba.qmd) | bending: four derivatives spread the overtones; the clamp moves them off the whole numbers | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
+| [6 · Change the order](kalimba.qmd) | bending: four derivatives spread the overtones; the clamped and free ends move them off the whole numbers | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
 | [6b · The harmonica](harmonica.qmd) | the excitation, not the operator, can set the overtones | the same as 6 | heard as $\propto n$ |
 | [7 · The piano](piano.qmd) | operators add; the pedals act on damping and forcing, not on the spectrum | $-c^2\partial_x^2 + \kappa^2\partial_x^4$ | $n\sqrt{1 + Bn^2}$ |
 | [8 · The drum](drum.qmd) | two dimensions; no clear pitch | $-c^2\Delta$ on a disk | Bessel zeros |
-| [9 · What the spectrum knows](shape.qmd) | the spectrum hears area and perimeter, but not always the shape | $-\Delta$ on any region | Weyl's law |
+| [9 · What the spectrum knows](shape.qmd) | the spectrum hears area and perimeter, but not always the shape | $-c^2\Delta$ on any region | Weyl's law |
 | [10 · Did instruments shape our scales?](epilogue.qmd) | the spectrum decides which intervals sound smooth | the bar's, with free ends | $1 : 2.76 : 5.40$ |
 
 : Every page, its new idea, its operator and its frequencies. {.striped}
@@ -107,7 +109,7 @@ Here for one puzzle? Each one above links to the page that answers it, and each 
 
 <details><summary>Instruments that are the same up to constants</summary>
 
-Instruments in one family share one operator, so they are the same mathematical object with different constants. The last column says what still differs inside a family; for air columns that includes the boundary condition, and for drums the air around the head, which changes the operator a little.
+Instruments in one family share one rule for the restoring force, so they are close to the same mathematical object with different constants. The last column says what still differs inside a family: for air columns the ends, which are part of the operator, and for drums the air around the head, which matters for timpani.
 
 | Family | Operator and boundary | Demos | What varies inside the family |
 |:--|:--|:--|:--|

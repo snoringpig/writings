@@ -18,7 +18,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.puzzle}
-**The puzzle.** Imagine beads threaded on a loop of string pulled tight, an idealized ring with nothing touching it but the string's own tension, and pluck one of them. The motion looks like a tangle. Yet it is made of a handful of perfectly regular motions, all happening at once. What are they, and how do you find them?
+**The puzzle.** Imagine beads threaded on a tight string whose two ends are joined into a ring, so that every bead has a neighbor on each side and none is special, and pluck one of them. The motion looks like a tangle. Yet it is made of a handful of perfectly regular motions, all happening at once. What are they, and how do you find them?
 :::
 
 The demo starts with one bead plucked; watch the tangle. Then press the mode buttons one at a time. In each mode, every bead swings at the same frequency and the overall shape never changes, and the tangle is all of the modes at once. In the 1730s Daniel Bernoulli studied systems like this, weights strung along a flexible thread and a hanging chain, and came to believe that every vibration is built from such simple motions; in 1753 he put this forward as a general principle.
@@ -39,7 +39,7 @@ The demo starts with one bead plucked; watch the tangle. Then press the mode but
 
 ## Untangling the motion
 
-**The force on one bead.** Let $u_j$ be the height of bead $j$, with beads spaced $h$ apart along a string of tension $T$, each of mass $m$. Because the loop closes, bead $N$ is next to bead 1, so indices are counted around the ring. For small displacements, Newton's law for bead $j$ is
+**The force on one bead.** Let $u_j$ be the height of bead $j$, with beads spaced $h$ apart along a string of tension $T$, each of mass $m$. Because the loop closes, bead $N$ is next to bead 1, so indices are counted around the ring. (This is an idealization: a real loop of string would need something to hold it out against its own tension. The model keeps only the sideways pulls between neighbors, exactly as for a straight string whose two ends are joined.) For small displacements, Newton's law for bead $j$ is
 $$
 m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
 $$
@@ -83,13 +83,13 @@ Here $Ku$ is the column whose $j$-th entry is row $j$ of $K$ times $u$: multiply
 $$
 K = \begin{pmatrix} 2 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 2 \end{pmatrix}.
 $$
-Row $j$ of this $K$ gives $(Kv)_j = 3v_j - (v_1 + v_2 + v_3)$. The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$, so it is an eigenvector with eigenvalue 0: every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts. Any column whose entries add up to zero gives $(Kv)_j = 3v_j$, so $Kv = 3v$. Every such column is a combination $a(1, -1, 0) + b(0, 1, -1)$, so these eigenvectors fill a whole plane, spanned by two independent shapes. The eigenvalues are $0, 3, 3$, with 3 counted twice: it has [multiplicity](glossary.qmd#multiplicity) 2.
+Row $j$ of this $K$ gives $(Kv)_j = 3v_j - (v_1 + v_2 + v_3)$. The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$, so it is an eigenvector with eigenvalue 0: every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts. Any column whose entries add up to zero gives $(Kv)_j = 3v_j$, so $Kv = 3v$. Every such column is a combination $a(1, -1, 0) + b(0, 1, -1)$, so these eigenvectors fill a whole plane: every one is built from those two shapes, and neither of the two is a multiple of the other. The eigenvalues are $0, 3, 3$, with 3 counted twice: it has [multiplicity](glossary.qmd#multiplicity) 2.
 
 **Any number of beads.** Try the column $v_j = \cos(2\pi jk/N)$, a wave with $k$ crests around the ring. The identity $\cos(a + b) + \cos(a - b) = 2\cos a\cos b$, with $a = 2\pi jk/N$ and $b = 2\pi k/N$, gives $v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j$, so
 $$
 (Kv)_j = 2v_j - v_{j+1} - v_{j-1} = \big(2 - 2\cos(2\pi k/N)\big)\,v_j = 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j ,
 $$
-using $1 - \cos 2x = 2\sin^2 x$. The same holds for $v_j = \sin(2\pi jk/N)$. These are the shapes the mode buttons play, and the eigenvalues are $4\sin^2(\pi k/N)$. At the beads, a wave with $N - k$ crests looks exactly like one with $k$ crests (the cosine is the same and the sine changes sign), so the different eigenvalues come from $k = 0, 1, \dots, \lfloor N/2\rfloor$, and each one from $k = 1$ up to just below $N/2$ has two eigenvectors, a cosine and a sine. Writing any motion as a sum of these waves splits it into separate masses on springs, one per wave; that splitting is the [discrete Fourier transform](glossary.qmd#dft).
+using $1 - \cos 2x = 2\sin^2 x$. The same holds for $v_j = \sin(2\pi jk/N)$. These are the shapes the mode buttons play, and the eigenvalues are $4\sin^2(\pi k/N)$. At the beads, a wave with $N - k$ crests looks exactly like one with $k$ crests (the cosine is the same and the sine changes sign), so the different eigenvalues come from $k = 0, 1, \dots$ up to $N/2$, rounded down, and each one from $k = 1$ up to just below $N/2$ has two eigenvectors, a cosine and a sine. (At $k = 0$, and at $k = N/2$ when $N$ is even, the sine is zero at every bead, so only the cosine is left.) Writing any motion as a sum of these waves splits it into separate masses on springs, one per wave; that splitting is the [discrete Fourier transform](glossary.qmd#dft).
 
 ::: {.derive}
 <details><summary><span class="label">Complex form</span>The same waves as $e^{2\pi i jk/N}$ <span class="needs">uses complex numbers</span></summary>

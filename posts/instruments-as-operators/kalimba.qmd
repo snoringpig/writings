@@ -95,7 +95,7 @@ This is the [Euler–Bernoulli beam](glossary.qmd#beam) equation. The operator i
 </svg>
 ```
 
-A fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$ (for a gentle bend, a fiber's change in length is its distance from the neutral axis times how much the bar turns), and by Hooke's law it carries the stress (force per area) $\sigma = -E\,y\,u_{xx}$. Summed over the cross-section these forces cancel, which is what places the neutral axis through the middle (the centroid) of the cross-section, but their torques do not. They add up to the *bending moment*
+A fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$ (for a gentle bend, the fraction by which a fiber stretches is its distance from the neutral axis times how fast the bar turns per unit length, which is the curvature $u_{xx}$), and by Hooke's law it carries the stress (force per area) $\sigma = -E\,y\,u_{xx}$. Summed over the cross-section these forces cancel, which is what places the neutral axis through the middle (the centroid) of the cross-section, but their torques do not. They add up to the *bending moment*
 $$
 M = -\int_S y\,\sigma\,dA = E\,u_{xx}\int_S y^2\,dA = EI\,u_{xx}, \qquad I = \int_S y^2\,dA ,
 $$
@@ -135,10 +135,10 @@ The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, close to $(
 $$
 1 : 6.27 : 17.55 : 34.39 : \cdots, \qquad \text{growing like } (2n-1)^2 .
 $$
-For a string, frequency is proportional to the wavenumber; for a bar, to its square. That change of order spreads the overtones apart, roughly like $n^2$ instead of $n$. It does not by itself move them off the whole numbers: with *pinned* ends, held in place but free to pivot, the same operator gives frequencies in the ratios $1 : 4 : 9 : 16$, all whole numbers. What moves them off is the clamped base and the free tip, which shift the low roots: the first is 1.8751 instead of $\pi/2 \approx 1.571$, and if every root were exactly $(n - \tfrac12)\pi$ the ratios would be the whole numbers $1 : 9 : 25$.
+For a string, frequency is proportional to the wavenumber; for a bar, to its square. That change of order spreads the overtones apart, roughly like $n^2$ instead of $n$. It does not by itself move them off the whole numbers: with *pinned* ends, held in place but free to pivot, so $u = u_{xx} = 0$ at both ends, the shapes $\sin(n\pi x/L)$ satisfy the conditions, four derivatives multiply them by $(n\pi/L)^4$, and the frequencies are in the ratios $1 : 4 : 9 : 16$, all whole numbers. What moves them off is the clamped base and the free tip, which shift the low roots: the first is 1.8751 instead of $\pi/2 \approx 1.571$, and if every root were exactly $(n - \tfrac12)\pi$ the ratios would be the whole numbers $1 : 9 : 25$.
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The four boundary conditions give cos βL cosh βL = −1 <span class="needs">uses a 2×2 determinant</span></summary>
+<details><summary><span class="label">Step-by-step derivation</span>The four boundary conditions give cos βL cosh βL = −1 <span class="needs">uses a 2×2 determinant and integration by parts</span></summary>
 
 The solutions of $X'''' = \beta^4X$ are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh$ and $\sinh$ are the [hyperbolic functions](https://en.wikipedia.org/wiki/Hyperbolic_functions), whose fourth derivatives also return them times $\beta^4$.
 
@@ -172,7 +172,19 @@ The operator $d^4/dx^4$ with these four conditions is symmetric, by integrating 
 
 **Tuning.** Since $\beta_1 = 1.8751/L$ and $\omega = \kappa\beta^2$, the lowest frequency is $f_1 \propto \kappa/L^2$ ($\propto$ means "proportional to"), so halving a tine's free length raises its pitch by a factor of 4, two octaves. Kalimba makers tune a tine by sliding it over the bridge to change its free length.
 
-**Why it still sounds pitched.** Plucked at the tip, a tine starts in the bent shape that a push at the tip produces, and that shape contains each mode in proportion to one over the square of its frequency: the second mode starts at only about $1/6.27^2 \approx 2.5\%$ of the first mode's size. So the first overtone is weak, it sits more than two and a half octaves above the fundamental, and it dies within a fraction of a second, so what remains is close to a single frequency. A sound made of essentially one frequency repeats, so it has a clear pitch. Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, dying away quickly after the attack. A real tine is not perfectly clamped: Chapman models it as clamped at one end, resting on the bridge partway along, and free at the tip, and finds that the overtone ratios track the lengths on either side of the bridge.
+**Why it still sounds pitched.** Plucked at the tip, a tine starts in the bent shape that a steady push at the tip produces. In that shape the second mode moves only about $1/6.27^2 \approx 2.5\%$ as far as the first (fold below). But what you hear is driven by the force the tine puts on the bridge, as on the [string page](violin.qmd), and for the same displacement a higher mode pushes harder. At the clamp, the second mode's bending moment is about 16% of the first's and its shear force about 55%. So the overtone is clearly there at the start: it is the brief metallic clink of the attack. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on. What remains is close to a single frequency, and a sound made of essentially one frequency repeats, so it has a clear pitch.
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>How strongly a pluck at the tip excites each mode <span class="needs">uses integration</span></summary>
+
+1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still in a bent shape $u_0$, so the bar's restoring force balances the push.
+2. *Split it into modes.* Write $u_0 = \sum_n c_n X_n$, with each mode scaled so that $\int_0^L X_n^2\,dx = L$. Multiply the balance of forces by $X_n$ and integrate along the tine, as on the [piano page](piano.qmd). The operator turns $X_n$ into $\omega_n^2X_n$, and the perpendicular modes drop out, which leaves $\rho S L\,\omega_n^2\,c_n = F\,X_n(L)$. This is page 1's spring again: mode $n$ is a spring of stiffness proportional to $\omega_n^2$, pushed with a force proportional to its value at the tip, and it gives way by force over stiffness.
+3. *Tip values.* Scaled this way, every mode of a clamped–free bar has the same tip value up to sign, $|X_n(L)| = 2$; this can be checked from the mode formula in the fold above. So $c_n \propto 1/\omega_n^2$, and $c_2/c_1 = 1/6.27^2 \approx 2.5\%$.
+4. *Forces.* The bending moment at the clamp is $EI\,u_{xx}$ there, and the shear force $EI\,u_{xxx}$ there (up to sign). For mode $n$ these grow like $\beta_n^2$ and $\beta_n^3$, times numbers from the mode formula. Multiplying by $c_n \propto 1/\beta_n^4$, the second mode's moment at the clamp is $(\beta_1/\beta_2)^2 \approx 16\%$ of the first's, and its shear force about 55%.
+
+</details>
+:::
+ Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, dying away quickly after the attack. A real tine is not perfectly clamped: Chapman models it as clamped at one end, resting on the bridge partway along, and free at the tip, and finds that the measured overtone ratios depend on how the tine's length is divided by the bridge, which is one reason they spread.
 
 ## What we found
 

@@ -18,7 +18,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.puzzle}
-**The puzzle.** Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with the textbook tuning. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
+**The puzzle.** Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](glossary.qmd#equal-temperament), the textbook tuning. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
 :::
 
 Listen to an octave tuned to exactly 2 : 1, then to a stretched one. The slow wobble in loudness is called a [beat](glossary.qmd#beats).
@@ -104,7 +104,7 @@ $$
 with $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$. Here $\partial_x^2$ means two derivatives in $x$, the same as the subscript $xx$, and $\mathcal{L}$ is this page's operator, playing the role $A$ played before. Treat the ends as *pinned*: held in place but free to pivot, so $u = 0$ and, since a pivot exerts no bending moment and the moment is $EI\,u_{xx}$, also $u_{xx} = 0$. Real piano strings are held a little more firmly than that, which shifts the numbers slightly but not the picture.
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a short piece of wire to the operator and its spectrum</summary>
+<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a short piece of wire to the operator and its spectrum <span class="needs">uses partial derivatives</span></summary>
 
 **1. One small piece.** Follow the stretch of wire between $x$ and $x+dx$. Its mass is $\mu\,dx$ and its vertical acceleration is $u_{tt}$, so Newton's law says $\mu\,dx\,u_{tt}$ equals the net vertical force on it. Two forces act: the pull of tension, and the wire's resistance to bending.
 
@@ -141,7 +141,7 @@ $$
 $$
 Taking square roots gives $f_n = n f_0\sqrt{1 + Bn^2}$, with $f_0 = c/2L$ and $B = \pi^2EI/TL^2$.
 
-**7. How big is $B$?** For a middle C wire, roughly $d = 1$ mm and $L = 0.6$ m, with steel's $E = 2\times10^{11}$ Pa and density $7850$ kg/m³; a tension of about $610$ N then gives middle C. So $I \approx 4.9\times10^{-14}$ m$^4$ and $B \approx 4.4\times10^{-4}$. The 10th partial then sits about $600\log_2(1 + 100B) \approx 37$ cents sharp of ten times the fundamental. These numbers are rough; real strings vary.
+**7. How big is $B$?** For a middle C wire, roughly $d = 1$ mm and $L = 0.6$ m, with steel's $E = 2\times10^{11}$ Pa and density $7850$ kg/m³; a tension of about $610$ N then gives middle C. So $I \approx 4.9\times10^{-14}$ m$^4$ and $B \approx 4.4\times10^{-4}$. The 10th partial, at $10f_0\sqrt{1 + 100B}$, then sits $1200\log_2\sqrt{(1 + 100B)/(1 + B)} \approx 37$ cents sharp of ten times the fundamental $f_0\sqrt{1 + B}$. These numbers are rough; real strings vary.
 
 **8. What was assumed.** Small slopes; tension unchanged as the wire flexes; the wire's rotational inertia neglected (Rayleigh's correction adds a small term); a uniform wire.
 
@@ -154,7 +154,7 @@ f_n = n f_0\sqrt{1 + Bn^2}, \qquad B = \frac{\pi^2 EI}{T L^2},
 $$
 where $f_0 = c/2L$ is the lowest frequency the same string would have without stiffness. The actual fundamental is $f_1 = f_0\sqrt{1 + B}$.
 
-The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials](glossary.qmd#partial) run noticeably sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic). For a middle C wire $B$ is about $4\times10^{-4}$, and the 10th partial sits about 35 [cents](glossary.qmd#cents) sharp of ten times the fundamental; the fold above has the arithmetic. Since $I$ grows like the fourth power of the wire's diameter and $B$ falls like $1/L^2$, short treble strings, thick for their length, are the stiffest.
+The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials](glossary.qmd#partial) run noticeably sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic). For a middle C wire $B$ is about $4.4\times10^{-4}$, and the 10th partial sits about 37 [cents](glossary.qmd#cents) sharp of ten times the fundamental; the fold above has the arithmetic. Since $I$ grows like the fourth power of the wire's diameter and $B$ falls like $1/L^2$, short treble strings, thick for their length, are the stiffest.
 
 ```{=html}
 <div class="ins">
@@ -169,7 +169,7 @@ The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials]
 
 ## Why exact octaves beat
 
-A tuner sets an octave by listening for [beats](glossary.qmd#beats), a slow wobble in loudness, between the lower note's second partial and the upper note's fundamental. Beats happen when two nearly equal frequencies add, at a rate equal to their difference. The lower note's fundamental is $f_0\sqrt{1+B}$ and its second partial is $2f_0\sqrt{1+4B}$, more than twice the fundamental by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental therefore sits a little below that second partial, and the two beat. To silence the beats the tuner raises the upper note until its fundamental matches the lower note's second partial, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise. Repeated across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), in which every semitone is exactly the ratio $2^{1/12}$, the top of a piano is tuned sharp and the bottom flat.
+A tuner sets an octave by listening for [beats](glossary.qmd#beats), a slow wobble in loudness, between the lower note's second partial and the upper note's fundamental. Beats happen when two nearly equal frequencies add, at a rate equal to their difference. The lower note's fundamental is $f_0\sqrt{1+B}$ and its second partial is $2f_0\sqrt{1+4B}$. Their ratio is $2\sqrt{(1+4B)/(1+B)} \approx 2\,(1 + 2B)(1 - B/2) \approx 2\,(1 + 3B/2)$, using $\sqrt{1+x} \approx 1 + x/2$ and $1/\sqrt{1+x} \approx 1 - x/2$ for small $x$: the second partial is more than twice the fundamental by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental therefore sits a little below that second partial, and the two beat. To silence the beats the tuner raises the upper note until its fundamental matches the lower note's second partial, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise. Repeated across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), in which every semitone is exactly the ratio $2^{1/12}$, the top of a piano is tuned sharp and the bottom flat.
 
 That answers the opening puzzle: on a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
 
@@ -184,9 +184,9 @@ $$
 
 Each term has one job. The operator, $T\,u_{xx} - EI\,u_{xxxx}$, fixes the frequencies and the mode shapes. The forcing $f$ is the hammer, and it fixes how much of each mode is excited. The damping $b$ is the felt dampers plus small internal losses, and it fixes how fast each mode dies. Every control a pianist touches acts on $f$ or on $b$. Only the tuner's wrench, which changes $T$, touches the operator.
 
-Both effects are read off the mode shapes $X_n(x) = \sin(n\pi x/L)$. A hammer blow at $x_h$ gives mode $n$ a weight proportional to $X_n(x_h)$, the mode's own height at the hammer. The drum on the next page uses the same rule. A damper felt resting on a short stretch $D$ of the string makes mode $n$'s swing shrink like $e^{-\gamma_n t}$, and for weak damping (to [first order](glossary.qmd#first-order) in $b$, that is, ignoring terms in $b^2$) the decay rate is
+Both effects are read off the mode shapes $X_n(x) = \sin(n\pi x/L)$. A hammer blow at $x_h$ gives mode $n$ a weight proportional to $X_n(x_h)$, the mode's own height at the hammer. The drum on the next page uses the same rule. A damper felt resting on a short stretch $W$ of the string makes mode $n$'s swing shrink like $e^{-\gamma_n t}$, and for weak damping (to [first order](glossary.qmd#first-order) in $b$, that is, ignoring terms in $b^2$) the decay rate is
 $$
-\gamma_n = \frac{\int_D b\,X_n^2\,dx}{2\mu\int_0^L X_n^2\,dx}.
+\gamma_n = \frac{\int_W b\,X_n^2\,dx}{2\mu\int_0^L X_n^2\,dx}.
 $$
 A mode is damped in proportion to how much it moves under the felt, and its frequency shifts only by an amount proportional to $\gamma_n^2$, negligible for weak damping. A mode with a node under the felt barely notices the damper: in the view below, slide the damper to $L/8$, where the hammer also sits, and the 8th mode, which has a still point there, is not excited and barely damped.
 
@@ -195,7 +195,7 @@ A mode is damped in proportion to how much it moves under the felt, and its freq
 
 **1. Expand in modes.** Write $u(x,t) = \sum_n q_n(t)\,X_n(x)$, with $\mathcal{L}X_n = \omega_n^2X_n$ and the pinned conditions.
 
-**2. Project.** Substitute into the full equation, multiply by $X_m$ and integrate along the string. The operator is [self-adjoint](glossary.qmd#self-adjoint) with these boundary conditions, integrating by parts as on the [circle page](circle.qmd), so the $X_n$ are orthogonal: $\int_0^L X_mX_n\,dx = 0$ for $m \ne n$. The acceleration and operator terms collapse to one term each:
+**2. Project.** Substitute into the full equation, multiply by $X_m$ and integrate along the string. The operator is symmetric with these boundary conditions (in fact [self-adjoint](glossary.qmd#self-adjoint)), by integrating by parts as on the [circle page](circle.qmd), so the $X_n$ are orthogonal: $\int_0^L X_mX_n\,dx = 0$ for $m \ne n$. The acceleration and operator terms collapse to one term each:
 $$
 \mu N_m\,(\ddot q_m + \omega_m^2 q_m) + \sum_n D_{mn}\,\dot q_n = F_m(t),
 $$

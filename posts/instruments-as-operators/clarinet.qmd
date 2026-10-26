@@ -21,7 +21,7 @@ resources: [core.js, ins.css]
 **The puzzle.** A clarinet and a flute are about the same length. Yet the clarinet's lowest note is almost an [octave](glossary.qmd#octave) below the flute's. And when the players [overblow](glossary.qmd#overblow), making the tube jump to its next mode (a flutist by blowing faster, a clarinetist by pressing the [register key](glossary.qmd#overblow)), the flute jumps up an octave while the clarinet jumps an [octave and a fifth](glossary.qmd#octave). The same equation governs the air in both tubes. What is different?
 :::
 
-Play a fingering on the clarinet, then switch the same tube to a flute, open at both ends, and play it again. Then hold the register key, which makes the tube jump to its next mode, on each.
+Play a fingering on the clarinet, then switch the same tube to a flute, open at both ends, and play it again. Then hold the register key, which makes the tube jump to its next mode, on each; on the flute it stands in for blowing faster.
 
 ```{=html}
 <style>
@@ -42,7 +42,7 @@ Play a fingering on the clarinet, then switch the same tube to a flute, open at 
   <div class="controls" style="padding:0.5rem 0.25rem 0" id="fing" role="group" aria-label="Fingerings"></div>
   <div class="readout" id="cRead" style="padding:0.5rem 0.25rem 0"></div>
   <svg class="spec" id="cSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the sound"></svg>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Tap holes or pick a fingering, then hold the button (or the space bar; keys 1–7 change fingering). The shading inside the bore is the pressure of the sounding mode: dark at a pressure <a href="glossary.html#node">antinode</a>, where the pressure swings most, pale at a node, where it stays at room pressure. The first open hole acts as the end of the tube.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Tap holes or pick a fingering, then hold the button (or the space bar; keys 1–7 change fingering). The shading inside the bore is the pressure of the sounding mode: dark at a pressure <a href="glossary.html#node">antinode</a>, where the pressure swings most, pale at a node, where it stays at room pressure. The first open hole acts, approximately, as the end of the tube; the effective end lies a little beyond it.</p>
 </section>
 </div>
 ```
@@ -60,7 +60,7 @@ $$
 where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-modulus), its resistance to being squeezed (this $K$ has nothing to do with the bead matrix of page 2). The constant $c$ is the speed of sound, about 343 m/s at 20 °C. So the operator is again $-c^2\,d^2/dx^2$, now acting on pressure shapes along the tube.
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>Newton's law for a slab of air</summary>
+<details><summary><span class="label">Step-by-step derivation</span>Newton's law for a slab of air <span class="needs">uses partial derivatives</span></summary>
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 130" role="img" aria-label="A slab of air in a tube, pushed by pressure on both faces">
@@ -69,7 +69,7 @@ where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-
   <path class="pos" d="M 120 65 L 168 65"/><path class="fillpos" d="M 168 59 L 180 65 L 168 71 Z"/>
   <path class="neg" d="M 300 65 L 252 65"/><path class="fillneg" d="M 252 59 L 240 65 L 252 71 Z"/>
   <text x="96" y="58">p(x)</text><text x="300" y="58">p(x+dx)</text>
-  <text x="180" y="118">slab, mass ρA dx</text>
+  <text x="180" y="118">slab, mass ρS dx</text>
 </svg>
 ```
 
@@ -83,7 +83,7 @@ What was assumed: the tube is narrow compared with the sound's wavelength, so th
 </details>
 :::
 
-**Boundary conditions.** At an open end the air in the tube meets the room, so the pressure there is room pressure: $p = 0$. This is approximate: the air just outside moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end. At the clarinet's reed the opening is nearly shut, so the air there cannot move back and forth. Air that never moves has no acceleration, so the net push on it is zero; that push is set by how fast the pressure changes along the tube, $p_x$, so $p_x = 0$ there (step 2 of the derivation, with $\xi$ the air's displacement along the tube). The first of these is the string's Dirichlet condition. The second, a condition on the slope, is called a *Neumann condition*.
+**Boundary conditions.** At an open end the air in the tube meets the room, so the pressure there is room pressure: $p = 0$. This is approximate: the air just outside moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end, an amount called the *end correction*. At the clarinet's reed the opening is nearly shut, so the air there cannot move back and forth. Air that never moves has no acceleration, so the net push on it is zero; that push is set by how fast the pressure changes along the tube, $p_x$, so $p_x = 0$ there (step 2 of the derivation, with $\xi$ the air's displacement along the tube). The first of these is the string's Dirichlet condition. The second, a condition on the slope, is called a *Neumann condition*.
 
 **Spectrum.** A mode is a pressure shape $X(x)$ with $-X'' = k^2 X$, so $X = a\cos kx + b\sin kx$, and its frequency is $f = ck/2\pi$. For the clarinet, $X'(0) = bk = 0$ at the reed forces $b = 0$, leaving $X = \cos kx$, and $X(L) = 0$ at the open end needs $\cos kL = 0$, so $kL = (2n - 1)\pi/2$ and $f_n = (2n-1)c/4L$. For the flute, open at both ends, the conditions are the string's, and give $\sin(n\pi x/L)$. So
 
@@ -95,10 +95,10 @@ What was assumed: the tube is narrow compared with the sound's wavelength, so th
 Two consequences can be heard in the demo.
 
 - **An octave lower, almost.** An octave is a frequency ratio of 2. The same ideal tube sounds $c/4L$ closed at one end but $c/2L$ open at both, exactly an octave lower. Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and the end corrections differ, so the real interval comes out a bit less than an octave.
-- **A twelfth, not an octave.** The clarinet's register key opens a small hole near the top of the tube. For the lowest notes it sits close to a point where the $3f_1$ mode has almost no pressure variation. The hole spoils the fundamental, which does have pressure variation there, and barely disturbs the $3f_1$ mode, so the tube jumps to it. That is a ratio of 3, called a twelfth: an octave and a fifth, where a fifth is the ratio 3/2. A flutist overblows without a key, by blowing faster, and the flute's next mode is $2f_1$, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
+- **A twelfth, not an octave.** The clarinet's register key opens a small hole near the top of the tube. For a note in the middle of the low register, such as written B♭3, it sits about a third of the way down the sounding tube, right where that note's $3f_1$ mode has no pressure variation; for the other notes its place is a compromise (Wolfe). An open hole lets air in and out, pulling the pressure there toward room pressure, which spoils the fundamental, a mode that needs pressure variation at that point. And because the hole is small, its air is too heavy to move back and forth quickly, so at the higher frequency of the $3f_1$ mode it acts almost as a plug. The tube jumps to the $3f_1$ mode. That is a ratio of 3, called a twelfth: an octave and a fifth, where a fifth is the ratio 3/2. A flutist overblows without a key, by blowing faster, and the flute's next mode is $2f_1$, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
 
 ::: {.derive}
-<details><summary><span class="label">Proof</span>Why only odd harmonics: the closed tube is a quarter of a loop</summary>
+<details><summary><span class="label">Proof</span>Why only odd harmonics: the closed tube is a quarter of a loop <span class="needs">uses the circle's eigenfunctions (page 3)</span></summary>
 
 Use the reflections from the [string page](violin.qmd). Take a pressure shape $p$ on $[0, L]$ with $p_x(0) = 0$ and $p(L) = 0$.
 
@@ -111,7 +111,7 @@ So the clarinet's modes are the odd harmonics of a loop four tube-lengths long, 
 </details>
 :::
 
-**The reed.** The reed is a valve. When the pressure in the mouthpiece drops, it closes, and when the pressure rises, it opens, so the air column, through the pressure it creates, drives the reed that feeds it. In normal playing this settles into a [periodic](glossary.qmd#periodic) oscillation, like the bowed string, at a playing frequency close to the tube's lowest mode. A periodic sound has partials at every whole-number multiple of the playing frequency, so the distinction matters: the tube's *modes* are odd multiples only, but the *sound* contains even harmonics too. In the low register, the lowest notes of the instrument, the even harmonics are weak because the tube has no resonance to support them, but they are not absent. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
+**The reed.** The reed is a valve. When the pressure in the mouthpiece drops, it closes, and when the pressure rises, it opens, so the air column, through the pressure it creates, drives the reed that feeds it. In normal playing this settles into a [periodic](glossary.qmd#periodic) oscillation, like the bowed string, at a playing frequency close to the tube's lowest mode. A periodic sound can have partials only at whole-number multiples of the playing frequency, but it may have them at all of them, so the distinction matters: the tube's *modes* are odd multiples only, but the clarinet's *sound* contains even harmonics too. In the low register, the lowest notes of the instrument, the even harmonics are weak because the tube has no resonance to support them, but they are not absent. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
 
 ## What we found
 

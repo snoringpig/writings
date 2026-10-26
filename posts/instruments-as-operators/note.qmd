@@ -56,7 +56,7 @@ The $n = 0$ term is a constant, the average pressure, usually zero. The possible
 
 ## Why whole numbers matter
 
-Turn it around. If an object vibrates at several frequencies at once, its sound repeats only when those frequencies are whole-number multiples of one common frequency. For two tones, that means their frequency ratio is a fraction $a/b$ of whole numbers, in lowest terms; the pattern then repeats every $b$ cycles of the lower tone. Only a small $b$ gives a repetition fast enough to hear as one pitch. Try it:
+Turn it around. If an object vibrates at several frequencies at once, its sound repeats only when those frequencies are whole-number multiples of one common frequency. For two tones, that means their frequency ratio is a fraction $p/q$ of whole numbers, in lowest terms; the pattern then repeats every $q$ cycles of the lower tone. Only a small $q$ gives a repetition fast enough to hear as one pitch. Try it:
 
 ```{=html}
 <div class="ins">
@@ -75,11 +75,11 @@ Turn it around. If an object vibrates at several frequencies at once, its sound 
 
 Let $s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)$ with $0 < f_1 < f_2$.
 
-*If the ratio is rational, $s$ is periodic.* Write $f_2/f_1 = a/b$ in lowest terms and put $P = b/f_1$. Then $f_1P = b$ and $f_2P = a$ are whole numbers, so both cosines return to their starting values after time $P$, and $s(t+P) = s(t)$.
+*If the ratio is rational, $s$ is periodic.* Write $f_2/f_1 = p/q$ in lowest terms and put $P = q/f_1$. Then $f_1P = q$ and $f_2P = p$ are whole numbers, so both cosines return to their starting values after time $P$, and $s(t+P) = s(t)$.
 
-*If $s$ is periodic, the ratio is rational.* Suppose $s(t+P) = s(t)$ for all $t$, with $P > 0$. At $t = 0$ this gives $s(P) = s(0) = 2$. A sum of two cosines equals 2 only when both cosines equal 1, so $\cos(2\pi f_1P) = \cos(2\pi f_2P) = 1$, which means $f_1P$ and $f_2P$ are whole numbers. So $f_2/f_1 = (f_2P)/(f_1P)$ is a ratio of whole numbers. Since $f_2/f_1 = a/b$ in lowest terms, the whole number $f_1P$ must be a multiple of $b$, so every period is a multiple of $b/f_1$, and $b/f_1$ is the shortest one.
+*If $s$ is periodic, the ratio is rational.* Suppose $s(t+P) = s(t)$ for all $t$, with $P > 0$. At $t = 0$ this gives $s(P) = s(0) = 2$. A sum of two cosines equals 2 only when both cosines equal 1, so $\cos(2\pi f_1P) = \cos(2\pi f_2P) = 1$, which means $f_1P$ and $f_2P$ are whole numbers. So $f_2/f_1 = (f_2P)/(f_1P)$ is a ratio of whole numbers. Since $f_2/f_1 = p/q$, we have $q\,(f_2P) = p\,(f_1P)$, so $q$ divides $p\,(f_1P)$; as $p$ and $q$ share no factor, $q$ divides the whole number $f_1P$. So every period is a multiple of $q/f_1$, and $q/f_1$ is the shortest one.
 
-The shortest period $b/f_1$ grows with the denominator $b$. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as "simple enough" is a question of perception, not mathematics; see [pitch](https://en.wikipedia.org/wiki/Pitch_(music)).
+The shortest period $q/f_1$ grows with the denominator $q$. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as "simple enough" is a question of perception, not mathematics; see [pitch](https://en.wikipedia.org/wiki/Pitch_(music)).
 
 </details>
 :::

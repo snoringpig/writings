@@ -21,10 +21,10 @@ Technical words in the series link here, usually the first time they appear on a
 : One cycle per second, the unit of frequency. The A above middle C is tuned to 440 Hz. [Wikipedia](https://en.wikipedia.org/wiki/Hertz)
 
 [Periodic]{#periodic}
-: A signal $p(t)$ is periodic with period $P$ if it repeats exactly every $P$ seconds: $p(t + P) = p(t)$ for all $t$. [Wikipedia](https://en.wikipedia.org/wiki/Periodic_function)
+: A signal $p(t)$ is periodic with period $P > 0$ if it repeats exactly every $P$ seconds: $p(t + P) = p(t)$ for all $t$. Its *shortest* such $P$ is usually what is meant by the period. [Wikipedia](https://en.wikipedia.org/wiki/Periodic_function)
 
 [Pitch]{#pitch}
-: How high or low a note sounds. For a periodic sound, the pitch is heard at the repetition rate $1/P$, even when no component at that frequency is present. [Wikipedia](https://en.wikipedia.org/wiki/Pitch_(music)), and [page 0](note.qmd)
+: How high or low a note sounds. For a periodic sound with shortest period $P$, the pitch is heard at the repetition rate $1/P$, even when no component at that frequency is present, as long as that rate is between a few dozen and a few thousand per second. [Wikipedia](https://en.wikipedia.org/wiki/Pitch_(music)), and [page 0](note.qmd)
 
 [Partial, overtone]{#partial}
 : A sound can be split into components of single frequencies; each one is a partial. An overtone is any partial above the lowest. [Wikipedia](https://en.wikipedia.org/wiki/Overtone)
@@ -71,7 +71,7 @@ Technical words in the series link here, usually the first time they appear on a
 : On a string instrument, the two points that end a string's vibrating length: the nut at the top of the neck, the bridge on the body. The bridge also carries the string's vibration to the body, or on a piano to the soundboard. On a kalimba, the bridge is the bar the tines are pressed against. [Wikipedia](https://en.wikipedia.org/wiki/Bridge_(instrument))
 
 [Open string]{#open-string}
-: A string played with no finger pressing it down, so its whole length between the nut and the bridge vibrates. [Wikipedia](https://en.wikipedia.org/wiki/Open_string)
+: A string played with no finger pressing it down, so its whole length between the nut and the bridge vibrates. [Wikipedia](https://en.wikipedia.org/wiki/Open_string_(music))
 
 [Harmonics, on a string]{#string-harmonics}
 : Notes a string player gets by touching the string lightly at a fraction of its length, such as the middle, instead of pressing it down. Only the modes with a still point under the finger keep sounding. [Wikipedia](https://en.wikipedia.org/wiki/String_harmonic), and [page 4](violin.qmd)
@@ -80,7 +80,7 @@ Technical words in the series link here, usually the first time they appear on a
 : Making a wind instrument's air column jump to a higher mode. A flutist overblows by blowing faster; a clarinetist presses the register key, which opens a small hole that spoils the lowest mode. [Wikipedia](https://en.wikipedia.org/wiki/Overblowing), and [page 5](clarinet.qmd)
 
 [Blow, draw]{#draw}
-: On a harmonica, a blow note sounds when you breathe out through a hole, and a draw note when you breathe in. Each hole has one reed for each. [Wikipedia](https://en.wikipedia.org/wiki/Harmonica)
+: On a harmonica, a blow note sounds when you breathe out through a hole, and a draw note when you breathe in. Each hole has one reed for each (on a chromatic harmonica, one for each in each of its two sets). [Wikipedia](https://en.wikipedia.org/wiki/Harmonica)
 
 [Free reed]{#free-reed}
 : A thin metal tongue fixed at one end that swings through a closely fitting slot, opening and shutting it like a valve. Harmonicas and accordions use free reeds. [Wikipedia](https://en.wikipedia.org/wiki/Free_reed_aerophone)
@@ -97,7 +97,7 @@ Technical words in the series link here, usually the first time they appear on a
 ## Vibration
 
 [Partial derivative, $u_t$, $u_{xx}$]{#partial-derivative}
-: For a function of several variables, such as the height $u(x, t)$ of a string at position $x$ and time $t$, the rate of change in one variable with the others held fixed. Subscripts name the variable: $u_t$ is the velocity of the point at $x$, $u_{tt}$ its acceleration, $u_x$ the slope of the string, and $u_{xx}$ how fast that slope changes along it, its curvature. [Wikipedia](https://en.wikipedia.org/wiki/Partial_derivative)
+: For a function of several variables, such as the height $u(x, t)$ of a string at position $x$ and time $t$, the rate of change in one variable with the others held fixed. Subscripts name the variable: $u_t$ is the velocity of the point at $x$, $u_{tt}$ its acceleration, $u_x$ the slope of the string, and $u_{xx}$ how fast that slope changes along it, which for small slopes is its curvature. [Wikipedia](https://en.wikipedia.org/wiki/Partial_derivative)
 
 [Proportional, $\propto$]{#proportional}
 : $a \propto b$ means that $a$ is a fixed number times $b$. So $f \propto 1/L^2$ means that halving $L$ multiplies $f$ by four. [Wikipedia](https://en.wikipedia.org/wiki/Proportionality_(mathematics))
@@ -109,7 +109,7 @@ Technical words in the series link here, usually the first time they appear on a
 : The counterpart of angular frequency in space: a wave $\sin kx$ has wavenumber $k = 2\pi/\text{wavelength}$. For the wave equation, $\omega = ck$. [Wikipedia](https://en.wikipedia.org/wiki/Wavenumber)
 
 [Linear]{#linear}
-: An equation is linear if sums and multiples of solutions are again solutions. The operators in this series are linear, a good model for the small vibrations of instruments. What keeps a bowed string, a clarinet reed or a harmonica reed going is not linear: the bow's grip and slip and a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Linear_differential_equation)
+: An equation with no outside force is linear if sums and multiples of solutions are again solutions; with an outside force, the difference of two solutions solves the force-free equation. The operators in this series are linear, a good model for the small vibrations of instruments. What keeps a bowed string, a clarinet reed or a harmonica reed going is not linear: the bow's grip and slip and a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Linear_differential_equation)
 
 [Superposition]{#superposition}
 : Adding solutions of a linear equation to get another solution. The motion of an instrument is a superposition, a sum, of its modes. [Wikipedia](https://en.wikipedia.org/wiki/Superposition_principle)
@@ -136,7 +136,7 @@ Technical words in the series link here, usually the first time they appear on a
 : Friction that drains energy from a vibration, so that it dies away. A term $b\,u_t$ in the equation, proportional to velocity, is the simplest model. [Wikipedia](https://en.wikipedia.org/wiki/Damping)
 
 [Self-sustained oscillation, limit cycle]{#self-sustained}
-: An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. The motion settles into one repeating cycle, called a limit cycle. This needs a mechanism that is not linear, such as the bow's grip and slip or a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Self-oscillation)
+: An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle; under some conditions it does not, as in a wolf note. This needs a mechanism that is not linear, such as the bow's grip and slip or a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Self-oscillation)
 
 [Coupling]{#coupling}
 : Two vibrating parts are coupled when the motion of one pushes on the other, as when piano strings share a bridge. Coupled parts trade energy, and their modes mix. [Wikipedia](https://en.wikipedia.org/wiki/Coupling_(physics))
@@ -180,7 +180,7 @@ Technical words in the series link here, usually the first time they appear on a
 : See [eigenvector](#eigenvector).
 
 [Multiplicity]{#multiplicity}
-: The number of independent eigenvectors that share one eigenvalue. Two modes with the same frequency, such as a wave traveling each way around a ring, give multiplicity 2. [Wikipedia](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors#Geometric_multiplicity)
+: The number of independent eigenvectors that share one eigenvalue. Vectors are *independent* when none of them is a combination of the others. On a ring, the cosine and sine shapes of the same wave are two independent modes with the same frequency, so that frequency has multiplicity 2. [Wikipedia](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors#Geometric_multiplicity)
 
 [Perpendicular, orthogonal]{#orthogonal}
 : Two vectors are perpendicular, or orthogonal, when their dot product, the sum of the products of matching entries, is zero. For functions the dot product is replaced by the [inner product](#inner-product). [Wikipedia](https://en.wikipedia.org/wiki/Orthogonality_(mathematics))
@@ -192,7 +192,7 @@ Technical words in the series link here, usually the first time they appear on a
 : A number computed from a square matrix that is zero exactly when the matrix sends some nonzero vector to zero. So linear equations with all right-hand sides zero have a solution other than all zeros exactly when the determinant of their coefficients is zero. For a $2\times2$ matrix with rows $(p, q)$ and $(r, s)$ it is $ps - qr$. [Wikipedia](https://en.wikipedia.org/wiki/Determinant)
 
 [Circulant matrix]{#circulant}
-: A square matrix in which each row is the row above shifted one place to the right, wrapping around. Whatever its entries, the waves of the discrete Fourier transform, the next entry, are eigenvectors of it. [Wikipedia](https://en.wikipedia.org/wiki/Circulant_matrix)
+: A square matrix in which each row is the row above shifted one place to the right, wrapping around. Whatever its entries, the complex waves $e^{2\pi ijk/N}$ of the discrete Fourier transform, the next entry, are eigenvectors of it; when the matrix is also symmetric, as on page 2, so are the real cosine and sine waves. [Wikipedia](https://en.wikipedia.org/wiki/Circulant_matrix)
 
 [Discrete Fourier transform (DFT)]{#dft}
 : Writing a list of $N$ numbers, indexed by $j = 0, \dots, N-1$, as a sum of the waves $\cos(2\pi jk/N)$ and $\sin(2\pi jk/N)$ for $k = 0, \dots, N-1$; with [Euler's formula](#euler-formula) these are combined into $e^{2\pi ijk/N}$. [Wikipedia](https://en.wikipedia.org/wiki/Discrete_Fourier_transform), and [page 2](ring.qmd)
@@ -201,22 +201,22 @@ Technical words in the series link here, usually the first time they appear on a
 : $e^{i\theta} = \cos\theta + i\sin\theta$, where $i^2 = -1$. It packs a cosine and a sine into one expression that is easier to multiply and differentiate. [Wikipedia](https://en.wikipedia.org/wiki/Euler%27s_formula)
 
 [Operator]{#operator}
-: A rule that takes a function and returns another function. In this series the operator $A$ takes a shape $u$ of the instrument and returns minus the restoring force on it, per unit mass, so that the motion obeys $u_{tt} = -Au$. It comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Example: $A = -d^2/d\theta^2$ on shapes of a loop. [Wikipedia](https://en.wikipedia.org/wiki/Operator_(mathematics))
+: A rule that takes a function and returns another function. In this series the operator $A$ takes a shape $u$ of the instrument and returns minus the restoring force on it, per unit mass, so that the motion obeys $u_{tt} = -Au$. It comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Example: $A = -c^2\,d^2/d\theta^2$ on shapes of a loop. Pages 3 and 4 drop the constant $c^2$ and work with $-d^2/d\theta^2$, whose eigenvalues $\lambda$ give frequencies $c\sqrt\lambda/2\pi$. [Wikipedia](https://en.wikipedia.org/wiki/Operator_(mathematics))
 
 [Eigenfunction]{#eigenfunction}
 : A nonzero function $f$ that an operator only rescales: $Af = \lambda f$. Example: $-\frac{d^2}{d\theta^2}\cos 3\theta = 9\cos 3\theta$. [Wikipedia](https://en.wikipedia.org/wiki/Eigenfunction)
 
 [Spectrum]{#spectrum}
-: For every instrument in this series, the list of its operator's eigenvalues; the frequencies are their square roots divided by $2\pi$. (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers $\lambda$ for which $A - \lambda$ has no well-behaved inverse, which can contain more than eigenvalues.) [Wikipedia](https://en.wikipedia.org/wiki/Spectrum_(functional_analysis))
+: For every instrument in this series, the list of its operator's eigenvalues; the frequencies are their square roots divided by $2\pi$ (when the constant $c^2$ is dropped from the operator, multiply by $c$ too). (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers $\lambda$ for which $A - \lambda$ has no well-behaved inverse, which can contain more than eigenvalues.) [Wikipedia](https://en.wikipedia.org/wiki/Spectrum_(functional_analysis))
 
 [Inner product]{#inner-product}
 : A way to multiply two vectors or two functions to get a number, generalizing the dot product. For functions on the circle, $\langle f, g\rangle = \int_0^{2\pi} f\,\bar g\,d\theta$, where $\bar g$ is the complex conjugate of $g$, which is just $g$ when $g$ is real. Two functions are perpendicular if it is zero. [Wikipedia](https://en.wikipedia.org/wiki/Inner_product_space)
 
 [$L^2(S^1)$]{#l2}
-: The space of functions on the circle $S^1$ with $\int_0^{2\pi}|f|^2\,d\theta$ finite, with the inner product above. Two functions that differ only on a set of zero total length count as the same. It is where the shapes of a vibrating loop live. [Wikipedia](https://en.wikipedia.org/wiki/Lp_space)
+: The space of functions on the circle $S^1$ with $\int_0^{2\pi}|f|^2\,d\theta$ finite, with the inner product above. (For readers who know measure theory: two functions that differ only on a set of measure zero count as the same.) It is where the shapes of a vibrating loop live. [Wikipedia](https://en.wikipedia.org/wiki/Lp_space)
 
 [Symmetric and self-adjoint operators]{#self-adjoint}
-: An operator $A$ is symmetric if $\langle Af, g\rangle = \langle f, Ag\rangle$ for all allowed $f$ and $g$, the analogue of a symmetric matrix. That alone makes its eigenvalues real and its eigenfunctions for different eigenvalues perpendicular. Self-adjoint is a stronger condition: the set of allowed shapes is exactly right, neither too small nor too large. It is what the spectral theorem needs to give enough eigenfunctions to build every shape ([page 3](circle.qmd)). [Wikipedia](https://en.wikipedia.org/wiki/Self-adjoint_operator)
+: An operator $A$ is symmetric if $\langle Af, g\rangle = \langle f, Ag\rangle$ for all allowed $f$ and $g$, the analogue of a symmetric matrix. That alone makes its eigenvalues real and its eigenfunctions for different eigenvalues perpendicular. Self-adjoint is a stronger condition on the set of allowed shapes, roughly that it is neither too small nor too large; for the loop of page 3 the allowed shapes are those with two derivatives that are square-integrable. Self-adjointness, together with a further property that every instrument here has (a compact inverse of $A + 1$), is what the spectral theorem needs to give enough eigenfunctions to build every shape ([page 3](circle.qmd)). Precisely, self-adjoint means $A = A^*$, domains included. [Wikipedia](https://en.wikipedia.org/wiki/Self-adjoint_operator)
 
 [Fourier series]{#fourier-series}
 : Writing a periodic function as a sum of sines and cosines, or of $e^{in\theta}$, of whole-number frequencies. On [page 3](circle.qmd) this is the expansion in eigenfunctions of $-d^2/d\theta^2$. [Wikipedia](https://en.wikipedia.org/wiki/Fourier_series)
@@ -228,13 +228,13 @@ Technical words in the series link here, usually the first time they appear on a
 : Looking for solutions that are a product of a function of one variable and a function of another, such as $u(x, t) = X(x)\,q(t)$. It splits one equation in several variables into simpler equations in one variable each. [Wikipedia](https://en.wikipedia.org/wiki/Separation_of_variables)
 
 [Bessel function]{#bessel}
-: The functions $J_m(r)$ that describe how the modes of a round drum vary from the center to the rim, as sines do along a string. $J_0$ starts at 1 and swings like a slowly fading cosine, crossing zero at $r \approx 2.405,\ 5.520,\ 8.654, \dots$; for $m \ge 1$, $J_m$ starts at 0. Their zeros, unevenly spaced at first, set the drum's frequencies. [Wikipedia](https://en.wikipedia.org/wiki/Bessel_function), and [page 8](drum.qmd)
+: The functions $J_m(r)$ that describe how the modes of a round drum vary from the center to the rim, as sines do along a string. $J_0$ starts at 1 and swings like a slowly fading cosine, crossing zero at $r \approx 2.405,\ 5.520,\ 8.654, \dots$; for $m \ge 1$, $J_m$ starts at 0. Their zeros, which are not whole-number multiples of the first one, set the drum's frequencies. [Wikipedia](https://en.wikipedia.org/wiki/Bessel_function), and [page 8](drum.qmd)
 
 [Divergence theorem]{#divergence-theorem}
 : The total flow out through the boundary of a region equals the sum, over the region, of how much flow is created at each point. It turns forces along the edge of a patch of drumhead into an integral over the patch. [Wikipedia](https://en.wikipedia.org/wiki/Divergence_theorem)
 
 [Rayleigh quotient]{#rayleigh-quotient}
-: For a symmetric operator, $R(f) = \langle Af, f\rangle/\langle f, f\rangle$. Its smallest value, over all nonzero shapes $f$ that obey the conditions at clamped or fixed ends, is the lowest eigenvalue, reached at the lowest mode; conditions at free ends need not be imposed. It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. [Wikipedia](https://en.wikipedia.org/wiki/Rayleigh_quotient)
+: The ratio of a shape's stored energy to its mass-weighted size, for example $R(f) = \int EI\,(f'')^2\,dx \big/ \int \rho S\,f^2\,dx$ for a bar; for a shape that meets all the boundary conditions it equals $\langle Af, f\rangle/\langle f, f\rangle$. Its smallest value, over all nonzero shapes $f$ that obey the conditions at clamped or fixed ends, is the lowest eigenvalue, reached at the lowest mode; in this energy form, conditions at free ends need not be imposed. It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. [Wikipedia](https://en.wikipedia.org/wiki/Rayleigh_quotient)
 
 ## Shape and spectrum
 

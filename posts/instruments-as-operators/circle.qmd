@@ -84,7 +84,7 @@ The middle bead sits above the average of its neighbors by about $-\tfrac{h^2}{2
 $$
 u_{tt} = -c^2 A u, \qquad A = -\frac{d^2}{d\theta^2}.
 $$
-The operator $A$ takes a shape $f(\theta)$ and returns a new shape, $-f''$. The minus sign is a convention that makes $A$ of a bump positive at the bump; the restoring force per unit mass is $-c^2 Af$, which pulls the bump back down. If you read page 2, $A$ is the continuous version of the beads' matrix $K/h^2$.
+The operator $A$ takes a shape $f(\theta)$ and returns a new shape, $-f''$. Strictly, the operator in the sense of the [series page](index.qmd), minus the restoring force per unit mass, is $c^2A$; the constant $c^2$ only scales the eigenvalues, so this page works with $A$ and puts $c$ back in the frequencies. The minus sign is a convention that makes $A$ of a bump positive at the bump; the restoring force per unit mass is $-c^2 Af$, which pulls the bump back down. If you read page 2, $A$ is the continuous version of the beads' matrix $K/h^2$.
 
 **Which shapes.** A shape on the loop is a function $f(\theta)$ that returns to itself after one turn: $f(\theta + 2\pi) = f(\theta)$.
 
@@ -112,7 +112,7 @@ These shapes close up after one turn exactly when $n$ is a whole number. So the 
 $$
 \int_0^{2\pi} (Af)\,g\,d\theta = -\int_0^{2\pi} f''g\,d\theta = \int_0^{2\pi} f'g'\,d\theta = -\int_0^{2\pi} f g''\,d\theta = \int_0^{2\pi} f\,(Ag)\,d\theta .
 $$
-An operator with this property is called *symmetric*, by analogy with a symmetric matrix. (With the right choice of allowed shapes it is also [self-adjoint](glossary.qmd#self-adjoint), the stronger property that the spectral theorem in the fold below needs.) If $Af = \lambda f$ with $f$ not identically zero, take $g = f$ in the middle expression: $\lambda\int_0^{2\pi} f^2\,d\theta = \int_0^{2\pi}(f')^2\,d\theta \ge 0$, so $\lambda \ge 0$.
+An operator with this property is called *symmetric*, by analogy with a symmetric matrix. (With the right choice of allowed shapes it is also [self-adjoint](glossary.qmd#self-adjoint), the stronger property that the spectral theorem in the fold below needs.) If $Af = \lambda f$ with $f$ not identically zero, take $g = f$ in the middle expression: $\lambda\int_0^{2\pi} f^2\,d\theta = \int_0^{2\pi}(f')^2\,d\theta \ge 0$, so $\lambda \ge 0$. (For a complex-valued $f$, use $\int f\bar f\,d\theta = \int |f|^2\,d\theta$ instead, as in the complex-form fold below; the same computation shows that $\lambda$ is real and at least 0.)
 
 *Step 2: solve the equation.* $Af = \lambda f$ means $f'' = -\lambda f$.
 
@@ -138,11 +138,11 @@ the [Fourier series](glossary.qmd#fourier-series) of $f$. To find the numbers $a
 $$
 \int_0^{2\pi}\cos n\theta\,\cos m\theta\,d\theta = 0, \qquad \int_0^{2\pi}\sin n\theta\,\sin m\theta\,d\theta = 0,
 $$
-while $\int_0^{2\pi}\cos n\theta\,\sin m\theta\,d\theta = 0$ for all $n$ and $m$, and $\int_0^{2\pi}\cos^2 n\theta\,d\theta = \int_0^{2\pi}\sin^2 n\theta\,d\theta = \pi$ for $n \ge 1$. These integrals are the continuous version of the dot product: for two columns of bead heights, $\sum_j u_j v_j\,h$ is a dot product times $h$, and as the beads crowd together it becomes $\int f g\,d\theta$. Now multiply both sides of the series by $\cos m\theta$ and integrate from $0$ to $2\pi$. Every term drops out except the one with $n = m$, which leaves $\pi a_m$. So
+while $\int_0^{2\pi}\cos n\theta\,\sin m\theta\,d\theta = 0$ for all $n$ and $m$, and $\int_0^{2\pi}\cos^2 n\theta\,d\theta = \int_0^{2\pi}\sin^2 n\theta\,d\theta = \pi$ for $n \ge 1$. To check them, turn each product into a sum with $\cos A\cos B = \tfrac12[\cos(A - B) + \cos(A + B)]$ and its relatives for sines; every cosine or sine of a nonzero whole-number multiple of $\theta$ integrates to zero over a full turn. These integrals are the continuous version of the dot product: for two columns of bead heights, $\sum_j u_j v_j\,h$ is a dot product times $h$, and as the beads crowd together it becomes $\int f g\,d\theta$. Now multiply both sides of the series by $\cos m\theta$ and integrate from $0$ to $2\pi$. Every term drops out except the one with $n = m$, which leaves $\pi a_m$. So
 $$
 a_n = \frac{1}{\pi}\int_0^{2\pi} f(\theta)\cos n\theta\,d\theta, \qquad b_n = \frac{1}{\pi}\int_0^{2\pi} f(\theta)\sin n\theta\,d\theta,
 $$
-just as a vector's component along an axis is its dot product with that axis. Released from rest in the shape $f$, each eigenfunction swings at its own frequency:
+just as a vector's component along an axis is its dot product with that axis. The constant term is written $a_0/2$ so that the same formula also gives $a_0$: for $n = 0$, $\int_0^{2\pi}\cos^2 0\,d\theta = 2\pi$, not $\pi$. Released from rest in the shape $f$, each eigenfunction swings at its own frequency:
 $$
 u(\theta, t) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos n\theta + b_n\sin n\theta\big)\cos(c\,n\,t).
 $$
@@ -205,7 +205,7 @@ In that equation $k$ was chosen in advance, and for each $k$ it has the two solu
 ::: {.qa}
 <details><summary><span class="label">Reader question</span>How is the shape $\cos n\theta$ related to the factor $\cos(\omega_n t)$?</summary>
 
-Both come from [separating variables](glossary.qmd#separation-of-variables). Look for a motion in which the shape stays fixed and only its size changes: $u = X(\theta)\,q(t)$. Substituting into $u_{tt} = c^2u_{\theta\theta}$ and dividing by $Xq$ gives $q''/q = c^2X''/X$. The left side depends only on $t$ and the right only on $\theta$. Changing $t$ alone cannot change the right side, so the left side cannot change either; the same holds the other way round, so both sides equal one constant. That constant cannot be positive, because $A$ has no negative eigenvalues (Step 1 of the proof above), so we call it $-\omega^2$. That splits the equation in two. In time, $q'' = -\omega^2 q$, so $q = \cos(\omega t + \phi)$: the mass on a spring. In space, $-X'' = (\omega/c)^2 X$ with $X$ periodic: the eigenvalue problem for $A$, which allows only $\omega/c = n$. The space part chooses the frequency, and the time part swings at it. The time factor is a cosine for every instrument in this series, because every operator here has no negative eigenvalues and every equation has two time derivatives and no friction term; damping, added on page 7, multiplies the cosine by a decaying factor. Everything instrument-specific lives in the space part.
+Both come from [separating variables](glossary.qmd#separation-of-variables). Look for a motion in which the shape stays fixed and only its size changes: $u = X(\theta)\,q(t)$. Substituting into $u_{tt} = c^2u_{\theta\theta}$ and dividing by $Xq$ gives $q''/q = c^2X''/X$. The left side depends only on $t$ and the right only on $\theta$. Changing $t$ alone cannot change the right side, so the left side cannot change either; the same holds the other way round, so both sides equal one constant. That constant cannot be positive, because $A$ has no negative eigenvalues (Step 1 of the proof above), so we call it $-\omega^2$. That splits the equation in two. In time, $q'' = -\omega^2 q$, so $q = \cos(\omega t + \phi)$, times any constant: the mass on a spring. (For $\omega = 0$ the solution is $q = a + bt$ instead: the loop drifts as a whole.) In space, $-X'' = (\omega/c)^2 X$ with $X$ periodic: the eigenvalue problem for $A$, which allows only $\omega/c = n$. The space part chooses the frequency, and the time part swings at it. The time factor is a cosine, for every nonzero frequency, for every instrument in this series, because every operator here has no negative eigenvalues and every equation has two time derivatives and no friction term; damping, added on page 7, multiplies the cosine by a decaying factor. Everything instrument-specific lives in the space part.
 
 </details>
 :::

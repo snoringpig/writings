@@ -47,10 +47,10 @@ Here $\ddot x$ means the second derivative of position with respect to time, the
 $$
 f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
 $$
-The amplitude $A$ and the starting phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$. A real string also loses energy, which this model leaves out. Adding friction proportional to the velocity gives $x = Ae^{-\gamma t}\cos(\omega_d t + \phi)$ with $\omega_d = \sqrt{k/m - \gamma^2}$: the swing shrinks, and its frequency still does not depend on $A$.
+The amplitude $A$ and the starting phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$. A real string also loses energy, which this model leaves out. Adding a friction force proportional to the velocity, $-2m\gamma\,\dot x$, gives $x = Ae^{-\gamma t}\cos(\omega_d t + \phi)$ with $\omega_d = \sqrt{k/m - \gamma^2}$, as long as the friction is light ($\gamma^2 < k/m$); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, $\omega_d$, still does not depend on $A$.
 
 ::: {.derive}
-<details><summary><span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude</summary>
+<details><summary><span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude <span class="needs">uses the uniqueness of solutions of a differential equation</span></summary>
 
 *Every solution is $A\cos(\omega t + \phi)$.* The equation $\ddot x = -\lambda x$ is linear: sums and multiples of solutions are solutions. A solution is determined by its starting position $x(0)$ and starting velocity $\dot x(0)$; this is the uniqueness theorem for [ordinary differential equations](https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem). The functions $\cos\omega t$ and $\sin\omega t$, with $\omega = \sqrt\lambda$, are solutions with starting data $(1, 0)$ and $(0, \omega)$. So the solution with data $(x_0, v_0)$ is $x_0\cos\omega t + (v_0/\omega)\sin\omega t$. By the formula $\cos(\omega t + \phi) = \cos\omega t\cos\phi - \sin\omega t\sin\phi$, this equals $A\cos(\omega t + \phi)$ with $A = \sqrt{x_0^2 + (v_0/\omega)^2}$, $\cos\phi = x_0/A$ and $\sin\phi = -v_0/(\omega A)$.
 

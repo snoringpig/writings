@@ -69,20 +69,20 @@ with frequencies in hertz. It is zero at $x = 0$, rises to a peak at $x = \ln(5.
 
 For a harmonic sound, the partials of the lower note are at $f, 2f, 3f, \dots$ and those of the upper note at $\alpha f, 2\alpha f, 3\alpha f, \dots$. When $\alpha$ is a ratio of small whole numbers, say $3/2$, many partials of the two notes land exactly on each other: the lower note's third partial and the upper note's second are both at $3f$. Partials that coincide do not beat. Move $\alpha$ off $3/2$ and the pairs that coincided pull apart, by a few hertz and then by tens of hertz, into the range where beating sounds roughest. So each simple ratio sits at the bottom of a dip. The smooth intervals of a harmonic sound are the simple whole-number ratios, which extends the second idea of this series: frequencies at whole-number multiples of one frequency give a clear pitch, and they also make whole-number intervals smooth.
 
-A uniform bar free at both ends, such as a glockenspiel bar, has the kalimba's operator with different ends, and its partials are at $1,\ 2.756,\ 5.404,\ 8.933$ times the lowest, as the fold below shows. (Xylophone and marimba bars are thinned underneath, in the middle, to move these partials onto whole numbers; gamelan bars are shaped too, as discussed below.) Now the coincidences happen elsewhere. At $\alpha = 2.756$ the upper note's fundamental lands on the lower note's second partial. At $\alpha = 5.404/2.756 \approx 1.961$ the upper note's second partial lands on the lower note's third, and that is the dip just below the octave. At $\alpha = 2$ nothing lines up.
+A uniform bar free at both ends, such as a glockenspiel bar, has the kalimba's operator with different ends, and its partials are at $1,\ 2.756,\ 5.404,\ 8.933$ times the lowest, as the fold below shows. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too, as discussed below.) Now the coincidences happen elsewhere. At $\alpha = 2.756$ the upper note's fundamental lands on the lower note's second partial. At $\alpha = 5.404/2.756 \approx 1.961$ the upper note's second partial lands on the lower note's third, and that is the dip just below the octave. At $\alpha = 2$ nothing lines up.
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The modes of a bar free at both ends</summary>
+<details><summary><span class="label">Step-by-step derivation</span>The modes of a bar free at both ends <span class="needs">uses a 2×2 determinant and hyperbolic functions</span></summary>
 
 The operator is the bar's $\kappa^2\,d^4/dx^4$ from the [kalimba page](kalimba.qmd). A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ the conditions are $X'' = 0$ and $X''' = 0$.
 
 1. As on the kalimba page, write $X = A_1\cos\beta x + A_2\sin\beta x + A_3\cosh\beta x + A_4\sinh\beta x$.
 2. At $x = 0$: $X''(0) = \beta^2(-A_1 + A_3) = 0$ and $X'''(0) = \beta^3(-A_2 + A_4) = 0$, so $A_3 = A_1$ and $A_4 = A_2$. Then $X = A_1(\cos\beta x + \cosh\beta x) + A_2(\sin\beta x + \sinh\beta x)$.
-3. At $x = L$, dividing by $\beta^2$ and $\beta^3$ and writing $c = \cos\beta L$, $C = \cosh\beta L$, $s = \sin\beta L$, $S = \sinh\beta L$:
+3. At $x = L$, dividing by $\beta^2$ and $\beta^3$ and writing $C_1 = \cos\beta L$, $S_1 = \sin\beta L$, $C_2 = \cosh\beta L$, $S_2 = \sinh\beta L$, as on the kalimba page:
 $$
-(C - c)\,A_1 + (S - s)\,A_2 = 0, \qquad (S + s)\,A_1 + (C - c)\,A_2 = 0 .
+(C_2 - C_1)\,A_1 + (S_2 - S_1)\,A_2 = 0, \qquad (S_2 + S_1)\,A_1 + (C_2 - C_1)\,A_2 = 0 .
 $$
-4. These have a solution other than $A_1 = A_2 = 0$ exactly when the [determinant](glossary.qmd#determinant) is zero: $(C - c)^2 - (S - s)(S + s) = (C^2 - S^2) + (c^2 + s^2) - 2cC = 2 - 2cC$, using $C^2 - S^2 = 1$ and $c^2 + s^2 = 1$. So
+4. These have a solution other than $A_1 = A_2 = 0$ exactly when the [determinant](glossary.qmd#determinant) is zero: $(C_2 - C_1)^2 - (S_2 - S_1)(S_2 + S_1) = (C_2^2 - S_2^2) + (C_1^2 + S_1^2) - 2C_1C_2 = 2 - 2C_1C_2$, using $C_2^2 - S_2^2 = 1$ and $C_1^2 + S_1^2 = 1$. So
 $$
 \cos\beta L\,\cosh\beta L = 1 .
 $$
