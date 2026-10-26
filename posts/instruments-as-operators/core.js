@@ -85,7 +85,7 @@
     var a = xd - w / 2, b = xd + w / 2, k = 2 * n * Math.PI;
     return 1 - (Math.sin(k * b) - Math.sin(k * a)) / (k * w);
   };
-  C.DAMPER = { xd: 0.12, w: 0.05, G: 15 };
+  C.DAMPER = { xd: 0.22, w: 0.05, G: 15 };
   var pcache = {};
   C.pianoParts = function (k, mult, soft, mute) {
     var f = C.mtof(k);

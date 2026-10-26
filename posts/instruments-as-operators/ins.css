@@ -27,7 +27,8 @@
 .ins .readout b { color: var(--ink); font-weight: 500; }
 .ins svg.spec { width: 100%; height: auto; display: block; }
 .ins svg.spec text, .ins svg.mini text { font-family: var(--f-mono); fill: var(--muted); }
-.ins canvas { display: block; width: 100%; touch-action: none; }
+.ins canvas { display: block; width: 100%; touch-action: pan-y; }
+#act3dCanvas { touch-action: none; }
 .ins .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.75rem; }
 .ins .strip > div { background: var(--panel); border-radius: 10px; padding: 0.6rem 0.7rem; display: grid; gap: 0.35rem; }
 .ins .strip .nm { font-weight: 600; }
@@ -64,3 +65,14 @@
 .derive svg.fig .dash { stroke: var(--muted); fill: none; stroke-width: 1; stroke-dasharray: 4 3; }
 .derive svg.fig .fillacc { fill: var(--accent); } .derive svg.fig .fillpos { fill: var(--pos); } .derive svg.fig .fillneg { fill: var(--neg); }
 .derive svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
+/* Page layers: the one-line new idea at the top, the references at the bottom. */
+.newidea { background: var(--panel); border-radius: 8px; padding: 0.7rem 0.95rem; margin: 0 0 1.5rem; font-size: 1rem; }
+.newidea p { margin: 0; }
+.refs { font-size: 0.86rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.75rem; margin: 2.25rem 0 1rem; line-height: 1.55; }
+.refs p { margin: 0 0 0.4rem; }
+.refs a { color: inherit; }
+.ins .hsliders { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.25rem 1rem; }
+.ins .hsliders .slider output { min-width: 3rem; }
+/* Narrow screens: wide equations and tables scroll inside themselves instead of widening the page. */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; position: relative; }
+@media (max-width: 700px) { main table { display: block; overflow-x: auto; position: relative; } }

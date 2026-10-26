@@ -1,0 +1,108 @@
+---
+title: "1 · One mass on a spring"
+subtitle: "Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+date-modified: 2026-10-25
+resources: [core.js, ins.css]
+---
+
+::: {.series-nav}
+[Series](index.qmd) · [0 Note](note.qmd) · **1 Oscillator** · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+:::
+
+::: {.newidea}
+**New idea on this page.** Newton's law plus a restoring force proportional to displacement allows exactly one frequency. It is set by stiffness and mass, not by how hard you pull.
+:::
+
+## For everyone
+
+Hang a mass on a spring, pull it down and let go: it bobs at a steady rate, faster with a stiffer spring and slower with a heavier mass. Pull it further and it travels further, but each bob takes exactly as long as before. That is why a fading piano note keeps its pitch: as the sound dies away, the vibration gets smaller but not slower.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="oCanvas" style="height:200px" aria-label="A mass on a spring bobbing"></canvas>
+  <div class="slider"><label for="oK" style="min-width:9rem">Stiffness k</label><input type="range" id="oK" min="10" max="200" step="1" value="40"><output id="oKo"></output></div>
+  <div class="slider"><label for="oM" style="min-width:9rem">Mass m</label><input type="range" id="oM" min="0.1" max="2" step="0.05" value="1"><output id="oMo"></output></div>
+  <div class="slider"><label for="oA" style="min-width:9rem">How far you pull</label><input type="range" id="oA" min="0.1" max="1" step="0.05" value="0.6"><output id="oAo"></output></div>
+  <div class="controls"><button id="oPlay" class="primary">Hear it, 200 times faster</button></div>
+  <div class="readout" id="oRead"></div>
+  <p class="cap">The animation runs in real time. A real mass on a spring bobs a few times a second, too slowly to hear, so the sound plays the same motion 200 times faster.</p>
+</div>
+</div>
+```
+
+## The mathematics
+
+A spring pulled a distance $x$ from rest pulls back with force $-kx$: this is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law), and the constant $k$ is the spring's stiffness. Newton's second law says force equals mass times acceleration, so
+$$
+m\,\ddot x = -k\,x, \qquad\text{that is}\qquad \ddot x = -\lambda\,x \quad\text{with}\quad \lambda = k/m .
+$$
+Here $\ddot x$ means the second derivative of position with respect to time, the acceleration. Try a steady oscillation $x = A\cos(\omega t + \phi)$. Differentiating twice gives $\ddot x = -\omega^2 x$, so it solves the equation exactly when $\omega^2 = \lambda$. The motion repeats $f = \omega/2\pi$ times a second:
+$$
+f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
+$$
+The amplitude $A$ and the starting phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude</summary>
+
+*Every solution is $A\cos(\omega t + \phi)$.* The equation $\ddot x = -\lambda x$ is linear: sums and multiples of solutions are solutions. A solution is determined by its starting position $x(0)$ and starting velocity $\dot x(0)$; this is the uniqueness theorem for [ordinary differential equations](https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem). The functions $\cos\omega t$ and $\sin\omega t$, with $\omega = \sqrt\lambda$, are solutions with starting data $(1, 0)$ and $(0, \omega)$. So the solution with data $(x_0, v_0)$ is $x_0\cos\omega t + (v_0/\omega)\sin\omega t$, which can be rewritten as $A\cos(\omega t + \phi)$.
+
+*Amplitude cannot change the pitch.* If $x(t)$ is a solution, so is $2x(t)$, by linearity, and it has the same period. Real springs stop obeying Hooke's law when stretched far; then the equation is no longer linear and the frequency does depend on amplitude ([anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity)). Instruments are played in the range where the linear law holds well.
+
+</details>
+:::
+
+## The operator, in its smallest form
+
+Write the equation as $\ddot x = -\lambda x$. The restoring force per unit mass is "multiply the displacement by $\lambda$", and the one allowed frequency is $\omega = \sqrt\lambda$.
+
+On the next page the single displacement $x$ becomes a list of displacements, one per bead, and the number $\lambda$ becomes a table of numbers, a matrix. Later it becomes a rule acting on whole shapes, a differential [operator](glossary.qmd#operator). The pattern never changes: **the allowed frequencies are the square roots of the operator's [eigenvalues](glossary.qmd#eigenvalue)**. For one mass there is one eigenvalue, $k/m$.
+
+[← What is a note?](note.qmd) · [Next: beads on a ring →](ring.qmd)
+
+::: {.refs}
+**References.** Wikipedia, [Simple harmonic motion](https://en.wikipedia.org/wiki/Simple_harmonic_motion) and [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 1.
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, cv = document.getElementById("oCanvas"), ctx = cv.getContext("2d");
+  var k = 40, m = 1, A = 0.6, t0 = performance.now();
+  function f() { return Math.sqrt(k / m) / (2 * Math.PI); }
+  function read() {
+    document.getElementById("oKo").textContent = k.toFixed(0) + " N/m";
+    document.getElementById("oMo").textContent = m.toFixed(2) + " kg";
+    document.getElementById("oAo").textContent = (A * 10).toFixed(1) + " cm";
+    document.getElementById("oRead").innerHTML = "f = (1/2&pi;)&radic;(k/m) = <b>" + f().toFixed(2) + " Hz</b> · one bob every <b>" + (1 / f()).toFixed(2) + " s</b>, however far you pull";
+  }
+  [["oK", function (v) { k = v; }], ["oM", function (v) { m = v; }], ["oA", function (v) { A = v; }]].forEach(function (p) {
+    var el = document.getElementById(p[0]); el.addEventListener("input", function () { p[1](parseFloat(el.value)); read(); });
+  });
+  function fadeOut(b, s) { var dd = b.getChannelData(0), n = Math.floor(s * b.sampleRate); for (var i = 0; i < n; i++) dd[dd.length - 1 - i] *= i / n; return b; }
+  document.getElementById("oPlay").addEventListener("click", function () { C.play(fadeOut(C.render([{ f: 200 * f(), amp: 1, tau: 1.2 }], 1.8), 0.2), 0.7); });
+  function draw(now) {
+    var d = C.fit(cv), W = cv.width, H = cv.height, t = (now - t0) / 1000;
+    var x = A * Math.cos(2 * Math.PI * f() * t), top = 14 * d, rest = H * 0.55, y = rest + x * H * 0.32, bw = 60 * d, bh = 36 * d, cx = W / 2;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(cx - 70 * d, top - 6 * d, 140 * d, 6 * d);
+    ctx.strokeStyle = C.rgb("--muted"); ctx.lineWidth = 2 * d; ctx.beginPath(); ctx.moveTo(cx, top);
+    var coils = 12, len = y - bh / 2 - top;
+    for (var i = 1; i <= coils; i++) ctx.lineTo(cx + (i % 2 ? 14 : -14) * d, top + len * (i - 0.5) / coils);
+    ctx.lineTo(cx, y - bh / 2); ctx.stroke();
+    ctx.fillStyle = C.rgb("--accent"); ctx.fillRect(cx - bw / 2, y - bh / 2, bw, bh);
+    ctx.strokeStyle = C.rgb("--grid"); ctx.setLineDash([4 * d, 4 * d]); ctx.beginPath(); ctx.moveTo(cx - 90 * d, rest); ctx.lineTo(cx + 90 * d, rest); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (12 * d) + "px 'IBM Plex Mono', monospace"; ctx.fillText("rest", cx + 96 * d, rest + 4 * d);
+    requestAnimationFrame(draw);
+  }
+  read(); requestAnimationFrame(draw);
+})();
+</script>
+```

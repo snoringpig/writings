@@ -1,6 +1,6 @@
 ---
-title: "The clarinet"
-subtitle: "Air columns · Instruments as Operators"
+title: "5 · An air column"
+subtitle: "The clarinet and the flute · Instruments as Operators"
 format:
   html:
     html-math-method: katex
@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [Foundations](foundations.qmd) · [Violin](violin.qmd) · **Clarinet** · [Kalimba](kalimba.qmd) · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · [Drum](drum.qmd)
+[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · **5 Air column** · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
-The violin's operator again, now acting on air pressure in a tube. Only the boundary condition at one end changes, and half the spectrum disappears.
-
-::: {.family}
-**Family: air columns.** The flute uses the same operator with a different boundary condition: open at both ends instead of closed at one. Stopped organ pipes and pan pipes are closed at one end like the clarinet, so they share its odd-harmonic spectrum. The switch in the demo moves between the two cases.
+::: {.newidea}
+**New idea on this page.** The string's operator also governs the air pressure in a tube. Changing the boundary condition at one end, from "pressure equals the room's" to "the air cannot move", removes every even harmonic: a clarinet's spectrum is the odd whole numbers.
 :::
 
-## Play it
+## For everyone
+
+Blow into a tube and the air inside sloshes back and forth along it. A flute is open at both ends, while a clarinet is nearly closed at the mouthpiece by its reed. That one difference makes the clarinet sound almost an [octave](glossary.qmd#octave) lower than a flute of the same length and leaves it only the odd harmonics, much of its hollow sound; the switch below changes one into the other.
 
 ```{=html}
 <style>
@@ -45,37 +45,81 @@ The violin's operator again, now acting on air pressure in a tube. Only the boun
 </div>
 ```
 
-## Deriving the operator
-
-1. Follow a thin slab of air in a tube of cross-section $A$. Let $\xi(x,t)$ be how far the air at $x$ has moved along the tube, and $p(x,t)$ the pressure above room pressure.
-2. The slab between $x$ and $x+dx$ has mass $\rho A\,dx$, and the pressure difference across it is the only force, so Newton's law reads $\rho\,\xi_{tt} = -p_x$.
-3. If the slab stretches by the fraction $\xi_x$, its pressure drops in proportion. Sound compresses air too quickly for heat to flow, so the constant is the adiabatic bulk modulus $K = \gamma P_0$, and $p = -K\,\xi_x$.
-4. Differentiate step 2 in $x$ and step 3 twice in $t$, and eliminate $\xi$.
-
-::: {.result}
-**The air column's operator.**
-$$
-p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2 .
-$$
+::: {.family}
+**Same operator, other ends.** Stopped organ pipes and pan pipes are closed at one end like the clarinet and share its odd-harmonic spectrum. Open organ pipes share the flute's. Oboes and saxophones have cone-shaped tubes instead of cylinders, a different operator, which this series does not cover.
 :::
 
-5. At an open end the air meets the room, so $p = 0$. At the reed the opening is nearly shut, so the air cannot move: $\xi = 0$ there, and by step 2, $p_x = 0$.
+## The mathematics
 
-## Spectrum
-
-The condition $p_x(0) = 0$ at the reed leaves $X = \cos kx$, and $p(L) = 0$ at the open end requires $\cos kL = 0$. So
+**The operator.** Let $p(x, t)$ be the air pressure in the tube minus room pressure. It obeys the wave equation again,
 $$
-k_n = \frac{(2n-1)\pi}{2L}, \qquad f_n = \frac{(2n-1)\,c}{4L}.
+p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
 $$
+where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-modulus), its resistance to being squeezed. The constant $c$ is the speed of sound, about 343 m/s at 20 °C.
 
-Only odd multiples survive. A flute is open at both ends: $p = 0$ at both ends gives $\sin(n\pi x/L)$ and $f_n = nc/2L$, every multiple. Two consequences, both audible above:
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Newton's law for a slab of air</summary>
 
-- **An octave lower.** The same tube sounds $c/4L$ closed at one end but $c/2L$ open at both. Switch the type and listen.
-- **A twelfth, not an octave.** The register key makes the tube jump to its next mode. For the clarinet that is $3f_1$, an octave plus a fifth; for the flute it is $2f_1$. This is why clarinet fingerings repeat a twelfth apart.
+```{=html}
+<svg class="fig" viewBox="0 0 420 130" role="img" aria-label="A slab of air in a tube, pushed by pressure on both faces">
+  <path class="ink" d="M 20 30 L 400 30 M 20 100 L 400 100"/>
+  <rect x="170" y="31" width="80" height="68" class="bar" opacity="0.5"/>
+  <path class="pos" d="M 120 65 L 168 65"/><path class="fillpos" d="M 168 59 L 180 65 L 168 71 Z"/>
+  <path class="neg" d="M 300 65 L 252 65"/><path class="fillneg" d="M 252 59 L 240 65 L 252 71 Z"/>
+  <text x="96" y="58">p(x)</text><text x="300" y="58">p(x+dx)</text>
+  <text x="180" y="118">slab, mass ρA dx</text>
+</svg>
+```
 
-Like the bow, the reed is a valve driven by the pressure it creates, so the oscillation is periodic and its partials sit exactly on $n f_1$. In the low register the even ones are weak, not zero. A real bore is not perfectly cylindrical and the bell matters; those refine the numbers, not the picture.
+1. Let $\xi(x, t)$ be how far the air that normally sits at $x$ has moved along the tube, and let the tube's cross-section have area $A$.
+2. The slab of air between $x$ and $x + dx$ has mass $\rho A\,dx$. The only force on it along the tube is the pressure difference between its two faces, $A\,[p(x) - p(x + dx)] \approx -A\,p_x\,dx$. Newton's law is $\rho\,\xi_{tt} = -p_x$.
+3. If neighboring air moves apart, the slab is stretched by the fraction $\xi_x$ and its pressure drops in proportion: $p = -K\,\xi_x$. In a sound wave the squeezing is too fast for heat to flow, which is called [adiabatic](glossary.qmd#bulk-modulus); for air this makes $K$ about 1.4 times atmospheric pressure.
+4. Differentiate step 2 in $x$ and step 3 twice in $t$: $\rho\,\xi_{ttx} = -p_{xx}$ and $p_{tt} = -K\,\xi_{xtt}$. Eliminating $\xi$ gives $p_{tt} = (K/\rho)\,p_{xx}$.
 
-[← The violin](violin.qmd) · [The kalimba →](kalimba.qmd)
+What was assumed: the tube is narrow compared with the sound's wavelength, so the pressure is the same across it, and the pressure changes are small. Friction with the walls is left out.
+
+</details>
+:::
+
+**Boundary conditions.** At an open end the air in the tube meets the room, so the pressure there is room pressure: $p = 0$. At the clarinet's reed the opening is nearly shut, so the air there cannot move, $\xi = 0$, and step 2 of the derivation then gives $p_x = 0$. The first of these is the string's Dirichlet condition. The second, a condition on the slope, is called a *Neumann condition*.
+
+**Spectrum.** For the clarinet, $p_x(0) = 0$ at the reed leaves $X = \cos kx$, and $p(L) = 0$ at the open end needs $\cos kL = 0$. For the flute, open at both ends, the conditions are the string's, and give $\sin(n\pi x/L)$. So
+
+| | ends | eigenfunctions | frequencies |
+|:--|:--|:--|:--|
+| flute | open, open | $\sin(n\pi x/L)$ | $f_n = n\,\dfrac{c}{2L}$ |
+| clarinet | closed, open | $\cos\big((2n-1)\pi x/2L\big)$ | $f_n = (2n-1)\,\dfrac{c}{4L}$ |
+
+Two consequences can be heard in the demo.
+
+- **Almost an octave lower.** An octave is a frequency ratio of 2. The same tube sounds $c/4L$ closed at one end but $c/2L$ open at both.
+- **A twelfth, not an octave.** The register key opens a small hole that makes the tube jump to its next mode. For the clarinet that is $3f_1$, a ratio of 3, called a twelfth: an octave and a fifth, where a fifth is the ratio 3/2. For the flute the next mode is $2f_1$, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Why only odd harmonics: the closed tube is a quarter of a loop</summary>
+
+Use the reflections from the [string page](violin.qmd). Take a pressure shape $p$ on $[0, L]$ with $p'(0) = 0$ and $p(L) = 0$.
+
+1. Reflect it *evenly* across the reed end, $p(-x) = p(x)$. Even reflection is what the Neumann condition $p'(0) = 0$ allows, so the result is a shape on $[-L, L]$ that vanishes at both ends.
+2. Reflect that *oddly* across $x = L$, $p(2L - x) = -p(x)$, and repeat. The result is a shape on a loop of circumference $4L$.
+3. On that loop the eigenfunctions are $\cos(k\pi x/2L)$ and $\sin(k\pi x/2L)$. Step 1 keeps only cosines. Step 2 needs $\cos\big(k\pi(2L - x)/2L\big) = (-1)^k\cos(k\pi x/2L)$ to equal $-\cos(k\pi x/2L)$, which keeps only odd $k$.
+
+So the clarinet's modes are the odd harmonics of a loop four tube-lengths long, which is where both the factor 4 and the odd numbers come from.
+
+</details>
+:::
+
+**The reed.** The reed is a valve. When the pressure in the mouthpiece drops, it closes, and when the pressure rises, it opens, so the air column, through the pressure it creates, drives the reed that feeds it. The result is a [periodic](glossary.qmd#periodic) oscillation, like the bowed string, so the partials sit exactly on whole-number multiples of $f_1$. In the low register the even harmonics are weak but not absent. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
+
+## What changed, and what comes next
+
+Same operator, a new boundary condition, and half the spectrum gone. So far every restoring force has been a pull or a push along the medium, giving two derivatives in space. Next, a bar that resists bending gives four.
+
+[← A string with ends](violin.qmd) · [Next: change the order →](kalimba.qmd)
+
+::: {.refs}
+**References.** J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html) and [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW. N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 8 (pipes) and chapter 15 (woodwind reed instruments).
+:::
 
 ```{=html}
 <script src="core.js"></script>

@@ -1,0 +1,277 @@
+---
+title: "3 · The circle"
+subtitle: "Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+date-modified: 2026-10-25
+resources: [core.js, ins.css]
+aliases: [foundations.html]
+---
+
+::: {.series-nav}
+[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · **3 The circle** · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+:::
+
+::: {.newidea}
+**New idea on this page.** When the beads crowd into a continuous loop, the matrix becomes an [operator](glossary.qmd#operator), $-\tfrac{d^2}{d\theta^2}$, acting on shapes. Its eigenvalues are exactly $0, 1, 4, 9, \dots$, so the frequencies are exactly $0, 1, 2, 3, \dots$ times a base frequency. Writing a shape as a sum of this operator's eigenfunctions is the [Fourier series](glossary.qmd#fourier-series).
+:::
+
+## For everyone
+
+Keep the loop the same size and the same total weight, but cut the weight into more and more beads. The low frequencies slide onto the whole-number grid. In the limit the beads become a continuous loop of string, and its frequencies are exactly 1, 2, 3, … times the lowest: a clear [pitch](glossary.qmd#pitch).
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="cRing" style="height:220px" aria-label="Beads on a ring swinging in their lowest mode"></canvas>
+  <div class="slider"><label for="cN">Beads N</label><input type="range" id="cN" min="0" max="16" step="1" value="3"><output id="cNo"></output></div>
+  <svg class="spec" id="cSpec" viewBox="0 0 320 100" style="max-width:520px" aria-label="Frequencies of the first modes relative to the lowest"></svg>
+  <div class="readout" id="cRead"></div>
+  <div class="controls"><button id="cPlay" class="primary">Hear the first modes together</button></div>
+  <p class="cap">Stems: frequencies of the first ten distinct modes as multiples of the lowest, against the whole-number grid. The last slider position is the continuous loop. Each mode is played with loudness 1/k, so you hear one sound, not a list of tones.</p>
+</div>
+</div>
+```
+
+## The mathematics
+
+**From beads to a loop.** Measure position around the loop by the angle $\theta$, and choose units so that the loop has circumference $2\pi$. Bead $j$ sits at $\theta_j = jh$ with $h = 2\pi/N$. Let $\rho$ be the mass per unit length, so each bead has mass $m = \rho h$, and write $u(\theta, t)$ for the height of the loop at angle $\theta$, so that $u_j(t) = u(\theta_j, t)$. Dividing the bead equation from the [previous page](ring.qmd) by $m$,
+$$
+\ddot u_j = \frac{T}{\rho}\cdot\frac{u_{j+1} - 2u_j + u_{j-1}}{h^2} \quad\xrightarrow{\;h\to 0\;}\quad \frac{\partial^2 u}{\partial t^2} = c^2\,\frac{\partial^2 u}{\partial \theta^2}, \qquad c^2 = \frac{T}{\rho}.
+$$
+This is the [wave equation](https://en.wikipedia.org/wiki/Wave_equation). The constant $c$ is the speed at which a bump travels around the loop; the second demo shows it.
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Why the second difference becomes the second derivative</summary>
+
+Expand the neighbors with [Taylor's theorem](https://en.wikipedia.org/wiki/Taylor%27s_theorem), assuming the shape has four continuous derivatives:
+$$
+u(\theta \pm h) = u \pm h\,u' + \tfrac{h^2}{2}u'' \pm \tfrac{h^3}{6}u''' + O(h^4).
+$$
+Add the two expansions and subtract $2u$. The odd terms cancel in pairs:
+$$
+u(\theta + h) - 2u(\theta) + u(\theta - h) = h^2 u''(\theta) + O(h^4).
+$$
+Divide by $h^2$: the fraction equals $u'' + O(h^2)$, which tends to $u''$. What was held fixed: the circumference, the tension $T$, and the mass per length $\rho$. So as the beads multiply, each one gets lighter in proportion.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 150" role="img" aria-label="Three neighboring beads on a curve; the middle one sits above the average of the outer two by about h squared times the curvature over two">
+  <path class="acc" d="M 40 120 Q 210 -10 380 120"/>
+  <path class="dash" d="M 100 78 L 320 78"/>
+  <circle cx="100" cy="78" r="6" class="fillacc"/><circle cx="210" cy="55" r="7" class="fillacc"/><circle cx="320" cy="78" r="6" class="fillacc"/>
+  <path class="neg" d="M 210 55 L 210 78"/>
+  <text x="80" y="104">θ − h</text><text x="200" y="104">θ</text><text x="300" y="104">θ + h</text>
+  <text x="222" y="72">gap ≈ −h² u''/2</text>
+</svg>
+```
+
+The gap between the middle bead and the average of its neighbors is about $-\tfrac{h^2}{2}u''$. That is why the force on a bead, and so its acceleration, is proportional to the curvature $u''$.
+
+</details>
+:::
+
+**The operator.** Write the wave equation as
+$$
+u_{tt} = -c^2 A u, \qquad A = -\frac{d^2}{d\theta^2}.
+$$
+$A$ takes a shape, a function of the angle, and returns a new shape: minus its second derivative. It is the continuous version of the matrix $K/h^2$ from the beads, since $(Kv)_j/h^2 = -(v_{j+1} - 2v_j + v_{j-1})/h^2$.
+
+**Which shapes.** A shape on the loop is a function $f(\theta)$ that returns to itself after one turn, $f(\theta + 2\pi) = f(\theta)$. The space of all such shapes with $\int_0^{2\pi}|f|^2\,d\theta$ finite is called [$L^2(S^1)$](glossary.qmd#l2), where $S^1$ is the circle. It has an inner product $\langle f, g\rangle = \int_0^{2\pi} f\,\bar g\,d\theta$, which does for shapes what the dot product does for columns of numbers: it says when two shapes are perpendicular.
+
+**Eigenfunctions and eigenvalues.** An eigenfunction is a nonzero shape that $A$ only stretches: $Af = \lambda f$. Try $e^{in\theta}$, a wave that winds $n$ times around the loop:
+$$
+A\,e^{in\theta} = -\frac{d^2}{d\theta^2}e^{in\theta} = n^2\,e^{in\theta}.
+$$
+The wave closes up after one turn exactly when $n$ is a whole number. So the [spectrum](glossary.qmd#spectrum) of $A$ is $\{0, 1, 4, 9, 16, \dots\}$. Each $n^2$ with $n \ge 1$ has two eigenfunctions, $e^{in\theta}$ and $e^{-in\theta}$, or equivalently $\cos n\theta$ and $\sin n\theta$: one wave traveling each way, the same pairing as on the ring. The first fold below proves that there are no other eigenvalues.
+
+**Frequencies.** The shape $\cos(n\theta)\cos(\omega t)$ solves $u_{tt} = -c^2Au$ when $\omega^2 = c^2 n^2$. So the angular frequencies are $\omega_n = c\,n$, exactly $n$ times the lowest. The eigenvalues are perfect squares, and the frequencies, their square roots, are whole numbers. The ring of beads approaches this from below:
+
+| mode $k$ | 8 beads | 32 beads | loop |
+|:--|--:|--:|--:|
+| 1 | 1 | 1 | 1 |
+| 2 | 1.848 | 1.990 | 2 |
+| 3 | 2.414 | 2.962 | 3 |
+| 4 | 2.613 | 3.904 | 4 |
+
+: Frequency of mode $k$ divided by the frequency of mode 1. On the ring of $N$ beads the ratio is $\sin(\pi k/N)/\sin(\pi/N)$. {.striped}
+
+**The Fourier series is the eigenfunction expansion.** With the beads, we wrote the starting shape as a sum of eigenvectors and let each one swing on its own. Here the same move reads
+$$
+f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{\langle f, e^{in\theta}\rangle}{\langle e^{in\theta}, e^{in\theta}\rangle} = \frac{1}{2\pi}\int_0^{2\pi} f(\theta)\,e^{-in\theta}\,d\theta ,
+$$
+which is the [Fourier series](https://en.wikipedia.org/wiki/Fourier_series) of $f$. Released from rest in the shape $f$, the loop moves as
+$$
+u(\theta, t) = \sum_{n} c_n\,e^{in\theta}\cos(c\,|n|\,t).
+$$
+Term $n$ repeats every $2\pi/(cn)$ seconds, so every term, and the whole motion, repeats every $2\pi/c$ seconds, and any sound it makes has a pitch. The second fold shows that every shape in $L^2(S^1)$ can be written this way; this is a theorem, not automatic, because there are infinitely many terms.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
+  <div class="slider"><label for="cM" style="min-width:12rem">Eigenfunctions used, up to n =</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
+  <div class="controls"><button id="cGo" class="primary" aria-pressed="false">Let go</button><button id="cHear">Hear the pluck point</button></div>
+  <div class="readout" id="cShapeRead"></div>
+  <p class="cap">The loop is cut open and laid flat: the left and right edges are the same point. Dashed: the plucked shape, and once released the exact motion, two half-bumps traveling in opposite directions. Solid: the sum of the eigenfunctions cos nθ up to the chosen n, each swinging at its own frequency n.</p>
+</div>
+</div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>The eigenvalues are exactly 0, 1, 4, 9, …</summary>
+
+*Step 1: every eigenvalue is real and at least 0.* For periodic $f$ and $g$, [integrate by parts](https://en.wikipedia.org/wiki/Integration_by_parts) twice. The boundary terms are values at $\theta = 2\pi$ minus values at $\theta = 0$, which cancel because the functions are periodic:
+$$
+\langle Af, g\rangle = -\int_0^{2\pi} f''\,\bar g\,d\theta = \int_0^{2\pi} f'\,\bar g{}'\,d\theta = -\int_0^{2\pi} f\,\bar g{}''\,d\theta = \langle f, Ag\rangle .
+$$
+An operator with this property is called [self-adjoint](glossary.qmd#self-adjoint); it is the analogue of a symmetric matrix. If $Af = \lambda f$ with $f \ne 0$, take $g = f$ in the middle expression: $\lambda\langle f, f\rangle = \int_0^{2\pi}|f'|^2\,d\theta$. Both integrals are real and nonnegative, so $\lambda$ is real and $\lambda \ge 0$.
+
+*Step 2: solve the equation.* $Af = \lambda f$ means $f'' = -\lambda f$.
+
+- If $\lambda = 0$, then $f = a + b\theta$, which is periodic only when $b = 0$. Eigenvalue 0, eigenfunctions the constants: the whole loop lifted at once, the same as mode 0 on the ring.
+- If $\lambda > 0$, write $\lambda = s^2$ with $s > 0$; then $f = a\cos s\theta + b\sin s\theta$. Shifting $\theta$ by $2\pi$ rotates the pair $(a, b)$ by the angle $2\pi s$, so $f(\theta + 2\pi) = f(\theta)$ for all $\theta$ exactly when $2\pi s$ is a multiple of $2\pi$, that is, when $s$ is a whole number $n$. Eigenvalue $n^2$, eigenfunctions $\cos n\theta$ and $\sin n\theta$.
+
+*Step 3: eigenfunctions for different eigenvalues are perpendicular.* Directly, $\int_0^{2\pi} e^{in\theta}e^{-im\theta}\,d\theta = 0$ for $n \ne m$. This also follows from self-adjointness alone, just as for a symmetric matrix.
+
+A remark for readers who know functional analysis: $A$ is not defined on every function in $L^2(S^1)$, only on those with two derivatives in $L^2$, the [Sobolev space](https://en.wikipedia.org/wiki/Sobolev_space) $H^2(S^1)$. On that domain it is an unbounded self-adjoint operator.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Theorem</span>Every shape is a sum of eigenfunctions</summary>
+
+**Statement.** The functions $e^{in\theta}/\sqrt{2\pi}$, $n \in \mathbb{Z}$, form an orthonormal basis of $L^2(S^1)$. That is, for every $f$ in $L^2(S^1)$,
+$$
+\Big\| f - \sum_{|n| \le M} c_n e^{in\theta} \Big\| \to 0 \quad (M \to \infty), \qquad \frac{1}{2\pi}\int_0^{2\pi}|f|^2\,d\theta = \sum_n |c_n|^2 ,
+$$
+the second identity being [Parseval's](https://en.wikipedia.org/wiki/Parseval%27s_theorem).
+
+**Why it needs a proof.** For a symmetric $N\times N$ matrix, $N$ perpendicular eigenvectors automatically span everything, because the space has dimension $N$. Here there are infinitely many eigenfunctions and the space is infinite-dimensional, so one has to show that no shape is perpendicular to all of them. One standard proof shows that trigonometric sums can approximate any continuous periodic function uniformly ([Fejér's theorem](https://en.wikipedia.org/wiki/Fej%C3%A9r%27s_theorem)), and that continuous functions are dense in $L^2$. See Stein and Shakarchi, chapters 2 and 3.
+
+**Pointwise.** Convergence in $L^2$ is convergence of the total squared error. At individual points more care is needed: there are continuous functions whose Fourier series diverge at a point. For the shapes on this page, continuous and made of straight pieces, the series converges at every point. The plucked triangle's coefficients shrink like $1/n^2$, which is why a few terms already look right in the demo.
+
+**The pattern for every later page.** Each instrument's operator $A$ will be self-adjoint and nonnegative, and $(A + 1)^{-1}$ will be a compact operator. The [spectral theorem for compact self-adjoint operators](https://en.wikipedia.org/wiki/Compact_operator_on_Hilbert_space#Spectral_theorem) then gives the same three facts as here: a list of real eigenvalues growing to infinity, perpendicular eigenfunctions, and an expansion of every shape in them. Only the list and the shapes change.
+
+</details>
+:::
+
+::: {.qa}
+<details><summary><span class="label">Reader question</span>$u'' + k^2u = 0$ has a single $k$. Where does an infinite list of frequencies come from?</summary>
+
+In that equation $k$ was chosen in advance, and for each $k$ it has the two solutions $\cos k\theta$ and $\sin k\theta$. The eigenvalue question runs the other way: for which $k$ does a solution go once around the loop and come back to itself? Every whole number $k$ does, and nothing limits how many times a wave may wind around, so the list never ends. The count matches the number of ways the system can move. $N$ beads have $N$ eigenvalues, counted with multiplicity; a continuous loop has infinitely many.
+
+On an infinite straight string, with no loop to close up and no ends, every $k \ge 0$ gives a bounded wave $e^{ikx}$ and the spectrum is the whole half-line $[0, \infty)$. Strictly, these waves are not eigenfunctions, because $\int|e^{ikx}|^2\,dx$ is infinite. This is one reason the general definition of [spectrum](glossary.qmd#spectrum) is more than a list of eigenvalues. A bounded instrument, closed up or with ends, always has a discrete list.
+
+</details>
+:::
+
+::: {.qa}
+<details><summary><span class="label">Reader question</span>How is the shape $\cos n\theta$ related to the factor $\cos(\omega_n t)$?</summary>
+
+Both come from [separating variables](glossary.qmd#separation-of-variables). Look for a motion in which the shape stays fixed and only its size changes: $u = X(\theta)\,q(t)$. Substituting into $u_{tt} = c^2u_{\theta\theta}$ and dividing by $Xq$ gives $q''/q = c^2X''/X$. The left side depends only on $t$ and the right only on $\theta$, so both equal one constant, $-\omega^2$. That splits the equation in two. In time, $q'' = -\omega^2 q$, so $q = \cos(\omega t + \phi)$: the mass on a spring. In space, $-X'' = (\omega/c)^2 X$ with $X$ periodic: the eigenvalue problem for $A$, which allows only $\omega/c = n$. The space part chooses the frequency, and the time part swings at it. The time factor is a cosine for every instrument in this series, because every equation here is second order in time; everything instrument-specific lives in the space part.
+
+</details>
+:::
+
+## What changed, and what comes next
+
+The matrix became a differential operator on a space of functions, the discrete Fourier transform became the Fourier series, and the nearly harmonic spectrum became exactly harmonic. This is the smallest example of an operator's spectrum: one dimension, no ends, constant coefficients.
+
+As far as I know, no common instrument is a closed loop of string. It comes first because, with no ends, there is nothing to decide about what happens at the boundary. The next page ties the ends down. For a string the answer barely changes; for a metal bar, two pages later, it changes completely.
+
+[← Beads on a ring](ring.qmd) · [Next: a string with ends →](violin.qmd)
+
+::: {.refs}
+**References.** E. M. Stein and R. Shakarchi, *Fourier Analysis: An Introduction*, Princeton University Press, 2003, chapters 1–3 (the wave equation, convergence of Fourier series, $L^2$ theory). Wikipedia, [Wave equation](https://en.wikipedia.org/wiki/Wave_equation), [Fourier series](https://en.wikipedia.org/wiki/Fourier_series), [Self-adjoint operator](https://en.wikipedia.org/wiki/Self-adjoint_operator), [Parseval's theorem](https://en.wikipedia.org/wiki/Parseval%27s_theorem) and [Compact operator on Hilbert space](https://en.wikipedia.org/wiki/Compact_operator_on_Hilbert_space).
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  // ---------- beads to loop ----------
+  var NL = [3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 48, 64, 100, 200, 1000, Infinity], N = 6, t0 = performance.now();
+  var rc = document.getElementById("cRing"), rx = rc.getContext("2d");
+  function ratio(k) { return isFinite(N) ? Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N) : k; }
+  function kmax() { return isFinite(N) ? Math.min(10, Math.floor(N / 2)) : 10; }
+  function specA() {
+    var parts = []; for (var k = 1; k <= kmax(); k++) parts.push({ ratio: ratio(k), amp: 1 / k });
+    C.stems(document.getElementById("cSpec"), parts, { W: 320, H: 100, rmax: 10, fs: 8, sw: 3 });
+    var k5 = Math.min(5, kmax()), r = ratio(k5), cents = 1200 * Math.log2(r / k5);
+    document.getElementById("cNo").textContent = isFinite(N) ? N : "∞";
+    document.getElementById("cRead").innerHTML = isFinite(N)
+      ? N + " beads: mode " + k5 + " sounds at <b>" + r.toFixed(3) + "×</b> the lowest instead of " + k5 + "×, " + Math.abs(cents).toFixed(0) + " cents flat (a cent is a hundredth of a piano semitone)"
+      : "A continuous loop: mode k sounds at exactly <b>k×</b> the lowest";
+  }
+  function drawRing(now) {
+    var d = C.fit(rc), W = rc.width, H = rc.height, cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.34, t = (now - t0) / 1000, s = 0.22 * Math.cos(2 * Math.PI * 0.5 * t);
+    rx.clearRect(0, 0, W, H);
+    rx.strokeStyle = C.rgb("--grid"); rx.lineWidth = d; rx.beginPath(); rx.arc(cx, cy, R, 0, 2 * Math.PI); rx.stroke();
+    var n = isFinite(N) ? N : 240;
+    rx.strokeStyle = C.rgb(isFinite(N) ? "--muted" : "--accent"); rx.lineWidth = (isFinite(N) ? 1.5 : 3) * d; rx.beginPath();
+    for (var j = 0; j <= n; j++) { var th = 2 * Math.PI * j / n - Math.PI / 2, r = R * (1 + s * Math.cos(2 * Math.PI * j / n)), x = cx + r * Math.cos(th), y = cy + r * Math.sin(th); if (j) rx.lineTo(x, y); else rx.moveTo(x, y); }
+    rx.stroke();
+    if (isFinite(N)) {
+      var rad = Math.max(1.5, Math.min(6, 60 / N)) * d;
+      for (var j = 0; j < N; j++) { var th = 2 * Math.PI * j / N - Math.PI / 2, r = R * (1 + s * Math.cos(2 * Math.PI * j / N)); rx.fillStyle = C.rgb("--accent"); rx.beginPath(); rx.arc(cx + r * Math.cos(th), cy + r * Math.sin(th), rad, 0, 2 * Math.PI); rx.fill(); }
+    }
+  }
+  var ns = document.getElementById("cN");
+  ns.addEventListener("input", function () { N = NL[parseInt(ns.value, 10)]; specA(); });
+  N = NL[parseInt(ns.value, 10)];
+  document.getElementById("cPlay").addEventListener("click", function () {
+    // no friction in the model; the sound is faded out only so that it stops
+    var parts = []; for (var k = 1; k <= kmax(); k++) parts.push({ f: 196 * ratio(k), amp: 1 / k, tau: 0.9 });
+    C.play(C.render(parts, 2.4), 0.7);
+  });
+
+  // ---------- one pluck, many eigenfunctions ----------
+  var sc = document.getElementById("cShape"), sx = sc.getContext("2d"), M = 3, w = 0.7, going = false, tg = 0, last = null, OMEGA = 2 * Math.PI / 4;
+  function tri(s) { s = ((s % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI); var z = Math.abs(s - Math.PI); return Math.max(0, 1 - z / w); }
+  function an(n) { return n === 0 ? w / (2 * Math.PI) : (n % 2 ? -1 : 1) * 2 * (1 - Math.cos(n * w)) / (Math.PI * n * n * w); }
+  function partial(th, t) { var s = an(0); for (var n = 1; n <= M; n++) s += an(n) * Math.cos(n * th) * Math.cos(n * OMEGA * t); return s; }
+  function exact(th, t) { return 0.5 * (tri(th - OMEGA * t) + tri(th + OMEGA * t)); }
+  function readB() {
+    document.getElementById("cMo").textContent = M;
+    var e = 0; for (var i = 0; i <= 400; i++) { var th = 2 * Math.PI * i / 400; e = Math.max(e, Math.abs(partial(th, 0) - exact(th, 0))); }
+    document.getElementById("cShapeRead").innerHTML = "cos 0θ, cos θ, …, cos " + M + "θ: largest gap from the plucked shape <b>" + e.toFixed(3) + "</b> (peak height 1)";
+  }
+  function drawShape(now) {
+    var d = C.fit(sc), W = sc.width, H = sc.height, L = 12 * d, R = W - 12 * d, base = H * 0.78, amp = H * 0.6;
+    if (going && last != null) tg += (now - last) / 1000; last = now;
+    function X(th) { return L + (R - L) * th / (2 * Math.PI); }
+    sx.clearRect(0, 0, W, H);
+    sx.strokeStyle = C.rgb("--grid"); sx.lineWidth = d; sx.beginPath(); sx.moveTo(L, base); sx.lineTo(R, base); sx.stroke();
+    [L, R].forEach(function (x) { sx.beginPath(); sx.moveTo(x, base - amp - 6 * d); sx.lineTo(x, base + 8 * d); sx.stroke(); });
+    sx.setLineDash([5 * d, 4 * d]); sx.strokeStyle = C.rgb("--muted"); sx.lineWidth = 1.5 * d; sx.beginPath();
+    for (var i = 0; i <= 600; i++) { var th = 2 * Math.PI * i / 600, y = base - amp * exact(th, tg); if (i) sx.lineTo(X(th), y); else sx.moveTo(X(th), y); }
+    sx.stroke(); sx.setLineDash([]);
+    sx.strokeStyle = C.rgb("--accent"); sx.lineWidth = 2.5 * d; sx.beginPath();
+    for (var i = 0; i <= 600; i++) { var th = 2 * Math.PI * i / 600, y = base - amp * partial(th, tg); if (i) sx.lineTo(X(th), y); else sx.moveTo(X(th), y); }
+    sx.stroke();
+    sx.fillStyle = C.rgb("--muted"); sx.font = (11 * d) + "px 'IBM Plex Mono', monospace";
+    sx.fillText("θ = 0", L, H - 4 * d); var tw = sx.measureText("θ = 2π (same point)").width; sx.fillText("θ = 2π (same point)", R - tw, H - 4 * d);
+  }
+  var ms = document.getElementById("cM");
+  ms.addEventListener("input", function () { M = parseInt(ms.value, 10); readB(); });
+  var go = document.getElementById("cGo");
+  go.addEventListener("click", function () {
+    going = !going; go.setAttribute("aria-pressed", going); go.textContent = going ? "Pause" : (tg > 0 ? "Continue" : "Let go");
+  });
+  document.getElementById("cHear").addEventListener("click", function () {
+    // the motion at the pluck point theta = pi: a_n cos(n pi) = 2(1 - cos nw)/(pi n^2 w), all positive
+    var parts = []; for (var n = 1; n <= Math.max(1, M); n++) parts.push({ f: 196 * n, amp: an(n) * (n % 2 ? -1 : 1), tau: 0.9 });
+    C.play(C.render(parts, 2.4), 0.7);
+  });
+
+  function frame(now) { drawRing(now); drawShape(now); requestAnimationFrame(frame); }
+  C.onTheme(function () { specA(); });
+  specA(); readB(); requestAnimationFrame(frame);
+})();
+</script>
+```

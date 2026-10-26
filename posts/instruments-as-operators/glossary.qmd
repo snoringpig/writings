@@ -1,0 +1,167 @@
+---
+title: "Glossary"
+subtitle: "Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+date-modified: 2026-10-25
+resources: [core.js, ins.css]
+---
+
+::: {.series-nav}
+[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · **Glossary**
+:::
+
+Every technical word in the series links here the first time it appears on a page. Each entry gives a plain definition and a link to a fuller explanation.
+
+## Sound
+
+[Hertz (Hz)]{#hertz}
+: One cycle per second, the unit of frequency. The A above middle C is tuned to 440 Hz. [Wikipedia](https://en.wikipedia.org/wiki/Hertz)
+
+[Periodic]{#periodic}
+: A signal $p(t)$ is periodic with period $P$ if it repeats exactly every $P$ seconds: $p(t + P) = p(t)$ for all $t$. [Wikipedia](https://en.wikipedia.org/wiki/Periodic_function)
+
+[Pitch]{#pitch}
+: How high or low a note sounds. For a periodic sound, the pitch is heard at the repetition rate $1/P$, even when no component at that frequency is present. [Wikipedia](https://en.wikipedia.org/wiki/Pitch_(music)), and [page 0](note.qmd)
+
+[Partial, overtone]{#partial}
+: A sound can be split into components of single frequencies; each one is a partial. An overtone is any partial above the lowest. [Wikipedia](https://en.wikipedia.org/wiki/Overtone)
+
+[Fundamental]{#fundamental}
+: The lowest frequency $f = 1/P$ of a periodic sound. Usually, though not always, the strongest partial. [Wikipedia](https://en.wikipedia.org/wiki/Fundamental_frequency)
+
+[Harmonic]{#harmonic}
+: A partial at a whole-number multiple $nf$ of the fundamental. A periodic sound contains only harmonics. [Wikipedia](https://en.wikipedia.org/wiki/Harmonic)
+
+[Inharmonic]{#inharmonic}
+: Having partials that are not whole-number multiples of one frequency. A bell, a drum and a kalimba tine are strongly inharmonic; a piano string is slightly inharmonic. [Wikipedia](https://en.wikipedia.org/wiki/Inharmonicity)
+
+[Timbre]{#timbre}
+: What tells two notes of the same pitch and loudness apart, such as a violin and a flute both playing A. It depends mostly on the relative strengths of the partials and how they change over the course of the note. [Wikipedia](https://en.wikipedia.org/wiki/Timbre)
+
+[Cent]{#cents}
+: A unit for small differences in pitch: one hundredth of a piano semitone, so an octave is 1200 cents. Two frequencies in the ratio $r$ are $1200\log_2 r$ cents apart. Trained listeners notice a few cents. [Wikipedia](https://en.wikipedia.org/wiki/Cent_(music))
+
+[Octave, fifth, twelfth]{#octave}
+: Musical intervals named by frequency ratio. An octave is a ratio of 2, a fifth about 3/2, and a twelfth, an octave plus a fifth, a ratio of 3. Two notes an octave apart sound like "the same note, higher". [Wikipedia](https://en.wikipedia.org/wiki/Interval_(music))
+
+## Vibration
+
+[Linear]{#linear}
+: An equation is linear if sums and multiples of solutions are again solutions. All the equations in this series are linear, which holds well for the small vibrations of instruments. [Wikipedia](https://en.wikipedia.org/wiki/Linear_differential_equation)
+
+[Mode, normal mode]{#mode}
+: A motion in which every part of an object swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small vibration is a sum of modes. [Wikipedia](https://en.wikipedia.org/wiki/Normal_mode)
+
+[Standing wave]{#standing-wave}
+: A wave whose shape stays in place, such as a mode of a string. It can be seen as two equal waves traveling in opposite directions. [Wikipedia](https://en.wikipedia.org/wiki/Standing_wave)
+
+[Node, antinode]{#node}
+: A node is a point of a standing wave that does not move; an antinode is a point that moves the most. Touching a string lightly at a node of a mode does not disturb that mode. [Wikipedia](https://en.wikipedia.org/wiki/Node_(physics))
+
+[Wave equation]{#wave-equation}
+: The equation $u_{tt} = c^2u_{xx}$ for the height $u(x, t)$ of a stretched string, and its relatives for air in a pipe and for a drumhead. The constant $c$ is the speed at which a bump travels. [Wikipedia](https://en.wikipedia.org/wiki/Wave_equation), and [page 3](circle.qmd)
+
+[Boundary condition]{#boundary-condition}
+: A rule for what happens at the edge of a vibrating object, set by how it is held. A string tied down at an end has $u = 0$ there. A bar clamped at an end can neither move nor tilt there: $u = 0$ and $u' = 0$. At the open end of a pipe the pressure equals room pressure. [Wikipedia](https://en.wikipedia.org/wiki/Boundary_value_problem), and [page 4](violin.qmd)
+
+[Damping]{#damping}
+: Friction that drains energy from a vibration, so that it dies away. A term $b\,u_t$ in the equation, proportional to velocity, is the simplest model. [Wikipedia](https://en.wikipedia.org/wiki/Damping)
+
+[Helmholtz motion]{#helmholtz-motion}
+: The way a bowed string moves. The string sticks to the bow, slips back, and sticks again; seen from the side, a single sharp corner races back and forth along the string, one round trip per period. [J. Wolfe, UNSW: The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html)
+
+[Cantilever, clamped bar]{#cantilever}
+: A bar fixed rigidly at one end, so that end can neither move nor tilt, and free at the other, like a diving board. A kalimba tine is a cantilever: it is pressed against a bridge near one end and its tip is free. [Wikipedia](https://en.wikipedia.org/wiki/Cantilever)
+
+[Euler–Bernoulli beam]{#beam}
+: The standard model of a bending bar: $\mu u_{tt} = -EI\,u_{xxxx}$. A bar resists bending, not stretching, which gives four derivatives in space instead of two. [Wikipedia](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory)
+
+[Young's modulus]{#youngs-modulus}
+: How stiff a material is when stretched: the force per unit area needed, divided by the fraction by which it lengthens. Steel is about 200 GPa; nylon, used for classical guitar strings, is a few GPa. [Wikipedia](https://en.wikipedia.org/wiki/Young%27s_modulus)
+
+[Second moment of area]{#second-moment}
+: How the shape of a bar's cross-section resists bending, written $I$. For a rectangle of width $b$ and thickness $h$, $I = bh^3/12$: doubling the thickness makes the bar eight times harder to bend. [Wikipedia](https://en.wikipedia.org/wiki/Second_moment_of_area)
+
+[Bulk modulus, adiabatic]{#bulk-modulus}
+: How hard a material is to compress: the pressure needed, divided by the fraction by which the volume shrinks. In a sound wave the squeezes are too quick for heat to flow in or out, which is called adiabatic, and for air this gives about $1.4 \times$ atmospheric pressure. [Wikipedia](https://en.wikipedia.org/wiki/Bulk_modulus)
+
+[Free reed]{#free-reed}
+: A thin metal tongue fixed at one end that swings through a closely fitting slot, opening and shutting it like a valve. Harmonicas and accordions use free reeds. [Wikipedia](https://en.wikipedia.org/wiki/Free_reed_aerophone)
+
+## Piano parts
+
+[Damper]{#damper}
+: A felt pad that rests on a piano string and stops it when the key is released. Each key lifts its own damper while held; the right pedal lifts them all. The highest strings have no dampers. [Wikipedia: Sustain pedal](https://en.wikipedia.org/wiki/Sustain_pedal)
+
+[Soft pedal, una corda]{#soft-pedal}
+: The left pedal. On a grand it shifts the hammers sideways so they hit fewer strings; on an upright it moves the hammers closer to the strings, so they strike more gently. [Wikipedia](https://en.wikipedia.org/wiki/Soft_pedal)
+
+[Practice pedal, mute]{#practice-pedal}
+: The middle pedal on many uprights. It lowers a strip of felt between the hammers and the strings, making the sound much quieter and duller. [Wikipedia: Piano pedals](https://en.wikipedia.org/wiki/Piano_pedals)
+
+## Matrices and operators
+
+[Eigenvector, eigenvalue]{#eigenvector}
+: A nonzero vector $v$ that a matrix $K$ only stretches: $Kv = \lambda v$. The number $\lambda$ is the eigenvalue. For vibrations, eigenvectors are mode shapes and eigenvalues are squared frequencies, up to a constant. [Wikipedia](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors)
+
+[Eigenvalue]{#eigenvalue}
+: See [eigenvector](#eigenvector).
+
+[Multiplicity]{#multiplicity}
+: The number of independent eigenvectors that share one eigenvalue. Two modes with the same frequency, such as a wave traveling each way around a ring, give multiplicity 2. [Wikipedia](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors#Algebraic_multiplicity)
+
+[Symmetric matrix]{#symmetric-matrix}
+: A square matrix equal to its own mirror image across the diagonal. The spectral theorem says its eigenvalues are real and it has a full set of perpendicular eigenvectors. [Wikipedia](https://en.wikipedia.org/wiki/Spectral_theorem)
+
+[Circulant matrix]{#circulant}
+: A square matrix in which each row is the row above shifted one place to the right, wrapping around. Whatever its entries, its eigenvectors are the waves of the discrete Fourier transform, the next entry. [Wikipedia](https://en.wikipedia.org/wiki/Circulant_matrix)
+
+[Discrete Fourier transform (DFT)]{#dft}
+: Writing a list of $N$ numbers as a sum of the waves $e^{2\pi ijk/N}$, $k = 0, \dots, N-1$. [Wikipedia](https://en.wikipedia.org/wiki/Discrete_Fourier_transform), and [page 2](ring.qmd)
+
+[Operator]{#operator}
+: A rule that takes a function and returns another function. All operators in this series are linear, and they take a shape and return the restoring force on it per unit mass. Example: $A = -d^2/d\theta^2$. [Wikipedia](https://en.wikipedia.org/wiki/Operator_(mathematics))
+
+[Eigenfunction]{#eigenfunction}
+: A nonzero function $f$ that an operator only stretches: $Af = \lambda f$. Example: $-\frac{d^2}{d\theta^2}\cos 3\theta = 9\cos 3\theta$. [Wikipedia](https://en.wikipedia.org/wiki/Eigenfunction)
+
+[Spectrum]{#spectrum}
+: For a matrix, the set of its eigenvalues. For an operator on an infinite-dimensional space, the set of numbers $\lambda$ for which $A - \lambda$ has no well-behaved inverse; this can contain more than eigenvalues. For every instrument in this series it is simply a list of eigenvalues, and the frequencies are their square roots, up to a constant. [Wikipedia](https://en.wikipedia.org/wiki/Spectrum_(functional_analysis))
+
+[Inner product]{#inner-product}
+: A way to multiply two vectors or two functions to get a number, generalizing the dot product. For functions on the circle, $\langle f, g\rangle = \int_0^{2\pi} f\,\bar g\,d\theta$. Two functions are perpendicular if it is zero. [Wikipedia](https://en.wikipedia.org/wiki/Inner_product_space)
+
+[$L^2(S^1)$]{#l2}
+: The space of functions on the circle $S^1$ with $\int_0^{2\pi}|f|^2\,d\theta$ finite, with the inner product above. It is where the shapes of a vibrating loop live. [Wikipedia](https://en.wikipedia.org/wiki/Lp_space)
+
+[Self-adjoint]{#self-adjoint}
+: An operator $A$ with $\langle Af, g\rangle = \langle f, Ag\rangle$ for all allowed $f$ and $g$: the analogue of a symmetric matrix. Its eigenvalues are real, and its eigenfunctions for different eigenvalues are perpendicular. [Wikipedia](https://en.wikipedia.org/wiki/Self-adjoint_operator)
+
+[Fourier series]{#fourier-series}
+: Writing a periodic function as a sum of sines and cosines, or of $e^{in\theta}$, of whole-number frequencies. On [page 3](circle.qmd) this is the expansion in eigenfunctions of $-d^2/d\theta^2$. [Wikipedia](https://en.wikipedia.org/wiki/Fourier_series)
+
+[Laplacian]{#laplacian}
+: The operator $\Delta u = u_{xx} + u_{yy}$ in the plane. At each point it is proportional to how far $u$ sits below the average of its surroundings. A drumhead's operator is $-c^2\Delta$. [Wikipedia](https://en.wikipedia.org/wiki/Laplace_operator)
+
+[Separation of variables]{#separation-of-variables}
+: Looking for solutions that are a product of a function of one variable and a function of another, such as $u(x, t) = X(x)\,q(t)$. It splits one equation in several variables into simpler equations in one variable each. [Wikipedia](https://en.wikipedia.org/wiki/Separation_of_variables)
+
+[Bessel function]{#bessel}
+: The functions $J_m(r)$ that describe how the modes of a round drum vary from the center to the rim, as sines do along a string. Their zeros set the drum's frequencies. [Wikipedia](https://en.wikipedia.org/wiki/Bessel_function)
+
+[Divergence theorem]{#divergence-theorem}
+: The total flow out through the boundary of a region equals the sum, over the region, of how much flow is created at each point. It turns forces along the edge of a patch of drumhead into an integral over the patch. [Wikipedia](https://en.wikipedia.org/wiki/Divergence_theorem)
+
+[Rayleigh quotient]{#rayleigh-quotient}
+: For a self-adjoint operator, $R(f) = \langle Af, f\rangle/\langle f, f\rangle$. Its smallest value over all shapes is the lowest eigenvalue, at the lowest mode. It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. [Wikipedia](https://en.wikipedia.org/wiki/Rayleigh_quotient)
+
+## Shape and spectrum
+
+[Weyl's law]{#weyl}
+: How many eigenvalues lie below a large number, to leading order. For a drum it depends only on the area, with a correction from the perimeter, so the spectrum of a drum "hears" its area. [Wikipedia](https://en.wikipedia.org/wiki/Weyl_law)
+
+[Isospectral]{#isospectral}
+: Having the same spectrum, counted with multiplicity. Gordon, Webb and Wolpert found two differently shaped drums that are isospectral. [Wikipedia: Hearing the shape of a drum](https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum)

@@ -1,6 +1,6 @@
 ---
-title: "The drum"
-subtitle: "Membranes · Instruments as Operators"
+title: "8 · The drum"
+subtitle: "Two dimensions · Instruments as Operators"
 format:
   html:
     html-math-method: katex
@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [Foundations](foundations.qmd) · [Violin](violin.qmd) · [Clarinet](clarinet.qmd) · [Kalimba](kalimba.qmd) · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · **Drum**
+[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · **8 Drum** · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
-The string's operator in two dimensions. The zeros of Bessel functions replace the whole numbers, and where you strike decides which modes speak.
-
-::: {.family}
-**Family: membranes.** Toms, snares and timpani share the operator $-c^2\Delta$ on a disk. They differ in constants (tension, size, head mass) and in what surrounds the head: a timpani's kettle loads the air and pulls its modes toward a harmonic series, which a tom lacks.
+::: {.newidea}
+**New idea on this page.** On a surface the operator is the [Laplacian](glossary.qmd#laplacian). For a round drum its eigenfunctions are built from [Bessel functions](glossary.qmd#bessel), and the frequencies are set by their zeros, which are not evenly spaced. That is why a drum has no clear pitch.
 :::
 
-## Play it
+## For everyone
+
+A drumhead is a sheet pulled tight in every direction, like a trampoline. Tap it anywhere below. The head vibrates in many patterns at once, at frequencies 1, 1.59, 2.14, 2.30, … times the lowest; these do not fit any common base frequency, so you hear a thud rather than a note.
 
 ```{=html}
 <style>
@@ -43,24 +43,17 @@ The string's operator in two dimensions. The zeros of Bessel functions replace t
 </div>
 ```
 
-## Deriving the operator
-
-1. A drumhead is a sheet under tension $T$, measured as force per unit length of any cut through it, with mass $\sigma$ per unit area. Take a small patch $D$ of it.
-2. Along each piece $ds$ of the patch's edge, the outside sheet pulls with force $T\,ds$ along the surface. For small slopes its vertical part is $T\,\partial_n u\,ds$, where $\partial_n u$ is the slope in the outward direction.
-3. Adding these up and applying the divergence theorem gives the net vertical force,
-$$
-T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
-$$
-4. Newton's law for the patch is $\iint_D \sigma u_{tt}\,dA = T\iint_D \Delta u\,dA$. This holds for every patch, so the integrands agree.
-
-::: {.result}
-**The drumhead's operator.**
-$$
-u_{tt} = -\mathcal{L}u,\qquad \mathcal{L} = -c^2\Delta,\qquad c^2 = T/\sigma,\qquad u = 0 \text{ on the rim}.
-$$
+::: {.family}
+**Same operator, different constants.** Toms, snares and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it: a timpani's kettle and the air it encloses shift the head's modes toward nearly whole-number ratios, which gives a timpani a pitch that a tom lacks (Fletcher and Rossing, chapter 18).
 :::
 
-In one dimension the patch is a segment, its edge is two endpoints, and step 3 is the fundamental theorem of calculus. That is the foundations' equation again.
+## The mathematics
+
+**The operator.** A drumhead with tension $T$, measured as force per unit length of any cut through it, and mass $\sigma$ per unit area obeys
+$$
+u_{tt} = c^2\,\Delta u, \qquad \Delta u = u_{xx} + u_{yy}, \qquad c^2 = \frac{T}{\sigma}, \qquad u = 0 \text{ on the rim}.
+$$
+The operator is $-c^2\Delta$. On a string, the restoring force was proportional to how far a point sits below the average of its two neighbors; on a sheet it is proportional to how far a point sits below the average of the points around it, and that is what $\Delta u$ measures.
 
 ```{=html}
 <div class="ins">
@@ -79,15 +72,52 @@ In one dimension the patch is a segment, its edge is two endpoints, and step 3 i
 </div>
 ```
 
-## Spectrum
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Newton's law for a patch of drumhead</summary>
 
-Separating variables in polar coordinates gives standing waves $J_m(kr)\cos m\theta$ and $J_m(kr)\sin m\theta$, with $J_m$ a Bessel function; the second solution of Bessel's equation blows up at the center and is discarded. The rim condition is $J_m(ka) = 0$, so
+1. Take any small patch $D$ of the head. Along each short piece $ds$ of its edge, the sheet outside pulls with force $T\,ds$, along the surface and outward.
+2. For small slopes the vertical part of that pull is $T\,\partial_n u\,ds$, where $\partial_n u$ is the slope of the head in the outward direction across the edge. This is the string's $T\sin\theta \approx T\tan\theta$ again.
+3. Add these up around the edge. The [divergence theorem](glossary.qmd#divergence-theorem) turns the sum around the edge into a sum over the inside:
+$$
+T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
+$$
+4. Newton's law for the patch reads $\iint_D \sigma\,u_{tt}\,dA = T\iint_D \Delta u\,dA$. This holds for every patch, however small, so the integrands are equal at every point: $\sigma u_{tt} = T\Delta u$.
+
+In one dimension a patch is a segment, its edge is its two endpoints, and step 3 is the fundamental theorem of calculus, $u_x(b) - u_x(a) = \int_a^b u_{xx}\,dx$. That is the string's equation again.
+
+</details>
+:::
+
+**Spectrum.** For a round drum of radius $a$, use polar coordinates $(r, \theta)$. The modes are
+$$
+J_m(k r)\cos m\theta \quad\text{and}\quad J_m(kr)\sin m\theta, \qquad m = 0, 1, 2, \dots,
+$$
+where $J_m$ is the Bessel function of order $m$. The rim condition $J_m(ka) = 0$ picks out the allowed $k$, so
 $$
 f_{m,n} = \frac{c\,j_{m,n}}{2\pi a},
 $$
-where $j_{m,n}$ is the $n$-th zero of $J_m$. These zeros are not evenly spaced and no common base frequency fits them, so the drum has no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, $\cos m\theta$ and $\sin m\theta$: the round head's symmetry, visible in the spectrum.
+where $j_{m,n}$ is the $n$-th positive zero of $J_m$. Listed in order, the frequencies relative to the lowest are $1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots$ These are not evenly spaced and no common base frequency fits them, so there is no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head's symmetry, visible as a [multiplicity](glossary.qmd#multiplicity) of 2.
 
-A strike at $p$, heard at $q$, gives mode $k$ the weight $X_k(p)X_k(q)/\lVert X_k\rVert^2$, the eigen-expansion of a point kick. Tap a stem to see one mode on the drumhead and hear it alone.
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Separation of variables in polar coordinates</summary>
+
+1. *Look for a fixed shape.* A mode is $u = X(r, \theta)\cos\omega t$ with $-\Delta X = k^2X$, $k = \omega/c$, and $X = 0$ at $r = a$.
+2. *Laplacian in polar coordinates.* $\Delta X = X_{rr} + \frac1r X_r + \frac{1}{r^2}X_{\theta\theta}$.
+3. *Separate.* Try $X = R(r)\,\Theta(\theta)$, a [separation of variables](glossary.qmd#separation-of-variables). Substituting and multiplying by $r^2/(R\Theta)$ gives
+$$
+\frac{r^2R'' + rR' + k^2r^2R}{R} = -\frac{\Theta''}{\Theta}.
+$$
+The left side depends only on $r$, the right only on $\theta$, so both equal one constant.
+4. *The angle.* Going once around the drum must return $\Theta$ to itself, so $-\Theta'' = m^2\Theta$ with $\Theta$ periodic. This is exactly the eigenvalue problem of the [circle page](circle.qmd): $m$ is a whole number and $\Theta = \cos m\theta$ or $\sin m\theta$.
+5. *The radius.* What remains is *Bessel's equation*, $r^2R'' + rR' + (k^2r^2 - m^2)R = 0$. It has two independent solutions; one, $J_m(kr)$, is finite at the center, and the other becomes infinite there, so a drumhead cannot use it.
+6. *The rim.* $R(a) = 0$ means $J_m(ka) = 0$, so $ka$ must be one of the zeros $j_{m,1} < j_{m,2} < \cdots$ of $J_m$.
+
+The zeros have no closed form; this page computes them numerically. For large $n$ they approach $j_{m,n} \approx (n + \tfrac m2 - \tfrac14)\pi$, evenly spaced for one fixed $m$, but the different $m$ interleave, and the low ones are not close to any common grid.
+
+</details>
+:::
+
+**Where you strike.** A strike at a point $p$, heard at a point $q$, gives mode $k$ the weight $X_k(p)\,X_k(q)/\lVert X_k\rVert^2$, where $\lVert X_k\rVert^2 = \iint X_k^2\,dA$. This is the eigenfunction expansion of a sharp kick at one point, the same rule as the piano's hammer. Strike the center and only the round modes, $m = 0$, sound, because every other mode has zero height there. Tap a stem to see one mode on the drumhead and hear it alone.
 
 ```{=html}
 <div class="ins">
@@ -99,7 +129,15 @@ A strike at $p$, heard at $q$, gives mode $k$ the weight $X_k(p)X_k(q)/\lVert X_
 </div>
 ```
 
-[← The piano](piano.qmd) · [Back to the series](index.qmd)
+## What changed, and what comes next
+
+The operator moved from a line to a surface, and the circle's eigenfunctions reappeared inside the drum's, as the angular part. The spectrum is no longer nearly evenly spaced, and the pitch is gone. The last page turns the question around: from the spectrum alone, what can be known about the drum?
+
+[← The piano](piano.qmd) · [Next: what the spectrum knows →](shape.qmd)
+
+::: {.refs}
+**References.** Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane), [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums).
+:::
 
 ```{=html}
 <script src="core.js"></script>

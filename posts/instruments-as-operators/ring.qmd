@@ -1,0 +1,182 @@
+---
+title: "2 · Beads on a ring"
+subtitle: "Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+date-modified: 2026-10-25
+resources: [core.js, ins.css]
+---
+
+::: {.series-nav}
+[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · **2 Beads on a ring** · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+:::
+
+::: {.newidea}
+**New idea on this page.** Many coupled masses move in a few special shapes, called [modes](glossary.qmd#mode), each swinging at its own frequency. Finding them means finding the [eigenvectors](glossary.qmd#eigenvector) and [eigenvalues](glossary.qmd#eigenvalue) of a matrix. On a ring, the modes are exactly the waves of the discrete Fourier transform.
+:::
+
+## For everyone
+
+Thread $N$ beads on a closed loop of string pulled tight; each bead is tugged by the string toward its two neighbors. Pluck one bead and the motion looks complicated, but it is a sum of $N$ simple motions, the modes, in each of which every bead swings at one shared frequency and the shape stays fixed. The buttons below play one mode at a time.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="rCanvas" style="height:300px" aria-label="Beads on a ring, displacements drawn in and out of the circle"></canvas>
+  <div class="slider"><label for="rN">Beads N</label><input type="range" id="rN" min="3" max="24" step="1" value="8"><output id="rNo"></output></div>
+  <div class="controls" id="rModes" role="group" aria-label="Play one mode"></div>
+  <div class="controls"><button id="rPluck">Pluck one bead</button><button id="rPlay" class="primary">Hear this motion</button></div>
+  <svg class="spec" id="rSpec" viewBox="0 0 320 100" style="max-width:520px" aria-label="Frequencies of the modes relative to the lowest"></svg>
+  <div class="readout" id="rRead"></div>
+  <p class="cap">Displacements are drawn in and out of the circle so you can see them; on a real ring the beads move up and down, out of the page. Mode k is a wave that fits k times around the ring. Stems: frequencies of the modes as multiples of the lowest, with height showing how much of each mode the current motion contains.</p>
+</div>
+</div>
+```
+
+## The mathematics
+
+**The force on one bead.** Let $u_j$ be the height of bead $j$, with beads spaced $h$ apart along a string of tension $T$, each of mass $m$. Because the loop closes, bead $N$ is next to bead 1, so indices are counted around the ring. For small displacements, Newton's law for bead $j$ is
+$$
+m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
+$$
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Why the force is the difference between a bead and its neighbors</summary>
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 160" role="img" aria-label="A bead pulled by the string toward its two neighbors">
+  <path class="dash" d="M 20 120 L 400 120"/>
+  <path class="ink" d="M 60 110 L 210 60 L 360 100"/>
+  <circle cx="60" cy="110" r="6" class="fillacc"/><circle cx="210" cy="60" r="7" class="fillacc"/><circle cx="360" cy="100" r="6" class="fillacc"/>
+  <path class="pos" d="M 210 60 L 150 80"/><path class="pos" d="M 210 60 L 270 76"/>
+  <path class="neg" d="M 210 60 L 210 110"/>
+  <text x="40" y="140">bead j−1</text><text x="190" y="40">bead j</text><text x="340" y="140">bead j+1</text>
+  <text x="120" y="76">T</text><text x="280" y="70">T</text><text x="218" y="100">net pull</text>
+</svg>
+```
+
+1. The string between beads $j$ and $j+1$ pulls bead $j$ along itself with force $T$.
+2. Its slope is $(u_{j+1} - u_j)/h$. For small slopes the vertical part of the pull is $T\sin\theta \approx T\tan\theta = T(u_{j+1} - u_j)/h$.
+3. The string on the other side contributes $T(u_{j-1} - u_j)/h$.
+4. Adding the two and applying Newton's law gives the equation above. The bracket $u_{j+1} - 2u_j + u_{j-1}$ is twice the gap between the average of the neighbors and bead $j$ itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up.
+
+The assumptions are small slopes and a tension that does not change as the string flexes.
+
+</details>
+:::
+
+**The matrix.** Collect the heights into a column $u = (u_1, \dots, u_N)$. The equations for all beads at once read $\ddot u = -\frac{T}{mh}\,K u$, where $K$ is the $N\times N$ matrix with 2 on the diagonal, $-1$ just above and below it, and $-1$ in the two corners, because bead 1 and bead $N$ are neighbors. For $N = 5$,
+$$
+K = \begin{pmatrix} 2 & -1 & 0 & 0 & -1\\ -1 & 2 & -1 & 0 & 0\\ 0 & -1 & 2 & -1 & 0\\ 0 & 0 & -1 & 2 & -1\\ -1 & 0 & 0 & -1 & 2 \end{pmatrix}.
+$$
+Each row is the row above shifted one place to the right, wrapping around. A matrix with this property is called [circulant](https://en.wikipedia.org/wiki/Circulant_matrix).
+
+**Eigenvectors and eigenvalues.** A nonzero column $v$ is an eigenvector of $K$, with eigenvalue $\lambda$, if $Kv = \lambda v$: the matrix only stretches it. The set of all eigenvalues is the [spectrum](glossary.qmd#spectrum) of $K$.
+
+**Modes.** If $Kv = \lambda v$, then $u(t) = v\cos(\omega t)$ is a motion of the beads, provided $\omega^2 = \frac{T}{mh}\lambda$. To check, differentiate twice: $\ddot u = -\omega^2 v\cos\omega t$, while $-\frac{T}{mh}Ku = -\frac{T}{mh}\lambda v\cos\omega t$. Every bead swings at the same frequency $\omega$, in the fixed shape $v$. This is the mass on a spring again, once for each eigenvector.
+
+**A small example, three beads.** For $N = 3$,
+$$
+K = \begin{pmatrix} 2 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 2 \end{pmatrix}.
+$$
+The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$, so it is an eigenvector with eigenvalue 0. Every bead moves up together, nothing stretches, and nothing pulls back. Any column whose entries add up to zero, such as $(1, -1, 0)$ or $(1, 1, -2)$, gives $Kv = 3v$. So the spectrum is $\{0, 3, 3\}$: two genuinely different shapes share one frequency. That eigenvalue has *multiplicity* 2.
+
+**Any number of beads.** Try the column $v_j = e^{2\pi i jk/N}$, a wave that winds $k$ times around the ring. Then
+$$
+(Kv)_j = 2v_j - v_{j+1} - v_{j-1} = \big(2 - e^{2\pi ik/N} - e^{-2\pi ik/N}\big)\,v_j = 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j .
+$$
+So these waves are the eigenvectors, for $k = 0, 1, \dots, N-1$, and the spectrum is $\{4\sin^2(\pi k/N)\}$. Their real and imaginary parts, $\cos(2\pi jk/N)$ and $\sin(2\pi jk/N)$, are the shapes the mode buttons play. These are precisely the basis vectors of the [discrete Fourier transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform): the Fourier transform is what turns a ring of coupled beads into independent oscillators. Waves winding $k$ and $N-k$ times have the same eigenvalue, one traveling each way around the ring, which is why most eigenvalues come in pairs.
+
+**Not quite whole numbers.** The frequencies are proportional to $\sin(\pi k/N)$, which is not proportional to $k$, so the beads are not exactly harmonic. For small $k$, $\sin(\pi k/N) \approx \pi k/N$, and the low modes are nearly harmonic; raise $N$ in the demo and watch the stems approach the integer grid.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Every motion is a sum of modes</summary>
+
+The matrix $K$ is symmetric: the entry in row $i$, column $j$ equals the entry in row $j$, column $i$. By the [spectral theorem for symmetric matrices](https://en.wikipedia.org/wiki/Spectral_theorem), $K$ has $N$ mutually orthogonal eigenvectors $v^{(1)}, \dots, v^{(N)}$ with real eigenvalues $\lambda_1, \dots, \lambda_N \ge 0$. Write any starting shape as $u(0) = \sum_k c_k v^{(k)}$ and any starting velocity as $\dot u(0) = \sum_k d_k v^{(k)}$. Each coefficient obeys its own mass-on-a-spring equation, so the motion is $u(t) = \sum_k \big(c_k\cos\omega_k t + \frac{d_k}{\omega_k}\sin\omega_k t\big)v^{(k)}$, read as $c_k + d_k t$ when $\omega_k = 0$. The eigenvalues are nonnegative because $u^{\mathsf T}Ku = \sum_j (u_{j+1} - u_j)^2 \ge 0$.
+
+</details>
+:::
+
+## What changed, and what comes next
+
+The operator is now a matrix, $\frac{T}{mh}K$, and its spectrum, the list of its eigenvalues, gives the frequencies. On the next page the beads crowd together. The matrix becomes a [differential operator](glossary.qmd#operator), the waves $e^{2\pi ijk/N}$ become $e^{ik\theta}$, the discrete Fourier transform becomes the Fourier series, and the near-harmonic spectrum becomes exactly harmonic.
+
+[← One mass on a spring](oscillator.qmd) · [Next: the circle →](circle.qmd)
+
+::: {.refs}
+**References.** Wikipedia, [Circulant matrix](https://en.wikipedia.org/wiki/Circulant_matrix), [Discrete Fourier transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform), [Normal mode](https://en.wikipedia.org/wiki/Normal_mode) and [Spectral theorem](https://en.wikipedia.org/wiki/Spectral_theorem).
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, N = 8, a = [], b = [], u0 = null, t0 = performance.now(), mode = 1;
+  var cv = document.getElementById("rCanvas"), ctx = cv.getContext("2d");
+  function lam(k) { return 4 * Math.pow(Math.sin(Math.PI * k / N), 2); }
+  function ratio(k) { return Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N); }
+  function setMode(k) {
+    mode = k; a = []; b = []; for (var q = 0; q < N; q++) { a.push(0); b.push(0); }
+    a[k] = 1; t0 = performance.now(); buttons(); spec();
+  }
+  function pluck() {
+    // bead 0 pushed out by 1, the others at rest: u_j = (1/N) sum_k e^{2 pi i jk/N}, folded into cosines
+    mode = -1; a = []; b = [];
+    for (var k = 0; k < N; k++) { a.push(k === 0 ? 1 / N : (2 * k < N ? 2 / N : 0)); b.push(0); }
+    if (N % 2 === 0) a[N / 2] = 1 / N;
+    t0 = performance.now(); buttons(); spec();
+  }
+  function shape(t) {
+    var u = [];
+    for (var j = 0; j < N; j++) {
+      var s = 0;
+      for (var k = 0; k <= Math.floor(N / 2); k++) {
+        var w = 2 * Math.PI * 0.35 * ratio(k), c = Math.cos(w * t);
+        s += (a[k] * Math.cos(2 * Math.PI * j * k / N) + b[k] * Math.sin(2 * Math.PI * j * k / N)) * (k === 0 ? 1 : c);
+      }
+      u.push(s);
+    }
+    return u;
+  }
+  function buttons() {
+    var box = document.getElementById("rModes"); box.innerHTML = "";
+    for (var k = 0; k <= Math.floor(N / 2); k++) (function (k) {
+      var bt = document.createElement("button"); bt.type = "button"; bt.textContent = "mode " + k; bt.setAttribute("aria-pressed", k === mode);
+      bt.addEventListener("click", function () { setMode(k); }); box.appendChild(bt);
+    })(k);
+  }
+  function spec() {
+    var parts = [];
+    for (var k = 1; k <= Math.floor(N / 2); k++) parts.push({ ratio: ratio(k), amp: Math.max(Math.abs(a[k]), Math.abs(b[k]), 0.0001) });
+    C.stems(document.getElementById("rSpec"), parts, { W: 320, H: 100, rmax: Math.max(4, Math.ceil(ratio(Math.floor(N / 2)))), fs: 8, sw: 3 });
+    var r = []; for (var k = 1; k <= Math.min(5, Math.floor(N / 2)); k++) r.push(ratio(k).toFixed(3));
+    document.getElementById("rRead").innerHTML = "N = <b>" + N + "</b> · eigenvalues 4 sin&sup2;(&pi;k/N) · frequency ratios <b>" + r.join(", ") + "</b>" + (mode === 0 ? " · mode 0 has eigenvalue 0: the ring shifts as a whole and nothing pulls it back" : "");
+  }
+  function draw(now) {
+    var d = C.fit(cv), W = cv.width, H = cv.height, cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.32, t = (now - t0) / 1000, u = shape(t), mx = 1;
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = C.rgb("--grid"); ctx.lineWidth = d; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.stroke();
+    ctx.strokeStyle = C.rgb("--muted"); ctx.lineWidth = 1.5 * d; ctx.beginPath();
+    for (var j = 0; j <= N; j++) { var jj = j % N, th = 2 * Math.PI * jj / N - Math.PI / 2, r = R + u[jj] / mx * R * 0.28, x = cx + r * Math.cos(th), y = cy + r * Math.sin(th); if (j) ctx.lineTo(x, y); else ctx.moveTo(x, y); }
+    ctx.stroke();
+    for (var j = 0; j < N; j++) { var th = 2 * Math.PI * j / N - Math.PI / 2, r = R + u[j] / mx * R * 0.28; ctx.fillStyle = C.rgb("--accent"); ctx.beginPath(); ctx.arc(cx + r * Math.cos(th), cy + r * Math.sin(th), 6 * d, 0, 2 * Math.PI); ctx.fill(); }
+    requestAnimationFrame(draw);
+  }
+  document.getElementById("rPlay").addEventListener("click", function () {
+    // the model has no friction; the sound is faded out only so that it stops
+    var parts = []; for (var k = 1; k <= Math.floor(N / 2); k++) parts.push({ f: 196 * ratio(k), amp: Math.max(Math.abs(a[k]), Math.abs(b[k])), tau: 0.8 });
+    if (!parts.some(function (p) { return p.amp > 1e-6; })) parts = [{ f: 1, amp: 0, tau: 1 }];
+    C.play(C.render(parts, 2.2), 0.7);
+  });
+  document.getElementById("rPluck").addEventListener("click", pluck);
+  var ns = document.getElementById("rN");
+  ns.addEventListener("input", function () { N = parseInt(ns.value, 10); document.getElementById("rNo").textContent = N; setMode(Math.min(mode < 0 ? 1 : mode, Math.floor(N / 2))); });
+  document.getElementById("rNo").textContent = N;
+  C.onTheme(spec);
+  setMode(1); requestAnimationFrame(draw);
+})();
+</script>
+```

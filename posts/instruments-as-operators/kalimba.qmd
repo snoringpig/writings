@@ -1,6 +1,6 @@
 ---
-title: "The kalimba"
-subtitle: "Clamped bars · Instruments as Operators"
+title: "6 · Change the order"
+subtitle: "The kalimba · Instruments as Operators"
 format:
   html:
     html-math-method: katex
@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [Foundations](foundations.qmd) · [Violin](violin.qmd) · [Clarinet](clarinet.qmd) · **Kalimba** · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · [Drum](drum.qmd)
+[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · **6 Kalimba** · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
-Take away the tension and keep only stiffness. A steel tine clamped at one end obeys a fourth-order equation, its overtones scatter far from the integers, and it still sounds pitched.
-
-::: {.family}
-**Family: clamped bars.** Harmonica reeds and the comb of a music box obey the same operator, $\kappa^2\partial_x^4$, with the same clamped–free boundary conditions. The kalimba and the [harmonica](harmonica.qmd) differ in constants (a steel tine versus a smaller brass reed) and, more importantly, in excitation: plucked versus blown. That difference decides whether you hear the bar's scattered overtones or exact harmonics.
+::: {.newidea}
+**New idea on this page.** A bar springs back because it resists bending, not because it is stretched. Its operator has four derivatives instead of two, so the frequencies grow like the square of the mode number and the overtones land far from the whole numbers: 1, 6.27, 17.55, … times the lowest.
 :::
 
-## Play it
+## For everyone
+
+A kalimba tine is a strip of steel pressed down near one end and free at the other, like a diving board. Nothing stretches it; it springs back because steel resists bending. Its overtones fall far from the whole numbers, but they are weak and die within moments, so you hear a clear note with a metallic click at the start.
 
 ```{=html}
 <style>
@@ -46,19 +46,17 @@ Take away the tension and keep only stiffness. A steel tine clamped at one end o
 </div>
 ```
 
-## Deriving the operator
-
-1. Bend a thin bar. Fibers on the outside of the curve stretch and fibers on the inside compress. By Hooke's law their stresses add up to a *bending moment* proportional to the curvature, $M = EI\,u_{xx}$, where $E$ is Young's modulus of the steel and $I$ is the second moment of area of the cross-section.
-2. Cut out a slice of length $dx$. Its two faces carry moments and vertical shear forces. A thin slice has negligible rotational inertia, so its torques balance, which forces the shear to be the slope of the moment: $V = -M_x$.
-3. Vertical forces do not balance; their difference accelerates the slice. With density $\rho$ and area $A$, Newton's law reads $\rho A\,u_{tt} = V_x = -M_{xx}$. Substituting step 1 gives the operator below.
-4. The clamp forbids moving and tilting: $u = u_x = 0$ at the base. Nothing grips the tip, so it carries no moment and no shear: $u_{xx} = u_{xxx} = 0$ there.
-
-::: {.result}
-**The tine's operator.**
-$$
-u_{tt} = -\kappa^2 u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho A}.
-$$
+::: {.family}
+**Same operator, different constants.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other. The [harmonica](harmonica.qmd), next, has the same operator and the same ends, but it is blown instead of plucked, and that decides what you hear.
 :::
+
+## The mathematics
+
+**The operator.** A bar of [Young's modulus](glossary.qmd#youngs-modulus) $E$ (how stiff the steel is), cross-section area $A$, [second moment of area](glossary.qmd#second-moment) $I$ (how the cross-section's shape resists bending) and density $\rho$ obeys
+$$
+u_{tt} = -\kappa^2\,u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho A}.
+$$
+This is the [Euler–Bernoulli beam](glossary.qmd#beam) equation. The operator is $\kappa^2\,d^4/dx^4$: four derivatives, because bending is resisted by curvature, $u_{xx}$, and the force comes from how that resistance changes along the bar, two more derivatives.
 
 ```{=html}
 <div class="ins">
@@ -79,18 +77,85 @@ $$
 </div>
 ```
 
-## Spectrum
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a thin slice to four derivatives</summary>
 
-A standing wave $X(x)\cos\omega t$ needs $X'''' = \beta^4 X$ with $\beta^4 = \omega^2/\kappa^2$. The solutions are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$. The four boundary conditions are four linear equations for the four coefficients, and they have a nonzero solution exactly when
+**1. Bending stresses.** Bend the bar. Fibers on the outside of the curve stretch and fibers on the inside compress, while a middle line, the *neutral axis*, keeps its length.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 150" role="img" aria-label="A bent section of bar: fibers on the outside stretch, fibers on the inside compress, the middle keeps its length">
+  <path class="bar" d="M 50 60 Q 210 10 370 60 L 370 100 Q 210 50 50 100 Z"/>
+  <path class="dash" d="M 50 80 Q 210 30 370 80"/>
+  <path class="pos" d="M 150 40 L 120 47"/><path class="pos" d="M 270 40 L 300 47"/>
+  <path class="neg" d="M 140 78 L 165 72"/><path class="neg" d="M 280 78 L 255 72"/>
+  <text x="168" y="22">stretched (y &gt; 0)</text><text x="160" y="118">compressed (y &lt; 0)</text>
+  <text x="300" y="138">neutral axis, y = 0</text>
+</svg>
+```
+
+A fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$, and by Hooke's law it carries the stress (force per area) $\sigma = -E\,y\,u_{xx}$. Summed over the cross-section these forces cancel, but their torques do not. They add up to the *bending moment*
+$$
+M = -\int_A y\,\sigma\,dA = E\,u_{xx}\int_A y^2\,dA = EI\,u_{xx}, \qquad I = \int_A y^2\,dA .
+$$
+For a rectangle of width $w$ and thickness $h$, $I = wh^3/12$; for a round wire of diameter $d$, $I = \pi d^4/64$.
+
+**2. Shear.** A moment twists a slice but cannot lift it. Each face of a slice also carries a vertical force, the *shear force* $V$.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 170" role="img" aria-label="A thin slice with bending moments and shear forces on both faces">
+  <path class="dash" d="M 30 85 L 390 85"/>
+  <rect class="bar" x="150" y="65" width="120" height="40" rx="2"/>
+  <path class="pos" d="M 136 55 A 32 32 0 0 0 136 115"/><path class="fillpos" d="M 130 113 L 140 120 L 141 109 Z"/>
+  <path class="pos" d="M 284 55 A 32 32 0 0 1 284 115"/><path class="fillpos" d="M 290 113 L 280 120 L 279 109 Z"/>
+  <path class="neg" d="M 150 85 L 150 140"/><path class="fillneg" d="M 144 136 L 156 136 L 150 148 Z"/>
+  <path class="neg" d="M 270 85 L 270 30"/><path class="fillneg" d="M 264 34 L 276 34 L 270 22 Z"/>
+  <text x="96" y="90">M</text><text x="306" y="90">M + dM</text>
+  <text x="158" y="152">V</text><text x="278" y="30">V + dV</text><text x="198" y="128">dx</text>
+</svg>
+```
+
+The slice is thin, so it has almost no resistance to being spun, and the torques on it must balance. Taking torques about the left face, the shear on the right face times the lever arm $dx$ cancels the change in moment: $V\,dx + dM = 0$, so $V = -M_x$.
+
+**3. Newton's law.** The vertical forces on the slice do not balance: $V(x + dx) - V(x) = V_x\,dx$ accelerates its mass $\rho A\,dx$. So $\rho A\,u_{tt} = V_x = -M_{xx} = -EI\,u_{xxxx}$, the equation above.
+
+**What was assumed.** Small slopes, a uniform bar, and no rotational inertia of the slices; Rayleigh's correction for that adds a small term that matters only for thick bars and high modes.
+
+</details>
+:::
+
+**Boundary conditions.** Four derivatives need two conditions at each end. At the base the tine is held down, so it can neither move nor tilt: $u = 0$ and $u_x = 0$. A bar held this way at one end and free at the other is called a [cantilever](glossary.qmd#cantilever). At the free tip nothing pushes or twists the bar, so both the moment and the shear vanish: $u_{xx} = 0$ and $u_{xxx} = 0$.
+
+**Spectrum.** A mode $X(x)\cos\omega t$ needs $X'''' = \beta^4 X$ with $\omega = \kappa\beta^2$. The four boundary conditions are four equations for the four constants in the general solution, and they have a nonzero solution exactly when
 $$
 \cos\beta L\,\cosh\beta L = -1 .
 $$
+The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, close to $(n - \tfrac12)\pi$ from the second one on. Since $\omega \propto \beta^2$, the frequency ratios are
+$$
+1 : 6.27 : 17.55 : 34.39 : \cdots, \qquad \text{growing like } (2n-1)^2 .
+$$
+For a string, frequency is proportional to the wavenumber; for a bar, to its square. That single change of order spreads the overtones apart and off the whole numbers.
 
-The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, computed live on this page. Since $\omega = \kappa\beta^2$, the frequency ratios are $(\beta_n/\beta_1)^2 = 1 : 6.27 : 17.55 : 34.39$. Bending makes frequency grow like the square of the wavenumber, so the overtones fly apart.
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>The four boundary conditions give cos βL cosh βL = −1</summary>
 
-The same formula gives $f_1 \propto 1/L^2$. Kalimba makers tune a tine by sliding it over the bridge to change its free length.
+The solutions of $X'''' = \beta^4X$ are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh$ and $\sinh$ are the [hyperbolic functions](https://en.wikipedia.org/wiki/Hyperbolic_functions), whose fourth derivatives also return them times $\beta^4$.
 
-The tine sounds pitched anyway because its first overtone is weak, sits more than two octaves up, and dies within a few hundredths of a second. The ear hears the fundamental with a short metallic click on top.
+1. *Clamped base.* $X(0) = 0$ and $X'(0) = 0$ leave $X = a\,(\cos\beta x - \cosh\beta x) + b\,(\sin\beta x - \sinh\beta x)$.
+2. *Free tip.* Differentiating, and dropping the common factors $\beta^2$ and $\beta^3$, the conditions $X''(L) = 0$ and $X'''(L) = 0$ read, with $c = \cos\beta L$, $s = \sin\beta L$, $C = \cosh\beta L$, $S = \sinh\beta L$:
+$$
+\begin{pmatrix} -(c + C) & -(s + S) \\ s - S & -(c + C) \end{pmatrix}\begin{pmatrix} a \\ b\end{pmatrix} = \begin{pmatrix} 0 \\ 0\end{pmatrix}.
+$$
+3. *Nonzero solution.* A nonzero $(a, b)$ exists exactly when the determinant vanishes:
+$$
+(c + C)^2 + (s + S)(s - S) = c^2 + s^2 + 2cC + C^2 - S^2 = 2 + 2cC = 0,
+$$
+using $c^2 + s^2 = 1$ and $C^2 - S^2 = 1$. So $\cos\beta L\cosh\beta L = -1$.
+4. *Roots.* Since $\cosh\beta L$ grows fast, $\cos\beta L$ must be close to 0, so $\beta L \approx (n - \tfrac12)\pi$, and the approximation improves quickly with $n$. The first root, $1.8751$, is the furthest from it.
+
+The operator $d^4/dx^4$ with these four conditions is self-adjoint, by integrating by parts four times, so its eigenvalues are real and its eigenfunctions perpendicular, as on the circle.
+
+</details>
+:::
 
 ```{=html}
 <div class="ins">
@@ -103,7 +168,19 @@ The tine sounds pitched anyway because its first overtone is weak, sits more tha
 </div>
 ```
 
-[← The clarinet](clarinet.qmd) · [The harmonica →](harmonica.qmd)
+**Tuning.** The formula gives $f_1 \propto \kappa/L^2$, so halving a tine's free length raises its pitch by a factor of 4, two octaves. Kalimba makers tune a tine by sliding it over the bridge to change its free length.
+
+**Why it still sounds pitched.** The tine's first overtone is weak, sits more than two and a half octaves above the fundamental, and dies within a fraction of a second, so what remains is close to a single frequency. Chapman measured real kalimbas and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, dying away quickly after the attack. A real tine is pressed against a bridge rather than perfectly clamped, which is probably part of why the measured ratios spread.
+
+## What changed, and what comes next
+
+The operator went from second to fourth order, and the spectrum went from whole numbers to roughly odd squares. The next page keeps this operator and changes how it is driven: blown instead of plucked.
+
+[← An air column](clarinet.qmd) · [Next: the harmonica →](harmonica.qmd)
+
+::: {.refs}
+**References.** D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustical Society of America, 2008. Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory) and [Cantilever](https://en.wikipedia.org/wiki/Cantilever). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2 (bars).
+:::
 
 ```{=html}
 <script src="core.js"></script>

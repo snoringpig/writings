@@ -1,6 +1,6 @@
 ---
-title: "The violin"
-subtitle: "Strings · Instruments as Operators"
+title: "4 · A string with ends"
+subtitle: "The violin · Instruments as Operators"
 format:
   html:
     html-math-method: katex
@@ -10,25 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [Foundations](foundations.qmd) · **Violin** · [Clarinet](clarinet.qmd) · [Kalimba](kalimba.qmd) · [Harmonica](harmonica.qmd) · [Piano](piano.qmd) · [Drum](drum.qmd)
+[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · **4 String** · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
-The string from the foundations, played two ways. Tension and length set the pitch; the bow forces the overtones onto exact whole numbers.
-
-::: {.family}
-**Family: strings under tension.** Guitar, cello and harp strings obey the same operator, $-c^2\partial_x^2$ with tied ends. They differ only in the constants $L$, $T$ and $\mu$, which set $f_1$, and in how they are excited: plucked (guitar, harp) or bowed (violin, cello). Conceptually they are one instrument with different constants; the shape of the spectrum, whole-number multiples, is the same for all of them.
+::: {.newidea}
+**New idea on this page.** A [boundary condition](glossary.qmd#boundary-condition), the rule for what the ends of the string may do, is part of the operator. Tying the ends down keeps the circle's operator but keeps only half of its eigenfunctions, the sines. The frequencies are still exactly whole-number multiples.
 :::
 
-## Operator and spectrum
+## For everyone
 
-A violin string is the continuum bead chain of the [foundations](foundations.qmd), so its operator is $-c^2\partial_x^2$ on $[0,L]$ with tied ends. Its eigenfunctions are $\sin(n\pi x/L)$, and the frequencies are
-$$
-f_n = \frac{n}{2L}\sqrt{\frac{T}{\mu}}, \qquad n = 1, 2, 3, \dots
-$$
+A violin string is tied down at the nut and at the bridge. It can swing in one hump, two humps, three humps and so on, and because whole humps must fit between the ends, these come at 1, 2, 3, … times the lowest frequency. Press a string below to play it, with the bow or by plucking.
 
-The four strings share one length and differ in $T/\mu$, tuned to G3, D4, A4 and E5. A finger shortens the vibrating length, and since $f \propto 1/L$, stopping the string at a fraction $s$ of its length raises the pitch by a factor $1/(1-s)$. That is why the semitone markers below bunch together toward the bridge.
 
-## Play it
 
 ```{=html}
 <div class="ins">
@@ -40,19 +33,73 @@ The four strings share one length and differ in $T/\mu$, tuned to G3, D4, A4 and
     <span class="readout" id="vRead">Press and hold a string. Slide left and right to finger it.</span>
   </div>
   <svg class="spec" id="playSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the note being played, as heard through the body"></svg>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge is the nut, right edge the bridge. The ticks mark equal-tempered semitones, at fractions 1 − 2<sup>−k/12</sup> of the length. The stems are the partials you hear. The body is a linear filter, so switching it off or on changes their heights, never their positions. Its resonances here (about 280, 470, 550 and 2700 Hz) are approximate textbook values.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge is the nut, right edge the bridge. The ticks mark equal-tempered semitones, at fractions 1 − 2<sup>−k/12</sup> of the length. The stems are the partials you hear. The body is a linear filter, so switching it off or on changes their heights, never their positions. Its resonances here (about 280, 470, 550 and 2700 Hz) are rough values chosen to illustrate; see the references.</p>
 </section>
 </div>
 ```
 
-## What the bow does
+::: {.family}
+**Same operator, different constants.** Guitar, cello and harp strings obey the same equation with the same tied ends. They differ in length, tension and mass per length, which set the lowest frequency, and in how they are played: plucked (guitar, harp) or bowed (violin, cello).
+:::
 
-The bow grips the string and drags it along (stick) until the string's tension tears it free and it flies back (slip). Helmholtz watched this through a vibration microscope and described the result in 1863: the string becomes two straight segments joined by one sharp corner, and the corner races around a lens-shaped path, once per period. In modal terms that shape is
-$$
-u(x,t) = \sum_{n\ge1} \frac{A}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(n\omega_1 t).
-$$
+## The mathematics
 
-The motion repeats exactly every period, so its spectrum sits exactly on $n f_1$, and the force on the bridge falls off like $1/n$. A real string is slightly stiff and its own frequencies run a little sharp ([the piano](piano.qmd)); the stick–slip cycle locks every partial to the period anyway. A pluck, by contrast, lets each mode ring freely at its own frequency and decay.
+**The operator and its boundary condition.** A string of length $L$, tension $T$ and mass $\mu$ per unit length obeys the [wave equation](glossary.qmd#wave-equation), derived on the [circle page](circle.qmd):
+$$
+u_{tt} = -c^2 A u, \qquad A = -\frac{d^2}{dx^2}, \qquad c^2 = \frac{T}{\mu}, \qquad u(0) = u(L) = 0 .
+$$
+The same rule $-d^2/dx^2$ now acts on shapes on the interval $[0, L]$, and only shapes that vanish at both ends are allowed. That restriction, called a *Dirichlet condition*, changes which shapes are eigenfunctions, and so changes the spectrum. An operator is the rule together with the shapes it is allowed to act on.
+
+**Spectrum.** The solutions of $-X'' = k^2X$ are $a\cos kx + b\sin kx$. The condition $X(0) = 0$ forces $a = 0$, and $X(L) = 0$ then needs $\sin kL = 0$, so $k = n\pi/L$. The eigenfunctions are $\sin(n\pi x/L)$ for $n = 1, 2, 3, \dots$, with eigenvalues $(n\pi/L)^2$, and the frequencies are
+$$
+f_n = \frac{c\,k_n}{2\pi} = \frac{n}{2L}\sqrt{\frac{T}{\mu}} .
+$$
+Exactly whole-number multiples of $f_1$, as on the circle. Each eigenvalue now has [multiplicity](glossary.qmd#multiplicity) 1, not 2: a wave cannot travel around a string that has ends, so only [standing waves](glossary.qmd#standing-wave) remain.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>The string is half of a circle: the sine series as a Fourier series</summary>
+
+Take a shape $u$ on $[0, L]$ with $u(0) = u(L) = 0$. Extend it to $[-L, 0]$ by $u(-x) = -u(x)$, an odd reflection, and then repeat with period $2L$. The result is a shape on a loop of circumference $2L$.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 120" role="img" aria-label="A plucked string shape on zero to L, reflected oddly to minus L to zero">
+  <path class="dash" d="M 20 60 L 400 60"/>
+  <path class="dash" d="M 210 20 L 210 100"/>
+  <path class="acc" d="M 210 60 L 290 25 L 380 60"/>
+  <path class="neg" d="M 210 60 L 130 95 L 40 60"/>
+  <text x="200" y="114">0</text><text x="372" y="78">L</text><text x="28" y="78">−L</text>
+  <text x="300" y="20">string</text><text x="62" y="108">odd reflection</text>
+</svg>
+```
+
+1. *Odd shapes stay odd.* If $u(x, t)$ solves the wave equation on the loop, so does $-u(-x, t)$, since two derivatives in $x$ do not change sign under $x \mapsto -x$. Starting from an odd shape at rest, both are the same solution by uniqueness, so the motion stays odd.
+2. *Odd shapes on the loop are exactly string shapes.* An odd periodic shape vanishes at $0$, because $u(0) = -u(0)$, and at $L$, because $u(L) = u(-L) = -u(L)$. Conversely every string shape extends this way.
+3. *So the string's eigenfunctions are the loop's odd eigenfunctions.* On a loop of circumference $2L$ the eigenfunctions are $\cos(n\pi x/L)$ and $\sin(n\pi x/L)$ with eigenvalues $(n\pi/L)^2$. The odd ones are the sines. Each eigenvalue keeps one of its two eigenfunctions, which is why the multiplicity drops from 2 to 1.
+
+The *sine series* of a string shape, $u = \sum_n b_n\sin(n\pi x/L)$, is therefore the Fourier series of its odd extension, and everything proved on the circle page carries over. The same trick with an even reflection, $u(-x) = u(x)$, gives the cosines and the condition $u'(0) = u'(L) = 0$; the next page uses it for air in a tube.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>The same result from beads with the ends tied</summary>
+
+Put $N$ beads of mass $m$, spaced $h$ apart, on a thread of tension $T$, with both ends tied, so $u_0 = u_{N+1} = 0$. The force on bead $j$ is the one derived on the [ring page](ring.qmd), so $m\ddot u_j = \frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})$. The matrix is now the ring's matrix without its two corner entries:
+$$
+K = \begin{pmatrix} 2 & -1 & & \\ -1 & 2 & \ddots & \\ & \ddots & \ddots & -1\\ & & -1 & 2 \end{pmatrix}.
+$$
+Its eigenvectors are $v_j = \sin\big(n\pi j/(N+1)\big)$, the sampled sines, with eigenvalues $4\sin^2\big(n\pi/2(N+1)\big)$ for $n = 1, \dots, N$. To check: $\sin(\alpha(j+1)) + \sin(\alpha(j-1)) = 2\cos\alpha\,\sin(\alpha j)$, so $(Kv)_j = (2 - 2\cos\alpha)\,v_j = 4\sin^2(\alpha/2)\,v_j$ with $\alpha = n\pi/(N+1)$, and the tied ends hold because $\sin 0 = \sin n\pi = 0$. As on the ring, letting $N \to \infty$ with $L = (N+1)h$ and $\mu = m/h$ fixed gives the wave equation and the frequencies $f_n = \frac{n}{2L}\sqrt{T/\mu}$.
+
+</details>
+:::
+
+**Fingers.** A finger pressed onto the fingerboard makes a new tied end. The vibrating length shrinks to $(1 - s)L$ when the finger is a fraction $s$ of the way from the nut, so the pitch rises by the factor $1/(1-s)$. Equal semitones are equal ratios of frequency, $2^{1/12}$ each, and so they sit at $s_k = 1 - 2^{-k/12}$, bunching together toward the bridge.
+
+**The bow.** The bow grips the string and drags it along until the string's pull tears it free; it slips back, and is gripped again. Hermann von Helmholtz watched this through a microscope fixed to a vibrating tuning fork and described it in 1863: the string forms two straight pieces joined by one sharp corner, and the corner races back and forth between the bridge and the finger, once per period. This is called [Helmholtz motion](glossary.qmd#helmholtz-motion). Its expansion in the string's eigenfunctions is
+$$
+u(x,t) = \sum_{n\ge1} \frac{A}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(2\pi n f_1 t).
+$$
+The motion repeats exactly every $1/f_1$ seconds, so its partials sit exactly on $nf_1$. The force on the bridge is proportional to the string's slope there, which brings down a factor $n$, so partial $n$ pushes the bridge with strength proportional to $1/n$. A pluck, by contrast, sets each mode swinging freely at its own frequency, and each then fades at its own rate.
 
 ```{=html}
 <div class="ins">
@@ -65,11 +112,30 @@ The motion repeats exactly every period, so its spectrum sits exactly on $n f_1$
 </div>
 ```
 
-## The body
+**The body.** The string itself moves very little air. It rocks the bridge, the bridge shakes the wooden body, and the body moves the air. Each step is [linear](glossary.qmd#linear), so it can make each partial louder or quieter but can never move it to another frequency. Toggle the wooden body in the first demo: the stems change height and stay where they are.
 
-The string barely moves any air. It rocks the bridge, which drives the wooden body, which radiates. Each link is linear, so it can change how loud each partial is but never move one. Toggle the body above while playing: the stems change height and stay put.
+## What changed, and what comes next
 
-[← Foundations](foundations.qmd) · [The clarinet →](clarinet.qmd)
+The operator is still $-d^2/dx^2$, but now with a boundary condition, and the boundary condition chose the sines out of the circle's eigenfunctions. The supports used in the rest of the series:
+
+| Support | What it forbids | Condition | Where |
+|:--|:--|:--|:--|
+| tied end | moving | $u = 0$ | violin, piano (approximately) |
+| [clamp](glossary.qmd#cantilever) | moving and tilting | $u = 0,\ u' = 0$ | kalimba tine, harmonica reed at the rivet |
+| free tip | nothing; it carries no bending and no shear | $u'' = 0,\ u''' = 0$ | kalimba tine, harmonica reed at the tip |
+| open end of a tube | pressure different from the room's | $p = 0$ | flute, clarinet bell |
+| nearly closed end of a tube | air moving | $p_x = 0$ | clarinet at the reed |
+| rim of a drum | moving | $u = 0$ on the rim | drum |
+
+: Boundary conditions in this series. The bar conditions are explained on the kalimba page, and the tube conditions on the next page. {.striped}
+
+Next, the same operator acts on air pressure in a tube, and a different boundary condition at one end removes every other harmonic.
+
+[← The circle](circle.qmd) · [Next: an air column →](clarinet.qmd)
+
+::: {.refs}
+**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 2 (strings) and chapter 10 (bowed strings). J. Wolfe, [The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html) and [Violin acoustics: an introduction](https://www.phys.unsw.edu.au/jw/violintro.html), UNSW. H. von Helmholtz, *On the Sensations of Tone*, 1863 (English translation by A. J. Ellis, 1875). The four body resonances in the demo are rough illustrative values, not measured from a particular violin: Wolfe gives the air resonance at about 300 Hz and notes that the bridge passes vibration to the body well from about 1 to 4 kHz.
+:::
 
 ```{=html}
 <script src="core.js"></script>
