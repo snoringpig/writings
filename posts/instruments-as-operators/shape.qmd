@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-25
+date-modified: 2026-10-26
 resources: [core.js, ins.css, gww.py, gww_modes.py]
 ---
 
