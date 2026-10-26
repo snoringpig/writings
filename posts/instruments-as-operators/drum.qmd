@@ -1,18 +1,43 @@
 ---
-title: "The drum"
-subtitle: "Part 5 of Instruments as Operators"
+title: "8 · The drum"
+subtitle: "Two dimensions · Instruments as Operators"
 format:
   html:
     html-math-method: katex
     css: ins.css
+date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · [2 Clarinet](clarinet.qmd) · [3 Kalimba](kalimba.qmd) · [4 Piano](piano.qmd) · **5 Drum**
+::: {.series-nav}
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), **8 Drum** · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
+:::
 
-The string's operator in two dimensions. The zeros of Bessel functions replace the whole numbers, and where you strike decides which modes speak.
+::: {.pageinfo}
+**Builds on** [page 4](violin.qmd); the loop of [page 3](circle.qmd) reappears inside the drum. About 7 minutes, plus 5 for the folds.
+:::
 
-## Play it
+::: {.puzzle}
+**The puzzle.** In 1808 Ernst Chladni showed the French Institute in Paris, the body that then held the Academy of Sciences, a trick: sprinkle sand on a metal plate, draw a violin bow along its edge, and the sand leaps into intricate patterns, a different one for each note. What draws the patterns? And why does a drum, struck, give a thud where a string gives a note?
+:::
+
+Here is the same trick on a drumhead. Pick a note and watch where the sand goes.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="sCanvas" style="height:320px" aria-label="Sand on a vibrating drumhead gathering where the head stays still"></canvas>
+  <div class="controls" id="sModes" role="group" aria-label="Which note to drive the drumhead at"></div>
+  <div class="controls"><button id="sShake" class="primary">Sprinkle fresh sand</button><button id="sHear">Hear this note</button></div>
+  <div class="readout" id="sRead"></div>
+  <p class="cap">Each button drives the drumhead at one of its own frequencies, given as a multiple of the lowest. Every grain is jostled in proportion to how much the head moves under it, so grains drift until they reach a place where the head stays still. Chladni used stiff metal plates, whose operator involves bending, not tension; the sand behaves the same way on both.</p>
+</div>
+</div>
+```
+
+Napoleon offered a prize for a mathematical explanation of Chladni's patterns. It was won in 1816 by Sophie Germain, the first woman to receive the grand prize in mathematics of the Paris Academy. Her theory had errors, and the Academy was still not fully satisfied with it; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. The lines the sand draws are the places where the surface does not move, and finding them is the same kind of problem as finding the frequencies: for a drumhead, the problem on this page; for Chladni's plates, the same problem with the plate's own operator.
+
+Now strike the drum itself. Tap the head anywhere below.
 
 ```{=html}
 <style>
@@ -31,29 +56,22 @@ The string's operator in two dimensions. The zeros of Bessel functions replace t
   <canvas id="head" aria-label="Drumhead. Tap anywhere to strike it there."></canvas>
   <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="ten">Tension ×</label><input type="range" id="ten" min="0.5" max="2" step="0.05" value="1"><output id="teno">1.00</output></div>
   <div class="readout" id="dRead" style="padding:0.4rem 0.25rem 0">Tap the head anywhere. The ring marks where we listen.</div>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">The motion is the real superposition of the 40 lowest modes, slowed about 300 times. Strike dead center: only round modes appear. Strike on a nodal line of a mode and that mode stays silent.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">The motion is the actual sum of the 40 lowest modes, slowed about 300 times. Strike dead center and only the round modes, those with no lines through the center, appear. Strike on a line where a mode stays still and that mode stays silent.</p>
 </section>
 </div>
 ```
 
-## Deriving the operator
-
-1. A drumhead is a sheet under tension $T$, measured as force per unit length of any cut through it, with mass $\sigma$ per unit area. Take a small patch $D$ of it.
-2. Along each piece $ds$ of the patch's edge, the outside sheet pulls with force $T\,ds$ along the surface. For small slopes its vertical part is $T\,\partial_n u\,ds$, where $\partial_n u$ is the slope in the outward direction.
-3. Adding these up and applying the divergence theorem gives the net vertical force,
-$$
-T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
-$$
-4. Newton's law for the patch is $\iint_D \sigma u_{tt}\,dA = T\iint_D \Delta u\,dA$. This holds for every patch, so the integrands agree.
-
-::: {.callout-tip appearance="simple"}
-## The drumhead's operator
-$$
-u_{tt} = -\mathcal{L}u,\qquad \mathcal{L} = -c^2\Delta,\qquad c^2 = T/\sigma,\qquad u = 0 \text{ on the rim}.
-$$
+::: {.family}
+**Same operator, different constants, as a first model.** Toms, snares and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it, and the air in and around a drum changes the operator a little. A timpani's kettle and the air it encloses shift the head's modes enough to matter: measured, the modes with one, two, three and four lines through the center, and no still circle inside, sit close to 2, 3, 4 and 5 times a common base frequency, which gives a timpani a pitch that a tom lacks (HyperPhysics; Fletcher and Rossing, chapter 18). The note is normally heard at the frequency of the first of these, the "2", with the next two a fifth and an octave above it (Institute of Musical Acoustics, Vienna); HyperPhysics notes that the missing base, an octave lower, may be heard instead.
 :::
 
-In one dimension the patch is a segment, its edge is two endpoints, and step 3 is the fundamental theorem of calculus. That is Part 0's equation again.
+## A sheet pulled tight
+
+**The operator.** A drumhead with tension $T$, measured as force per unit length of any cut through it, and mass $\sigma$ per unit area obeys
+$$
+u_{tt} = c^2\,\Delta u, \qquad \Delta u = u_{xx} + u_{yy}, \qquad c^2 = \frac{T}{\sigma}, \qquad u = 0 \text{ on the rim}.
+$$
+The operator is $-c^2\Delta$; $\Delta$, the [Laplacian](glossary.qmd#laplacian), adds the second partial derivatives in the two directions across the sheet. On a string, the restoring force was proportional to how far a point sits below the average of its two neighbors; on a sheet it is proportional to how far a point sits below the average of the points around it, and that is what $\Delta u$ measures.
 
 ```{=html}
 <div class="ins">
@@ -72,15 +90,76 @@ In one dimension the patch is a segment, its edge is two endpoints, and step 3 i
 </div>
 ```
 
-## Spectrum
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Newton's law for a patch of drumhead <span class="needs">uses multivariable calculus</span></summary>
 
-Separating variables in polar coordinates gives standing waves $J_m(kr)\cos m\theta$ and $J_m(kr)\sin m\theta$, with $J_m$ a Bessel function; the second solution of Bessel's equation blows up at the center and is discarded. The rim condition is $J_m(ka) = 0$, so
+1. Take any small patch $D$ of the head. Along each short piece $ds$ of its edge, the sheet outside pulls with force $T\,ds$, along the surface and outward.
+2. For small slopes the vertical part of that pull is $T\,\partial_n u\,ds$, where $\partial_n u$ is the slope of the head in the outward direction across the edge. This is the string's $T\sin\theta \approx T\tan\theta$ again.
+3. Add these up around the edge. The [divergence theorem](glossary.qmd#divergence-theorem) turns the sum around the edge into a sum over the inside:
 $$
-f_{m,n} = \frac{c\,j_{m,n}}{2\pi a},
+T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
 $$
-where $j_{m,n}$ is the $n$-th zero of $J_m$. These zeros are not evenly spaced and no common base frequency fits them, so the drum has no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, $\cos m\theta$ and $\sin m\theta$: the round head's symmetry, visible in the spectrum.
+4. Newton's law for the patch reads $\iint_D \sigma\,u_{tt}\,dA = T\iint_D \Delta u\,dA$. This holds for every patch, however small, so the integrands are equal at every point: $\sigma u_{tt} = T\Delta u$.
 
-A strike at $p$, heard at $q$, gives mode $k$ the weight $X_k(p)X_k(q)/\lVert X_k\rVert^2$, the eigen-expansion of a point kick. Tap a stem to see one mode on the drumhead and hear it alone.
+In one dimension a patch is a segment, its edge is its two endpoints, and step 3 is the fundamental theorem of calculus, $u_x(b) - u_x(a) = \int_a^b u_{xx}\,dx$. That is the string's equation again.
+
+What was assumed: small slopes, a tension that is the same everywhere and does not change as the head moves, no bending stiffness, and no air. The air matters for real drums, as the note above says.
+
+</details>
+:::
+
+**Spectrum, and the sand's lines.** A mode is a fixed shape $X$ swinging as $X\cos\omega t$, with $-\Delta X = k^2 X$ where $k = \omega/c$, and $X = 0$ on the rim. For a round drum of radius $a$, measure position by the distance $r$ from the center and the angle $\theta$. Going once around the drum, a mode must return to itself, so its dependence on the angle is $\cos m\theta$ or $\sin m\theta$ with $m$ a whole number: the loop of [page 3](circle.qmd), inside the drum. Its dependence on $r$ is a [Bessel function](glossary.qmd#bessel), so the modes are
+$$
+J_m(k r)\cos m\theta \quad\text{and}\quad J_m(kr)\sin m\theta, \qquad m = 0, 1, 2, \dots
+$$
+The Bessel function $J_m$ plays the part that the sine played on a string: it wiggles like a cosine or sine whose swings slowly shrink. Its zeros are not whole-number multiples of the first one: those of $J_0$ are at $2.405,\ 5.520,\ 8.654, \dots$, in the ratios $1 : 2.30 : 3.60$. They are spaced by about $\pi$, but shifted: the first is about $0.77\pi$, not $\pi$, so the later ones are not multiples of it. $J_0$ starts at 1 at the center; $J_1$, $J_2$, … start at 0.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 170" role="img" aria-label="Graphs of the Bessel functions J0 and J1: wiggles like a cosine and a sine whose swings shrink, crossing zero at points that are not whole-number multiples of the first">
+<path class="dash" d="M 30 90 L 414 90"/>
+<path class="acc" d="M 30.0 30.0 L 31.3 30.0 L 32.5 30.1 L 33.8 30.2 L 35.1 30.4 L 36.3 30.7 L 37.6 31.0 L 38.8 31.3 L 40.1 31.7 L 41.4 32.1 L 42.6 32.6 L 43.9 33.2 L 45.2 33.8 L 46.4 34.4 L 47.7 35.1 L 49.0 35.8 L 50.2 36.6 L 51.5 37.5 L 52.8 38.3 L 54.0 39.2 L 55.3 40.2 L 56.5 41.2 L 57.8 42.2 L 59.1 43.3 L 60.3 44.4 L 61.6 45.5 L 62.9 46.7 L 64.1 47.9 L 65.4 49.1 L 66.7 50.4 L 67.9 51.7 L 69.2 53.0 L 70.5 54.3 L 71.7 55.7 L 73.0 57.1 L 74.2 58.5 L 75.5 59.9 L 76.8 61.3 L 78.0 62.7 L 79.3 64.2 L 80.6 65.6 L 81.8 67.1 L 83.1 68.6 L 84.4 70.0 L 85.6 71.5 L 86.9 73.0 L 88.2 74.4 L 89.4 75.9 L 90.7 77.4 L 91.9 78.8 L 93.2 80.2 L 94.5 81.7 L 95.7 83.1 L 97.0 84.5 L 98.3 85.9 L 99.5 87.2 L 100.8 88.6 L 102.1 89.9 L 103.3 91.2 L 104.6 92.5 L 105.9 93.7 L 107.1 95.0 L 108.4 96.2 L 109.6 97.3 L 110.9 98.5 L 112.2 99.6 L 113.4 100.6 L 114.7 101.7 L 116.0 102.7 L 117.2 103.6 L 118.5 104.6 L 119.8 105.4 L 121.0 106.3 L 122.3 107.1 L 123.6 107.9 L 124.8 108.6 L 126.1 109.3 L 127.3 109.9 L 128.6 110.5 L 129.9 111.0 L 131.1 111.5 L 132.4 112.0 L 133.7 112.4 L 134.9 112.8 L 136.2 113.1 L 137.5 113.4 L 138.7 113.6 L 140.0 113.8 L 141.3 114.0 L 142.5 114.1 L 143.8 114.1 L 145.0 114.2 L 146.3 114.1 L 147.6 114.1 L 148.8 114.0 L 150.1 113.8 L 151.4 113.6 L 152.6 113.4 L 153.9 113.1 L 155.2 112.8 L 156.4 112.5 L 157.7 112.1 L 158.9 111.7 L 160.2 111.2 L 161.5 110.7 L 162.7 110.2 L 164.0 109.7 L 165.3 109.1 L 166.5 108.5 L 167.8 107.9 L 169.1 107.2 L 170.3 106.5 L 171.6 105.8 L 172.9 105.1 L 174.1 104.4 L 175.4 103.6 L 176.6 102.8 L 177.9 102.0 L 179.2 101.2 L 180.4 100.4 L 181.7 99.5 L 183.0 98.7 L 184.2 97.8 L 185.5 97.0 L 186.8 96.1 L 188.0 95.2 L 189.3 94.3 L 190.6 93.5 L 191.8 92.6 L 193.1 91.7 L 194.3 90.9 L 195.6 90.0 L 196.9 89.1 L 198.1 88.3 L 199.4 87.4 L 200.7 86.6 L 201.9 85.8 L 203.2 85.0 L 204.5 84.2 L 205.7 83.4 L 207.0 82.7 L 208.3 81.9 L 209.5 81.2 L 210.8 80.5 L 212.0 79.9 L 213.3 79.2 L 214.6 78.6 L 215.8 78.0 L 217.1 77.4 L 218.4 76.8 L 219.6 76.3 L 220.9 75.8 L 222.2 75.3 L 223.4 74.9 L 224.7 74.5 L 226.0 74.1 L 227.2 73.8 L 228.5 73.4 L 229.7 73.2 L 231.0 72.9 L 232.3 72.7 L 233.5 72.5 L 234.8 72.3 L 236.1 72.2 L 237.3 72.1 L 238.6 72.0 L 239.9 72.0 L 241.1 72.0 L 242.4 72.0 L 243.7 72.1 L 244.9 72.2 L 246.2 72.3 L 247.4 72.5 L 248.7 72.7 L 250.0 72.9 L 251.2 73.1 L 252.5 73.4 L 253.8 73.7 L 255.0 74.0 L 256.3 74.4 L 257.6 74.8 L 258.8 75.2 L 260.1 75.6 L 261.4 76.1 L 262.6 76.5 L 263.9 77.0 L 265.1 77.5 L 266.4 78.1 L 267.7 78.6 L 268.9 79.2 L 270.2 79.8 L 271.5 80.4 L 272.7 81.0 L 274.0 81.6 L 275.3 82.3 L 276.5 82.9 L 277.8 83.6 L 279.1 84.3 L 280.3 84.9 L 281.6 85.6 L 282.8 86.3 L 284.1 87.0 L 285.4 87.7 L 286.6 88.4 L 287.9 89.1 L 289.2 89.8 L 290.4 90.4 L 291.7 91.1 L 293.0 91.8 L 294.2 92.5 L 295.5 93.1 L 296.7 93.8 L 298.0 94.4 L 299.3 95.1 L 300.5 95.7 L 301.8 96.3 L 303.1 96.9 L 304.3 97.5 L 305.6 98.0 L 306.9 98.6 L 308.1 99.1 L 309.4 99.6 L 310.7 100.1 L 311.9 100.6 L 313.2 101.0 L 314.4 101.5 L 315.7 101.9 L 317.0 102.2 L 318.2 102.6 L 319.5 102.9 L 320.8 103.3 L 322.0 103.5 L 323.3 103.8 L 324.6 104.0 L 325.8 104.2 L 327.1 104.4 L 328.4 104.6 L 329.6 104.7 L 330.9 104.8 L 332.1 104.9 L 333.4 105.0 L 334.7 105.0 L 335.9 105.0 L 337.2 104.9 L 338.5 104.9 L 339.7 104.8 L 341.0 104.7 L 342.3 104.6 L 343.5 104.4 L 344.8 104.2 L 346.1 104.0 L 347.3 103.8 L 348.6 103.5 L 349.8 103.3 L 351.1 103.0 L 352.4 102.6 L 353.6 102.3 L 354.9 101.9 L 356.2 101.5 L 357.4 101.1 L 358.7 100.7 L 360.0 100.3 L 361.2 99.8 L 362.5 99.4 L 363.8 98.9 L 365.0 98.4 L 366.3 97.9 L 367.5 97.3 L 368.8 96.8 L 370.1 96.3 L 371.3 95.7 L 372.6 95.1 L 373.9 94.6 L 375.1 94.0 L 376.4 93.4 L 377.7 92.8 L 378.9 92.2 L 380.2 91.7 L 381.5 91.1 L 382.7 90.5 L 384.0 89.9 L 385.2 89.3 L 386.5 88.7 L 387.8 88.1 L 389.0 87.6 L 390.3 87.0 L 391.6 86.4 L 392.8 85.9 L 394.1 85.4 L 395.4 84.8 L 396.6 84.3 L 397.9 83.8 L 399.2 83.3 L 400.4 82.8 L 401.7 82.3 L 402.9 81.9 L 404.2 81.5 L 405.5 81.0 L 406.7 80.6 L 408.0 80.2"/>
+<path class="pos" d="M 30.0 90.0 L 31.3 88.7 L 32.5 87.5 L 33.8 86.2 L 35.1 85.0 L 36.3 83.7 L 37.6 82.5 L 38.8 81.2 L 40.1 80.0 L 41.4 78.8 L 42.6 77.6 L 43.9 76.5 L 45.2 75.3 L 46.4 74.2 L 47.7 73.1 L 49.0 72.0 L 50.2 70.9 L 51.5 69.9 L 52.8 68.8 L 54.0 67.9 L 55.3 66.9 L 56.5 66.0 L 57.8 65.1 L 59.1 64.2 L 60.3 63.4 L 61.6 62.6 L 62.9 61.8 L 64.1 61.1 L 65.4 60.4 L 66.7 59.8 L 67.9 59.2 L 69.2 58.6 L 70.5 58.1 L 71.7 57.6 L 73.0 57.1 L 74.2 56.7 L 75.5 56.4 L 76.8 56.1 L 78.0 55.8 L 79.3 55.6 L 80.6 55.4 L 81.8 55.2 L 83.1 55.2 L 84.4 55.1 L 85.6 55.1 L 86.9 55.1 L 88.2 55.2 L 89.4 55.3 L 90.7 55.5 L 91.9 55.7 L 93.2 55.9 L 94.5 56.2 L 95.7 56.6 L 97.0 56.9 L 98.3 57.4 L 99.5 57.8 L 100.8 58.3 L 102.1 58.8 L 103.3 59.4 L 104.6 60.0 L 105.9 60.6 L 107.1 61.3 L 108.4 62.0 L 109.6 62.7 L 110.9 63.4 L 112.2 64.2 L 113.4 65.0 L 114.7 65.9 L 116.0 66.8 L 117.2 67.6 L 118.5 68.5 L 119.8 69.5 L 121.0 70.4 L 122.3 71.4 L 123.6 72.4 L 124.8 73.4 L 126.1 74.4 L 127.3 75.4 L 128.6 76.4 L 129.9 77.5 L 131.1 78.5 L 132.4 79.6 L 133.7 80.6 L 134.9 81.7 L 136.2 82.8 L 137.5 83.8 L 138.7 84.9 L 140.0 85.9 L 141.3 87.0 L 142.5 88.0 L 143.8 89.1 L 145.0 90.1 L 146.3 91.1 L 147.6 92.1 L 148.8 93.1 L 150.1 94.0 L 151.4 95.0 L 152.6 95.9 L 153.9 96.8 L 155.2 97.7 L 156.4 98.6 L 157.7 99.5 L 158.9 100.3 L 160.2 101.1 L 161.5 101.9 L 162.7 102.6 L 164.0 103.3 L 165.3 104.0 L 166.5 104.7 L 167.8 105.3 L 169.1 105.9 L 170.3 106.5 L 171.6 107.0 L 172.9 107.5 L 174.1 108.0 L 175.4 108.4 L 176.6 108.8 L 177.9 109.1 L 179.2 109.5 L 180.4 109.8 L 181.7 110.0 L 183.0 110.2 L 184.2 110.4 L 185.5 110.5 L 186.8 110.7 L 188.0 110.7 L 189.3 110.8 L 190.6 110.8 L 191.8 110.7 L 193.1 110.7 L 194.3 110.6 L 195.6 110.4 L 196.9 110.2 L 198.1 110.0 L 199.4 109.8 L 200.7 109.5 L 201.9 109.2 L 203.2 108.9 L 204.5 108.5 L 205.7 108.1 L 207.0 107.7 L 208.3 107.3 L 209.5 106.8 L 210.8 106.3 L 212.0 105.8 L 213.3 105.2 L 214.6 104.6 L 215.8 104.1 L 217.1 103.4 L 218.4 102.8 L 219.6 102.2 L 220.9 101.5 L 222.2 100.8 L 223.4 100.1 L 224.7 99.4 L 226.0 98.7 L 227.2 98.0 L 228.5 97.2 L 229.7 96.5 L 231.0 95.7 L 232.3 95.0 L 233.5 94.2 L 234.8 93.4 L 236.1 92.7 L 237.3 91.9 L 238.6 91.1 L 239.9 90.4 L 241.1 89.6 L 242.4 88.9 L 243.7 88.1 L 244.9 87.4 L 246.2 86.6 L 247.4 85.9 L 248.7 85.2 L 250.0 84.5 L 251.2 83.8 L 252.5 83.2 L 253.8 82.5 L 255.0 81.9 L 256.3 81.3 L 257.6 80.7 L 258.8 80.1 L 260.1 79.5 L 261.4 79.0 L 262.6 78.5 L 263.9 78.0 L 265.1 77.5 L 266.4 77.0 L 267.7 76.6 L 268.9 76.2 L 270.2 75.9 L 271.5 75.5 L 272.7 75.2 L 274.0 74.9 L 275.3 74.7 L 276.5 74.4 L 277.8 74.2 L 279.1 74.0 L 280.3 73.9 L 281.6 73.8 L 282.8 73.7 L 284.1 73.6 L 285.4 73.6 L 286.6 73.6 L 287.9 73.6 L 289.2 73.7 L 290.4 73.8 L 291.7 73.9 L 293.0 74.0 L 294.2 74.2 L 295.5 74.4 L 296.7 74.6 L 298.0 74.8 L 299.3 75.1 L 300.5 75.4 L 301.8 75.7 L 303.1 76.1 L 304.3 76.4 L 305.6 76.8 L 306.9 77.2 L 308.1 77.7 L 309.4 78.1 L 310.7 78.6 L 311.9 79.1 L 313.2 79.6 L 314.4 80.1 L 315.7 80.6 L 317.0 81.2 L 318.2 81.7 L 319.5 82.3 L 320.8 82.9 L 322.0 83.5 L 323.3 84.1 L 324.6 84.7 L 325.8 85.3 L 327.1 85.9 L 328.4 86.6 L 329.6 87.2 L 330.9 87.8 L 332.1 88.5 L 333.4 89.1 L 334.7 89.7 L 335.9 90.4 L 337.2 91.0 L 338.5 91.6 L 339.7 92.2 L 341.0 92.8 L 342.3 93.5 L 343.5 94.0 L 344.8 94.6 L 346.1 95.2 L 347.3 95.8 L 348.6 96.3 L 349.8 96.9 L 351.1 97.4 L 352.4 97.9 L 353.6 98.4 L 354.9 98.9 L 356.2 99.3 L 357.4 99.8 L 358.7 100.2 L 360.0 100.6 L 361.2 101.0 L 362.5 101.3 L 363.8 101.7 L 365.0 102.0 L 366.3 102.3 L 367.5 102.6 L 368.8 102.8 L 370.1 103.0 L 371.3 103.3 L 372.6 103.4 L 373.9 103.6 L 375.1 103.7 L 376.4 103.8 L 377.7 103.9 L 378.9 104.0 L 380.2 104.0 L 381.5 104.0 L 382.7 104.0 L 384.0 103.9 L 385.2 103.9 L 386.5 103.8 L 387.8 103.7 L 389.0 103.5 L 390.3 103.4 L 391.6 103.2 L 392.8 103.0 L 394.1 102.7 L 395.4 102.5 L 396.6 102.2 L 397.9 101.9 L 399.2 101.6 L 400.4 101.3 L 401.7 100.9 L 402.9 100.6 L 404.2 100.2 L 405.5 99.8 L 406.7 99.4 L 408.0 98.9"/>
+<circle cx="102.1" cy="90" r="3" class="fillacc"/>
+<circle cx="195.6" cy="90" r="3" class="fillacc"/>
+<circle cx="289.6" cy="90" r="3" class="fillacc"/>
+<circle cx="383.7" cy="90" r="3" class="fillacc"/>
+<circle cx="145.0" cy="90" r="3" class="fillpos"/>
+<circle cx="240.5" cy="90" r="3" class="fillpos"/>
+<circle cx="335.2" cy="90" r="3" class="fillpos"/>
+<text x="36" y="24">J₀ (starts at 1)</text><text x="80" y="58">J₁ (starts at 0)</text>
+<text x="88" y="106">2.405</text><text x="182" y="106">5.520</text><text x="276" y="106">8.654</text>
+<text x="404" y="84">r →</text>
+</svg>
+```
+
+The rim condition $J_m(ka) = 0$ says $ka$ must be a zero of $J_m$. Writing $j_{m,n}$ for the $n$-th positive zero, $k = j_{m,n}/a$ and $f = ck/2\pi$, so
+$$
+f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
+$$
+Listed in order, the frequencies relative to the lowest are $1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots$ No base frequency in the pitch range puts them near whole-number multiples: the zeros of each $J_m$ are spaced by about $\pi$ but shifted, by an amount that depends on $m$, and the zeros of $J_0$, of $J_1$, of $J_2$ and so on interleave at unrelated places. So the sound does not repeat and there is no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head's symmetry, visible as a [multiplicity](glossary.qmd#multiplicity) of 2.
+
+The sand demo shows these shapes directly. The mode $J_m(kr)\cos m\theta$ is zero where $\cos m\theta = 0$, at $2m$ angles, which pair up into $m$ lines through the center, and along the circles where $J_m(kr) = 0$ inside the rim, $n - 1$ of them for the $n$-th zero. Those are exactly the lines where the sand collects.
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Separation of variables in polar coordinates <span class="needs">uses multivariable calculus</span></summary>
+
+1. *Look for a fixed shape.* A mode is $u = X(r, \theta)\cos\omega t$ with $-\Delta X = k^2X$, $k = \omega/c$, and $X = 0$ at $r = a$.
+2. *Laplacian in polar coordinates.* $\Delta X = X_{rr} + \frac1r X_r + \frac{1}{r^2}X_{\theta\theta}$.
+3. *Separate.* Try $X = R(r)\,\Theta(\theta)$, a [separation of variables](glossary.qmd#separation-of-variables). Substituting and multiplying by $r^2/(R\Theta)$ gives
+$$
+\frac{r^2R'' + rR' + k^2r^2R}{R} = -\frac{\Theta''}{\Theta}.
+$$
+The left side depends only on $r$, the right only on $\theta$, so both equal one constant.
+4. *The angle.* Going once around the drum must return $\Theta$ to itself, so $-\Theta'' = m^2\Theta$ with $\Theta$ periodic. This is exactly the eigenvalue problem of the [circle page](circle.qmd): $m$ is a whole number and $\Theta = \cos m\theta$ or $\sin m\theta$.
+5. *The radius.* What remains is *Bessel's equation*, $r^2R'' + rR' + (k^2r^2 - m^2)R = 0$. It has two independent solutions; one, $J_m(kr)$, is finite at the center, and the other becomes infinite there. For $m = 0$ that would correspond to a point force pushing on the center of the head, and for $m \ge 1$ to something even more singular; in every case its energy is infinite, so it is not a free mode.
+6. *The rim.* $R(a) = 0$ means $J_m(ka) = 0$, so $ka$ must be one of the zeros $j_{m,1} < j_{m,2} < \cdots$ of $J_m$.
+
+Each frequency with $m \ge 1$ belongs to exactly two modes because Bessel functions of different whole-number orders never share a positive zero; this was conjectured by Bourget and proved by Carl Ludwig Siegel in 1929. The zeros have no closed form; this page computes them numerically. For large $n$ they approach $j_{m,n} \approx (n + \tfrac m2 - \tfrac14)\pi$, evenly spaced for one fixed $m$, but the different $m$ interleave, and the low ones are not close to any common grid.
+
+</details>
+:::
+
+**Where you strike.** Number the modes $X_1, X_2, \dots$ in order of frequency. A sharp strike, a brief push at a point $p$, gives mode $i$ a starting speed in proportion to $X_i(p)$, the mode's height at the point struck, the same rule as the piano's hammer on page 7. We model what you hear as the speed of the head at a listening point $q$, which picks up mode $i$ in proportion to $X_i(q)$. Dividing by $\iint X_i^2\,dA$, the integral of the mode's square over the head, removes the arbitrary size of each shape. So mode $i$ sounds with weight $X_i(p)\,X_i(q)\big/\iint X_i^2\,dA$. (A real drum radiates sound from its whole head, and some modes radiate better than others; this model ignores that.) Strike the center and only the round modes, $m = 0$, sound, because every other mode has zero height there. Timpanists strike between halfway and three-quarters of the way out from the center, near the still lines of several modes, which keeps those modes quiet (HyperPhysics); for the first four modes with one still circle inside, for example, that circle lies between 0.44 and 0.65 of the radius. The lowest mode, which dies away fast and is not musically useful, is excited less there than by a strike at the center. Tap a stem to see one mode on the drumhead and hear it alone.
 
 ```{=html}
 <div class="ins">
@@ -92,7 +171,21 @@ A strike at $p$, heard at $q$, gives mode $k$ the weight $X_k(p)X_k(q)/\lVert X_
 </div>
 ```
 
-[← Part 4, the piano](piano.qmd) · [Back to the series](index.qmd)
+## What we found
+
+On a surface the operator is the [Laplacian](glossary.qmd#laplacian). For a round drum its eigenfunctions are built from [Bessel functions](glossary.qmd#bessel), and the frequencies are set by their zeros, which are not near whole-number multiples of any one frequency. That is why a drum has no clear pitch. The lines where each mode stays still are what Chladni's sand made visible, on plates.
+
+## The next puzzle
+
+The shape of the drum sets its frequencies. Turn that around: if you could hear every frequency a drum makes, perfectly, could you work out its shape? Mark Kac made this question famous in 1966.
+
+*On the core path?* This is its last page. [Page 9](shape.qmd) turns the question around, if you want more.
+
+[← The piano](piano.qmd) · [Next: what the spectrum knows →](shape.qmd)
+
+::: {.refs}
+**References.** [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), HyperPhysics, Georgia State University. [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), Institute of Musical Acoustics (Wiener Klangstil), University of Music and Performing Arts Vienna. The Chladni and Germain history: [The 'extraordinary talent and superior genius' of Sophie Germain](https://www.irishtimes.com/news/science/the-extraordinary-talent-and-superior-genius-of-sophie-germain-1.4130947), *The Irish Times*. Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane), [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums).
+:::
 
 ```{=html}
 <script src="core.js"></script>
@@ -180,6 +273,61 @@ A strike at $p$, heard at $q$, gives mode $k$ the weight $X_k(p)X_k(q)/\lVert X_
   }
   C.onTheme(dspec);
   dspec(); requestAnimationFrame(frame);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, cv = document.getElementById("sCanvas"), ctx = cv.getContext("2d"), G = 160, NP = 2600;
+  var MODES = C.DR.slice(0, 10), sel = 3, grid = new Float32Array(G * G), px = new Float32Array(NP), py = new Float32Array(NP);
+  function build() {
+    var d = MODES[sel], mx = 0;
+    for (var i = 0; i < G; i++) for (var j = 0; j < G; j++) {
+      var x = 2 * (i + 0.5) / G - 1, y = 2 * (j + 0.5) / G - 1, r = Math.sqrt(x * x + y * y), v = 0;
+      if (r < 1) v = Math.abs(C.J(d.m, d.j * r) * Math.cos(d.m * Math.atan2(y, x)));
+      grid[i * G + j] = v; mx = Math.max(mx, v);
+    }
+    for (var k = 0; k < G * G; k++) grid[k] /= mx;
+    var lines = d.m === 0 ? "no lines through the center" : d.m + " line" + (d.m > 1 ? "s" : "") + " through the center";
+    var circ = d.n - 1 === 0 ? "no circles inside the rim" : (d.n - 1) + " circle" + (d.n > 2 ? "s" : "") + " inside the rim";
+    document.getElementById("sRead").innerHTML = "frequency <b>" + d.ratio.toFixed(3) + "×</b> the lowest · still lines: " + lines + ", " + circ;
+  }
+  function amp(x, y) { var i = Math.floor((x + 1) / 2 * G), j = Math.floor((y + 1) / 2 * G); if (i < 0 || j < 0 || i >= G || j >= G) return 0; return grid[i * G + j]; }
+  function sprinkle() { for (var k = 0; k < NP; k++) { var r = Math.sqrt(Math.random()) * 0.98, t = 2 * Math.PI * Math.random(); px[k] = r * Math.cos(t); py[k] = r * Math.sin(t); } }
+  function step() {
+    for (var k = 0; k < NP; k++) {
+      var a = amp(px[k], py[k]), s = 0.035 * a, t = 2 * Math.PI * Math.random();
+      var nx = px[k] + s * Math.cos(t), ny = py[k] + s * Math.sin(t), rr = nx * nx + ny * ny;
+      if (rr > 0.97) { var f = Math.sqrt(0.97 / rr); nx *= f; ny *= f; }
+      px[k] = nx; py[k] = ny;
+    }
+  }
+  function draw() {
+    var d = C.fit(cv), W = cv.width, H = cv.height, R = Math.min(W, H) / 2 - 8 * d, cx = W / 2, cy = H / 2;
+    if (!C.reduce) { step(); step(); }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.rgb("--wood", 0.25); ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.fill();
+    ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 3 * d; ctx.stroke();
+    ctx.fillStyle = C.rgb("--ink", 0.8); var g = 1.6 * d;
+    for (var k = 0; k < NP; k++) ctx.fillRect(cx + px[k] * R - g / 2, cy - py[k] * R - g / 2, g, g);
+    requestAnimationFrame(draw);
+  }
+  var box = document.getElementById("sModes");
+  MODES.forEach(function (m, i) {
+    var b = document.createElement("button"); b.type = "button"; b.textContent = m.ratio.toFixed(2) + "×"; b.setAttribute("aria-pressed", i === sel);
+    b.addEventListener("click", function () { sel = i; Array.prototype.forEach.call(box.children, function (c, k) { c.setAttribute("aria-pressed", k === i); }); build(); sprinkle(); });
+    box.appendChild(b);
+  });
+  document.getElementById("sShake").addEventListener("click", sprinkle);
+  document.getElementById("sHear").addEventListener("click", function () {
+    var f = 150 * MODES[sel].ratio, b = C.render([{ f: f, amp: 1, tau: 20 }], 1.6), dd = b.getChannelData(0), n = Math.floor(0.25 * b.sampleRate);
+    for (var i = 0; i < n; i++) dd[dd.length - 1 - i] *= i / n;
+    C.play(b, 0.6);
+  });
+  build(); sprinkle(); requestAnimationFrame(draw);
 })();
 </script>
 ```

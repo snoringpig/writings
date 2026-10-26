@@ -1,6 +1,7 @@
 ---
 title: "A Bicycle Wheel"
 date: 2023-11-21
+date-modified: 2023-11-23
 number-sections: true
 format: 
     html:

@@ -1,18 +1,27 @@
 ---
-title: "The kalimba"
-subtitle: "Part 3 of Instruments as Operators"
+title: "6 · Change the order"
+subtitle: "The kalimba · Instruments as Operators"
 format:
   html:
     html-math-method: katex
     css: ins.css
+date-modified: 2026-10-25
 resources: [core.js, ins.css]
 ---
 
-[Series](index.qmd) · [0 Foundations](foundations.qmd) · [1 Violin](violin.qmd) · [2 Clarinet](clarinet.qmd) · **3 Kalimba** · [4 Piano](piano.qmd) · [5 Drum](drum.qmd)
+::: {.series-nav}
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), **6 Kalimba**, [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
+:::
 
-Take away the tension and keep only stiffness. A steel tine clamped at one end obeys a fourth-order equation, its overtones scatter far from the integers, and it still sounds pitched.
+::: {.pageinfo}
+**Builds on** [page 4](violin.qmd), for boundary conditions. About 8 minutes, plus 5 for the folds.
+:::
 
-## Play it
+::: {.puzzle}
+**The puzzle.** Halve the length of a string and its pitch rises an octave. Halve the length of a kalimba tine and its pitch rises two octaves. And a tine's first overtone is at 6.27 times its fundamental frequency, nowhere near a whole number, yet a kalimba sounds like a clean note. Why?
+:::
+
+Tap the tines below, or drag across several. They are drawn to scale: each tine's length follows from its pitch by the rule this page derives, and the long low tines are not twice as long as the high ones an octave up. Then tick the box that lets the overtones ring as long as the fundamental, and listen to how the sound changes.
 
 ```{=html}
 <style>
@@ -34,24 +43,22 @@ Take away the tension and keep only stiffness. A steel tine clamped at one end o
     <label class="check"><input type="checkbox" id="keq"> Overtones ring as long as the fundamental</label>
     <span class="readout" id="kRead">Tap a tine, or drag across several.</span>
   </div>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Tine lengths are drawn from the operator: frequency goes as 1/L², so each tine's length is the C4 tine's divided by the square root of its frequency ratio. Tick the box and pluck again to hear the same spectrum as a bell.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Tine lengths are drawn from the operator: frequency goes as 1/L², so each tine's length is the C4 (middle C) tine's divided by the square root of its frequency ratio. Tick the box and pluck again: with the off-grid overtones ringing as long as the fundamental, the same frequencies sound clangorous, like a bell.</p>
 </section>
 </div>
 ```
 
-## Deriving the operator
-
-1. Bend a thin bar. Fibers on the outside of the curve stretch and fibers on the inside compress. By Hooke's law their stresses add up to a *bending moment* proportional to the curvature, $M = EI\,u_{xx}$, where $E$ is Young's modulus of the steel and $I$ is the second moment of area of the cross-section.
-2. Cut out a slice of length $dx$. Its two faces carry moments and vertical shear forces. A thin slice has negligible rotational inertia, so its torques balance, which forces the shear to be the slope of the moment: $V = -M_x$.
-3. Vertical forces do not balance; their difference accelerates the slice. With density $\rho$ and area $A$, Newton's law reads $\rho A\,u_{tt} = V_x = -M_{xx}$. Substituting step 1 gives the operator below.
-4. The clamp forbids moving and tilting: $u = u_x = 0$ at the base. Nothing grips the tip, so it carries no moment and no shear: $u_{xx} = u_{xxx} = 0$ there.
-
-::: {.callout-tip appearance="simple"}
-## The tine's operator
-$$
-u_{tt} = -\kappa^2 u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho A}.
-$$
+::: {.family}
+**Same operator, different constants.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other. The [harmonica](harmonica.qmd), next, has the same operator and the same ends, but it is blown instead of plucked, and that decides what you hear.
 :::
+
+## A bar resists bending
+
+**The operator.** A bar of [Young's modulus](glossary.qmd#youngs-modulus) $E$ (how stiff the steel is), cross-section area $S$, [second moment of area](glossary.qmd#second-moment) $I$ (how the cross-section's shape resists bending) and density $\rho$ obeys
+$$
+u_{tt} = -\kappa^2\,u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho S}.
+$$
+This is the [Euler–Bernoulli beam](glossary.qmd#beam) equation. The operator is $\kappa^2\,d^4/dx^4$, with four derivatives. Two of them measure how sharply the bar is bent, its curvature $u_{xx}$; the bar resists bending with a turning effect, the *bending moment*, proportional to it. Two more turn that into a net force: one derivative turns the change of bending moment along the bar into the sideways force across each cut, the *shear force*, and another turns the change of shear force along the bar into the net force on each piece.
 
 ```{=html}
 <div class="ins">
@@ -67,23 +74,90 @@ $$
       <text x="118" y="150">V</text><text x="218" y="30">V + dV</text>
       <text x="146" y="128">dx</text>
     </svg>
-    <p class="cap">One slice of the tine. Moments (warm) bend it; shear forces (cool) push it up and down. Torque balance links them; force balance moves the slice.</p>
+    <p class="cap">One slice of the tine. Bending moments (warm), the turning effects that bend it; shear forces (cool), the sideways forces across each cut, push it up and down. Torque balance links them; force balance moves the slice.</p>
   </div>
 </div>
 ```
 
-## Spectrum
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a thin slice to four derivatives <span class="needs">uses integrals over an area</span></summary>
 
-A standing wave $X(x)\cos\omega t$ needs $X'''' = \beta^4 X$ with $\beta^4 = \omega^2/\kappa^2$. The solutions are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$. The four boundary conditions are four linear equations for the four coefficients, and they have a nonzero solution exactly when
+**1. Bending stresses.** Bend the bar. Fibers on the outside of the curve stretch and fibers on the inside compress, while a middle line, the *neutral axis*, keeps its length.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 150" role="img" aria-label="A bent section of bar: fibers on the outside stretch, fibers on the inside compress, the middle keeps its length">
+  <path class="bar" d="M 50 60 Q 210 10 370 60 L 370 100 Q 210 50 50 100 Z"/>
+  <path class="dash" d="M 50 80 Q 210 30 370 80"/>
+  <path class="pos" d="M 150 40 L 120 47"/><path class="pos" d="M 270 40 L 300 47"/>
+  <path class="neg" d="M 140 78 L 165 72"/><path class="neg" d="M 280 78 L 255 72"/>
+  <text x="168" y="22">stretched (y &gt; 0)</text><text x="160" y="118">compressed (y &lt; 0)</text>
+  <text x="300" y="138">neutral axis, y = 0</text>
+</svg>
+```
+
+A fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$ (for a gentle bend, the fraction by which a fiber stretches is its distance from the neutral axis times how fast the bar turns per unit length, which is the curvature $u_{xx}$), and by Hooke's law it carries the stress (force per area) $\sigma = -E\,y\,u_{xx}$. Summed over the cross-section these forces cancel, which is what places the neutral axis through the middle (the centroid) of the cross-section, but their torques do not. They add up to the *bending moment*
+$$
+M = -\int_S y\,\sigma\,dA = E\,u_{xx}\int_S y^2\,dA = EI\,u_{xx}, \qquad I = \int_S y^2\,dA ,
+$$
+the integrals running over the cross-section. For a rectangle of width $w$ and thickness $h$, $I = wh^3/12$; for a round wire of diameter $d$, $I = \pi d^4/64$.
+
+**2. Shear.** A moment rotates a slice but cannot lift it. Each face of a slice also carries a vertical force, the *shear force*. The conventions: $M$ is the moment on a face that bends the slice into an upward curve, counterclockwise on the right face and clockwise on the left; $V$ is the upward force on the right face, and the left face feels the same force downward.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 170" role="img" aria-label="A thin slice with bending moments, clockwise on the left face and counterclockwise on the right face, and shear forces, down on the left face and up on the right face">
+  <path class="dash" d="M 30 85 L 390 85"/>
+  <rect class="bar" x="150" y="65" width="120" height="40" rx="2"/>
+  <path class="pos" d="M 136 55 A 32 32 0 0 0 136 115"/><path class="fillpos" d="M 143 55 L 132 49 L 132 61 Z"/>
+  <path class="pos" d="M 284 55 A 32 32 0 0 1 284 115"/><path class="fillpos" d="M 277 55 L 288 49 L 288 61 Z"/>
+  <path class="neg" d="M 150 85 L 150 140"/><path class="fillneg" d="M 144 136 L 156 136 L 150 148 Z"/>
+  <path class="neg" d="M 270 85 L 270 30"/><path class="fillneg" d="M 264 34 L 276 34 L 270 22 Z"/>
+  <text x="96" y="90">M</text><text x="306" y="90">M + dM</text>
+  <text x="158" y="152">V</text><text x="278" y="30">V + dV</text><text x="198" y="128">dx</text>
+</svg>
+```
+
+We neglect the slice's resistance to being spun, its rotational inertia, which is accurate when the bar is thin compared with the length of its bending waves; then the torques on the slice must balance. Taking torques about the left face, the shear on the right face times the lever arm $dx$ cancels the change in moment: $V\,dx + dM = 0$, so $V = -M_x$.
+
+**3. Newton's law.** The vertical forces on the slice do not balance: $V(x + dx) - V(x) = V_x\,dx$ accelerates its mass $\rho S\,dx$. So $\rho S\,u_{tt} = V_x = -M_{xx} = -EI\,u_{xxxx}$, the equation above.
+
+**What was assumed.** Small slopes, a uniform bar, no rotational inertia of the slices (Rayleigh's correction for it adds a small term that matters only for thick bars and high modes), and no shear deformation of the slices (Timoshenko's correction).
+
+</details>
+:::
+
+**Boundary conditions.** The bending moment is $EI\,u_{xx}$ and the shear force is $-EI\,u_{xxx}$ (the fold derives both). At the base the tine is held down, so it can neither move nor tilt: $u = 0$ and $u_x = 0$. A bar held this way at one end and free at the other is called a [cantilever](glossary.qmd#cantilever). At the free tip nothing pushes or bends the bar, so both the moment and the shear force vanish: $u_{xx} = 0$ and $u_{xxx} = 0$. That is two conditions at each end, four in all.
+
+**Spectrum.** Substituting a mode $X(x)\cos\omega t$ into the equation gives $\kappa^2 X'''' = \omega^2 X$. Write $\omega/\kappa = \beta^2$, so that $X'''' = \beta^4 X$; the number $\beta$ plays the role of the string's [wavenumber](glossary.qmd#wavenumber). Four functions solve this equation: $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh y = (e^y + e^{-y})/2$ and $\sinh y = (e^y - e^{-y})/2$ are the [hyperbolic functions](glossary.qmd#hyperbolic). So $X$ is a combination of the four with four unknown constants. The four boundary conditions are four equations for those constants, and they have a solution other than all zeros exactly when
 $$
 \cos\beta L\,\cosh\beta L = -1 .
 $$
+The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, close to $(n - \tfrac12)\pi$ from the second one on. Since $\omega \propto \beta^2$, the frequency ratios are
+$$
+1 : 6.27 : 17.55 : 34.39 : \cdots, \qquad \text{growing like } (2n-1)^2 .
+$$
+For a string, frequency is proportional to the wavenumber; for a bar, to its square. That change of order spreads the overtones apart, roughly like $n^2$ instead of $n$. It does not by itself move them off the whole numbers: with *pinned* ends, held in place but free to pivot, so $u = u_{xx} = 0$ at both ends, the shapes $\sin(n\pi x/L)$ satisfy the conditions, four derivatives multiply them by $(n\pi/L)^4$, and the frequencies are in the ratios $1 : 4 : 9 : 16$, all whole numbers. What moves them off is the clamped base and the free tip, which shift the low roots: the first is 1.8751 instead of $\pi/2 \approx 1.571$, and if every root were exactly $(n - \tfrac12)\pi$ the ratios would be the whole numbers $1 : 9 : 25$.
 
-The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, computed live on this page. Since $\omega = \kappa\beta^2$, the frequency ratios are $(\beta_n/\beta_1)^2 = 1 : 6.27 : 17.55 : 34.39$. Bending makes frequency grow like the square of the wavenumber, so the overtones fly apart.
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>The four boundary conditions give cos βL cosh βL = −1 <span class="needs">uses a 2×2 determinant and integration by parts</span></summary>
 
-The same formula gives $f_1 \propto 1/L^2$. Kalimba makers tune a tine by sliding it over the bridge to change its free length.
+The solutions of $X'''' = \beta^4X$ are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh$ and $\sinh$ are the [hyperbolic functions](https://en.wikipedia.org/wiki/Hyperbolic_functions), whose fourth derivatives also return them times $\beta^4$.
 
-The tine sounds pitched anyway because its first overtone is weak, sits more than two octaves up, and dies within a few hundredths of a second. The ear hears the fundamental with a short metallic click on top.
+1. *Clamped base.* $X(0) = 0$ and $X'(0) = 0$ leave $X = a\,(\cos\beta x - \cosh\beta x) + b\,(\sin\beta x - \sinh\beta x)$.
+2. *Free tip.* Differentiating, and dropping the common factors $\beta^2$ and $\beta^3$, the conditions $X''(L) = 0$ and $X'''(L) = 0$ read, with the shorthand $C_1 = \cos\beta L$, $S_1 = \sin\beta L$, $C_2 = \cosh\beta L$, $S_2 = \sinh\beta L$:
+$$
+-(C_1 + C_2)\,a - (S_1 + S_2)\,b = 0, \qquad (S_1 - S_2)\,a - (C_1 + C_2)\,b = 0 .
+$$
+3. *Nonzero solution.* Two equations $pa + qb = 0$ and $ra + sb = 0$ have a solution other than $a = b = 0$ exactly when $ps - qr = 0$, the *determinant*: solve the first for $a$ and substitute into the second. Here
+$$
+(C_1 + C_2)^2 + (S_1 + S_2)(S_1 - S_2) = C_1^2 + S_1^2 + 2C_1C_2 + C_2^2 - S_2^2 = 2 + 2C_1C_2 = 0,
+$$
+using $C_1^2 + S_1^2 = 1$ and $C_2^2 - S_2^2 = 1$. So $\cos\beta L\cosh\beta L = -1$.
+4. *Roots.* Since $\cosh\beta L$ grows fast, $\cos\beta L$ must be close to 0, so $\beta L \approx (n - \tfrac12)\pi$, and the approximation improves quickly with $n$. The first root, $1.8751$, is the furthest from it.
+
+The operator $d^4/dx^4$ with these four conditions is symmetric, by integrating by parts four times (the boundary terms all vanish), so its eigenvalues are real and its eigenfunctions perpendicular, as on the circle; with the right domain it is also self-adjoint. Integrating by parts twice gives $\int_0^L X\,X''''\,dx = \int_0^L (X'')^2\,dx$, so no eigenvalue is negative, and zero is ruled out because $X'' = 0$ with a clamped base forces $X = 0$. That is why $\beta$ is a real, positive number.
+
+</details>
+:::
 
 ```{=html}
 <div class="ins">
@@ -96,7 +170,36 @@ The tine sounds pitched anyway because its first overtone is weak, sits more tha
 </div>
 ```
 
-[← Part 2, the clarinet](clarinet.qmd) · [Part 4, the piano →](piano.qmd)
+**Tuning.** Since $\beta_1 = 1.8751/L$ and $\omega = \kappa\beta^2$, the lowest frequency is $f_1 \propto \kappa/L^2$ ($\propto$ means "proportional to"), so halving a tine's free length raises its pitch by a factor of 4, two octaves. Kalimba makers tune a tine by sliding it over the bridge to change its free length.
+
+**Why it still sounds pitched.** Plucked at the tip, a tine starts in the bent shape that a steady push at the tip produces. In that shape the second mode moves only about $1/6.27^2 \approx 2.5\%$ as far as the first (fold below). But what you hear is driven by the force the tine puts on the bridge, as on the [string page](violin.qmd), and for the same displacement a higher mode pushes harder. At the clamp, which in this model is where the tine presses on the bridge, the second mode's bending moment is about 16% of the first's and its shear force about 55%. The bridge feels both, so either way the overtone is far stronger in the sound than 2.5% suggests: it is the brief metallic clink of the attack. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on. What remains is close to a single frequency, and a sound made of essentially one frequency repeats, so it has a clear pitch.
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>How strongly a pluck at the tip excites each mode <span class="needs">uses integration by parts</span></summary>
+
+1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still in a bent shape $u_0$, so the bar's restoring force balances the push.
+2. *Split it into modes.* Write $u_0 = \sum_n c_n X_n$, with each mode scaled so that $\int_0^L X_n^2\,dx = L$. Inside the tine nothing pushes, so $EI\,u_0'''' = 0$ there; the push enters only at the tip, as the shear force there. Now compute $\int_0^L EI\,u_0\,X_n''''\,dx$ in two ways. First, $EI\,X_n'''' = \rho S\,\omega_n^2X_n$ (the mode equation), and the modes are perpendicular, so only the $c_n$ term survives: the integral is $\rho S L\,\omega_n^2\,c_n$. Second, integrate by parts four times to move the derivatives onto $u_0$, as in the fold above. Inside, $EI\,u_0'''' = 0$; at the clamp both $u_0$ and $X_n$ vanish with their slopes; at the tip $X_n'' = X_n''' = 0$ and $u_0'' = 0$. The one term left is the tip's shear force times $X_n(L)$, which is $F\,X_n(L)$. So $\rho S L\,\omega_n^2\,c_n = F\,X_n(L)$. This is page 1's spring again: mode $n$ is a spring of stiffness proportional to $\omega_n^2$, pushed with a force proportional to its value at the tip, and it gives way by force over stiffness.
+3. *Tip values.* Taking $a = -1$ and $b = \sigma_n$ in the fold above gives the standard form $X_n = \cosh\beta_nx - \cos\beta_nx - \sigma_n(\sinh\beta_nx - \sin\beta_nx)$, with $\sigma_n = (\sinh\beta_nL - \sin\beta_nL)/(\cosh\beta_nL + \cos\beta_nL)$, about $0.734$ and $1.018$ for the first two modes. Written this way, each mode already has $\int_0^L X_n^2\,dx = L$, and its tip value is $\pm2$ for every $n$ (a known property of clamped–free modes, easily confirmed numerically). So $c_n \propto 1/\omega_n^2$, and $c_2/c_1 = 1/6.27^2 \approx 2.5\%$.
+4. *Forces.* The bending moment at the clamp is $EI\,u_{xx}$ there, and the shear force $EI\,u_{xxx}$ there (up to sign). From the standard form, $X_n''(0) = 2\beta_n^2$ and $X_n'''(0) = -2\sigma_n\beta_n^3$. Multiplying by $c_n \propto 1/\omega_n^2 \propto 1/\beta_n^4$, the second mode's moment at the clamp is $(\beta_1/\beta_2)^2 = (1.875/4.694)^2 \approx 16\%$ of the first's, and its shear force $(\sigma_2/\sigma_1)(\beta_1/\beta_2) \approx 1.39 \times 0.40 \approx 55\%$.
+
+</details>
+:::
+
+Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, dying away quickly after the attack. A real tine is not perfectly clamped: Chapman models it as clamped at one end, resting on the bridge partway along, and free at the tip, and finds that the measured overtone ratios depend on how the tine's length is divided by the bridge, which is one reason they spread.
+
+## What we found
+
+A bar under no tension springs back because it resists bending. Its operator has four derivatives instead of two, so the frequencies spread apart, growing roughly like the square of the mode number. The clamped base and free tip then move them off the whole numbers: 1, 6.27, 17.55, … times the lowest. With pinned ends the same operator would give 1, 4, 9, 16.
+
+## The next puzzle
+
+A harmonica reed is the same kind of bar, fixed at one end and free at the other, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck one and you hear them. Yet a harmonica, blown, plays notes whose overtones are exact whole-number multiples. Where did the bar's own overtones go?
+
+[← An air column](clarinet.qmd) · [Next: the harmonica →](harmonica.qmd)
+
+::: {.refs}
+**References.** D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustical Society of America, 2008. Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory) and [Cantilever](https://en.wikipedia.org/wiki/Cantilever). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2 (bars).
+:::
 
 ```{=html}
 <script src="core.js"></script>

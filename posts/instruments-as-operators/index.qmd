@@ -2,6 +2,7 @@
 title: "Instruments as Operators"
 subtitle: "Newton's law gives an operator, its spectrum gives the frequencies, the way you play gives the sound"
 date: 2026-10-25
+date-modified: 2026-10-25
 categories: [math, music]
 format:
   html:
@@ -10,20 +11,122 @@ format:
 resources: [core.js, ins.css]
 ---
 
-::: {.callout-note appearance="simple"}
-## How this was made
-The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.
+::: {.series-nav}
+**Series** · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-Every instrument in this series is worked out the same way, in three steps.
+::: {.made}
+*How this was made.* The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.
+:::
 
-1. **Operator.** Apply Newton's law to a small piece of the instrument. The restoring force per unit mass, written as a function of the shape, is an operator $\mathcal{L}$, and the motion obeys $u_{tt} = -\mathcal{L}u$. The supports give the boundary conditions.
-2. **Spectrum.** Each eigenpair $\mathcal{L}X = \omega^2 X$ is a standing wave $X(x)\cos\omega t$. The eigenvalues fix which frequencies the instrument can make.
-3. **Sound.** How you play it, by bow, reed, hammer, thumb or stick, fixes how strongly each mode is excited. Whether the frequencies line up on whole-number multiples decides whether you hear a pitch.
+Here are six sounds that need explaining. Play them, and try to guess why each one happens.
 
-## Hear them side by side
+```{=html}
+<div class="ins">
+<div class="gallery">
+  <div class="pcard">
+    <p class="q">Why does a string sing and a drum thud?</p>
+    <p class="b">Both are pulled tight and set vibrating. One gives a note you could hum; the other doesn't.</p>
+    <div class="controls"><button data-g="string">Pluck a string</button><button data-g="drum">Strike a drum</button></div>
+    <p class="go">Answered on <a href="violin.html">page 4</a> and <a href="drum.html">page 8</a></p>
+  </div>
+  <div class="pcard">
+    <p class="q">How can you hear a frequency that isn't there?</p>
+    <p class="b">Remove a note's own frequency completely, and you still hear the same note.</p>
+    <div class="controls"><button data-g="note">The note</button><button data-g="nofund">Without its own frequency</button></div>
+    <p class="go">Answered on <a href="note.html">page 0</a></p>
+  </div>
+  <div class="pcard">
+    <p class="q">Why is a clarinet almost an octave deeper than a flute?</p>
+    <p class="b">They are about the same length. The difference is one closed end.</p>
+    <div class="controls"><button data-g="flute">A flute-like tube</button><button data-g="clar">The same tube, closed at one end</button></div>
+    <p class="go">Answered on <a href="clarinet.html">page 5</a></p>
+  </div>
+  <div class="pcard">
+    <p class="q">Why do these two sound so different?</p>
+    <p class="b">A kalimba tine and a harmonica reed are the same kind of bar, with the same <a href="glossary.html#partial">overtones</a> far off the whole-number multiples.</p>
+    <div class="controls"><button data-g="kal">Kalimba tine, plucked</button><button data-g="harm">Harmonica reed, blown</button></div>
+    <p class="go">Answered on <a href="kalimba.html">page 6</a> and <a href="harmonica.html">6b</a></p>
+  </div>
+  <div class="pcard">
+    <p class="q">Why do piano tuners avoid exact octaves?</p>
+    <p class="b">An octave tuned to exactly 2 : 1 wobbles; a slightly stretched one doesn't. Stiffness exaggerated here so the wobble is easy to hear.</p>
+    <div class="controls"><button data-g="oct">Exactly 2 : 1</button><button data-g="str">Stretched</button></div>
+    <p class="go">Answered on <a href="piano.html">page 7</a></p>
+  </div>
+  <div class="pcard">
+    <p class="q">Can you hear the shape of a drum?</p>
+    <p class="b">These two drums have different shapes. Played with every <a href="glossary.html#mode">mode</a> equally loud, which no real strike does, they sound identical.</p>
+    <div class="controls"><button data-g="gA">Drum A</button><button data-g="gB">Drum B</button></div>
+    <p class="go">Answered on <a href="shape.html">page 9</a></p>
+  </div>
+</div>
+</div>
+```
 
-Gray lines are whole-number multiples of the fundamental. Stem height is how strongly each partial is excited.
+And one question beyond the mathematics: did the instruments people built shape the scales they play? That is the [epilogue](epilogue.qmd).
+
+## Two ideas answer all six
+
+1. **An instrument's frequencies come from the [spectrum](glossary.qmd#spectrum) of an [operator].** The operator is a rule that takes a shape of the instrument, a bent string or a dented drumhead, and gives back the force pulling it back toward rest (per unit mass, and with a minus sign, so that the motion obeys $u_{tt} = -Au$, where $u$ is the shape, $u_{tt}$ its [acceleration](glossary.qmd#partial-derivative) and $A$ the operator). The shapes it only rescales are the instrument's [modes](glossary.qmd#mode); the rescaling factors are its [eigenvalues](glossary.qmd#eigenvalue), and the list of them is the spectrum. Each frequency is proportional to the square root of an eigenvalue. The simplest case is a loop of string, where the operator is $-c^2\,d^2/d\theta^2$, minus the second derivative times a constant $c^2$, and writing a shape in its modes is the [Fourier series](glossary.qmd#fourier-series).
+2. **A clear [pitch](glossary.qmd#pitch) means the frequencies you hear sit at, or very near, whole-number multiples of one frequency, a frequency in the range we hear as pitch, from a few dozen to a few thousand hertz.** Then the sound repeats, or nearly repeats, and the repetition rate is the pitch. Since the frequencies come from the spectrum, whether they line up is decided by the operator and the instrument's shape. How you play decides how loud each frequency is, with one refinement: a steady bow or breath can lock the motion into exact repetition, close to one of the operator's frequencies, even when the operator's overtones are off the grid.
+
+[operator]: glossary.qmd#operator
+
+## How to read this series
+
+Every page opens with a puzzle you can hear or see, builds the explanation, and ends with what we found and the next puzzle. The step-by-step derivations and proofs are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the [glossary](glossary.qmd), and the symbol $\propto$ means "proportional to".
+
+- **The gist, 5 minutes.** This page: the six puzzles above and the two ideas that answer them.
+- **The core idea, about 35 minutes.** Read [0 · What is a note?](note.qmd), [3 · The circle](circle.qmd), [4 · A string with ends](violin.qmd) and [8 · The drum](drum.qmd), skipping the folds. They carry both points: a pitch is a repeating sound, the circle is the smallest operator and its spectrum, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not.
+- **The whole story, about an hour and a half.** Pages 0 to 8 in order, each answering the question the last one raised.
+- **Everything, about three hours.** All the pages, including [9 · What the spectrum knows](shape.qmd) and the [epilogue](epilogue.qmd), with the folds open.
+
+Here for one puzzle? Each one above links to the page that answers it, and each page says at the top which earlier page it builds on and how long it takes. Already know Fourier series? Start at page 4. The times assume reading about 120 words a minute, plus a minute or two per demo.
+
+## All pages
+
+In the table, $\partial_x$ means a derivative in $x$, so $-c^2\partial_x^2$ is the string's $-c^2\,d^2/dx^2$; $\kappa^2 = EI/\rho S$ is a bar's stiffness constant ([page 6](kalimba.qmd)); $\Delta$ is the [Laplacian](glossary.qmd#laplacian); [circulant](glossary.qmd#circulant) matrices and [Bessel](glossary.qmd#bessel) zeros are explained on pages 2 and 8.
+
+| Page | New idea | Operator | Frequencies |
+|:--|:--|:--|:--|
+| [0 · What is a note?](note.qmd) | a note is a sound that repeats; its partials are whole-number multiples | | $f, 2f, 3f, \dots$ |
+| [1 · One mass on a spring](oscillator.qmd) | one restoring force, one frequency | the number $k/m$ | $\sqrt{k/m}/2\pi$ |
+| [2 · Beads on a ring](ring.qmd) | many masses: eigenvectors of a matrix | circulant matrix | $\propto \sin(\pi k/N)$ |
+| [3 · The circle](circle.qmd) | the smallest operator spectrum; Fourier series | $-c^2\,d^2/d\theta^2$ on a loop | $\propto n$, exactly |
+| [4 · A string with ends](violin.qmd) | boundary conditions are part of the operator | $-c^2\,d^2/dx^2$, ends tied | $\propto n$ |
+| [5 · An air column](clarinet.qmd) | closing one end halves the lowest frequency and keeps only its odd multiples | the same, on pressure | $\propto 2n - 1$ |
+| [6 · Change the order](kalimba.qmd) | bending: four derivatives spread the overtones; the clamped and free ends move them off the whole numbers | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
+| [6b · The harmonica](harmonica.qmd) | the excitation, not the operator, can set the overtones | the same as 6 | heard as $\propto n$ |
+| [7 · The piano](piano.qmd) | operators add; the pedals act on damping and forcing, not on the spectrum | $-c^2\partial_x^2 + \kappa^2\partial_x^4$ | $n\sqrt{1 + Bn^2}$ |
+| [8 · The drum](drum.qmd) | two dimensions; no clear pitch | $-c^2\Delta$ on a disk | Bessel zeros |
+| [9 · What the spectrum knows](shape.qmd) | the spectrum hears area and perimeter, but not always the shape | $-c^2\Delta$ on any region | Weyl's law |
+| [10 · Did instruments shape our scales?](epilogue.qmd) | the spectrum decides which intervals sound smooth | the bar's, with free ends | $1 : 2.76 : 5.40$ |
+
+: Every page, its new idea, its operator and its frequencies. {.striped}
+
+## Families
+
+<details><summary>Instruments that are the same up to constants</summary>
+
+Instruments in one family share one rule for the restoring force, so they are close to the same mathematical object with different constants. The last column says what still differs inside a family: for air columns the ends, which are part of the operator, and for drums the air around the head, which matters for timpani.
+
+| Family | Operator and boundary | Demos | What varies inside the family |
+|:--|:--|:--|:--|
+| Strings under tension | $-c^2\partial_x^2$, tied ends | [Violin](violin.qmd) | length, tension, mass per length; plucked (guitar, harp) or bowed (violin, cello) |
+| Air columns | $-c^2\partial_x^2$ on pressure | [Clarinet](clarinet.qmd), with a flute switch | the boundary condition: one end closed (clarinet, pan pipes) or both open (flute) |
+| Clamped bars | $\kappa^2\partial_x^4$, clamped base, free tip | [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) | steel tine or brass reed; plucked or blown, which decides whether you hear harmonics |
+| Stiff strings | $-c^2\partial_x^2 + \kappa^2\partial_x^4$, pinned ends | [Piano](piano.qmd) | stiffness, rising toward the treble |
+| Membranes | $-c^2\Delta$ on a disk | [Drum](drum.qmd) | tension and size; the air under a timpani head |
+
+</details>
+
+
+## All the sounds side by side
+
+<details><summary>The partials of each instrument's sound, as it is usually played</summary>
+
+These are the partials of the sound, which for blown and bowed instruments differ from the operator's own frequencies. Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each [partial](glossary.qmd#partial) is excited.
 
 ```{=html}
 <div class="ins">
@@ -31,35 +134,31 @@ Gray lines are whole-number multiples of the fundamental. Stem height is how str
   <div><span class="nm">Violin</span><svg class="mini" data-mini="violin" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="violin">—</span><button class="primary" data-play="violin">Play</button></div>
   <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">modes 1, 3, 5, 7, 9</span><button class="primary" data-play="clarinet">Play</button></div>
   <div><span class="nm">Kalimba</span><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="kalimba">—</span><button class="primary" data-play="kalimba">Play</button></div>
+  <div><span class="nm">Harmonica</span><svg class="mini" data-mini="harmonica" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="harmonica">—</span><button class="primary" data-play="harmonica">Play</button></div>
   <div><span class="nm">Piano</span><svg class="mini" data-mini="piano" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="piano">—</span><button class="primary" data-play="piano">Play</button></div>
   <div><span class="nm">Drum</span><svg class="mini" data-mini="drum" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="drum">—</span><button class="primary" data-play="drum">Play</button></div>
 </div>
 </div>
 ```
 
-## Reading path
-
-| Part | Instrument | Operator | What you can play |
-|:-----|:-----------|:---------|:------------------|
-| 0 | [Foundations](foundations.qmd) | $m\ddot u_j = \tfrac{T}{h}(u_{j+1}-2u_j+u_{j-1}) \to c^2u_{xx}$ | beads on a thread |
-| 1 | [Violin](violin.qmd) | $-c^2\partial_x^2$ | a bowed fingerboard |
-| 2 | [Clarinet](clarinet.qmd) | $-c^2\partial_x^2$, with $p_x = 0$ at the reed | tone holes and a register key |
-| 3 | [Kalimba](kalimba.qmd) | $\kappa^2\partial_x^4$ | seventeen tines |
-| 4 | [Piano](piano.qmd) | $-c^2\partial_x^2 + \kappa^2\partial_x^4$ | a keyboard with a stiffness knob |
-| 5 | [Drum](drum.qmd) | $-c^2\Delta$ | a drumhead you strike anywhere |
+</details>
 
 ## Comparison
 
-| | Violin | Clarinet | Kalimba | Piano | Drum |
-|:--|:--|:--|:--|:--|:--|
-| Restoring force | tension | air pressure | bending stiffness | tension + bending | tension, in 2D |
-| Newton's law on | a segment | a slab of air | a slice: torque, then force | a segment, both forces added | a patch, via the divergence theorem |
-| Operator | $-c^2\partial_x^2$ | $-c^2\partial_x^2$ on pressure | $\kappa^2\partial_x^4$ | $-c^2\partial_x^2+\kappa^2\partial_x^4$ | $-c^2\Delta$ |
-| Boundary | $u=0$ at both ends | $p_x=0$ at reed, $p=0$ at open end | $u=u'=0$ at clamp, $u''=u'''=0$ at tip | $u=u''=0$ at both ends | $u=0$ on the rim |
-| Eigen-condition | $\sin kL=0$ | $\cos kL=0$ | $\cos\beta L\cosh\beta L=-1$ | $\sin kL=0$ | $J_m(ka)=0$ |
-| $f_n/f_1$ | $n$ | $2n-1$ | $(\beta_n/\beta_1)^2$: 1, 6.27, 17.5 | $n\sqrt{(1+Bn^2)/(1+B)}$ | $j_{m,n}/j_{0,1}$: 1, 1.59, 2.14 |
-| Excitation | bow, sustained | reed, sustained | thumb pluck | felt hammer | stick |
-| Why it sounds as it does | periodic: exact harmonics | periodic, odd harmonics dominate: overblows a twelfth | overtones weak, far and brief: pitch survives | near-harmonic: pitch, stretched octaves | inharmonic and long-lived: a thud |
+<details><summary>Every instrument side by side: force, operator, boundary, eigen-condition, ratios, excitation</summary>
+
+| | Violin | Clarinet | Kalimba | Harmonica | Piano | Drum |
+|:--|:--|:--|:--|:--|:--|:--|
+| Restoring force | tension | air pressure | bending | bending | tension + bending | tension, in 2D |
+| Newton's law on | a segment | a slab of air | a slice: torque, then force | a slice, as for the kalimba | a segment, both forces added | a patch, via the divergence theorem |
+| Operator | $-c^2\partial_x^2$ | $-c^2\partial_x^2$ on pressure | $\kappa^2\partial_x^4$ | $\kappa^2\partial_x^4$ | $-c^2\partial_x^2+\kappa^2\partial_x^4$ | $-c^2\Delta$ |
+| Boundary | $u=0$ at both ends | $p_x=0$ at reed, $p=0$ at open end | $u=u'=0$ at clamp, $u''=u'''=0$ at tip | same as the kalimba | $u=u''=0$ at both ends | $u=0$ on the rim |
+| Eigen-condition | $\sin kL=0$ | $\cos kL=0$ | $\cos\beta L\cosh\beta L=-1$ | $\cos\beta L\cosh\beta L=-1$ | $\sin kL=0$ | $J_m(ka)=0$ |
+| Mode ratios | $n$ | $2n-1$ | 1, 6.27, 17.55 | 1, 6.27, 17.55 | $n\sqrt{(1+Bn^2)/(1+B)}$ | 1, 1.59, 2.14 |
+| Excitation | bow, sustained | reed, sustained | thumb pluck | airflow, sustained | felt hammer | stick |
+| What you hear | exact harmonics | odd harmonics dominate; overblows a [twelfth](glossary.qmd#octave) | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
+
+</details>
 
 ```{=html}
 <script src="core.js"></script>
@@ -69,27 +168,53 @@ Gray lines are whole-number multiples of the fundamental. Stem height is how str
   var C = Core, M = C.models;
   var DEF = {
     violin: function () { return M.violin.partials(); },
+    clarinet: function () { return M.clarinet.partials(); },
     kalimba: function () { return M.kalimba.partials(); },
+    harmonica: function () { return M.harmonica.partials(); },
     piano: function () { return M.piano.partials({ B: 0.0012 }); },
-    drum: function () { return M.drum.partials({ r: 0.35 }); },
-    clarinet: function () { return M.clarinet.partials(); }
+    drum: function () { return M.drum.partials({ r: 0.35 }); }
   };
+  var SUSTAINED = { violin: 1, clarinet: 1, harmonica: 1 };
   function draw() {
     document.querySelectorAll("svg[data-mini]").forEach(function (svg) {
       C.stems(svg, DEF[svg.getAttribute("data-mini")](), { W: 200, H: 58, rmax: 8, fs: 9, sw: 2, labelEvery: 2 });
     });
-    document.querySelectorAll("[data-ratios]").forEach(function (td) {
-      td.textContent = DEF[td.getAttribute("data-ratios")]().map(function (p) { return p.ratio; }).sort(function (a, b) { return a - b; }).slice(0, 5).map(function (r) { return r.toFixed(2); }).join(", ");
+    document.querySelectorAll("[data-ratios]").forEach(function (el) {
+      el.textContent = DEF[el.getAttribute("data-ratios")]().map(function (p) { return p.ratio; }).sort(function (a, b) { return a - b; }).slice(0, 4).map(function (r) { return r.toFixed(2); }).join(", ");
     });
   }
   function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
   document.querySelectorAll("[data-play]").forEach(function (b) {
     b.addEventListener("click", function () {
       var id = b.getAttribute("data-play"), f = M[id].F0, buf;
-      if (id === "violin" || id === "clarinet") buf = fadeOut(C.render(C.toHz(DEF[id](), f), 1.8), 0.4);
+      if (SUSTAINED[id]) buf = fadeOut(C.render(C.toHz(DEF[id](), f), 1.8), 0.4);
       else buf = C.render(C.toHz(DEF[id](), f), id === "piano" ? 3.2 : 2.6);
       C.play(buf, 0.8);
     });
+  });
+
+  // ---- the six puzzles ----
+  function harmonics(f, n, odd, skip1) { var out = []; for (var k = 1; k <= n; k++) { if (odd && k % 2 === 0) continue; if (skip1 && k === 1) continue; out.push({ f: f * k, amp: 1 / k, tau: 10 }); } return out; }
+  var BL = 0.0024, BU = 0.0048, LOW = 261.63, P2 = Math.sqrt((1 + 4 * BL) / (1 + BL));
+  function pianoNote(f1, B) { return C.toHz(M.piano.partials({ B: B, f1: f1 }), f1); }
+  var GWW = [2.53794399980, 3.65550971352, 5.17555935622, 6.53755744376, 7.24807786256, 9.20929499840, 10.5969856913, 11.5413953956, 12.3370055014, 13.0536540557, 14.3138624643, 15.8713026200];
+  function gww() { return GWW.map(function (v, k) { return { f: 150 * Math.sqrt(v / GWW[0]), amp: 1, tau: 1.4 / (1 + 0.12 * k) }; }); }
+  var G = {
+    string: function () { return C.render(C.toHz(M.violin.partials({ pluck: 0.2 }), 196), 2.6); },
+    drum: function () { return C.render(C.toHz(M.drum.partials({ r: 0.35 }), 140), 2.4); },
+    note: function () { return fadeOut(C.render(harmonics(220, 8), 1.6), 0.3); },
+    nofund: function () { return fadeOut(C.render(harmonics(220, 8, false, true), 1.6), 0.3); },
+    flute: function () { return fadeOut(C.render(harmonics(343 / 1.2, 8), 1.6), 0.3); },
+    clar: function () { return fadeOut(C.render(harmonics(343 / 2.4, 15, true), 1.6), 0.3); },
+    kal: function () { return C.render(C.toHz(M.kalimba.partials(), 523.25), 2.4); },
+    harm: function () { return fadeOut(C.render(C.toHz(M.harmonica.partials(), 523.25), 1.6), 0.3); },
+    oct: function () { return C.render(pianoNote(LOW, BL).concat(pianoNote(2 * LOW, BU)), 4); },
+    str: function () { return C.render(pianoNote(LOW, BL).concat(pianoNote(2 * LOW * P2, BU)), 4); },
+    gA: function () { return C.render(gww(), 2.4); },
+    gB: function () { return C.render(gww(), 2.4); }
+  };
+  document.querySelectorAll("[data-g]").forEach(function (b) {
+    b.addEventListener("click", function () { C.play(G[b.getAttribute("data-g")](), 0.75); });
   });
   C.onTheme(draw);
   draw();

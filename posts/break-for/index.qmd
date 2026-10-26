@@ -1,6 +1,7 @@
 ---
 title: "How to Break Nested For Loop"
 date: 2023-09-22
+date-modified: 2023-11-23
 toc: true
 jupyter: python3
 number-sections: true
