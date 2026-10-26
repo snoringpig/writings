@@ -1,0 +1,181 @@
+---
+title: "10 · Did instruments shape our scales?"
+subtitle: "Epilogue · Instruments as Operators"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+date-modified: 2026-10-25
+resources: [core.js, ins.css]
+---
+
+::: {.series-nav}
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), **10 Epilogue** · [Glossary](glossary.qmd)
+:::
+
+::: {.pageinfo}
+**Builds on** [page 0](note.qmd), for harmonics, and [page 6](kalimba.qmd), for bars. About 10 minutes, plus 4 for the folds.
+:::
+
+::: {.puzzle}
+**The puzzle.** Play two notes an [octave](glossary.qmd#octave) apart, then two notes a semitone apart. The octave sounds smooth and the semitone sounds rough. Why? And why does a Javanese gamelan, an orchestra of tuned metal bars and gongs, use scales that fit no piano? One answer, argued by the engineer and musician William Sethares, is that it depends on the instruments: on their spectra.
+:::
+
+Pick a sound, then slide the interval between two notes of that sound and listen. The curve shows how rough each interval is.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <div class="controls" role="group" aria-label="Which instrument's sound">
+    <button id="eHarm" aria-pressed="true">String-like (harmonic)</button><button id="eBar" aria-pressed="false">Metal bar</button>
+  </div>
+  <canvas id="eCurve" style="height:230px" aria-label="Roughness of two notes as a function of the interval between them"></canvas>
+  <div class="slider"><label for="eA">Interval (frequency ratio)</label><input type="range" id="eA" min="1" max="3" step="0.001" value="1.5"><output id="eAo"></output></div>
+  <div class="controls" role="group" aria-label="Named intervals">
+    <button data-iv="1.0595">semitone</button><button data-iv="1.2">minor third 6:5</button><button data-iv="1.25">major third 5:4</button><button data-iv="1.3333">fourth 4:3</button><button data-iv="1.5">fifth 3:2</button><button data-iv="2">octave 2:1</button>
+  </div>
+  <div class="controls"><button id="ePlay" class="primary">Play the two notes</button></div>
+  <div class="readout" id="eRead"></div>
+  <p class="cap">Solid: the roughness of two notes of the chosen sound, against the frequency ratio between them, lower note at 262 Hz. Faint: the other sound, for comparison. Each curve is scaled to its own highest point, so compare where the dips are, not the heights. Dots: the smoothest intervals, where the curve dips. The string-like sound has six harmonics with strengths falling by a factor 0.88 each; the metal bar has the first four modes of a uniform bar free at both ends, with strengths 1, 0.7, 0.5, 0.35. Both sets of strengths are chosen for illustration.</p>
+</div>
+</div>
+```
+
+With the string-like sound, the curve dips at $6/5$, $5/4$, $4/3$, $3/2$, $5/3$ and $2$: the intervals of Western harmony. Switch to the metal bar and the dips move. The octave $2 : 1$ is no longer a dip; a slightly narrower interval, about $1.96$, is smoother.
+
+## Where roughness comes from
+
+Two pure tones close in frequency produce [beats](glossary.qmd#beats): their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away. In 1965 Reinier Plomp and Willem Levelt measured how rough pairs of pure tones sound as a function of their separation, and Sethares fitted a formula to their curve. In that formula the roughness of two pure tones near middle C is greatest when they are about 22 Hz apart.
+
+A note from a real instrument is several pure tones at once, its [partials](glossary.qmd#partial). For two such notes, Sethares adds up the roughness of every pair of partials, from either note:
+$$
+D(\alpha) = \sum_{\text{pairs } i < j} a_i a_j\, d\big(|f_i - f_j|\big),
+$$
+where the $f_i$ and $a_i$ run over the partials of the lower note and those of the upper note, whose frequencies are $\alpha$ times the lower note's. The curve in the demo is $D(\alpha)$.
+
+::: {.derive}
+<details><summary><span class="label">Formula</span>The roughness of two pure tones</summary>
+
+Sethares' fit to Plomp and Levelt's data, for two pure tones of frequencies $f_1 < f_2$ and amplitudes $a_1, a_2$, is
+$$
+d = a_1 a_2\left(e^{-3.5\,s\,x} - e^{-5.75\,s\,x}\right), \qquad x = f_2 - f_1, \qquad s = \frac{0.24}{0.021\,f_1 + 19},
+$$
+with frequencies in hertz. The factor $s$ makes the roughest separation grow with the frequency, as Plomp and Levelt found: tones high up must be further apart, in hertz, to sound equally smooth. The formula describes average listeners' judgments of roughness for pure tones; it is a fitted curve, not derived from first principles.
+
+</details>
+:::
+
+## Why the dips sit where they do
+
+For a harmonic sound, the partials of the lower note are at $f, 2f, 3f, \dots$ and those of the upper note at $\alpha f, 2\alpha f, 3\alpha f, \dots$. When $\alpha$ is a ratio of small whole numbers, say $3/2$, many partials of the two notes land exactly on each other: the lower note's third partial and the upper note's second are both at $3f$. Partials that coincide do not beat. Move $\alpha$ slightly off $3/2$ and they nearly coincide, which is where beating is roughest. So the smooth intervals of a harmonic sound are the simple whole-number ratios, and that is the second idea of this series again: whole-number spectra make whole-number intervals smooth.
+
+A bar free at both ends, like a xylophone bar or the bar of a gamelan metallophone, has the kalimba's operator with different ends, and its partials are at $1,\ 2.756,\ 5.404,\ 8.933$ times the lowest, as the fold below shows. Now the coincidences happen elsewhere. At $\alpha = 2.756$ the upper note's fundamental lands on the lower note's second partial. At $\alpha = 5.404/2.756 \approx 1.961$ the upper note's second partial lands on the lower note's third, and that is the dip just below the octave. At $\alpha = 2$ nothing lines up.
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>The modes of a bar free at both ends</summary>
+
+The operator is the bar's $\kappa^2\,d^4/dx^4$ from the [kalimba page](kalimba.qmd). A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ the conditions are $X'' = 0$ and $X''' = 0$. Writing $X = a\cos\beta x + b\sin\beta x + c\cosh\beta x + d\sinh\beta x$ and imposing the four conditions gives four linear equations for $a, b, c, d$, exactly as on the kalimba page. Eliminating $a, b, c, d$ as there, a nonzero solution exists exactly when
+$$
+\cos\beta L\,\cosh\beta L = 1 .
+$$
+Besides $\beta = 0$, which belongs to the bar moving or rotating rigidly without bending, the roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page. Since the frequency is proportional to $\beta^2$, the partials are at $(\beta_n/\beta_1)^2 = 1,\ 2.756,\ 5.404,\ 8.933$ times the lowest.
+
+</details>
+:::
+
+## The gamelan
+
+Sethares measured the spectra of gamelan metallophones and reports that "the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans". The bars in the demo above are idealized uniform bars, not measured gamelan instruments, so the demo shows the mechanism, not his gamelan result; real gamelan bars are shaped and tuned by their makers, and tunings vary from one gamelan to another.
+
+## How far does this go?
+
+The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for consonant chords followed *harmonicity*, whether the frequencies fit one harmonic series, more than it followed beating, and grew with musical training. In 2016 McDermott and colleagues found that the Tsimane', a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.
+
+So the spectrum decides what sounds rough, a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world's music is an open, argued question.
+
+## What we found
+
+An instrument's spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it: for harmonic instruments, the simple whole-number ratios of Western harmony; for metal bars, other intervals. The operator of page 6, with different ends, reaches all the way to the tuning of an orchestra.
+
+[← What the spectrum knows](shape.qmd) · [Back to the series](index.qmd)
+
+::: {.refs}
+**References.**
+W. A. Sethares, "Adaptive tunings for musical scales", *Journal of the Acoustical Society of America* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
+W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, Springer ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from the [overview](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
+R. Plomp and W. J. M. Levelt, "Tonal consonance and critical bandwidth", *Journal of the Acoustical Society of America* 38 (1965), as cited by Sethares.
+J. H. McDermott, A. J. Lehr and A. J. Oxenham, "Individual differences reveal the basis of consonance", *Current Biology*, 2010 ([summary](https://www.sciencedaily.com/releases/2010/05/100520131431.htm)).
+J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, "Indifference to dissonance in native Amazonians reveals cultural variation in music perception", *Nature*, 2016 ([summary](https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713)).
+The free bar's modes: Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory).
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, F0 = 262, alpha = 1.5, which = "harm";
+  // free-free bar: roots of cos(x)cosh(x) = 1
+  var roots = [];
+  for (var k = 1; roots.length < 4; k++) { var lo = (k + 0.5) * Math.PI - 0.6, hi = (k + 0.5) * Math.PI + 0.6; roots.push(C.bisect(function (x) { return Math.cos(x) * Math.cosh(x) - 1; }, lo, hi)); }
+  var BAR = roots.map(function (r) { return Math.pow(r / roots[0], 2); });
+  var SPEC = {
+    harm: { r: [1, 2, 3, 4, 5, 6], a: [1, 0.88, 0.7744, 0.6815, 0.5997, 0.5277], name: "string-like" },
+    bar: { r: BAR, a: [1, 0.7, 0.5, 0.35], name: "metal bar" }
+  };
+  function d(f1, f2, a1, a2) { if (f2 < f1) { var t = f1; f1 = f2; f2 = t; } var s = 0.24 / (0.021 * f1 + 19), x = f2 - f1; return a1 * a2 * (Math.exp(-3.5 * s * x) - Math.exp(-5.75 * s * x)); }
+  function D(sp, al) {
+    var F = [], A = [], t = 0;
+    sp.r.forEach(function (r, i) { F.push(F0 * r); A.push(sp.a[i]); F.push(F0 * r * al); A.push(sp.a[i]); });
+    for (var i = 0; i < F.length; i++) for (var j = i + 1; j < F.length; j++) t += d(F[i], F[j], A[i], A[j]);
+    return t;
+  }
+  var NPTS = 700, curves = {}, minima = {};
+  ["harm", "bar"].forEach(function (k) {
+    var v = []; for (var i = 0; i <= NPTS; i++) v.push(D(SPEC[k], 1 + 2 * i / NPTS));
+    curves[k] = v; var m = [];
+    for (var i = 2; i < NPTS - 1; i++) if (v[i] < v[i - 1] && v[i] <= v[i + 1] && v[i] < 0.9 * Math.max(v[i - 2], v[i + 2]) + 0.1 * v[i]) m.push(1 + 2 * i / NPTS);
+    minima[k] = m;
+  });
+  var cv = document.getElementById("eCurve"), ctx = cv.getContext("2d");
+  function draw() {
+    var dpr = C.fit(cv), W = cv.width, H = cv.height, L = 10 * dpr, R = W - 10 * dpr, T = 10 * dpr, B = H - 22 * dpr;
+    var MX = {}; ["harm", "bar"].forEach(function (k) { var m = 0; curves[k].forEach(function (y, i) { if (i > NPTS * 0.02) m = Math.max(m, y); }); MX[k] = m; });
+    function X(a) { return L + (R - L) * (a - 1) / 2; } function Yk(k, v) { return B - (B - T) * Math.min(1, v / MX[k]); }
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = C.rgb("--grid"); ctx.lineWidth = dpr; ctx.beginPath(); ctx.moveTo(L, B); ctx.lineTo(R, B); ctx.stroke();
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * dpr) + "px 'IBM Plex Mono', monospace";
+    [1, 1.5, 2, 2.5, 3].forEach(function (a) { var x = X(a); ctx.beginPath(); ctx.moveTo(x, B); ctx.lineTo(x, B + 4 * dpr); ctx.stroke(); var t = a + ""; ctx.fillText(t, x - ctx.measureText(t).width / 2, H - 5 * dpr); });
+    ["harm", "bar"].forEach(function (k) {
+      var on = k === which; ctx.strokeStyle = C.rgb("--accent", on ? 1 : 0.22); ctx.lineWidth = (on ? 2.2 : 1.4) * dpr; ctx.beginPath();
+      curves[k].forEach(function (y, i) { var px = X(1 + 2 * i / NPTS), py = Yk(k, y); if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py); }); ctx.stroke();
+    });
+    ctx.fillStyle = C.rgb("--pos");
+    minima[which].forEach(function (a) { ctx.beginPath(); ctx.arc(X(a), Yk(which, D(SPEC[which], a)), 4 * dpr, 0, 2 * Math.PI); ctx.fill(); });
+    ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 1.5 * dpr; ctx.setLineDash([4 * dpr, 3 * dpr]); ctx.beginPath(); ctx.moveTo(X(alpha), T); ctx.lineTo(X(alpha), B); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function read() {
+    var cents = 1200 * Math.log2(alpha), m = minima[which], near = m.reduce(function (b, a) { return Math.abs(a - alpha) < Math.abs(b - alpha) ? a : b; }, m[0]);
+    document.getElementById("eAo").textContent = alpha.toFixed(3);
+    document.getElementById("eRead").innerHTML = SPEC[which].name + " · ratio <b>" + alpha.toFixed(3) + "</b> = " + Math.round(cents) + " cents · roughness " + D(SPEC[which], alpha).toFixed(3) +
+      " · smoothest intervals of this sound: " + m.map(function (a) { return a.toFixed(3); }).join(", ") +
+      (which === "bar" ? " · bar partials at " + BAR.map(function (r) { return r.toFixed(3); }).join(", ") : "");
+    draw();
+  }
+  var sl = document.getElementById("eA");
+  sl.addEventListener("input", function () { alpha = parseFloat(sl.value); read(); });
+  document.querySelectorAll("[data-iv]").forEach(function (b) { b.addEventListener("click", function () { alpha = parseFloat(b.getAttribute("data-iv")); sl.value = alpha; read(); }); });
+  var bH = document.getElementById("eHarm"), bB = document.getElementById("eBar");
+  bH.addEventListener("click", function () { which = "harm"; bH.setAttribute("aria-pressed", true); bB.setAttribute("aria-pressed", false); read(); });
+  bB.addEventListener("click", function () { which = "bar"; bB.setAttribute("aria-pressed", true); bH.setAttribute("aria-pressed", false); read(); });
+  document.getElementById("ePlay").addEventListener("click", function () {
+    var sp = SPEC[which], parts = [];
+    sp.r.forEach(function (r, i) { parts.push({ f: F0 * r, amp: sp.a[i], tau: 1.6 }); parts.push({ f: F0 * r * alpha, amp: sp.a[i], tau: 1.6 }); });
+    C.play(C.render(parts, 2.4), 0.75);
+  });
+  window.addEventListener("resize", draw);
+  C.onTheme(draw);
+  read();
+})();
+</script>
+```

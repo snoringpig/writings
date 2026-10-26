@@ -10,16 +10,18 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} **9 Shape** · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} **9 Shape**, [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** The list of a drum's frequencies determines the drum's area and its perimeter. It does not determine its shape: two differently shaped drums can have exactly the same list.
-
+::: {.pageinfo}
 **Builds on** [page 8](drum.qmd): a drum's operator and its modes. About 8 minutes, plus 8 for the folds.
 :::
 
-These two drums have different shapes but exactly the same frequencies. Play each with every mode equally loud, and they sound the same. Click a drum to strike it at a point, and they usually sound different, because the shape decides how strongly each mode is struck.
+::: {.puzzle}
+**The puzzle.** In 1966 Mark Kac asked a question that became famous: if you could hear every frequency a drum makes, perfectly, could you work out the drum's shape? The two drums below have different shapes. Listen to them.
+:::
+
+Play each drum with every mode equally loud. Then click a drum to strike it at a point, and compare.
 
 ```{=html}
 <div class="ins">
@@ -43,9 +45,9 @@ These two drums have different shapes but exactly the same frequencies. Play eac
 </div>
 ```
 
-## The mathematics
+## What a list of frequencies can tell you
 
-**The question.** A drum's operator, from the [drum page](drum.qmd), is $-c^2\Delta$ on the drumhead $\Omega$, a region of the plane, with $u = 0$ on the rim. Here $\Delta$ is the [Laplacian](glossary.qmd#laplacian). Its eigenvalues $\lambda_1 < \lambda_2 \le \lambda_3 \le \cdots$, listed with [multiplicity](glossary.qmd#multiplicity), give the frequencies $f_k = \frac{c}{2\pi}\sqrt{\lambda_k}$. In 1966 Mark Kac asked whether the list $\lambda_1, \lambda_2, \dots$ determines the shape of $\Omega$: "Can one hear the shape of a drum?"
+**The question.** A drum's operator, from the [drum page](drum.qmd), is $-c^2\Delta$ on the drumhead $\Omega$, a region of the plane, with $u = 0$ on the rim. Here $\Delta$ is the [Laplacian](glossary.qmd#laplacian). Its eigenvalues $\lambda_1 < \lambda_2 \le \lambda_3 \le \cdots$, listed with [multiplicity](glossary.qmd#multiplicity), give the frequencies $f_k = \frac{c}{2\pi}\sqrt{\lambda_k}$. Kac's question, in these terms, is whether the list $\lambda_1, \lambda_2, \dots$ determines the shape of $\Omega$.
 
 **What can be heard: Weyl's law.** Count the eigenvalues up to $\lambda$, $N(\lambda) = \#\{k : \lambda_k \le \lambda\}$. For large $\lambda$,
 $$
@@ -128,11 +130,15 @@ The scripts are [gww.py](gww.py) for the eigenvalues and [gww_modes.py](gww_mode
 
 **Same frequencies, not the same sound.** A struck drum's sound is a sum of its modes, each at its own frequency and with a strength that depends on where it is struck and where it is heard. The two drums share the frequencies. The mode shapes differ, so the strengths from a strike at a given point differ, and so does the [timbre](glossary.qmd#timbre). What the drums share is the answer to "which frequencies can this drum make", which is exactly the spectrum.
 
-## What changed, and where the series ends
+## What we found
 
-Every page has used one idea: an instrument's frequencies are the spectrum of an operator, and a clear pitch means a nearly evenly spaced spectrum. This page asked the reverse question, what the spectrum says about the instrument. It records the size, area and perimeter for a drum, but not the shape. The study of what a spectrum determines is called *spectral geometry*.
+The list of a drum's frequencies determines the drum's area and its perimeter. It does not determine its shape: two differently shaped drums can have exactly the same list. Looking back, every page has used one idea: an instrument's frequencies are the spectrum of an operator, and a clear pitch means a nearly evenly spaced spectrum. This page asked the reverse question, what the spectrum says about the instrument; the study of such questions is called *spectral geometry*.
 
-[← The drum](drum.qmd) · [Back to the series](index.qmd)
+## The next puzzle
+
+One question is left, and it goes beyond mathematics. An instrument's spectrum decides which pairs of notes sound smooth together on it. Did the instruments people built shape the music they made?
+
+[← The drum](drum.qmd) · [Next: did instruments shape our scales? →](epilogue.qmd)
 
 ::: {.refs}
 **References.**

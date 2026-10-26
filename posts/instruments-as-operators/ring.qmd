@@ -10,16 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), **2 Beads on a ring**, [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), **2 Beads on a ring**, [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** Many coupled masses move in a few special shapes, called [modes](glossary.qmd#mode), each swinging at its own frequency. Finding them means finding the [eigenvectors](glossary.qmd#eigenvector) and [eigenvalues](glossary.qmd#eigenvalue) of a matrix. On a ring, the modes are exactly the waves of the discrete Fourier transform.
-
+::: {.pageinfo}
 **Builds on** [page 1](oscillator.qmd): a restoring force of $-\lambda x$ per unit mass gives the frequency $\sqrt\lambda/2\pi$. About 7 minutes, plus 3 for the folds.
 :::
 
-Thread beads on a loop of string pulled tight. Each bead is tugged toward its two neighbors. Pluck one bead and the motion looks messy, but it is a sum of a few simple motions, called modes. In a mode, every bead swings at the same frequency and the overall shape never changes. The buttons below play one mode at a time.
+::: {.puzzle}
+**The puzzle.** Thread beads on a loop of string pulled tight and pluck one of them. The motion looks like a tangle. Yet it is made of a handful of perfectly regular motions, all happening at once. What are they, and how do you find them?
+:::
+
+The demo starts with one bead plucked; watch the tangle. Then press the mode buttons one at a time. In each mode, every bead swings at the same frequency and the overall shape never changes, and the tangle is all of the modes at once. Daniel Bernoulli studied exactly this kind of system, masses joined by springs, in the 1730s and 1740s, and came to believe that every vibration is built from such simple motions.
 
 ```{=html}
 <div class="ins">
@@ -35,7 +37,7 @@ Thread beads on a loop of string pulled tight. Each bead is tugged toward its tw
 </div>
 ```
 
-## The mathematics
+## Untangling the motion
 
 **The force on one bead.** Let $u_j$ be the height of bead $j$, with beads spaced $h$ apart along a string of tension $T$, each of mass $m$. Because the loop closes, bead $N$ is next to bead 1, so indices are counted around the ring. For small displacements, Newton's law for bead $j$ is
 $$
@@ -99,9 +101,13 @@ The matrix $K$ is symmetric: the entry in row $i$, column $j$ equals the entry i
 </details>
 :::
 
-## What changed, and what comes next
+## What we found
 
-The operator is now a matrix, $\frac{T}{mh}K$, and its spectrum, the list of its eigenvalues, gives the frequencies. On the next page the beads crowd together. The matrix becomes a [differential operator](glossary.qmd#operator), the waves $e^{2\pi ijk/N}$ become $e^{ik\theta}$, the discrete Fourier transform becomes the Fourier series, and the near-harmonic spectrum becomes exactly harmonic.
+Many coupled masses move in a few special shapes, called [modes](glossary.qmd#mode), each swinging at its own frequency. Finding them means finding the [eigenvectors](glossary.qmd#eigenvector) and [eigenvalues](glossary.qmd#eigenvalue) of a matrix, the operator $\frac{T}{mh}K$, whose list of eigenvalues, its spectrum, gives the frequencies. On a ring, the modes are exactly the waves of the discrete Fourier transform.
+
+## The next puzzle
+
+The beads' frequencies are almost whole-number multiples of the lowest, and they get closer as you add beads. What happens with infinitely many, a continuous loop of string? Do the frequencies become exactly whole numbers? And can every shape of the loop be built from these waves?
 
 [← One mass on a spring](oscillator.qmd) · [Next: the circle →](circle.qmd)
 
@@ -173,10 +179,10 @@ The operator is now a matrix, $\frac{T}{mh}K$, and its spectrum, the list of its
   });
   document.getElementById("rPluck").addEventListener("click", pluck);
   var ns = document.getElementById("rN");
-  ns.addEventListener("input", function () { N = parseInt(ns.value, 10); document.getElementById("rNo").textContent = N; setMode(Math.min(mode < 0 ? 1 : mode, Math.floor(N / 2))); });
+  ns.addEventListener("input", function () { N = parseInt(ns.value, 10); document.getElementById("rNo").textContent = N; if (mode < 0) pluck(); else setMode(Math.min(mode, Math.floor(N / 2))); });
   document.getElementById("rNo").textContent = N;
   C.onTheme(spec);
-  setMode(1); requestAnimationFrame(draw);
+  pluck(); requestAnimationFrame(draw);
 })();
 </script>
 ```

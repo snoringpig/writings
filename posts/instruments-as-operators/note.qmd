@@ -10,38 +10,53 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} **0 Note**, [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} **0 Note**, [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** A note is a sound that repeats. Its pitch is how often it repeats, and one note is a sum of tones at whole-number multiples of that rate.
-
+::: {.pageinfo}
 **Start here.** About 6 minutes, plus 4 for the folded proof.
 :::
 
-Sound is air pressure rising and falling. When the pattern repeats every $P$ seconds, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate $f = 1/P$, measured in [hertz](glossary.qmd#hertz): repetitions per second. Middle C repeats about 262 times a second.
-
-Any repeating pattern can be built from pure tones at 1, 2, 3, … times its rate. These are its [harmonics](glossary.qmd#harmonic), and the lowest is the [fundamental](glossary.qmd#fundamental). Mix them with the sliders below. The wave's shape changes, and so does the sound's color, its [timbre](glossary.qmd#timbre), but the pattern still repeats 220 times a second, so the pitch stays put.
+::: {.puzzle}
+**The puzzle.** Below is a note at 220 [hertz](glossary.qmd#hertz). Remove its 220 Hz component completely and play it again. The pitch does not change. If a note's pitch is not one of its frequencies, what is it?
+:::
 
 ```{=html}
 <div class="ins">
 <div class="panel">
   <div class="controls">
-    <button id="nPure">Pure tone</button><button id="nBright">Bright (like a bowed string)</button><button id="nHollow">Hollow (odd harmonics, like a clarinet)</button><button id="nMissing">Fundamental removed</button>
+    <button id="nBright">The note</button><button id="nMissing">The note without its 220 Hz part</button>
     <button id="nPlay" class="primary">Play</button>
   </div>
-  <div id="nSliders" class="hsliders"></div>
   <canvas id="nWave" style="height:120px" aria-label="Waveform over three repetitions"></canvas>
-  <svg class="spec" id="nSpec" viewBox="0 0 320 90" style="max-width:520px" aria-label="Strength of each harmonic"></svg>
+  <svg class="spec" id="nSpec" viewBox="0 0 320 90" style="max-width:520px" aria-label="Strength of each component"></svg>
   <div class="readout" id="nRead"></div>
-  <p class="cap">Gray ticks mark each repetition, every 1/220 s. Stems: the strength of each harmonic.</p>
+  <details class="more"><summary>Mix your own</summary>
+    <div class="controls" style="margin-top:0.5rem"><button id="nPure">Pure tone</button><button id="nHollow">Hollow, like a clarinet</button></div>
+    <div id="nSliders" class="hsliders"></div>
+  </details>
+  <p class="cap">The wave over three repetitions; gray ticks mark each repetition, every 1/220 of a second. Stems: how strong each component is, at 1, 2, 3, … times 220 Hz.</p>
 </div>
 </div>
 ```
 
-Press **Fundamental removed**: the 220 Hz tone is gone, yet the pitch you hear is still 220 Hz. The pattern still repeats every 1/220 s, and your ear tracks the repetition. This is the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental).
+Watch the wave while you switch between the two. Removing the 220 Hz component changes the wave's shape, but not how often it repeats: still every 1/220 of a second. That repetition is what you hear as the pitch. The effect is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental), and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
 
-So the question that runs through this series is: **why do the tones an instrument makes line up at whole-number multiples, and what happens when they don't?** Two tones repeat together only when their rates are in a simple whole-number ratio. Try it:
+## A note is a pattern that repeats
+
+Sound is air pressure rising and falling. When the pattern repeats every $P$ seconds, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate $f = 1/P$, measured in hertz, repetitions per second. Middle C repeats about 262 times a second.
+
+Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate. These are its [harmonics](glossary.qmd#harmonic), and the lowest is the [fundamental](glossary.qmd#fundamental). Open "Mix your own" above and try the presets: the wave's shape changes, and so does the sound's color, its [timbre](glossary.qmd#timbre), but as long as the pattern repeats 220 times a second, the pitch stays put.
+
+In symbols: a pressure signal $p(t)$ is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$. A periodic signal of reasonable regularity is the sum of its [Fourier series](glossary.qmd#fourier-series),
+$$
+p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
+$$
+The frequencies $nf$ are fixed by the period alone. The amplitudes $b_n$ and the phases $\phi_n$ carry everything else about the sound's shape, and the ear is mostly insensitive to the phases.
+
+## Why whole numbers matter
+
+Turn it around. If an object vibrates at several frequencies at once, its sound repeats only when those frequencies are whole-number multiples of one common frequency. Two tones repeat together only when their rates are in a simple whole-number ratio. Try it:
 
 ```{=html}
 <div class="ins">
@@ -54,14 +69,6 @@ So the question that runs through this series is: **why do the tones an instrume
 </div>
 </div>
 ```
-
-## The mathematics
-
-A pressure signal $p(t)$ is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$. A periodic signal of reasonable regularity is the sum of its [Fourier series](glossary.qmd#fourier-series),
-$$
-p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
-$$
-The frequencies $nf$ are fixed by the period alone. The amplitudes $b_n$ and phases $\phi_n$ carry everything else about the sound's shape, and the ear is mostly insensitive to the phases.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is rational</summary>
@@ -85,9 +92,13 @@ No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is
 </details>
 :::
 
-## What comes next
+## What we found
 
-Nothing on this page says where the frequencies come from. The next pages build the answer from Newton's law: one mass on a spring gives one frequency, many masses give many, and a continuous string gives infinitely many. Each instrument then turns out to be a different answer to one question: *which frequencies does this object allow?*
+A note is a sound that repeats. Its pitch is how often it repeats, and so one note is a sum of tones at whole-number multiples of that rate.
+
+## The next puzzle
+
+So a clear note needs frequencies at exact whole-number multiples of one frequency. A guitar string is just a piece of wire, and a drumhead just a sheet of plastic. Why would the wire vibrate at exactly 1, 2, 3, … times one frequency, and the drumhead not? To find out, start with the simplest thing that vibrates at all: one mass on a spring.
 
 *On the core path (pages 0, 3, 4, 8)?* Skip ahead to [3 · The circle](circle.qmd).
 
@@ -106,7 +117,7 @@ Nothing on this page says where the frequencies come from. The next pages build 
   var box = document.getElementById("nSliders"), inputs = [];
   for (var n = 1; n <= NH; n++) {
     var d = document.createElement("div"); d.className = "slider";
-    d.innerHTML = '<label for="h' + n + '" style="min-width:5.5rem">' + (n === 1 ? "1 (fundamental)" : n + " × 220 Hz") + '</label><input type="range" id="h' + n + '" min="0" max="1" step="0.01"><output id="h' + n + 'o"></output>';
+    d.innerHTML = '<label for="h' + n + '" style="min-width:5.5rem">' + (n + " × 220 Hz") + '</label><input type="range" id="h' + n + '" min="0" max="1" step="0.01"><output id="h' + n + 'o"></output>';
     box.appendChild(d);
   }
   for (var n = 1; n <= NH; n++) (function (i) {

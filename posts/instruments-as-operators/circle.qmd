@@ -11,16 +11,18 @@ aliases: [foundations.html]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), **3 The circle** · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), **3 The circle** · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** A continuous loop of string has an [operator](glossary.qmd#operator), $-\tfrac{d^2}{d\theta^2}$, acting on its shapes; it is what the beads' matrix becomes when the beads crowd together. Its eigenvalues are exactly $0, 1, 4, 9, \dots$, so the frequencies are exactly $0, 1, 2, 3, \dots$ times a base frequency. Writing a shape as a sum of this operator's eigenfunctions is the [Fourier series](glossary.qmd#fourier-series).
-
+::: {.pageinfo}
 **Builds on** [page 2](ring.qmd). If you skipped it: on a string of tension $T$ with beads spaced $h$ apart, bead $j$ at height $u_j$ feels the force $\frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})$, which pulls it toward the average of its two neighbors. About 10 minutes, plus 12 for the folded proofs.
 :::
 
-Beads on a loop of string vibrate at frequencies close to whole-number multiples of the lowest, but not quite. Keep the loop's size and total weight fixed, and cut the weight into more and more beads. The frequencies slide onto the whole-number grid. In the limit the beads become a continuous loop of string, whose frequencies are exactly 1, 2, 3, … times the lowest: a clear [pitch](glossary.qmd#pitch).
+::: {.puzzle}
+**The puzzle.** Keep a loop of beads the same size and weight, but use more and more beads. The frequencies creep toward 1, 2, 3, … times the lowest, and in the limit, a continuous loop of string, they land on the whole numbers exactly. Why exactly? And a harder question, which the best mathematicians of the 18th century argued about for decades: can every shape of a string be built from these simple waves?
+:::
+
+Slide the number of beads from a few up to the last position, the continuous loop, and watch the stems settle onto the whole-number grid.
 
 ```{=html}
 <div class="ins">
@@ -35,7 +37,9 @@ Beads on a loop of string vibrate at frequencies close to whole-number multiples
 </div>
 ```
 
-## The mathematics
+The second question has a history. From the 1740s on, Jean d'Alembert, Leonhard Euler and Daniel Bernoulli all worked on the vibrating string. D'Alembert showed in 1747 that a string can move in essentially any smooth shape. Bernoulli held that every vibration is a sum of simple modes, which for a string are sine-shaped. Euler objected that a sum of sines could not represent an arbitrary shape, such as a string plucked into a sharp corner, and d'Alembert doubted that such a sum was physical at all. The argument went on for decades. This page answers the first question, and then the second.
+
+## Why exactly whole numbers
 
 **From beads to a loop.** Measure position around the loop by the angle $\theta$, and choose units so that the loop has circumference $2\pi$. Bead $j$ sits at $\theta_j = jh$ with $h = 2\pi/N$. Let $\rho$ be the mass per unit length, so each bead has mass $m = \rho h$, and write $u(\theta, t)$ for the height of the loop at angle $\theta$, so that $u_j(t) = u(\theta_j, t)$. Dividing the bead equation from the [previous page](ring.qmd) by $m$,
 $$
@@ -97,28 +101,6 @@ The wave closes up after one turn exactly when $n$ is a whole number. So the [sp
 
 : Frequency of mode $k$ divided by the frequency of mode 1. On the ring of $N$ beads the ratio is $\sin(\pi k/N)/\sin(\pi/N)$. {.striped}
 
-**The Fourier series is the eigenfunction expansion.** With the beads, we wrote the starting shape as a sum of eigenvectors and let each one swing on its own. Here the same move reads
-$$
-f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{\langle f, e^{in\theta}\rangle}{\langle e^{in\theta}, e^{in\theta}\rangle} = \frac{1}{2\pi}\int_0^{2\pi} f(\theta)\,e^{-in\theta}\,d\theta ,
-$$
-which is the [Fourier series](https://en.wikipedia.org/wiki/Fourier_series) of $f$. Released from rest in the shape $f$, the loop moves as
-$$
-u(\theta, t) = \sum_{n} c_n\,e^{in\theta}\cos(c\,|n|\,t).
-$$
-Term $n$ repeats every $2\pi/(cn)$ seconds, so every term, and the whole motion, repeats every $2\pi/c$ seconds, and any sound it makes has a pitch. The second fold shows that every shape in $L^2(S^1)$ can be written this way; this is a theorem, not automatic, because there are infinitely many terms.
-
-```{=html}
-<div class="ins">
-<div class="panel">
-  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
-  <div class="slider"><label for="cM" style="min-width:12rem">Eigenfunctions used, up to n =</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
-  <div class="controls"><button id="cGo" class="primary" aria-pressed="false">Let go</button><button id="cHear">Hear the pluck point</button></div>
-  <div class="readout" id="cShapeRead"></div>
-  <p class="cap">The loop is cut open and laid flat: the left and right edges are the same point. Dashed: the plucked shape, and once released the exact motion, two half-bumps traveling in opposite directions. Solid: the sum of the eigenfunctions cos nθ up to the chosen n, each swinging at its own frequency n.</p>
-</div>
-</div>
-```
-
 ::: {.derive}
 <details><summary><span class="label">Proof</span>The eigenvalues are exactly 0, 1, 4, 9, …</summary>
 
@@ -140,6 +122,33 @@ A remark for readers who know functional analysis: $A$ is not defined on every f
 </details>
 :::
 
+## Who was right
+
+Bernoulli, in a sense that took mathematicians more than a century to make precise. Every shape of the loop, corners included, is a sum of the operator's eigenfunctions. Euler's worry was reasonable, since every sine is smooth and a corner is not, but an infinite sum of smooth waves need not be smooth.
+
+**The Fourier series is the eigenfunction expansion.** With the beads, we wrote the starting shape as a sum of eigenvectors and let each one swing on its own. Here the same move reads
+$$
+f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{\langle f, e^{in\theta}\rangle}{\langle e^{in\theta}, e^{in\theta}\rangle} = \frac{1}{2\pi}\int_0^{2\pi} f(\theta)\,e^{-in\theta}\,d\theta ,
+$$
+which is the [Fourier series](https://en.wikipedia.org/wiki/Fourier_series) of $f$. Released from rest in the shape $f$, the loop moves as
+$$
+u(\theta, t) = \sum_{n} c_n\,e^{in\theta}\cos(c\,|n|\,t).
+$$
+Term $n$ repeats every $2\pi/(cn)$ seconds, so every term, and the whole motion, repeats every $2\pi/c$ seconds, and any sound it makes has a pitch. The demo below builds a plucked shape, corner and all, out of sines. The second fold states the theorem that settles the old argument, and what it took.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
+  <div class="slider"><label for="cM" style="min-width:12rem">Eigenfunctions used, up to n =</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
+  <div class="controls"><button id="cGo" class="primary" aria-pressed="false">Let go</button><button id="cHear">Hear the pluck point</button></div>
+  <div class="readout" id="cShapeRead"></div>
+  <p class="cap">The loop is cut open and laid flat: the left and right edges are the same point. Dashed: the plucked shape, and once released the exact motion, two half-bumps traveling in opposite directions. Solid: the sum of the eigenfunctions cos nθ up to the chosen n, each swinging at its own frequency n.</p>
+</div>
+</div>
+```
+
+
 ::: {.derive}
 <details><summary><span class="label">Theorem</span>Every shape is a sum of eigenfunctions</summary>
 
@@ -152,6 +161,8 @@ the second identity being [Parseval's](https://en.wikipedia.org/wiki/Parseval%27
 **Why it needs a proof.** For a symmetric $N\times N$ matrix, $N$ perpendicular eigenvectors automatically span everything, because the space has dimension $N$. Here there are infinitely many eigenfunctions and the space is infinite-dimensional, so one has to show that no shape is perpendicular to all of them. One standard proof shows that trigonometric sums can approximate any continuous periodic function uniformly ([Fejér's theorem](https://en.wikipedia.org/wiki/Fej%C3%A9r%27s_theorem)), and that continuous functions are dense in $L^2$. See Stein and Shakarchi, chapters 2 and 3.
 
 **Pointwise.** Convergence in $L^2$ is convergence of the total squared error. At individual points more care is needed: there are continuous functions whose Fourier series diverge at a point. For the shapes on this page, continuous and made of straight pieces, the series converges at every point. The plucked triangle's coefficients shrink like $1/n^2$, which is why a few terms already look right in the demo.
+
+**What it took.** The old argument could not be settled until "sum" had a precise meaning for infinitely many terms. Fourier claimed such expansions for arbitrary functions in his 1807 work on heat. Dirichlet proved in 1829 that the series converges at every point for a broad class of functions, including shapes with corners; the $L^2$ statement above belongs to the early 20th century; and that the Fourier series of every $L^2$ function converges at almost every point was proved only in 1966, by Lennart Carleson ([Wikipedia](https://en.wikipedia.org/wiki/Carleson%27s_theorem)). In the $L^2$ sense, Bernoulli was right and Euler's corner is no obstacle.
 
 **The pattern for every later page.** Each instrument's operator $A$ will be self-adjoint and nonnegative, and $(A + 1)^{-1}$ will be a compact operator. The [spectral theorem for compact self-adjoint operators](https://en.wikipedia.org/wiki/Compact_operator_on_Hilbert_space#Spectral_theorem) then gives the same three facts as here: a list of real eigenvalues growing to infinity, perpendicular eigenfunctions, and an expansion of every shape in them. Only the list and the shapes change.
 
@@ -176,11 +187,13 @@ Both come from [separating variables](glossary.qmd#separation-of-variables). Loo
 </details>
 :::
 
-## What changed, and what comes next
+## What we found
 
-The matrix became a differential operator on a space of functions, the discrete Fourier transform became the Fourier series, and the nearly harmonic spectrum became exactly harmonic. This is the smallest example of an operator's spectrum: one dimension, no ends, constant coefficients.
+A continuous loop of string has an [operator](glossary.qmd#operator), $-\tfrac{d^2}{d\theta^2}$, acting on its shapes; it is what the beads' matrix becomes when they crowd together. Its eigenvalues are exactly $0, 1, 4, 9, \dots$, so the frequencies are exactly $0, 1, 2, 3, \dots$ times a base frequency. Writing a shape as a sum of this operator's eigenfunctions is the [Fourier series](glossary.qmd#fourier-series). This is the smallest example of an operator's spectrum: one dimension, no ends, the same string everywhere.
 
-As far as I know, no common instrument is a closed loop of string. It comes first because, with no ends, there is nothing to decide about what happens at the boundary. The next page ties the ends down. For a string the answer barely changes; for a metal bar, two pages later, it changes completely.
+## The next puzzle
+
+As far as I know, no common instrument is a closed loop of string; a violin string is tied down at both ends. What do the ends change? And here is something guitarists use every day: touch a vibrating string lightly at its exact middle, and the note jumps up an octave. Why?
 
 *On the core path?* Next is [4 · A string with ends](violin.qmd).
 

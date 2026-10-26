@@ -10,16 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), **6 Kalimba**, [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), **6 Kalimba**, [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** A bar springs back because it resists bending, not because it is stretched. Its operator has four derivatives instead of two, so the frequencies grow like the square of the mode number and the overtones land far from the whole numbers: 1, 6.27, 17.55, … times the lowest.
-
+::: {.pageinfo}
 **Builds on** [page 4](violin.qmd), for boundary conditions. About 8 minutes, plus 5 for the folds.
 :::
 
-A kalimba tine is a strip of steel, pressed down near one end and free at the other, like a diving board. Nothing stretches it. It springs back because steel resists bending. Its overtones lie far from the whole-number multiples, but they are weak and die within moments, so you hear a clear note with a metallic click at the start.
+::: {.puzzle}
+**The puzzle.** Halve the length of a string and its pitch rises an octave. Halve the length of a kalimba tine and its pitch rises two octaves. And a tine's first overtone sits 6.27 times above its fundamental, nowhere near a whole number, yet a kalimba sounds like a clean note. Why?
+:::
+
+Tap the tines below, or drag across several. They are drawn to scale: each tine's length follows from its pitch by the rule this page derives, and the long low tines are not twice as long as the high ones an octave up. Then tick the box that lets the overtones ring as long as the fundamental, and listen to how the sound changes.
 
 ```{=html}
 <style>
@@ -50,7 +52,7 @@ A kalimba tine is a strip of steel, pressed down near one end and free at the ot
 **Same operator, different constants.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other. The [harmonica](harmonica.qmd), next, has the same operator and the same ends, but it is blown instead of plucked, and that decides what you hear.
 :::
 
-## The mathematics
+## A bar resists bending
 
 **The operator.** A bar of [Young's modulus](glossary.qmd#youngs-modulus) $E$ (how stiff the steel is), cross-section area $A$, [second moment of area](glossary.qmd#second-moment) $I$ (how the cross-section's shape resists bending) and density $\rho$ obeys
 $$
@@ -172,9 +174,13 @@ The operator $d^4/dx^4$ with these four conditions is self-adjoint, by integrati
 
 **Why it still sounds pitched.** The tine's first overtone is weak, sits more than two and a half octaves above the fundamental, and dies within a fraction of a second, so what remains is close to a single frequency. Chapman measured real kalimbas and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, dying away quickly after the attack. A real tine is pressed against a bridge rather than perfectly clamped, which is probably part of why the measured ratios spread.
 
-## What changed, and what comes next
+## What we found
 
-The operator went from second to fourth order, and the spectrum went from whole numbers to roughly odd squares. The next page keeps this operator and changes how it is driven: blown instead of plucked.
+A bar springs back because it resists bending, not because it is stretched. Its operator has four derivatives instead of two, so the frequencies grow like the square of the mode number and the overtones land far from the whole numbers: 1, 6.27, 17.55, … times the lowest.
+
+## The next puzzle
+
+A harmonica reed is the same kind of bar, fixed at one end and free at the other, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck one and you hear them. Yet a harmonica, blown, plays notes whose overtones are exact whole-number multiples. Where did the bar's own overtones go?
 
 [← An air column](clarinet.qmd) · [Next: the harmonica →](harmonica.qmd)
 

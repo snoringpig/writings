@@ -10,16 +10,30 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), **6b Harmonica**, [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), **6b Harmonica**, [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** The operator decides which frequencies an object can vibrate at; the way it is driven decides what you hear. A harmonica reed has the kalimba's operator and its scattered overtones, but blowing makes it a valve that chops the air into a regular train of puffs, and a regular train has exactly whole-number partials.
-
+::: {.pageinfo}
 **Builds on** [page 6](kalimba.qmd) for the reed's operator, and [page 0](note.qmd): a sound that repeats has only whole-number partials. About 9 minutes, plus 5 for the folds.
 :::
 
-Each note on a harmonica is a small brass reed, a [free reed](glossary.qmd#free-reed), fixed at one end over a slot. When you blow, the reed swings through the slot and lets the air through in puffs, hundreds of times a second. You hear the puffs more than the reed. They come at a perfectly steady rate, so the note has a clear pitch.
+::: {.puzzle}
+**The puzzle.** A harmonica reed is a little brass bar, fixed at one end and free at the other, like a kalimba tine, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck it and you hear them. Blow it and they are gone: the note becomes perfectly harmonic. Where did they go?
+:::
+
+Pluck the reed, then blow it, and compare the stems with the gray whole-number grid.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <div class="controls"><button id="pluckR">Pluck the C5 reed</button><button id="blowR" class="primary">Blow the C5 reed</button></div>
+    <svg class="spec" id="hSpec" viewBox="0 0 320 110" aria-label="Partials of the plucked or blown reed"></svg>
+    <p class="cap" id="hCap">Same operator, same boundary conditions, same reed. Only the excitation differs.</p>
+  </div>
+</div>
+```
+
+And here is a whole chromatic harmonica to play.
 
 ```{=html}
 <style>
@@ -53,7 +67,7 @@ Each note on a harmonica is a small brass reed, a [free reed](glossary.qmd#free-
 **Same operator as the kalimba.** Accordion, concertina and harmonium reeds are free reeds too. All of them are cantilevers like the kalimba's tine: same operator, same ends, smaller and thinner brass instead of steel. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.
 :::
 
-## The mathematics
+## The reed is a valve
 
 **The operator.** A reed is riveted at one end and free at the other, so everything derived on the [kalimba page](kalimba.qmd) applies unchanged:
 $$
@@ -66,16 +80,6 @@ $$
 Low reeds are long, high reeds are short. The width cancels, so it affects how much air the reed moves, not its pitch.
 
 **Plucked versus blown.** Pluck a reed and it rings like a kalimba tine: you hear its own modes at 1, 6.27 and 17.55 times the fundamental, with the overtones dying almost at once. Blow it and the reed swings through its slot, opening and closing the air path. The sound comes mainly from the chopped airflow; Pykett notes that very little sound comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a rate $f_1$ close to its first mode's frequency, so the puffs repeat at that rate too. A [periodic](glossary.qmd#periodic) signal has partials only at whole-number multiples of its repetition rate, so the blown note is harmonic, with strong odd and even partials (Pykett), even though the reed's own overtones are not.
-
-```{=html}
-<div class="ins">
-<div class="panel">
-    <div class="controls"><button id="pluckR">Pluck the C5 reed</button><button id="blowR" class="primary">Blow the C5 reed</button></div>
-    <svg class="spec" id="hSpec" viewBox="0 0 320 110" aria-label="Partials of the plucked or blown reed"></svg>
-    <p class="cap" id="hCap">Same operator, same boundary conditions, same reed. Only the excitation differs.</p>
-  </div>
-</div>
-```
 
 ::: {.derive}
 <details><summary><span class="label">Why it works</span>A steady puff train has whole-number partials</summary>
@@ -124,9 +128,13 @@ The demo uses the full quotient with the original mode shape, which is accurate 
 
 **The chromatic slide.** A chromatic harmonica has two sets of reed chambers, the second tuned a semitone higher. Each hole has a blow reed and a draw reed in each set. Pushing the slide moves a perforated bar that closes one set and opens the other, so every note rises a semitone. In solo tuning each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw.
 
-## What changed, and what comes next
+## What we found
 
-Nothing in the operator changed from the kalimba; the excitation did. The next page combines the two operators met so far, tension and bending, in one piano wire, and adds the remaining terms of a real string's equation: damping and forcing, where the pianist's hands and feet act.
+The operator decides which frequencies an object can vibrate at; the way it is driven decides what you hear. A harmonica reed has the kalimba's operator and its scattered overtones, but blowing makes it a valve that chops the air into a regular train of puffs, and a regular train has exactly whole-number partials.
+
+## The next puzzle
+
+Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with the textbook tuning. Why would exact sound wrong?
 
 [← The kalimba](kalimba.qmd) · [Next: the piano →](piano.qmd)
 

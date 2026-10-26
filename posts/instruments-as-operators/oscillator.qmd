@@ -10,16 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), **1 Oscillator**, [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), **1 Oscillator**, [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** Newton's law plus a restoring force proportional to displacement allows exactly one frequency. It is set by stiffness and mass, not by how hard you pull.
-
+::: {.pageinfo}
 **Builds on** nothing. About 5 minutes, plus 2 for the folded proof.
 :::
 
-Hang a mass on a spring, pull it down and let go. It bobs at a steady rate: faster with a stiffer spring, slower with a heavier mass. Pull it further and it travels further, but each bob takes exactly as long. That is why a fading piano note keeps its pitch. The vibration shrinks, but it does not slow down.
+::: {.puzzle}
+**The puzzle.** Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note never goes flat. Why doesn't a smaller vibration go slower?
+:::
+
+Start with the simplest thing that vibrates: a mass on a spring. Pull it down and let go, and it bobs at a steady rate, faster with a stiffer spring and slower with a heavier mass. Now change how far you pull it. It travels further, but each bob takes exactly as long.
 
 ```{=html}
 <div class="ins">
@@ -35,7 +37,7 @@ Hang a mass on a spring, pull it down and let go. It bobs at a steady rate: fast
 </div>
 ```
 
-## The mathematics
+## Why the size of the swing doesn't matter
 
 A spring pulled a distance $x$ from rest pulls back with force $-kx$: this is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law), and the constant $k$ is the spring's stiffness. Newton's second law says force equals mass times acceleration, so
 $$
@@ -62,6 +64,14 @@ The amplitude $A$ and the starting phase $\phi$ are free: they record how you st
 Write the equation as $\ddot x = -\lambda x$. The restoring force per unit mass is "multiply the displacement by $\lambda$", and the one allowed frequency is $\omega = \sqrt\lambda$.
 
 On the next page the single displacement $x$ becomes a list of displacements, one per bead, and the number $\lambda$ becomes a table of numbers, a matrix. Later it becomes a rule acting on whole shapes, a differential [operator](glossary.qmd#operator). The pattern never changes: **the allowed frequencies are the square roots of the operator's [eigenvalues](glossary.qmd#eigenvalue)**. For one mass there is one eigenvalue, $k/m$.
+
+## What we found
+
+Newton's law, with a restoring force proportional to the displacement, allows exactly one frequency. It is set by the stiffness and the mass, not by how far the mass swings, and that is why a fading note keeps its pitch.
+
+## The next puzzle
+
+One mass gives one frequency. A note has many, all sounding at once. Where do the others come from? Add more masses, and let them pull on one another.
 
 [← What is a note?](note.qmd) · [Next: beads on a ring →](ring.qmd)
 

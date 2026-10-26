@@ -10,16 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), **5 Air column**, [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), **5 Air column**, [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** The string's operator also governs the air pressure in a tube. Changing the boundary condition at one end, from "pressure equals the room's" to "the air cannot move", removes every even harmonic: a clarinet's spectrum is the odd whole numbers.
-
+::: {.pageinfo}
 **Builds on** [page 4](violin.qmd): the boundary condition decides which eigenfunctions are allowed. About 7 minutes, plus 4 for the folds.
 :::
 
-Blow into a tube and the air inside sloshes back and forth. A flute is open at both ends. A clarinet is nearly closed at one end, by the reed in its mouthpiece. That one difference makes a clarinet sound almost an [octave](glossary.qmd#octave) lower than a flute of the same length, and leaves it only the odd harmonics, which give it its hollow sound. The switch below turns one into the other.
+::: {.puzzle}
+**The puzzle.** A clarinet and a flute are about the same length. Yet the clarinet's lowest note is almost an [octave](glossary.qmd#octave) below the flute's. And when the players overblow, the flute jumps up an octave while the clarinet jumps an octave and a fifth. The same equation governs the air in both tubes. What is different?
+:::
+
+Play a fingering on the clarinet, then switch the same tube to a flute, open at both ends, and play it again. Then hold the register key, which makes the tube jump to its next mode, on each.
 
 ```{=html}
 <style>
@@ -49,7 +51,7 @@ Blow into a tube and the air inside sloshes back and forth. A flute is open at b
 **Same operator, other ends.** Stopped organ pipes and pan pipes are closed at one end like the clarinet and share its odd-harmonic spectrum. Open organ pipes share the flute's. Oboes and saxophones have cone-shaped tubes instead of cylinders, a different operator, which this series does not cover.
 :::
 
-## The mathematics
+## Same equation, other ends
 
 **The operator.** Let $p(x, t)$ be the air pressure in the tube minus room pressure. It obeys the wave equation again,
 $$
@@ -111,9 +113,13 @@ So the clarinet's modes are the odd harmonics of a loop four tube-lengths long, 
 
 **The reed.** The reed is a valve. When the pressure in the mouthpiece drops, it closes, and when the pressure rises, it opens, so the air column, through the pressure it creates, drives the reed that feeds it. The result is a [periodic](glossary.qmd#periodic) oscillation, like the bowed string, so the partials sit exactly on whole-number multiples of $f_1$. In the low register the even harmonics are weak but not absent. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
 
-## What changed, and what comes next
+## What we found
 
-Same operator, a new boundary condition, and half the spectrum gone. So far every restoring force has been a pull or a push along the medium, giving two derivatives in space. Next, a bar that resists bending gives four.
+The string's operator also governs the air pressure in a tube. Changing the boundary condition at one end, from "pressure equals the room's" to "the air cannot move", removes every even harmonic: a clarinet's spectrum is the odd whole numbers.
+
+## The next puzzle
+
+So far every restoring force has been a pull or a push along the material: tension along a string, pressure along a tube. A kalimba tine is different, because nothing stretches it. Halve a string's length and its pitch rises one octave; halve a tine's length and its pitch rises two. Why?
 
 [← A string with ends](violin.qmd) · [Next: change the order →](kalimba.qmd)
 

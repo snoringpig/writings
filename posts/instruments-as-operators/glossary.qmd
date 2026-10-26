@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · **Glossary**
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · **Glossary**
 :::
 
 Every technical word in the series links here the first time it appears on a page. Each entry gives a plain definition and a link to a fuller explanation.
@@ -46,6 +46,15 @@ Every technical word in the series links here the first time it appears on a pag
 
 [Octave, fifth, twelfth]{#octave}
 : Musical intervals named by frequency ratio. An octave is a ratio of 2, a fifth about 3/2, and a twelfth, an octave plus a fifth, a ratio of 3. Two notes an octave apart sound like "the same note, higher". [Wikipedia](https://en.wikipedia.org/wiki/Interval_(music))
+
+[Beats]{#beats}
+: When two pure tones of nearly equal frequency sound together, their sum swells and fades in loudness at a rate equal to the difference of their frequencies. Tuners listen for beats; fast beats are heard as roughness. [Wikipedia](https://en.wikipedia.org/wiki/Beat_(acoustics))
+
+[Consonance, roughness]{#consonance}
+: Consonance is how smooth or stable two notes sound together. Roughness is one ingredient of it: the harsh quality of fast beats between partials that are close but not equal. [Wikipedia](https://en.wikipedia.org/wiki/Consonance_and_dissonance), and the [epilogue](epilogue.qmd)
+
+[Harmonics, on a string]{#string-harmonics}
+: Notes a string player gets by touching the string lightly at a fraction of its length, such as the middle, instead of pressing it down. Only the modes with a still point under the finger keep sounding. [Wikipedia](https://en.wikipedia.org/wiki/String_harmonic), and [page 4](violin.qmd)
 
 ## Vibration
 

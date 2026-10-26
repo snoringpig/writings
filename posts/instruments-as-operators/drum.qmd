@@ -10,16 +10,34 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), **8 Drum** · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), **8 Drum** · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
 :::
 
-::: {.newidea}
-**New idea on this page.** On a surface the operator is the [Laplacian](glossary.qmd#laplacian). For a round drum its eigenfunctions are built from [Bessel functions](glossary.qmd#bessel), and the frequencies are set by their zeros, which are not evenly spaced. That is why a drum has no clear pitch.
-
+::: {.pageinfo}
 **Builds on** [page 4](violin.qmd); the loop of [page 3](circle.qmd) reappears inside the drum. About 7 minutes, plus 5 for the folds.
 :::
 
-A drumhead is a sheet pulled tight in every direction, like a trampoline. Tap it anywhere below. It vibrates in many patterns at once, at 1, 1.59, 2.14, 2.30, … times the lowest frequency. No common base frequency fits these numbers, so you hear a thud, not a note.
+::: {.puzzle}
+**The puzzle.** In 1808 Ernst Chladni showed the Paris Academy of Sciences a trick: sprinkle sand on a metal plate, draw a violin bow along its edge, and the sand leaps into intricate patterns, a different one for each note. What draws the patterns? And why does a drum, struck, give a thud where a string gives a note?
+:::
+
+Here is the same trick on a drumhead. Pick a note and watch where the sand goes.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="sCanvas" style="height:320px" aria-label="Sand on a vibrating drumhead gathering where the head stays still"></canvas>
+  <div class="controls" id="sModes" role="group" aria-label="Which note to drive the drumhead at"></div>
+  <div class="controls"><button id="sShake" class="primary">Sprinkle fresh sand</button><button id="sHear">Hear this note</button></div>
+  <div class="readout" id="sRead"></div>
+  <p class="cap">Each button drives the drumhead at one of its own frequencies, given as a multiple of the lowest. Every grain is jostled in proportion to how much the head moves under it, so grains drift until they reach a place where the head stays still. Chladni used stiff metal plates, whose operator involves bending, not tension; the sand behaves the same way on both.</p>
+</div>
+</div>
+```
+
+Napoleon offered a prize for a mathematical explanation of Chladni's patterns. It was won in 1816 by Sophie Germain, the first woman to receive the grand prize in mathematics of the Paris Academy. The lines the sand draws are the places where the surface does not move, and finding them is the same problem as finding the drum's frequencies.
+
+Now strike the drum itself. Tap the head anywhere below.
 
 ```{=html}
 <style>
@@ -44,10 +62,10 @@ A drumhead is a sheet pulled tight in every direction, like a trampoline. Tap it
 ```
 
 ::: {.family}
-**Same operator, different constants.** Toms, snares and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it: a timpani's kettle and the air it encloses shift the head's modes toward nearly whole-number ratios, which gives a timpani a pitch that a tom lacks (Fletcher and Rossing, chapter 18).
+**Same operator, different constants.** Toms, snares and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it: a timpani's kettle and the air it encloses shift the head's modes toward nearly whole-number ratios, which gives a timpani a pitch that a tom lacks. Measured timpani modes sit close to 2, 3, 4, 5 times a common base frequency (HyperPhysics; Fletcher and Rossing, chapter 18).
 :::
 
-## The mathematics
+## A sheet pulled tight
 
 **The operator.** A drumhead with tension $T$, measured as force per unit length of any cut through it, and mass $\sigma$ per unit area obeys
 $$
@@ -88,7 +106,7 @@ In one dimension a patch is a segment, its edge is its two endpoints, and step 3
 </details>
 :::
 
-**Spectrum.** For a round drum of radius $a$, use polar coordinates $(r, \theta)$. The modes are
+**Spectrum, and the sand's lines.** For a round drum of radius $a$, use polar coordinates $(r, \theta)$. The modes are
 $$
 J_m(k r)\cos m\theta \quad\text{and}\quad J_m(kr)\sin m\theta, \qquad m = 0, 1, 2, \dots,
 $$
@@ -97,6 +115,8 @@ $$
 f_{m,n} = \frac{c\,j_{m,n}}{2\pi a},
 $$
 where $j_{m,n}$ is the $n$-th positive zero of $J_m$. Listed in order, the frequencies relative to the lowest are $1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots$ These are not evenly spaced and no common base frequency fits them, so there is no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head's symmetry, visible as a [multiplicity](glossary.qmd#multiplicity) of 2.
+
+The sand demo shows these shapes directly. The mode $J_m(kr)\cos m\theta$ is zero along $m$ lines through the center, where $\cos m\theta = 0$, and along the circles where $J_m(kr) = 0$ inside the rim, $n - 1$ of them for the $n$-th zero. Those are exactly the lines where the sand collects.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>Separation of variables in polar coordinates</summary>
@@ -117,7 +137,7 @@ The zeros have no closed form; this page computes them numerically. For large $n
 </details>
 :::
 
-**Where you strike.** A strike at a point $p$, heard at a point $q$, gives mode $k$ the weight $X_k(p)\,X_k(q)/\lVert X_k\rVert^2$, where $\lVert X_k\rVert^2 = \iint X_k^2\,dA$. This is the eigenfunction expansion of a sharp kick at one point, the same rule as the piano's hammer. Strike the center and only the round modes, $m = 0$, sound, because every other mode has zero height there. Tap a stem to see one mode on the drumhead and hear it alone.
+**Where you strike.** A strike at a point $p$, heard at a point $q$, gives mode $k$ the weight $X_k(p)\,X_k(q)/\lVert X_k\rVert^2$, where $\lVert X_k\rVert^2 = \iint X_k^2\,dA$. This is the eigenfunction expansion of a sharp kick at one point, the same rule as the piano's hammer. Strike the center and only the round modes, $m = 0$, sound, because every other mode has zero height there. Timpanists strike between halfway and three-quarters of the way out from the center, near the still lines of several modes, which keeps those modes quiet (HyperPhysics). Tap a stem to see one mode on the drumhead and hear it alone.
 
 ```{=html}
 <div class="ins">
@@ -129,16 +149,20 @@ The zeros have no closed form; this page computes them numerically. For large $n
 </div>
 ```
 
-## What changed, and what comes next
+## What we found
 
-The operator moved from a line to a surface, and the circle's eigenfunctions reappeared inside the drum's, as the angular part. The spectrum is no longer nearly evenly spaced, and the pitch is gone. The last page turns the question around: from the spectrum alone, what can be known about the drum?
+On a surface the operator is the [Laplacian](glossary.qmd#laplacian). For a round drum its eigenfunctions are built from [Bessel functions](glossary.qmd#bessel), and the frequencies are set by their zeros, which are not evenly spaced. That is why a drum has no clear pitch. The lines where each mode stays still are what Chladni's sand made visible.
+
+## The next puzzle
+
+The shape of the drum sets its frequencies. Turn that around: if you could hear every frequency a drum makes, perfectly, could you work out its shape? Mark Kac asked this in 1966.
 
 *On the core path?* This is its last page. [Page 9](shape.qmd) turns the question around, if you want more.
 
 [← The piano](piano.qmd) · [Next: what the spectrum knows →](shape.qmd)
 
 ::: {.refs}
-**References.** Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane), [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums).
+**References.** [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), HyperPhysics, Georgia State University. The Chladni and Germain history: [The 'extraordinary talent and superior genius' of Sophie Germain](https://www.irishtimes.com/news/science/the-extraordinary-talent-and-superior-genius-of-sophie-germain-1.4130947), *The Irish Times*. Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane), [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums).
 :::
 
 ```{=html}
@@ -227,6 +251,61 @@ The operator moved from a line to a surface, and the circle's eigenfunctions rea
   }
   C.onTheme(dspec);
   dspec(); requestAnimationFrame(frame);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, cv = document.getElementById("sCanvas"), ctx = cv.getContext("2d"), G = 160, NP = 2600;
+  var MODES = C.DR.slice(0, 10), sel = 3, grid = new Float32Array(G * G), px = new Float32Array(NP), py = new Float32Array(NP);
+  function build() {
+    var d = MODES[sel], mx = 0;
+    for (var i = 0; i < G; i++) for (var j = 0; j < G; j++) {
+      var x = 2 * (i + 0.5) / G - 1, y = 2 * (j + 0.5) / G - 1, r = Math.sqrt(x * x + y * y), v = 0;
+      if (r < 1) v = Math.abs(C.J(d.m, d.j * r) * Math.cos(d.m * Math.atan2(y, x)));
+      grid[i * G + j] = v; mx = Math.max(mx, v);
+    }
+    for (var k = 0; k < G * G; k++) grid[k] /= mx;
+    var lines = d.m === 0 ? "no lines through the center" : d.m + " line" + (d.m > 1 ? "s" : "") + " through the center";
+    var circ = d.n - 1 === 0 ? "no circles inside the rim" : (d.n - 1) + " circle" + (d.n > 2 ? "s" : "") + " inside the rim";
+    document.getElementById("sRead").innerHTML = "frequency <b>" + d.ratio.toFixed(3) + "×</b> the lowest · still lines: " + lines + ", " + circ;
+  }
+  function amp(x, y) { var i = Math.floor((x + 1) / 2 * G), j = Math.floor((y + 1) / 2 * G); if (i < 0 || j < 0 || i >= G || j >= G) return 0; return grid[i * G + j]; }
+  function sprinkle() { for (var k = 0; k < NP; k++) { var r = Math.sqrt(Math.random()) * 0.98, t = 2 * Math.PI * Math.random(); px[k] = r * Math.cos(t); py[k] = r * Math.sin(t); } }
+  function step() {
+    for (var k = 0; k < NP; k++) {
+      var a = amp(px[k], py[k]), s = 0.035 * a, t = 2 * Math.PI * Math.random();
+      var nx = px[k] + s * Math.cos(t), ny = py[k] + s * Math.sin(t), rr = nx * nx + ny * ny;
+      if (rr > 0.97) { var f = Math.sqrt(0.97 / rr); nx *= f; ny *= f; }
+      px[k] = nx; py[k] = ny;
+    }
+  }
+  function draw() {
+    var d = C.fit(cv), W = cv.width, H = cv.height, R = Math.min(W, H) / 2 - 8 * d, cx = W / 2, cy = H / 2;
+    if (!C.reduce) { step(); step(); }
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.rgb("--wood", 0.25); ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2 * Math.PI); ctx.fill();
+    ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 3 * d; ctx.stroke();
+    ctx.fillStyle = C.rgb("--ink", 0.8); var g = 1.6 * d;
+    for (var k = 0; k < NP; k++) ctx.fillRect(cx + px[k] * R - g / 2, cy - py[k] * R - g / 2, g, g);
+    requestAnimationFrame(draw);
+  }
+  var box = document.getElementById("sModes");
+  MODES.forEach(function (m, i) {
+    var b = document.createElement("button"); b.type = "button"; b.textContent = m.ratio.toFixed(2) + "×"; b.setAttribute("aria-pressed", i === sel);
+    b.addEventListener("click", function () { sel = i; Array.prototype.forEach.call(box.children, function (c, k) { c.setAttribute("aria-pressed", k === i); }); build(); sprinkle(); });
+    box.appendChild(b);
+  });
+  document.getElementById("sShake").addEventListener("click", sprinkle);
+  document.getElementById("sHear").addEventListener("click", function () {
+    var f = 150 * MODES[sel].ratio, b = C.render([{ f: f, amp: 1, tau: 20 }], 1.6), dd = b.getChannelData(0), n = Math.floor(0.25 * b.sampleRate);
+    for (var i = 0; i < n; i++) dd[dd.length - 1 - i] *= i / n;
+    C.play(b, 0.6);
+  });
+  build(); sprinkle(); requestAnimationFrame(draw);
 })();
 </script>
 ```
