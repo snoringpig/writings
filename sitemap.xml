@@ -2,50 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://snoringpig.github.io/writings/about.html</loc>
-    <lastmod>2026-10-25T23:08:21.804Z</lastmod>
+    <lastmod>2026-10-26T16:01:51.858Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/sampling/index.html</loc>
-    <lastmod>2026-10-25T23:08:21.893Z</lastmod>
+    <lastmod>2026-10-26T16:01:51.965Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/violin.html</loc>
-    <lastmod>2026-10-25T23:08:21.893Z</lastmod>
+    <lastmod>2026-10-26T16:01:51.965Z</lastmod>
   </url>
   <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/clarinet.html</loc>
-    <lastmod>2026-10-25T23:08:21.892Z</lastmod>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/shape.html</loc>
+    <lastmod>2026-10-26T16:01:51.965Z</lastmod>
   </url>
   <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/foundations.html</loc>
-    <lastmod>2026-10-25T23:08:21.893Z</lastmod>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/ring.html</loc>
+    <lastmod>2026-10-26T16:01:51.965Z</lastmod>
   </url>
   <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/piano.html</loc>
-    <lastmod>2026-10-25T23:08:21.893Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/index.html</loc>
-    <lastmod>2026-10-25T23:08:21.807Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/index.html</loc>
-    <lastmod>2026-10-25T23:08:21.893Z</lastmod>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/circle.html</loc>
+    <lastmod>2026-10-26T16:01:51.963Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/drum.html</loc>
-    <lastmod>2026-10-25T23:08:21.893Z</lastmod>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/epilogue.html</loc>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/harmonica.html</loc>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/index.html</loc>
+    <lastmod>2026-10-26T16:01:51.860Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/oscillator.html</loc>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/piano.html</loc>
+    <lastmod>2026-10-26T16:01:51.965Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/index.html</loc>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/clarinet.html</loc>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/glossary.html</loc>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/kalimba.html</loc>
-    <lastmod>2026-10-25T23:08:21.893Z</lastmod>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/note.html</loc>
+    <lastmod>2026-10-26T16:01:51.964Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/break-for/index.html</loc>
-    <lastmod>2026-10-25T23:08:21.892Z</lastmod>
+    <lastmod>2026-10-26T16:01:51.963Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/bicycle-wheel/index.html</loc>
-    <lastmod>2026-10-25T23:08:21.892Z</lastmod>
+    <lastmod>2026-10-26T16:01:51.963Z</lastmod>
   </url>
 </urlset>

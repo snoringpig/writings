@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Glossary – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Glossary</h1>
+<p class="subtitle lead">Instruments as Operators</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 26, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav">
+<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <strong>Glossary</strong></p>
+</div>
+<p>Technical words in the series link here, usually the first time they appear on a page. Each entry gives a plain definition and a link to a fuller explanation.</p>
+<section id="sound" class="level2">
+<h2 class="anchored" data-anchor-id="sound">Sound</h2>
+<dl>
+<dt><span id="hertz">Hertz (Hz)</span></dt>
+<dd>
+One cycle per second, the unit of frequency. The A above middle C is tuned to 440 Hz. <a href="https://en.wikipedia.org/wiki/Hertz">Wikipedia</a>
+</dd>
+<dt><span id="periodic">Periodic</span></dt>
+<dd>
+A signal <span class="math inline">p(t)</span> is periodic with period <span class="math inline">P &gt; 0</span> if it repeats exactly every <span class="math inline">P</span> seconds: <span class="math inline">p(t + P) = p(t)</span> for all <span class="math inline">t</span>. Its <em>shortest</em> such <span class="math inline">P</span> is usually what is meant by the period. <a href="https://en.wikipedia.org/wiki/Periodic_function">Wikipedia</a>
+</dd>
+<dt><span id="pitch">Pitch</span></dt>
+<dd>
+How high or low a note sounds. For a periodic sound with shortest period <span class="math inline">P</span>, the pitch is heard at the repetition rate <span class="math inline">1/P</span>, even when no component at that frequency is present, as long as that rate is between a few dozen and a few thousand per second. <a href="https://en.wikipedia.org/wiki/Pitch_(music)">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/note.html">page 0</a>
+</dd>
+<dt><span id="partial">Partial, overtone</span></dt>
+<dd>
+A sound can be split into components of single frequencies; each one is a partial. An overtone is any partial above the lowest. <a href="https://en.wikipedia.org/wiki/Overtone">Wikipedia</a>
+</dd>
+<dt><span id="fundamental">Fundamental</span></dt>
+<dd>
+For a periodic sound, the frequency <span class="math inline">f = 1/P</span> at which it repeats; its harmonics are the whole-number multiples of <span class="math inline">f</span>. It is usually the lowest and strongest partial, but it can be weak or even missing, and the pitch is still heard at <span class="math inline">f</span> (<a href="../../posts/instruments-as-operators/note.html">page 0</a>). For a sound that is not periodic, such as a drum’s, “fundamental” just means the lowest partial. <a href="https://en.wikipedia.org/wiki/Fundamental_frequency">Wikipedia</a>
+</dd>
+<dt><span id="harmonic">Harmonic</span></dt>
+<dd>
+A partial at a whole-number multiple <span class="math inline">nf</span> of the fundamental. A periodic sound contains only harmonics. <a href="https://en.wikipedia.org/wiki/Harmonic">Wikipedia</a>
+</dd>
+<dt><span id="harmonic-series">Harmonic series</span></dt>
+<dd>
+The whole-number multiples <span class="math inline">f, 2f, 3f, \dots</span> of one frequency <span class="math inline">f</span>. All the partials of a periodic sound belong to one harmonic series. <a href="https://en.wikipedia.org/wiki/Harmonic_series_(music)">Wikipedia</a>
+</dd>
+<dt><span id="inharmonic">Inharmonic</span></dt>
+<dd>
+Having partials that are not whole-number multiples of one frequency. A bell, a drum and a kalimba tine are strongly inharmonic; a piano string is slightly inharmonic. <a href="https://en.wikipedia.org/wiki/Inharmonicity">Wikipedia</a>
+</dd>
+<dt><span id="timbre">Timbre</span></dt>
+<dd>
+What tells two notes of the same pitch and loudness apart, such as a violin and a flute both playing A. It depends mostly on the relative strengths of the partials and how they change over the course of the note. <a href="https://en.wikipedia.org/wiki/Timbre">Wikipedia</a>
+</dd>
+<dt><span id="note-names">Note names: C4, A4, middle C</span></dt>
+<dd>
+Notes are named by a letter from A to G and an octave number. C4 is middle C, about 262 Hz, near the middle of the piano keyboard; C5 is the C an octave above it; A4 is the A at 440 Hz. <a href="https://en.wikipedia.org/wiki/Scientific_pitch_notation">Wikipedia</a>
+</dd>
+<dt><span id="semitone">Semitone</span></dt>
+<dd>
+The smallest step on a piano, from one key to the next, white or black. Twelve semitones make an octave. <a href="https://en.wikipedia.org/wiki/Semitone">Wikipedia</a>
+</dd>
+<dt><span id="equal-temperament">Equal temperament</span></dt>
+<dd>
+The usual way of tuning a piano: every semitone is the same frequency ratio, <span class="math inline">2^{1/12} \approx 1.0595</span>, so twelve of them make an exact octave. The price is that the other intervals miss the simple ratios slightly: an equal-tempered fifth is <span class="math inline">2^{7/12} \approx 1.4983</span>, not <span class="math inline">3/2</span>. <a href="https://en.wikipedia.org/wiki/Equal_temperament">Wikipedia</a>
+</dd>
+<dt><span id="cents">Cent</span></dt>
+<dd>
+A unit for small differences in pitch: one hundredth of an equal-tempered semitone, so an octave is 1200 cents. Two frequencies in the ratio <span class="math inline">r</span> are <span class="math inline">1200\log_2 r</span> cents apart. Trained listeners notice a few cents. <a href="https://en.wikipedia.org/wiki/Cent_(music)">Wikipedia</a>
+</dd>
+<dt><span id="octave">Octave, fifth, twelfth</span></dt>
+<dd>
+Musical intervals, named by frequency ratio. An octave is a ratio of 2. A fifth is the ratio <span class="math inline">3/2</span> when tuned to the simple ratio, and <span class="math inline">2^{7/12} \approx 1.498</span> in equal temperament. A twelfth, an octave plus a fifth, is about 3. Two notes an octave apart sound like “the same note, higher”. <a href="https://en.wikipedia.org/wiki/Interval_(music)">Wikipedia</a>
+</dd>
+<dt><span id="beats">Beats</span></dt>
+<dd>
+When two pure tones of nearly equal frequency sound together, their sum swells and fades in loudness at a rate equal to the difference of their frequencies. Tuners listen for beats; fast beats are heard as roughness. <a href="https://en.wikipedia.org/wiki/Beat_(acoustics)">Wikipedia</a>
+</dd>
+<dt><span id="consonance">Consonance, roughness</span></dt>
+<dd>
+Consonance is how smooth or stable two notes sound together. Roughness is one ingredient of it: the harsh quality of fast beats between partials that are close but not equal. <a href="https://en.wikipedia.org/wiki/Consonance_and_dissonance">Wikipedia</a>, and the <a href="../../posts/instruments-as-operators/epilogue.html">epilogue</a>
+</dd>
+</dl>
+</section>
+<section id="instrument-parts-and-playing" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-parts-and-playing">Instrument parts and playing</h2>
+<dl>
+<dt><span id="bridge">Nut, bridge</span></dt>
+<dd>
+On a string instrument, the two points that end a string’s vibrating length: the nut at the top of the neck, the bridge on the body. The bridge also carries the string’s vibration to the body, or on a piano to the soundboard. On a kalimba, the bridge is the bar the tines are pressed against. <a href="https://en.wikipedia.org/wiki/Bridge_(instrument)">Wikipedia</a>
+</dd>
+<dt><span id="open-string">Open string</span></dt>
+<dd>
+A string played with no finger pressing it down, so its whole length between the nut and the bridge vibrates. <a href="https://en.wikipedia.org/wiki/Open_string_(music)">Wikipedia</a>
+</dd>
+<dt><span id="string-harmonics">Harmonics, on a string</span></dt>
+<dd>
+Notes a string player gets by touching the string lightly at a fraction of its length, such as the middle, instead of pressing it down. Only the modes with a still point under the finger keep sounding. <a href="https://en.wikipedia.org/wiki/String_harmonic">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/violin.html">page 4</a>
+</dd>
+<dt><span id="overblow">Overblowing, register key</span></dt>
+<dd>
+Making a wind instrument’s air column jump to a higher mode. A flutist overblows by blowing faster; a clarinetist presses the register key, which opens a small hole that spoils the lowest mode. <a href="https://en.wikipedia.org/wiki/Overblowing">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/clarinet.html">page 5</a>
+</dd>
+<dt><span id="draw">Blow, draw</span></dt>
+<dd>
+On a harmonica, a blow note sounds when you breathe out through a hole, and a draw note when you breathe in. Each hole has one reed for each (on a chromatic harmonica, one for each in each of its two sets). <a href="https://en.wikipedia.org/wiki/Harmonica">Wikipedia</a>
+</dd>
+<dt><span id="free-reed">Free reed</span></dt>
+<dd>
+A thin metal tongue fixed at one end that swings through a closely fitting slot, opening and shutting it like a valve. Harmonicas and accordions use free reeds. <a href="https://en.wikipedia.org/wiki/Free_reed_aerophone">Wikipedia</a>
+</dd>
+<dt><span id="damper">Damper</span></dt>
+<dd>
+A felt pad that rests on a piano string and stops it when the key is released. Each key lifts its own damper while held; the right pedal lifts them all. The highest strings, roughly the top 20 keys, have no dampers. <a href="https://en.wikipedia.org/wiki/Sustain_pedal">Wikipedia: Sustain pedal</a>
+</dd>
+<dt><span id="soft-pedal">Soft pedal, una corda</span></dt>
+<dd>
+The left pedal of a piano. On a grand it shifts the hammers sideways so they hit fewer strings; this is the <em>una corda</em>, Italian for “one string”. On an upright it instead moves the hammers closer to the strings, so they strike more gently. <a href="https://en.wikipedia.org/wiki/Soft_pedal">Wikipedia</a>
+</dd>
+<dt><span id="practice-pedal">Practice pedal, mute</span></dt>
+<dd>
+The middle pedal on many uprights. It lowers a strip of felt between the hammers and the strings, making the sound much quieter and duller. <a href="https://en.wikipedia.org/wiki/Piano_pedals">Wikipedia: Piano pedals</a>
+</dd>
+</dl>
+</section>
+<section id="vibration" class="level2">
+<h2 class="anchored" data-anchor-id="vibration">Vibration</h2>
+<dl>
+<dt><span id="partial-derivative">Partial derivative, <span class="math inline">u_t</span>, <span class="math inline">u_{xx}</span></span></dt>
+<dd>
+For a function of several variables, such as the height <span class="math inline">u(x, t)</span> of a string at position <span class="math inline">x</span> and time <span class="math inline">t</span>, the rate of change in one variable with the others held fixed. Subscripts name the variable: <span class="math inline">u_t</span> is the velocity of the point at <span class="math inline">x</span>, <span class="math inline">u_{tt}</span> its acceleration, <span class="math inline">u_x</span> the slope of the string, and <span class="math inline">u_{xx}</span> how fast that slope changes along it, which for small slopes is its curvature. <a href="https://en.wikipedia.org/wiki/Partial_derivative">Wikipedia</a>
+</dd>
+<dt><span id="proportional">Proportional, <span class="math inline">\propto</span></span></dt>
+<dd>
+<span class="math inline">a \propto b</span> means that <span class="math inline">a</span> is a fixed number times <span class="math inline">b</span>. So <span class="math inline">f \propto 1/L^2</span> means that halving <span class="math inline">L</span> multiplies <span class="math inline">f</span> by four. <a href="https://en.wikipedia.org/wiki/Proportionality_(mathematics)">Wikipedia</a>
+</dd>
+<dt><span id="angular-frequency">Angular frequency</span></dt>
+<dd>
+<span class="math inline">\omega = 2\pi f</span>: the frequency counted in radians per second instead of cycles per second, one cycle being <span class="math inline">2\pi</span> radians. Formulas such as <span class="math inline">\omega^2 = k/m</span> are shortest in <span class="math inline">\omega</span>. <a href="https://en.wikipedia.org/wiki/Angular_frequency">Wikipedia</a>
+</dd>
+<dt><span id="wavenumber">Wavenumber</span></dt>
+<dd>
+The counterpart of angular frequency in space: a wave <span class="math inline">\sin kx</span> has wavenumber <span class="math inline">k = 2\pi/\text{wavelength}</span>. For the wave equation, <span class="math inline">\omega = ck</span>. <a href="https://en.wikipedia.org/wiki/Wavenumber">Wikipedia</a>
+</dd>
+<dt><span id="linear">Linear</span></dt>
+<dd>
+An equation with no outside force is linear if sums and multiples of solutions are again solutions. An equation with an outside force is linear when it reads (left side) = (the force), where the force does not involve <span class="math inline">u</span>, and the left side is built from <span class="math inline">u</span> and its derivatives only by multiplying each by a number, or by a given function of position and time, and adding: no <span class="math inline">u^2</span>, no <span class="math inline">u\,u_x</span>, no <span class="math inline">\sin u</span>. The <a href="../../posts/instruments-as-operators/piano.html">piano page</a>’s <span class="math inline">\mu u_{tt} + b\,u_t - Tu_{xx} + EI\,u_{xxxx} = f(x, t)</span> is an example. Then the difference of any two solutions solves the same equation without the force. The operators in this series are linear, a good model for the small vibrations of instruments. What keeps a bowed string, a clarinet reed or a harmonica reed going is not linear: the bow’s grip and slip and a reed opening and closing. <a href="https://en.wikipedia.org/wiki/Linear_differential_equation">Wikipedia</a>
+</dd>
+<dt><span id="superposition">Superposition</span></dt>
+<dd>
+Adding solutions of a linear equation to get another solution. The free motion of an instrument, once nothing is driving it, is a superposition, a sum, of its modes. <a href="https://en.wikipedia.org/wiki/Superposition_principle">Wikipedia</a>
+</dd>
+<dt><span id="mode">Mode, normal mode</span></dt>
+<dd>
+A motion of an object, with no friction and nothing driving it, in which every part swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small free vibration is a sum of modes. <a href="https://en.wikipedia.org/wiki/Normal_mode">Wikipedia</a>
+</dd>
+<dt><span id="standing-wave">Standing wave</span></dt>
+<dd>
+A wave whose shape stays in place, such as a mode of a string. It can be seen as two equal waves traveling in opposite directions. <a href="https://en.wikipedia.org/wiki/Standing_wave">Wikipedia</a>
+</dd>
+<dt><span id="node">Node, antinode, nodal line</span></dt>
+<dd>
+A node is a point of a standing wave that does not move; an antinode is a point that moves the most. Touching a string lightly at a node of a mode does not disturb that mode. On a drumhead or a plate, a mode stays still along whole curves, its nodal lines; Chladni’s sand collects on them. <a href="https://en.wikipedia.org/wiki/Node_(physics)">Wikipedia</a>
+</dd>
+<dt><span id="wave-equation">Wave equation</span></dt>
+<dd>
+The equation <span class="math inline">u_{tt} = c^2u_{xx}</span> for the height <span class="math inline">u(x, t)</span> of a stretched string, and its relatives for air in a pipe and for a drumhead. The constant <span class="math inline">c</span> is the speed at which a bump travels. <a href="https://en.wikipedia.org/wiki/Wave_equation">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/circle.html">page 3</a>
+</dd>
+<dt><span id="boundary-condition">Boundary condition</span></dt>
+<dd>
+A rule for what happens at the edge of a vibrating object, set by how it is held. A string tied down at an end has <span class="math inline">u = 0</span> there. A bar clamped at an end can neither move nor tilt there: <span class="math inline">u = 0</span> and <span class="math inline">u_x = 0</span>. At the open end of a pipe the pressure equals room pressure. <a href="https://en.wikipedia.org/wiki/Boundary_value_problem">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/violin.html">page 4</a>
+</dd>
+<dt><span id="dirichlet">Dirichlet and Neumann conditions</span></dt>
+<dd>
+Two kinds of boundary condition. A Dirichlet condition fixes the value at the edge, such as <span class="math inline">u = 0</span> at a string’s tied end or <span class="math inline">p = 0</span> at a pipe’s open end. A Neumann condition fixes the slope, such as <span class="math inline">p_x = 0</span> at a clarinet’s reed end. <a href="https://en.wikipedia.org/wiki/Dirichlet_boundary_condition">Wikipedia: Dirichlet</a>, <a href="https://en.wikipedia.org/wiki/Neumann_boundary_condition">Neumann</a>
+</dd>
+<dt><span id="damping">Damping</span></dt>
+<dd>
+Friction that drains energy from a vibration, so that it dies away. A term <span class="math inline">b\,u_t</span> in the equation, proportional to velocity, is the simplest model. <a href="https://en.wikipedia.org/wiki/Damping">Wikipedia</a>
+</dd>
+<dt><span id="self-sustained">Self-sustained oscillation, limit cycle</span></dt>
+<dd>
+An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle; under some conditions it does not, as in the unsteady, warbling <em>wolf note</em> of some cellos. This needs a mechanism that is not linear, such as the bow’s grip and slip or a reed opening and closing. <a href="https://en.wikipedia.org/wiki/Self-oscillation">Wikipedia</a>
+</dd>
+<dt><span id="coupling">Coupling</span></dt>
+<dd>
+Two vibrating parts are coupled when the motion of one pushes on the other, as when piano strings share a bridge. Coupled parts trade energy, and their modes mix. <a href="https://en.wikipedia.org/wiki/Coupling_(physics)">Wikipedia</a>
+</dd>
+<dt><span id="helmholtz-motion">Helmholtz motion</span></dt>
+<dd>
+The way a bowed string moves. The string sticks to the bow, slips back, and sticks again; seen from the side, a single sharp corner races back and forth along the string, one round trip per period. <a href="https://newt.phys.unsw.edu.au/jw/Bows.html">J. Wolfe, UNSW: The bowed string</a>
+</dd>
+<dt><span id="cantilever">Cantilever, clamped bar</span></dt>
+<dd>
+A bar fixed rigidly at one end, so that end can neither move nor tilt, and free at the other, like a diving board. A kalimba tine is close to a cantilever: it is pressed against a bridge near one end and its tip is free. <a href="https://en.wikipedia.org/wiki/Cantilever">Wikipedia</a>
+</dd>
+<dt><span id="beam">Euler–Bernoulli beam</span></dt>
+<dd>
+The standard model of a bending bar under no tension: <span class="math inline">\mu u_{tt} = -EI\,u_{xxxx}</span>, where <span class="math inline">\mu</span> is the mass per unit length, <span class="math inline">E</span> the <a href="#youngs-modulus">Young’s modulus</a> and <span class="math inline">I</span> the <a href="#second-moment">second moment of area</a>. The bar resists being bent, and bending is curvature, two derivatives; balancing forces along the bar adds two more, giving four. <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Wikipedia</a>
+</dd>
+<dt><span id="moment">Bending moment, shear force</span></dt>
+<dd>
+Imagine cutting a bent bar at some point. The bending moment is the turning effect that one side exerts on the other, which tries to bend the bar; the shear force is the sideways force across the cut. A free end carries neither. <a href="https://en.wikipedia.org/wiki/Bending_moment">Wikipedia: Bending moment</a>, <a href="https://en.wikipedia.org/wiki/Shear_force">Shear force</a>
+</dd>
+<dt><span id="youngs-modulus">Young’s modulus</span></dt>
+<dd>
+How stiff a material is when stretched: the force per unit area needed, divided by the fraction by which it lengthens. Steel is about 200 GPa; nylon, used for classical guitar strings, is a few GPa. <a href="https://en.wikipedia.org/wiki/Young%27s_modulus">Wikipedia</a>
+</dd>
+<dt><span id="second-moment">Second moment of area</span></dt>
+<dd>
+How the shape of a bar’s cross-section resists bending, written <span class="math inline">I</span>. For a rectangle of width <span class="math inline">w</span> and thickness <span class="math inline">h</span>, <span class="math inline">I = wh^3/12</span>: doubling the thickness makes the bar eight times harder to bend. <a href="https://en.wikipedia.org/wiki/Second_moment_of_area">Wikipedia</a>
+</dd>
+<dt><span id="hyperbolic">Hyperbolic functions, cosh and sinh</span></dt>
+<dd>
+<span class="math inline">\cosh x = (e^x + e^{-x})/2</span> and <span class="math inline">\sinh x = (e^x - e^{-x})/2</span>. They satisfy <span class="math inline">\cosh^2 x - \sinh^2 x = 1</span>, much as <span class="math inline">\cos^2 + \sin^2 = 1</span>. In a bar they describe the part of the bending that grows or fades along the bar instead of wiggling. <a href="https://en.wikipedia.org/wiki/Hyperbolic_functions">Wikipedia</a>
+</dd>
+<dt><span id="bulk-modulus">Bulk modulus, adiabatic</span></dt>
+<dd>
+How hard a material is to compress: the pressure needed, divided by the fraction by which the volume shrinks. In a sound wave the squeezes are too quick for heat to flow in or out, which is called adiabatic, and for air this gives about <span class="math inline">1.4 \times</span> atmospheric pressure. <a href="https://en.wikipedia.org/wiki/Bulk_modulus">Wikipedia</a>
+</dd>
+<dt><span id="first-order">First-order approximation</span></dt>
+<dd>
+Keeping only the terms proportional to a small change and dropping those proportional to its square and higher powers. For a small <span class="math inline">\varepsilon</span>, <span class="math inline">(1 + \varepsilon)^3 = 1 + 3\varepsilon + 3\varepsilon^2 + \varepsilon^3 \approx 1 + 3\varepsilon</span> to first order. A second-order approximation keeps the <span class="math inline">\varepsilon^2</span> terms too. <a href="https://en.wikipedia.org/wiki/Perturbation_theory">Wikipedia</a>
+</dd>
+</dl>
+</section>
+<section id="matrices-and-operators" class="level2">
+<h2 class="anchored" data-anchor-id="matrices-and-operators">Matrices and operators</h2>
+<dl>
+<dt><span id="matrix-vector">Matrix times vector</span></dt>
+<dd>
+For a square matrix <span class="math inline">K</span> and a list of numbers <span class="math inline">v</span>, the product <span class="math inline">Kv</span> is the list whose <span class="math inline">j</span>-th entry is <span class="math inline">\sum_k K_{jk}v_k</span>: row <span class="math inline">j</span> of <span class="math inline">K</span>, multiplied entry by entry with <span class="math inline">v</span> and added up. <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">Wikipedia</a>
+</dd>
+<dt><span id="eigenvector">Eigenvector, eigenvalue</span></dt>
+<dd>
+A nonzero vector <span class="math inline">v</span> that a matrix <span class="math inline">K</span> only rescales, multiplying it by a number <span class="math inline">\lambda</span>: <span class="math inline">Kv = \lambda v</span>. The number <span class="math inline">\lambda</span> is the eigenvalue. On the bead ring of <a href="../../posts/instruments-as-operators/ring.html">page 2</a>, <span class="math inline">v</span> lists how far each bead is displaced and <span class="math inline">Kv</span> the forces pulling them back, up to a constant; an eigenvector is a shape in which each bead is pulled back in proportion to its own displacement, so all the beads swing at one frequency. Eigenvalues are squared angular frequencies, up to a constant. <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">Wikipedia</a>
+</dd>
+<dt><span id="eigenvalue">Eigenvalue</span></dt>
+<dd>
+See <a href="#eigenvector">eigenvector</a>.
+</dd>
+<dt><span id="multiplicity">Multiplicity</span></dt>
+<dd>
+The number of independent eigenvectors that share one eigenvalue. Vectors are <em>independent</em> when none of them is a combination of the others. On a ring, the cosine and sine shapes of the same wave are two independent modes with the same frequency, so that frequency has multiplicity 2. <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors#Geometric_multiplicity">Wikipedia</a>
+</dd>
+<dt><span id="orthogonal">Perpendicular, orthogonal</span></dt>
+<dd>
+Two vectors are perpendicular, or orthogonal, when their dot product, the sum of the products of matching entries, is zero. For functions the dot product is replaced by the <a href="#inner-product">inner product</a>. <a href="https://en.wikipedia.org/wiki/Orthogonality_(mathematics)">Wikipedia</a>
+</dd>
+<dt><span id="symmetric-matrix">Symmetric matrix</span></dt>
+<dd>
+A square matrix of real numbers equal to its own mirror image across the diagonal: the entry in row <span class="math inline">i</span>, column <span class="math inline">j</span> equals the entry in row <span class="math inline">j</span>, column <span class="math inline">i</span>. The spectral theorem says its eigenvalues are real and it has a full set of perpendicular eigenvectors. <a href="https://en.wikipedia.org/wiki/Spectral_theorem">Wikipedia</a>
+</dd>
+<dt><span id="determinant">Determinant</span></dt>
+<dd>
+A number computed from a square matrix that is zero exactly when the matrix sends some nonzero vector to zero. So linear equations with all right-hand sides zero have a solution other than all zeros exactly when the determinant of their coefficients is zero. For a <span class="math inline">2\times2</span> matrix with rows <span class="math inline">(p, q)</span> and <span class="math inline">(r, s)</span> it is <span class="math inline">ps - qr</span>. <a href="https://en.wikipedia.org/wiki/Determinant">Wikipedia</a>
+</dd>
+<dt><span id="circulant">Circulant matrix</span></dt>
+<dd>
+A square matrix in which each row is the row above shifted one place to the right, wrapping around. Whatever its entries, the complex waves <span class="math inline">e^{2\pi ijk/N}</span> of the discrete Fourier transform, the next entry, are eigenvectors of it; when the matrix is also symmetric, as on page 2, so are the real cosine and sine waves. <a href="https://en.wikipedia.org/wiki/Circulant_matrix">Wikipedia</a>
+</dd>
+<dt><span id="dft">Discrete Fourier transform (DFT)</span></dt>
+<dd>
+Writing a list of <span class="math inline">N</span> numbers, indexed by <span class="math inline">j = 0, \dots, N-1</span>, as a sum of the waves <span class="math inline">\cos(2\pi jk/N)</span> and <span class="math inline">\sin(2\pi jk/N)</span> for <span class="math inline">k = 0, \dots, N-1</span>; with <a href="#euler-formula">Euler’s formula</a> these are combined into <span class="math inline">e^{2\pi ijk/N}</span>. <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/ring.html">page 2</a>
+</dd>
+<dt><span id="euler-formula">Euler’s formula</span></dt>
+<dd>
+<span class="math inline">e^{i\theta} = \cos\theta + i\sin\theta</span>, where <span class="math inline">i^2 = -1</span>. It packs a cosine and a sine into one expression that is easier to multiply and differentiate. <a href="https://en.wikipedia.org/wiki/Euler%27s_formula">Wikipedia</a>
+</dd>
+<dt><span id="operator">Operator</span></dt>
+<dd>
+A rule that takes a function and returns another function. In this series the operator <span class="math inline">A</span> takes a shape <span class="math inline">u</span> of the instrument and returns minus the restoring force on it, per unit mass, so that the motion obeys <span class="math inline">u_{tt} = -Au</span>. It comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Example: <span class="math inline">A = -c^2\,d^2/d\theta^2</span> on shapes of a loop. Pages 3 and 4 drop the constant <span class="math inline">c^2</span> and work with <span class="math inline">-d^2/d\theta^2</span>, whose eigenvalues <span class="math inline">\lambda</span> give frequencies <span class="math inline">c\sqrt\lambda/2\pi</span>. <a href="https://en.wikipedia.org/wiki/Operator_(mathematics)">Wikipedia</a>
+</dd>
+<dt><span id="eigenfunction">Eigenfunction</span></dt>
+<dd>
+A nonzero function <span class="math inline">f</span> that an operator only rescales: <span class="math inline">Af = \lambda f</span>. Example: <span class="math inline">-\frac{d^2}{d\theta^2}\cos 3\theta = 9\cos 3\theta</span>. <a href="https://en.wikipedia.org/wiki/Eigenfunction">Wikipedia</a>
+</dd>
+<dt><span id="spectrum">Spectrum</span></dt>
+<dd>
+For every instrument in this series, the list of its operator’s eigenvalues; the frequencies are their square roots divided by <span class="math inline">2\pi</span> (when the constant <span class="math inline">c^2</span> is dropped from the operator, multiply by <span class="math inline">c</span> too). (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers <span class="math inline">\lambda</span> for which <span class="math inline">A - \lambda</span> has no well-behaved inverse, which can contain more than eigenvalues.) <a href="https://en.wikipedia.org/wiki/Spectrum_(functional_analysis)">Wikipedia</a>
+</dd>
+<dt><span id="inner-product">Inner product</span></dt>
+<dd>
+A way to multiply two vectors or two functions to get a number, generalizing the dot product. For functions on the circle, <span class="math inline">\langle f, g\rangle = \int_0^{2\pi} f\,\bar g\,d\theta</span>, where <span class="math inline">\bar g</span> is the complex conjugate of <span class="math inline">g</span>, which is just <span class="math inline">g</span> when <span class="math inline">g</span> is real. Two functions are perpendicular if it is zero. <a href="https://en.wikipedia.org/wiki/Inner_product_space">Wikipedia</a>
+</dd>
+<dt><span id="l2"><span class="math inline">L^2(S^1)</span></span></dt>
+<dd>
+The space of functions on the circle <span class="math inline">S^1</span> with <span class="math inline">\int_0^{2\pi}|f|^2\,d\theta</span> finite, with the inner product above. (For readers who know measure theory: two functions that differ only on a set of measure zero count as the same.) It is where the shapes of a vibrating loop live. <a href="https://en.wikipedia.org/wiki/Lp_space">Wikipedia</a>
+</dd>
+<dt><span id="self-adjoint">Symmetric and self-adjoint operators</span></dt>
+<dd>
+An operator <span class="math inline">A</span> is symmetric if <span class="math inline">\langle Af, g\rangle = \langle f, Ag\rangle</span> for all allowed <span class="math inline">f</span> and <span class="math inline">g</span>, the analogue of a symmetric matrix. That alone makes its eigenvalues real and its eigenfunctions for different eigenvalues perpendicular. Self-adjoint is a stronger condition on the set of allowed shapes, roughly that it is neither too small nor too large. Together with a further property that every instrument here has, it is what the spectral theorem needs to give enough eigenfunctions to build every shape (<a href="../../posts/instruments-as-operators/circle.html">page 3</a>). (For readers who know functional analysis: self-adjoint means <span class="math inline">A = A^*</span>, domains included; for the loop the domain is <span class="math inline">H^2(S^1)</span>, and the further property is that <span class="math inline">(A + 1)^{-1}</span> is compact.) <a href="https://en.wikipedia.org/wiki/Self-adjoint_operator">Wikipedia</a>
+</dd>
+<dt><span id="fourier-series">Fourier series</span></dt>
+<dd>
+Writing a periodic function as a sum of sines and cosines, or of <span class="math inline">e^{in\theta}</span>, of whole-number frequencies. On <a href="../../posts/instruments-as-operators/circle.html">page 3</a> this is the expansion in eigenfunctions of <span class="math inline">-d^2/d\theta^2</span>. <a href="https://en.wikipedia.org/wiki/Fourier_series">Wikipedia</a>
+</dd>
+<dt><span id="laplacian">Laplacian</span></dt>
+<dd>
+The operator <span class="math inline">\Delta u = u_{xx} + u_{yy}</span> in the plane. At each point it is proportional to how far <span class="math inline">u</span> sits below the average of its values on a small circle around the point. A drumhead’s operator is <span class="math inline">-c^2\Delta</span>. <a href="https://en.wikipedia.org/wiki/Laplace_operator">Wikipedia</a>
+</dd>
+<dt><span id="separation-of-variables">Separation of variables</span></dt>
+<dd>
+Looking for solutions that are a product of a function of one variable and a function of another, such as <span class="math inline">u(x, t) = X(x)\,q(t)</span>. It splits one equation in several variables into simpler equations in one variable each. <a href="https://en.wikipedia.org/wiki/Separation_of_variables">Wikipedia</a>
+</dd>
+<dt><span id="bessel">Bessel function</span></dt>
+<dd>
+The functions <span class="math inline">J_m(r)</span> that describe how the modes of a round drum vary from the center to the rim, as sines do along a string. <span class="math inline">J_0</span> starts at 1 and swings like a slowly fading cosine, crossing zero at <span class="math inline">r \approx 2.405,\ 5.520,\ 8.654, \dots</span>; for <span class="math inline">m \ge 1</span>, <span class="math inline">J_m</span> starts at 0. Their zeros, which are not whole-number multiples of the first one, set the drum’s frequencies. <a href="https://en.wikipedia.org/wiki/Bessel_function">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/drum.html">page 8</a>
+</dd>
+<dt><span id="divergence-theorem">Divergence theorem</span></dt>
+<dd>
+The total flow out through the boundary of a region equals the sum, over the region, of how much flow is created at each point. It turns forces along the edge of a patch of drumhead into an integral over the patch. <a href="https://en.wikipedia.org/wiki/Divergence_theorem">Wikipedia</a>
+</dd>
+<dt><span id="rayleigh-quotient">Rayleigh quotient</span></dt>
+<dd>
+The ratio of a shape’s stored energy to its mass-weighted size, for example <span class="math inline">R(f) = \int EI\,(f'')^2\,dx \big/ \int \rho S\,f^2\,dx</span> for a bar; for a shape that meets all the boundary conditions it equals <span class="math inline">\langle Af, f\rangle/\langle f, f\rangle</span>. Its smallest value, over all nonzero shapes <span class="math inline">f</span> that obey the conditions at clamped or fixed ends, is the lowest eigenvalue, reached at the lowest mode; in this energy form, conditions at free ends need not be imposed. It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. <a href="https://en.wikipedia.org/wiki/Rayleigh_quotient">Wikipedia</a>
+</dd>
+</dl>
+</section>
+<section id="shape-and-spectrum" class="level2">
+<h2 class="anchored" data-anchor-id="shape-and-spectrum">Shape and spectrum</h2>
+<dl>
+<dt><span id="weyl">Weyl’s law</span></dt>
+<dd>
+For a drum of area <span class="math inline">A</span>, the number <span class="math inline">N(\lambda)</span> of eigenvalues below a large number <span class="math inline">\lambda</span> is close to <span class="math inline">A\lambda/4\pi</span>, so the spectrum “hears” the area. A second term, <span class="math inline">-P\sqrt\lambda/4\pi</span> with <span class="math inline">P</span> the perimeter, is proved only under extra conditions, but for drums with smooth or polygonal rims the perimeter can be heard anyway, by a smoother count (<a href="../../posts/instruments-as-operators/shape.html">page 9</a>). <a href="https://en.wikipedia.org/wiki/Weyl_law">Wikipedia</a>
+</dd>
+<dt><span id="isospectral">Isospectral</span></dt>
+<dd>
+Having the same spectrum, counted with multiplicity. Gordon, Webb and Wolpert found two differently shaped drums that are isospectral. <a href="https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum">Wikipedia: Hearing the shape of a drum</a>
+</dd>
+</dl>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

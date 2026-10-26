@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10 · Did instruments shape our scales? – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">10 · Did instruments shape our scales?</h1>
+<p class="subtitle lead">Epilogue · Instruments as Operators</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 25, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav">
+<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <strong>10 Epilogue</strong> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p><strong>Builds on</strong> <a href="../../posts/instruments-as-operators/note.html">page 0</a>, for harmonics, and <a href="../../posts/instruments-as-operators/kalimba.html">page 6</a>, for bars. About 10 minutes, plus 4 for the folds.</p>
+</div>
+<div class="puzzle">
+<p><strong>The puzzle.</strong> Play two notes an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave</a> apart, then two notes a <a href="../../posts/instruments-as-operators/glossary.html#semitone">semitone</a> apart, the smallest step on a piano. The octave sounds smooth and the semitone sounds rough. Why? And why does a Javanese gamelan, an orchestra of tuned metal bars and gongs, use scales that fit no piano? One answer, argued by the engineer and musician William Sethares, is that it depends on the instruments: on their spectra.</p>
+</div>
+<p>Pick a sound, then slide the interval between two notes of that sound and listen. The curve shows how rough each interval is.</p>
+<div class="ins">
+<div class="panel">
+  <div class="controls" role="group" aria-label="Which instrument's sound">
+    <button id="eHarm" aria-pressed="true">String-like (harmonic)</button><button id="eBar" aria-pressed="false">Metal bar</button>
+  </div>
+  <canvas id="eCurve" style="height:230px" aria-label="Roughness of two notes as a function of the interval between them"></canvas>
+  <div class="slider"><label for="eA">Interval (frequency ratio)</label><input type="range" id="eA" min="1" max="3" step="0.001" value="1.5"><output id="eAo"></output></div>
+  <div class="controls" role="group" aria-label="Named intervals">
+    <button data-iv="1.0595">semitone</button><button data-iv="1.2">minor third 6:5</button><button data-iv="1.25">major third 5:4</button><button data-iv="1.3333">fourth 4:3</button><button data-iv="1.5">fifth 3:2</button><button data-iv="2">octave 2:1</button>
+  </div>
+  <div class="controls"><button id="ePlay" class="primary">Play the two notes</button></div>
+  <div class="readout" id="eRead"></div>
+  <p class="cap">Solid: the roughness of two notes of the chosen sound, against the frequency ratio between them, lower note at 262 Hz. Faint: the other sound, for comparison. Each curve is scaled to its own highest point, so compare where the dips are, not the heights. Dots: the smoothest intervals, where the curve dips. The string-like sound has six harmonics with strengths falling by a factor 0.88 each; the metal bar has the first four modes of a uniform bar free at both ends, with strengths 1, 0.7, 0.5, 0.35. Both sets of strengths are chosen for illustration.</p>
+</div>
+</div>
+<p>With the string-like sound, the curve dips at <span class="math inline">6/5</span>, <span class="math inline">5/4</span>, <span class="math inline">4/3</span>, <span class="math inline">3/2</span>, <span class="math inline">5/3</span> and <span class="math inline">2</span>: the intervals of Western harmony. Switch to the metal bar and the dips move. The octave <span class="math inline">2 : 1</span> is no longer a dip; a slightly narrower interval, about <span class="math inline">1.96</span>, is smoother.</p>
+<section id="where-roughness-comes-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-roughness-comes-from">Where roughness comes from</h2>
+<p>Two pure tones close in frequency produce <a href="../../posts/instruments-as-operators/glossary.html#beats">beats</a>: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation, and Sethares fitted a formula to their curve, written <span class="math inline">\delta</span> below. In that formula the roughness of two pure tones near middle C is greatest when they are about 22 Hz apart, and falls off on both sides: tones much closer beat too slowly to sound rough, and tones much further apart are heard as two separate, smooth tones.</p>
+<p>A note from a real instrument is several pure tones at once, its <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a>. For two such notes, Sethares adds up the roughness of every pair of partials, from either note, each weighted by the product of the two partials’ amplitudes: <span class="math display">
+D(\alpha) = \sum_{\text{pairs } i &lt; j} a_i a_j\; \delta\big(\min(f_i, f_j),\ |f_i - f_j|\big).
+</span> Here the list <span class="math inline">f_1, f_2, \dots</span> holds the partials of both notes: those of the lower note, and those of the upper note, whose frequencies are <span class="math inline">\alpha</span> times the lower note’s; <span class="math inline">a_i</span> is the amplitude of partial <span class="math inline">f_i</span>. The roughness <span class="math inline">\delta</span> of two pure tones depends on how far apart they are and, a little, on how high they are, hence its two inputs. The curve in the demo is <span class="math inline">D(\alpha)</span>.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Formula</span>The roughness of two pure tones
+</summary>
+<p>Sethares’ fit to Plomp and Levelt’s data, for two pure tones of equal loudness, the lower at frequency <span class="math inline">f</span> and the other <span class="math inline">x</span> hertz above it, is <span class="math display">
+\delta(f, x) = e^{-3.5\,s\,x} - e^{-5.75\,s\,x}, \qquad s = \frac{0.24}{0.021\,f + 19},
+</span> with frequencies in hertz. It is zero at <span class="math inline">x = 0</span>, rises to a peak at <span class="math inline">x = \ln(5.75/3.5)/(2.25\,s)</span>, about 22 Hz near middle C, and then decays. For tones of amplitudes <span class="math inline">a_1</span> and <span class="math inline">a_2</span>, Sethares multiplies by <span class="math inline">a_1 a_2</span>, as in <span class="math inline">D(\alpha)</span> above. The factor <span class="math inline">s</span> makes the roughest separation grow with the frequency, as Plomp and Levelt found: tones high up must be further apart, in hertz, to sound equally smooth. The formula describes average listeners’ judgments of roughness for pure tones; it is a fitted curve, not derived from first principles.</p>
+</details>
+</div>
+</section>
+<section id="why-the-dips-sit-where-they-do" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-dips-sit-where-they-do">Why the dips sit where they do</h2>
+<p>For a harmonic sound, the partials of the lower note are at <span class="math inline">f, 2f, 3f, \dots</span> and those of the upper note at <span class="math inline">\alpha f, 2\alpha f, 3\alpha f, \dots</span>. When <span class="math inline">\alpha</span> is a ratio of small whole numbers, say <span class="math inline">3/2</span>, many partials of the two notes land exactly on each other: the lower note’s third partial and the upper note’s second are both at <span class="math inline">3f</span>. Partials that coincide do not beat. Move <span class="math inline">\alpha</span> off <span class="math inline">3/2</span> and the pairs that coincided pull apart, by a few hertz and then by tens of hertz, into the range where beating sounds roughest. So each simple ratio sits at the bottom of a dip. The smooth intervals of a harmonic sound are the simple whole-number ratios, which extends the second idea of this series: frequencies at whole-number multiples of one frequency give a clear pitch, and they also make whole-number intervals smooth.</p>
+<p>A uniform bar free at both ends, such as a glockenspiel bar, has the kalimba’s operator with different ends, and its partials are at <span class="math inline">1,\ 2.756,\ 5.404,\ 8.933</span> times the lowest, as the fold below shows. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too, as discussed below.) Now the coincidences happen elsewhere. At <span class="math inline">\alpha = 2.756</span> the upper note’s fundamental lands on the lower note’s second partial. At <span class="math inline">\alpha = 5.404/2.756 \approx 1.961</span> the upper note’s second partial lands on the lower note’s third, and that is the dip just below the octave. At <span class="math inline">\alpha = 2</span> nothing lines up.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>The modes of a bar free at both ends <span class="needs">uses a 2×2 determinant and hyperbolic functions</span>
+</summary>
+<p>The operator is the bar’s <span class="math inline">\kappa^2\,d^4/dx^4</span> from the <a href="../../posts/instruments-as-operators/kalimba.html">kalimba page</a>. A free end carries no bending moment and no shear force, so at both <span class="math inline">x = 0</span> and <span class="math inline">x = L</span> the conditions are <span class="math inline">X'' = 0</span> and <span class="math inline">X''' = 0</span>.</p>
+<ol type="1">
+<li>As on the kalimba page, write <span class="math inline">X = A_1\cos\beta x + A_2\sin\beta x + A_3\cosh\beta x + A_4\sinh\beta x</span>.</li>
+<li>At <span class="math inline">x = 0</span>: <span class="math inline">X''(0) = \beta^2(-A_1 + A_3) = 0</span> and <span class="math inline">X'''(0) = \beta^3(-A_2 + A_4) = 0</span>, so <span class="math inline">A_3 = A_1</span> and <span class="math inline">A_4 = A_2</span>. Then <span class="math inline">X = A_1(\cos\beta x + \cosh\beta x) + A_2(\sin\beta x + \sinh\beta x)</span>.</li>
+<li>At <span class="math inline">x = L</span>, dividing by <span class="math inline">\beta^2</span> and <span class="math inline">\beta^3</span> and writing <span class="math inline">C_1 = \cos\beta L</span>, <span class="math inline">S_1 = \sin\beta L</span>, <span class="math inline">C_2 = \cosh\beta L</span>, <span class="math inline">S_2 = \sinh\beta L</span>, as on the kalimba page: <span class="math display">
+(C_2 - C_1)\,A_1 + (S_2 - S_1)\,A_2 = 0, \qquad (S_2 + S_1)\,A_1 + (C_2 - C_1)\,A_2 = 0 .
+</span></li>
+<li>These have a solution other than <span class="math inline">A_1 = A_2 = 0</span> exactly when the <a href="../../posts/instruments-as-operators/glossary.html#determinant">determinant</a> is zero: <span class="math inline">(C_2 - C_1)^2 - (S_2 - S_1)(S_2 + S_1) = (C_2^2 - S_2^2) + (C_1^2 + S_1^2) - 2C_1C_2 = 2 - 2C_1C_2</span>, using <span class="math inline">C_2^2 - S_2^2 = 1</span> and <span class="math inline">C_1^2 + S_1^2 = 1</span>. So <span class="math display">
+\cos\beta L\,\cosh\beta L = 1 .
+</span> Besides <span class="math inline">\beta = 0</span>, which belongs to the bar moving or rotating rigidly without bending, the roots are <span class="math inline">\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots</span>, computed on this page. Since the frequency is proportional to <span class="math inline">\beta^2</span>, the partials are at <span class="math inline">(\beta_n/\beta_1)^2 = 1,\ 2.756,\ 5.404,\ 8.933</span> times the lowest.</li>
+</ol>
+</details>
+</div>
+</section>
+<section id="the-gamelan" class="level2">
+<h2 class="anchored" data-anchor-id="the-gamelan">The gamelan</h2>
+<p>Sethares measured the spectra of gamelan metallophones and reports that “the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans”. The bars in the demo above are idealized uniform bars, not measured gamelan instruments, so the demo shows the mechanism, not his gamelan result; real gamelan bars are shaped and tuned by their makers, and tunings vary from one gamelan to another.</p>
+</section>
+<section id="how-far-does-this-go" class="level2">
+<h2 class="anchored" data-anchor-id="how-far-does-this-go">How far does this go?</h2>
+<p>The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for consonant chords followed <em>harmonicity</em>, whether the frequencies fit one harmonic series (whole-number multiples <span class="math inline">f, 2f, 3f, \dots</span> of one frequency), more than it followed beating, and grew with musical training. In 2016 McDermott and colleagues found that the Tsimane’, a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.</p>
+<p>So the spectrum decides what sounds rough, a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world’s music is an open, argued question.</p>
+</section>
+<section id="what-we-found" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
+<p>An instrument’s spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it: for harmonic instruments, the simple whole-number ratios of Western harmony; for metal bars, other intervals. The operator of page 6, with different ends, may reach as far as the tuning of an orchestra.</p>
+<p><a href="../../posts/instruments-as-operators/shape.html">← What the spectrum knows</a> · <a href="../../posts/instruments-as-operators/index.html">Back to the series</a></p>
+<div class="refs">
+<p><strong>References.</strong> W. A. Sethares, “Adaptive tunings for musical scales”, <em>Journal of the Acoustical Society of America</em> 96 (1994), 10–18 (<a href="https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1">PDF</a>), for the roughness formula. W. A. Sethares, <em>Tuning, Timbre, Spectrum, Scale</em>, Springer (<a href="https://sethares.engr.wisc.edu/ttss.html">book site</a>; quotation from chapter 1, p.&nbsp;6, of the <a href="https://sethares.engr.wisc.edu/paperspdf/ttss.pdf">book PDF</a>). R. Plomp and W. J. M. Levelt, “Tonal consonance and critical bandwidth”, <em>Journal of the Acoustical Society of America</em> 38 (1965), 548–560, as cited by Sethares. J. H. McDermott, A. J. Lehr and A. J. Oxenham, “Individual differences reveal the basis of consonance”, <em>Current Biology</em> 20 (2010), 1035–1041 (<a href="https://www.sciencedaily.com/releases/2010/05/100520131431.htm">summary</a>). J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, “Indifference to dissonance in native Amazonians reveals cultural variation in music perception”, <em>Nature</em> 535 (2016), 547–550 (<a href="https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713">summary</a>). The free bar’s modes: Wikipedia, <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Euler–Bernoulli beam theory</a>.</p>
+</div>
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, F0 = 262, alpha = 1.5, which = "harm";
+  // free-free bar: roots of cos(x)cosh(x) = 1
+  var roots = [];
+  for (var k = 1; roots.length < 4; k++) { var lo = (k + 0.5) * Math.PI - 0.6, hi = (k + 0.5) * Math.PI + 0.6; roots.push(C.bisect(function (x) { return Math.cos(x) * Math.cosh(x) - 1; }, lo, hi)); }
+  var BAR = roots.map(function (r) { return Math.pow(r / roots[0], 2); });
+  var SPEC = {
+    harm: { r: [1, 2, 3, 4, 5, 6], a: [1, 0.88, 0.7744, 0.6815, 0.5997, 0.5277], name: "string-like" },
+    bar: { r: BAR, a: [1, 0.7, 0.5, 0.35], name: "metal bar" }
+  };
+  function d(f1, f2, a1, a2) { if (f2 < f1) { var t = f1; f1 = f2; f2 = t; } var s = 0.24 / (0.021 * f1 + 19), x = f2 - f1; return a1 * a2 * (Math.exp(-3.5 * s * x) - Math.exp(-5.75 * s * x)); }
+  function D(sp, al) {
+    var F = [], A = [], t = 0;
+    sp.r.forEach(function (r, i) { F.push(F0 * r); A.push(sp.a[i]); F.push(F0 * r * al); A.push(sp.a[i]); });
+    for (var i = 0; i < F.length; i++) for (var j = i + 1; j < F.length; j++) t += d(F[i], F[j], A[i], A[j]);
+    return t;
+  }
+  var NPTS = 700, curves = {}, minima = {};
+  ["harm", "bar"].forEach(function (k) {
+    var v = []; for (var i = 0; i <= NPTS; i++) v.push(D(SPEC[k], 1 + 2 * i / NPTS));
+    curves[k] = v; var m = [];
+    for (var i = 2; i < NPTS - 1; i++) if (v[i] < v[i - 1] && v[i] <= v[i + 1] && v[i] < 0.9 * Math.max(v[i - 2], v[i + 2]) + 0.1 * v[i]) m.push(1 + 2 * i / NPTS);
+    minima[k] = m;
+  });
+  var cv = document.getElementById("eCurve"), ctx = cv.getContext("2d");
+  function draw() {
+    var dpr = C.fit(cv), W = cv.width, H = cv.height, L = 10 * dpr, R = W - 10 * dpr, T = 10 * dpr, B = H - 22 * dpr;
+    var MX = {}; ["harm", "bar"].forEach(function (k) { var m = 0; curves[k].forEach(function (y, i) { if (i > NPTS * 0.02) m = Math.max(m, y); }); MX[k] = m; });
+    function X(a) { return L + (R - L) * (a - 1) / 2; } function Yk(k, v) { return B - (B - T) * Math.min(1, v / MX[k]); }
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = C.rgb("--grid"); ctx.lineWidth = dpr; ctx.beginPath(); ctx.moveTo(L, B); ctx.lineTo(R, B); ctx.stroke();
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * dpr) + "px 'IBM Plex Mono', monospace";
+    [1, 1.5, 2, 2.5, 3].forEach(function (a) { var x = X(a); ctx.beginPath(); ctx.moveTo(x, B); ctx.lineTo(x, B + 4 * dpr); ctx.stroke(); var t = a + ""; ctx.fillText(t, x - ctx.measureText(t).width / 2, H - 5 * dpr); });
+    ["harm", "bar"].forEach(function (k) {
+      var on = k === which; ctx.strokeStyle = C.rgb("--accent", on ? 1 : 0.22); ctx.lineWidth = (on ? 2.2 : 1.4) * dpr; ctx.beginPath();
+      curves[k].forEach(function (y, i) { var px = X(1 + 2 * i / NPTS), py = Yk(k, y); if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py); }); ctx.stroke();
+    });
+    ctx.fillStyle = C.rgb("--pos");
+    minima[which].forEach(function (a) { ctx.beginPath(); ctx.arc(X(a), Yk(which, D(SPEC[which], a)), 4 * dpr, 0, 2 * Math.PI); ctx.fill(); });
+    ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 1.5 * dpr; ctx.setLineDash([4 * dpr, 3 * dpr]); ctx.beginPath(); ctx.moveTo(X(alpha), T); ctx.lineTo(X(alpha), B); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function read() {
+    var cents = 1200 * Math.log2(alpha), m = minima[which], near = m.reduce(function (b, a) { return Math.abs(a - alpha) < Math.abs(b - alpha) ? a : b; }, m[0]);
+    document.getElementById("eAo").textContent = alpha.toFixed(3);
+    document.getElementById("eRead").innerHTML = SPEC[which].name + " · ratio <b>" + alpha.toFixed(3) + "</b> = " + Math.round(cents) + " cents · roughness " + D(SPEC[which], alpha).toFixed(3) +
+      " · smoothest intervals of this sound: " + m.map(function (a) { return a.toFixed(3); }).join(", ") +
+      (which === "bar" ? " · bar partials at " + BAR.map(function (r) { return r.toFixed(3); }).join(", ") : "");
+    draw();
+  }
+  var sl = document.getElementById("eA");
+  sl.addEventListener("input", function () { alpha = parseFloat(sl.value); read(); });
+  document.querySelectorAll("[data-iv]").forEach(function (b) { b.addEventListener("click", function () { alpha = parseFloat(b.getAttribute("data-iv")); sl.value = alpha; read(); }); });
+  var bH = document.getElementById("eHarm"), bB = document.getElementById("eBar");
+  bH.addEventListener("click", function () { which = "harm"; bH.setAttribute("aria-pressed", true); bB.setAttribute("aria-pressed", false); read(); });
+  bB.addEventListener("click", function () { which = "bar"; bB.setAttribute("aria-pressed", true); bH.setAttribute("aria-pressed", false); read(); });
+  document.getElementById("ePlay").addEventListener("click", function () {
+    var sp = SPEC[which], parts = [];
+    sp.r.forEach(function (r, i) { parts.push({ f: F0 * r, amp: sp.a[i], tau: 1.6 }); parts.push({ f: F0 * r * alpha, amp: sp.a[i], tau: 1.6 }); });
+    C.play(C.render(parts, 2.4), 0.75);
+  });
+  window.addEventListener("resize", draw);
+  C.onTheme(draw);
+  read();
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

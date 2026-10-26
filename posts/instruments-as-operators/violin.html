@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The violin – No Man’s Land</title>
+<title>4 · A string with ends – No Man’s Land</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -160,8 +160,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The violin</h1>
-<p class="subtitle lead">Part 1 of Instruments as Operators</p>
+<h1 class="title">4 · A string with ends</h1>
+<p class="subtitle lead">The violin · Instruments as Operators</p>
 </div>
 
 
@@ -170,6 +170,12 @@ window.Quarto = {
 
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 25, 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -178,49 +184,181 @@ window.Quarto = {
 </header>
 
 
-<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <a href="../../posts/instruments-as-operators/foundations.html">0 Foundations</a> · <strong>1 Violin</strong> · <a href="../../posts/instruments-as-operators/clarinet.html">2 Clarinet</a> · <a href="../../posts/instruments-as-operators/kalimba.html">3 Kalimba</a> · <a href="../../posts/instruments-as-operators/piano.html">4 Piano</a> · <a href="../../posts/instruments-as-operators/drum.html">5 Drum</a></p>
-<p>The string from Part 0, played two ways. Tension and length set the pitch; the bow forces the overtones onto exact whole numbers.</p>
-<section id="operator-and-spectrum" class="level2">
-<h2 class="anchored" data-anchor-id="operator-and-spectrum">Operator and spectrum</h2>
-<p>A violin string is the continuum bead chain of <a href="../../posts/instruments-as-operators/foundations.html">Part 0</a>, so its operator is <span class="math inline">-c^2\partial_x^2</span> on <span class="math inline">[0,L]</span> with tied ends. Its eigenfunctions are <span class="math inline">\sin(n\pi x/L)</span>, and the frequencies are <span class="math display">
-f_n = \frac{n}{2L}\sqrt{\frac{T}{\mu}}, \qquad n = 1, 2, 3, \dots
-</span></p>
-<p>The four strings share one length and differ in <span class="math inline">T/\mu</span>, tuned to G3, D4, A4 and E5. A finger shortens the vibrating length, and since <span class="math inline">f \propto 1/L</span>, stopping the string at a fraction <span class="math inline">s</span> of its length raises the pitch by a factor <span class="math inline">1/(1-s)</span>. That is why the semitone markers below bunch together toward the bridge.</p>
-</section>
-<section id="play-it" class="level2">
-<h2 class="anchored" data-anchor-id="play-it">Play it</h2>
+<div class="series-nav">
+<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <strong>4 String</strong>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p><strong>Builds on</strong> <a href="../../posts/instruments-as-operators/circle.html">page 3</a>: on a loop, the operator <span class="math inline">-d^2/d\theta^2</span> has eigenfunctions <span class="math inline">\cos n\theta</span> and <span class="math inline">\sin n\theta</span> with eigenvalues <span class="math inline">n^2</span>. About 10 minutes, plus 5 for the folds.</p>
+</div>
+<div class="puzzle">
+<p><strong>The puzzle.</strong> Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an octave. Touch it a third of the way along and it jumps to three times the frequency, an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave and a fifth</a> up. Pluck it near the bridge and it sounds bright; pluck it near the middle and it sounds mellow. What are the finger and the pluck doing?</p>
+</div>
+<p>Try it. Pluck the string, then pick a point to touch and pluck again. String players call these notes <a href="../../posts/instruments-as-operators/glossary.html#string-harmonics">harmonics</a>.</p>
+<div class="ins">
+<div class="panel">
+  <canvas id="tCanvas" style="height:170px" aria-label="A string, the point where it is plucked, and the finger touching it lightly"></canvas>
+  <div class="controls" role="group" aria-label="Where the finger touches">
+    <span class="cap" style="margin-right:0.25rem">Touch lightly at</span>
+    <button data-touch="0" aria-pressed="true">no touch</button><button data-touch="0.5">1/2</button><button data-touch="0.3333333">1/3</button><button data-touch="0.25">1/4</button><button data-touch="0.2">1/5</button>
+  </div>
+  <div class="slider"><label for="tP">Pluck point, from the bridge</label><input type="range" id="tP" min="0.04" max="0.5" step="0.01" value="0.16"><output id="tPo"></output></div>
+  <div class="controls"><button id="tPluck" class="primary">Pluck</button></div>
+  <svg class="spec" id="tSpec" viewbox="0 0 320 96" style="max-width:520px" aria-label="Strength of each mode a quarter second after the pluck"></svg>
+  <div class="readout" id="tRead"></div>
+  <p class="cap">Left end: the nut; right end: the bridge. The motion is slowed down for the eye, while modes fade at their real rates. Stems (the vertical lines): how strong each mode is a quarter of a second after the pluck, at 1, 2, 3, … times the open (untouched) string's 196 Hz. The touching finger is modeled as extra <a href="glossary.html#damping">damping</a>, energy loss, on every mode that moves under it, the same model as the piano's dampers on page 7.</p>
+</div>
+</div>
+<p>And here is a whole violin to play: press and hold a string, slide to finger it, and choose the bow or plucking.</p>
 <div class="ins">
 <section class="instrument" aria-labelledby="play">
   <canvas id="fiddle" style="height:260px" tabindex="0" aria-label="Violin fingerboard. Press and hold on a string to bow it; slide sideways to change the finger position."></canvas>
   <div class="controls" style="padding:0.5rem 0.25rem 0">
-    <button id="mBow" aria-pressed="true">Bow (hold)</button><button id="mPizz" aria-pressed="false">Pizzicato (tap)</button>
+    <button id="mBow" aria-pressed="true">Bow (hold)</button><button id="mPizz" aria-pressed="false">Pizzicato, plucked (tap)</button>
     <label class="check"><input type="checkbox" id="body" checked=""> Wooden body</label>
     <span class="readout" id="vRead">Press and hold a string. Slide left and right to finger it.</span>
   </div>
   <svg class="spec" id="playSpec" viewbox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the note being played, as heard through the body"></svg>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge is the nut, right edge the bridge. The ticks mark equal-tempered semitones, at fractions 1 − 2<sup>−k/12</sup> of the length. The stems are the partials you hear. The body is a linear filter, so switching it off or on changes their heights, never their positions. Its resonances here (about 280, 470, 550 and 2700 Hz) are approximate textbook values.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge is the nut, right edge the bridge. The ticks mark equal-tempered semitones, at fractions 1 − 2<sup>−k/12</sup> of the length. The stems are the partials you hear. The body passes each partial on at its own frequency, only louder or quieter (it is linear, as explained below), so switching it off or on changes their heights, never their positions. Its resonances, the frequencies at which it vibrates most easily, here (about 280, 470, 550 and 2700 Hz) are rough values chosen to illustrate; see the references.</p>
 </section>
 </div>
+<div class="family">
+<p><strong>Same operator, different constants.</strong> Guitar, cello and harp strings obey the same equation with the same tied ends. They differ in length, tension and mass per length, which set the lowest frequency, and in how they are played: plucked (guitar, harp) or bowed (violin, cello).</p>
+</div>
+<p>To explain the harmonics, we need to know what a string’s ends do to the circle’s operator.</p>
+<section id="tie-the-ends-down" class="level2">
+<h2 class="anchored" data-anchor-id="tie-the-ends-down">Tie the ends down</h2>
+<p><strong>The operator and its boundary condition.</strong> A string of length <span class="math inline">L</span>, tension <span class="math inline">T</span> and mass <span class="math inline">\mu</span> per unit length obeys the <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a>, derived on the <a href="../../posts/instruments-as-operators/circle.html">circle page</a>: <span class="math display">
+u_{tt} = -c^2 A u, \qquad A = -\frac{d^2}{dx^2}, \qquad c^2 = \frac{T}{\mu}, \qquad u(0) = u(L) = 0 .
+</span> The same rule <span class="math inline">-d^2/dx^2</span> now acts on shapes on the interval <span class="math inline">[0, L]</span>, and only shapes that vanish at both ends are allowed. That restriction, called a <em>Dirichlet condition</em>, changes which shapes are eigenfunctions, and so changes the spectrum. An operator is the rule together with the shapes it is allowed to act on. As on the circle page, the operator proper is <span class="math inline">c^2A</span>, and we work with <span class="math inline">A</span>.</p>
+<p><strong>Spectrum.</strong> The solutions of <span class="math inline">-X'' = k^2X</span> are <span class="math inline">a\cos kx + b\sin kx</span>. The condition <span class="math inline">X(0) = 0</span> forces <span class="math inline">a = 0</span>, and <span class="math inline">X(L) = 0</span> then needs <span class="math inline">\sin kL = 0</span>, so <span class="math inline">k = n\pi/L</span>. The eigenfunctions are <span class="math inline">\sin(n\pi x/L)</span> for <span class="math inline">n = 1, 2, 3, \dots</span>, with eigenvalues <span class="math inline">(n\pi/L)^2</span>, and the frequencies are <span class="math display">
+f_n = \frac{c\,k_n}{2\pi} = \frac{n}{2L}\sqrt{\frac{T}{\mu}} .
+</span> Exactly whole-number multiples of <span class="math inline">f_1</span>, as on the circle. (There are no other eigenvalues. Multiply <span class="math inline">-X'' = \lambda X</span> by <span class="math inline">X</span> and integrate by parts, using <span class="math inline">X = 0</span> at both ends: <span class="math inline">\lambda\int X^2\,dx = \int (X')^2\,dx</span>. So a zero or negative <span class="math inline">\lambda</span> would need <span class="math inline">\int (X')^2\,dx \le 0</span>, which only <span class="math inline">X = 0</span> satisfies.) Each eigenvalue now has <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a> 1, not 2: a wave running along the string reflects at the ends instead of going around, and each reflected pair forms one <a href="../../posts/instruments-as-operators/glossary.html#standing-wave">standing wave</a>.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>The string is half of a circle: the sine series as a Fourier series <span class="needs">uses Fourier series and the uniqueness of solutions of the wave equation</span>
+</summary>
+<p>Take a shape <span class="math inline">u</span> on <span class="math inline">[0, L]</span> with <span class="math inline">u(0) = u(L) = 0</span>. Extend it to <span class="math inline">[-L, 0]</span> by <span class="math inline">u(-x) = -u(x)</span>, an odd reflection, and then repeat with period <span class="math inline">2L</span>. The result is a shape on a loop of circumference <span class="math inline">2L</span>.</p>
+<svg class="fig" viewbox="0 0 420 120" role="img" aria-label="A plucked string shape on zero to L, reflected oddly to minus L to zero">
+  <path class="dash" d="M 20 60 L 400 60"></path>
+  <path class="dash" d="M 210 20 L 210 100"></path>
+  <path class="acc" d="M 210 60 L 290 25 L 380 60"></path>
+  <path class="neg" d="M 210 60 L 130 95 L 40 60"></path>
+  <text x="200" y="114">0</text><text x="372" y="78">L</text><text x="28" y="78">−L</text>
+  <text x="300" y="20">string</text><text x="62" y="108">odd reflection</text>
+</svg>
+<ol type="1">
+<li><em>Odd shapes stay odd.</em> If <span class="math inline">u(x, t)</span> solves the wave equation on the loop, so does <span class="math inline">-u(-x, t)</span>, since two derivatives in <span class="math inline">x</span> do not change sign under <span class="math inline">x \mapsto -x</span>. Starting from an odd shape at rest, both are the same solution by uniqueness, so the motion stays odd.</li>
+<li><em>Odd shapes on the loop are exactly string shapes.</em> An odd periodic shape vanishes at <span class="math inline">0</span>, because <span class="math inline">u(0) = -u(0)</span>, and at <span class="math inline">L</span>, because <span class="math inline">u(L) = u(-L) = -u(L)</span>. Conversely every string shape extends this way.</li>
+<li><em>So the string’s eigenfunctions are the loop’s odd eigenfunctions.</em> On a loop of circumference <span class="math inline">2L</span> the eigenfunctions are <span class="math inline">\cos(n\pi x/L)</span> and <span class="math inline">\sin(n\pi x/L)</span> with eigenvalues <span class="math inline">(n\pi/L)^2</span>. The odd ones are the sines. Each eigenvalue keeps one of its two eigenfunctions, which is why the multiplicity drops from 2 to 1.</li>
+</ol>
+<p>The <em>sine series</em> of a string shape, <span class="math inline">u = \sum_n b_n\sin(n\pi x/L)</span>, is therefore the Fourier series of its odd extension, and everything proved on the circle page carries over. The same trick with an even reflection, <span class="math inline">u(-x) = u(x)</span>, gives the cosines and the condition <span class="math inline">u'(0) = u'(L) = 0</span>; the next page combines both reflections for air in a tube.</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>The same result from beads with the ends tied <span class="needs">uses matrices, as on page 2</span>
+</summary>
+<p>Put <span class="math inline">N</span> beads of mass <span class="math inline">m</span>, spaced <span class="math inline">h</span> apart, on a thread of tension <span class="math inline">T</span>, with both ends tied, so <span class="math inline">u_0 = u_{N+1} = 0</span>. The force on bead <span class="math inline">j</span> is the one derived on the <a href="../../posts/instruments-as-operators/ring.html">ring page</a>, so <span class="math inline">m\ddot u_j = \frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})</span>. The matrix is now the ring’s matrix without its two corner entries: <span class="math display">
+K = \begin{pmatrix} 2 &amp; -1 &amp; &amp; \\ -1 &amp; 2 &amp; \ddots &amp; \\ &amp; \ddots &amp; \ddots &amp; -1\\ &amp; &amp; -1 &amp; 2 \end{pmatrix}.
+</span> Its eigenvectors are <span class="math inline">v_j = \sin\big(n\pi j/(N+1)\big)</span>, the sampled sines, with eigenvalues <span class="math inline">4\sin^2\big(n\pi/(2(N+1))\big)</span> for <span class="math inline">n = 1, \dots, N</span>. To check: <span class="math inline">\sin(\alpha(j+1)) + \sin(\alpha(j-1)) = 2\cos\alpha\,\sin(\alpha j)</span>, so <span class="math inline">(Kv)_j = (2 - 2\cos\alpha)\,v_j = 4\sin^2(\alpha/2)\,v_j</span> with <span class="math inline">\alpha = n\pi/(N+1)</span>, and the tied ends hold because <span class="math inline">\sin 0 = \sin n\pi = 0</span>. As on the ring, letting <span class="math inline">N \to \infty</span> with <span class="math inline">L = (N+1)h</span> and <span class="math inline">\mu = m/h</span> fixed gives the wave equation and the frequencies <span class="math inline">f_n = \frac{n}{2L}\sqrt{T/\mu}</span>.</p>
+</details>
+</div>
 </section>
-<section id="what-the-bow-does" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-bow-does">What the bow does</h2>
-<p>The bow grips the string and drags it along (stick) until the string’s tension tears it free and it flies back (slip). Helmholtz watched this through a vibration microscope and described the result in 1863: the string becomes two straight segments joined by one sharp corner, and the corner races around a lens-shaped path, once per period. In modal terms that shape is <span class="math display">
-u(x,t) = \sum_{n\ge1} \frac{A}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(n\omega_1 t).
-</span></p>
-<p>The motion repeats exactly every period, so its spectrum sits exactly on <span class="math inline">n f_1</span>, and the force on the bridge falls off like <span class="math inline">1/n</span>. A real string is slightly stiff and its own frequencies run a little sharp (<a href="../../posts/instruments-as-operators/piano.html">Part 4</a>); the stick–slip cycle locks every partial to the period anyway. A pluck, by contrast, lets each mode ring freely at its own frequency and decay.</p>
+<section id="the-finger-and-the-still-points" class="level2">
+<h2 class="anchored" data-anchor-id="the-finger-and-the-still-points">The finger and the still points</h2>
+<p>Let the finger touch the string at the distance <span class="math inline">s</span> from the <a href="../../posts/instruments-as-operators/glossary.html#bridge">nut</a>, and write <span class="math inline">X_n(x) = \sin(n\pi x/L)</span> for the shape of mode <span class="math inline">n</span>. A light touch is a soft contact that soaks up energy: it barely changes the modes, but it drains each one in proportion to how much that mode moves under the finger, roughly <span class="math inline">X_n(s)^2</span>. The <a href="../../posts/instruments-as-operators/piano.html">piano page</a> derives this rule for the piano’s felt dampers; for a finger it is a rough guide, not an exact law. The modes that survive are the ones with a <a href="../../posts/instruments-as-operators/glossary.html#node">node</a>, a point that never moves, right under the finger: <span class="math inline">\sin(n\pi s/L) = 0</span>, which means <span class="math inline">ns/L</span> is a whole number. At the middle, <span class="math inline">s = L/2</span>, the surviving modes are the even ones, at <span class="math inline">2f_1, 4f_1, 6f_1, \dots</span>: a note with fundamental <span class="math inline">2f_1</span>, an octave up. At <span class="math inline">s = L/3</span> they are <span class="math inline">n = 3, 6, 9, \dots</span>, with fundamental <span class="math inline">3f_1</span>: an octave (a factor 2) and a fifth (a factor 3/2) up, since <span class="math inline">2 \times 3/2 = 3</span>. Pressing the string down firmly is different, as described under <em>Fingers</em> below.</p>
+</section>
+<section id="where-you-pluck" class="level2">
+<h2 class="anchored" data-anchor-id="where-you-pluck">Where you pluck</h2>
+<p>By the circle page, every shape of the string is a sum <span class="math inline">\sum_n b_n\sin(n\pi x/L)</span> of its modes, and <span class="math inline">b_n</span> says how much of mode <span class="math inline">n</span> the shape contains. A string pulled aside a distance <span class="math inline">d</span> at a point <span class="math inline">x_p</span> from one end, and let go, starts as a triangle. With <span class="math inline">x_p</span> measured from the nut, where <span class="math inline">x = 0</span>, its sine coefficients are <span class="math display">
+b_n = \frac{2dL^2}{\pi^2 x_p(L - x_p)}\cdot\frac{\sin(n\pi x_p/L)}{n^2}.
+</span> Measuring <span class="math inline">x_p</span> from the bridge instead only flips the sign of every second <span class="math inline">b_n</span>, since <span class="math inline">\sin(n\pi(L - x_p)/L) = \pm\sin(n\pi x_p/L)</span>, and signs do not change how loud a mode is; from here on <span class="math inline">x_p</span> is the distance from the bridge. What reaches your ear is driven by the force on the bridge, which is proportional to the string’s slope there and so to <span class="math inline">n\,b_n</span> for mode <span class="math inline">n</span>. Near the bridge, <span class="math inline">x_p</span> small, <span class="math inline">\sin(n\pi x_p/L) \approx n\pi x_p/L</span> for the first several modes, so <span class="math inline">n b_n</span> hardly falls off at all: the high modes are strong and the sound is bright. At the middle, <span class="math inline">\sin(n\pi/2)</span> is zero for every even <span class="math inline">n</span>, and the rest have <span class="math inline">n b_n</span> falling like <span class="math inline">1/n</span>: a mellower, hollow sound.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>The sine coefficients of a plucked string <span class="needs">uses integration by parts</span>
+</summary>
+<p>Take <span class="math inline">L = 1</span> and write <span class="math inline">q = x_p</span>. The starting shape is <span class="math inline">u_0(x) = dx/q</span> for <span class="math inline">0 \le x \le q</span> and <span class="math inline">u_0(x) = d(1 - x)/(1 - q)</span> for <span class="math inline">q \le x \le 1</span>. Its sine coefficients are <span class="math inline">b_n = 2\int_0^1 u_0(x)\sin(n\pi x)\,dx</span>, by the perpendicularity of the sines, which the first fold above inherits from the <a href="../../posts/instruments-as-operators/circle.html">circle page</a>. Integrate by parts twice on each straight piece. Since <span class="math inline">u_0</span> vanishes at both ends and <span class="math inline">u_0'' = 0</span> on each piece, the only term left comes from the jump in slope at the corner, from <span class="math inline">d/q</span> just left of it to <span class="math inline">-d/(1-q)</span> just right of it: <span class="math inline">b_n = \frac{2}{n^2\pi^2}\big(\tfrac{d}{q} + \tfrac{d}{1-q}\big)\sin(n\pi q) = \frac{2d\sin(n\pi q)}{n^2\pi^2 q(1-q)}</span>. The <span class="math inline">1/n^2</span> comes from that single corner.</p>
+</details>
+</div>
+<p><strong>Fingers.</strong> The <em>nut</em> is the end of the string near the tuning pegs, and an <em>open</em> string is one not pressed down by a finger. A finger pressed firmly onto the fingerboard makes a new tied end, and the piece between the finger and the bridge sounds on its own. With the finger at distance <span class="math inline">s</span> from the nut, the vibrating length shrinks to <span class="math inline">L - s</span>, so the pitch rises by the factor <span class="math inline">L/(L - s)</span>. In <a href="../../posts/instruments-as-operators/glossary.html#equal-temperament">equal temperament</a> the twelve semitones of an octave are equal ratios of frequency, so each is <span class="math inline">2^{1/12}</span>, and <span class="math inline">k</span> semitones are <span class="math inline">2^{k/12}</span>. Solving <span class="math inline">L/(L - s) = 2^{k/12}</span> gives <span class="math inline">s_k = (1 - 2^{-k/12})L</span>: the semitone positions bunch together toward the bridge.</p>
+<p><strong>The bow.</strong> The bow grips the string and drags it along until the string’s pull tears it free; it slips back, and is gripped again. Hermann von Helmholtz watched it with a <em>vibration microscope</em>, whose lens rides on a vibrating tuning fork, so that a bright speck on the string traces a pattern revealing its motion, and reported it in 1860 and in his 1863 book: the string forms two straight pieces joined by one sharp corner, and the corner races back and forth between the bridge and the finger, once per period. This is called <a href="../../posts/instruments-as-operators/glossary.html#helmholtz-motion">Helmholtz motion</a>. Its expansion in the string’s eigenfunctions is, for some overall size <span class="math inline">a</span>, <span class="math display">
+u(x,t) = \sum_{n\ge1} \frac{a}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(2\pi n f_1 t).
+</span> Where this comes from: at each moment the string is two straight pieces, like a plucked string, with the corner at some point <span class="math inline">x_c</span>. Helmholtz showed that the corner’s height is proportional to <span class="math inline">x_c(L - x_c)</span>, so it traces two arcs of a parabola, the lens in the demo, and that the corner moves at the wave speed <span class="math inline">c = 2Lf_1</span>. Put that height in place of <span class="math inline">d</span> in the pluck formula above: the factor <span class="math inline">x_c(L - x_c)</span> cancels and <span class="math inline">b_n \propto \sin(n\pi x_c/L)/n^2</span>. With <span class="math inline">x_c = 2Lf_1t</span> this is <span class="math inline">\sin(2\pi nf_1t)/n^2</span>; on the way back the corner runs along the lower arc, and the same formula covers it: for <span class="math inline">x_c</span> between <span class="math inline">L</span> and <span class="math inline">2L</span>, <span class="math inline">\sin(n\pi x_c/L)</span> describes a corner at <span class="math inline">2L - x_c</span> with negative height. The motion repeats exactly every <span class="math inline">1/f_1</span> seconds, so its partials sit exactly on <span class="math inline">nf_1</span>. The force on the bridge is proportional to the string’s slope there, and the slope of <span class="math inline">\sin(n\pi x/L)</span> carries an extra factor <span class="math inline">n\pi/L</span>, so partial <span class="math inline">n</span> pushes the bridge with strength proportional to <span class="math inline">1/n</span>. On an ideal string a pluck also gives exact multiples of <span class="math inline">f_1</span>. The difference shows on a real string, which is slightly stiff, so its own frequencies run a little sharp of the whole numbers (page 7): plucked, each mode rings at its own slightly sharp frequency and fades; bowed, the stick and slip lock the whole motion into exact repetition. That locking is a property of the bow’s friction, which is not linear, and is observed rather than derived here.</p>
 <div class="ins">
 <div class="panel">
     <canvas id="helm" style="height:180px" aria-label="Slow-motion string shape"></canvas>
     <div class="controls"><button id="hBow" aria-pressed="true">Bowed</button><button id="hPluck" aria-pressed="false">Plucked at 1/4</button></div>
     <svg class="spec" id="vSpec" viewbox="0 0 320 110" aria-label="Partials of the bridge force"></svg>
-    <p class="cap">Slowed about 500 times. The faint lens is the envelope the corner traces. Stems: partials of the bridge force.</p>
+    <p class="cap">Slowed about 500 times. The faint lens-shaped outline is the path the corner traces. Stems: partials of the bridge force.</p>
   </div>
 </div>
+<p><strong>The body.</strong> The string itself moves very little air. It rocks the bridge, the bridge shakes the wooden body, and the body moves the air. Each step is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a>, and a linear system shaken at one frequency responds at that same frequency, only scaled and delayed. So the body can make each partial louder or quieter but can never move it to another frequency. Toggle the wooden body in the first demo: the stems change height and stay where they are.</p>
 </section>
-<section id="the-body" class="level2">
-<h2 class="anchored" data-anchor-id="the-body">The body</h2>
-<p>The string barely moves any air. It rocks the bridge, which drives the wooden body, which radiates. Each link is linear, so it can change how loud each partial is but never move one. Toggle the body above while playing: the stems change height and stay put.</p>
-<p><a href="../../posts/instruments-as-operators/foundations.html">← Part 0, foundations</a> · <a href="../../posts/instruments-as-operators/clarinet.html">Part 2, the clarinet →</a></p>
+<section id="what-we-found" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
+<p>A <a href="../../posts/instruments-as-operators/glossary.html#boundary-condition">boundary condition</a>, the rule for what the ends of the string may do, is part of the operator. Tying the ends down keeps the circle’s operator but keeps only half of its eigenfunctions, the sines, so the frequencies are still exactly whole-number multiples. A light touch drains every mode that moves under the finger, so only the modes that already have a still point there survive.</p>
+<p>The supports used in the rest of the series:</p>
+<table class="table-striped caption-top table">
+<caption>Boundary conditions in this series. The bar conditions are explained on the kalimba page, and the tube conditions on the next page.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Support</th>
+<th style="text-align: left;">What it forbids</th>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: left;">Where</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">tied end</td>
+<td style="text-align: left;">moving</td>
+<td style="text-align: left;"><span class="math inline">u = 0</span></td>
+<td style="text-align: left;">violin, piano (approximately)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/glossary.html#cantilever">clamp</a></td>
+<td style="text-align: left;">moving and tilting</td>
+<td style="text-align: left;"><span class="math inline">u = 0,\ u' = 0</span></td>
+<td style="text-align: left;">kalimba tine, harmonica reed at the rivet</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">free tip</td>
+<td style="text-align: left;">nothing: no bending moment (the turning effect that bends a bar) and no shear force (the sideways force across a cut) acts there</td>
+<td style="text-align: left;"><span class="math inline">u'' = 0,\ u''' = 0</span></td>
+<td style="text-align: left;">kalimba tine, harmonica reed at the tip</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">open end of a tube</td>
+<td style="text-align: left;">pressure different from the room’s</td>
+<td style="text-align: left;"><span class="math inline">p = 0</span></td>
+<td style="text-align: left;">flute, clarinet bell</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">nearly closed end of a tube</td>
+<td style="text-align: left;">air moving</td>
+<td style="text-align: left;"><span class="math inline">p_x = 0</span></td>
+<td style="text-align: left;">clarinet at the reed</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rim of a drum</td>
+<td style="text-align: left;">moving</td>
+<td style="text-align: left;"><span class="math inline">u = 0</span> on the rim</td>
+<td style="text-align: left;">drum</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-next-puzzle" class="level2">
+<h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
+<p>A flute and a clarinet are both tubes of air, and about the same length. Yet the clarinet’s lowest note is almost an octave below the flute’s, and when the players overblow, making the tube jump to its next mode, the flute jumps up an octave while the clarinet jumps an octave and a fifth. The same operator governs the air in both. What is different?</p>
+<p><em>On the core path?</em> Skip ahead to <a href="../../posts/instruments-as-operators/drum.html">8 · The drum</a>.</p>
+<p><a href="../../posts/instruments-as-operators/circle.html">← The circle</a> · <a href="../../posts/instruments-as-operators/clarinet.html">Next: an air column →</a></p>
+<div class="refs">
+<p><strong>References.</strong> N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998: chapter 2 (strings) and chapter 10 (bowed strings). J. Wolfe, <a href="https://newt.phys.unsw.edu.au/jw/Bows.html">The bowed string</a> and <a href="https://www.phys.unsw.edu.au/jw/violintro.html">Violin acoustics: an introduction</a>, UNSW. H. Helmholtz, “On the motion of the strings of a violin”, <em>Proceedings of the Philosophical Society of Glasgow</em> 5 (1860–64), 17–21, read 19 December 1860 (<a href="https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5">archive.org</a>). H. von Helmholtz, <em>On the Sensations of Tone</em>, 1863 (English translation by A. J. Ellis, 1875). The four body resonances in the demo are rough illustrative values, not measured from a particular violin: Wolfe gives the air resonance at about 300 Hz and notes that the bridge passes vibration to the body well from about 1 to 4 kHz.</p>
+</div>
 <script src="core.js"></script>
 <script>
 (function () {
@@ -386,6 +524,69 @@ u(x,t) = \sum_{n\ge1} \frac{A}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(n\omega_1 t).
   vspec(); playSpec(196);
   function loop(now) { drawFiddle(now); drawHelm(now); requestAnimationFrame(loop); }
   requestAnimationFrame(loop);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, F1 = 196, NM = 24, G = 45, touch = 0, pluckP = 0.16, t0 = -1e9, amps = [], gam = [];
+  var cv = document.getElementById("tCanvas"), ctx = cv.getContext("2d");
+  function setup() {
+    amps = []; gam = [];
+    for (var n = 1; n <= NM; n++) {
+      amps.push(Math.sin(n * Math.PI * pluckP) / (n * n));
+      var g = 0.6 + 0.02 * n * n, x = touch ? Math.sin(n * Math.PI * touch) : 0;
+      gam.push(g + G * x * x);
+    }
+  }
+  function survivors() { if (!touch) return null; var out = []; for (var n = 1; n <= 12; n++) if (Math.abs(Math.sin(n * Math.PI * touch)) < 1e-6) out.push(n); return out; }
+  var NAMES = { 2: "an octave up", 3: "an octave and a fifth up", 4: "two octaves up", 5: "two octaves and a major third up" };
+  function read() {
+    document.getElementById("tPo").textContent = pluckP.toFixed(2) + " of the length";
+    var sv = survivors(), txt;
+    if (!sv) txt = "open string: every mode sounds, lowest " + F1 + " Hz";
+    else txt = "only modes with a still point under the finger survive: n = " + sv.slice(0, 4).join(", ") + ", … · you hear <b>" + (sv[0] * F1) + " Hz</b>, " + NAMES[sv[0]];
+    document.getElementById("tRead").innerHTML = txt + " · plucked " + (pluckP < 0.12 ? "near the bridge: bright" : pluckP > 0.4 ? "near the middle: mellow, even modes weak" : "between bridge and middle");
+    var parts = amps.map(function (a, i) { return { ratio: i + 1, amp: Math.abs(a) * Math.exp(-gam[i] * 0.25) }; });
+    C.stems(document.getElementById("tSpec"), parts, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3 });
+  }
+  function pluck() {
+    setup(); read(); t0 = performance.now();
+    C.play(C.render(amps.map(function (a, i) { return { f: F1 * (i + 1), amp: a, tau: 1 / gam[i] }; }), 3), 0.8);
+  }
+  function draw(now) {
+    var d = C.fit(cv), W = cv.width, H = cv.height, L = 18 * d, R = W - 18 * d, y0 = H * 0.5, A = H * 0.32, t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(L - 4 * d, y0 - 22 * d, 4 * d, 44 * d); ctx.fillRect(R, y0 - 22 * d, 4 * d, 44 * d);
+    var norm = 0; amps.forEach(function (a) { norm += Math.abs(a); }); norm = norm || 1;
+    ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = 2 * d; ctx.beginPath();
+    for (var i = 0; i <= 300; i++) {
+      var x = i / 300, u = 0;
+      if (t >= 0 && t < 6) for (var n = 1; n <= NM; n++) u += amps[n - 1] * Math.exp(-gam[n - 1] * t) * Math.sin(n * Math.PI * x) * Math.cos(2 * Math.PI * n * 0.9 * t);
+      var px = L + (R - L) * x, py = y0 - A * u / norm * 2.2; if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+    }
+    ctx.stroke();
+    var pxp = L + (R - L) * (1 - pluckP);
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace"; ctx.fillText("pluck", pxp - 14 * d, H - 6 * d);
+    ctx.beginPath(); ctx.moveTo(pxp, H - 18 * d); ctx.lineTo(pxp, H - 26 * d); ctx.strokeStyle = C.rgb("--muted"); ctx.lineWidth = d; ctx.stroke();
+    if (touch) {
+      var fx = L + (R - L) * touch;
+      ctx.fillStyle = C.rgb("--pos"); ctx.beginPath(); ctx.ellipse(fx, y0 - 16 * d, 7 * d, 11 * d, 0, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText("finger", fx - 18 * d, 14 * d);
+    }
+    requestAnimationFrame(draw);
+  }
+  document.querySelectorAll("[data-touch]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      touch = parseFloat(b.getAttribute("data-touch"));
+      document.querySelectorAll("[data-touch]").forEach(function (c) { c.setAttribute("aria-pressed", c === b); });
+      pluck();
+    });
+  });
+  var ps = document.getElementById("tP"); ps.addEventListener("input", function () { pluckP = parseFloat(ps.value); setup(); read(); });
+  document.getElementById("tPluck").addEventListener("click", pluck);
+  C.onTheme(read);
+  setup(); read(); requestAnimationFrame(draw);
 })();
 </script>
 

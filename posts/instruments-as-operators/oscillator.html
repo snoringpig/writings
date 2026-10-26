@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1 · One mass on a spring – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">1 · One mass on a spring</h1>
+<p class="subtitle lead">Instruments as Operators</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 25, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav">
+<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <strong>1 Oscillator</strong>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p><strong>Builds on</strong> nothing. About 5 minutes, plus 2 for the folded proof.</p>
+</div>
+<div class="puzzle">
+<p><strong>The puzzle.</strong> Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note barely changes pitch. Why doesn’t a smaller vibration go slower?</p>
+</div>
+<p>Start with the simplest thing that vibrates: a mass on a spring. Pull it down and let go, and it bobs at a steady rate, faster with a stiffer spring and slower with a heavier mass. Now change how far you pull it. It travels further, but each bob takes exactly as long.</p>
+<div class="ins">
+<div class="panel">
+  <canvas id="oCanvas" style="height:200px" aria-label="A mass on a spring bobbing"></canvas>
+  <div class="slider"><label for="oK" style="min-width:9rem">Stiffness k</label><input type="range" id="oK" min="10" max="200" step="1" value="40"><output id="oKo"></output></div>
+  <div class="slider"><label for="oM" style="min-width:9rem">Mass m</label><input type="range" id="oM" min="0.1" max="2" step="0.05" value="1"><output id="oMo"></output></div>
+  <div class="slider"><label for="oA" style="min-width:9rem">How far you pull</label><input type="range" id="oA" min="0.1" max="1" step="0.05" value="0.6"><output id="oAo"></output></div>
+  <div class="controls"><button id="oPlay" class="primary">Hear it, 200 times faster</button></div>
+  <div class="readout" id="oRead"></div>
+  <p class="cap">The animation runs in real time. A real mass on a spring bobs a few times a second, too slowly to hear, so the sound plays the same motion 200 times faster.</p>
+</div>
+</div>
+<section id="why-the-size-of-the-swing-doesnt-matter" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-size-of-the-swing-doesnt-matter">Why the size of the swing doesn’t matter</h2>
+<p>A spring pulled a distance <span class="math inline">x</span> from its resting position (for a hanging spring, the position where the spring’s pull balances gravity) pulls back with force <span class="math inline">-kx</span>: this is <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke’s law</a>, and the constant <span class="math inline">k</span> is the spring’s stiffness. Newton’s second law says force equals mass times acceleration, so <span class="math display">
+m\,\ddot x = -k\,x, \qquad\text{that is}\qquad \ddot x = -\lambda\,x \quad\text{with}\quad \lambda = k/m .
+</span> Here <span class="math inline">\ddot x</span> means the second derivative of position with respect to time, the acceleration. Try a steady oscillation <span class="math inline">x = A\cos(\omega t + \phi)</span>. Differentiating twice gives <span class="math inline">\ddot x = -\omega^2 x</span>, so it solves the equation exactly when <span class="math inline">\omega^2 = \lambda</span>. The number <span class="math inline">\omega</span> is the <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a>, in radians per second. The cosine repeats each time <span class="math inline">\omega t</span> grows by <span class="math inline">2\pi</span>, so one cycle takes <span class="math inline">2\pi/\omega</span> seconds, and the motion repeats <span class="math inline">f = \omega/2\pi</span> times a second: <span class="math display">
+f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
+</span> The amplitude <span class="math inline">A</span> and the starting phase <span class="math inline">\phi</span> are free: they record how you started the motion, and they do not appear in <span class="math inline">f</span>. A real string also loses energy, which this model leaves out. Adding a friction force proportional to the velocity, <span class="math inline">-2m\gamma\,\dot x</span>, gives <span class="math inline">x = Ae^{-\gamma t}\cos(\omega_d t + \phi)</span> with <span class="math inline">\omega_d = \sqrt{k/m - \gamma^2}</span>, as long as the friction is light (<span class="math inline">\gamma^2 &lt; k/m</span>); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, <span class="math inline">\omega_d</span>, still does not depend on <span class="math inline">A</span>.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude <span class="needs">uses the uniqueness of solutions of a differential equation</span>
+</summary>
+<p><em>Every solution is <span class="math inline">A\cos(\omega t + \phi)</span>.</em> The equation <span class="math inline">\ddot x = -\lambda x</span> is linear: sums and multiples of solutions are solutions. A solution is determined by its starting position <span class="math inline">x(0)</span> and starting velocity <span class="math inline">\dot x(0)</span>; this is the uniqueness theorem for <a href="https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem">ordinary differential equations</a>. The functions <span class="math inline">\cos\omega t</span> and <span class="math inline">\sin\omega t</span>, with <span class="math inline">\omega = \sqrt\lambda</span>, are solutions with starting data <span class="math inline">(1, 0)</span> and <span class="math inline">(0, \omega)</span>. So the solution with data <span class="math inline">(x_0, v_0)</span> is <span class="math inline">x_0\cos\omega t + (v_0/\omega)\sin\omega t</span>. By the formula <span class="math inline">\cos(\omega t + \phi) = \cos\omega t\cos\phi - \sin\omega t\sin\phi</span>, this equals <span class="math inline">A\cos(\omega t + \phi)</span> with <span class="math inline">A = \sqrt{x_0^2 + (v_0/\omega)^2}</span>, <span class="math inline">\cos\phi = x_0/A</span> and <span class="math inline">\sin\phi = -v_0/(\omega A)</span>.</p>
+<p><em>Amplitude cannot change the pitch.</em> If <span class="math inline">x(t)</span> is a solution, so is <span class="math inline">2x(t)</span>, by linearity, and it has the same period. Real springs stop obeying Hooke’s law when stretched far; then the equation is no longer linear and the frequency does depend on amplitude (<a href="https://en.wikipedia.org/wiki/Anharmonicity">anharmonicity</a>). Strings show a small version of this: a hard pluck stretches the string, raising its tension, so the note starts slightly sharp and settles as it fades. For the gentle vibrations of most playing, the linear law holds well.</p>
+</details>
+</div>
+</section>
+<section id="the-operator-in-its-smallest-form" class="level2">
+<h2 class="anchored" data-anchor-id="the-operator-in-its-smallest-form">The operator, in its smallest form</h2>
+<p>Write the equation as <span class="math inline">\ddot x = -\lambda x</span>. The restoring force per unit mass is <span class="math inline">-\lambda x</span>: multiply the displacement by <span class="math inline">\lambda</span> and reverse its direction. We call the rule “multiply by <span class="math inline">\lambda</span>” the operator, and keep the minus sign in the equation. The one allowed angular frequency is <span class="math inline">\omega = \sqrt\lambda</span>.</p>
+<p>On the next page the single displacement <span class="math inline">x</span> becomes a list of displacements, one per bead, and the number <span class="math inline">\lambda</span> becomes a table of numbers, a matrix. Later it becomes a rule acting on whole shapes, a differential <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>. The pattern never changes: <strong>the allowed angular frequencies <span class="math inline">\omega = 2\pi f</span> are the square roots of the operator’s <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a></strong>, the numbers by which it rescales its special shapes. The next page defines them properly; for one mass there is one eigenvalue, the number <span class="math inline">\lambda = k/m</span> itself.</p>
+</section>
+<section id="what-we-found" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
+<p>Newton’s law, with a restoring force proportional to the displacement, allows exactly one frequency. It is set by the stiffness and the mass, not by how far the mass swings, and that is why a fading note keeps its pitch, to a very good approximation.</p>
+</section>
+<section id="the-next-puzzle" class="level2">
+<h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
+<p>One mass gives one frequency. A note has many, all sounding at once. Where do the others come from? Add more masses, and let them pull on one another.</p>
+<p><a href="../../posts/instruments-as-operators/note.html">← What is a note?</a> · <a href="../../posts/instruments-as-operators/ring.html">Next: beads on a ring →</a></p>
+<div class="refs">
+<p><strong>References.</strong> Wikipedia, <a href="https://en.wikipedia.org/wiki/Simple_harmonic_motion">Simple harmonic motion</a> and <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke’s law</a>. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 1.</p>
+</div>
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, cv = document.getElementById("oCanvas"), ctx = cv.getContext("2d");
+  var k = 40, m = 1, A = 0.6, t0 = performance.now();
+  function f() { return Math.sqrt(k / m) / (2 * Math.PI); }
+  function read() {
+    document.getElementById("oKo").textContent = k.toFixed(0) + " N/m";
+    document.getElementById("oMo").textContent = m.toFixed(2) + " kg";
+    document.getElementById("oAo").textContent = (A * 10).toFixed(1) + " cm";
+    document.getElementById("oRead").innerHTML = "f = (1/2&pi;)&radic;(k/m) = <b>" + f().toFixed(2) + " Hz</b> · one bob every <b>" + (1 / f()).toFixed(2) + " s</b>, however far you pull";
+  }
+  [["oK", function (v) { k = v; }], ["oM", function (v) { m = v; }], ["oA", function (v) { A = v; }]].forEach(function (p) {
+    var el = document.getElementById(p[0]); el.addEventListener("input", function () { p[1](parseFloat(el.value)); read(); });
+  });
+  function fadeOut(b, s) { var dd = b.getChannelData(0), n = Math.floor(s * b.sampleRate); for (var i = 0; i < n; i++) dd[dd.length - 1 - i] *= i / n; return b; }
+  document.getElementById("oPlay").addEventListener("click", function () { C.play(fadeOut(C.render([{ f: 200 * f(), amp: 1, tau: 1.2 }], 1.8), 0.2), 0.7); });
+  function draw(now) {
+    var d = C.fit(cv), W = cv.width, H = cv.height, t = (now - t0) / 1000;
+    var x = A * Math.cos(2 * Math.PI * f() * t), top = 14 * d, rest = H * 0.55, y = rest + x * H * 0.32, bw = 60 * d, bh = 36 * d, cx = W / 2;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(cx - 70 * d, top - 6 * d, 140 * d, 6 * d);
+    ctx.strokeStyle = C.rgb("--muted"); ctx.lineWidth = 2 * d; ctx.beginPath(); ctx.moveTo(cx, top);
+    var coils = 12, len = y - bh / 2 - top;
+    for (var i = 1; i <= coils; i++) ctx.lineTo(cx + (i % 2 ? 14 : -14) * d, top + len * (i - 0.5) / coils);
+    ctx.lineTo(cx, y - bh / 2); ctx.stroke();
+    ctx.fillStyle = C.rgb("--accent"); ctx.fillRect(cx - bw / 2, y - bh / 2, bw, bh);
+    ctx.strokeStyle = C.rgb("--grid"); ctx.setLineDash([4 * d, 4 * d]); ctx.beginPath(); ctx.moveTo(cx - 90 * d, rest); ctx.lineTo(cx + 90 * d, rest); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (12 * d) + "px 'IBM Plex Mono', monospace"; ctx.fillText("rest", cx + 96 * d, rest + 4 * d);
+    requestAnimationFrame(draw);
+  }
+  read(); requestAnimationFrame(draw);
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6b · The harmonica – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">6b · The harmonica</h1>
+<p class="subtitle lead">Same operator, blown · Instruments as Operators</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 25, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav">
+<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <strong>6b Harmonica</strong>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p><strong>Builds on</strong> <a href="../../posts/instruments-as-operators/kalimba.html">page 6</a> for the reed’s operator, and <a href="../../posts/instruments-as-operators/note.html">page 0</a>: a sound that repeats has only whole-number partials. About 9 minutes, plus 5 for the folds.</p>
+</div>
+<div class="puzzle">
+<p><strong>The puzzle.</strong> A harmonica reed is a little brass bar, fixed at one end and free at the other, like a kalimba tine, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck it and you hear them. Blow it and they are gone: the note becomes perfectly harmonic. Where did they go?</p>
+</div>
+<p>Pluck the reed, then blow it, and compare the stems with the gray whole-number grid.</p>
+<div class="ins">
+<div class="panel">
+    <div class="controls"><button id="pluckR">Pluck the C5 reed</button><button id="blowR" class="primary">Blow the C5 reed</button></div>
+    <svg class="spec" id="hSpec" viewbox="0 0 320 110" aria-label="Partials of the plucked or blown reed"></svg>
+    <p class="cap" id="hCap">Same operator, same boundary conditions, same reed. Only the excitation differs. (C5 is the C an octave above middle C.)</p>
+  </div>
+</div>
+<p>And here is a whole chromatic harmonica to play.</p>
+<style>
+.harp { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3px; background: #8e96a3; padding: 6px; border-radius: 10px; user-select: none; -webkit-user-select: none; touch-action: none; }
+.harp .cell { display: grid; grid-template-rows: auto 1fr 1fr; gap: 3px; min-width: 0; }
+.harp .num { font-family: var(--f-mono); font-size: 10px; color: #f4f5f2; text-align: center; }
+.harp button { padding: 0; min-height: 3.2rem; min-width: 0; border-radius: 4px; font-family: var(--f-mono); font-size: 11px; border: 0; color: #1d2230; }
+.harp button.blow { background: #f4f1e8; }
+.harp button.draw { background: #dfe3ea; }
+.harp button.on { background: var(--accent); color: #fff; }
+.harp-legend { display: flex; justify-content: space-between; font-family: var(--f-ui); font-size: 0.8rem; color: var(--muted); padding: 0 0.25rem; }
+#slide.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+</style>
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <div class="harp-legend"><span>blow, breathing out (top row: keys 1 … =)</span><span>draw, breathing in (bottom row: keys Q … ])</span></div>
+  <div class="harp" id="harp" aria-label="Twelve-hole chromatic harmonica in C"></div>
+  <div class="controls" style="padding:0.6rem 0.25rem 0">
+    <button id="slide">Slide (hold, or Space)</button>
+    <span class="readout" id="hRead">Press and hold a hole. Slide across holes to move between notes.</span>
+  </div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Twelve holes in solo tuning (explained at the bottom of the page), from C4, middle C, up three octaves. Pushing the slide raises every note a semitone, by switching the air to a second set of reeds.</p>
+</section>
+</div>
+<div class="family">
+<p><strong>Same operator as the kalimba.</strong> Accordion, concertina and harmonium reeds are <a href="../../posts/instruments-as-operators/glossary.html#free-reed">free reeds</a> too: they swing freely through a slot, unlike a clarinet’s reed, which beats against the mouthpiece. All of them are cantilevers like the kalimba’s tine: same operator, same ends, smaller and thinner, usually of brass in harmonicas and harmoniums and of steel in accordions and concertinas. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.</p>
+</div>
+<section id="the-reed-is-a-valve" class="level2">
+<h2 class="anchored" data-anchor-id="the-reed-is-a-valve">The reed is a valve</h2>
+<p><strong>The operator.</strong> A reed is riveted at one end and free at the other, so everything derived on the <a href="../../posts/instruments-as-operators/kalimba.html">kalimba page</a> applies unchanged: <span class="math display">
+u_{tt} = -\kappa^2 u_{xxxx}, \qquad u = u_x = 0 \text{ at the rivet}, \qquad u_{xx} = u_{xxx} = 0 \text{ at the tip}.
+</span> The mode frequencies are in the ratios <span class="math inline">1 : 6.27 : 17.55</span>. For a rectangular reed of width <span class="math inline">w</span> and thickness <span class="math inline">h</span>, <span class="math inline">I = wh^3/12</span> and the cross-section area is <span class="math inline">S = wh</span>, so <span class="math inline">\kappa^2 = EI/(\rho S) = Eh^2/(12\rho)</span>. With <span class="math inline">\beta_1 = 1.8751/L</span> and <span class="math inline">\omega = \kappa\beta^2</span> from the kalimba page, the lowest frequency <span class="math inline">f_1 = \omega_1/2\pi</span> is <span class="math display">
+f_1 = \frac{(1.8751)^2}{2\pi}\cdot\frac{h}{L^2}\sqrt{\frac{E}{12\rho}} .
+</span> Low reeds are long, high reeds are short. The width cancels, so it affects how much air the reed moves, not its pitch.</p>
+<p><strong>Plucked versus blown.</strong> Pluck a reed and it rings like a kalimba tine: you hear its own modes at 1, 6.27 and 17.55 times the fundamental, with the overtones dying almost at once. Blow it and the reed swings through its slot, opening and closing the air path. The sound comes mainly from the chopped airflow; Pykett notes that very little sound comes from the reed’s own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency <span class="math inline">f_p</span> slightly below its first mode’s frequency <span class="math inline">f_1</span>, so the pattern of airflow repeats at that rate too. Why does it lock? A plausible picture, not a derivation: the airflow feeds energy mainly into the first mode, while the reed’s other modes are not sustained at their own frequencies, so the motion settles into one repeating cycle; in that cycle the other modes move only as they are driven, at whole-number multiples of <span class="math inline">f_p</span>. A <a href="../../posts/instruments-as-operators/glossary.html#periodic">periodic</a> signal has partials only at whole-number multiples of its repetition rate, so the blown note is harmonic, with strong odd and even partials (Pykett), even though the reed’s own overtones are not. The harmonics come from the valve action, the slot being open for only part of each cycle, not from the reed’s modes.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Why it works</span>A steady puff train has whole-number partials <span class="needs">uses Fourier series (page 3)</span>
+</summary>
+<p>Let <span class="math inline">q(t)</span> be the airflow through the slot. Once the blown reed has settled into its steady oscillation, the opening, and so <span class="math inline">q</span>, repeats every <span class="math inline">P = 1/f_p</span> seconds: <span class="math inline">q(t + P) = q(t)</span>. A steady oscillation kept going by a steady push, like this one, is called a <a href="../../posts/instruments-as-operators/glossary.html#self-sustained">self-sustained oscillation</a>, and the repeating cycle it settles into a <em>limit cycle</em>; the bowed string and the clarinet reed are others. That it settles into one is observed, and reproduced by nonlinear models of reeds; it is not derived here. By the <a href="../../posts/instruments-as-operators/circle.html">circle page</a>, a periodic function of period <span class="math inline">P</span> is a Fourier series in <span class="math inline">\cos(2\pi nt/P)</span> and <span class="math inline">\sin(2\pi nt/P)</span>, so it contains only the frequencies <span class="math inline">n f_p</span>. How strong each one is depends on the shape of a single puff: short, sharp puffs give strong high partials. The argument uses only that the motion repeats, not which modes make it up, which is why the reed’s own overtone frequencies, 6.27 and 17.55 times <span class="math inline">f_1</span>, do not appear.</p>
+<p>The demo’s sound is a model: one puff shape, chosen so that the open part of each cycle is short, repeated at the playing frequency, then passed through two broad peaks, a stand-in for resonances of the player’s mouth and the instrument. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.</p>
+</details>
+</div>
+<p>The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a periodic oscillation. On those instruments the operator’s own frequencies are already nearly whole-number multiples, so the excitation and the operator agree, and locking is easy. A free reed’s are not, which lets you hear that the excitation, not the operator, sets the overtones.</p>
+<p><strong>Tuning a reed with a file.</strong> Reed makers tune by scraping metal off, and where they scrape decides the direction. The <a href="../../posts/instruments-as-operators/glossary.html#rayleigh-quotient">Rayleigh quotient</a> explains why. For the first mode, <span class="math display">
+\omega_1^2 = \min_{u} \frac{\int_0^L EI\,(u'')^2\,dx}{\int_0^L \rho S\,u^2\,dx},
+</span> the minimum taken over shapes, not identically zero, that satisfy the conditions at the rivet; the minimizing shape is the first mode itself. This is <span class="math inline">\omega^2 = k/m</span> from page 1 again: stiffness on top, weighted by where the reed bends, and mass at the bottom, weighted by where it moves. The first mode is the shape that makes this ratio as small as possible. The first mode bends most near the rivet and moves most near the tip. Thinning the reed near the rivet removes stiffness where it counts and lowers the pitch; thinning it near the tip removes mass where it counts and raises it.</p>
+<div class="ins">
+<div class="panel">
+    <div class="slider"><label for="fx">Where to file</label><input type="range" id="fx" min="0.02" max="0.98" step="0.01" value="0.1"><output id="fxo">base</output></div>
+    <div class="readout" id="fRead"></div>
+    <div class="controls"><button id="fPlay" class="primary">Blow the filed reed</button><button id="fOrig">Blow the original</button></div>
+    <p class="cap">Filing removes 25% of the thickness over about a tenth of the reed. The pitch change uses the unfiled mode shape in the Rayleigh quotient, which is accurate when the filing is shallow.</p>
+  </div>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>The effect of a little filing <span class="needs">uses integration by parts and a first-order approximation</span>
+</summary>
+<ol type="1">
+<li><em>The quotient.</em> Multiply <span class="math inline">\rho S\,\omega^2X = (EI\,X'')''</span> by <span class="math inline">X</span> and integrate by parts twice; the boundary terms vanish at the rivet and at the free tip, as on the kalimba page. This gives <span class="math inline">\omega^2 = \int EI(X'')^2 / \int \rho S X^2</span> for every mode.</li>
+<li><em>Small change.</em> File the reed so that its thickness changes by <span class="math inline">\delta h(x) &lt; 0</span>. Then <span class="math inline">I \propto h^3</span> changes by <span class="math inline">\delta(EI) = 3EI\,\delta h/h</span>, and <span class="math inline">S \propto h</span> changes by <span class="math inline">\delta(\rho S) = \rho S\,\delta h/h</span>, to <a href="../../posts/instruments-as-operators/glossary.html#first-order">first order</a>, that is, ignoring terms in <span class="math inline">(\delta h)^2</span>.</li>
+<li><em>First order.</em> Because the first mode minimizes the quotient, changing the shape slightly changes the quotient only by an amount proportional to the square of the change. So to first order one may keep the old mode shape <span class="math inline">X</span> and change only the coefficients: <span class="math display">
+\delta(\omega^2) = \frac{\int \frac{\delta h}{h}\,\big(3EI\,(X'')^2 - \omega^2\rho S\,X^2\big)\,dx}{\int \rho S\,X^2\,dx}.
+</span></li>
+<li><em>Sign.</em> Near the rivet <span class="math inline">X \approx 0</span> and <span class="math inline">X''</span> is largest, so the bracket is positive and, with <span class="math inline">\delta h &lt; 0</span>, <span class="math inline">\omega</span> drops. Near the tip <span class="math inline">X'' = 0</span> and <span class="math inline">X</span> is largest, so the bracket is negative and <span class="math inline">\omega</span> rises. In between there is a point where filing changes nothing, to first order.</li>
+</ol>
+<p>The demo uses the full quotient with the original mode shape, which is accurate to first order in the depth of filing.</p>
+</details>
+</div>
+<p><strong>The chromatic slide.</strong> A chromatic harmonica has two sets of reed chambers, the second tuned a <a href="../../posts/instruments-as-operators/glossary.html#semitone">semitone</a> higher. Each hole has a blow reed, sounded by breathing out, and a <a href="../../posts/instruments-as-operators/glossary.html#draw">draw</a> reed, sounded by breathing in, in each set. Pushing the slide moves a perforated bar that closes one set and opens the other, so every note rises a semitone. In <em>solo tuning</em>, the usual layout for a chromatic harmonica, each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw.</p>
+</section>
+<section id="what-we-found" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
+<p>The operator decides which frequencies an object can vibrate at; the way it is driven decides what you hear. A harmonica reed has the kalimba’s operator and its scattered overtones, but blowing makes it a valve that chops the air into a regular train of puffs, and a regular train has exactly whole-number partials.</p>
+</section>
+<section id="the-next-puzzle" class="level2">
+<h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
+<p>Piano tuners don’t tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with <a href="../../posts/instruments-as-operators/glossary.html#equal-temperament">equal temperament</a>, the textbook tuning. Why would exact sound wrong?</p>
+<p><a href="../../posts/instruments-as-operators/kalimba.html">← The kalimba</a> · <a href="../../posts/instruments-as-operators/piano.html">Next: the piano →</a></p>
+<div class="refs">
+<p><strong>References.</strong> C. Pykett, <a href="https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm">The physics of free reeds</a>, 2023. J. Cottingham, <a href="https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments">Acoustics of free-reed instruments</a>, <em>Physics Today</em> 64(3), 2011. Wikipedia, <a href="https://en.wikipedia.org/wiki/Free_reed_aerophone">Free reed aerophone</a> and <a href="https://en.wikipedia.org/wiki/Rayleigh_quotient">Rayleigh quotient</a>.</p>
+</div>
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  // solo tuning in C: [blow, draw] MIDI notes for holes 1..12
+  var HOLES = [];
+  for (var o = 0; o < 3; o++) {
+    var c = 60 + 12 * o;
+    HOLES.push([c, c + 2], [c + 4, c + 5], [c + 7, c + 9], [c + 12, c + 11]);
+  }
+  var BLOWC = ["Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal"];
+  var DRAWC = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight"];
+  var slide = false, cur = null, voice = null, wave = null;
+  var harp = document.getElementById("harp"), cells = [];
+  function label(k) { return C.noteName(C.mtof(k)).name.replace(/\d+$/, ""); }
+  HOLES.forEach(function (h, i) {
+    var cell = document.createElement("div"); cell.className = "cell";
+    var num = document.createElement("span"); num.className = "num"; num.textContent = i + 1;
+    var b = document.createElement("button"); b.type = "button"; b.className = "blow"; b.dataset.hole = i; b.dataset.dir = 0;
+    var d = document.createElement("button"); d.type = "button"; d.className = "draw"; d.dataset.hole = i; d.dataset.dir = 1;
+    cell.appendChild(num); cell.appendChild(b); cell.appendChild(d); harp.appendChild(cell); cells.push([b, d]);
+  });
+  function relabel() { HOLES.forEach(function (h, i) { cells[i][0].textContent = label(h[0] + (slide ? 1 : 0)); cells[i][1].textContent = label(h[1] + (slide ? 1 : 0)); }); }
+  function note(c) { return HOLES[c.hole][c.dir] + (slide ? 1 : 0); }
+  function getWave(a) { if (!wave) wave = C.wave(a, C.models.harmonica.partials()); return wave; }
+  // A harmonica voice: the reed's puff train (rich in odd and even harmonics), shaped by the resonances of the reed
+  // chamber and the player's mouth, plus a little breath noise. The resonance and noise settings are by ear, not measured.
+  var noiseBuf = null;
+  function noise(a) {
+    if (!noiseBuf) { noiseBuf = a.createBuffer(1, a.sampleRate * 2, a.sampleRate); var d = noiseBuf.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+    var n = a.createBufferSource(); n.buffer = noiseBuf; n.loop = true; return n;
+  }
+  function sound(c) {
+    var a = C.ac(), f = C.mtof(note(c)), t = a.currentTime;
+    if (!voice) {
+      var osc = a.createOscillator(), g = a.createGain(), out = a.createGain();
+      osc.setPeriodicWave(getWave(a)); osc.frequency.value = f;
+      var f1 = a.createBiquadFilter(); f1.type = "peaking"; f1.frequency.value = 1300; f1.Q.value = 1.4; f1.gain.value = 7;
+      var f2 = a.createBiquadFilter(); f2.type = "peaking"; f2.frequency.value = 2900; f2.Q.value = 1.8; f2.gain.value = 5;
+      var lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 7000; lp.Q.value = 0.5;
+      var hp = a.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 180;
+      osc.connect(f1); f1.connect(f2); f2.connect(lp); lp.connect(hp); hp.connect(g);
+      var nz = noise(a), nb = a.createBiquadFilter(), ng = a.createGain();
+      nb.type = "bandpass"; nb.frequency.value = 2200; nb.Q.value = 0.8; ng.gain.value = 0.035;
+      nz.connect(nb); nb.connect(ng); ng.connect(g);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.32, t + 0.025); g.gain.setTargetAtTime(0.26, t + 0.025, 0.08);
+      g.connect(out); out.gain.value = 1; out.connect(C.out); osc.start(); nz.start();
+      voice = { osc: osc, g: g, nz: nz };
+    } else voice.osc.frequency.setTargetAtTime(f, t, 0.004);
+    var nn = C.noteName(f);
+    document.getElementById("hRead").innerHTML = "hole <b>" + (c.hole + 1) + "</b> " + (c.dir ? "draw" : "blow") + (slide ? " + slide" : "") + " · <b>" + nn.name + "</b> · " + f.toFixed(1) + " Hz";
+  }
+  function silence() { if (!voice) return; var t = C.ac().currentTime; voice.g.gain.cancelScheduledValues(t); voice.g.gain.setTargetAtTime(0, t, 0.03); voice.osc.stop(t + 0.3); voice.nz.stop(t + 0.3); voice = null; }
+  function light(c, on) { if (c) cells[c.hole][c.dir].classList.toggle("on", on); }
+  function set(c) { light(cur, false); cur = c; if (c) { light(c, true); sound(c); } else silence(); }
+  function at(e) { var el = document.elementFromPoint(e.clientX, e.clientY); return el && el.dataset && el.dataset.hole != null ? { hole: +el.dataset.hole, dir: +el.dataset.dir } : null; }
+  var down = false;
+  harp.addEventListener("pointerdown", function (e) { e.preventDefault(); down = true; harp.setPointerCapture(e.pointerId); set(at(e)); });
+  harp.addEventListener("pointermove", function (e) { if (!down) return; var c = at(e); if (c && (!cur || c.hole !== cur.hole || c.dir !== cur.dir)) set(c); });
+  function up() { down = false; set(null); }
+  harp.addEventListener("pointerup", up); harp.addEventListener("pointercancel", up);
+  function setSlide(on) { slide = on; document.getElementById("slide").classList.toggle("on", on); relabel(); if (cur) sound(cur); }
+  var sb = document.getElementById("slide");
+  sb.addEventListener("pointerdown", function (e) { e.preventDefault(); sb.setPointerCapture(e.pointerId); setSlide(true); });
+  sb.addEventListener("pointerup", function () { setSlide(false); }); sb.addEventListener("pointercancel", function () { setSlide(false); });
+  var keyCell = {};
+  // capture phase, so the page claims its keys before the blog's search shortcut sees them
+  function mine(e) { return e.code === "Space" || BLOWC.indexOf(e.code) >= 0 || DRAWC.indexOf(e.code) >= 0; }
+  window.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT") || !mine(e)) return;
+    e.preventDefault(); e.stopPropagation(); if (e.repeat) return;
+    if (e.code === "Space") { setSlide(true); return; }
+    var i = BLOWC.indexOf(e.code), dir = 0; if (i < 0) { i = DRAWC.indexOf(e.code); dir = 1; }
+    keyCell[e.code] = true; set({ hole: i, dir: dir });
+  }, true);
+  window.addEventListener("keyup", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT") || !mine(e)) return;
+    e.preventDefault(); e.stopPropagation();
+    if (e.code === "Space") { setSlide(false); return; }
+    if (keyCell[e.code]) { delete keyCell[e.code]; set(null); }
+  }, true);
+
+  // plucked vs blown
+  var mode = "blow";
+  function hspec() {
+    var p = C.models.harmonica.partials({ plucked: mode === "pluck" });
+    C.stems(document.getElementById("hSpec"), p, { W: 320, H: 110, rmax: 20, fs: 8, sw: 2, labelEvery: 2 });
+  }
+  function fadeOut(b, s) { var d = b.getChannelData(0), n = Math.floor(s * b.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return b; }
+  document.getElementById("pluckR").addEventListener("click", function () { mode = "pluck"; hspec(); C.play(C.render(C.toHz(C.models.harmonica.partials({ plucked: true }), 523.25), 2.0), 0.8); });
+  document.getElementById("blowR").addEventListener("click", function () { mode = "blow"; hspec(); C.play(fadeOut(C.render(C.toHz(C.models.harmonica.partials(), 523.25), 1.6), 0.25), 0.6); });
+
+  // reed filing
+  var fx = document.getElementById("fx"), fxo = document.getElementById("fxo");
+  function ratio() { return C.reedRatio(parseFloat(fx.value), 0.25, 0.06); }
+  function fRead() {
+    var x = parseFloat(fx.value), r = ratio(), cents = 1200 * Math.log2(r);
+    fxo.textContent = x < 0.2 ? "near the clamp" : x > 0.8 ? "near the tip" : (x * 100).toFixed(0) + "% along";
+    document.getElementById("fRead").innerHTML = "pitch change <b>" + (cents >= 0 ? "+" : "") + cents.toFixed(0) + "¢</b> · " + (cents < 0 ? "flatter" : "sharper");
+  }
+  fx.addEventListener("input", fRead);
+  function blowAt(f) { C.play(fadeOut(C.render(C.toHz(C.models.harmonica.partials(), f), 1.3), 0.25), 0.6); }
+  document.getElementById("fPlay").addEventListener("click", function () { blowAt(523.25 * ratio()); });
+  document.getElementById("fOrig").addEventListener("click", function () { blowAt(523.25); });
+
+  C.onTheme(hspec);
+  relabel(); hspec(); fRead();
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
