@@ -35,28 +35,28 @@ resources: [core.js, ins.css]
     <div class="controls" style="margin-top:0.5rem"><button id="nPure">Pure tone</button><button id="nHollow">Hollow, like a clarinet</button></div>
     <div id="nSliders" class="hsliders"></div>
   </details>
-  <p class="cap">The wave over three repetitions; gray ticks mark each repetition, every 1/220 of a second. Stems: how strong each component is, at 1, 2, 3, … times 220 Hz.</p>
+  <p class="cap">The wave over three repetitions; gray ticks mark each repetition, every 1/220 of a second. Stems (the vertical lines): how strong each component is, at 1, 2, 3, … times 220 Hz.</p>
 </div>
 </div>
 ```
 
-Watch the wave while you switch between the two. Removing the 220 Hz component changes the wave's shape, but not how often it repeats: still every 1/220 of a second. That repetition is what you hear as the pitch. The effect is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental), and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
+Watch the wave while you switch between the two. Removing the 220 Hz component changes the wave's shape, but not how often it repeats: still every 1/220 of a second. The components left are at 440, 660, 880, … Hz, and each of them goes through a whole number of cycles in 1/220 of a second (2, 3, 4, …), so together they still repeat after exactly that time. They do not all fit into 1/440 of a second: 660 Hz would need one and a half cycles. That repetition is what you hear as the pitch. The effect is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental), the fundamental being the component at the repetition rate itself, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
 
 ## A note is a pattern that repeats
 
-Sound is air pressure rising and falling. When the pattern repeats every $P$ seconds, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate $f = 1/P$, measured in hertz, repetitions per second. Middle C repeats about 262 times a second.
+Sound is air pressure rising and falling. When the pattern repeats every $P$ seconds, with $P$ the shortest such time, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate $f = 1/P$, measured in hertz, repetitions per second. This holds for repetition rates in the range where we hear pitch, from a few dozen to a few thousand times a second; much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.
 
-Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate. These are its [harmonics](glossary.qmd#harmonic), and the lowest is the [fundamental](glossary.qmd#fundamental). Open "Mix your own" above and try the presets: the wave's shape changes, and so does the sound's color, its [timbre](glossary.qmd#timbre), but as long as the pattern repeats 220 times a second, the pitch stays put.
+A pure tone is a single cosine wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier's theorem, and page 3 shows where it comes from. These tones are its [harmonics](glossary.qmd#harmonic), and the one at the repetition rate itself is the [fundamental](glossary.qmd#fundamental). Open "Mix your own" above and try the presets: the wave's shape changes, and so does the sound's color, its [timbre](glossary.qmd#timbre), but as long as the pattern repeats 220 times a second, the pitch stays put.
 
-In symbols: a pressure signal $p(t)$ is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$. A periodic signal of reasonable regularity is the sum of its [Fourier series](glossary.qmd#fourier-series),
+In symbols: a pressure signal $p(t)$ is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$. Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its [Fourier series](glossary.qmd#fourier-series),
 $$
 p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
 $$
-The frequencies $nf$ are fixed by the period alone. The amplitudes $b_n$ and the phases $\phi_n$ carry everything else about the sound's shape, and the ear is mostly insensitive to the phases.
+The $n = 0$ term is a constant, the average pressure, usually zero. The possible frequencies $nf$ are fixed by the period alone, and a given sound may use only some of them: a pure tone uses only $f$. The amplitudes $b_n$ and the phases $\phi_n$ carry everything else about the sound's shape, and the ear is mostly insensitive to the phases.
 
 ## Why whole numbers matter
 
-Turn it around. If an object vibrates at several frequencies at once, its sound repeats only when those frequencies are whole-number multiples of one common frequency. Two tones repeat together only when their rates are in a simple whole-number ratio. Try it:
+Turn it around. If an object vibrates at several frequencies at once, its sound repeats only when those frequencies are whole-number multiples of one common frequency. For two tones, that means their frequency ratio is a fraction $a/b$ of whole numbers, in lowest terms; the pattern then repeats every $b$ cycles of the lower tone. Only a small $b$ gives a repetition fast enough to hear as one pitch. Try it:
 
 ```{=html}
 <div class="ins">
@@ -65,7 +65,7 @@ Turn it around. If an object vibrates at several frequencies at once, its sound 
   <div class="slider"><label for="ratio">Ratio</label><input type="range" id="ratio" min="1" max="3" step="0.01" value="2"><output id="ratioOut">2.00×</output></div>
   <div class="readout" id="ratioMsg"></div>
   <canvas id="ratioWave" style="height:120px" aria-label="Sum of two tones over six cycles of the lower one"></canvas>
-  <p class="cap">Gray ticks mark cycles of the lower tone. At 2 : 1 the sum repeats every cycle; at 3 : 2 every two; at 1.59 : 1 it never lines up, and you hear no clear pitch.</p>
+  <p class="cap">Gray ticks mark cycles of the lower tone. At 2 : 1 the sum repeats every cycle; at 3 : 2 every two; at 1.59 : 1, which is 159/100, it lines up only after 100 cycles of the lower tone, far too slowly to hear as one pitch.</p>
 </div>
 </div>
 ```
@@ -75,11 +75,11 @@ Turn it around. If an object vibrates at several frequencies at once, its sound 
 
 Let $s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)$ with $0 < f_1 < f_2$.
 
-*If the ratio is rational, $s$ is periodic.* Write $f_2/f_1 = p/q$ in lowest terms and put $P = q/f_1$. Then $f_1P = q$ and $f_2P = p$ are integers, so both cosines return to their starting values after time $P$, and $s(t+P) = s(t)$.
+*If the ratio is rational, $s$ is periodic.* Write $f_2/f_1 = a/b$ in lowest terms and put $P = b/f_1$. Then $f_1P = b$ and $f_2P = a$ are whole numbers, so both cosines return to their starting values after time $P$, and $s(t+P) = s(t)$.
 
-*If $s$ is periodic, the ratio is rational.* Suppose $s(t+P) = s(t)$ for all $t$. Writing each cosine as a sum of two exponentials, this says $\sum c_k e^{2\pi i \nu_k t}(e^{2\pi i\nu_k P} - 1) = 0$ for all $t$, with the four distinct frequencies $\nu_k = \pm f_1, \pm f_2$ and nonzero $c_k$. Exponentials with distinct frequencies are linearly independent, so every bracket vanishes: $f_1P$ and $f_2P$ are integers, and $f_2/f_1 = (f_2P)/(f_1P)$ is rational.
+*If $s$ is periodic, the ratio is rational.* Suppose $s(t+P) = s(t)$ for all $t$, with $P > 0$. At $t = 0$ this gives $s(P) = s(0) = 2$. A sum of two cosines equals 2 only when both cosines equal 1, so $\cos(2\pi f_1P) = \cos(2\pi f_2P) = 1$, which means $f_1P$ and $f_2P$ are whole numbers. So $f_2/f_1 = (f_2P)/(f_1P)$ is a ratio of whole numbers. Since $f_2/f_1 = a/b$ in lowest terms, the whole number $f_1P$ must be a multiple of $b$, so every period is a multiple of $b/f_1$, and $b/f_1$ is the shortest one.
 
-The period $P = q/f_1$ grows with the denominator $q$. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as "simple enough" is a question of perception, not mathematics; see [pitch](https://en.wikipedia.org/wiki/Pitch_(music)).
+The shortest period $b/f_1$ grows with the denominator $b$. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as "simple enough" is a question of perception, not mathematics; see [pitch](https://en.wikipedia.org/wiki/Pitch_(music)).
 
 </details>
 :::
@@ -87,7 +87,7 @@ The period $P = q/f_1$ grows with the denominator $q$. A ratio like 1.59 = 159/1
 ::: {.qa}
 <details><summary><span class="label">Reader question</span>Is a musical note one frequency?</summary>
 
-No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is the repetition rate $f = 1/P$. By the Fourier series above it contains $f, 2f, 3f, \dots$ at once. The fundamental sets the pitch and the weights $b_n$ set the timbre: a piano C4 and a violin C4 share $f$ and differ in their $b_n$. Removing the $f$ component does not change the pitch, because the pattern still repeats every $1/f$ seconds. The precise correspondence is between a note and a period.
+No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is the repetition rate $f = 1/P$. By the Fourier series above, its components can only be at $f, 2f, 3f, \dots$, and usually several are present at once. The repetition rate sets the pitch, whether or not a component at $f$ itself is present, and the weights $b_n$ set the timbre: a piano C4 and a violin C4 share $f$ and differ in their $b_n$. So a note corresponds to a period, not to a single frequency.
 
 </details>
 :::

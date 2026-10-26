@@ -18,7 +18,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.puzzle}
-**The puzzle.** A clarinet and a flute are about the same length. Yet the clarinet's lowest note is almost an [octave](glossary.qmd#octave) below the flute's. And when the players overblow, the flute jumps up an octave while the clarinet jumps an octave and a fifth. The same equation governs the air in both tubes. What is different?
+**The puzzle.** A clarinet and a flute are about the same length. Yet the clarinet's lowest note is almost an [octave](glossary.qmd#octave) below the flute's. And when the players [overblow](glossary.qmd#overblow), making the tube jump to its next mode (a flutist by blowing faster, a clarinetist by pressing the [register key](glossary.qmd#overblow)), the flute jumps up an octave while the clarinet jumps an [octave and a fifth](glossary.qmd#octave). The same equation governs the air in both tubes. What is different?
 :::
 
 Play a fingering on the clarinet, then switch the same tube to a flute, open at both ends, and play it again. Then hold the register key, which makes the tube jump to its next mode, on each.
@@ -42,7 +42,7 @@ Play a fingering on the clarinet, then switch the same tube to a flute, open at 
   <div class="controls" style="padding:0.5rem 0.25rem 0" id="fing" role="group" aria-label="Fingerings"></div>
   <div class="readout" id="cRead" style="padding:0.5rem 0.25rem 0"></div>
   <svg class="spec" id="cSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the sound"></svg>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Tap holes or pick a fingering, then hold the button (or the space bar; keys 1–7 change fingering). The shading inside the bore is the pressure of the sounding mode: dark at a pressure antinode, pale at a node. The first open hole acts as the end of the tube.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Tap holes or pick a fingering, then hold the button (or the space bar; keys 1–7 change fingering). The shading inside the bore is the pressure of the sounding mode: dark at a pressure <a href="glossary.html#node">antinode</a>, where the pressure swings most, pale at a node, where it stays at room pressure. The first open hole acts as the end of the tube.</p>
 </section>
 </div>
 ```
@@ -57,7 +57,7 @@ Play a fingering on the clarinet, then switch the same tube to a flute, open at 
 $$
 p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
 $$
-where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-modulus), its resistance to being squeezed. The constant $c$ is the speed of sound, about 343 m/s at 20 °C.
+where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-modulus), its resistance to being squeezed (this $K$ has nothing to do with the bead matrix of page 2). The constant $c$ is the speed of sound, about 343 m/s at 20 °C. So the operator is again $-c^2\,d^2/dx^2$, now acting on pressure shapes along the tube.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>Newton's law for a slab of air</summary>
@@ -73,9 +73,9 @@ where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-
 </svg>
 ```
 
-1. Let $\xi(x, t)$ be how far the air that normally sits at $x$ has moved along the tube, and let the tube's cross-section have area $A$.
-2. The slab of air between $x$ and $x + dx$ has mass $\rho A\,dx$. The only force on it along the tube is the pressure difference between its two faces, $A\,[p(x) - p(x + dx)] \approx -A\,p_x\,dx$. Newton's law is $\rho\,\xi_{tt} = -p_x$.
-3. If neighboring air moves apart, the slab is stretched by the fraction $\xi_x$ and its pressure drops in proportion: $p = -K\,\xi_x$. In a sound wave the squeezing is too fast for heat to flow, which is called [adiabatic](glossary.qmd#bulk-modulus); for air this makes $K$ about 1.4 times atmospheric pressure.
+1. Let $\xi(x, t)$ be how far the air that normally sits at $x$ has moved along the tube, and let the tube's cross-section have area $S$.
+2. The slab of air between $x$ and $x + dx$ has mass $\rho S\,dx$. The only force on it along the tube is the pressure difference between its two faces, $S\,[p(x) - p(x + dx)] \approx -S\,p_x\,dx$. Newton's law, mass times acceleration equals force, divided by $S\,dx$, is $\rho\,\xi_{tt} = -p_x$.
+3. The slab's two faces move by $\xi(x)$ and $\xi(x + dx)$, so its length changes by $\xi(x + dx) - \xi(x) \approx \xi_x\,dx$: it is stretched by the fraction $\xi_x$, and its pressure drops in proportion: $p = -K\,\xi_x$. In a sound wave the squeezing is too fast for heat to flow, which is called [adiabatic](glossary.qmd#bulk-modulus); for air this makes $K$ about 1.4 times atmospheric pressure.
 4. Differentiate step 2 in $x$ and step 3 twice in $t$: $\rho\,\xi_{ttx} = -p_{xx}$ and $p_{tt} = -K\,\xi_{xtt}$. Eliminating $\xi$ gives $p_{tt} = (K/\rho)\,p_{xx}$.
 
 What was assumed: the tube is narrow compared with the sound's wavelength, so the pressure is the same across it, and the pressure changes are small. Friction with the walls is left out.
@@ -83,9 +83,9 @@ What was assumed: the tube is narrow compared with the sound's wavelength, so th
 </details>
 :::
 
-**Boundary conditions.** At an open end the air in the tube meets the room, so the pressure there is room pressure: $p = 0$. At the clarinet's reed the opening is nearly shut, so the air there cannot move, $\xi = 0$, and step 2 of the derivation then gives $p_x = 0$. The first of these is the string's Dirichlet condition. The second, a condition on the slope, is called a *Neumann condition*.
+**Boundary conditions.** At an open end the air in the tube meets the room, so the pressure there is room pressure: $p = 0$. This is approximate: the air just outside moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end. At the clarinet's reed the opening is nearly shut, so the air there cannot move back and forth. Air that never moves has no acceleration, so the net push on it is zero; that push is set by how fast the pressure changes along the tube, $p_x$, so $p_x = 0$ there (step 2 of the derivation, with $\xi$ the air's displacement along the tube). The first of these is the string's Dirichlet condition. The second, a condition on the slope, is called a *Neumann condition*.
 
-**Spectrum.** For the clarinet, $p_x(0) = 0$ at the reed leaves $X = \cos kx$, and $p(L) = 0$ at the open end needs $\cos kL = 0$. For the flute, open at both ends, the conditions are the string's, and give $\sin(n\pi x/L)$. So
+**Spectrum.** A mode is a pressure shape $X(x)$ with $-X'' = k^2 X$, so $X = a\cos kx + b\sin kx$, and its frequency is $f = ck/2\pi$. For the clarinet, $X'(0) = bk = 0$ at the reed forces $b = 0$, leaving $X = \cos kx$, and $X(L) = 0$ at the open end needs $\cos kL = 0$, so $kL = (2n - 1)\pi/2$ and $f_n = (2n-1)c/4L$. For the flute, open at both ends, the conditions are the string's, and give $\sin(n\pi x/L)$. So
 
 | | ends | eigenfunctions | frequencies |
 |:--|:--|:--|:--|
@@ -94,15 +94,15 @@ What was assumed: the tube is narrow compared with the sound's wavelength, so th
 
 Two consequences can be heard in the demo.
 
-- **Almost an octave lower.** An octave is a frequency ratio of 2. The same tube sounds $c/4L$ closed at one end but $c/2L$ open at both.
-- **A twelfth, not an octave.** The register key opens a small hole that makes the tube jump to its next mode. For the clarinet that is $3f_1$, a ratio of 3, called a twelfth: an octave and a fifth, where a fifth is the ratio 3/2. For the flute the next mode is $2f_1$, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
+- **An octave lower, almost.** An octave is a frequency ratio of 2. The same ideal tube sounds $c/4L$ closed at one end but $c/2L$ open at both, exactly an octave lower. Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and the end corrections differ, so the real interval comes out a bit less than an octave.
+- **A twelfth, not an octave.** The clarinet's register key opens a small hole near the top of the tube. For the lowest notes it sits close to a point where the $3f_1$ mode has almost no pressure variation. The hole spoils the fundamental, which does have pressure variation there, and barely disturbs the $3f_1$ mode, so the tube jumps to it. That is a ratio of 3, called a twelfth: an octave and a fifth, where a fifth is the ratio 3/2. A flutist overblows without a key, by blowing faster, and the flute's next mode is $2f_1$, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Why only odd harmonics: the closed tube is a quarter of a loop</summary>
 
-Use the reflections from the [string page](violin.qmd). Take a pressure shape $p$ on $[0, L]$ with $p'(0) = 0$ and $p(L) = 0$.
+Use the reflections from the [string page](violin.qmd). Take a pressure shape $p$ on $[0, L]$ with $p_x(0) = 0$ and $p(L) = 0$.
 
-1. Reflect it *evenly* across the reed end, $p(-x) = p(x)$. Even reflection is what the Neumann condition $p'(0) = 0$ allows, so the result is a shape on $[-L, L]$ that vanishes at both ends.
+1. Reflect it *evenly* across the reed end, $p(-x) = p(x)$. A smooth even shape has zero slope at 0, so even reflection is what the Neumann condition $p_x(0) = 0$ allows, so the result is a shape on $[-L, L]$ that vanishes at both ends.
 2. Reflect that *oddly* across $x = L$, $p(2L - x) = -p(x)$, and repeat. The result is a shape on a loop of circumference $4L$.
 3. On that loop the eigenfunctions are $\cos(k\pi x/2L)$ and $\sin(k\pi x/2L)$. Step 1 keeps only cosines. Step 2 needs $\cos\big(k\pi(2L - x)/2L\big) = (-1)^k\cos(k\pi x/2L)$ to equal $-\cos(k\pi x/2L)$, which keeps only odd $k$.
 
@@ -111,11 +111,11 @@ So the clarinet's modes are the odd harmonics of a loop four tube-lengths long, 
 </details>
 :::
 
-**The reed.** The reed is a valve. When the pressure in the mouthpiece drops, it closes, and when the pressure rises, it opens, so the air column, through the pressure it creates, drives the reed that feeds it. The result is a [periodic](glossary.qmd#periodic) oscillation, like the bowed string, so the partials sit exactly on whole-number multiples of $f_1$. In the low register the even harmonics are weak but not absent. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
+**The reed.** The reed is a valve. When the pressure in the mouthpiece drops, it closes, and when the pressure rises, it opens, so the air column, through the pressure it creates, drives the reed that feeds it. In normal playing this settles into a [periodic](glossary.qmd#periodic) oscillation, like the bowed string, at a playing frequency close to the tube's lowest mode. A periodic sound has partials at every whole-number multiple of the playing frequency, so the distinction matters: the tube's *modes* are odd multiples only, but the *sound* contains even harmonics too. In the low register, the lowest notes of the instrument, the even harmonics are weak because the tube has no resonance to support them, but they are not absent. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
 
 ## What we found
 
-The string's operator also governs the air pressure in a tube. Changing the boundary condition at one end, from "pressure equals the room's" to "the air cannot move", removes every even harmonic: a clarinet's spectrum is the odd whole numbers.
+The string's operator also governs the air pressure in a tube. Changing the boundary condition at one end, from "pressure equals the room's" to "the air cannot move", halves the lowest frequency and keeps only its odd multiples: the clarinet's modes are at 1, 3, 5, … times $c/4L$. In the sound, which repeats, the even harmonics are weak rather than gone.
 
 ## The next puzzle
 

@@ -18,7 +18,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.puzzle}
-**The puzzle.** Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note never goes flat. Why doesn't a smaller vibration go slower?
+**The puzzle.** Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note barely changes pitch. Why doesn't a smaller vibration go slower?
 :::
 
 Start with the simplest thing that vibrates: a mass on a spring. Pull it down and let go, and it bobs at a steady rate, faster with a stiffer spring and slower with a heavier mass. Now change how far you pull it. It travels further, but each bob takes exactly as long.
@@ -39,35 +39,35 @@ Start with the simplest thing that vibrates: a mass on a spring. Pull it down an
 
 ## Why the size of the swing doesn't matter
 
-A spring pulled a distance $x$ from rest pulls back with force $-kx$: this is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law), and the constant $k$ is the spring's stiffness. Newton's second law says force equals mass times acceleration, so
+A spring pulled a distance $x$ from its resting position (for a hanging spring, the position where the spring's pull balances gravity) pulls back with force $-kx$: this is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law), and the constant $k$ is the spring's stiffness. Newton's second law says force equals mass times acceleration, so
 $$
 m\,\ddot x = -k\,x, \qquad\text{that is}\qquad \ddot x = -\lambda\,x \quad\text{with}\quad \lambda = k/m .
 $$
-Here $\ddot x$ means the second derivative of position with respect to time, the acceleration. Try a steady oscillation $x = A\cos(\omega t + \phi)$. Differentiating twice gives $\ddot x = -\omega^2 x$, so it solves the equation exactly when $\omega^2 = \lambda$. The motion repeats $f = \omega/2\pi$ times a second:
+Here $\ddot x$ means the second derivative of position with respect to time, the acceleration. Try a steady oscillation $x = A\cos(\omega t + \phi)$. Differentiating twice gives $\ddot x = -\omega^2 x$, so it solves the equation exactly when $\omega^2 = \lambda$. The number $\omega$ is the [angular frequency](glossary.qmd#angular-frequency), in radians per second. The cosine repeats each time $\omega t$ grows by $2\pi$, so one cycle takes $2\pi/\omega$ seconds, and the motion repeats $f = \omega/2\pi$ times a second:
 $$
 f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
 $$
-The amplitude $A$ and the starting phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$.
+The amplitude $A$ and the starting phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$. A real string also loses energy, which this model leaves out. Adding friction proportional to the velocity gives $x = Ae^{-\gamma t}\cos(\omega_d t + \phi)$ with $\omega_d = \sqrt{k/m - \gamma^2}$: the swing shrinks, and its frequency still does not depend on $A$.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude</summary>
 
-*Every solution is $A\cos(\omega t + \phi)$.* The equation $\ddot x = -\lambda x$ is linear: sums and multiples of solutions are solutions. A solution is determined by its starting position $x(0)$ and starting velocity $\dot x(0)$; this is the uniqueness theorem for [ordinary differential equations](https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem). The functions $\cos\omega t$ and $\sin\omega t$, with $\omega = \sqrt\lambda$, are solutions with starting data $(1, 0)$ and $(0, \omega)$. So the solution with data $(x_0, v_0)$ is $x_0\cos\omega t + (v_0/\omega)\sin\omega t$, which can be rewritten as $A\cos(\omega t + \phi)$.
+*Every solution is $A\cos(\omega t + \phi)$.* The equation $\ddot x = -\lambda x$ is linear: sums and multiples of solutions are solutions. A solution is determined by its starting position $x(0)$ and starting velocity $\dot x(0)$; this is the uniqueness theorem for [ordinary differential equations](https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem). The functions $\cos\omega t$ and $\sin\omega t$, with $\omega = \sqrt\lambda$, are solutions with starting data $(1, 0)$ and $(0, \omega)$. So the solution with data $(x_0, v_0)$ is $x_0\cos\omega t + (v_0/\omega)\sin\omega t$. By the formula $\cos(\omega t + \phi) = \cos\omega t\cos\phi - \sin\omega t\sin\phi$, this equals $A\cos(\omega t + \phi)$ with $A = \sqrt{x_0^2 + (v_0/\omega)^2}$, $\cos\phi = x_0/A$ and $\sin\phi = -v_0/(\omega A)$.
 
-*Amplitude cannot change the pitch.* If $x(t)$ is a solution, so is $2x(t)$, by linearity, and it has the same period. Real springs stop obeying Hooke's law when stretched far; then the equation is no longer linear and the frequency does depend on amplitude ([anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity)). Instruments are played in the range where the linear law holds well.
+*Amplitude cannot change the pitch.* If $x(t)$ is a solution, so is $2x(t)$, by linearity, and it has the same period. Real springs stop obeying Hooke's law when stretched far; then the equation is no longer linear and the frequency does depend on amplitude ([anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity)). Strings show a small version of this: a hard pluck stretches the string, raising its tension, so the note starts slightly sharp and settles as it fades. For the gentle vibrations of most playing, the linear law holds well.
 
 </details>
 :::
 
 ## The operator, in its smallest form
 
-Write the equation as $\ddot x = -\lambda x$. The restoring force per unit mass is "multiply the displacement by $\lambda$", and the one allowed frequency is $\omega = \sqrt\lambda$.
+Write the equation as $\ddot x = -\lambda x$. The restoring force per unit mass is $-\lambda x$: multiply the displacement by $\lambda$ and reverse its direction. We call the rule "multiply by $\lambda$" the operator, and keep the minus sign in the equation. The one allowed angular frequency is $\omega = \sqrt\lambda$.
 
-On the next page the single displacement $x$ becomes a list of displacements, one per bead, and the number $\lambda$ becomes a table of numbers, a matrix. Later it becomes a rule acting on whole shapes, a differential [operator](glossary.qmd#operator). The pattern never changes: **the allowed frequencies are the square roots of the operator's [eigenvalues](glossary.qmd#eigenvalue)**. For one mass there is one eigenvalue, $k/m$.
+On the next page the single displacement $x$ becomes a list of displacements, one per bead, and the number $\lambda$ becomes a table of numbers, a matrix. Later it becomes a rule acting on whole shapes, a differential [operator](glossary.qmd#operator). The pattern never changes: **the allowed angular frequencies $\omega = 2\pi f$ are the square roots of the operator's [eigenvalues](glossary.qmd#eigenvalue)**, the numbers by which it rescales its special shapes. The next page defines them properly; for one mass there is one eigenvalue, the number $\lambda = k/m$ itself.
 
 ## What we found
 
-Newton's law, with a restoring force proportional to the displacement, allows exactly one frequency. It is set by the stiffness and the mass, not by how far the mass swings, and that is why a fading note keeps its pitch.
+Newton's law, with a restoring force proportional to the displacement, allows exactly one frequency. It is set by the stiffness and the mass, not by how far the mass swings, and that is why a fading note keeps its pitch, to a very good approximation.
 
 ## The next puzzle
 

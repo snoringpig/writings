@@ -18,10 +18,10 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.puzzle}
-**The puzzle.** Thread beads on a loop of string pulled tight and pluck one of them. The motion looks like a tangle. Yet it is made of a handful of perfectly regular motions, all happening at once. What are they, and how do you find them?
+**The puzzle.** Imagine beads threaded on a loop of string pulled tight, an idealized ring with nothing touching it but the string's own tension, and pluck one of them. The motion looks like a tangle. Yet it is made of a handful of perfectly regular motions, all happening at once. What are they, and how do you find them?
 :::
 
-The demo starts with one bead plucked; watch the tangle. Then press the mode buttons one at a time. In each mode, every bead swings at the same frequency and the overall shape never changes, and the tangle is all of the modes at once. Daniel Bernoulli studied exactly this kind of system, masses joined by springs, in the 1730s and 1740s, and came to believe that every vibration is built from such simple motions.
+The demo starts with one bead plucked; watch the tangle. Then press the mode buttons one at a time. In each mode, every bead swings at the same frequency and the overall shape never changes, and the tangle is all of the modes at once. In the 1730s Daniel Bernoulli studied systems like this, weights strung along a flexible thread and a hanging chain, and came to believe that every vibration is built from such simple motions; in 1753 he put this forward as a general principle.
 
 ```{=html}
 <div class="ins">
@@ -32,7 +32,7 @@ The demo starts with one bead plucked; watch the tangle. Then press the mode but
   <div class="controls"><button id="rPluck">Pluck one bead</button><button id="rPlay" class="primary">Hear this motion</button></div>
   <svg class="spec" id="rSpec" viewBox="0 0 320 100" style="max-width:520px" aria-label="Frequencies of the modes relative to the lowest"></svg>
   <div class="readout" id="rRead"></div>
-  <p class="cap">Displacements are drawn in and out of the circle so you can see them; on a real ring the beads move up and down, out of the page. Mode k is a wave that fits k times around the ring. Stems: frequencies of the modes as multiples of the lowest, with height showing how much of each mode the current motion contains.</p>
+  <p class="cap">Displacements are drawn in and out of the circle so you can see them; on a real ring the beads move up and down, out of the page. Mode k is a wave that fits k times around the ring. Stems (the vertical lines): frequencies of the modes as multiples of mode 1's frequency, with height showing how much of each mode the current motion contains.</p>
 </div>
 </div>
 ```
@@ -60,7 +60,7 @@ $$
 ```
 
 1. The string between beads $j$ and $j+1$ pulls bead $j$ along itself with force $T$.
-2. Its slope is $(u_{j+1} - u_j)/h$. For small slopes the vertical part of the pull is $T\sin\theta \approx T\tan\theta = T(u_{j+1} - u_j)/h$.
+2. Its slope is $(u_{j+1} - u_j)/h$. Let $\theta$ be the angle that piece of string makes with the horizontal. For small slopes the vertical part of the pull is $T\sin\theta \approx T\tan\theta = T(u_{j+1} - u_j)/h$.
 3. The string on the other side contributes $T(u_{j-1} - u_j)/h$.
 4. Adding the two and applying Newton's law gives the equation above. The bracket $u_{j+1} - 2u_j + u_{j-1}$ is twice the gap between the average of the neighbors and bead $j$ itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up.
 
@@ -73,30 +73,38 @@ The assumptions are small slopes and a tension that does not change as the strin
 $$
 K = \begin{pmatrix} 2 & -1 & 0 & 0 & -1\\ -1 & 2 & -1 & 0 & 0\\ 0 & -1 & 2 & -1 & 0\\ 0 & 0 & -1 & 2 & -1\\ -1 & 0 & 0 & -1 & 2 \end{pmatrix}.
 $$
-Each row is the row above shifted one place to the right, wrapping around. A matrix with this property is called [circulant](https://en.wikipedia.org/wiki/Circulant_matrix).
+Here $Ku$ is the column whose $j$-th entry is row $j$ of $K$ times $u$: multiply each entry of row $j$ by the matching entry of $u$, and add. Row $j$ has 2 in place $j$ and $-1$ in places $j - 1$ and $j + 1$, so $(Ku)_j = 2u_j - u_{j-1} - u_{j+1}$, and the matrix equation is the bead equation for every bead at once. Each row of $K$ is the row above shifted one place to the right, wrapping around; a matrix with this property is called [circulant](glossary.qmd#circulant).
 
-**Eigenvectors and eigenvalues.** A nonzero column $v$ is an eigenvector of $K$, with eigenvalue $\lambda$, if $Kv = \lambda v$: the matrix only stretches it. The set of all eigenvalues is the [spectrum](glossary.qmd#spectrum) of $K$.
+**Eigenvectors and eigenvalues.** A nonzero column $v$ is an [eigenvector](glossary.qmd#eigenvector) of $K$, with eigenvalue $\lambda$, if $Kv = \lambda v$: the matrix only rescales it, possibly by zero. The set of all eigenvalues is the [spectrum](glossary.qmd#spectrum) of $K$.
 
-**Modes.** If $Kv = \lambda v$, then $u(t) = v\cos(\omega t)$ is a motion of the beads, provided $\omega^2 = \frac{T}{mh}\lambda$. To check, differentiate twice: $\ddot u = -\omega^2 v\cos\omega t$, while $-\frac{T}{mh}Ku = -\frac{T}{mh}\lambda v\cos\omega t$. Every bead swings at the same frequency $\omega$, in the fixed shape $v$. This is the mass on a spring again, once for each eigenvector.
+**Modes.** If $Kv = \lambda v$, then $u(t) = v\cos(\omega t)$ is a motion of the beads, provided $\omega^2 = \frac{T}{mh}\lambda$. To check, differentiate twice: $\ddot u = -\omega^2 v\cos\omega t$, while $-\frac{T}{mh}Ku = -\frac{T}{mh}\lambda v\cos\omega t$. Every bead swings at the same angular frequency $\omega$ (radians per second; page 1), in the fixed shape $v$. This is the mass on a spring again, once for each eigenvector.
 
 **A small example, three beads.** For $N = 3$,
 $$
 K = \begin{pmatrix} 2 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 2 \end{pmatrix}.
 $$
-The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$, so it is an eigenvector with eigenvalue 0. Every bead moves up together, nothing stretches, and nothing pulls back. Any column whose entries add up to zero, such as $(1, -1, 0)$ or $(1, 1, -2)$, gives $Kv = 3v$. So the spectrum is $\{0, 3, 3\}$: two genuinely different shapes share one frequency. That eigenvalue has *multiplicity* 2.
+Row $j$ of this $K$ gives $(Kv)_j = 3v_j - (v_1 + v_2 + v_3)$. The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$, so it is an eigenvector with eigenvalue 0: every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts. Any column whose entries add up to zero gives $(Kv)_j = 3v_j$, so $Kv = 3v$. Every such column is a combination $a(1, -1, 0) + b(0, 1, -1)$, so these eigenvectors fill a whole plane, spanned by two independent shapes. The eigenvalues are $0, 3, 3$, with 3 counted twice: it has [multiplicity](glossary.qmd#multiplicity) 2.
 
-**Any number of beads.** Try the column $v_j = e^{2\pi i jk/N}$, a wave that winds $k$ times around the ring. Then
+**Any number of beads.** Try the column $v_j = \cos(2\pi jk/N)$, a wave with $k$ crests around the ring. The identity $\cos(a + b) + \cos(a - b) = 2\cos a\cos b$, with $a = 2\pi jk/N$ and $b = 2\pi k/N$, gives $v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j$, so
 $$
-(Kv)_j = 2v_j - v_{j+1} - v_{j-1} = \big(2 - e^{2\pi ik/N} - e^{-2\pi ik/N}\big)\,v_j = 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j .
+(Kv)_j = 2v_j - v_{j+1} - v_{j-1} = \big(2 - 2\cos(2\pi k/N)\big)\,v_j = 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j ,
 $$
-So these waves are the eigenvectors, for $k = 0, 1, \dots, N-1$, and the spectrum is $\{4\sin^2(\pi k/N)\}$. Their real and imaginary parts, $\cos(2\pi jk/N)$ and $\sin(2\pi jk/N)$, are the shapes the mode buttons play. These are precisely the basis vectors of the [discrete Fourier transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform): the Fourier transform is what turns a ring of coupled beads into independent oscillators. Waves winding $k$ and $N-k$ times have the same eigenvalue, one traveling each way around the ring, which is why most eigenvalues come in pairs.
-
-**Not quite whole numbers.** The frequencies are proportional to $\sin(\pi k/N)$, which is not proportional to $k$, so the beads are not exactly harmonic. For small $k$, $\sin(\pi k/N) \approx \pi k/N$, and the low modes are nearly harmonic; raise $N$ in the demo and watch the stems approach the integer grid.
+using $1 - \cos 2x = 2\sin^2 x$. The same holds for $v_j = \sin(2\pi jk/N)$. These are the shapes the mode buttons play, and the eigenvalues are $4\sin^2(\pi k/N)$. At the beads, a wave with $N - k$ crests looks exactly like one with $k$ crests (the cosine is the same and the sine changes sign), so the different eigenvalues come from $k = 0, 1, \dots, \lfloor N/2\rfloor$, and each one from $k = 1$ up to just below $N/2$ has two eigenvectors, a cosine and a sine. Writing any motion as a sum of these waves splits it into separate masses on springs, one per wave; that splitting is the [discrete Fourier transform](glossary.qmd#dft).
 
 ::: {.derive}
-<details><summary><span class="label">Proof</span>Every motion is a sum of modes</summary>
+<details><summary><span class="label">Complex form</span>The same waves as $e^{2\pi i jk/N}$ <span class="needs">uses complex numbers</span></summary>
 
-The matrix $K$ is symmetric: the entry in row $i$, column $j$ equals the entry in row $j$, column $i$. By the [spectral theorem for symmetric matrices](https://en.wikipedia.org/wiki/Spectral_theorem), $K$ has $N$ mutually orthogonal eigenvectors $v^{(1)}, \dots, v^{(N)}$ with real eigenvalues $\lambda_1, \dots, \lambda_N \ge 0$. Write any starting shape as $u(0) = \sum_k c_k v^{(k)}$ and any starting velocity as $\dot u(0) = \sum_k d_k v^{(k)}$. Each coefficient obeys its own mass-on-a-spring equation, so the motion is $u(t) = \sum_k \big(c_k\cos\omega_k t + \frac{d_k}{\omega_k}\sin\omega_k t\big)v^{(k)}$, read as $c_k + d_k t$ when $\omega_k = 0$. The eigenvalues are nonnegative because $u^{\mathsf T}Ku = \sum_j (u_{j+1} - u_j)^2 \ge 0$.
+With Euler's formula $e^{ix} = \cos x + i\sin x$, the cosine and sine waves combine into $v_j = e^{2\pi i jk/N}$ for $k = 0, 1, \dots, N - 1$ (here $i$ is the imaginary unit and $j$ the bead number). Then $(Kv)_j = \big(2 - e^{2\pi ik/N} - e^{-2\pi ik/N}\big)v_j = 4\sin^2(\pi k/N)\,v_j$ in one line. These $N$ waves are the basis vectors of the discrete Fourier transform, and they are eigenvectors of every circulant matrix, not only this one. Combined with the time factor $e^{\mp i\omega t}$, the waves with $k$ and $N - k$ crests travel around the ring in opposite directions.
+
+</details>
+:::
+
+**Not quite whole numbers.** The frequencies are proportional to $\sin(\pi k/N)$, which is not proportional to $k$, so the beads are not exactly harmonic. For small $k$, $\sin(\pi k/N) \approx \pi k/N$, so the low modes are nearly harmonic: raise $N$ in the demo and watch the low stems approach the whole-number grid. The modes near $k = N/2$ stay far from it.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Every motion is a sum of modes <span class="needs">uses linear algebra</span></summary>
+
+The matrix $K$ is symmetric: the entry in row $i$, column $j$ equals the entry in row $j$, column $i$. By the [spectral theorem for symmetric matrices](https://en.wikipedia.org/wiki/Spectral_theorem), $K$ has a basis of $N$ mutually orthogonal (perpendicular) eigenvectors $v^{(1)}, \dots, v^{(N)}$ with real eigenvalues $\lambda_1, \dots, \lambda_N$. Write the motion as $u(t) = \sum_k a_k(t)\,v^{(k)}$. Substituting into $\ddot u = -\frac{T}{mh}Ku$ and taking the dot product with $v^{(k)}$, which removes every other term because they are perpendicular, gives $\ddot a_k = -\omega_k^2 a_k$ with $\omega_k^2 = \frac{T}{mh}\lambda_k$: each coefficient obeys its own mass-on-a-spring equation. With starting shape $u(0) = \sum_k c_k v^{(k)}$ and starting velocity $\dot u(0) = \sum_k d_k v^{(k)}$, and by the uniqueness of solutions from page 1, every motion is $u(t) = \sum_k \big(c_k\cos\omega_k t + \frac{d_k}{\omega_k}\sin\omega_k t\big)v^{(k)}$, read as $c_k + d_k t$ when $\omega_k = 0$. The eigenvalues are nonnegative because $u \cdot Ku = \sum_j u_j(2u_j - u_{j+1} - u_{j-1}) = \sum_j (u_{j+1} - u_j)^2 \ge 0$, by regrouping the terms around the ring; for an eigenvector this equals $\lambda\,(u\cdot u)$.
 
 </details>
 :::
@@ -107,12 +115,12 @@ Many coupled masses move in a few special shapes, called [modes](glossary.qmd#mo
 
 ## The next puzzle
 
-The beads' frequencies are almost whole-number multiples of the lowest, and they get closer as you add beads. What happens with infinitely many, a continuous loop of string? Do the frequencies become exactly whole numbers? And can every shape of the loop be built from these waves?
+The low frequencies of the beads are almost whole-number multiples of the lowest, and they get closer as you add beads. What happens with infinitely many, a continuous loop of string? Do the frequencies become exactly whole numbers? And can every shape of the loop be built from these waves?
 
 [← One mass on a spring](oscillator.qmd) · [Next: the circle →](circle.qmd)
 
 ::: {.refs}
-**References.** Wikipedia, [Circulant matrix](https://en.wikipedia.org/wiki/Circulant_matrix), [Discrete Fourier transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform), [Normal mode](https://en.wikipedia.org/wiki/Normal_mode) and [Spectral theorem](https://en.wikipedia.org/wiki/Spectral_theorem).
+**References.** J. O. Smith, [Daniel Bernoulli's modal decomposition](https://ccrma.stanford.edu/~jos/sasp/Daniel_Bernoulli_s_Modal_Decomposition.html), CCRMA, Stanford. D. D. Nolte, [The ups and downs of the compound double pendulum](https://galileo-unbound.blog/2020/10/18/the-ups-and-downs-of-the-compound-double-pendulum/), Galileo Unbound, 2020 (Bernoulli's 1733 work and the 1753 statement). Wikipedia, [Circulant matrix](https://en.wikipedia.org/wiki/Circulant_matrix), [Discrete Fourier transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform), [Normal mode](https://en.wikipedia.org/wiki/Normal_mode) and [Spectral theorem](https://en.wikipedia.org/wiki/Spectral_theorem).
 :::
 
 ```{=html}

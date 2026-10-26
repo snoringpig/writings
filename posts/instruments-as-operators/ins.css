@@ -92,3 +92,14 @@
 .ins .pcard .b { font-size: 0.93rem; color: var(--muted); }
 .ins .pcard .controls { margin-top: auto; }
 .ins .pcard .go { font-family: var(--f-ui); font-size: 0.86rem; color: var(--muted); }
+/* figures in the main text, same look as in the folds */
+svg.fig { display: block; width: 100%; max-width: 420px; height: auto; margin: 0.5rem auto 0.75rem; }
+svg.fig text { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; fill: var(--ink); }
+svg.fig .ink { stroke: var(--ink); fill: none; stroke-width: 1.6; }
+svg.fig .acc { stroke: var(--accent); fill: none; stroke-width: 2; }
+svg.fig .pos { stroke: var(--pos); fill: none; stroke-width: 2; }
+svg.fig .neg { stroke: var(--neg); fill: none; stroke-width: 2; }
+svg.fig .dash { stroke: var(--muted); fill: none; stroke-width: 1; stroke-dasharray: 4 3; }
+svg.fig .fillacc { fill: var(--accent); } svg.fig .fillpos { fill: var(--pos); } svg.fig .fillneg { fill: var(--neg); }
+svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
+.needs { font-family: var(--f-ui); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; padding: 0 0.45rem; margin-left: 0.35rem; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }

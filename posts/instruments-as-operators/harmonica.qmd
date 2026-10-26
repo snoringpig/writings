@@ -28,7 +28,7 @@ Pluck the reed, then blow it, and compare the stems with the gray whole-number g
 <div class="panel">
     <div class="controls"><button id="pluckR">Pluck the C5 reed</button><button id="blowR" class="primary">Blow the C5 reed</button></div>
     <svg class="spec" id="hSpec" viewBox="0 0 320 110" aria-label="Partials of the plucked or blown reed"></svg>
-    <p class="cap" id="hCap">Same operator, same boundary conditions, same reed. Only the excitation differs.</p>
+    <p class="cap" id="hCap">Same operator, same boundary conditions, same reed. Only the excitation differs. (C5 is the C an octave above middle C.)</p>
   </div>
 </div>
 ```
@@ -52,19 +52,19 @@ And here is a whole chromatic harmonica to play.
 ```{=html}
 <div class="ins">
 <section class="instrument" aria-labelledby="play">
-  <div class="harp-legend"><span>blow (top row: keys 1 … =)</span><span>draw (bottom row: keys Q … ])</span></div>
+  <div class="harp-legend"><span>blow, breathing out (top row: keys 1 … =)</span><span>draw, breathing in (bottom row: keys Q … ])</span></div>
   <div class="harp" id="harp" aria-label="Twelve-hole chromatic harmonica in C"></div>
   <div class="controls" style="padding:0.6rem 0.25rem 0">
     <button id="slide">Slide (hold, or Space)</button>
     <span class="readout" id="hRead">Press and hold a hole. Slide across holes to move between notes.</span>
   </div>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Twelve holes in solo tuning, from C4 up three octaves. Pushing the slide raises every note a semitone, by switching the air to a second set of reeds.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Twelve holes in solo tuning (explained at the bottom of the page), from C4, middle C, up three octaves. Pushing the slide raises every note a semitone, by switching the air to a second set of reeds.</p>
 </section>
 </div>
 ```
 
 ::: {.family}
-**Same operator as the kalimba.** Accordion, concertina and harmonium reeds are free reeds too. All of them are cantilevers like the kalimba's tine: same operator, same ends, smaller and thinner brass instead of steel. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.
+**Same operator as the kalimba.** Accordion, concertina and harmonium reeds are [free reeds](glossary.qmd#free-reed) too: they swing freely through a slot, unlike a clarinet's reed, which beats against the mouthpiece. All of them are cantilevers like the kalimba's tine: same operator, same ends, smaller and thinner, usually of brass in harmonicas and harmoniums and of steel in accordions and concertinas. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.
 :::
 
 ## The reed is a valve
@@ -73,31 +73,31 @@ And here is a whole chromatic harmonica to play.
 $$
 u_{tt} = -\kappa^2 u_{xxxx}, \qquad u = u_x = 0 \text{ at the rivet}, \qquad u_{xx} = u_{xxx} = 0 \text{ at the tip}.
 $$
-The mode frequencies are in the ratios $1 : 6.27 : 17.55$. For a rectangular reed of width $w$ and thickness $h$, $I = wh^3/12$ and $A = wh$, so $\kappa = h\sqrt{E/12\rho}$ and
+The mode frequencies are in the ratios $1 : 6.27 : 17.55$. For a rectangular reed of width $w$ and thickness $h$, $I = wh^3/12$ and the cross-section area is $S = wh$, so $\kappa^2 = EI/(\rho S) = Eh^2/(12\rho)$. With $\beta_1 = 1.8751/L$ and $\omega = \kappa\beta^2$ from the kalimba page, the lowest frequency $f_1 = \omega_1/2\pi$ is
 $$
 f_1 = \frac{(1.8751)^2}{2\pi}\cdot\frac{h}{L^2}\sqrt{\frac{E}{12\rho}} .
 $$
 Low reeds are long, high reeds are short. The width cancels, so it affects how much air the reed moves, not its pitch.
 
-**Plucked versus blown.** Pluck a reed and it rings like a kalimba tine: you hear its own modes at 1, 6.27 and 17.55 times the fundamental, with the overtones dying almost at once. Blow it and the reed swings through its slot, opening and closing the air path. The sound comes mainly from the chopped airflow; Pykett notes that very little sound comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a rate $f_1$ close to its first mode's frequency, so the puffs repeat at that rate too. A [periodic](glossary.qmd#periodic) signal has partials only at whole-number multiples of its repetition rate, so the blown note is harmonic, with strong odd and even partials (Pykett), even though the reed's own overtones are not.
+**Plucked versus blown.** Pluck a reed and it rings like a kalimba tine: you hear its own modes at 1, 6.27 and 17.55 times the fundamental, with the overtones dying almost at once. Blow it and the reed swings through its slot, opening and closing the air path. The sound comes mainly from the chopped airflow; Pykett notes that very little sound comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency $f_p$ slightly below its first mode's frequency $f_1$, so the pattern of airflow repeats at that rate too (Cottingham reports two puffs of air per cycle). Why exactly? The reed's other modes are hardly excited and die out, while the steady airflow keeps feeding the first one, so the motion locks into one repeating cycle. A [periodic](glossary.qmd#periodic) signal has partials only at whole-number multiples of its repetition rate, so the blown note is harmonic, with strong odd and even partials (Pykett), even though the reed's own overtones are not. The harmonics come from the valve action, the slot being open for only part of each cycle, not from the reed's modes.
 
 ::: {.derive}
 <details><summary><span class="label">Why it works</span>A steady puff train has whole-number partials</summary>
 
-Let $q(t)$ be the airflow through the slot. Once the blown reed has settled into its steady oscillation, the opening, and so $q$, repeats every $P = 1/f_1$ seconds: $q(t + P) = q(t)$. A steady oscillation kept going by a steady push, like this one, is called a *self-sustained* oscillation; the bowed string and the clarinet reed are others. By the [circle page](circle.qmd), a periodic function of period $P$ is a Fourier series in $e^{2\pi i n t/P}$, so it contains only the frequencies $n f_1$. How strong each one is depends on the shape of a single puff: short, sharp puffs give strong high partials. The argument uses only that the motion repeats, not which modes make it up, which is why the reed's own overtone frequencies, 6.27 and 17.55 times $f_1$, do not appear.
+Let $q(t)$ be the airflow through the slot. Once the blown reed has settled into its steady oscillation, the opening, and so $q$, repeats every $P = 1/f_p$ seconds: $q(t + P) = q(t)$. A steady oscillation kept going by a steady push, like this one, is called a [self-sustained oscillation](glossary.qmd#self-sustained), and the repeating cycle it settles into a *limit cycle*; the bowed string and the clarinet reed are others. That it settles into one is observed, and reproduced by nonlinear models of reeds; it is not derived here. By the [circle page](circle.qmd), a periodic function of period $P$ is a Fourier series in $\cos(2\pi nt/P)$ and $\sin(2\pi nt/P)$, so it contains only the frequencies $n f_p$. How strong each one is depends on the shape of a single puff: short, sharp puffs give strong high partials. The argument uses only that the motion repeats, not which modes make it up, which is why the reed's own overtone frequencies, 6.27 and 17.55 times $f_1$, do not appear.
 
-The demo's sound is a model: one puff shape, chosen so that the open part of each cycle is short, repeated at $f_1$, then passed through two broad peaks, a stand-in for resonances of the player's mouth and the instrument. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.
+The demo's sound is a model: one puff shape, chosen so that the open part of each cycle is short, repeated at the playing frequency, then passed through two broad peaks, a stand-in for resonances of the player's mouth and the instrument. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.
 
 </details>
 :::
 
-The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a periodic oscillation. On those instruments the operator's own frequencies are already whole numbers, so the excitation and the operator agree. A free reed's are not, which lets you hear that the excitation, not the operator, sets the overtones.
+The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a periodic oscillation. On those instruments the operator's own frequencies are already nearly whole-number multiples, so the excitation and the operator agree, and locking is easy. A free reed's are not, which lets you hear that the excitation, not the operator, sets the overtones.
 
 **Tuning a reed with a file.** Reed makers tune by scraping metal off, and where they scrape decides the direction. The [Rayleigh quotient](glossary.qmd#rayleigh-quotient) explains why. For the first mode,
 $$
-\omega_1^2 = \min_{u} \frac{\int_0^L EI\,(u'')^2\,dx}{\int_0^L \rho A\,u^2\,dx},
+\omega_1^2 = \min_{u} \frac{\int_0^L EI\,(u'')^2\,dx}{\int_0^L \rho S\,u^2\,dx},
 $$
-the minimum taken over shapes that satisfy the conditions at the rivet; the minimizing shape is the first mode itself. Stiffness is on top and mass at the bottom. The first mode bends most near the rivet and moves most near the tip. Thinning the reed near the rivet removes stiffness where it counts and lowers the pitch; thinning it near the tip removes mass where it counts and raises it.
+the minimum taken over shapes, not identically zero, that satisfy the conditions at the rivet; the minimizing shape is the first mode itself. This is $\omega^2 = k/m$ from page 1 again: stiffness on top, weighted by where the reed bends, and mass at the bottom, weighted by where it moves. The first mode is the shape that makes this ratio as small as possible. The first mode bends most near the rivet and moves most near the tip. Thinning the reed near the rivet removes stiffness where it counts and lowers the pitch; thinning it near the tip removes mass where it counts and raises it.
 
 ```{=html}
 <div class="ins">
@@ -105,19 +105,19 @@ the minimum taken over shapes that satisfy the conditions at the rivet; the mini
     <div class="slider"><label for="fx">Where to file</label><input type="range" id="fx" min="0.02" max="0.98" step="0.01" value="0.1"><output id="fxo">base</output></div>
     <div class="readout" id="fRead"></div>
     <div class="controls"><button id="fPlay" class="primary">Blow the filed reed</button><button id="fOrig">Blow the original</button></div>
-    <p class="cap">Filing removes 25% of the thickness over about a tenth of the reed. The pitch change uses the unfiled mode shape in the Rayleigh quotient, which is accurate to first order.</p>
+    <p class="cap">Filing removes 25% of the thickness over about a tenth of the reed. The pitch change uses the unfiled mode shape in the Rayleigh quotient, which is accurate when the filing is shallow.</p>
   </div>
 </div>
 ```
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The first-order effect of filing</summary>
+<details><summary><span class="label">Step-by-step derivation</span>The effect of a little filing <span class="needs">uses integration by parts and a first-order approximation</span></summary>
 
-1. *The quotient.* Multiply $\rho A\,\omega^2X = (EI\,X'')''$ by $X$ and integrate by parts twice; the boundary terms vanish at the rivet and at the free tip, as on the kalimba page. This gives $\omega^2 = \int EI(X'')^2 / \int \rho A X^2$ for every mode.
-2. *Small change.* File the reed so that its thickness changes by $\delta h(x) < 0$. Then $I \propto h^3$ changes by $\delta(EI) = 3EI\,\delta h/h$, and $A \propto h$ changes by $\delta(\rho A) = \rho A\,\delta h/h$.
-3. *First order.* Because the first mode minimizes the quotient, changing the shape slightly changes the quotient only at second order. So to first order one may keep the old mode shape $X$ and change only the coefficients:
+1. *The quotient.* Multiply $\rho S\,\omega^2X = (EI\,X'')''$ by $X$ and integrate by parts twice; the boundary terms vanish at the rivet and at the free tip, as on the kalimba page. This gives $\omega^2 = \int EI(X'')^2 / \int \rho S X^2$ for every mode.
+2. *Small change.* File the reed so that its thickness changes by $\delta h(x) < 0$. Then $I \propto h^3$ changes by $\delta(EI) = 3EI\,\delta h/h$, and $S \propto h$ changes by $\delta(\rho S) = \rho S\,\delta h/h$, to [first order](glossary.qmd#first-order), that is, ignoring terms in $(\delta h)^2$.
+3. *First order.* Because the first mode minimizes the quotient, changing the shape slightly changes the quotient only by an amount proportional to the square of the change. So to first order one may keep the old mode shape $X$ and change only the coefficients:
 $$
-\delta(\omega^2) = \frac{\int \frac{\delta h}{h}\,\big(3EI\,(X'')^2 - \omega^2\rho A\,X^2\big)\,dx}{\int \rho A\,X^2\,dx}.
+\delta(\omega^2) = \frac{\int \frac{\delta h}{h}\,\big(3EI\,(X'')^2 - \omega^2\rho S\,X^2\big)\,dx}{\int \rho S\,X^2\,dx}.
 $$
 4. *Sign.* Near the rivet $X \approx 0$ and $X''$ is largest, so the bracket is positive and, with $\delta h < 0$, $\omega$ drops. Near the tip $X'' = 0$ and $X$ is largest, so the bracket is negative and $\omega$ rises. In between there is a point where filing changes nothing, to first order.
 
@@ -126,7 +126,7 @@ The demo uses the full quotient with the original mode shape, which is accurate 
 </details>
 :::
 
-**The chromatic slide.** A chromatic harmonica has two sets of reed chambers, the second tuned a semitone higher. Each hole has a blow reed and a draw reed in each set. Pushing the slide moves a perforated bar that closes one set and opens the other, so every note rises a semitone. In solo tuning each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw.
+**The chromatic slide.** A chromatic harmonica has two sets of reed chambers, the second tuned a [semitone](glossary.qmd#semitone) higher. Each hole has a blow reed, sounded by breathing out, and a [draw](glossary.qmd#draw) reed, sounded by breathing in, in each set. Pushing the slide moves a perforated bar that closes one set and opens the other, so every note rises a semitone. In *solo tuning*, the usual layout for a chromatic harmonica, each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw.
 
 ## What we found
 

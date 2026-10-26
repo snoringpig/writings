@@ -44,7 +44,7 @@ Here are six sounds that need explaining. Play them, and try to guess why each o
   </div>
   <div class="pcard">
     <p class="q">Why do these two sound so different?</p>
-    <p class="b">A kalimba tine and a harmonica reed are the same kind of bar, with the same overtones far off the whole numbers.</p>
+    <p class="b">A kalimba tine and a harmonica reed are the same kind of bar, with the same [overtones](glossary.qmd#partial) far off the whole-number multiples.</p>
     <div class="controls"><button data-g="kal">Kalimba tine, plucked</button><button data-g="harm">Harmonica reed, blown</button></div>
     <p class="go">Answered on <a href="kalimba.html">page 6</a> and <a href="harmonica.html">6b</a></p>
   </div>
@@ -56,7 +56,7 @@ Here are six sounds that need explaining. Play them, and try to guess why each o
   </div>
   <div class="pcard">
     <p class="q">Can you hear the shape of a drum?</p>
-    <p class="b">These two drums have different shapes. Struck with every mode equally loud, they sound identical.</p>
+    <p class="b">These two drums have different shapes. Played with every [mode](glossary.qmd#mode) equally loud, which no real strike does, they sound identical.</p>
     <div class="controls"><button data-g="gA">Drum A</button><button data-g="gB">Drum B</button></div>
     <p class="go">Answered on <a href="shape.html">page 9</a></p>
   </div>
@@ -66,19 +66,19 @@ Here are six sounds that need explaining. Play them, and try to guess why each o
 
 And one question beyond the mathematics: did the instruments people built shape the scales they play? That is the [epilogue](epilogue.qmd).
 
-## One idea answers all six
+## Two ideas answer all six
 
-1. **An instrument's frequencies are the [spectrum](glossary.qmd#spectrum) of an [operator].** The operator is the rule that takes a shape of the instrument, a bent string or a dented drumhead, and returns the force pulling it back. Its eigenvalues give the frequencies the instrument can make. The [Fourier series](glossary.qmd#fourier-series) is the simplest case: the spectrum of $-d^2/d\theta^2$ on a circle.
-2. **A clear [pitch](glossary.qmd#pitch) means a nearly evenly spaced spectrum.** Whether the frequencies line up on whole-number multiples is decided by the operator and the instrument's shape. How you play it decides only how loud each frequency is, with one exception: a steady bow or breath can force a sound to repeat exactly, and then it has a pitch whatever the operator says.
+1. **An instrument's frequencies come from the [spectrum](glossary.qmd#spectrum) of an [operator].** The operator is a rule that takes a shape of the instrument, a bent string or a dented drumhead, and gives back the force pulling it back toward rest (per unit mass, and with a minus sign, so that the motion obeys $u_{tt} = -Au$). The shapes it only rescales are the instrument's [modes](glossary.qmd#mode); the rescaling factors are its [eigenvalues](glossary.qmd#eigenvalue), and the list of them is the spectrum. Each frequency is proportional to the square root of an eigenvalue. The simplest case is a loop of string, where the operator is minus the second derivative, $-d^2/d\theta^2$, and writing a shape in its modes is the [Fourier series](glossary.qmd#fourier-series).
+2. **A clear [pitch](glossary.qmd#pitch) means the frequencies you hear sit at, or very near, whole-number multiples of one frequency.** Then the sound repeats, and the repetition rate is the pitch. Since the frequencies come from the spectrum, whether they line up is decided by the operator and the instrument's shape. How you play decides how loud each frequency is, with one refinement: a steady bow or breath can lock the motion into exact repetition, close to one of the operator's frequencies, even when the operator's overtones are off the grid.
 
 [operator]: glossary.qmd#operator
 
 ## How to read this series
 
-Every page opens with a puzzle you can hear or see, builds the explanation, and ends with what we found and the next puzzle. The step-by-step derivations and proofs are folded away, and technical words link to the [glossary](glossary.qmd).
+Every page opens with a puzzle you can hear or see, builds the explanation, and ends with what we found and the next puzzle. The step-by-step derivations and proofs are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the [glossary](glossary.qmd), and the symbol $\propto$ means "proportional to".
 
-- **The gist, 5 minutes.** This page: the six puzzles above and the idea that answers them.
-- **The core idea, about 35 minutes.** Read [0 · What is a note?](note.qmd), [3 · The circle](circle.qmd), [4 · A string with ends](violin.qmd) and [8 · The drum](drum.qmd), skipping the folds. They carry both points: a pitch is a repeating sound, the circle is the smallest operator and its spectrum, the string is a real instrument with an evenly spaced spectrum, and the drum is one without.
+- **The gist, 5 minutes.** This page: the six puzzles above and the two ideas that answer them.
+- **The core idea, about 35 minutes.** Read [0 · What is a note?](note.qmd), [3 · The circle](circle.qmd), [4 · A string with ends](violin.qmd) and [8 · The drum](drum.qmd), skipping the folds. They carry both points: a pitch is a repeating sound, the circle is the smallest operator and its spectrum, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not.
 - **The whole story, about an hour and a half.** Pages 0 to 8 in order, each answering the question the last one raised.
 - **Everything, about three hours.** All the pages, including [9 · What the spectrum knows](shape.qmd) and the [epilogue](epilogue.qmd), with the folds open.
 
@@ -91,14 +91,14 @@ Here for one puzzle? Each one above links to the page that answers it, and each 
 | [0 · What is a note?](note.qmd) | a note is a sound that repeats; its partials are whole-number multiples | | $f, 2f, 3f, \dots$ |
 | [1 · One mass on a spring](oscillator.qmd) | one restoring force, one frequency | the number $k/m$ | $\sqrt{k/m}/2\pi$ |
 | [2 · Beads on a ring](ring.qmd) | many masses: eigenvectors of a matrix | circulant matrix | $\propto \sin(\pi k/N)$ |
-| [3 · The circle](circle.qmd) | the smallest operator spectrum; Fourier series | $-d^2/d\theta^2$ on $L^2(S^1)$ | $\propto n$, exactly |
+| [3 · The circle](circle.qmd) | the smallest operator spectrum; Fourier series | $-d^2/d\theta^2$ on a loop | $\propto n$, exactly |
 | [4 · A string with ends](violin.qmd) | boundary conditions are part of the operator | $-c^2\,d^2/dx^2$, ends tied | $\propto n$ |
-| [5 · An air column](clarinet.qmd) | a different boundary condition removes half the spectrum | the same, on pressure | $\propto 2n - 1$ |
-| [6 · Change the order](kalimba.qmd) | bending: four derivatives, scattered overtones | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
+| [5 · An air column](clarinet.qmd) | closing one end halves the lowest frequency and keeps only its odd multiples | the same, on pressure | $\propto 2n - 1$ |
+| [6 · Change the order](kalimba.qmd) | bending: four derivatives spread the overtones; the clamp moves them off the whole numbers | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
 | [6b · The harmonica](harmonica.qmd) | the excitation, not the operator, can set the overtones | the same as 6 | heard as $\propto n$ |
 | [7 · The piano](piano.qmd) | operators add; the pedals act on damping and forcing, not on the spectrum | $-c^2\partial_x^2 + \kappa^2\partial_x^4$ | $n\sqrt{1 + Bn^2}$ |
 | [8 · The drum](drum.qmd) | two dimensions; no clear pitch | $-c^2\Delta$ on a disk | Bessel zeros |
-| [9 · What the spectrum knows](shape.qmd) | the spectrum hears area and perimeter, not shape | $-\Delta$ on any region | Weyl's law |
+| [9 · What the spectrum knows](shape.qmd) | the spectrum hears area and perimeter, but not always the shape | $-\Delta$ on any region | Weyl's law |
 | [10 · Did instruments shape our scales?](epilogue.qmd) | the spectrum decides which intervals sound smooth | the bar's, with free ends | $1 : 2.76 : 5.40$ |
 
 : Every page, its new idea, its operator and its frequencies. {.striped}
@@ -107,7 +107,7 @@ Here for one puzzle? Each one above links to the page that answers it, and each 
 
 <details><summary>Instruments that are the same up to constants</summary>
 
-Instruments with the same operator and boundary conditions are the same mathematical object with different constants. Each family below shares one operator; the last column says what still differs inside it.
+Instruments in one family share one operator, so they are the same mathematical object with different constants. The last column says what still differs inside a family; for air columns that includes the boundary condition, and for drums the air around the head, which changes the operator a little.
 
 | Family | Operator and boundary | Demos | What varies inside the family |
 |:--|:--|:--|:--|
@@ -120,11 +120,11 @@ Instruments with the same operator and boundary conditions are the same mathemat
 </details>
 
 
-## All the spectra side by side
+## All the sounds side by side
 
-<details><summary>Each instrument's spectrum as it is usually played</summary>
+<details><summary>The partials of each instrument's sound, as it is usually played</summary>
 
-Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each [partial](glossary.qmd#partial) is excited.
+These are the partials of the sound, which for blown and bowed instruments differ from the operator's own frequencies. Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each [partial](glossary.qmd#partial) is excited.
 
 ```{=html}
 <div class="ins">
@@ -152,9 +152,9 @@ Gray lines are whole-number multiples of the lowest frequency; stem height is ho
 | Operator | $-c^2\partial_x^2$ | $-c^2\partial_x^2$ on pressure | $\kappa^2\partial_x^4$ | $\kappa^2\partial_x^4$ | $-c^2\partial_x^2+\kappa^2\partial_x^4$ | $-c^2\Delta$ |
 | Boundary | $u=0$ at both ends | $p_x=0$ at reed, $p=0$ at open end | $u=u'=0$ at clamp, $u''=u'''=0$ at tip | same as the kalimba | $u=u''=0$ at both ends | $u=0$ on the rim |
 | Eigen-condition | $\sin kL=0$ | $\cos kL=0$ | $\cos\beta L\cosh\beta L=-1$ | $\cos\beta L\cosh\beta L=-1$ | $\sin kL=0$ | $J_m(ka)=0$ |
-| Mode ratios | $n$ | $2n-1$ | 1, 6.27, 17.5 | 1, 6.27, 17.5 | $n\sqrt{(1+Bn^2)/(1+B)}$ | 1, 1.59, 2.14 |
+| Mode ratios | $n$ | $2n-1$ | 1, 6.27, 17.55 | 1, 6.27, 17.55 | $n\sqrt{(1+Bn^2)/(1+B)}$ | 1, 1.59, 2.14 |
 | Excitation | bow, sustained | reed, sustained | thumb pluck | airflow, sustained | felt hammer | stick |
-| What you hear | exact harmonics | odd harmonics dominate; overblows a twelfth | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
+| What you hear | exact harmonics | odd harmonics dominate; overblows a [twelfth](glossary.qmd#octave) | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
 
 </details>
 
