@@ -50,3 +50,17 @@
 .qa .label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
 .made { font-size: 0.85rem; color: var(--muted); margin: 0 0 1.5rem; }
 .made p { margin: 0; }
+.derive { margin: 0.75rem 0 1.25rem; }
+.derive details { border-left: 2px solid var(--accent); padding: 0.15rem 0 0.15rem 0.9rem; }
+.derive summary { cursor: pointer; color: var(--accent); font-size: 0.95rem; }
+.derive details[open] summary { margin-bottom: 0.5rem; }
+.derive .label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
+.derive svg.fig { display: block; width: 100%; max-width: 420px; height: auto; margin: 0.5rem auto 0.75rem; }
+.derive svg.fig text { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; fill: var(--ink); }
+.derive svg.fig .ink { stroke: var(--ink); fill: none; stroke-width: 1.6; }
+.derive svg.fig .acc { stroke: var(--accent); fill: none; stroke-width: 2; }
+.derive svg.fig .pos { stroke: var(--pos); fill: none; stroke-width: 2; }
+.derive svg.fig .neg { stroke: var(--neg); fill: none; stroke-width: 2; }
+.derive svg.fig .dash { stroke: var(--muted); fill: none; stroke-width: 1; stroke-dasharray: 4 3; }
+.derive svg.fig .fillacc { fill: var(--accent); } .derive svg.fig .fillpos { fill: var(--pos); } .derive svg.fig .fillneg { fill: var(--neg); }
+.derive svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
