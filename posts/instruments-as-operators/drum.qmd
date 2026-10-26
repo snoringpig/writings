@@ -136,7 +136,7 @@ The rim condition $J_m(ka) = 0$ says $ka$ must be a zero of $J_m$. Writing $j_{m
 $$
 f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
 $$
-Listed in order, the frequencies relative to the lowest are $1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots$ No base frequency in the pitch range puts them near whole-number multiples: the zeros of each $J_m$ are shifted as just described, and the zeros of $J_0$, of $J_1$, of $J_2$ and so on interleave at unrelated places. So the sound does not repeat and there is no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head's symmetry, visible as a [multiplicity](glossary.qmd#multiplicity) of 2.
+Listed in order, the frequencies relative to the lowest are $1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots$ No base frequency in the pitch range puts them near whole-number multiples: the zeros of each $J_m$ are spaced by about $\pi$ but shifted, by an amount that depends on $m$, and the zeros of $J_0$, of $J_1$, of $J_2$ and so on interleave at unrelated places. So the sound does not repeat and there is no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head's symmetry, visible as a [multiplicity](glossary.qmd#multiplicity) of 2.
 
 The sand demo shows these shapes directly. The mode $J_m(kr)\cos m\theta$ is zero where $\cos m\theta = 0$, at $2m$ angles, which pair up into $m$ lines through the center, and along the circles where $J_m(kr) = 0$ inside the rim, $n - 1$ of them for the $n$-th zero. Those are exactly the lines where the sand collects.
 
