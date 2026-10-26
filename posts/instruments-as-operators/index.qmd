@@ -12,7 +12,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-**Series** · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+**Series** · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.made}
@@ -26,7 +26,35 @@ If you take only two things from this series, take these.
 
 [operator]: glossary.qmd#operator
 
-The pages climb from a single note to a mathematician's question, one new idea at a time. Each page starts with a plain explanation and a demo; the equations come next, and the step-by-step derivations and proofs are folded away for those who want them. Every technical word links to the [glossary](glossary.qmd).
+## How to read this series
+
+Choose how deep to go. Every page opens with a plain explanation and a demo; the equations come next, and the step-by-step derivations and proofs are folded away. Technical words link to the [glossary](glossary.qmd).
+
+- **The gist, 5 minutes.** Stay on this page. Read the two points above, then play the instruments just below. Listen for which ones have a clear pitch, and compare their stems with the gray whole-number grid. The kalimba is the interesting case: its overtones are off the grid, but weak and brief.
+- **The core idea, about 35 minutes.** Read [0 · What is a note?](note.qmd), [3 · The circle](circle.qmd), [4 · A string with ends](violin.qmd) and [8 · The drum](drum.qmd), skipping the folds. These four pages carry both points: a pitch is a repeating sound, the circle is the smallest operator and its spectrum, the string is a real instrument with an evenly spaced spectrum, and the drum is one without.
+- **Every instrument, about an hour and a half.** Pages 0 to 8 in order.
+- **Everything, about two and a half hours.** All the pages, including [9 · What the spectrum knows](shape.qmd), with the folds open.
+
+Here for one instrument? Go straight to its page in the table of all pages below; each page says at the top which earlier page it builds on and how long it takes. Already know Fourier series? Start at page 4. Interested in spectral geometry? Read pages 3, 8 and 9 with the folds open. The times assume reading about 120 words a minute, plus a minute or two per demo.
+
+## Hear the difference
+
+Each box is one instrument's spectrum as it is usually played. Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each [partial](glossary.qmd#partial) is excited.
+
+```{=html}
+<div class="ins">
+<div class="strip">
+  <div><span class="nm">Violin</span><svg class="mini" data-mini="violin" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="violin">—</span><button class="primary" data-play="violin">Play</button></div>
+  <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">modes 1, 3, 5, 7, 9</span><button class="primary" data-play="clarinet">Play</button></div>
+  <div><span class="nm">Kalimba</span><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="kalimba">—</span><button class="primary" data-play="kalimba">Play</button></div>
+  <div><span class="nm">Harmonica</span><svg class="mini" data-mini="harmonica" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="harmonica">—</span><button class="primary" data-play="harmonica">Play</button></div>
+  <div><span class="nm">Piano</span><svg class="mini" data-mini="piano" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="piano">—</span><button class="primary" data-play="piano">Play</button></div>
+  <div><span class="nm">Drum</span><svg class="mini" data-mini="drum" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="drum">—</span><button class="primary" data-play="drum">Play</button></div>
+</div>
+</div>
+```
+
+## All pages
 
 | Page | New idea | Operator | Frequencies |
 |:--|:--|:--|:--|
@@ -59,23 +87,6 @@ Instruments with the same operator and boundary conditions are the same mathemat
 | Membranes | $-c^2\Delta$ on a disk | [Drum](drum.qmd) | tension and size; the air under a timpani head |
 
 </details>
-
-## Hear them side by side
-
-Each row is one instrument's spectrum as it is usually played. Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each [partial](glossary.qmd#partial) is excited.
-
-```{=html}
-<div class="ins">
-<div class="strip">
-  <div><span class="nm">Violin</span><svg class="mini" data-mini="violin" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="violin">—</span><button class="primary" data-play="violin">Play</button></div>
-  <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">modes 1, 3, 5, 7, 9</span><button class="primary" data-play="clarinet">Play</button></div>
-  <div><span class="nm">Kalimba</span><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="kalimba">—</span><button class="primary" data-play="kalimba">Play</button></div>
-  <div><span class="nm">Harmonica</span><svg class="mini" data-mini="harmonica" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="harmonica">—</span><button class="primary" data-play="harmonica">Play</button></div>
-  <div><span class="nm">Piano</span><svg class="mini" data-mini="piano" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="piano">—</span><button class="primary" data-play="piano">Play</button></div>
-  <div><span class="nm">Drum</span><svg class="mini" data-mini="drum" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="drum">—</span><button class="primary" data-play="drum">Play</button></div>
-</div>
-</div>
-```
 
 ## Comparison
 

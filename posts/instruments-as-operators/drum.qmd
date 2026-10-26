@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · **8 Drum** · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), **8 Drum** · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** On a surface the operator is the [Laplacian](glossary.qmd#laplacian). For a round drum its eigenfunctions are built from [Bessel functions](glossary.qmd#bessel), and the frequencies are set by their zeros, which are not evenly spaced. That is why a drum has no clear pitch.
+
+**Builds on** [page 4](violin.qmd); the loop of [page 3](circle.qmd) reappears inside the drum. About 7 minutes, plus 5 for the folds.
 :::
 
-## For everyone
-
-A drumhead is a sheet pulled tight in every direction, like a trampoline. Tap it anywhere below. The head vibrates in many patterns at once, at frequencies 1, 1.59, 2.14, 2.30, … times the lowest; these do not fit any common base frequency, so you hear a thud rather than a note.
+A drumhead is a sheet pulled tight in every direction, like a trampoline. Tap it anywhere below. It vibrates in many patterns at once, at 1, 1.59, 2.14, 2.30, … times the lowest frequency. No common base frequency fits these numbers, so you hear a thud, not a note.
 
 ```{=html}
 <style>
@@ -132,6 +132,8 @@ The zeros have no closed form; this page computes them numerically. For large $n
 ## What changed, and what comes next
 
 The operator moved from a line to a surface, and the circle's eigenfunctions reappeared inside the drum's, as the angular part. The spectrum is no longer nearly evenly spaced, and the pitch is gone. The last page turns the question around: from the spectrum alone, what can be known about the drum?
+
+*On the core path?* This is its last page. [Page 9](shape.qmd) turns the question around, if you want more.
 
 [← The piano](piano.qmd) · [Next: what the spectrum knows →](shape.qmd)
 

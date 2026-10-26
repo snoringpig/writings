@@ -10,16 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · **0 Note** · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} **0 Note**, [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** A note is a sound that repeats. Its pitch is how often it repeats, and one note is a sum of tones at whole-number multiples of that rate.
+
+**Start here.** About 6 minutes, plus 4 for the folded proof.
 :::
 
-## For everyone
+Sound is air pressure rising and falling. When the pattern repeats every $P$ seconds, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate $f = 1/P$, measured in [hertz](glossary.qmd#hertz): repetitions per second. Middle C repeats about 262 times a second.
 
-Sound is air pressure rising and falling; when the pattern repeats every $P$ seconds you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate $f = 1/P$, counted in [hertz](glossary.qmd#hertz), repetitions per second (middle C repeats about 262 times a second). Any repeating pattern can be built by adding pure tones at 1, 2, 3, … times that rate: the [harmonics](glossary.qmd#harmonic), the lowest being the [fundamental](glossary.qmd#fundamental). Drag the sliders below, which mix harmonics of 220 Hz: the wave's shape and the sound's color, its [timbre](glossary.qmd#timbre), change, but the pattern still repeats every 1/220 of a second, so the pitch stays the same.
+Any repeating pattern can be built from pure tones at 1, 2, 3, … times its rate. These are its [harmonics](glossary.qmd#harmonic), and the lowest is the [fundamental](glossary.qmd#fundamental). Mix them with the sliders below. The wave's shape changes, and so does the sound's color, its [timbre](glossary.qmd#timbre), but the pattern still repeats 220 times a second, so the pitch stays put.
 
 ```{=html}
 <div class="ins">
@@ -86,6 +88,8 @@ No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is
 ## What comes next
 
 Nothing on this page says where the frequencies come from. The next pages build the answer from Newton's law: one mass on a spring gives one frequency, many masses give many, and a continuous string gives infinitely many. Each instrument then turns out to be a different answer to one question: *which frequencies does this object allow?*
+
+*On the core path (pages 0, 3, 4, 8)?* Skip ahead to [3 · The circle](circle.qmd).
 
 [Next: one mass on a spring →](oscillator.qmd)
 

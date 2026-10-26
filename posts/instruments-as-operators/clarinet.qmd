@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · **5 Air column** · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), **5 Air column**, [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** The string's operator also governs the air pressure in a tube. Changing the boundary condition at one end, from "pressure equals the room's" to "the air cannot move", removes every even harmonic: a clarinet's spectrum is the odd whole numbers.
+
+**Builds on** [page 4](violin.qmd): the boundary condition decides which eigenfunctions are allowed. About 7 minutes, plus 4 for the folds.
 :::
 
-## For everyone
-
-Blow into a tube and the air inside sloshes back and forth along it. A flute is open at both ends, while a clarinet is nearly closed at the mouthpiece by its reed. That one difference makes the clarinet sound almost an [octave](glossary.qmd#octave) lower than a flute of the same length and leaves it only the odd harmonics, much of its hollow sound; the switch below changes one into the other.
+Blow into a tube and the air inside sloshes back and forth. A flute is open at both ends. A clarinet is nearly closed at one end, by the reed in its mouthpiece. That one difference makes a clarinet sound almost an [octave](glossary.qmd#octave) lower than a flute of the same length, and leaves it only the odd harmonics, which give it its hollow sound. The switch below turns one into the other.
 
 ```{=html}
 <style>

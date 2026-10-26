@@ -10,16 +10,16 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · **9 Shape** · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} **9 Shape** · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** The list of a drum's frequencies determines the drum's area and its perimeter. It does not determine its shape: two differently shaped drums can have exactly the same list.
+
+**Builds on** [page 8](drum.qmd): a drum's operator and its modes. About 8 minutes, plus 8 for the folds.
 :::
 
-## For everyone
-
-These two drums have different shapes and exactly the same frequencies. Play them with every mode equally loud and you cannot tell them apart. Strike them at a point, by clicking on a drum, and you usually can: the shape decides how strongly each mode is struck.
+These two drums have different shapes but exactly the same frequencies. Play each with every mode equally loud, and they sound the same. Click a drum to strike it at a point, and they usually sound different, because the shape decides how strongly each mode is struck.
 
 ```{=html}
 <div class="ins">

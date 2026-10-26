@@ -76,3 +76,5 @@
 /* Narrow screens: wide equations and tables scroll inside themselves instead of widening the page. */
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; position: relative; }
 @media (max-width: 700px) { main table { display: block; overflow-x: auto; position: relative; } }
+.series-nav .part { font-size: 0.7rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-right: 0.15rem; }
+.newidea p + p { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); }

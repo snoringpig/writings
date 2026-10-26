@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · **6 Kalimba** · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), **6 Kalimba**, [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** A bar springs back because it resists bending, not because it is stretched. Its operator has four derivatives instead of two, so the frequencies grow like the square of the mode number and the overtones land far from the whole numbers: 1, 6.27, 17.55, … times the lowest.
+
+**Builds on** [page 4](violin.qmd), for boundary conditions. About 8 minutes, plus 5 for the folds.
 :::
 
-## For everyone
-
-A kalimba tine is a strip of steel pressed down near one end and free at the other, like a diving board. Nothing stretches it; it springs back because steel resists bending. Its overtones fall far from the whole numbers, but they are weak and die within moments, so you hear a clear note with a metallic click at the start.
+A kalimba tine is a strip of steel, pressed down near one end and free at the other, like a diving board. Nothing stretches it. It springs back because steel resists bending. Its overtones lie far from the whole-number multiples, but they are weak and die within moments, so you hear a clear note with a metallic click at the start.
 
 ```{=html}
 <style>

@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · **7 Piano** · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), **7 Piano**, [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** Operators add. A piano wire is pulled tight like a string and resists bending like a bar, so its operator is the sum of the two, and its overtones run slightly sharp of the whole numbers. The rest of a real string's equation, damping and forcing, is where the hammer, the dampers and the pedals act, and none of them can move a frequency.
+
+**Builds on** [page 4](violin.qmd) for the string and [page 6](kalimba.qmd) for bending. About 15 minutes, plus 9 for the folds.
 :::
 
-## For everyone
-
-A piano wire is a violin string made of thick steel, so it is also a little bit of a kalimba tine. Play the full keyboard below with your computer keys or the mouse; release a key and its felt [damper](glossary.qmd#damper) drops back on the string to stop it.
+A piano wire is a string, but a thick steel one, so it also bends like a kalimba tine. That makes its overtones run slightly sharp. Play the full keyboard below with the mouse or your computer keys. Release a key and its felt [damper](glossary.qmd#damper) drops back onto the string and stops it.
 
 ```{=html}
 <style>

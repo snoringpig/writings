@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · **4 String** · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} **4 String**, [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** A [boundary condition](glossary.qmd#boundary-condition), the rule for what the ends of the string may do, is part of the operator. Tying the ends down keeps the circle's operator but keeps only half of its eigenfunctions, the sines. The frequencies are still exactly whole-number multiples.
+
+**Builds on** [page 3](circle.qmd): on a loop, the operator $-d^2/d\theta^2$ has eigenfunctions $\cos n\theta$ and $\sin n\theta$ with eigenvalues $n^2$. About 10 minutes, plus 5 for the folds.
 :::
 
-## For everyone
-
-A violin string is tied down at the nut and at the bridge. It can swing in one hump, two humps, three humps and so on, and because whole humps must fit between the ends, these come at 1, 2, 3, … times the lowest frequency. Press a string below to play it, with the bow or by plucking.
+A violin string is tied down at both ends, at the nut and at the bridge. It can swing in one hump, two humps, three humps, and so on. Whole humps must fit between the ends, so these motions come at exactly 1, 2, 3, … times the lowest frequency. Press a string below to play it, with the bow or by plucking.
 
 
 
@@ -130,6 +130,8 @@ The operator is still $-d^2/dx^2$, but now with a boundary condition, and the bo
 : Boundary conditions in this series. The bar conditions are explained on the kalimba page, and the tube conditions on the next page. {.striped}
 
 Next, the same operator acts on air pressure in a tube, and a different boundary condition at one end removes every other harmonic.
+
+*On the core path?* Skip ahead to [8 · The drum](drum.qmd).
 
 [← The circle](circle.qmd) · [Next: an air column →](clarinet.qmd)
 

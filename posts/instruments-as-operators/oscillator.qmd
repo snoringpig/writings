@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · **1 Oscillator** · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), **1 Oscillator**, [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** Newton's law plus a restoring force proportional to displacement allows exactly one frequency. It is set by stiffness and mass, not by how hard you pull.
+
+**Builds on** nothing. About 5 minutes, plus 2 for the folded proof.
 :::
 
-## For everyone
-
-Hang a mass on a spring, pull it down and let go: it bobs at a steady rate, faster with a stiffer spring and slower with a heavier mass. Pull it further and it travels further, but each bob takes exactly as long as before. That is why a fading piano note keeps its pitch: as the sound dies away, the vibration gets smaller but not slower.
+Hang a mass on a spring, pull it down and let go. It bobs at a steady rate: faster with a stiffer spring, slower with a heavier mass. Pull it further and it travels further, but each bob takes exactly as long. That is why a fading piano note keeps its pitch. The vibration shrinks, but it does not slow down.
 
 ```{=html}
 <div class="ins">

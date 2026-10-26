@@ -11,16 +11,16 @@ aliases: [foundations.html]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · **3 The circle** · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · [6b Harmonica](harmonica.qmd) · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), **3 The circle** · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
-**New idea on this page.** When the beads crowd into a continuous loop, the matrix becomes an [operator](glossary.qmd#operator), $-\tfrac{d^2}{d\theta^2}$, acting on shapes. Its eigenvalues are exactly $0, 1, 4, 9, \dots$, so the frequencies are exactly $0, 1, 2, 3, \dots$ times a base frequency. Writing a shape as a sum of this operator's eigenfunctions is the [Fourier series](glossary.qmd#fourier-series).
+**New idea on this page.** A continuous loop of string has an [operator](glossary.qmd#operator), $-\tfrac{d^2}{d\theta^2}$, acting on its shapes; it is what the beads' matrix becomes when the beads crowd together. Its eigenvalues are exactly $0, 1, 4, 9, \dots$, so the frequencies are exactly $0, 1, 2, 3, \dots$ times a base frequency. Writing a shape as a sum of this operator's eigenfunctions is the [Fourier series](glossary.qmd#fourier-series).
+
+**Builds on** [page 2](ring.qmd). If you skipped it: on a string of tension $T$ with beads spaced $h$ apart, bead $j$ at height $u_j$ feels the force $\frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})$, which pulls it toward the average of its two neighbors. About 10 minutes, plus 12 for the folded proofs.
 :::
 
-## For everyone
-
-Keep the loop the same size and the same total weight, but cut the weight into more and more beads. The low frequencies slide onto the whole-number grid. In the limit the beads become a continuous loop of string, and its frequencies are exactly 1, 2, 3, … times the lowest: a clear [pitch](glossary.qmd#pitch).
+Beads on a loop of string vibrate at frequencies close to whole-number multiples of the lowest, but not quite. Keep the loop's size and total weight fixed, and cut the weight into more and more beads. The frequencies slide onto the whole-number grid. In the limit the beads become a continuous loop of string, whose frequencies are exactly 1, 2, 3, … times the lowest: a clear [pitch](glossary.qmd#pitch).
 
 ```{=html}
 <div class="ins">
@@ -181,6 +181,8 @@ Both come from [separating variables](glossary.qmd#separation-of-variables). Loo
 The matrix became a differential operator on a space of functions, the discrete Fourier transform became the Fourier series, and the nearly harmonic spectrum became exactly harmonic. This is the smallest example of an operator's spectrum: one dimension, no ends, constant coefficients.
 
 As far as I know, no common instrument is a closed loop of string. It comes first because, with no ends, there is nothing to decide about what happens at the boundary. The next page ties the ends down. For a string the answer barely changes; for a metal bar, two pages later, it changes completely.
+
+*On the core path?* Next is [4 · A string with ends](violin.qmd).
 
 [← Beads on a ring](ring.qmd) · [Next: a string with ends →](violin.qmd)
 

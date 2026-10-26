@@ -10,16 +10,16 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav}
-[Series](index.qmd) · [0 Note](note.qmd) · [1 Oscillator](oscillator.qmd) · [2 Beads on a ring](ring.qmd) · [3 The circle](circle.qmd) · [4 String](violin.qmd) · [5 Air column](clarinet.qmd) · [6 Kalimba](kalimba.qmd) · **6b Harmonica** · [7 Piano](piano.qmd) · [8 Drum](drum.qmd) · [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
+[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), **6b Harmonica**, [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd) · [Glossary](glossary.qmd)
 :::
 
 ::: {.newidea}
 **New idea on this page.** The operator decides which frequencies an object can vibrate at; the way it is driven decides what you hear. A harmonica reed has the kalimba's operator and its scattered overtones, but blowing makes it a valve that chops the air into a regular train of puffs, and a regular train has exactly whole-number partials.
+
+**Builds on** [page 6](kalimba.qmd) for the reed's operator, and [page 0](note.qmd): a sound that repeats has only whole-number partials. About 9 minutes, plus 5 for the folds.
 :::
 
-## For everyone
-
-Each note of a harmonica is a small brass strip, a [free reed](glossary.qmd#free-reed), fixed at one end over a slot. Blow, and the reed swings through the slot, letting air through in puffs, many hundreds of times a second. You hear the puffs, not the reed, and because they come at a perfectly steady rate the note has a clear pitch.
+Each note on a harmonica is a small brass reed, a [free reed](glossary.qmd#free-reed), fixed at one end over a slot. When you blow, the reed swings through the slot and lets the air through in puffs, hundreds of times a second. You hear the puffs more than the reed. They come at a perfectly steady rate, so the note has a clear pitch.
 
 ```{=html}
 <style>
