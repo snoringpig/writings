@@ -109,10 +109,10 @@ Technical words in the series link here, usually the first time they appear on a
 : The counterpart of angular frequency in space: a wave $\sin kx$ has wavenumber $k = 2\pi/\text{wavelength}$. For the wave equation, $\omega = ck$. [Wikipedia](https://en.wikipedia.org/wiki/Wavenumber)
 
 [Linear]{#linear}
-: An equation with no outside force is linear if sums and multiples of solutions are again solutions; with an outside force, the difference of two solutions solves the force-free equation. The operators in this series are linear, a good model for the small vibrations of instruments. What keeps a bowed string, a clarinet reed or a harmonica reed going is not linear: the bow's grip and slip and a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Linear_differential_equation)
+: An equation with no outside force is linear if sums and multiples of solutions are again solutions. An equation with an outside force counts as linear if the difference of any two of its solutions solves the same equation without the force. The operators in this series are linear, a good model for the small vibrations of instruments. What keeps a bowed string, a clarinet reed or a harmonica reed going is not linear: the bow's grip and slip and a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Linear_differential_equation)
 
 [Superposition]{#superposition}
-: Adding solutions of a linear equation to get another solution. The motion of an instrument is a superposition, a sum, of its modes. [Wikipedia](https://en.wikipedia.org/wiki/Superposition_principle)
+: Adding solutions of a linear equation to get another solution. The free motion of an instrument, once nothing is driving it, is a superposition, a sum, of its modes. [Wikipedia](https://en.wikipedia.org/wiki/Superposition_principle)
 
 [Mode, normal mode]{#mode}
 : A motion of an object, with no friction and nothing driving it, in which every part swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small free vibration is a sum of modes. [Wikipedia](https://en.wikipedia.org/wiki/Normal_mode)
@@ -136,7 +136,7 @@ Technical words in the series link here, usually the first time they appear on a
 : Friction that drains energy from a vibration, so that it dies away. A term $b\,u_t$ in the equation, proportional to velocity, is the simplest model. [Wikipedia](https://en.wikipedia.org/wiki/Damping)
 
 [Self-sustained oscillation, limit cycle]{#self-sustained}
-: An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle; under some conditions it does not, as in a wolf note. This needs a mechanism that is not linear, such as the bow's grip and slip or a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Self-oscillation)
+: An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle; under some conditions it does not, as in the unsteady, warbling *wolf note* of some cellos. This needs a mechanism that is not linear, such as the bow's grip and slip or a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Self-oscillation)
 
 [Coupling]{#coupling}
 : Two vibrating parts are coupled when the motion of one pushes on the other, as when piano strings share a bridge. Coupled parts trade energy, and their modes mix. [Wikipedia](https://en.wikipedia.org/wiki/Coupling_(physics))
@@ -216,7 +216,7 @@ Technical words in the series link here, usually the first time they appear on a
 : The space of functions on the circle $S^1$ with $\int_0^{2\pi}|f|^2\,d\theta$ finite, with the inner product above. (For readers who know measure theory: two functions that differ only on a set of measure zero count as the same.) It is where the shapes of a vibrating loop live. [Wikipedia](https://en.wikipedia.org/wiki/Lp_space)
 
 [Symmetric and self-adjoint operators]{#self-adjoint}
-: An operator $A$ is symmetric if $\langle Af, g\rangle = \langle f, Ag\rangle$ for all allowed $f$ and $g$, the analogue of a symmetric matrix. That alone makes its eigenvalues real and its eigenfunctions for different eigenvalues perpendicular. Self-adjoint is a stronger condition on the set of allowed shapes, roughly that it is neither too small nor too large; for the loop of page 3 the allowed shapes are those with two derivatives that are square-integrable. Self-adjointness, together with a further property that every instrument here has (a compact inverse of $A + 1$), is what the spectral theorem needs to give enough eigenfunctions to build every shape ([page 3](circle.qmd)). Precisely, self-adjoint means $A = A^*$, domains included. [Wikipedia](https://en.wikipedia.org/wiki/Self-adjoint_operator)
+: An operator $A$ is symmetric if $\langle Af, g\rangle = \langle f, Ag\rangle$ for all allowed $f$ and $g$, the analogue of a symmetric matrix. That alone makes its eigenvalues real and its eigenfunctions for different eigenvalues perpendicular. Self-adjoint is a stronger condition on the set of allowed shapes, roughly that it is neither too small nor too large. Together with a further property that every instrument here has, it is what the spectral theorem needs to give enough eigenfunctions to build every shape ([page 3](circle.qmd)). (For readers who know functional analysis: self-adjoint means $A = A^*$, domains included; for the loop the domain is $H^2(S^1)$, and the further property is that $(A + 1)^{-1}$ is compact.) [Wikipedia](https://en.wikipedia.org/wiki/Self-adjoint_operator)
 
 [Fourier series]{#fourier-series}
 : Writing a periodic function as a sum of sines and cosines, or of $e^{in\theta}$, of whole-number frequencies. On [page 3](circle.qmd) this is the expansion in eigenfunctions of $-d^2/d\theta^2$. [Wikipedia](https://en.wikipedia.org/wiki/Fourier_series)

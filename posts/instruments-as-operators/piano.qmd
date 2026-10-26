@@ -237,7 +237,7 @@ An upright piano with its front panel removed, one octave of it. Each key, hamme
   <div class="act-wrap"><canvas id="act3dCanvas" aria-label="Upright piano with the front panel removed, one octave. Click a key to play it; drag to turn the view."></canvas><div class="act-tools"><button id="aLabels" aria-pressed="true">Labels</button><button id="aReset">Reset view</button></div></div>
   <div class="eqx" aria-label="String equation with the active terms highlighted">
     <span class="t" id="tAcc">&mu;&thinsp;<i>u</i><sub>tt</sub></span> +
-    <span class="t" id="tDamp"><i>b</i>(<i>x</i>)&thinsp;<i>u</i><sub>t</sub></span> =
+    <span class="t" id="tDamp"><i>b</i>(<i>x</i>,&thinsp;<i>t</i>)&thinsp;<i>u</i><sub>t</sub></span> =
     <span class="t op" id="tT"><i>T</i>&thinsp;<i>u</i><sub>xx</sub> &minus; <i>EI</i>&thinsp;<i>u</i><sub>xxxx</sub></span> +
     <span class="t" id="tF"><i>f</i>(<i>x</i>,&thinsp;<i>t</i>)</span>
   </div>

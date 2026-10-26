@@ -35,7 +35,7 @@ Here is the same trick on a drumhead. Pick a note and watch where the sand goes.
 </div>
 ```
 
-Napoleon offered a prize for a mathematical explanation of Chladni's patterns. It was won in 1816 by Sophie Germain, the first woman to receive the grand prize in mathematics of the Paris Academy. Her theory had errors, and the Academy was never fully satisfied with it; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. The lines the sand draws are the places where the surface does not move, and finding them is the same kind of problem as finding the frequencies: for a drumhead, the problem on this page; for Chladni's plates, the same problem with the plate's own operator.
+Napoleon offered a prize for a mathematical explanation of Chladni's patterns. It was won in 1816 by Sophie Germain, the first woman to receive the grand prize in mathematics of the Paris Academy. Her theory had errors, and the Academy was still not fully satisfied with it; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. The lines the sand draws are the places where the surface does not move, and finding them is the same kind of problem as finding the frequencies: for a drumhead, the problem on this page; for Chladni's plates, the same problem with the plate's own operator.
 
 Now strike the drum itself. Tap the head anywhere below.
 
@@ -112,7 +112,7 @@ What was assumed: small slopes, a tension that is the same everywhere and does n
 $$
 J_m(k r)\cos m\theta \quad\text{and}\quad J_m(kr)\sin m\theta, \qquad m = 0, 1, 2, \dots
 $$
-The Bessel function $J_m$ plays the part that the sine played on a string: it wiggles like a cosine or sine whose swings slowly shrink. Its zeros are not whole-number multiples of the first one: those of $J_0$ are at $2.405,\ 5.520,\ 8.654, \dots$, in the ratios $1 : 2.30 : 3.60$. Further out they become nearly evenly spaced, but they start offset, like the clamped bar's roots on [page 6](kalimba.qmd). $J_0$ starts at 1 at the center; $J_1$, $J_2$, … start at 0.
+The Bessel function $J_m$ plays the part that the sine played on a string: it wiggles like a cosine or sine whose swings slowly shrink. Its zeros are not whole-number multiples of the first one: those of $J_0$ are at $2.405,\ 5.520,\ 8.654, \dots$, in the ratios $1 : 2.30 : 3.60$. They are spaced by about $\pi$, but shifted: the first is about $0.77\pi$, not $\pi$, so the later ones are not multiples of it. $J_0$ starts at 1 at the center; $J_1$, $J_2$, … start at 0.
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 170" role="img" aria-label="Graphs of the Bessel functions J0 and J1: wiggles like a cosine and a sine whose swings shrink, crossing zero at points that are not whole-number multiples of the first">
@@ -136,7 +136,7 @@ The rim condition $J_m(ka) = 0$ says $ka$ must be a zero of $J_m$. Writing $j_{m
 $$
 f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
 $$
-Listed in order, the frequencies relative to the lowest are $1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots$ No base frequency in the pitch range puts them near whole-number multiples: within one $m$ the zeros start offset, and the families for different $m$ interleave at unrelated places. So the sound does not repeat and there is no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head's symmetry, visible as a [multiplicity](glossary.qmd#multiplicity) of 2.
+Listed in order, the frequencies relative to the lowest are $1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots$ No base frequency in the pitch range puts them near whole-number multiples: the zeros of each $J_m$ are shifted as just described, and the zeros of $J_0$, of $J_1$, of $J_2$ and so on interleave at unrelated places. So the sound does not repeat and there is no clear pitch. Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head's symmetry, visible as a [multiplicity](glossary.qmd#multiplicity) of 2.
 
 The sand demo shows these shapes directly. The mode $J_m(kr)\cos m\theta$ is zero where $\cos m\theta = 0$, at $2m$ angles, which pair up into $m$ lines through the center, and along the circles where $J_m(kr) = 0$ inside the rim, $n - 1$ of them for the $n$-th zero. Those are exactly the lines where the sand collects.
 
@@ -151,7 +151,7 @@ $$
 $$
 The left side depends only on $r$, the right only on $\theta$, so both equal one constant.
 4. *The angle.* Going once around the drum must return $\Theta$ to itself, so $-\Theta'' = m^2\Theta$ with $\Theta$ periodic. This is exactly the eigenvalue problem of the [circle page](circle.qmd): $m$ is a whole number and $\Theta = \cos m\theta$ or $\sin m\theta$.
-5. *The radius.* What remains is *Bessel's equation*, $r^2R'' + rR' + (k^2r^2 - m^2)R = 0$. It has two independent solutions; one, $J_m(kr)$, is finite at the center, and the other becomes infinite there. For $m = 0$ that would correspond to a point force pushing on the center of the head, and for $m \ge 1$ to something even more singular, with infinite energy; either way it is not a free mode.
+5. *The radius.* What remains is *Bessel's equation*, $r^2R'' + rR' + (k^2r^2 - m^2)R = 0$. It has two independent solutions; one, $J_m(kr)$, is finite at the center, and the other becomes infinite there. For $m = 0$ that would correspond to a point force pushing on the center of the head, and for $m \ge 1$ to something even more singular; in every case its energy is infinite, so it is not a free mode.
 6. *The rim.* $R(a) = 0$ means $J_m(ka) = 0$, so $ka$ must be one of the zeros $j_{m,1} < j_{m,2} < \cdots$ of $J_m$.
 
 Each frequency with $m \ge 1$ belongs to exactly two modes because Bessel functions of different whole-number orders never share a positive zero; this was conjectured by Bourget and proved by Carl Ludwig Siegel in 1929. The zeros have no closed form; this page computes them numerically. For large $n$ they approach $j_{m,n} \approx (n + \tfrac m2 - \tfrac14)\pi$, evenly spaced for one fixed $m$, but the different $m$ interleave, and the low ones are not close to any common grid.
