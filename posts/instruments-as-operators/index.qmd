@@ -2,7 +2,7 @@
 title: "Instruments as Operators"
 subtitle: "Newton's law gives an operator, its spectrum gives the frequencies, the way you play gives the sound"
 date: 2026-10-25
-date-modified: 2026-10-25
+date-modified: 2026-10-26
 categories: [math, music]
 format:
   html:
