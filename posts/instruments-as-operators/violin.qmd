@@ -10,18 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 3 Loop](circle.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [5 Clarinet →](clarinet.qmd)
+[← 3 Loop](circle.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [5 Clarinet →](clarinet.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 3, the loop of string](circle.qmd). About 10 minutes, plus the folds.
+Builds on [page 0, the note](note.qmd); page 3 is not needed. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
 Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an [octave](glossary.qmd#octave). Touch it a third of the way along and it jumps to three times the frequency. How can a feather-light finger, which does not even shorten the string, change the note so much?
 :::
 
-Pluck the string, then pick a point to touch and pluck again. String players call these touched notes [harmonics](glossary.qmd#string-harmonics).
+Listen first: pluck the string, then pick a point to touch and pluck again. String players call these touched notes [harmonics](glossary.qmd#string-harmonics).
 
 ```{=html}
 <div class="ins">
@@ -41,31 +41,131 @@ Pluck the string, then pick a point to touch and pluck again. String players cal
 ```
 
 ::: {.gist}
-**The gist.** A string tied at both ends can swing as one arch, two, three, …, at 1, 2, 3, … times its lowest frequency, and a pluck starts many of these at once. A light touch makes no new end: it soaks up the energy of every shape that moves under the finger. Touch at the middle and only the shapes that already stand still there survive: two arches, four, six, …. They sit at 2, 4, 6, … times the old lowest frequency, which is a note an octave up.
+**The recipe on this instrument, in brief.**
+
+1. *Newton's law* on a short piece of string under tension gives the wave equation $u_{tt} = c^2u_{xx}$ for the string's height.
+2. *The operator* is minus $c^2$ times the second derivative, $A = -c^2\,d^2/dx^2$, acting on shapes held still at both ends.
+3. *Its spectrum*: mode $n$ has $n$ arches, eigenvalue $\lambda_n = (n\pi c/L)^2$ and frequency $f_n = n f_1$, a whole-number multiple of the lowest.
+4. *On the diagram*: the stems sit exactly on the whole-number lines.
+5. *What we hear*: a clear note at the lowest frequency; a light touch at the middle drains every mode that moves under the finger and leaves the even ones, a note an octave up.
+
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
-## On the pitch ruler
+## 1 · Newton's law: the equation of motion
 
-In this ideal model, an open string's frequencies sit exactly on the lines: 1×, 2×, 3×, …. Each stem's height is how far that mode still swings a quarter of a second after the pluck. Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the stems shrink slowly as they go up, and at the middle they shrink fast, with every second stem missing even without a finger.
+*Mathematics used: partial derivatives (explained) and the small-angle approximation.*
 
-## How it works
+Apply Newton's law, mass times acceleration equals force, to one short piece of the string. The only force on the piece comes from the tension pulling at its two ends, and it turns out to depend only on how the string bends there.
 
-**Tied ends keep half of the loop's waves.** A string tied at both ends can only take shapes that stay still at the ends: one arch, two arches, three, …. Each is exactly half of a wave on a loop twice as long, so the reason from page 3 still holds (a shorter wave bends more sharply, and the string pulls back in proportion to how sharply it bends): a shape with *n* arches is *n* times shorter, is pulled back *n*² times harder, and swings *n* times faster. The frequencies are exactly 1, 2, 3, … times the lowest, which itself rises with the tension and falls with the string's length and its weight per length. One thing does change: on a loop each frequency had two waves, one shifted along the loop; on a string a wave cannot run around, it reflects at the ends, and each frequency has a single shape, a [standing wave](glossary.qmd#standing-wave).
+**1. Set up the string.** Let the string run along $x$ from the [nut](glossary.qmd#bridge), at $x = 0$, to the bridge, at $x = L$. It is stretched with tension $T$, a pulling force, and has mass $\mu$ per unit length. Write $u(x, t)$ for its height above the straight line at position $x$ and time $t$. Take the short piece between $x$ and $x + dx$; its mass is $\mu\,dx$.
+
+**2. The tension pulls each end of the piece along the string.** If the string at a point makes a small angle $\theta$ with the straight line, the upward part of the pull is $T\sin\theta$; for a small angle $\sin\theta \approx \tan\theta$ (both are about $\theta$ in radians), and $\tan\theta$ is the slope. So the upward part of the pull is the tension times the slope. At the right end the rest of the string pulls with upward part $T\,u_x(x + dx)$; at the left end it pulls the other way, with upward part $-T\,u_x(x)$. Here $u_x$ is the slope, the derivative in $x$ with the time held fixed (a [partial derivative](glossary.qmd#partial-derivative)).
+
+```{=html}
+<svg class="fig" viewBox="0 48 420 104" role="img" aria-label="A short piece of string between x and x plus dx on a hump; the tension pulls along the string at each end, and both pulls tilt downward, so the net force pulls the hump back down">
+  <path class="dash" d="M 60 110 Q 210 30 360 100"/>
+  <path class="acc" d="M 120 84 Q 210 54 300 78"/>
+  <circle cx="120" cy="84" r="4" class="fillacc"/><circle cx="300" cy="78" r="4" class="fillacc"/>
+  <path class="neg" d="M 120 84 L 66 102"/><path class="neg" d="M 75.9 103.2 L 66 102 L 73.3 95.1"/>
+  <path class="neg" d="M 300 78 L 356 93"/><path class="neg" d="M 348.3 86.6 L 356 93 L 346.2 94.8"/>
+  <text x="44" y="122">T</text><text x="364" y="110">T</text>
+  <text x="112" y="70">x</text><text x="282" y="64">x + dx</text>
+  <text x="104" y="142">upward part of each pull ≈ T × slope</text>
+</svg>
+```
+
+**3. Add the two pulls.** The net upward force on the piece is the difference of the slopes at its two ends, times $T$:
+$$
+T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx ,
+$$
+where $u_{xx}$, the rate at which the slope changes, is the string's curvature. On a hump the slope falls from left to right, $u_{xx} < 0$, and the net force pulls the piece down.
+
+**4. Newton's law.** The piece's acceleration is $u_{tt}$, the second derivative of the height in time with $x$ held fixed. Mass times acceleration equals force: $\mu\,dx\;u_{tt} = T\,u_{xx}\,dx$. Divide by $\mu\,dx$:
+$$
+u_{tt} = c^2\,u_{xx}, \qquad c^2 = \frac{T}{\mu}.
+$$
+This is the [wave equation](glossary.qmd#wave-equation); $c$ is the speed at which a bump runs along the string.
+
+**What we assumed.** Small slopes, so that the tension stays $T$ and its upward part is $T$ times the slope; the same tension and mass per length everywhere; a perfectly flexible string, with no stiffness (a real string is slightly stiff: [page 7](piano.qmd)); no air and no friction; and ends that are held perfectly still.
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The string's operator and its frequencies <span class="needs">uses derivatives and integration by parts</span></summary>
+<details><summary><span class="label">Step-by-step derivation</span>The same equation from beads with the ends tied <span class="needs">uses matrices, as on page 2</span></summary>
 
-**The operator and its boundary condition.** A string of length $L$, tension $T$ and mass $\mu$ per unit length obeys the [wave equation](glossary.qmd#wave-equation), derived on the [circle page](circle.qmd):
+Put $N$ beads of mass $m$, spaced $h$ apart, on a thread of tension $T$, with both ends tied, so $u_0 = u_{N+1} = 0$. The force on bead $j$ is the one derived on the [ring page](ring.qmd), so $m\ddot u_j = \frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})$. The matrix is now the ring's matrix without its two corner entries:
 $$
-u_{tt} = -c^2 A u, \qquad A = -\frac{d^2}{dx^2}, \qquad c^2 = \frac{T}{\mu}, \qquad u(0) = u(L) = 0 .
+K = \begin{pmatrix} 2 & -1 & & \\ -1 & 2 & \ddots & \\ & \ddots & \ddots & -1\\ & & -1 & 2 \end{pmatrix}.
 $$
-The same rule $-d^2/dx^2$ now acts on shapes on the interval $[0, L]$, and only shapes that vanish at both ends are allowed. That restriction, called a [Dirichlet condition](glossary.qmd#dirichlet), changes which shapes are eigenfunctions, and so changes the spectrum. An operator is the rule together with the shapes it is allowed to act on. As on the circle page, the operator proper is $c^2A$, and we work with $A$.
+Its eigenvectors are $v_j = \sin\big(n\pi j/(N+1)\big)$, the sampled sines, with eigenvalues $4\sin^2\big(n\pi/(2(N+1))\big)$ for $n = 1, \dots, N$. To check: $\sin(\alpha(j+1)) + \sin(\alpha(j-1)) = 2\cos\alpha\,\sin(\alpha j)$, so $(Kv)_j = (2 - 2\cos\alpha)\,v_j = 4\sin^2(\alpha/2)\,v_j$ with $\alpha = n\pi/(N+1)$, and the tied ends hold because $\sin 0 = \sin n\pi = 0$. As on the ring, letting $N \to \infty$ with $L = (N+1)h$ and $\mu = m/h$ fixed gives the wave equation and the frequencies $f_n = \frac{n}{2L}\sqrt{T/\mu}$ found below.
 
-**Spectrum.** The solutions of $-X'' = k^2X$ are $a\cos kx + b\sin kx$. The condition $X(0) = 0$ forces $a = 0$, and $X(L) = 0$ then needs $\sin kL = 0$, so $k = n\pi/L$. The eigenfunctions are $\sin(n\pi x/L)$ for $n = 1, 2, 3, \dots$, with eigenvalues $(n\pi/L)^2$, and the frequencies are
+</details>
+:::
+
+## 2 · The operator
+
+Read the equation of motion as a rule. The acceleration of each point is $c^2u_{xx}$: take the string's shape, find its curvature at every point, and multiply by $c^2$. Minus that, the restoring force per unit mass, is the string's [operator](glossary.qmd#operator), $A = -c^2\,d^2/dx^2$, and the equation reads $u_{tt} = -Au$.
+
+**The ends are tied.** At the nut and the bridge the string cannot move: $u(0, t) = 0$ and $u(L, t) = 0$ at every moment. So $A$ only ever acts on shapes that stay still at both ends. This restriction is a [boundary condition](glossary.qmd#boundary-condition), here a [Dirichlet condition](glossary.qmd#dirichlet). An operator is the rule together with the shapes it is allowed to act on, so the tied ends are part of the operator: they decide which shapes are eigenfunctions, and so which frequencies the string has.
+
+::: {.result}
+**The string's operator.** The equation of motion is
 $$
-f_n = \frac{c\,k_n}{2\pi} = \frac{n}{2L}\sqrt{\frac{T}{\mu}} .
+\begin{gathered} u_{tt} = -A\,u, \\ A = -c^2\,\frac{d^2}{dx^2}, \qquad c^2 = \frac{T}{\mu}, \end{gathered}
 $$
-Exactly whole-number multiples of $f_1$, as on the circle. (There are no other eigenvalues. Multiply $-X'' = \lambda X$ by $X$ and integrate by parts, using $X = 0$ at both ends: $\lambda\int X^2\,dx = \int (X')^2\,dx$. So a zero or negative $\lambda$ would need $\int (X')^2\,dx \le 0$, which only $X = 0$ satisfies.) Each eigenvalue now has [multiplicity](glossary.qmd#multiplicity) 1, not 2: a wave running along the string reflects at the ends instead of going around, and each reflected pair forms one [standing wave](glossary.qmd#standing-wave).
+acting on shapes $X$ on $[0, L]$ with $X(0) = X(L) = 0$. In words: $A$ takes a shape and returns minus $c^2$ times its curvature, and only shapes that stay still at both ends are allowed.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The supports used in the rest of the series <span class="needs">uses derivatives</span></summary>
+
+| Support | What it forbids | Condition | Where |
+|:--|:--|:--|:--|
+| tied end | moving | $u = 0$ | violin |
+| pinned end | moving, and any bending moment (the turning effect that bends a stiff wire) | $u = 0,\ u'' = 0$ | piano |
+| [clamp](glossary.qmd#cantilever) | moving and tilting | $u = 0,\ u' = 0$ | kalimba tine, harmonica reed at the rivet |
+| free tip | nothing: no bending moment and no shear force (the sideways force across a cut) acts there | $u'' = 0,\ u''' = 0$ | kalimba tine, harmonica reed at the tip |
+| open end of a tube | pressure different from the room's | $p = 0$ | flute, clarinet bell |
+| nearly closed end of a tube | air moving | $p_x = 0$ | clarinet at the reed |
+| rim of a drum | moving | $u = 0$ on the rim | drum |
+
+: Boundary conditions in this series. The bar conditions are explained on the kalimba page, the tube conditions on the next page, and the pinned end on the piano page. {.striped}
+
+</details>
+:::
+
+## 3 · Its spectrum
+
+A [mode](glossary.qmd#mode) is a shape that the operator only rescales: $AX = \lambda X$. The shape $X$ is an [eigenfunction](glossary.qmd#eigenfunction), and the number $\lambda$ its [eigenvalue](glossary.qmd#eigenvalue). Released in that shape, the string keeps it and swings at the angular frequency $\omega = \sqrt\lambda$, that is, at $f = \sqrt\lambda/2\pi$ in hertz. The list of all eigenvalues is the [spectrum](glossary.qmd#spectrum). Here is the whole computation.
+
+**1. Which shapes does the operator only rescale?** $AX = \lambda X$ says $-c^2X'' = \lambda X$. Write $\lambda = c^2k^2$ with $k > 0$; then $X'' = -k^2X$, a shape whose curvature is minus $k^2$ times itself. Its solutions are the waves $X = a\cos kx + b\sin kx$. (Zero and negative $\lambda$ give no shape that stays still at both ends; see the first proof fold below.)
+
+**2. Hold the nut still.** $X(0) = 0$ forces $a = 0$, so $X = b\sin kx$.
+
+**3. Hold the bridge still.** $X(L) = 0$ then needs $\sin kL = 0$, so $kL$ is a whole multiple of $\pi$: $k = n\pi/L$ for $n = 1, 2, 3, \dots$ The shape $\sin(n\pi x/L)$ has $n$ arches.
+
+**4. Turn the eigenvalues into frequencies.** The eigenvalues are $\lambda_n = c^2k_n^2 = (n\pi c/L)^2$, so
+$$
+f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{n\,c}{2L} = \frac{n}{2L}\sqrt{\frac{T}{\mu}} = n\,f_1 .
+$$
+
+::: {.result}
+**The string's spectrum.** Eigenfunctions: $\sin(n\pi x/L)$, the shapes with $n = 1, 2, 3, \dots$ arches. Eigenvalues: $\lambda_n = (n\pi c/L)^2$. Frequencies: $f_n = n f_1$, with
+$$
+f_1 = \frac{1}{2L}\sqrt{\frac{T}{\mu}},
+$$
+exactly 1, 2, 3, … times the lowest. The lowest rises with the tension and falls with the length and the mass per length.
+:::
+
+In plain words: a shape with *n* arches is *n* times shorter than the one-arch shape; a shorter shape bends more sharply, and the string pulls back in proportion to how sharply it bends, so it is pulled back *n*² times harder and swings *n* times faster. Each arch shape is exactly half of a wave on a loop twice as long, so the string keeps half of the loop's waves from [page 3](circle.qmd). One thing does change: on a loop each frequency had two waves, one shifted along the loop; on a string a wave cannot run around, it reflects at the ends, and each frequency has a single shape, a [standing wave](glossary.qmd#standing-wave).
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>No other eigenvalues <span class="needs">uses integration by parts</span></summary>
+
+Write the eigenvalue as $\lambda = c^2 k^2$ for some number $k^2$, so that $-X'' = k^2 X$. Multiply by $X$ and integrate from $0$ to $L$. Integrating by parts, the boundary term $-X X'$ vanishes at both ends because $X = 0$ there:
+$$
+k^2\int_0^L X^2\,dx = \int_0^L (X')^2\,dx .
+$$
+So a zero or negative $\lambda$ would need $\int (X')^2\,dx \le 0$, which only the constant shapes satisfy, and the only constant that vanishes at the ends is $X = 0$. Each eigenvalue $(n\pi c/L)^2$ has [multiplicity](glossary.qmd#multiplicity) 1: the boundary condition at the nut removed the cosine.
 
 </details>
 :::
@@ -88,26 +188,29 @@ Take a shape $u$ on $[0, L]$ with $u(0) = u(L) = 0$. Extend it to $[-L, 0]$ by $
 
 1. *Odd shapes stay odd.* If $u(x, t)$ solves the wave equation on the loop, so does $-u(-x, t)$, since two derivatives in $x$ do not change sign under $x \mapsto -x$. Starting from an odd shape at rest, both are the same solution by uniqueness, so the motion stays odd.
 2. *Odd shapes on the loop are exactly string shapes.* An odd periodic shape vanishes at $0$, because $u(0) = -u(0)$, and at $L$, because $u(L) = u(-L) = -u(L)$. Conversely every string shape extends this way.
-3. *So the string's eigenfunctions are the loop's odd eigenfunctions.* On a loop of circumference $2L$ the eigenfunctions are $\cos(n\pi x/L)$ and $\sin(n\pi x/L)$ with eigenvalues $(n\pi/L)^2$. The odd ones are the sines. Each eigenvalue keeps one of its two eigenfunctions, which is why the multiplicity drops from 2 to 1.
+3. *So the string's eigenfunctions are the loop's odd eigenfunctions.* On a loop of circumference $2L$ the eigenfunctions of $-c^2\,d^2/dx^2$ are $\cos(n\pi x/L)$ and $\sin(n\pi x/L)$, with eigenvalues $(n\pi c/L)^2$. The odd ones are the sines. Each eigenvalue keeps one of its two eigenfunctions, which is why the multiplicity drops from 2 to 1.
 
-The *sine series* of a string shape, $u = \sum_n b_n\sin(n\pi x/L)$, is therefore the Fourier series of its odd extension, and everything proved on the circle page carries over. The same trick with an even reflection, $u(-x) = u(x)$, gives the cosines and the condition $u'(0) = u'(L) = 0$; the next page combines both reflections for air in a tube.
-
-</details>
-:::
-
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The same result from beads with the ends tied <span class="needs">uses matrices, as on page 2</span></summary>
-
-Put $N$ beads of mass $m$, spaced $h$ apart, on a thread of tension $T$, with both ends tied, so $u_0 = u_{N+1} = 0$. The force on bead $j$ is the one derived on the [ring page](ring.qmd), so $m\ddot u_j = \frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})$. The matrix is now the ring's matrix without its two corner entries:
-$$
-K = \begin{pmatrix} 2 & -1 & & \\ -1 & 2 & \ddots & \\ & \ddots & \ddots & -1\\ & & -1 & 2 \end{pmatrix}.
-$$
-Its eigenvectors are $v_j = \sin\big(n\pi j/(N+1)\big)$, the sampled sines, with eigenvalues $4\sin^2\big(n\pi/(2(N+1))\big)$ for $n = 1, \dots, N$. To check: $\sin(\alpha(j+1)) + \sin(\alpha(j-1)) = 2\cos\alpha\,\sin(\alpha j)$, so $(Kv)_j = (2 - 2\cos\alpha)\,v_j = 4\sin^2(\alpha/2)\,v_j$ with $\alpha = n\pi/(N+1)$, and the tied ends hold because $\sin 0 = \sin n\pi = 0$. As on the ring, letting $N \to \infty$ with $L = (N+1)h$ and $\mu = m/h$ fixed gives the wave equation and the frequencies $f_n = \frac{n}{2L}\sqrt{T/\mu}$.
+The *sine series* of a string shape, $u = \sum_n b_n\sin(n\pi x/L)$, is therefore the Fourier series of its odd extension, and everything proved on the circle page carries over: every string shape is a sum of the string's modes. The same trick with an even reflection, $u(-x) = u(x)$, gives the cosines and the condition $u'(0) = u'(L) = 0$; the next page combines both reflections for air in a tube.
 
 </details>
 :::
 
-**A light touch keeps only the shapes that are still under the finger.** Where a shape has a still point, a [node](glossary.qmd#node), the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. At the middle, the shapes with a node there are the ones with an even number of arches: 2, 4, 6, …, at 2, 4, 6, … times the open string's frequency, a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a [fifth](glossary.qmd#octave) up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the [piano page](piano.qmd) derives for felt dampers.)
+## 4 · On the spectrum diagram
+
+The stems below are the frequencies in the result box, drawn as multiples of the lowest: stem $n$ sits at $f_n/f_1 = n$, exactly on line $n$, in this ideal model. Below, each stem's height is how far that mode swings just after the pluck; under the demo at the top, how far it still swings a quarter of a second later; the pluck decides how strongly each mode starts, and the finger decides how fast each one dies (stage 5). Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the stems shrink slowly as they go up, and at the middle they shrink fast, with every second stem missing even without a finger.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="vS4" viewBox="0 0 320 96" style="max-width:520px" aria-label="The open string's modes after a pluck 0.16 of the way from the bridge, at 1, 2, 3, ... times the lowest frequency"></svg>
+  <p class="cap">The open string, plucked 0.16 of its length from the bridge: mode n at n times the lowest frequency, exactly on line n, drawn as far as it swings just after the pluck.</p>
+</div>
+</div>
+```
+
+## 5 · What we hear {#what-we-hear}
+
+**A light touch keeps only the shapes that are still under the finger.** Where a shape has a still point, a [node](glossary.qmd#node), the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. The shape $\sin(n\pi x/L)$ is still at the middle exactly when $n$ is even: 2, 4, 6, … arches, at 2, 4, 6, … times the open string's frequency. The survivors repeat twice as often, so you hear a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a [fifth](glossary.qmd#octave) up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the [piano page](piano.qmd) derives for felt dampers.)
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Which modes survive a light touch <span class="needs">uses the sine function</span></summary>
@@ -117,23 +220,29 @@ Let the finger touch the string at the distance $s$ from the [nut](glossary.qmd#
 </details>
 :::
 
-**Where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle. What reaches your ear is the string's push on the bridge, and for the same height a shape with more arches has steeper ends, so it pushes harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard (near the end, a shape with n arches starts about 1/n as large but is n times as steep, so the pushes come out about equal; fold below): the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still exactly where you pulled; the rest push the bridge less and less, the more arches they have: a mellow, hollow sound.
+The string's motion is the sum of its modes, each swinging at its own frequency and fading at its own rate:
+$$
+u(x, t) = \sum_{n} a_n\,e^{-t/\tau_n}\sin\frac{n\pi x}{L}\,\cos(2\pi f_n t + \phi_n).
+$$
+The demo's sound is made this way: it adds up these modes at $f_n = n \times 196$ Hz, each weighted by its push on the bridge, which is what reaches your ear (see "Where you pluck" below); the stems show how far each mode swings. Because every $f_n$ is a whole multiple of $f_1$, apart from the slow fading the sum repeats every $1/f_1$ seconds, and a sound that repeats is a note at that rate ([page 0](note.qmd)).
+
+**Where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle. What reaches your ear is the string's push on the bridge, and for the same height a shape with more arches has steeper ends, so it pushes harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard (near the end, a shape with *n* arches starts about 1/*n* as large but is *n* times as steep, so the pushes come out about equal; fold below): the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still exactly where you pulled; the rest push the bridge less and less, the more arches they have: a mellow, hollow sound.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>How much of each shape a pluck starts <span class="needs">uses integration by parts</span></summary>
 
-By the circle page, every shape of the string is a sum $\sum_n b_n\sin(n\pi x/L)$ of its modes, and $b_n$ says how much of mode $n$ the shape contains. A string pulled aside a distance $d$ at a point $x_p$ from one end, and let go, starts as a triangle. With $x_p$ measured from the nut, where $x = 0$, its sine coefficients are
+Every shape of the string is a sum $\sum_n b_n\sin(n\pi x/L)$ of its modes (second proof fold above), and $b_n$ says how much of mode $n$ the shape contains. A string pulled aside a distance $d$ at a point $x_p$ from one end, and let go, starts as a triangle. With $x_p$ measured from the nut, where $x = 0$, its sine coefficients are
 $$
 b_n = \frac{2dL^2}{\pi^2 x_p(L - x_p)}\cdot\frac{\sin(n\pi x_p/L)}{n^2}.
 $$
 Measuring $x_p$ from the bridge instead only flips the sign of every second $b_n$, since $\sin(n\pi(L - x_p)/L) = \pm\sin(n\pi x_p/L)$, and signs do not change how loud a mode is; from here on $x_p$ is the distance from the bridge. What reaches your ear is driven by the force on the bridge, which is proportional to the string's slope there and so to $n\,b_n$ for mode $n$. Near the bridge, $x_p$ small, $\sin(n\pi x_p/L) \approx n\pi x_p/L$ for the first several modes, so $n b_n$ hardly falls off at all: the high modes are strong and the sound is bright. At the middle, $\sin(n\pi/2)$ is zero for every even $n$, and the rest have $n b_n$ falling like $1/n$: a mellower, hollow sound.
 
-**Where the formula comes from.** Take $L = 1$ and write $q = x_p$. The starting shape is $u_0(x) = dx/q$ for $0 \le x \le q$ and $u_0(x) = d(1 - x)/(1 - q)$ for $q \le x \le 1$. Its sine coefficients are $b_n = 2\int_0^1 u_0(x)\sin(n\pi x)\,dx$, by the perpendicularity of the sines, which the string inherits from the [circle page](circle.qmd) (second fold above). Integrate by parts twice on each straight piece. Since $u_0$ vanishes at both ends and $u_0'' = 0$ on each piece, the only term left comes from the jump in slope at the corner, from $d/q$ just left of it to $-d/(1-q)$ just right of it: $b_n = \frac{2}{n^2\pi^2}\big(\tfrac{d}{q} + \tfrac{d}{1-q}\big)\sin(n\pi q) = \frac{2d\sin(n\pi q)}{n^2\pi^2 q(1-q)}$. The $1/n^2$ comes from that single corner.
+**Where the formula comes from.** Take $L = 1$ and write $q = x_p$. The starting shape is $u_0(x) = dx/q$ for $0 \le x \le q$ and $u_0(x) = d(1 - x)/(1 - q)$ for $q \le x \le 1$. Its sine coefficients are $b_n = 2\int_0^1 u_0(x)\sin(n\pi x)\,dx$, by the perpendicularity of the sines, which the string inherits from the [circle page](circle.qmd). Integrate by parts twice on each straight piece. Since $u_0$ vanishes at both ends and $u_0'' = 0$ on each piece, the only term left comes from the jump in slope at the corner, from $d/q$ just left of it to $-d/(1-q)$ just right of it: $b_n = \frac{2}{n^2\pi^2}\big(\tfrac{d}{q} + \tfrac{d}{1-q}\big)\sin(n\pi q) = \frac{2d\sin(n\pi q)}{n^2\pi^2 q(1-q)}$. The $1/n^2$ comes from that single corner.
 
 </details>
 :::
 
-**Pressing down makes a new end.** Pressing a finger firmly onto the fingerboard is different: it ties the string down there, and only the piece between the finger and the [bridge](glossary.qmd#bridge) sounds. A shorter string sounds higher: two-thirds of the length sounds a fifth up, half the length an octave up, and the [semitone](glossary.qmd#semitone) positions bunch closer together toward the bridge. Play a whole violin: press and hold a string to bow it, slide sideways to finger it, or switch to plucking.
+**Pressing down makes a new end.** Pressing a finger firmly onto the fingerboard is different: it ties the string down there, and only the piece between the finger and the [bridge](glossary.qmd#bridge) sounds. By the formula for $f_1$, a shorter string sounds higher, in inverse proportion to its length: two-thirds of the length sounds a fifth up, half the length an octave up, and the [semitone](glossary.qmd#semitone) positions bunch closer together toward the bridge. Play a whole violin: press and hold a string to bow it, slide sideways to finger it, or switch to plucking.
 
 
 
@@ -160,7 +269,7 @@ The *nut* is the end of the string near the tuning pegs, and an [open string](gl
 </details>
 :::
 
-**The bow locks the note.** A bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per period. By 1860 Hermann von Helmholtz had watched this through a *vibration microscope*: the string forms two straight pieces joined by one sharp corner, which races between the bridge and the finger. This is [Helmholtz motion](glossary.qmd#helmholtz-motion). It repeats exactly, so its partials sit exactly on the lines. That matters because a real string is slightly stiff, and its own frequencies run a little sharp of the lines ([page 7](piano.qmd)): plucked, each mode rings at its own slightly sharp frequency and fades; bowed, the stick and slip lock the whole motion into exact repetition. The locking comes from the bow's friction, which is not [linear](glossary.qmd#linear); this page shows it but does not derive it.
+**The bow locks the note.** A bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per period. By 1860 Hermann von Helmholtz had watched this through a *vibration microscope*: the string forms two straight pieces joined by one sharp corner, which races between the bridge and the finger. This is [Helmholtz motion](glossary.qmd#helmholtz-motion). It repeats exactly, so its partials sit exactly on the lines. (The demo's bowed voice adds a gentle vibrato, as players do, which wobbles the lines slightly.) That matters because a real string is slightly stiff, and its own frequencies run a little sharp of the lines ([page 7](piano.qmd)): plucked, each mode rings at its own slightly sharp frequency and fades; bowed, the stick and slip lock the whole motion into exact repetition. The locking comes from the bow's friction, which is not [linear](glossary.qmd#linear); this page shows it but does not derive it.
 
 ```{=html}
 <div class="ins">
@@ -189,28 +298,12 @@ Where this comes from: at each moment the string is two straight pieces, like a 
 
 ## What we found
 
-Tying a string's ends down keeps half of the loop's waves, so its frequencies still land exactly on the lines. A light touch drains every wave that moves under the finger, so only those already still there survive: at the middle, every second one, which is a note an octave up. And the operator lesson: the rule for what the ends may do, a [boundary condition](glossary.qmd#boundary-condition), is part of the operator. It decides which shapes are allowed, and so which frequencies.
-
-::: {.derive}
-<details><summary><span class="label">Details</span>The supports used in the rest of the series <span class="needs">uses derivatives</span></summary>
-
-| Support | What it forbids | Condition | Where |
-|:--|:--|:--|:--|
-| tied end | moving | $u = 0$ | violin, piano (approximately) |
-| [clamp](glossary.qmd#cantilever) | moving and tilting | $u = 0,\ u' = 0$ | kalimba tine, harmonica reed at the rivet |
-| free tip | nothing: no bending moment (the turning effect that bends a bar) and no shear force (the sideways force across a cut) acts there | $u'' = 0,\ u''' = 0$ | kalimba tine, harmonica reed at the tip |
-| open end of a tube | pressure different from the room's | $p = 0$ | flute, clarinet bell |
-| nearly closed end of a tube | air moving | $p_x = 0$ | clarinet at the reed |
-| rim of a drum | moving | $u = 0$ on the rim | drum |
-
-: Boundary conditions in this series. The bar conditions are explained on the kalimba page, and the tube conditions on the next page. {.striped}
-
-</details>
-:::
+Newton's law on a short piece of string gave the wave equation, $u_{tt} = c^2u_{xx}$. Read as a rule, with the ends tied, it is the operator $A = -c^2\,d^2/dx^2$ on shapes that vanish at both ends. Its spectrum is $\lambda_n = (n\pi c/L)^2$, with eigenfunctions the arch shapes $\sin(n\pi x/L)$, so the frequencies are exactly $n f_1$, with $f_1 = \frac{1}{2L}\sqrt{T/\mu}$: on the diagram, every stem on a line, and what we hear is a clear note. A light touch drains every mode that moves under the finger, so only the eigenfunctions already still there survive: at the middle, the even ones, a note an octave up. And the operator lesson: the rule for what the ends may do, a [boundary condition](glossary.qmd#boundary-condition), is part of the operator. It decides which shapes are allowed, and so which frequencies.
 
 ::: {.family}
 **Same operator, different constants.** Guitar, cello and harp strings obey the same equation with the same tied ends. They differ in length, tension and mass per length, which set the lowest frequency, and in how they are played: plucked (guitar, harp) or bowed (violin, cello).
 :::
+
 
 ## The next puzzle
 
@@ -221,7 +314,7 @@ Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thu
 [← 3 · Loop](circle.qmd) · [Next: 5 · Clarinet →](clarinet.qmd)
 
 ::: {.refs}
-**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 2 (strings) and chapter 10 (bowed strings). J. Wolfe, [The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html) and [Violin acoustics: an introduction](https://www.phys.unsw.edu.au/jw/violintro.html), UNSW. H. Helmholtz, "On the motion of the strings of a violin", *Proceedings of the Philosophical Society of Glasgow* 5 (1860–64), 17–21, read 19 December 1860 ([archive.org](https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5)). H. von Helmholtz, *On the Sensations of Tone*, 1863 (English translation by A. J. Ellis, 1875). The four body resonances in the demo are rough illustrative values, not measured from a particular violin: Wolfe gives the air resonance at about 300 Hz and notes that the bridge passes vibration to the body well from about 1 to 4 kHz.
+**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 2 (strings, including the wave equation for a string) and chapter 10 (bowed strings). J. Wolfe, [The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html) and [Violin acoustics: an introduction](https://www.phys.unsw.edu.au/jw/violintro.html), UNSW. H. Helmholtz, "On the motion of the strings of a violin", *Proceedings of the Philosophical Society of Glasgow* 5 (1860–64), 17–21, read 19 December 1860 ([archive.org](https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5)). H. von Helmholtz, *On the Sensations of Tone*, 1863 (English translation by A. J. Ellis, 1875). The four body resonances in the demo are rough illustrative values, not measured from a particular violin: Wolfe gives the air resonance at about 300 Hz and notes that the bridge passes vibration to the body well from about 1 to 4 kHz.
 :::
 
 ```{=html}
@@ -421,7 +514,7 @@ Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thu
   }
   function pluck() {
     setup(); read(); t0 = performance.now();
-    C.play(C.render(amps.map(function (a, i) { return { f: F1 * (i + 1), amp: a, tau: 1 / gam[i] }; }), 3), 0.8);
+    C.play(C.render(amps.map(function (a, i) { return { f: F1 * (i + 1), amp: a * (i + 1), tau: 1 / gam[i] }; }), 3), 0.8); // heard through the bridge force, n times the displacement amplitude
   }
   function draw(now) {
     var d = C.fit(cv), W = cv.width, H = cv.height, L = 18 * d, R = W - 18 * d, y0 = H * 0.5, A = H * 0.32, t = (now - t0) / 1000;
@@ -456,6 +549,21 @@ Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thu
   document.getElementById("tPluck").addEventListener("click", pluck);
   C.onTheme(read);
   setup(); read(); requestAnimationFrame(draw);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    var p = []; for (var n = 1; n <= 12; n++) p.push({ ratio: n, amp: Math.abs(Math.sin(n * Math.PI * 0.16)) / (n * n) });
+    C.stems(document.getElementById("vS4"), p, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 ```

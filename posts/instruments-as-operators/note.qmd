@@ -10,11 +10,11 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[The Shape of a Sound](index.qmd) · [Map](map.qmd) · [1 Spring →](oscillator.qmd)
+[The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [1 Spring →](oscillator.qmd)
 :::
 
 ::: {.pageinfo}
-Start here. About 7 minutes, plus the folds.
+Start here. Math: cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -43,12 +43,12 @@ Play the note, then the note without its 220 Hz part, and watch the wave.
 ```
 
 ::: {.gist}
-**The gist.** A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave's shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time.
+**The gist.** A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave's shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time. This page is the last step of the series' recipe, what we hear; every later page starts from Newton's law, computes an instrument's frequencies as the spectrum of an operator, and checks whether they sit on these whole-number lines.
 :::
 
 ## The pitch ruler
 
-The stems under the wave are the note's frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the *pitch ruler*, and every page of this series puts an instrument on it. A note's frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the [fundamental](glossary.qmd#fundamental). Hearing the pitch without it is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
+The stems under the wave are the note's frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the *pitch ruler*, and every page of this series puts an instrument on it: stems on the pitch ruler, one per mode, make the spectrum diagram that stage 4 of every instrument page draws. A note's frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the [fundamental](glossary.qmd#fundamental). Hearing the pitch without it is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
 
 Open "Mix your own" and try the presets. The stems' heights change, and so does the sound's color, its [timbre](glossary.qmd#timbre), but the pitch stays put as long as the base frequency does. Keep only 2×, 4×, 6× and 8×, and the sound repeats twice as often: the base becomes 440 Hz, and the pitch jumps up an [octave](glossary.qmd#octave).
 
@@ -58,18 +58,14 @@ Open "Mix your own" and try the presets. The stems' heights change, and so does 
 
 **Every repeating sound is a chord on the lines.** A pure tone is a single sine-shaped wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier's theorem, and page 3 shows where it comes from. These tones are the sound's [partials](glossary.qmd#partial), and the one at the repetition rate itself is the fundamental. The repetition rate sets the pitch, whether or not the fundamental is actually there; the partials' strengths set the timbre.
 
-::: {.derive}
-<details><summary><span class="label">Precisely</span>Periodic signals and their Fourier series <span class="needs">uses sums of cosines</span></summary>
-
-Sound is a pressure signal $p(t)$. It is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$; take $P$ to be the shortest such time. The pitch is the repetition rate $f = 1/P$, for rates in the range where we hear pitch.
-
-Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its [Fourier series](glossary.qmd#fourier-series),
+In symbols: sound is a pressure signal $p(t)$. It is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$; take $P$ to be the shortest such time. The pitch is the repetition rate $f = 1/P$, for rates in the range where we hear pitch. Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its [Fourier series](glossary.qmd#fourier-series): with $f = 1/P$,
 $$
-p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
+p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n) .
 $$
 The $n = 0$ term is a constant, the average pressure, usually zero. The possible frequencies $nf$ are fixed by the period alone, and a given sound may use only some of them: a pure tone uses only $f$. The amplitudes $b_n$ and the phases $\phi_n$ carry everything else about the sound's shape, and the ear is mostly insensitive to the phases.
 
-</details>
+::: {.result}
+**A note, in symbols.** A sound that repeats every $P$ seconds contains only the frequencies $f, 2f, 3f, \dots$ with $f = 1/P$: whole-number multiples of its repetition rate, which is its pitch.
 :::
 
 ::: {.qa}
@@ -80,7 +76,7 @@ No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is
 </details>
 :::
 
-**Why whole numbers matter.** Turn it around. If something vibrates at several frequencies at once, its sound repeats only when they are all whole-number multiples of one common frequency. For two tones, the ratio of their frequencies must be a fraction, such as 3/2; the sound then repeats every 2 cycles of the lower tone. A ratio like 1.59, which is 159/100, repeats only every 100 cycles of the lower tone, far too slowly to hear as one pitch. Try it:
+**Why whole numbers matter.** Turn it around. If something vibrates at several frequencies at once, its sound repeats only when they are all whole-number multiples of one common frequency. For two tones, the ratio of their frequencies must be a fraction, such as 3/2; the sound then repeats every 2 cycles of the lower tone. The reason is short. Write the ratio in lowest terms, $f_2/f_1 = j/k$, and wait $P = k/f_1$ seconds. In that time the lower tone completes $f_1P = k$ whole cycles and the upper one $f_2P = j$ whole cycles, so both are back where they started, and the sum begins again: it repeats every $k$ cycles of the lower tone. A ratio like 1.59, which is 159/100, repeats only every 100 cycles of the lower tone, far too slowly to hear as one pitch. Try it:
 
 ```{=html}
 <div class="ins">
@@ -96,8 +92,10 @@ No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is
 
 Not every instrument is exact. Frequencies very near whole-number multiples still sound like one note: a piano's are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.
 
+**Where the frequencies come from.** This page took the frequencies as given. Every later page computes them. Newton's law, applied to a small piece of the instrument, gives a rule that turns the instrument's shape into the force pulling it back: the instrument's [operator](glossary.qmd#operator). Writing the motion as $u_{tt} = -A\,u$, where $u$ is the instrument's shape (how far each point is from rest), $u_{tt}$ its acceleration and $A$ the operator, each special number $\lambda$ of $A$, an [eigenvalue](glossary.qmd#eigenvalue), gives one frequency, $f = \sqrt{\lambda}/2\pi$. The list of eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Whether the spectrum lands on the lines of the pitch ruler is the first test of whether the instrument plays a note; pages 6 and 6b show what the spectrum alone does not decide. The [spectrum of an operator](spectrum.qmd) page sets out this recipe, from Newton's law to what we hear, and runs it on every instrument.
+
 ::: {.derive}
-<details><summary><span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is a fraction <span class="needs">uses cosines and divisibility</span></summary>
+<details><summary><span class="label">Proof</span>The converse: if two tones repeat together, their ratio is a fraction, and the shortest period <span class="needs">uses cosines and divisibility</span></summary>
 
 Let $s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)$ with $0 < f_1 < f_2$.
 
@@ -112,7 +110,7 @@ The shortest period $k/f_1$ grows with the denominator $k$. A ratio like 1.59 = 
 
 ## What we found
 
-A note is a sound that repeats, and its pitch is how often it repeats. So a note's frequencies sit on the lines of one pitch ruler, whole-number multiples of one base frequency, and that base frequency need not be present itself. Every later page puts an instrument on this ruler: on the lines, a note; off the lines, a clang or a thud.
+A note is a sound that repeats, and its pitch is how often it repeats. So a note's frequencies sit on the lines of one pitch ruler, whole-number multiples of one base frequency, and that base frequency need not be present itself. Every later page derives an instrument's operator from Newton's law, computes its spectrum, and puts the frequencies on this ruler: on the lines, a note; off the lines, a clang or a thud.
 
 ## The next puzzle
 

@@ -10,18 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 6b Harmonica](harmonica.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [8 Drum →](drum.qmd)
+[← 6b Harmonica](harmonica.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [8 Drum →](drum.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). About 8 minutes, plus the folds and the playable piano.
+Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). Math: up to partial derivatives (explained). About 3 minutes for the summary; about 25 with the mathematics and the playable piano.
 :::
 
 ::: {.puzzle}
 Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](glossary.qmd#equal-temperament), the tuning in which all twelve semitones are the same ratio. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
 :::
 
-Listen to an octave tuned to exactly 2 : 1, then to a stretched one. The slow wobble in loudness is called a [beat](glossary.qmd#beats).
+Listen first: an octave tuned to exactly 2 : 1, then a stretched one. The slow wobble in loudness is called a [beat](glossary.qmd#beats).
 
 ```{=html}
 <style>
@@ -74,54 +74,29 @@ Listen to an octave tuned to exactly 2 : 1, then to a stretched one. The slow wo
 ```
 
 ::: {.gist}
-**The gist.** A piano wire is pulled tight like a string, but it is also stiff steel, like a kalimba tine, and stiffness pushes its overtones slightly sharp, more so the higher they go. A tuner sets an octave by matching the upper note to the lower note's second [partial](glossary.qmd#partial), the second frequency in its sound, and on a stiff wire that partial sits a little above twice the fundamental. Tune to exactly 2 : 1 and the two beat; stretch the octave and they agree. Raise the stiffness slider and the beat gets faster.
+**The recipe on this instrument, in brief.**
+
+1. *Newton's law* on a short piece of piano wire: tension pulls it like a string, and stiff steel pushes back like a kalimba tine; the two forces add.
+2. *The operator* is the string's plus the bar's, $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$, with pinned ends.
+3. *Its spectrum*: the frequencies are $f_n = n f_0\sqrt{1 + Bn^2}$, with $B$ a small stiffness constant that pushes them a little sharp.
+4. *On the diagram*: every [partial](glossary.qmd#partial), each single frequency in the sound, sits a little sharp of its line, more so the higher it goes.
+5. *What we hear*: one clear note, but the second partial sits a little above twice the fundamental, so an octave tuned to exactly 2 : 1 beats against it; tuners stretch the octave until the beat stops.
+
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
-## On the pitch ruler
+## 1 · Newton's law: the equation of motion
 
-Here are the frequencies of a piano note, middle C, or the last key you played on the keyboard below. They sit a little sharp of the gray lines, and the higher the [partial](glossary.qmd#partial), the further sharp; the readout gives the shift in [cents](glossary.qmd#cents), hundredths of a semitone. The low partials are so close to the lines that the ear still hears one clear note. Each stem's height is how strongly the hammer starts that mode; the hammer strikes an eighth of the way along, where the 8th and 16th modes stand still, so those two are nearly silent.
+*Mathematics used: partial derivatives (explained) and the small-angle approximation.*
 
-```{=html}
-<div class="ins">
-<div class="panel">
-    <h3>Partials of the last key</h3>
-    <svg class="spec" id="pSpec" viewBox="0 0 320 120" aria-label="Partials of the last key played"></svg>
-    <div class="readout" id="pPart"></div>
-    <p class="cap">Try the soft pedal or the practice mute on the keyboard below: the high stems shrink, but none of them moves.</p>
-  </div>
-</div>
-```
+Here is where the piano's frequencies come from. Apply Newton's law, mass times acceleration equals force, to one short piece of wire. Two forces act on it, tension and bending, and the piano's whole story is that they add.
 
-## How it works
-
-**A piano wire is a string and a bar at once.** Tension pulls the wire straight, as on a violin, and the steel also resists being bent, as in a kalimba tine. The two restoring forces simply add. Bending resists short wiggles far more than long ones, so it barely touches the fundamental but pushes the high overtones sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic). For a middle C wire, the 10th partial (the fundamental counts as the 1st) sits about a third of a semitone above ten times the fundamental. Short treble strings, thick for their length, are the stiffest.
-
-::: {.derive}
-<details><summary><span class="label">Precisely</span>The wire's equation and its frequencies <span class="needs">uses partial derivatives</span></summary>
-
-**The operator.** Forces per unit length add. Tension contributes $T\,u_{xx}$, as for the [string](violin.qmd), and bending contributes $-EI\,u_{xxxx}$, as for the [kalimba](kalimba.qmd), so with $\mu$ the mass per unit length (density times cross-section area, the $\rho S$ of the kalimba page)
+**1. One small piece.** Follow the stretch of wire between $x$ and $x+dx$, and let $u(x,t)$ be its height above the rest line at time $t$; subscripts are [partial derivatives](glossary.qmd#partial-derivative). The piece has mass $\mu\,dx$, where $\mu$ is the mass per unit length, and vertical acceleration $u_{tt}$, so Newton's law for its up-and-down motion reads
 $$
-\mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx}, \qquad\text{that is}\qquad u_{tt} = -\mathcal{L}u, \quad \mathcal{L} = -c^2\partial_x^2 + \kappa^2\partial_x^4 ,
+\mu\,dx\,u_{tt} = \text{net force on the piece}.
 $$
-with $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$. Here $\partial_x^2$ means two derivatives in $x$, the same as the subscript $xx$, and $\mathcal{L}$ is this page's operator, playing the role $A$ played before. Treat the ends as *pinned*: held in place but free to pivot, so $u = 0$ and, since a pivot exerts no bending moment and the moment is $EI\,u_{xx}$, also $u_{xx} = 0$. Real piano strings are held a little more firmly than that, which shifts the numbers slightly but not the picture.
 
-**Spectrum.** Pinned ends make $\sin(n\pi x/L)$ an eigenfunction of both terms at once, so here the two operators' eigenvalues simply add; that is special to pinned ends, where the two operators share their eigenfunctions, and with clamped ends the formula needs a small correction. Substituting gives $\omega^2 = c^2k^2 + \kappa^2 k^4$ with $k = n\pi/L$, so
-$$
-f_n = n f_0\sqrt{1 + Bn^2}, \qquad B = \frac{\pi^2 EI}{T L^2},
-$$
-where $f_0 = c/2L$ is the lowest frequency the same string would have without stiffness. The actual fundamental is $f_1 = f_0\sqrt{1 + B}$.
-
-The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials](glossary.qmd#partial) run noticeably sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic). For a middle C wire $B$ is about $4.4\times10^{-4}$, and the 10th partial sits about 37 [cents](glossary.qmd#cents) sharp of ten times the fundamental; the next fold has the arithmetic. Since $I$ grows like the fourth power of the wire's diameter and $B$ falls like $1/L^2$, short treble strings, thick for their length, are the stiffest.
-
-</details>
-:::
-
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a short piece of wire to its frequencies <span class="needs">uses partial derivatives</span></summary>
-
-**1. One small piece.** Follow the stretch of wire between $x$ and $x+dx$. Its mass is $\mu\,dx$ and its vertical acceleration is $u_{tt}$, so Newton's law says $\mu\,dx\,u_{tt}$ equals the net vertical force on it. Two forces act: the pull of tension, and the wire's resistance to bending.
-
-**2. Tension.** The rest of the string pulls on each end of the piece with force $T$, along the string.
+**2. Tension pulls a curved piece toward the inside of its curve.** The rest of the wire pulls on each end of the piece with the tension $T$, along the wire.
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 170" role="img" aria-label="A curved piece of string with tension pulling along the string at both ends">
@@ -137,41 +112,101 @@ The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials]
 </svg>
 ```
 
-At the right end the pull points along the slope $u_x(x+dx)$, so for small slopes its vertical part is $T\sin\theta \approx T\tan\theta = T\,u_x(x+dx)$. At the left end it is $-T\,u_x(x)$. Together they give $T\,[u_x(x+dx) - u_x(x)] \approx T\,u_{xx}\,dx$. A curved piece feels a net pull toward its center of curvature; a straight piece feels none.
-
-**3. Bending.** The wire also resists bending, exactly like the kalimba's tine. The [kalimba page](kalimba.qmd) derives the bending force per unit length, $-EI\,u_{xxxx}$, where $E$ is steel's [Young's modulus](glossary.qmd#youngs-modulus) and $I = \pi d^4/64$ is the [second moment of area](glossary.qmd#second-moment) of a round wire of diameter $d$.
-
-**4. Newton's law.** Adding the two forces gives $\mu\,dx\,u_{tt} = T\,u_{xx}\,dx - EI\,u_{xxxx}\,dx$. Dividing by $\mu\,dx$, with $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$,
+At the right end the pull points along the wire, which makes a small angle $\theta$ with the horizontal there. Its upward part is $T\sin\theta$; for a small angle $\sin\theta \approx \tan\theta$ (both are about $\theta$ in radians), and $\tan\theta$ is the slope $u_x(x+dx)$, so the upward part is $T\,u_x(x+dx)$. At the left end it is $-T\,u_x(x)$. Together,
 $$
-u_{tt} = -\mathcal{L}u, \qquad \mathcal{L} = -c^2\partial_x^2 + \kappa^2\partial_x^4 .
+T\,\big[u_x(x+dx) - u_x(x)\big] \approx T\,u_{xx}\,dx .
+$$
+A straight piece feels no net pull; a curved one is pulled toward the inside of its curve. This is the violin string's force, unchanged.
+
+**3. Bending pushes back too.** Steel also resists being bent, exactly like the kalimba's tine, and the [kalimba page](kalimba.qmd) derives this force step by step. How sharply the wire bends, its curvature $u_{xx}$, sets a turning effect inside it, the bending moment $EI\,u_{xx}$. How that moment changes along the wire sets the sideways force across each cut, the shear force $-EI\,u_{xxx}$. And how the shear force changes along the wire is the net force on the piece:
+$$
+\text{bending force} = -EI\,u_{xxxx}\,dx ,
+$$
+where $E$ is steel's [Young's modulus](glossary.qmd#youngs-modulus), how stiff the material is, and $I = \pi d^4/64$ is the [second moment of area](glossary.qmd#second-moment) of a round wire of diameter $d$, how strongly its cross-section resists bending.
+
+**4. Newton's law.** The two forces simply add:
+$$
+\mu\,dx\,u_{tt} = T\,u_{xx}\,dx - EI\,u_{xxxx}\,dx .
+$$
+Dividing by $\mu\,dx$, and writing $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$,
+$$
+u_{tt} = c^2\,u_{xx} - \kappa^2\,u_{xxxx}.
 $$
 
-**5. Ends.** The bridge at one end and a metal bearing point at the other hold the wire in place, so $u = 0$. If they let the wire pivot freely, they exert no moment, so $M = EI\,u_{xx} = 0$. These are the pinned conditions $u = u_{xx} = 0$.
+**What we assumed.** A plain (unwound) steel wire: bass strings are wound with copper, which adds mass but little stiffness. Small slopes; a tension that does not change as the wire flexes; a uniform wire; the spin of each thin slice neglected (Rayleigh's correction for it adds a small term); and no damping, which the fold in stage 5 adds back.
 
-**6. Spectrum.** Try $u = \sin(kx)\cos(\omega t)$ with $k = n\pi/L$, which satisfies both pinned conditions. Then $u_{xx} = -k^2u$ and $u_{xxxx} = k^4u$, so the equation becomes $-\omega^2 = -c^2k^2 - \kappa^2k^4$, that is
+## 2 · The operator
+
+Dividing by the mass per unit length puts the equation in the series' form $u_{tt} = -A\,u$: the force per unit mass is a fixed rule applied to the wire's shape, and that rule is the wire's [operator](glossary.qmd#operator). The ends complete it. The bridge at one end and a metal bearing point at the other hold the wire in place, so $u = 0$ there. If they let the wire pivot freely they exert no bending moment, and the moment is $EI\,u_{xx}$, so also $u_{xx} = 0$. These are called *pinned* ends. Real piano strings are held a little more firmly than pinned, which shifts the numbers slightly but not the picture.
+
+::: {.result}
+**The piano wire's operator.** The equation of motion is $u_{tt} = -A\,u$, with
 $$
-\omega^2 = c^2k^2\Big(1 + \frac{EI}{T}\,k^2\Big) = \Big(\frac{n\pi c}{L}\Big)^2\Big(1 + \frac{\pi^2EI}{TL^2}\,n^2\Big).
+A = -c^2\frac{d^2}{dx^2} + \kappa^2\frac{d^4}{dx^4},
 $$
-Taking square roots gives $f_n = n f_0\sqrt{1 + Bn^2}$, with $f_0 = c/2L$ and $B = \pi^2EI/TL^2$.
-
-**7. How big is $B$?** For a middle C wire, roughly $d = 1$ mm and $L = 0.6$ m, with steel's $E = 2\times10^{11}$ Pa and density $7850$ kg/m³; a tension of about $610$ N then gives middle C. So $I \approx 4.9\times10^{-14}$ m$^4$ and $B \approx 4.4\times10^{-4}$. The 10th partial, at $10f_0\sqrt{1 + 100B}$, then sits $1200\log_2\sqrt{(1 + 100B)/(1 + B)} \approx 37$ cents sharp of ten times the fundamental $f_0\sqrt{1 + B}$. These numbers are rough; real strings vary.
-
-**8. What was assumed.** Small slopes; tension unchanged as the wire flexes; the wire's rotational inertia neglected (Rayleigh's correction adds a small term); a uniform wire.
-
-</details>
+where $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$, acting on shapes with $u = u_{xx} = 0$ at both ends. The first term is the string's operator, from tension; the second is the kalimba's, from bending. A piano wire is both at once: operators add. In words: the force per unit mass on each point is the string's pull toward the inside of the curve plus the bar's push back against bending.
 :::
 
-**Why exact octaves beat.** A tuner sets an octave by ear, listening for beats between the lower note's second partial and the upper note's fundamental. Two nearly equal frequencies played together beat at a rate equal to their difference. On a stiff wire the lower note's second partial is a little more than twice its fundamental, so an upper note tuned to exactly twice the fundamental sits just below that partial, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise; tick "Play every partial" in the demo at the top to hear it, as the stretched octave then wobbles too. Repeated across the keyboard, this is *stretch tuning*: the top of a piano ends up sharp and the bottom flat, compared with equal temperament. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
+## 3 · Its spectrum
 
-::: {.derive}
-<details><summary><span class="label">Precisely</span>How much wider than 2 : 1 <span class="needs">uses square-root approximations</span></summary>
+A [mode](glossary.qmd#mode) is a shape $X$ that the operator only rescales: $A X = \lambda X$, with the number $\lambda$ called its [eigenvalue](glossary.qmd#eigenvalue). Released in that shape, the wire keeps it and swings as $X(x)\cos\omega t$, with $\omega = \sqrt{\lambda}$, so at the frequency $f = \sqrt{\lambda}/2\pi$. The list of all the eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Here is the wire's.
 
-A tuner sets an octave by listening for [beats](glossary.qmd#beats), a slow wobble in loudness, between the lower note's second partial and the upper note's fundamental. Beats happen when two nearly equal frequencies add, at a rate equal to their difference. The lower note's fundamental is $f_0\sqrt{1+B}$ and its second partial is $2f_0\sqrt{1+4B}$. Their ratio is $2\sqrt{(1+4B)/(1+B)} \approx 2\,(1 + 2B)(1 - B/2) \approx 2\,(1 + 3B/2)$, using $\sqrt{1+x} \approx 1 + x/2$ and $1/\sqrt{1+x} \approx 1 - x/2$ for small $x$: the second partial is more than twice the fundamental by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental therefore sits a little below that second partial, and the two beat. To silence the beats the tuner raises the upper note until its fundamental matches the lower note's second partial, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise. Repeated across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), in which every semitone is exactly the ratio $2^{1/12}$, the top of a piano is tuned sharp and the bottom flat.
+**1. Try a sine, which already satisfies the pinned ends.** Take $X = \sin(kx)$ with $k = n\pi/L$, where $L$ is the wire's length and $n = 1, 2, 3, \dots$ It is zero at both ends, and so is $X'' = -k^2X$: both pinned conditions hold.
 
-</details>
+**2. Apply the operator: each term rescales the same sine.** Two derivatives give $X'' = -k^2X$ and four give $X'''' = k^4X$, so
+$$
+A X = \big(c^2k^2 + \kappa^2k^4\big)\,X .
+$$
+The sine is rescaled, not reshaped: it is an [eigenfunction](glossary.qmd#eigenfunction), with eigenvalue $\lambda_n = c^2k^2 + \kappa^2k^4$. Each term rescales the same sine, so the string's eigenvalue and the bar's simply add. That is special to pinned ends, where the two operators share their eigenfunctions; with clamped ends the formula needs a small correction. There are no other modes: the sines already form a complete set (page 4), and since the operator is symmetric, an eigenfunction for any other eigenvalue would be perpendicular to every sine, hence zero.
+
+**3. The frequencies: the string's, nudged up by stiffness.** Factoring out the string's part,
+$$
+\omega_n^2 = \lambda_n = c^2k^2\Big(1 + \frac{EI}{T}\,k^2\Big),
+$$
+and with $k = n\pi/L$,
+$$
+\omega_n^2 = \Big(\frac{n\pi c}{L}\Big)^2\Big(1 + \frac{\pi^2EI}{TL^2}\,n^2\Big).
+$$
+Taking the square root and dividing by $2\pi$ gives the result.
+
+::: {.result}
+**The piano wire's spectrum.** Modes $\sin(n\pi x/L)$, $n = 1, 2, 3, \dots$, with frequencies
+$$
+f_n = n f_0\sqrt{1 + Bn^2},
+$$
+with eigenvalues $\lambda_n = (2\pi f_n)^2$ and the stiffness constant $B = \pi^2 EI/(T L^2)$. Here $f_0 = c/2L$ is the lowest frequency the same wire would have without stiffness; the actual fundamental is $f_1 = f_0\sqrt{1 + B}$. Each partial sits at $f_n/f_1 = n\sqrt{(1 + Bn^2)/(1 + B)}$ times the fundamental: a little above $n$, more so the larger $n$.
 :::
 
-**Hammer, dampers and pedals: none of them moves a frequency.** The frequencies belong to the wire itself, set by its tension and stiffness. The hammer decides how much of each mode starts, and the felt dampers decide how fast each mode dies. Every control a pianist touches does one of these two things; only the tuner's wrench, which changes the tension, moves the frequencies. You can try them all on the whole piano further down.
+The stiffness constant $B$ is small, but it multiplies $n^2$, so the fundamental barely moves while high [partials](glossary.qmd#partial) run noticeably sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic).
+
+**How big is $B$?** For a middle C wire, roughly $d = 1$ mm and $L = 0.6$ m, with steel's $E = 2\times10^{11}$ Pa and density $7850$ kg/m³; a tension of about $610$ N then gives middle C. So $I \approx 4.9\times10^{-14}$ m$^4$ and $B \approx 4.4\times10^{-4}$. The 10th partial (the fundamental counts as the 1st), at $10f_0\sqrt{1 + 100B}$, then sits $1200\log_2\sqrt{(1 + 100B)/(1 + B)} \approx 37$ [cents](glossary.qmd#cents) sharp of ten times the fundamental, about a third of a semitone. These numbers are rough; real strings vary. Since $I$ grows like the fourth power of the diameter and $B$ falls like $1/L^2$, short treble strings, thick for their length, are the stiffest.
+
+## 4 · On the spectrum diagram
+
+Here are the frequencies of a piano note, middle C, or the last key you played on the keyboard below. Each stem is one $f_n/f_1 = n\sqrt{(1 + Bn^2)/(1 + B)}$ from the result box of stage 3, with that key's $B$. They sit a little sharp of the gray lines, and the higher the [partial](glossary.qmd#partial), the further sharp; the readout gives the shift in [cents](glossary.qmd#cents), hundredths of a semitone. The low partials are so close to the lines that the ear still hears one clear note. Each stem's height is how strongly the hammer starts that mode; the hammer strikes an eighth of the way along, where the 8th and 16th modes stand still, so those two are nearly silent.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <h3>Partials of the last key</h3>
+    <svg class="spec" id="pSpec" viewBox="0 0 320 120" aria-label="Partials of the last key played"></svg>
+    <div class="readout" id="pPart"></div>
+    <p class="cap">Try the soft pedal or the practice mute on the keyboard below: the high stems shrink, but none of them moves.</p>
+  </div>
+</div>
+```
+
+## 5 · What we hear {#what-we-hear}
+
+**Why exact octaves beat.** A tuner sets an octave by ear, listening for [beats](glossary.qmd#beats) between the lower note's second partial and the upper note's fundamental. Two nearly equal frequencies played together beat at a rate equal to their difference. The spectrum says where the lower note's second partial sits:
+$$
+\frac{f_2}{f_1} = 2\sqrt{\frac{1 + 4B}{1 + B}} \approx 2\Big(1 + \frac{3B}{2}\Big),
+$$
+using $\sqrt{1+x} \approx 1 + x/2$ (square it: $(1 + x/2)^2 = 1 + x + x^2/4$, and $x^2/4$ is tiny) and $1/\sqrt{1+x} \approx 1 - x/2$ for small $x$. So the second partial is more than twice the fundamental, by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental sits just below it, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise; tick "Play every partial" in the demo at the top to hear it, as the stretched octave then wobbles too. Repeated across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), the top of a piano ends up sharp and the bottom flat. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
+
+A struck wire moves as the sum of its modes, $u = \sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, so its sound is a sum of tones at the frequencies $f_n$ of stage 3, each fading at its own rate (damping, added to the model); the demos on this page synthesize it exactly this way. Because the low partials sit so close to the lines, the ear hears one clear note.
+
+**Hammer, dampers and pedals: none of them moves a frequency.** The frequencies belong to the operator, set by the wire's tension and stiffness. The hammer decides how much of each mode starts, and the felt dampers decide how fast each mode dies. Every control a pianist touches does one of these two things; only the tuner's wrench, which changes the tension, changes the operator and moves the frequencies. You can try them all on the whole piano further down.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>What each control changes</summary>
@@ -198,7 +233,7 @@ $$
 \mu\,u_{tt} + b(x,t)\,u_t = T\,u_{xx} - EI\,u_{xxxx} + f(x,t).
 $$
 
-Each term has one job. The operator, $T\,u_{xx} - EI\,u_{xxxx}$, fixes the frequencies and the mode shapes. The forcing $f$ is the hammer, and it fixes how much of each mode is excited. The damping $b$ is the felt dampers plus small internal losses, and it fixes how fast each mode dies. Every control a pianist touches acts on $f$ or on $b$. Only the tuner's wrench, which changes $T$, touches the operator.
+Each term has one job. The operator's term, $T\,u_{xx} - EI\,u_{xxxx}$ (that is, $-\mu A u$), fixes the frequencies and the mode shapes. The forcing $f$ is the hammer, and it fixes how much of each mode is excited. The damping $b$ is the felt dampers plus small internal losses, and it fixes how fast each mode dies. Every control a pianist touches acts on $f$ or on $b$. Only the tuner's wrench, which changes $T$, touches the operator.
 
 Both effects are read off the mode shapes $X_n(x) = \sin(n\pi x/L)$. A hammer blow at $x_h$ gives mode $n$ a weight proportional to $X_n(x_h)$, the mode's own height at the hammer. The drum on the next page uses the same rule. A damper felt resting on a short stretch $W$ of the string makes mode $n$'s swing shrink like $e^{-\gamma_n t}$, and for weak damping (to [first order](glossary.qmd#first-order) in $b$, that is, ignoring terms in $b^2$) the decay rate is
 $$
@@ -208,7 +243,7 @@ A mode is damped in proportion to how much it moves under the felt, and its freq
 
 In the table above, the dampers and the sustain pedal change $b$; the soft pedal and the practice mute change $f$; only the tuning pin changes the operator.
 
-**1. Expand in modes.** Write $u(x,t) = \sum_n q_n(t)\,X_n(x)$, with $\mathcal{L}X_n = \omega_n^2X_n$ and the pinned conditions.
+**1. Expand in modes.** Write $u(x,t) = \sum_n q_n(t)\,X_n(x)$, with $A X_n = \omega_n^2X_n$ and the pinned conditions.
 
 **2. Project.** Substitute into the full equation, multiply by $X_m$ and integrate along the string. The operator is symmetric with these boundary conditions (in fact [self-adjoint](glossary.qmd#self-adjoint)), by integrating by parts as on the [circle page](circle.qmd), so the $X_n$ are orthogonal: $\int_0^L X_mX_n\,dx = 0$ for $m \ne n$. The acceleration and operator terms collapse to one term each:
 $$
@@ -231,7 +266,7 @@ whose solution $e^{-\gamma_m t}\cos\big(\sqrt{\omega_m^2 - \gamma_m^2}\,t\big)$ 
 
 ## What we found
 
-On the pitch ruler, a piano's overtones sit slightly sharp of the lines, more so the higher they go: close enough that you hear one clear note, far enough that an exact octave beats. In the series' language, the piano adds one new idea: operators add. The wire is pulled tight like a string and resists bending like a bar, so its [operator](glossary.qmd#operator), the rule that turns a shape of the wire into the force pulling it back, is the sum of the string's and the bar's. The hammer, the dampers and the pedals act on how the modes start and die, and none of them moves a frequency by more than a hair.
+Newton's law on a short piece of wire (stage 1) gave its operator (stage 2), $A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$: the string's operator plus the bar's. Operators add, and with pinned ends so do their eigenvalues, so the spectrum is $f_n = n f_0\sqrt{1 + Bn^2}$ (stage 3). That puts every partial a little sharp of the lines of the spectrum diagram (stage 4), more so the higher it goes: close enough that you hear one clear note, far enough that an exact octave beats, which is why tuners stretch (stage 5). The hammer, the dampers and the pedals act on how the modes start and die, not on the operator, so none of them moves a frequency by more than a hair.
 
 ::: {.family}
 **Every real string is a little stiff.** Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.

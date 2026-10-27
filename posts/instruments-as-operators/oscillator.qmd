@@ -10,18 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 0 Note](note.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [2 Beads →](ring.qmd)
+[← 0 Note](note.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [2 Beads →](ring.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd). About 6 minutes, plus the folds.
+Builds on [page 0, the note](note.qmd). Math: up to second derivatives. About 2 minutes for the summary; about 15 with the mathematics.
 :::
 
 ::: {.puzzle}
-Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note's pitch barely sags. Why doesn't a smaller swing go slower?
+Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note's pitch barely sags. Why doesn't a smaller swing go slower? Start with the simplest thing that vibrates: a mass on a spring.
 :::
 
-Start with the simplest thing that vibrates: a mass on a spring. Change how far you pull it, and watch how long each bob takes.
+Listen first: change how far you pull the mass, and watch how long each bob takes.
 
 ```{=html}
 <div class="ins">
@@ -38,64 +38,103 @@ Start with the simplest thing that vibrates: a mass on a spring. Change how far 
 ```
 
 ::: {.gist}
-**The gist.** A spring pulls back twice as hard when it is stretched twice as far. So a swing twice as big has twice as far to go, but moves twice as fast all the way, and takes exactly as long. As long as the pull stays proportional to the stretch, the rate is set by the spring's stiffness and the mass, never by the size of the swing. A vibrating string, as later pages show, is many such springs at once.
+**The recipe on this instrument, in brief.**
+
+1. *Newton's law* with Hooke's pull gives $m\ddot x = -kx$ for one mass on a spring.
+2. *The operator* is the simplest there is: multiply the displacement by a number, $k/m$, the stiffness over the mass.
+3. *Its spectrum* is that one number, $\lambda = k/m$, giving one frequency, $f = \sqrt{k/m}/2\pi$, and no other.
+4. *On the diagram*: a single stem, a pure tone.
+5. *What we hear*: the size of the swing appears nowhere in the frequency, so a fading swing keeps its pitch, as long as the pull stays proportional to the stretch.
+
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
-## On the pitch ruler
+## 1 · Newton's law: the equation of motion
 
-A mass on a spring has just one frequency, so on the pitch ruler it is a single stem: a pure tone. The readout gives that frequency. The frequency goes as the square root of stiffness over mass: four times the stiffness doubles it, four times the mass halves it, and the size of the pull never enters. A note needs more than one stem; the next page finds where the others come from.
+*Mathematics used: second derivatives.*
 
-## How it works
+Every page of this series runs the same recipe: apply Newton's law, mass times acceleration equals force, to one piece of the instrument; find that the force is a fixed rule applied to the instrument's shape; read off that rule, the [operator](glossary.qmd#operator); find its spectrum; and from the spectrum, what we hear. The [spectrum of an operator](spectrum.qmd) page sets out the recipe in general. For one mass on a spring, the "shape" is a single number, how far the mass is from rest.
 
-**The pull is proportional to the stretch.** A spring pulled some distance from rest pulls back with a force proportional to that distance: twice as far, twice the pull. This is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law). Newton's law turns force into acceleration, so the mass always accelerates back toward rest, in proportion to how far away it is. The steady back-and-forth that results has exactly one frequency.
-
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>Newton's law, and the one frequency it allows <span class="needs">uses derivatives</span></summary>
-
-A spring pulled a distance $x$ from its resting position (for a hanging spring, the position where the spring's pull balances gravity) pulls back with force $-kx$; the constant $k$ is the spring's stiffness. Newton's second law says force equals mass times acceleration, so
+**1. The spring pulls back in proportion to the stretch.** Twice as far, twice the pull: this is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law). With $x$ the distance from the resting position (for a hanging spring, the position where the spring's pull balances gravity) and $k$ the spring's stiffness, the force is
 $$
-m\,\ddot x = -k\,x, \qquad\text{that is}\qquad \ddot x = -\lambda\,x \quad\text{with}\quad \lambda = k/m .
+F = -k\,x ,
 $$
-Here $\ddot x$ means the second derivative of position with respect to time, the acceleration. Try a steady oscillation $x = A\cos(\omega t + \phi)$. Differentiating twice gives $\ddot x = -\omega^2 x$, so it solves the equation exactly when $\omega^2 = \lambda$. The number $\omega$ is the [angular frequency](glossary.qmd#angular-frequency), in radians per second. The cosine repeats each time $\omega t$ grows by $2\pi$, so one cycle takes $2\pi/\omega$ seconds, and the motion repeats $f = \omega/2\pi$ times a second:
-$$
-f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
-$$
-The amplitude $A$ and the starting phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$.
+where the minus sign says the pull points back toward rest.
 
-</details>
+**2. The pull sets the acceleration.** Force equals mass times acceleration. Writing $\ddot x$ for the acceleration, the second derivative of $x$ with respect to time,
+$$
+m\,\ddot x = -k\,x .
+$$
+
+**What we assumed.** The pull is exactly proportional to the stretch (Hooke's law holds), the spring itself has no mass, and nothing else acts on the mass: no friction for now.
+
+## 2 · The operator
+
+Divide by the mass. The acceleration is the displacement multiplied by one fixed number, $k/m$, with its direction reversed:
+$$
+\ddot x = -\frac{k}{m}\,x .
+$$
+
+::: {.result}
+**The operator.** $\ddot x = -A\,x$, where $A$ is the rule "multiply by $k/m$". For any displacement $x$, $A\,x$ is the restoring force per unit mass with its direction reversed; the minus sign stays in the equation, as on every later page. There is nothing to hold at the ends here: a single mass has no boundary. In words: this is the smallest possible operator, acting on a single number.
 :::
 
-**Twice the swing, the same time.** Take any motion of the mass and double it: twice as far from rest at every moment. The pull doubles too, so the acceleration doubles, which is exactly what the doubled motion needs. So the doubled motion is also a motion of the mass, and it repeats just as often. Friction shrinks the swing, which is why a note fades, but light friction of the usual kind, proportional to speed, does not make the rate depend on the size of the swing either.
+## 3 · Its spectrum
 
-This needs the pull to be exactly proportional to the stretch. Pulled very far, a real spring stops obeying Hooke's law, and then a bigger swing does change the rate. A string shows a small version of this: a hard pluck stretches it, raising its tension, so the note starts very slightly sharp and settles as it fades (J. O. Smith, *Physical Audio Signal Processing*). That is why the pitch barely sags, rather than not at all.
+A [mode](glossary.qmd#mode) is a motion in which the shape keeps its form and only its size swings, at one frequency. In operator language, a mode's shape $X$ is one the operator only rescales, $A X = \lambda X$; the rescaling factor $\lambda$ is an [eigenvalue](glossary.qmd#eigenvalue), and the list of all eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Here every displacement is simply multiplied by $k/m$, so the spectrum is one number, $\lambda = k/m$. Now find the motion it allows.
+
+**1. Try a steady swing.** Guess $x = a\cos(\omega t + \phi)$, with amplitude $a$, starting phase $\phi$ and [angular frequency](glossary.qmd#angular-frequency) $\omega$ in radians per second.
+
+**2. Differentiate twice and see what comes back.** $\cos \to -\omega\sin \to -\omega^2\cos$: two derivatives give $-\omega^2$ times the start,
+$$
+\ddot x = -\omega^2\,a\cos(\omega t + \phi) = -\omega^2\,x .
+$$
+
+**3. Match the equation.** This equals $-\lambda x$ exactly when $\omega^2 = \lambda$. The cosine repeats each time $\omega t$ grows by $2\pi$, so the motion repeats $f = \omega/2\pi$ times a second:
+$$
+f = \frac{\sqrt{\lambda}}{2\pi} = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
+$$
+The amplitude $a$ and the phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$.
+
+::: {.result}
+**The spectrum.** One eigenvalue, $\lambda = k/m$. One angular frequency, $\omega = \sqrt{\lambda}$, and one frequency, $f = \frac{1}{2\pi}\sqrt{k/m}$, whatever the amplitude. In words: the same recipe, frequency = square root of an eigenvalue, divided by $2\pi$, gives every frequency in the rest of the series.
+:::
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude <span class="needs">uses the uniqueness of solutions of a differential equation</span></summary>
 
-*Every solution is $A\cos(\omega t + \phi)$.* The equation $\ddot x = -\lambda x$ is [linear](glossary.qmd#linear): sums and multiples of solutions are solutions. A solution is determined by its starting position $x(0)$ and starting velocity $\dot x(0)$; this is the uniqueness theorem for [ordinary differential equations](https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem). The functions $\cos\omega t$ and $\sin\omega t$, with $\omega = \sqrt\lambda$, are solutions with starting data $(1, 0)$ and $(0, \omega)$. So the solution with data $(x_0, v_0)$ is $x_0\cos\omega t + (v_0/\omega)\sin\omega t$. By the formula $\cos(\omega t + \phi) = \cos\omega t\cos\phi - \sin\omega t\sin\phi$, this equals $A\cos(\omega t + \phi)$ with $A = \sqrt{x_0^2 + (v_0/\omega)^2}$, $\cos\phi = x_0/A$ and $\sin\phi = -v_0/(\omega A)$.
+*Every solution is $a\cos(\omega t + \phi)$.* The equation $\ddot x = -\lambda x$ is [linear](glossary.qmd#linear): sums and multiples of solutions are solutions. A solution is determined by its starting position $x(0)$ and starting velocity $\dot x(0)$; this is the uniqueness theorem for [ordinary differential equations](https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem). The functions $\cos\omega t$ and $\sin\omega t$, with $\omega = \sqrt\lambda$, are solutions with starting data $(1, 0)$ and $(0, \omega)$. So the solution with data $(x_0, v_0)$ is $x_0\cos\omega t + (v_0/\omega)\sin\omega t$. By the formula $\cos(\omega t + \phi) = \cos\omega t\cos\phi - \sin\omega t\sin\phi$, this equals $a\cos(\omega t + \phi)$ with $a = \sqrt{x_0^2 + (v_0/\omega)^2}$, $\cos\phi = x_0/a$ and $\sin\phi = -v_0/(\omega a)$.
 
-*Amplitude cannot change the pitch.* If $x(t)$ is a solution, so is $2x(t)$, by linearity, and it has the same period. Real springs stop obeying Hooke's law when stretched far; then the equation is no longer linear and the frequency does depend on amplitude ([anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity)). Strings show a small version of this: a hard pluck stretches the string, raising its tension, so the note starts slightly sharp and settles as it fades. For the gentle vibrations of most playing, the linear law holds well.
-
-*With friction.* A real string also loses energy. Adding a friction force proportional to the velocity, $-2m\gamma\,\dot x$, gives $x = Ae^{-\gamma t}\cos(\omega_d t + \phi)$ with $\omega_d = \sqrt{k/m - \gamma^2}$, as long as the friction is light ($\gamma^2 < k/m$); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, $\omega_d$, still does not depend on $A$.
+*Amplitude cannot change the pitch.* If $x(t)$ is a solution, so is $2x(t)$, by linearity, and it has the same period.
 
 </details>
 :::
 
-**In the series' language.** The pull per unit mass is the displacement times one number, the stiffness divided by the mass, with the direction reversed. The rule "multiply by that number" is the [operator](glossary.qmd#operator) in its smallest form, and the frequency comes from it: its square root, divided by 2π. On the next page the one number becomes a table of numbers, a matrix, with many frequencies; later, a rule acting on whole shapes. The frequencies always come from the operator's special numbers, its [eigenvalues](glossary.qmd#eigenvalue).
+## 4 · On the spectrum diagram
+
+One eigenvalue means one stem on the pitch ruler: a pure tone, at $f = \sqrt{k/m}/2\pi$. The readout in the demo above is exactly this formula. The frequency goes as the square root of stiffness over mass: four times the stiffness doubles it, four times the mass halves it, and the size of the pull never enters. A note needs more than one stem; the next page finds where the others come from.
+
+## 5 · What we hear {#what-we-hear}
+
+**Twice the swing, the same time.** The frequency formula contains $k$ and $m$ but not the amplitude. In plain words: take any motion of the mass and double it, twice as far from rest at every moment. The pull doubles too, so the acceleration doubles, which is exactly what the doubled motion needs. So the doubled motion is also a motion of the mass, and it repeats just as often. That is why a fading note keeps its pitch.
+
+The motion is the one mode, $x = a\cos(2\pi f t + \phi)$, and so is the sound: the demo plays exactly this cosine, sped up 200 times, fading slowly.
+
+**Friction fades the note but keeps the rate.** Friction shrinks the swing, which is why a note fades, but light friction of the usual kind, proportional to speed, does not make the rate depend on the size of the swing either.
 
 ::: {.derive}
-<details><summary><span class="label">Precisely</span>The operator and its one eigenvalue</summary>
+<details><summary><span class="label">Step-by-step derivation</span>The motion with friction <span class="needs">uses derivatives</span></summary>
 
-Write the equation as $\ddot x = -\lambda x$. The restoring force per unit mass is $-\lambda x$: multiply the displacement by $\lambda$ and reverse its direction. We call the rule "multiply by $\lambda$" the operator, and keep the minus sign in the equation. The one allowed angular frequency is $\omega = \sqrt\lambda$.
-
-On the next page the single displacement $x$ becomes a list of displacements, one per bead, and the number $\lambda$ becomes a matrix. Later it becomes a differential operator acting on shapes. In every case **the allowed angular frequencies $\omega = 2\pi f$ are the square roots of the operator's eigenvalues**. The next page defines eigenvalues properly; for one mass there is one eigenvalue, the number $\lambda = k/m$ itself.
+Add a friction force proportional to the velocity, $-2m\gamma\,\dot x$, so that $\ddot x = -(k/m) x - 2\gamma\dot x$. Then $x = a e^{-\gamma t}\cos(\omega_d t + \phi)$ with $\omega_d = \sqrt{k/m - \gamma^2}$ is a solution, as long as the friction is light ($\gamma^2 < k/m$); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, $\omega_d$, still does not depend on $a$.
 
 </details>
 :::
+
+**Why "barely" sags, not "never".** All of this needs the pull to be exactly proportional to the stretch. Pulled very far, a real spring stops obeying Hooke's law, and then a bigger swing does change the rate ([anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity)). A string shows a small version of this: a hard pluck stretches it, raising its tension, so the note starts very slightly sharp and settles as it fades (J. O. Smith, *Physical Audio Signal Processing*). That is why the pitch barely sags, rather than not at all. For the gentle vibrations of most playing, the linear law holds well.
 
 ## What we found
 
-Newton's law, with a pull proportional to the stretch, allows exactly one frequency. It is set by the stiffness and the mass, not by how far the mass swings, and that is why a fading note keeps its pitch, very nearly. One mass gives one stem on the pitch ruler; a note needs many.
+Newton's law with Hooke's pull gave the equation $m\ddot x = -kx$; the operator is the smallest there is, multiply by $k/m$; its spectrum is that one number, and its square root, divided by $2\pi$, is the one frequency, $f = \frac{1}{2\pi}\sqrt{k/m}$: a single stem, a pure tone. The amplitude is not in it, which is why a fading note keeps its pitch, very nearly. One mass gives one stem on the pitch ruler; a note needs many. On the next page the one number becomes a table of numbers, a matrix, with many eigenvalues, and so many frequencies.
 
 ## The next puzzle
 

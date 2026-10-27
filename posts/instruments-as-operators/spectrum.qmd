@@ -1,0 +1,392 @@
+---
+title: "The spectrum of an operator"
+subtitle: "The idea behind every page"
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+date-modified: 2026-10-27
+resources: [core.js, ins.css]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [pages 1](oscillator.qmd), [2](ring.qmd) and [3](circle.qmd), but stands on its own. Math: up to integration by parts. About 3 minutes for the flowchart and the idea in brief; about 30 with the mathematics.
+:::
+
+::: {.puzzle}
+Pluck a string, blow into a tube, tap a steel tine, strike a drum. Four different objects, four different sounds, and one recipe predicts all four. This page lays out the recipe, shows why it works, and runs it on every instrument in the series.
+:::
+
+```{=html}
+<svg class="fig" viewBox="0 0 350 286" role="img" aria-label="The recipe in five stages: 1, Newton's law gives the equation of motion u_tt = minus A u; 2, the operator A, with how the instrument is held; 3, its spectrum, A X = lambda X, with frequencies f_n = square root of lambda_n over 2 pi; 4, the spectrum diagram, one stem per mode at f_n; 5, what we hear, the sum of the modes, tones at the frequencies f_n">
+<defs><marker id="sp-arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fillacc"/></marker></defs>
+<g>
+<rect class="bar" x="10" y="4" width="330" height="44" rx="6"/><text x="24" y="22">1  Newton's law: the equation of motion</text><text x="42" y="39" style="fill:var(--muted);font-size:11px">mass × acceleration = force  →  uₜₜ = −A u</text>
+<path class="acc" d="M175 48 L175 57" marker-end="url(#sp-arr)"/>
+<rect class="bar" x="10" y="62" width="330" height="44" rx="6"/><text x="24" y="80">2  The operator</text><text x="42" y="97" style="fill:var(--muted);font-size:11px">A, together with how the instrument is held</text>
+<path class="acc" d="M175 106 L175 115" marker-end="url(#sp-arr)"/>
+<rect class="bar" x="10" y="120" width="330" height="44" rx="6"/><text x="24" y="138">3  Its spectrum</text><text x="42" y="155" style="fill:var(--muted);font-size:11px">A X = λ X :  λ₁, λ₂, …   fₙ = √λₙ / 2π</text>
+<path class="acc" d="M175 164 L175 173" marker-end="url(#sp-arr)"/>
+<rect class="bar" x="10" y="178" width="330" height="44" rx="6"/><text x="24" y="196">4  On the spectrum diagram</text><text x="42" y="213" style="fill:var(--muted);font-size:11px">one stem per mode, at fₙ</text>
+<path class="acc" d="M175 222 L175 231" marker-end="url(#sp-arr)"/>
+<rect class="bar" x="10" y="236" width="330" height="44" rx="6"/><text x="24" y="254">5  What we hear</text><text x="42" y="271" style="fill:var(--muted);font-size:11px">the modes' sum: tones at the frequencies fₙ</text>
+</g>
+</svg>
+```
+
+::: {.gist}
+**The idea in brief: the operator decides where the stems stand; how you pluck or strike decides how tall they are.** Physics gives the operator: Newton's law, applied to one small piece of the instrument, always comes out as $u_{tt} = -A\,u$, where the [operator](glossary.qmd#operator) $A$ turns a shape of the instrument into minus the acceleration it causes. Mathematics gives the frequencies: a shape that $A$ only rescales, $AX = \lambda X$, swings at $f = \sqrt{\lambda}/2\pi$, and every motion is a sum of such shapes, so the list of eigenvalues, the [spectrum](glossary.qmd#spectrum), fixes the frequencies. (A steady bow or breath can do more: it can lock the sound onto exact whole-number multiples, pages 4, 5 and 6b.) The last section runs the recipe on every instrument in the series.
+:::
+
+## 1 · What an operator is
+
+*Mathematics used on this page: derivatives, partial derivatives and integration by parts.*
+
+The same pattern appears three times on pages 1 to 3, each time on a bigger object.
+
+**One mass on a spring** (page 1). The spring pulls back with force $-kx$, so Newton's law reads $m\ddot x = -kx$, that is
+$$
+\ddot x = -A\,x, \qquad A = \text{multiply by } \frac{k}{m} .
+$$
+Here $A$ acts on a single number, the displacement.
+
+**Beads on a ring** (page 2). Each bead of mass $m$ is pulled by the string toward its two neighbors, a distance $h$ away, with force $\frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})$ for small motions. All the beads at once:
+$$
+\ddot u = -A\,u, \qquad A = \frac{T}{mh}\,K ,
+$$
+where $u$ is the list of all the beads' heights and $K$ is a square table of numbers, a [matrix](glossary.qmd#matrix-vector), with 2 down its diagonal, $-1$ beside it, and $-1$ in the two corners, where the ring closes. Here $A$ acts on a list.
+
+**A string** (pages 3 and 4). In the limit of many beads, the pull on each bit of string is tension times curvature, and Newton's law becomes the [wave equation](glossary.qmd#wave-equation)
+$$
+u_{tt} = c^2\,u_{xx}, \qquad\text{that is}\qquad u_{tt} = -A\,u, \quad A = -c^2\,\frac{d^2}{dx^2}, \quad c^2 = \frac{T}{\mu} .
+$$
+Here $u(x, t)$ is the height of the string at position $x$ and time $t$, subscripts are [partial derivatives](glossary.qmd#partial-derivative), and $A$ acts on a whole shape, a function of $x$.
+
+::: {.result}
+**Definition.** For a vibrating object, the *operator* $A$ is the rule that takes a shape of the object (how far each point is from rest; for a tube, the air pressure) and returns minus the acceleration it causes at every point (for a string or a bar, minus the restoring force per unit mass). It acts only on the shapes allowed by how the object is held. Newton's law then reads
+$$
+u_{tt} = -A\,u .
+$$
+In words: the acceleration of every point is the restoring force on it, per unit mass.
+:::
+
+Why does every instrument come out this way? Because for small motions every restoring force in the series is proportional to the shape: tension pulls a curved string back in proportion to its curvature, squeezed air pushes back in proportion to the squeeze, bent steel pushes back through the change of its bending. Double the shape and the force doubles; add two shapes and their forces add. So $A$ is [linear](glossary.qmd#linear): $A(au + bv) = a\,Au + b\,Av$ for numbers $a$, $b$. That is all the next sections use. (Larger motions break this, and with it the recipe; see page 1 on amplitude.)
+
+## 2 · Why a mode swings at √λ / 2π
+
+A [mode](glossary.qmd#mode) is a shape that the operator only rescales,
+$$
+A\,X = \lambda\,X ,
+$$
+for some number $\lambda$, an [eigenvalue](glossary.qmd#eigenvalue) of $A$; the shape $X$ is an [eigenfunction](glossary.qmd#eigenfunction) (for the beads, an [eigenvector](glossary.qmd#eigenvector)). The list of all the eigenvalues, each counted as many times as it has modes (its [multiplicity](glossary.qmd#multiplicity)), is the operator's [spectrum](glossary.qmd#spectrum). Here is why each eigenvalue is a frequency.
+
+1. **Start the object in the shape of a mode and let go.** Try a motion that keeps that shape and only changes its size: $u(x, t) = X(x)\,q(t)$, with $AX = \lambda X$.
+2. **Newton's law for this motion.** The left side is $u_{tt} = X\,q''$. The right side is $-Au = -q\,AX = -\lambda\,q\,X$, since $A$ is linear and $q(t)$ is just a number at each moment. So $X\,q'' = -\lambda\,q\,X$, and dividing by $X$,
+$$
+q'' = -\lambda\,q .
+$$
+3. **This is page 1's spring.** For $\lambda > 0$ its solutions are $q(t) = \cos(\sqrt{\lambda}\,t + \phi)$, times any number: the shape swings with [angular frequency](glossary.qmd#angular-frequency) $\omega = \sqrt{\lambda}$. For $\lambda = 0$ the solutions are $q = a + bt$: the whole object drifting, with no sound. A negative $\lambda$ would give exponential growth; section 3 shows it never happens.
+
+::: {.result}
+**Eigenvalues are frequencies.** A mode with eigenvalue $\lambda > 0$ swings in place at
+$$
+f = \frac{\sqrt{\lambda}}{2\pi} .
+$$
+In words: $\lambda$ is restoring force per unit mass per unit displacement, a stiffness over a mass, and the frequency goes as its square root, as for a mass on a spring.
+:::
+
+## 3 · Why every motion is a chord
+
+Modes alone would be a curiosity if the object could also move in other ways. It cannot: every motion is a sum of modes, each at its own frequency. Three facts about $A$ make this so. They all come from one identity.
+
+**The identity: the operator is symmetric.** Measure how much two shapes $f$ and $g$ overlap by
+$$
+\langle f, g\rangle = \int_0^L f(x)\,g(x)\,dx
+$$
+(for the beads, $\sum_j f_j g_j$; for a drum, an integral over the head). For the string, [integrate by parts](https://en.wikipedia.org/wiki/Integration_by_parts) once:
+$$
+\langle Af, g\rangle = -c^2\int_0^L f''\,g\,dx = -c^2\big[f'\,g\big]_0^L + c^2\int_0^L f'\,g'\,dx .
+$$
+If the ends are tied, $g(0) = g(L) = 0$ and the bracket vanishes. (It also vanishes on a loop, where the two ends are the same point, and at a closed tube end, where $f' = 0$.) What is left, $c^2\int f'g'\,dx$, does not change when $f$ and $g$ swap places. So
+$$
+\langle Af, g\rangle = \langle f, Ag\rangle .
+$$
+This is what it means for $A$ to be *symmetric*. For a kalimba tine, integrating by parts twice gives $\kappa^2\int f''g''\,dx$, with every boundary term killed by the clamped and free ends; for a drum, the two-dimensional version gives $c^2\iint \nabla f\cdot\nabla g\,dA$ (here $\nabla f = (f_x, f_y)$, the slope in each direction, and $\nabla f\cdot\nabla g = f_x g_x + f_y g_y$), with the rim term killed by the fixed rim. The same holds for every instrument in the series: each way of holding an instrument that appears here makes the boundary terms vanish.
+
+**Fact 1: modes with different frequencies are perpendicular.** If $AX = \lambda X$ and $AY = \mu Y$, then $\lambda\langle X, Y\rangle = \langle AX, Y\rangle = \langle X, AY\rangle = \mu\langle X, Y\rangle$. If $\lambda \neq \mu$, this forces $\langle X, Y\rangle = 0$: the two shapes do not overlap at all, in the sense above. (Modes that share an eigenvalue, like a loop's cosine and sine, can be chosen perpendicular too.)
+
+**Fact 2: no eigenvalue is negative.** Put $g = f$ in the identity: $\langle Af, f\rangle = c^2\int (f')^2\,dx \ge 0$. For a mode, $\lambda\langle X, X\rangle = \langle AX, X\rangle \ge 0$, so $\lambda \ge 0$. The physics is energy. Let
+$$
+E(t) = \tfrac12\langle u_t, u_t\rangle + \tfrac12\langle Au, u\rangle .
+$$
+Times the mass per unit length, the first term is the kinetic energy and the second the energy stored in the stretched string ($\tfrac12 T\int u_x^2\,dx$). Using symmetry, $E' = \langle u_t, u_{tt}\rangle + \langle Au, u_t\rangle = \langle u_t, u_{tt} + Au\rangle = 0$ by Newton's law: energy is conserved, and since the stored part can never be negative, no mode can grow exponentially (a mode with $\lambda = 0$ can only drift). For the string, zero occurs only for a shape with no slope anywhere, the whole string moving at once, which a tied end forbids. (For a bar with both ends free, the zero modes are the bar sliding and tilting as a whole.)
+
+**Fact 3: the modes are complete.** Every allowed shape $f$ is a sum of modes, $f = \sum_n a_n X_n$, and Fact 1 gives the amounts: taking the overlap of both sides with $X_m$ kills every term but one, so
+$$
+a_n = \frac{\langle f, X_n\rangle}{\langle X_n, X_n\rangle} .
+$$
+For the beads this is the spectral theorem for symmetric matrices, used on page 2. For strings, tubes, bars and drums it is a theorem of analysis (fold below); on the loop it is Fourier's theorem, page 3.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Completeness for differential operators <span class="needs">uses functional analysis</span></summary>
+
+Work in the space $L^2$ of shapes with finite $\int f^2$, with the overlap above as inner product. On its natural domain (shapes with enough derivatives and the boundary conditions), each operator in the series is [self-adjoint](glossary.qmd#self-adjoint), not merely symmetric, and non-negative. Its inverse, or $(A + 1)^{-1}$ where $0$ is an eigenvalue (the loop, free ends), is a compact operator: for one-dimensional objects it is an integral operator with a continuous kernel, the Green's function; for a drum on a bounded region this is Rellich's theorem. The spectral theorem for compact self-adjoint operators then gives an orthonormal basis of $L^2$ made of eigenfunctions, with eigenvalues $\lambda_1 \le \lambda_2 \le \cdots \to \infty$, each of finite multiplicity. For one-dimensional problems this is [Sturm–Liouville theory](https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory); Courant and Hilbert, volume 1, chapters V and VI, treat all the cases in this series. The series converges in the $L^2$ sense; for one-dimensional problems and smooth shapes satisfying the boundary conditions it also converges uniformly.
+
+</details>
+:::
+
+Now put the three facts together. Start the object in any shape $u(x, 0) = f(x)$ with any velocity $u_t(x, 0) = g(x)$, and expand both in modes, $f = \sum a_n X_n$ and $g = \sum b_n X_n$. Each term $X_n(x)\cos(\omega_n t)$ and $X_n(x)\sin(\omega_n t)$ obeys Newton's law by section 2, and since $A$ is linear, so does any sum of them. The sum
+$$
+u(x, t) = \sum_n X_n(x)\Big(a_n\cos\omega_n t + \frac{b_n}{\omega_n}\sin\omega_n t\Big), \qquad \omega_n = \sqrt{\lambda_n},
+$$
+matches the starting shape and velocity, so it is the motion (two motions with the same start differ by one that starts flat and at rest; its energy is 0 and stays 0, so they are the same). (A mode with $\lambda_n = 0$ contributes $a_n + b_n t$ instead: drifting, no sound.)
+
+::: {.result}
+**Every motion is a chord.** Whatever you do to the instrument, its free motion is a sum of its modes, each swinging at its own frequency $f_n = \sqrt{\lambda_n}/2\pi$. The spectrum fixes the frequencies; the start (how and where you pluck or strike) fixes only the amounts $a_n$ and $b_n$.
+:::
+
+## 4 · How the instrument is held is part of the operator
+
+The rule alone is not the operator: the allowed shapes are part of it. Take the same rule, $-c^2\,d^2/dx^2$, on a piece of length $L$, and hold the ends in three ways. Writing $X$ as a sine or cosine of $kx$, so that $AX = c^2k^2X$, each way of holding picks out different values of $k$:
+
+| Held | Modes | Eigenvalues $\lambda_n$ | Frequencies $f_n$ |
+|:--|:--|:--|:--|
+| as a loop: $X(x + L) = X(x)$ | $\cos\frac{2\pi n x}{L}$, $\sin\frac{2\pi n x}{L}$ | $\big(\frac{2\pi n c}{L}\big)^2$ | $\frac{nc}{L}$: $0, 1, 2, 3, \dots$ |
+| both ends tied (string; flute, on pressure): $X(0) = X(L) = 0$ | $\sin\frac{n\pi x}{L}$ | $\big(\frac{n\pi c}{L}\big)^2$ | $\frac{nc}{2L}$: $1, 2, 3, \dots$ |
+| one end closed (clarinet, on pressure): $X'(0) = 0$, $X(L) = 0$ | $\cos\frac{(2n-1)\pi x}{2L}$ | $\big(\frac{(2n-1)\pi c}{2L}\big)^2$ | $\frac{(2n-1)c}{4L}$: $1, 3, 5, \dots$ |
+
+(On the loop each $n \ge 1$ has two modes, the cosine and the sine; page 3 uses a loop of length $2\pi$, where $f_n = nc/2\pi$.) The same happens for a bar, where the rule is $\kappa^2\,d^4/dx^4$: clamped at one end and free at the other (kalimba, harmonica reed), the frequencies stand in the ratios $1 : 6.27 : 17.55$; pinned at both ends, $1 : 4 : 9$; free at both ends (glockenspiel), $1 : 2.76 : 5.40$. Change how the instrument is held and you change its spectrum, without touching the physics of the material.
+
+## 5 · From the spectrum to the sound
+
+The spectrum gives the frequencies. Three more things decide what reaches your ear.
+
+**How you play sets the heights.** The amounts $a_n$, $b_n$ come from the starting shape and velocity, so where and how you pluck or strike decides which modes start and how strongly. A string plucked a fifth of the way along starts no 5th mode, because that mode stands still at the pluck point (page 4); a drum struck at its center starts only the round modes (page 8). On the spectrum diagram, the stems stand at the frequencies the spectrum gives, and their heights are set by the playing.
+
+**Each mode fades at its own rate.** Real instruments lose energy to friction, to the air and to their supports. For light losses each mode still swings at very nearly its own frequency, and its size fades away (page 1, and the piano's dampers on page 7). So the sound is
+$$
+p(t) \approx \sum_n c_n\, e^{-t/\tau_n}\cos(2\pi f_n t + \phi_n),
+$$
+with the frequencies $f_n$ from the spectrum and amounts and fading times $c_n$, $\tau_n$ from the playing, the losses and the way the instrument passes its motion to the air. That passing on is [linear](glossary.qmd#linear) too (a violin's body, for instance), so it changes the heights of the stems, never their positions (page 4). Every plucked or struck sound in this series' demos is made exactly this way: a sum of sine waves at the frequencies from the spectrum, each fading at its own rate. The bowed and blown sounds (pages 4, 5 and 6b) are made differently: a wave repeating at the playing frequency, so their frequencies are its whole-number multiples (apart from the violin's gentle vibrato and the chromatic harmonica's breath noise). The frequencies come from the operator; the amounts and fading times are modelling choices, rough values chosen to illustrate.
+
+**Then the ear.** If the frequencies you hear sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, you hear a note (page 0).
+
+What the operator does not decide, the series also shows. A kalimba's off-line overtones fade within a fraction of a second, so what you hear is mostly one frequency (page 6). And a steady bow or breath is not a free vibration at all: it keeps feeding energy in, and the motion locks into one exactly repeating pattern near one of the modes' frequencies, usually the lowest (observed, not derived in this series), so the sound sits exactly on the lines even when the operator's other frequencies do not (the violin, page 4; the clarinet's sound, page 5; the harmonica, page 6b).
+
+## 6 · The recipe on every instrument
+
+Each card runs one instrument through the same five stages as its own page, in compact form; the link at the bottom leads to the page with every step derived. The stems show the spectrum on the spectrum diagram, as multiples of the lowest frequency; the button plays the sound made from it.
+
+```{=html}
+<style>
+.recipe { background: var(--panel); border-radius: 10px; padding: 0.75rem 1rem 0.65rem; margin: 0.9rem 0; }
+.recipe > p { margin: 0 0 0.4rem; }
+.recipe ol { margin: 0.45rem 0 0.4rem; padding-left: 1.3rem; }
+.recipe > p:last-child { margin: 0; font-size: 0.92rem; }
+.recipe li { margin: 0.12rem 0; }
+.recipe .rdemo { display: flex; align-items: center; gap: 0.6rem 0.9rem; flex-wrap: wrap; margin: 0.35rem 0 0.1rem; }
+.recipe .rdemo svg.mini { width: 230px; max-width: 100%; flex: 0 1 230px; }
+.recipe .rdemo .tag { font-family: var(--f-ui); font-size: 0.8rem; color: var(--muted); }
+</style>
+```
+
+::: {.recipe}
+**A mass on a spring**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="spring" viewBox="0 0 200 58" aria-label="One stem at 1 times"></svg><button data-play="spring">▶ Play</button><span class="tag">a pure tone</span></div>
+```
+
+1. *Newton's law* on the mass, with the spring pulling back with force $-kx$ ([Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law)): $m\ddot x = -kx$.
+2. *The operator*: $A$ multiplies by $k/m$; there is nothing to hold.
+3. *Its spectrum*: one eigenvalue, $\lambda = k/m$, so one frequency, $f = \sqrt{k/m}\,/2\pi$.
+4. *On the diagram*: a single stem.
+5. *What you hear*: a pure tone, at the same pitch however far you pull the mass, as long as the pull stays proportional to the stretch.
+
+[Every step on page 1 →](oscillator.qmd)
+:::
+
+::: {.recipe}
+**Beads on a ring**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="beads" viewBox="0 0 200 58" aria-label="Eight beads: stems at 1, 1.85, 2.41 and 2.61 times"></svg><button data-play="beads">▶ Play</button><span class="tag">8 beads, every mode equally strong</span></div>
+```
+
+1. *Newton's law* on each bead, pulled toward its two neighbors by the string's tension $T$: $m\,\ddot u_j = \frac{T}{h}\,(u_{j+1} - 2u_j + u_{j-1})$, the beads numbered around the ring.
+2. *The operator*: $A = \frac{T}{mh}K$, a matrix acting on the list of heights; held as a ring, so bead $N + 1$ is bead 1.
+3. *Its spectrum*: the modes are waves $\cos\frac{2\pi jk}{N}$ and $\sin\frac{2\pi jk}{N}$ that fit $k$ times around the ring, with $\lambda_k = \frac{4T}{mh}\sin^2\frac{\pi k}{N}$, so $f_k = \frac{1}{\pi}\sqrt{\frac{T}{mh}}\,\sin\frac{\pi k}{N}$.
+4. *On the diagram*: for 8 beads, stems at 1, 1.85, 2.41 and 2.61 times the lowest; the low ones near the lines, the high ones well below.
+5. *What you hear*: one bead plucked, a jangle of all the modes; started in a single mode, one clean tone.
+
+[Every step on page 2 →](ring.qmd)
+:::
+
+::: {.recipe}
+**A loop of string**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="loop" viewBox="0 0 200 58" aria-label="Stems at 1, 2, 3, ... times, exactly on the lines"></svg><button data-play="loop">▶ Play</button><span class="tag">every stem on a line</span></div>
+```
+
+1. *Newton's law* on a short bit of string, where tension pulls along the string so the net pull is tension times curvature: $u_{tt} = c^2\,u_{\theta\theta}$, with $c^2 = T/\mu$, around a loop of length $2\pi$.
+2. *The operator*: $A = -c^2\,d^2/d\theta^2$, on shapes that close up, $X(\theta + 2\pi) = X(\theta)$.
+3. *Its spectrum*: $\cos n\theta$ and $\sin n\theta$ close up only for whole numbers $n$, so $\lambda_n = c^2 n^2$, each $n \ge 1$ twice, and $f_n = nc/2\pi$.
+4. *On the diagram*: every stem exactly on a line, $1 : 2 : 3 : \cdots$.
+5. *What you hear*: a sound that repeats every $1/f_1$ seconds, a note at $f_1$.
+
+[Every step on page 3 →](circle.qmd)
+:::
+
+::: {.recipe}
+**A violin string**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="string" viewBox="0 0 200 58" aria-label="Plucked a fifth of the way along: stems on every line except 5"></svg><button data-play="string">▶ Play</button><span class="tag">plucked a fifth of the way along</span></div>
+```
+
+1. *Newton's law* on a short piece of string under tension $T$, where for small slopes the upward part of each end's pull is tension times slope: $u_{tt} = c^2\,u_{xx}$, with $c^2 = T/\mu$.
+2. *The operator*: $A = -c^2\,d^2/dx^2$, with both ends tied, $u(0) = u(L) = 0$.
+3. *Its spectrum*: $X = \sin kx$ with $\sin kL = 0$, so $k = n\pi/L$, $\lambda_n = (n\pi c/L)^2$ and $f_n = \frac{n}{2L}\sqrt{T/\mu}$.
+4. *On the diagram*: every stem on a line; plucked a fifth of the way along, the 5th is missing.
+5. *What you hear*: a clear note at $f_1$; a light touch at the middle keeps only the even modes, an octave up.
+
+[Every step on page 4 →](violin.qmd)
+:::
+
+::: {.recipe}
+**A flute and a clarinet**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="flute" viewBox="0 0 200 58" aria-label="Flute tube: stems at 1, 2, 3, ... times"></svg><button data-play="flute">▶ Flute</button><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58" aria-label="Clarinet tube: stems at 1, 3, 5, ... times"></svg><button data-play="clarinet">▶ Clarinet</button><span class="tag">the tubes' spectra; blown, the clarinet's sound also has faint even multiples</span></div>
+```
+
+1. *Newton's law* on a thin slab of air, pushed by a pressure difference, $\rho\,\xi_{tt} = -p_x$, with squeezed air pushing back, $p = -K\xi_x$, gives $p_{tt} = c^2\,p_{xx}$, with $c^2 = K/\rho$, for the pressure $p$.
+2. *The operator*: $A = -c^2\,d^2/dx^2$, on pressure shapes. Flute, open at both ends: $p(0) = p(L) = 0$. Clarinet, closed at the reed: $p_x(0) = 0$, $p(L) = 0$.
+3. *Its spectrum*: flute, $\sin kL = 0$, so $f_n = nc/2L$; clarinet, $\cos kL = 0$, so $f_n = (2n-1)c/4L$.
+4. *On the diagram*: the flute's stems on every line, the clarinet's on the odd lines only, $1 : 3 : 5 : \cdots$.
+5. *What you hear*: two notes, the clarinet's almost an octave lower for the same length; blown, its sound also has faint even multiples (page 5).
+
+[Every step on page 5 →](clarinet.qmd)
+:::
+
+::: {.recipe}
+**A kalimba tine**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58" aria-label="Stems at 1, 6.27 and 17.55 times, off the lines"></svg><button data-play="kalimba">▶ Play</button><span class="tag">the overtones fade almost at once</span></div>
+```
+
+1. *Newton's law* on a thin slice of steel, where bending stretches one side and squeezes the other, giving a bending moment $M = EI\,u_{xx}$ and a shear force $V = -M_x$: $\rho S\,u_{tt} = -EI\,u_{xxxx}$.
+2. *The operator*: $A = \kappa^2\,d^4/dx^4$, with $\kappa^2 = EI/\rho S$; clamped at the bridge ($u = u_x = 0$), free at the tip ($u_{xx} = u_{xxx} = 0$).
+3. *Its spectrum*: $\cos\beta L\,\cosh\beta L = -1$, with $\lambda = \kappa^2\beta^4$, so $f_n = \kappa\beta_n^2/2\pi$ with $\beta_nL = 1.875, 4.694, 7.855, \dots$.
+4. *On the diagram*: stems at 1, 6.27 and 17.55 times the lowest, off the lines.
+5. *What you hear*: off the lines, but the overtone dies within a fraction of a second: a brief click, then a clean note.
+
+[Every step on page 6 →](kalimba.qmd)
+:::
+
+::: {.recipe}
+**A harmonica reed**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="reed" viewBox="0 0 200 58" aria-label="Plucked reed: stems at 1, 6.27 and 17.55 times"></svg><button data-play="reed">▶ Plucked</button><button data-play="blown">▶ Blown</button><span class="tag">same reed, two ways of playing</span></div>
+```
+
+1. *Newton's law*: the kalimba tine's, for a small brass bar riveted at one end.
+2. *The operator*: the tine's, with $\kappa^2 = Eh^2/12\rho$ for thickness $h$.
+3. *Its spectrum*: the same ratios, $1 : 6.27 : 17.55$, with $f_1 = \frac{(1.8751)^2}{2\pi}\,\frac{h}{L^2}\sqrt{\frac{E}{12\rho}}$.
+4. *On the diagram*: plucked, off the lines like the tine; blown, every stem on a line.
+5. *What you hear*: plucked, this spectrum; blown, the reed chops the airflow into puffs that repeat exactly, and the sound sits at whole-number multiples of the puff rate.
+
+[Every step on page 6b →](harmonica.qmd)
+:::
+
+::: {.recipe}
+**A piano wire**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="piano" viewBox="0 0 200 58" aria-label="Stems slightly sharp of 1, 2, 3, ... times"></svg><button data-play="piano">▶ Play</button><span class="tag">stiffness exaggerated (B = 0.0012)</span></div>
+```
+
+1. *Newton's law* on a short piece of stiff wire, where tension pulls it straight and the steel resists bending, the two forces adding: $u_{tt} = c^2\,u_{xx} - \kappa^2\,u_{xxxx}$, with $c^2 = T/\mu$, $\kappa^2 = EI/\mu$.
+2. *The operator*: $A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$, with the ends pinned, $u = u_{xx} = 0$.
+3. *Its spectrum*: $X = \sin kx$ with $\sin kL = 0$ and $\lambda = c^2k^2 + \kappa^2k^4$, so $f_n = n f_0\sqrt{1 + Bn^2}$, with $f_0 = c/2L$ and $B = \pi^2 EI/TL^2$.
+4. *On the diagram*: each stem a little sharp of its line, more so the higher it is.
+5. *What you hear*: still a clear note, but an octave tuned to exactly 2 : 1 beats, so tuners stretch octaves.
+
+[Every step on page 7 →](piano.qmd)
+:::
+
+::: {.recipe}
+**A drum**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-mini="drum" viewBox="0 0 200 58" aria-label="Many stems scattered between the lines"></svg><button data-play="drum">▶ Play</button><span class="tag">struck about a third of the way out</span></div>
+```
+
+1. *Newton's law* on a small patch of drumhead, where tension $T$ pulls all around the patch's edge and the [divergence theorem](glossary.qmd#divergence-theorem) turns the total pull into $T\,\Delta u$ per unit area: $\sigma\,u_{tt} = T\,\Delta u$, with $\Delta u = u_{xx} + u_{yy}$, the [Laplacian](glossary.qmd#laplacian).
+2. *The operator*: $A = -c^2\,\Delta$, with $c^2 = T/\sigma$, and the rim held fixed, $u = 0$.
+3. *Its spectrum*: for a round drum of radius $a$, $J_m(ka) = 0$ ([Bessel functions](glossary.qmd#bessel)), with $\lambda = c^2k^2$, so $f_{m,n} = c\,j_{m,n}/2\pi a$.
+4. *On the diagram*: stems at 1, 1.59, 2.14, 2.30, 2.65, 2.92, … times the lowest, scattered between the lines.
+5. *What you hear*: a sound that doesn't repeat at any rate we hear as pitch, and that fades fast: a thud (an ideal head; timpani differ, page 8).
+
+[Every step on page 8 →](drum.qmd)
+:::
+
+The last two pages turn the recipe around. [Page 9](shape.qmd) asks how much of a drum's shape its spectrum determines, and [page 10](epilogue.qmd) asks whether the spectra of instruments shaped the scales we play on them.
+
+## What we found
+
+One recipe explains every instrument in the series. Newton's law on a small piece gives an equation of motion of the form $u_{tt} = -A\,u$; the operator $A$, a rule together with the way the instrument is held, is linear and symmetric; its eigenvalues are never negative, and each one, $\lambda$, is a mode swinging at $f = \sqrt{\lambda}/2\pi$; and every motion is a sum of these modes. So the spectrum of the operator fixes where the stems of the spectrum diagram stand, plucking or striking fixes their heights (a steady bow or breath can do more), and the ear hears a note when the stems sit on, or very near, the lines of the pitch ruler.
+
+::: {.refs}
+**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapters 1–3. R. Courant and D. Hilbert, *Methods of Mathematical Physics*, vol. 1, Interscience, 1953, chapters V and VI. The instrument-specific facts quoted here (the kalimba's fast-fading overtone, the clarinet's faint even multiples, the harmonica's puffs, the glockenspiel's free bar) are sourced on their own pages. Wikipedia, [Spectrum (functional analysis)](https://en.wikipedia.org/wiki/Spectrum_(functional_analysis)), [Eigenvalues and eigenvectors](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors), [Spectral theorem](https://en.wikipedia.org/wiki/Spectral_theorem), [Sturm–Liouville theory](https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory) and [Integration by parts](https://en.wikipedia.org/wiki/Integration_by_parts).
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function beads(N) { var out = []; for (var k = 1; k <= Math.floor(N / 2); k++) out.push({ ratio: Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N), amp: 1, tau: 1.6 }); return out; }
+  function range(n0, n1, step, amp, tau) { var out = []; for (var n = n0; n <= n1; n += step) out.push({ ratio: n, amp: amp(n), tau: tau ? tau(n) : 2 }); return out; }
+  // what each card's stems show (the spectrum) and what its button plays (the sound made from it)
+  var DEF = {
+    spring:   { stems: function () { return [{ ratio: 1, amp: 1 }]; }, sound: function () { return [{ ratio: 1, amp: 1, tau: 2.5 }]; }, f: 220, dur: 2.4, rmax: 8 },
+    beads:    { stems: function () { return beads(8); }, sound: function () { return beads(8); }, f: 220, dur: 2.4, rmax: 8 },
+    loop:     { stems: function () { return range(1, 8, 1, function (n) { return 1 / n; }); }, sound: function () { return range(1, 24, 1, function (n) { return 1 / n; }, function (n) { return 1.8 / (1 + 0.04 * n * n); }); }, f: 196, dur: 2.6, rmax: 8 },
+    string:   { stems: function () { return M.violin.partials({ pluck: 0.2 }); }, sound: function () { return M.violin.partials({ pluck: 0.2 }); }, f: 196, dur: 2.6, rmax: 8 },
+    flute:    { stems: function () { return range(1, 8, 1, function (n) { return 1 / n; }); }, sound: function () { return M.clarinet.partials({ flute: true }); }, f: 293.66, dur: 1.8, sustained: true, rmax: 8 },
+    clarinet: { stems: function () { return range(1, 8, 2, function (n) { return 1 / n; }); }, sound: function () { return M.clarinet.partials(); }, f: 146.83, dur: 1.8, sustained: true, rmax: 8 },
+    kalimba:  { stems: function () { return M.kalimba.partials(); }, sound: function () { return M.kalimba.partials(); }, f: 440, dur: 2.6, rmax: 18, every: 3 },
+    reed:     { stems: function () { return M.harmonica.partials({ plucked: true }); }, sound: function () { return M.harmonica.partials({ plucked: true }); }, f: 523.25, dur: 2.0, rmax: 18, every: 3 },
+    blown:    { sound: function () { return M.harmonica.partials(); }, f: 523.25, dur: 1.8, sustained: true },
+    piano:    { stems: function () { return M.piano.partials({ B: 0.0012 }); }, sound: function () { return M.piano.partials({ B: 0.0012 }); }, f: 261.63, dur: 3.2, rmax: 8 },
+    drum:     { stems: function () { return M.drum.partials({ r: 0.35 }); }, sound: function () { return M.drum.partials({ r: 0.35 }); }, f: 140, dur: 2.4, rmax: 8 }
+  };
+  function draw() {
+    document.querySelectorAll("svg[data-mini]").forEach(function (svg) {
+      var d = DEF[svg.getAttribute("data-mini")];
+      C.stems(svg, d.stems(), { W: 200, H: 58, rmax: d.rmax, fs: 9, sw: 2, labelEvery: d.every || 2, noOff: true });
+    });
+  }
+  function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
+  document.querySelectorAll("[data-play]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var d = DEF[b.getAttribute("data-play")];
+      var buf = C.render(C.toHz(d.sound(), d.f), d.dur);
+      if (d.sustained) fadeOut(buf, 0.4);
+      C.play(buf, 0.8);
+    });
+  });
+  C.onTheme(draw);
+  draw();
+})();
+</script>
+```

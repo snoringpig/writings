@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[The Shape of a Sound](index.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
+[The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
 :::
 
 ## All the sounds side by side
@@ -37,12 +37,13 @@ Gray lines are whole-number multiples of the lowest frequency; stem height is ho
 
 ## How to read this series
 
-Every page opens with a puzzle you can hear or see, builds the explanation, and ends with what we found and the next puzzle. The step-by-step derivations and proofs are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the [glossary](glossary.qmd), and the symbol $\propto$ means "proportional to".
+The idea behind every page is laid out on [The spectrum of an operator](spectrum.qmd). Every page opens with a puzzle you can hear or see and a short summary of how the recipe answers it. Then each instrument page derives the instrument's operator from Newton's law, step by step, and works out its spectrum, the frequencies (page 0 comes before any operator; pages 9 and 10 reuse the operators of pages 8 and 6). Only proofs and side calculations are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the [glossary](glossary.qmd), and the symbol $\propto$ means "proportional to".
 
 - **The gist, 5 minutes.** The [series page](index.qmd): one puzzle, its answer, and the idea behind the whole series.
-- **The core idea.** Read [0 · What makes a sound a note?](note.qmd), [4 · Why does a light touch make a string jump an octave?](violin.qmd) and [8 · Why does a drum thud?](drum.qmd), skipping the folds; add [3 · Why does a loop of string land exactly on the lines?](circle.qmd) for the mathematics (about 35 minutes for all four). They carry the main idea: a pitch is a repeating sound, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not. Page 3 shows, in the simplest case, where the lines on the ruler come from.
-- **The whole story, about an hour and a half.** Pages 0 to 8 in order, each answering the question the last one raised.
-- **Everything, about three hours.** All the pages, including [9 · Can you hear the shape of a drum?](shape.qmd) and the [epilogue](epilogue.qmd), with the folds open.
+- **The core idea.** Read [0 · What makes a sound a note?](note.qmd), [4 · Why does a light touch make a string jump an octave?](violin.qmd) and [8 · Why does a drum thud?](drum.qmd), skipping the folds (about an hour); add [3 · Why does a loop of string land exactly on the lines?](circle.qmd) for the recipe in its simplest form. They carry the main idea: a pitch is a repeating sound, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not. Page 3 shows, in the simplest case, where the lines on the ruler come from.
+- **Every puzzle and its answer, about half an hour.** Each page's puzzle, demo and summary box, pages 0 to 10.
+- **The whole story with the mathematics, about three and a half hours.** Pages 0 to 8 in order, each deriving its operator and its spectrum, and each answering the question the last one raised.
+- **Everything, about four and a half hours.** All the pages, including [9 · Can you hear the shape of a drum?](shape.qmd) and the [epilogue](epilogue.qmd), with the folds open.
 
 Here for one puzzle? The series page lists every page by its question, and each page says at the top which earlier page it builds on. Already know Fourier series? Start at page 4. The times assume reading about 120 words a minute, plus a minute or two per demo.
 
@@ -56,6 +57,7 @@ In the table, $\partial_x$ means a derivative in $x$, so $-c^2\partial_x^2$ is t
 | [1 · Why does a fading note stay in tune?](oscillator.qmd) | one restoring force, one frequency | the number $k/m$ | $\sqrt{k/m}/2\pi$ |
 | [2 · How can a tangled wobble be a few simple motions?](ring.qmd) | many masses: eigenvectors of a matrix | circulant matrix | $\propto \sin(\pi k/N)$ |
 | [3 · Why does a loop of string land exactly on the lines?](circle.qmd) | the smallest operator spectrum; Fourier series | $-c^2\,d^2/d\theta^2$ on a loop | $\propto n$, exactly |
+| [★ The spectrum of an operator](spectrum.qmd) | the recipe: Newton's law → operator → spectrum → sound, on every instrument | $u_{tt} = -Au$ | $\sqrt{\lambda}/2\pi$ |
 | [4 · Why does a light touch make a string jump an octave?](violin.qmd) | boundary conditions are part of the operator | $-c^2\,d^2/dx^2$, ends tied | $\propto n$ |
 | [5 · Why is a clarinet almost an octave deeper than a flute?](clarinet.qmd) | closing one end halves the lowest frequency and keeps only its odd multiples | the same, on pressure | $\propto 2n - 1$ |
 | [6 · Why does a kalimba sound clean?](kalimba.qmd) | bending: four derivatives spread the overtones; the clamped and free ends move them off the whole numbers | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
@@ -86,7 +88,7 @@ Instruments in one family share one rule for the restoring force, so they are cl
 
 ## Comparison
 
-<details><summary>Every instrument side by side: force, operator, boundary, eigen-condition, ratios, excitation</summary>
+**Every instrument side by side**: force, operator, boundary, eigen-condition, ratios, excitation.
 
 | | Violin | Clarinet | Kalimba | Harmonica | Piano | Drum |
 |:--|:--|:--|:--|:--|:--|:--|
@@ -99,7 +101,7 @@ Instruments in one family share one rule for the restoring force, so they are cl
 | Excitation | bow, sustained | reed, sustained | thumb pluck | airflow, sustained | felt hammer | stick |
 | What you hear | exact harmonics | odd harmonics dominate; overblows a [twelfth](glossary.qmd#octave) | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
 
-</details>
+
 
 ```{=html}
 <script src="core.js"></script>

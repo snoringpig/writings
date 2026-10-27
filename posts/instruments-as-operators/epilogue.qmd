@@ -10,18 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 9 Drum shape](shape.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd)
+[← 9 Drum shape](shape.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd), for partials, and [page 6, the kalimba](kalimba.qmd), for bars. About 8 minutes, plus the folds.
+Builds on [page 0, the note](note.qmd), for partials, and [page 6, the kalimba](kalimba.qmd), for bars. Math: up to cosh, sinh and a determinant (as on page 6). About 4 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
 Play two notes an [octave](glossary.qmd#octave) apart, then two notes a [semitone](glossary.qmd#semitone) apart, the smallest step on a piano. The octave sounds smooth and the semitone sounds rough. Why? And why does a Javanese gamelan, an orchestra of tuned metal bars and gongs, use scales that fit no piano?
 :::
 
-Pick a sound, then slide the interval between two notes of that sound and listen. The curve shows how rough each interval sounds.
+Listen first: pick a sound, then slide the interval between two notes of that sound and listen. The curve shows how rough each interval sounds.
 
 ```{=html}
 <div class="ins">
@@ -42,58 +42,74 @@ Pick a sound, then slide the interval between two notes of that sound and listen
 ```
 
 ::: {.gist}
-**The gist.** Two notes sound rough when their [partials](glossary.qmd#partial) sit close together but not on top of each other, so they [beat](glossary.qmd#beats). A string-like sound has its partials on the lines of the pitch ruler, and then the partials of two notes land exactly on each other at simple whole-number ratios, such as 3 : 2 and 2 : 1: those intervals sound smooth. A metal bar's partials are off the lines, so its smooth intervals move, and the exact octave is no longer one of them. The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on.
+**The recipe on this page, in brief.** Two notes sound rough when their [partials](glossary.qmd#partial) sit close together but not on top of each other, so they [beat](glossary.qmd#beats); the roughness of two notes is computed from their spectra. So the recipe now runs one step further, from the spectrum to which intervals sound smooth.
+
+1. *Newton's law* on a slice of a metal bar gives the bending equation of page 6.
+2. *The operator* is again $\kappa^2\,d^4/dx^4$, now with both ends free; a string's is $-c^2\,d^2/dx^2$ with both ends tied (page 4).
+3. *Its spectrum*: the bar's frequencies sit at 1, 2.756, 5.404, … times the lowest, off the lines; the string's sit on them.
+4. *On the diagram*, here the roughness curve computed from those spectra: a string's smooth intervals are simple whole-number ratios such as 3 : 2 and 2 : 1; a bar's smooth intervals move, and the exact octave is no longer one of them.
+5. *What we hear*: the octave that is smooth on a string is not the smoothest interval on a bar.
+
+[Skip to what we hear](#what-we-hear) if you only want the answer.
+
+The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on.
 :::
 
 ## On the roughness curve
 
 The curve shows how rough two notes of the chosen sound are, against the ratio between their frequencies, from 1 (the same note) to 3. The dips are the smoothest intervals. With the string-like sound, up to the octave, the dips sit at 6 : 5, 5 : 4, 4 : 3, 3 : 2, 5 : 3 and 2 : 1: the intervals of Western harmony. Switch to the metal bar and the dips move. The octave, 2 : 1, is no longer a dip; a slightly narrower interval, about 1.96, is smoother.
 
-## How it works
+## Roughness, computed from the spectrum
 
-**Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness. In Sethares' fit to their results, the roughest separation near middle C is about 22 Hz. A note from a real instrument is several pure tones at once, its partials, so for two notes Sethares adds up the roughness of every pair of partials. That sum is the curve in the demo.
+*Mathematics used: $e^x$ and $\ln$, and cosh, sinh and a determinant as on page 6. The bar's spectrum follows the recipe of [The spectrum of an operator](spectrum.qmd).*
 
-::: {.derive}
-<details><summary><span class="label">Precisely</span>The roughness of two notes, in symbols <span class="needs">uses the exponential function</span></summary>
+**Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness.
 
-Sethares' fit to Plomp and Levelt's data, for two pure tones of equal loudness, the lower at frequency $f$ and the other $x$ hertz above it, is
+**The roughness of two pure tones.** Sethares fitted a formula to Plomp and Levelt's results. For two pure tones of equal loudness, the lower at frequency $f$ and the other $x$ hertz above it, the roughness is
 $$
 \delta(f, x) = e^{-3.5\,s\,x} - e^{-5.75\,s\,x}, \qquad s = \frac{0.24}{0.021\,f + 19},
 $$
-with frequencies in hertz. It is zero at $x = 0$, rises to a peak at $x = \ln(5.75/3.5)/(2.25\,s)$, about 22 Hz near middle C, and then decays. For tones of amplitudes $a_1$ and $a_2$, Sethares multiplies by $a_1 a_2$, as in $D(\alpha)$ below. The factor $s$ makes the roughest separation grow with the frequency, as Plomp and Levelt found: tones high up must be further apart, in hertz, to sound equally smooth. The formula describes average listeners' judgments of roughness for pure tones; it is a fitted curve, not derived from first principles.
+with frequencies in hertz. It is zero when the tones coincide ($x = 0$), rises to a peak at $x = \ln(5.75/3.5)/(2.25\,s)$, about 22 Hz near middle C, and then decays. The factor $s$ makes the roughest separation grow with the frequency, as Plomp and Levelt found: tones high up must be further apart, in hertz, to sound equally smooth. The formula describes average listeners' judgments for pure tones; it is a fitted curve, not derived from first principles.
 
-For two notes, Sethares adds up the roughness of every pair of partials, from either note, each weighted by the product of the two partials' amplitudes:
+**The roughness of two notes.** A note from a real instrument is several pure tones at once, its partials, which on every earlier page came from the instrument's spectrum. So for two notes, Sethares adds up the roughness of every pair of partials, from either note, each weighted by the product of the two partials' amplitudes:
 $$
 D(\alpha) = \sum_{\text{pairs } i < j} a_i a_j\; \delta\big(\min(f_i, f_j),\ |f_i - f_j|\big).
 $$
-Here the list $f_1, f_2, \dots$ holds the partials of both notes: those of the lower note, and those of the upper note, whose frequencies are $\alpha$ times the lower note's; $a_i$ is the amplitude of partial $f_i$. The roughness $\delta$ of two pure tones depends on how far apart they are and, a little, on how high they are, hence its two inputs. The curve in the demo is $D(\alpha)$. In the demo, the string-like sound has six partials with strengths falling by a factor 0.88 each, and the metal bar has the first four modes of a uniform bar free at both ends, with strengths 1, 0.7, 0.5 and 0.35. Both sets of strengths are chosen for illustration.
+Here the list $f_1, f_2, \dots$ holds the partials of both notes: those of the lower note, and those of the upper note, whose frequencies are $\alpha$ times the lower note's; $a_i$ is the amplitude of partial $f_i$. The curve in the demo is $D(\alpha)$, with the lower note at 262 Hz. In the demo, the string-like sound has six partials with strengths falling by a factor 0.88 each, and the metal bar has the first four modes of a bar free at both ends, with strengths 1, 0.7, 0.5 and 0.35; both sets of strengths are chosen for illustration.
 
-</details>
-:::
+**Partials that coincide don't beat.** In a string-like sound the lower note's partials sit at $f$, $2f$, $3f$ and so on, and the upper note's at $\alpha f$, $2\alpha f$, $3\alpha f$ and so on. The lower note's $n$th partial and the upper note's $m$th coincide when $n f = m\alpha f$, that is, when $\alpha = n/m$. When $\alpha$ is a ratio of small whole numbers, say $3/2$, many pairs coincide: the lower note's third partial and the upper note's second both sit at $3f$, its sixth and the upper note's fourth at $6f$. Coinciding partials contribute $\delta = 0$. Move off $3/2$ and those pairs pull apart, by a few hertz and then by tens of hertz, into the range where $\delta$ is largest. So each simple ratio sits at the bottom of a dip. This extends the idea behind the whole series: frequencies on the lines give a clear pitch, and they also make whole-number intervals smooth.
 
-**Partials that coincide don't beat.** In a string-like sound the partials of the lower note sit at 1, 2, 3, … times its frequency, and those of the upper note at the same multiples of the upper note's frequency. When the ratio between the notes is a ratio of small whole numbers, say 3 : 2, many partials of the two notes land exactly on each other: the lower note's third partial and the upper note's second both sit at three times the lower note's frequency. Partials that coincide do not beat. Move off 3 : 2 and those pairs pull apart, by a few hertz and then by tens of hertz, into the range where beating sounds roughest. So each simple ratio sits at the bottom of a dip. This extends the idea behind the whole series: frequencies on the lines give a clear pitch, and they also make whole-number intervals smooth.
+## The metal bar's spectrum
 
-**A metal bar moves the dips.** A uniform bar free at both ends, such as a glockenspiel bar, has the kalimba's operator with different ends, and its partials are at 1, 2.756, 5.404 and 8.933 times the lowest: off the lines. Now the coincidences happen elsewhere. At a ratio of 2.756, the upper note's lowest partial lands on the lower note's second. At about 1.961, the upper note's second partial lands on the lower note's third (1.961 × 2.756 ≈ 5.404), and that is the dip just below the octave. At exactly 2, nothing lines up. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too.)
+A glockenspiel bar is a uniform metal bar resting on soft supports, so both of its ends are free. Its operator is the bar's operator derived from Newton's law on the [kalimba page](kalimba.qmd), $A = \kappa^2\,d^4/dx^4$ with $\kappa^2 = EI/\rho S$; only the ends differ. A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ a mode $X$ must satisfy $X'' = 0$ and $X''' = 0$.
 
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The modes of a bar free at both ends <span class="needs">uses a 2×2 determinant and hyperbolic functions</span></summary>
+The spectrum follows the kalimba page's steps, with these new end conditions. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
 
-The operator is the bar's $\kappa^2\,d^4/dx^4$ from the [kalimba page](kalimba.qmd). A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ the conditions are $X'' = 0$ and $X''' = 0$.
-
-1. As on the kalimba page, write $X = A_1\cos\beta x + A_2\sin\beta x + A_3\cosh\beta x + A_4\sinh\beta x$.
-2. At $x = 0$: $X''(0) = \beta^2(-A_1 + A_3) = 0$ and $X'''(0) = \beta^3(-A_2 + A_4) = 0$, so $A_3 = A_1$ and $A_4 = A_2$. Then $X = A_1(\cos\beta x + \cosh\beta x) + A_2(\sin\beta x + \sinh\beta x)$.
-3. At $x = L$, dividing by $\beta^2$ and $\beta^3$ and writing $C_1 = \cos\beta L$, $S_1 = \sin\beta L$, $C_2 = \cosh\beta L$, $S_2 = \sinh\beta L$, as on the kalimba page:
+1. **Four candidate shapes.** As on the kalimba page, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
+2. **The left end is free.** Nothing bends or pushes the bar at $x = 0$: $X''(0) = \beta^2(-b_1 + b_3) = 0$ and $X'''(0) = \beta^3(-b_2 + b_4) = 0$, so $b_3 = b_1$ and $b_4 = b_2$. Then $X = b_1(\cos\beta x + \cosh\beta x) + b_2(\sin\beta x + \sinh\beta x)$.
+3. **The right end is free.** The same two conditions at $x = L$. Dividing by $\beta^2$ and $\beta^3$, and writing $c_1 = \cos\beta L$, $s_1 = \sin\beta L$, $c_2 = \cosh\beta L$, $s_2 = \sinh\beta L$ for short:
 $$
-(C_2 - C_1)\,A_1 + (S_2 - S_1)\,A_2 = 0, \qquad (S_2 + S_1)\,A_1 + (C_2 - C_1)\,A_2 = 0 .
+(c_2 - c_1)\,b_1 + (s_2 - s_1)\,b_2 = 0, \qquad (s_2 + s_1)\,b_1 + (c_2 - c_1)\,b_2 = 0 .
 $$
-4. These have a solution other than $A_1 = A_2 = 0$ exactly when the [determinant](glossary.qmd#determinant) is zero: $(C_2 - C_1)^2 - (S_2 - S_1)(S_2 + S_1) = (C_2^2 - S_2^2) + (C_1^2 + S_1^2) - 2C_1C_2 = 2 - 2C_1C_2$, using $C_2^2 - S_2^2 = 1$ and $C_1^2 + S_1^2 = 1$. So
+4. **When is there a mode?** Two equations for $b_1$ and $b_2$ have a solution other than $b_1 = b_2 = 0$ exactly when the [determinant](glossary.qmd#determinant) is zero: $(c_2 - c_1)^2 - (s_2 - s_1)(s_2 + s_1) = (c_2^2 - s_2^2) + (c_1^2 + s_1^2) - 2c_1c_2 = 2 - 2c_1c_2$, using $c_2^2 - s_2^2 = 1$ and $c_1^2 + s_1^2 = 1$. So
 $$
 \cos\beta L\,\cosh\beta L = 1 .
 $$
-Besides $\beta = 0$, which belongs to the bar moving or rotating rigidly without bending, the roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page. Since the frequency is proportional to $\beta^2$, the partials are at $(\beta_n/\beta_1)^2 = 1,\ 2.756,\ 5.404,\ 8.933$ times the lowest.
+5. **The roots.** $\lambda = 0$ is also an eigenvalue: $X'''' = 0$ with free ends leaves exactly $X = a + bx$, belonging to the bar sliding ($X = 1$) or tilting ($X = x$) as a whole without bending, which makes no sound. The other roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page.
 
-</details>
+::: {.result}
+**The free bar's operator:** $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $X'' = X''' = 0$ at both ends.
+
+**Its spectrum:** the eigenvalue $0$, twice (sliding and tilting, which make no sound), and the eigenvalues $\lambda_n = \kappa^2\beta_n^4$, where $\cos\beta_n L\,\cosh\beta_n L = 1$, $\beta_n > 0$. The frequencies are $f_n = \sqrt{\lambda_n}/2\pi = \kappa\beta_n^2/2\pi$, in the ratios $1 : 2.756 : 5.404 : 8.933$: off the lines.
+
+In words: the same bar as the kalimba's, but with both ends free its overtones sit at different places, still far from whole numbers.
 :::
+
+**What we assumed.** The bar assumptions of page 6 (small slopes, a uniform bar, no rotational inertia or shear deformation of the slices, no damping), and that a glockenspiel bar resting on soft supports near its fundamental's still points vibrates as if both ends were free.
+
+[]{#what-we-hear}**A metal bar moves the dips.** With the bar's partials at 1, 2.756, 5.404 and 8.933 times the lowest, the coincidences happen elsewhere. At a ratio of 2.756, the upper note's lowest partial lands on the lower note's second. At about 1.961, the upper note's second partial lands on the lower note's third ($1.961 \times 2.756 \approx 5.404$), and that is the dip just below the octave. At exactly 2, nothing lines up. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too.)
+
+## What the spectrum does not decide {#not-decide}
 
 **The gamelan.** Sethares measured the spectra of gamelan metallophones, instruments of tuned metal bars, and reports that "the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans". The demo's bars are idealized, not measured gamelan bars, so it shows the mechanism, not his result; real gamelan bars are shaped by their makers, and tunings vary from one gamelan to another.
 
@@ -101,12 +117,12 @@ Besides $\beta = 0$, which belongs to the bar moving or rotating rigidly without
 
 ## What we found
 
-An instrument's spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it: for instruments with their partials on the lines, the simple whole-number ratios of Western harmony; for metal bars, with their partials off the lines, other intervals. That much is a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world's music is an open, argued question.
+An instrument's spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it, because the roughness of two notes, $D(\alpha)$, is computed from their partials. A string's operator, $-c^2\,d^2/dx^2$ with both ends tied, has its spectrum at whole-number multiples, so its smooth intervals are the simple ratios of Western harmony. The free bar's operator, $\kappa^2\,d^4/dx^4$ with both ends free, has its spectrum at 1, 2.756, 5.404, …, so its smooth intervals move, and the exact octave is not one of them. That much is a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world's music is an open, argued question.
 
 [← 9 · Drum shape](shape.qmd) · [Back to the series](index.qmd) · [Map](map.qmd)
 
 ::: {.refs}
-**References.**
+**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba).
 W. A. Sethares, "Adaptive tunings for musical scales", *Journal of the Acoustical Society of America* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
 W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, Springer ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from chapter 1, p. 6, of the [book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
 R. Plomp and W. J. M. Levelt, "Tonal consonance and critical bandwidth", *Journal of the Acoustical Society of America* 38 (1965), 548–560, as cited by Sethares.
