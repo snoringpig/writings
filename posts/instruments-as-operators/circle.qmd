@@ -215,7 +215,7 @@ the second identity being [Parseval's](https://en.wikipedia.org/wiki/Parseval%27
 
 ## 4 · On the spectrum diagram
 
-The demo at the top is this page's spectrum diagram; the table below gives its numbers. On the continuous loop, mode $n$ sits exactly on the line $n$×, at $f_n = n f_1$ from the result box. With a few beads, the stems sit below the lines, the higher modes furthest below; on a ring of $N$ beads, mode $k$'s frequency divided by mode 1's is $\sin(\pi k/N)/\sin(\pi/N)$ ([page 2](ring.qmd)), which tends to $k$ as $N$ grows. The ring of beads approaches the loop from below:
+The demo at the top is this page's spectrum diagram; the table below gives some of its numbers. On the continuous loop, mode $n$ sits exactly on the line $n$×, at $f_n = n f_1$ from the result box. With a few beads, the stems sit below the lines, the higher modes furthest below; on a ring of $N$ beads, mode $k$'s frequency divided by mode 1's is $\sin(\pi k/N)/\sin(\pi/N)$ ([page 2](ring.qmd)), which tends to $k$ as $N$ grows. The ring of beads approaches the loop from below:
 
 | mode | 8 beads | 32 beads | loop |
 |:--|--:|--:|--:|
