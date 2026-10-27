@@ -10,18 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 0 Note](note.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [2 Beads →](ring.qmd)
+[← 0 Note](note.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [2 Beads →](ring.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd). About 2 minutes for the puzzle and the gist; about 15 with the mathematics, plus the folds.
+Builds on [page 0, the note](note.qmd). Uses second derivatives. About 2 minutes for the summary; about 15 with the mathematics.
 :::
 
 ::: {.puzzle}
-Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note's pitch barely sags. Why doesn't a smaller swing go slower?
+Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note's pitch barely sags. Why doesn't a smaller swing go slower? Start with the simplest thing that vibrates: a mass on a spring.
 :::
 
-Start with the simplest thing that vibrates: a mass on a spring. Change how far you pull it, and watch how long each bob takes.
+Listen first: change how far you pull the mass, and watch how long each bob takes.
 
 ```{=html}
 <div class="ins">
@@ -38,42 +38,52 @@ Start with the simplest thing that vibrates: a mass on a spring. Change how far 
 ```
 
 ::: {.gist}
-**The gist.** A spring pulls back twice as hard when it is stretched twice as far. So a swing twice as big has twice as far to go, but moves twice as fast all the way, and takes exactly as long. As long as the pull stays proportional to the stretch, the rate is set by the spring's stiffness and the mass, never by the size of the swing. Below, Newton's law turns the spring into the smallest possible operator, and that operator's one eigenvalue gives the one frequency.
+**The recipe on this instrument, in brief.**
+
+- *Newton's law* with Hooke's pull gives $m\ddot x = -kx$.
+- *The operator* is the simplest there is: multiply the displacement by $k/m$.
+- *Its spectrum* is that one number, $\lambda = k/m$, so one frequency, $f = \sqrt{k/m}/2\pi$.
+- *On the diagram*: a single stem, a pure tone.
+- *What we hear*: the size of the swing appears nowhere in $f$, so a fading swing keeps its pitch, as long as the pull stays proportional to the stretch.
+
+Only want the answer? Skip to [what we hear](#what-we-hear).
 :::
 
-## The operator
+## 1 · Newton's law: the equation of motion
 
-Every page of this series does the same thing: apply Newton's law, mass times acceleration equals force, to one piece of the instrument, and find that the force is a fixed rule applied to the instrument's shape. Divided by the mass, that rule is the instrument's [operator](glossary.qmd#operator). For one mass on a spring the "shape" is a single number, how far the mass is from rest, and the rule turns out to be as simple as a rule can be.
+Every page of this series runs the same recipe: apply Newton's law, mass times acceleration equals force, to one piece of the instrument; find that the force is a fixed rule applied to the instrument's shape; read off that rule, the [operator](glossary.qmd#operator); find its spectrum; and from the spectrum, what we hear. The [spectrum of an operator](spectrum.qmd) page sets out the recipe in general. For one mass on a spring, the "shape" is a single number, how far the mass is from rest.
 
-**1. The spring's pull.** A spring pulls back in proportion to how far it is stretched: twice as far, twice the pull. This is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law). With $x$ the distance from the resting position (for a hanging spring, the position where the spring's pull balances gravity) and $k$ the spring's stiffness, the force is
+**1. The spring pulls back in proportion to the stretch.** Twice as far, twice the pull: this is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law). With $x$ the distance from the resting position (for a hanging spring, the position where the spring's pull balances gravity) and $k$ the spring's stiffness, the force is
 $$
 F = -k\,x ,
 $$
 where the minus sign says the pull points back toward rest.
 
-**2. Newton's law.** Force equals mass times acceleration. Writing $\ddot x$ for the acceleration, the second derivative of $x$ with respect to time,
+**2. The pull sets the acceleration.** Force equals mass times acceleration. Writing $\ddot x$ for the acceleration, the second derivative of $x$ with respect to time,
 $$
 m\,\ddot x = -k\,x .
 $$
 
-**3. Divide by the mass.** The acceleration is the displacement multiplied by one fixed number, $\lambda = k/m$, with its direction reversed:
+**What we assumed.** The pull is exactly proportional to the stretch (Hooke's law holds), the spring itself has no mass, and nothing else acts on the mass: no friction for now.
+
+## 2 · The operator
+
+Divide by the mass. The acceleration is the displacement multiplied by one fixed number, $k/m$, with its direction reversed:
 $$
-\ddot x = -\lambda\,x, \qquad \lambda = \frac{k}{m} .
+\ddot x = -\frac{k}{m}\,x .
 $$
 
 ::: {.result}
-**The operator.** $\ddot x = -A\,x$, where $A$ is the rule "multiply by $\lambda = k/m$". This is the smallest possible operator: it acts on a single number. As on every later page, the minus sign stays in the equation, and $A$ is the restoring force per unit mass with its direction reversed.
+**The operator.** $\ddot x = -A\,x$, where $A$ is the rule "multiply by $k/m$". For any displacement $x$, $A\,x$ is the restoring force per unit mass with its direction reversed; the minus sign stays in the equation, as on every later page. There is nothing to hold at the ends here: a single mass has no boundary. In words: this is the smallest possible operator, acting on a single number.
 :::
 
-**What we assumed.** The pull is exactly proportional to the stretch (Hooke's law holds), the spring itself has no mass, and nothing else acts on the mass: no friction for now.
+## 3 · Its spectrum
 
-## Its spectrum
-
-A [mode](glossary.qmd#mode) is a motion in which the shape keeps its form and only its size swings, at one frequency. In operator language, a mode's shape $X$ is one the operator only rescales, $A X = \lambda X$; the rescaling factor $\lambda$ is an [eigenvalue](glossary.qmd#eigenvalue), and the list of all eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Here every displacement is simply multiplied by $k/m$, so the spectrum is one number. Now find the motion it allows.
+A [mode](glossary.qmd#mode) is a motion in which the shape keeps its form and only its size swings, at one frequency. In operator language, a mode's shape $X$ is one the operator only rescales, $A X = \lambda X$; the rescaling factor $\lambda$ is an [eigenvalue](glossary.qmd#eigenvalue), and the list of all eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Here every displacement is simply multiplied by $k/m$, so the spectrum is one number, $\lambda = k/m$. Now find the motion it allows.
 
 **1. Try a steady swing.** Guess $x = a\cos(\omega t + \phi)$, with amplitude $a$, starting phase $\phi$ and [angular frequency](glossary.qmd#angular-frequency) $\omega$ in radians per second.
 
-**2. Differentiate twice.** Each derivative of $\cos$ brings out a factor $\omega$ and the second one flips the sign:
+**2. Differentiate twice and see what comes back.** $\cos \to -\omega\sin \to -\omega^2\cos$: two derivatives give $-\omega^2$ times the start,
 $$
 \ddot x = -\omega^2\,a\cos(\omega t + \phi) = -\omega^2\,x .
 $$
@@ -85,7 +95,7 @@ $$
 The amplitude $a$ and the phase $\phi$ are free: they record how you started the motion, and they do not appear in $f$.
 
 ::: {.result}
-**The spectrum.** One eigenvalue, $\lambda = k/m$. One angular frequency, $\omega = \sqrt{\lambda}$, and one frequency, $f = \frac{1}{2\pi}\sqrt{k/m}$, whatever the amplitude. The same recipe, frequency = square root of an eigenvalue, divided by $2\pi$, gives every frequency in the rest of the series.
+**The spectrum.** One eigenvalue, $\lambda = k/m$. One angular frequency, $\omega = \sqrt{\lambda}$, and one frequency, $f = \frac{1}{2\pi}\sqrt{k/m}$, whatever the amplitude. In words: the same recipe, frequency = square root of an eigenvalue, divided by $2\pi$, gives every frequency in the rest of the series.
 :::
 
 ::: {.derive}
@@ -98,11 +108,13 @@ The amplitude $a$ and the phase $\phi$ are free: they record how you started the
 </details>
 :::
 
-## On the pitch ruler
+## 4 · On the spectrum diagram
 
-A mass on a spring has just one frequency, so on the pitch ruler it is a single stem: a pure tone. The readout gives that frequency, from the formula above. The frequency goes as the square root of stiffness over mass: four times the stiffness doubles it, four times the mass halves it, and the size of the pull never enters. A note needs more than one stem; the next page finds where the others come from.
+One eigenvalue means one stem on the pitch ruler: a pure tone, at $f = \sqrt{k/m}/2\pi$. The readout in the demo above is exactly this formula. The frequency goes as the square root of stiffness over mass: four times the stiffness doubles it, four times the mass halves it, and the size of the pull never enters. A note needs more than one stem; the next page finds where the others come from.
 
-## What the spectrum explains
+## 5 · What we hear {#what-we-hear}
+
+The motion is the one mode, $x = a\cos(2\pi f t + \phi)$, and so is the sound: the demo plays exactly this cosine, sped up 200 times, fading slowly.
 
 **Twice the swing, the same time.** The frequency formula contains $k$ and $m$ but not the amplitude. In plain words: take any motion of the mass and double it, twice as far from rest at every moment. The pull doubles too, so the acceleration doubles, which is exactly what the doubled motion needs. So the doubled motion is also a motion of the mass, and it repeats just as often. That is why a fading note keeps its pitch.
 
@@ -111,7 +123,7 @@ A mass on a spring has just one frequency, so on the pitch ruler it is a single 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>The motion with friction <span class="needs">uses derivatives</span></summary>
 
-Add a friction force proportional to the velocity, $-2m\gamma\,\dot x$, so that $\ddot x = -\lambda x - 2\gamma\dot x$. Then $x = a e^{-\gamma t}\cos(\omega_d t + \phi)$ with $\omega_d = \sqrt{k/m - \gamma^2}$ is a solution, as long as the friction is light ($\gamma^2 < k/m$); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, $\omega_d$, still does not depend on $a$.
+Add a friction force proportional to the velocity, $-2m\gamma\,\dot x$, so that $\ddot x = -(k/m) x - 2\gamma\dot x$. Then $x = a e^{-\gamma t}\cos(\omega_d t + \phi)$ with $\omega_d = \sqrt{k/m - \gamma^2}$ is a solution, as long as the friction is light ($\gamma^2 < k/m$); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, $\omega_d$, still does not depend on $a$.
 
 </details>
 :::
@@ -120,7 +132,7 @@ Add a friction force proportional to the velocity, $-2m\gamma\,\dot x$, so that 
 
 ## What we found
 
-Newton's law with Hooke's pull gave the smallest operator there is: multiply the displacement by $k/m$. Its spectrum is that one number, and its square root, divided by $2\pi$, is the one frequency, $f = \frac{1}{2\pi}\sqrt{k/m}$. The amplitude is not in it, which is why a fading note keeps its pitch, very nearly. One mass gives one stem on the pitch ruler; a note needs many. On the next page the one number becomes a table of numbers, a matrix, with many eigenvalues, and so many frequencies.
+Newton's law with Hooke's pull gave the equation $m\ddot x = -kx$; the operator is the smallest there is, multiply by $k/m$; its spectrum is that one number, and its square root, divided by $2\pi$, is the one frequency, $f = \frac{1}{2\pi}\sqrt{k/m}$: a single stem, a pure tone. The amplitude is not in it, which is why a fading note keeps its pitch, very nearly. One mass gives one stem on the pitch ruler; a note needs many. On the next page the one number becomes a table of numbers, a matrix, with many eigenvalues, and so many frequencies.
 
 ## The next puzzle
 

@@ -10,11 +10,11 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[The Shape of a Sound](index.qmd) · [Map](map.qmd) · [1 Spring →](oscillator.qmd)
+[The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [1 Spring →](oscillator.qmd)
 :::
 
 ::: {.pageinfo}
-Start here. About 2 minutes for the puzzle and the gist; about 11 with the mathematics, plus the folds.
+Start here. Uses cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -43,7 +43,7 @@ Play the note, then the note without its 220 Hz part, and watch the wave.
 ```
 
 ::: {.gist}
-**The gist.** A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave's shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time. Every later page computes an instrument's frequencies, as the spectrum of an operator, and checks whether they sit on these whole-number lines.
+**The gist.** A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave's shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time. This page is the last step of the series' recipe, what we hear; every later page starts from Newton's law, computes an instrument's frequencies as the spectrum of an operator, and checks whether they sit on these whole-number lines.
 :::
 
 ## The pitch ruler
@@ -92,7 +92,7 @@ No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is
 
 Not every instrument is exact. Frequencies very near whole-number multiples still sound like one note: a piano's are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.
 
-**Where the frequencies come from.** This page took the frequencies as given. Every later page computes them. Newton's law, applied to a small piece of the instrument, gives a rule that turns the instrument's shape into the force pulling it back: the instrument's [operator](glossary.qmd#operator). Writing the motion as $u_{tt} = -A\,u$, each special number $\lambda$ of the operator $A$, an [eigenvalue](glossary.qmd#eigenvalue), gives one frequency, $f = \sqrt{\lambda}/2\pi$. The list of eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Whether the spectrum lands on the lines of the pitch ruler decides whether the instrument plays a note.
+**Where the frequencies come from.** This page took the frequencies as given. Every later page computes them. Newton's law, applied to a small piece of the instrument, gives a rule that turns the instrument's shape into the force pulling it back: the instrument's [operator](glossary.qmd#operator). Writing the motion as $u_{tt} = -A\,u$, where $u$ is the instrument's shape (how far each point is from rest), $u_{tt}$ its acceleration and $A$ the operator, each special number $\lambda$ of $A$, an [eigenvalue](glossary.qmd#eigenvalue), gives one frequency, $f = \sqrt{\lambda}/2\pi$. The list of eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Whether the spectrum lands on the lines of the pitch ruler is the first test of whether the instrument plays a note; pages 6 and 6b show what the spectrum alone does not decide. The [spectrum of an operator](spectrum.qmd) page sets out this recipe, from Newton's law to what we hear, and runs it on every instrument.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>The converse: if two tones repeat together, their ratio is a fraction, and the shortest period <span class="needs">uses cosines and divisibility</span></summary>

@@ -11,18 +11,18 @@ aliases: [foundations.html]
 ---
 
 ::: {.series-nav .slim}
-[← 2 Beads](ring.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [4 String →](violin.qmd)
+[← 2 Beads](ring.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [4 String →](violin.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 2, beads on a ring](ring.qmd). About 3 minutes for the puzzle and the gist; about 20 with the mathematics, plus the folds.
+Builds on [page 2, beads on a ring](ring.qmd). Uses derivatives, partial derivatives (explained), Taylor's theorem (quoted) and integrals of sines and cosines. About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
 Keep a loop of beads the same size and the same weight, but share that weight among more and more beads. The frequencies creep toward 1, 2, 3, … times the lowest, and on a continuous loop of string they land on the whole numbers exactly. Why exactly? And a harder question, argued over for decades in the 18th century: can every shape of a string be built from these simple waves?
 :::
 
-Slide the number of beads up to the last position, the continuous loop, and watch the stems settle onto the lines.
+Listen first: slide the number of beads up to the last position, the continuous loop, and watch the stems settle onto the lines.
 
 ```{=html}
 <div class="ins">
@@ -38,16 +38,24 @@ Slide the number of beads up to the last position, the continuous loop, and watc
 ```
 
 ::: {.gist}
-**The gist.** A wave that runs around a loop must close up on itself, so it has a whole number of crests: 1, 2, 3, …. A wave with *n* crests is *n* times shorter, and a string pulls a shorter wave back harder: *n*² times harder, so it swings *n* times faster. That puts the frequencies exactly at 1, 2, 3, … times the lowest. And yes: every shape of the string, even one with a sharp corner, is a sum of these waves. Below, Newton's law turns the loop into an operator, and that operator's spectrum gives exactly these numbers.
+**The recipe on this instrument, in brief.** This is the recipe in its simplest form.
+
+- *Newton's law* for beads, crowded together into a continuous loop, gives the wave equation $u_{tt} = c^2 u_{\theta\theta}$.
+- *The operator* is $A = -c^2\,d^2/d\theta^2$, acting on shapes that close up after one turn.
+- *Its spectrum*: $\lambda_n = c^2n^2$ for $n = 0, 1, 2, \dots$, with eigenfunctions $\cos n\theta$ and $\sin n\theta$.
+- *On the diagram*: frequencies $f_n = \sqrt{\lambda_n}/2\pi = n f_1$, exactly on the whole-number lines.
+- *What we hear*: every shape is a sum of these waves (its Fourier series), so a plucked loop repeats exactly: a note.
+
+Only want the answer? Skip to [what we hear](#what-we-hear).
 :::
 
-## The operator
+## 1 · Newton's law: the equation of motion
 
-[Page 2](ring.qmd) applied Newton's law, mass times acceleration equals force, to each bead on a ring. Here we let the beads crowd together, keeping the loop's size, its tension and its total mass fixed, and watch the bead equation turn into the equation of a continuous string. The force on the string turns out to be a fixed rule applied to its shape. Divided by the mass, that rule is the loop's [operator](glossary.qmd#operator).
+[Page 2](ring.qmd) applied Newton's law, mass times acceleration equals force, to each bead on a ring. Here we let the beads crowd together, keeping the loop's size, its tension and its total mass fixed, and watch the bead equation turn into the equation of a continuous string.
 
 **1. Set up the loop.** Measure position around the loop by the angle $\theta$, and choose units so that the loop has circumference $2\pi$. Put $N$ beads on it, bead $j$ at $\theta_j = jh$, with spacing $h = 2\pi/N$. Let $T$ be the string's tension and $\mu$ its mass per unit length, so each bead has mass $m = \mu h$. Write $u(\theta, t)$ for the height of the loop at angle $\theta$ and time $t$, so that bead $j$ is at height $u_j(t) = u(\theta_j, t)$.
 
-**2. Newton's law for one bead.** The string pulls each bead along itself, on both sides. For small slopes, the upward part of the pull from the right is the tension times the slope to the right, and the pull from the left contributes minus the tension times the slope to the left (page 2 draws it):
+**2. Each bead is pulled toward its neighbors.** The string pulls each bead along itself, on both sides. If the string makes a small angle $\phi$ with the horizontal, the upward part of its pull is $T\sin\phi$; for a small angle $\sin\phi \approx \tan\phi$ (both are about $\phi$ in radians), and $\tan\phi$ is the slope (page 2 draws it). So the pull from the right contributes the tension times the slope to the right, and the pull from the left minus the tension times the slope to the left:
 $$
 \begin{aligned} m\,\ddot u_j &= T\,\frac{u_{j+1} - u_j}{h} - T\,\frac{u_j - u_{j-1}}{h} \\ &= \frac{T}{h}\,\big(u_{j+1} - 2u_j + u_{j-1}\big). \end{aligned}
 $$
@@ -56,7 +64,7 @@ $$
 \ddot u_j = \frac{T}{\mu}\cdot\frac{u_{j+1} - 2u_j + u_{j-1}}{h^2}.
 $$
 
-**3. The fraction measures bending.** The fraction compares each bead with its two neighbors. $(u_{j+1} - u_j)/h$ is the slope just to the right of bead $j$, and $(u_j - u_{j-1})/h$ the slope just to the left; their difference, divided by $h$ once more, measures how fast the slope changes. Where the string bends down, the middle bead sits above the average of its neighbors, and the string pulls it down:
+**3. The fraction measures how the string bends.** The fraction compares each bead with its two neighbors. $(u_{j+1} - u_j)/h$ is the slope just to the right of bead $j$, and $(u_j - u_{j-1})/h$ the slope just to the left; their difference, divided by $h$ once more, measures how fast the slope changes. Where the string bends down, the middle bead sits above the average of its neighbors, and the string pulls it down:
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 150" role="img" aria-label="Three neighboring beads on a curve; where the curve bends down, the middle one sits above the average of the outer two by about minus h squared times u double prime over two">
@@ -69,7 +77,7 @@ $$
 </svg>
 ```
 
-[Taylor's theorem](https://en.wikipedia.org/wiki/Taylor%27s_theorem) makes this exact, for a shape with four continuous derivatives:
+[Taylor's theorem](https://en.wikipedia.org/wiki/Taylor%27s_theorem) makes this precise. It says that near $\theta$ a smooth shape is its value, plus slope × $h$, plus half the second derivative × $h^2$, and so on; if you haven't met it, the slope argument above is the whole idea. For a shape with four continuous derivatives,
 $$
 \begin{aligned} u(\theta \pm h) = u &\pm h\,u' + \tfrac{h^2}{2}u'' \\ &\pm \tfrac{h^3}{6}u''' + O(h^4), \end{aligned}
 $$
@@ -79,73 +87,41 @@ $$
 $$
 So the fraction equals $u'' + O(h^2)$: the second derivative, the string's curvature, up to an error that vanishes as the beads crowd together. The middle bead sits above the average of its neighbors by about $-\tfrac{h^2}{2}u''$, which is positive where the curve bends down ($u'' < 0$).
 
-**4. Let the beads crowd together.** As $h \to 0$, the bead equation becomes
+**4. Let the beads crowd together.** The height $u$ now depends on two things, the angle and the time. Its derivative in time with the angle held fixed is written $\partial u/\partial t$, a [partial derivative](glossary.qmd#partial-derivative), and its derivative in angle with the time held fixed $\partial u/\partial\theta$; the second derivatives are also written $u_{tt}$ and $u_{\theta\theta}$. As $h \to 0$, the bead equation becomes
 $$
 \frac{\partial^2 u}{\partial t^2} = c^2\,\frac{\partial^2 u}{\partial \theta^2}, \qquad c^2 = \frac{T}{\mu}.
 $$
-Here $u$ depends on two things, the angle and the time. The symbol $\partial u/\partial t$, a [partial derivative](glossary.qmd#partial-derivative), is the derivative in time with the angle held fixed, and $\partial u/\partial\theta$ the derivative in angle with the time held fixed; the second derivatives are also written $u_{tt}$ and $u_{\theta\theta}$. This is the [wave equation](glossary.qmd#wave-equation). The constant $c$ is the speed at which a bump travels around the loop; the second demo below shows it.
+This is the [wave equation](glossary.qmd#wave-equation). The constant $c$ is the speed at which a bump travels around the loop; the second demo below shows it.
+
+**What we assumed.** Small slopes, so that the tension stays $T$ and its upward part is $T$ times the slope; the same tension and mass per length everywhere; no stiffness, no air and no friction; and shapes smooth enough for Taylor's theorem. As the beads multiplied, the circumference, $T$ and $\mu$ were held fixed, so each bead got lighter in proportion.
+
+## 2 · The operator
+
+The right side of the wave equation is a fixed rule applied to the shape: take its second derivative in angle and multiply by $c^2$. That rule, with its sign reversed, is the loop's [operator](glossary.qmd#operator). It acts on one shape $f(\theta)$ at a time, so it is written with $d$ rather than $\partial$. The minus sign makes $Af$ positive at a bump, where $f'' < 0$, so the force $-Af$ pulls the bump back down. The loop has no ends; what it imposes instead is that every shape closes up after one turn, and that condition is part of the operator. If you read page 2: there the operator was $\frac{T}{mh}K = \frac{c^2}{h^2}K$, and $-K/h^2$ is the second difference divided by $h^2$, which becomes the second derivative as the beads crowd together; so $A$ is the continuous version of page 2's matrix.
 
 ::: {.result}
 **The loop's operator.** The equation of motion is
 $$
-\begin{gathered} u_{tt} = -c^2 A\,u, \\ A = -\frac{d^2}{d\theta^2}, \qquad c^2 = \frac{T}{\mu}, \end{gathered}
+\begin{gathered} u_{tt} = -A\,u, \\ A = -c^2\,\frac{d^2}{d\theta^2}, \qquad c^2 = \frac{T}{\mu}, \end{gathered}
 $$
-acting on shapes that close up after one turn, $f(\theta + 2\pi) = f(\theta)$. In words: $A$ takes a shape and returns minus its curvature, and the string pulls each bit back with force per unit mass $-c^2Af$.
+acting on shapes that close up after one turn, $f(\theta + 2\pi) = f(\theta)$. In words: $A$ takes a shape and returns minus its curvature, times $c^2$: the restoring force per unit mass, reversed.
 :::
 
-The minus sign makes $A$ of a bump positive at the bump, so the force $-c^2Af$ pulls the bump back down. Strictly, the operator in the sense of the [series page](index.qmd), minus the restoring force per unit mass, is $c^2A$; the constant $c^2$ only scales the eigenvalues, so this page works with $A$ and puts $c$ back in the frequencies. If you read page 2, $A$ is the continuous version of the beads' matrix $K/h^2$.
+## 3 · Its spectrum
 
-**What we assumed.** Small slopes, so that the tension stays $T$ and its upward part is $T$ times the slope; the same tension and mass per length everywhere; no stiffness, no air and no friction; and shapes smooth enough for Taylor's theorem. As the beads multiplied, the circumference, $T$ and $\mu$ were held fixed, so each bead got lighter in proportion.
+A [mode](glossary.qmd#mode) is a shape that the operator only rescales: $AX = \lambda X$ for some number $\lambda$. The shape $X$ is an [eigenfunction](glossary.qmd#eigenfunction) of $A$, and $\lambda$ its [eigenvalue](glossary.qmd#eigenvalue). Released in that shape, the loop keeps it and swings at the angular frequency $\omega = \sqrt\lambda$, as on page 1. The list of all eigenvalues is the [spectrum](glossary.qmd#spectrum) of $A$. Here is the whole computation.
 
-## Its spectrum
-
-A [mode](glossary.qmd#mode) is a shape that the operator only rescales: $Af = \lambda f$ for some number $\lambda$. The shape $f$ is an [eigenfunction](glossary.qmd#eigenfunction) of $A$, and $\lambda$ its [eigenvalue](glossary.qmd#eigenvalue). Released in that shape, the loop keeps it and swings at the angular frequency $\omega = c\sqrt\lambda$, since the operator proper, $c^2A$, has eigenvalue $c^2\lambda$. The list of all eigenvalues is the [spectrum](glossary.qmd#spectrum) of $A$. Here is the whole computation.
-
-**1. Try a wave.** A wave with $n$ crests around the loop is $\cos n\theta$. Its second derivative is $-n^2\cos n\theta$, so
+**1. Try a wave with $n$ crests.** A wave with $n$ crests around the loop is $\cos n\theta$. Its second derivative is $-n^2\cos n\theta$, so
 $$
-\begin{gathered} A\cos n\theta = n^2\cos n\theta, \\ A\sin n\theta = n^2\sin n\theta . \end{gathered}
+\begin{gathered} A\cos n\theta = c^2n^2\cos n\theta, \\ A\sin n\theta = c^2n^2\sin n\theta . \end{gathered}
 $$
 A wave $n$ times shorter is pulled back $n^2$ times harder. In plain words: squeeze a wave into half the length, at the same height, and it bends 4 times as sharply (the slope doubles, and it changes over half the distance: 2 × 2 = 4), so the pull is 4 times as strong.
 
-**2. Find every eigenfunction.** The equation $Af = \lambda f$ says $f'' = -\lambda f$.
+**2. Ask which waves close up, to find every eigenfunction.** The equation $AX = \lambda X$ says $X'' = -(\lambda/c^2)\,X$.
 
-- If $\lambda = 0$, then $f = a + b\theta$, which closes up after one turn only when $b = 0$. Eigenvalue 0 belongs to the constant shape: the whole loop lifted at once, which makes no sound.
-- If $\lambda > 0$, write $\lambda = s^2$ with $s > 0$. Then $f = a\cos s\theta + b\sin s\theta$, a wave that repeats every $2\pi/s$ radians. It closes up after one full turn exactly when $2\pi$ is a whole number of these periods, that is, when $s$ is a whole number $n$. Eigenvalue $n^2$, eigenfunctions $\cos n\theta$ and $\sin n\theta$.
+- If $\lambda = 0$, then $X = a + b\theta$, which closes up after one turn only when $b = 0$. Eigenvalue 0 belongs to the constant shape: the whole loop lifted at once, which makes no sound.
+- If $\lambda > 0$, write $\lambda = c^2s^2$ with $s > 0$. Then $X = a\cos s\theta + b\sin s\theta$, a wave that repeats every $2\pi/s$ radians. It closes up after one full turn exactly when $2\pi$ is a whole number of these periods, that is, when $s$ is a whole number $n$. Eigenvalue $c^2n^2$, eigenfunctions $\cos n\theta$ and $\sin n\theta$.
 - A negative $\lambda$ is impossible: the proof fold below shows that $A$ has no negative eigenvalues.
-
-**3. The frequencies.** The motion $\cos(n\theta)\cos(\omega t)$ solves the wave equation when $\omega^2 = c^2n^2$: differentiate it twice in $t$ and twice in $\theta$ and compare. Here $\omega$ is the [angular frequency](glossary.qmd#angular-frequency), in radians per second, and the frequency in hertz is $\omega/2\pi$. So mode $n$ sounds at
-$$
-f_n = \frac{c\,n}{2\pi} = n\,f_1 .
-$$
-(In ordinary units, for a loop of circumference $\ell$, this is $f_n = nc/\ell$: the time for a bump to travel once around, $\ell/c$, is the period of the lowest mode.)
-
-::: {.result}
-**The loop's spectrum.** Eigenfunctions: the constant, and $\cos n\theta$ and $\sin n\theta$ for $n = 1, 2, 3, \dots$ Eigenvalues: $0, 1, 4, 9, 16, \dots$; each $n^2$ with $n \ge 1$ belongs to two eigenfunctions, the same wave shifted by a quarter of a wavelength. Frequencies: $f_n = n f_1$ with $f_1 = c/2\pi$, exactly 1, 2, 3, … times the lowest. The eigenvalues are perfect squares, so the frequencies, proportional to their square roots, are whole-number multiples of one frequency.
-:::
-
-::: {.derive}
-<details><summary><span class="label">Proof</span>No negative eigenvalues, and different waves are perpendicular <span class="needs">uses integration by parts</span></summary>
-
-*No eigenvalue is negative.* For periodic shapes $f$ and $g$, [integrate by parts](https://en.wikipedia.org/wiki/Integration_by_parts) twice. The boundary terms are values at $\theta = 2\pi$ minus values at $\theta = 0$, which cancel because the shapes are periodic:
-$$
-\int_0^{2\pi} (Af)\,g\,d\theta = -\int_0^{2\pi} f''g\,d\theta = \int_0^{2\pi} f'g'\,d\theta = -\int_0^{2\pi} f g''\,d\theta = \int_0^{2\pi} f\,(Ag)\,d\theta .
-$$
-An operator with this property is called *symmetric*, by analogy with a symmetric matrix. (With the right choice of allowed shapes it is also [self-adjoint](glossary.qmd#self-adjoint), the stronger property that the spectral theorem in the complex-numbers fold further down needs.) If $Af = \lambda f$ with $f$ not identically zero, take $g = f$ in the middle expression: $\lambda\int_0^{2\pi} f^2\,d\theta = \int_0^{2\pi}(f')^2\,d\theta \ge 0$, so $\lambda \ge 0$. (For a complex-valued $f$, use $\int f\bar f\,d\theta = \int |f|^2\,d\theta$ instead, as in the complex-numbers fold further down; the same computation shows that $\lambda$ is real and at least 0.)
-
-*Eigenfunctions for different eigenvalues are perpendicular*, in the sense used below: $\int_0^{2\pi} \cos n\theta\cos m\theta\,d\theta = 0$ for $n \ne m$, and similarly for sines and for a sine against a cosine. This can be checked directly with the product formulas for cosines, and it also follows from the symmetry above, just as for a symmetric matrix.
-
-*For readers who know functional analysis:* $A$ is not defined on every square-integrable function, only on those with two derivatives in $L^2$, the [Sobolev space](https://en.wikipedia.org/wiki/Sobolev_space) $H^2(S^1)$. On that domain it is self-adjoint, not merely symmetric: in Fourier coefficients it is multiplication by $n^2$ on the sequences with $\sum n^4|c_n|^2 < \infty$. That there is no spectrum besides these eigenvalues follows from the completeness of the eigenfunctions, proved in the complex-numbers fold further down.
-
-</details>
-:::
-
-::: {.qa}
-<details><summary><span class="label">Reader question</span>How is a mode's shape related to its swinging in time?</summary>
-
-Both come from [separating variables](glossary.qmd#separation-of-variables). Look for a motion in which the shape stays fixed and only its size changes: $u = X(\theta)\,q(t)$. Substituting into $u_{tt} = c^2u_{\theta\theta}$ and dividing by $Xq$ gives $q''/q = c^2X''/X$. The left side depends only on $t$ and the right only on $\theta$. Changing $t$ alone cannot change the right side, so the left side cannot change either; the same holds the other way round, so both sides equal one constant. That constant cannot be positive, because $A$ has no negative eigenvalues (proof fold above), so we call it $-\omega^2$. That splits the equation in two. In time, $q'' = -\omega^2 q$, so $q = \cos(\omega t + \phi)$, times any constant: the mass on a spring. (For $\omega = 0$ the solution is $q = a + bt$ instead: the loop drifts as a whole.) In space, $-X'' = (\omega/c)^2 X$ with $X$ periodic: the eigenvalue problem for $A$, which allows only $\omega/c = n$. The space part chooses the frequency, and the time part swings at it. The time factor is a cosine, for every nonzero frequency, for every instrument in this series, because every operator here has no negative eigenvalues and every equation has two time derivatives and no friction term; damping, added on page 7, multiplies the cosine by a decaying factor. Everything instrument-specific lives in the space part.
-
-</details>
-:::
 
 ::: {.qa}
 <details><summary><span class="label">Reader question</span>The equation of one wave has one frequency in it. Where does an infinite list come from?</summary>
@@ -157,26 +133,41 @@ In the equation $u'' + k^2u = 0$, the number $k$ is chosen in advance, and for e
 </details>
 :::
 
-## On the pitch ruler
+**3. Each eigenvalue gives a frequency.** The motion $\cos(n\theta)\cos(\omega t)$ solves $u_{tt} = -Au$ when $\omega^2 = \lambda_n = c^2n^2$: differentiate it twice in $t$, apply $A$, and compare. Here $\omega$ is the [angular frequency](glossary.qmd#angular-frequency), in radians per second, and the frequency in hertz is $\omega/2\pi$. So mode $n$ sounds at
+$$
+f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{c\,n}{2\pi} = n\,f_1 .
+$$
+(In ordinary units, for a loop of circumference $\ell$, this is $f_n = nc/\ell$: the time for a bump to travel once around, $\ell/c$, is the period of the lowest mode.)
 
-On the continuous loop, mode *n* sits exactly on the line *n*×. With a few beads, the stems sit below the lines, the higher modes furthest below; on a ring of $N$ beads, mode $k$'s frequency divided by mode 1's is $\sin(\pi k/N)/\sin(\pi/N)$ ([page 2](ring.qmd)), which tends to $k$ as $N$ grows. Press the button at a few bead counts: with few beads the chord sounds less clear; on the loop the modes fuse into one note ([page 0](note.qmd)). The ring of beads approaches the loop from below:
+::: {.qa}
+<details><summary><span class="label">Reader question</span>How is a mode's shape related to its swinging in time?</summary>
 
-| mode | 8 beads | 32 beads | loop |
-|:--|--:|--:|--:|
-| 1 | 1 | 1 | 1 |
-| 2 | 1.848 | 1.990 | 2 |
-| 3 | 2.414 | 2.962 | 3 |
-| 4 | 2.613 | 3.904 | 4 |
+Both come from [separating variables](glossary.qmd#separation-of-variables). Look for a motion in which the shape stays fixed and only its size changes: $u = X(\theta)\,q(t)$. Substituting into $u_{tt} = c^2u_{\theta\theta}$ and dividing by $Xq$ gives $q''/q = c^2X''/X$. The left side depends only on $t$ and the right only on $\theta$. Changing $t$ alone cannot change the right side, so the left side cannot change either; the same holds the other way round, so both sides equal one constant. That constant cannot be positive, because $A$ has no negative eigenvalues (proof fold above), so we call it $-\omega^2$. That splits the equation in two. In time, $q'' = -\omega^2 q$, so $q = \cos(\omega t + \phi)$, times any constant: the mass on a spring. (For $\omega = 0$ the solution is $q = a + bt$ instead: the loop drifts as a whole.) In space, $AX = -c^2X'' = \omega^2 X$ with $X$ periodic: the eigenvalue problem for $A$, with $\lambda = \omega^2$, which allows only $\omega = cn$. The space part chooses the frequency, and the time part swings at it. The time factor is a cosine, for every nonzero frequency, for every instrument in this series, because every operator here has no negative eigenvalues and every equation has two time derivatives and no friction term; damping, added on page 7, multiplies the cosine by a decaying factor. Everything instrument-specific lives in the space part.
 
-: Each mode's frequency divided by the lowest, for rings of 8 and 32 beads and for the continuous loop. {.striped}
+</details>
+:::
 
-**Why beads fall short.** A bead feels only its two neighbors. When a crest is many beads wide, that is enough to sense the bend almost exactly. When a crest is only a few beads wide, the neighbors sit partway down the wave, and the bead underestimates how sharply the string bends: the second difference is smaller than $h^2$ times the curvature. So the pull is weaker than *n*² times, and the frequency falls short of *n*×, the more so the shorter the wave. Crowd in more beads and any given wave becomes many beads wide: its shortfall vanishes.
+::: {.result}
+**The loop's spectrum.** Eigenfunctions: the constant, and $\cos n\theta$ and $\sin n\theta$ for $n = 1, 2, 3, \dots$ Eigenvalues: $\lambda_n = c^2n^2$, that is $0, c^2, 4c^2, 9c^2, \dots$; each with $n \ge 1$ belongs to two eigenfunctions, the same wave shifted by a quarter of a wavelength. Frequencies: $f_n = \sqrt{\lambda_n}/2\pi = n f_1$ with $f_1 = c/2\pi$. In words: the eigenvalues are $c^2$ times perfect squares, so the frequencies, their square roots divided by $2\pi$, are exactly whole-number multiples of one frequency.
+:::
 
-## What the spectrum explains
+::: {.derive}
+<details><summary><span class="label">Proof</span>No negative eigenvalues, and different waves are perpendicular <span class="needs">uses integration by parts</span></summary>
 
-**Why exactly on the lines.** The loop's eigenvalues are perfect squares, so its frequencies are exact whole-number multiples of $f_1$. The tension, the mass and the size of the loop cannot spoil this; they only set $f_1 = c/2\pi$. The whole-number lines of the pitch ruler come from one fact: a wave on a loop must close up, so it has a whole number of crests.
+*No eigenvalue is negative.* For periodic shapes $f$ and $g$, [integrate by parts](https://en.wikipedia.org/wiki/Integration_by_parts) twice. The boundary terms are values at $\theta = 2\pi$ minus values at $\theta = 0$, which cancel because the shapes are periodic:
+$$
+\int_0^{2\pi} (Af)\,g\,d\theta = -c^2\!\int_0^{2\pi} f''g\,d\theta = c^2\!\int_0^{2\pi} f'g'\,d\theta = -c^2\!\int_0^{2\pi} f g''\,d\theta = \int_0^{2\pi} f\,(Ag)\,d\theta .
+$$
+An operator with this property is called *symmetric*, by analogy with a symmetric matrix. (With the right choice of allowed shapes it is also [self-adjoint](glossary.qmd#self-adjoint), the stronger property that the spectral theorem in the complex-numbers fold further down needs.) If $Af = \lambda f$ with $f$ not identically zero, take $g = f$ in the middle expression: $\lambda\int_0^{2\pi} f^2\,d\theta = c^2\int_0^{2\pi}(f')^2\,d\theta \ge 0$, so $\lambda \ge 0$. (For a complex-valued $f$, use $\int f\bar f\,d\theta = \int |f|^2\,d\theta$ instead, as in the complex-numbers fold further down; the same computation shows that $\lambda$ is real and at least 0.)
 
-**Every shape is a sum of these waves.** From the 1740s on, Jean d'Alembert, Leonhard Euler and Daniel Bernoulli argued about the vibrating string. D'Alembert showed in 1747 that a string can move in essentially any smooth shape. Bernoulli held that every vibration is a sum of simple modes, which for a string are sine-shaped. Euler, who allowed a plucked string's sharp corner as a starting shape, objected that a sum of sines could not represent such arbitrary shapes, and d'Alembert doubted that such a sum was physical at all.
+*Eigenfunctions for different eigenvalues are perpendicular*, in the sense used below: $\int_0^{2\pi} \cos n\theta\cos m\theta\,d\theta = 0$ for $n \ne m$, and similarly for sines and for a sine against a cosine. This can be checked directly with the product formulas for cosines, and it also follows from the symmetry above, just as for a symmetric matrix.
+
+*For readers who know functional analysis:* $A$ is not defined on every square-integrable function, only on those with two derivatives in $L^2$, the [Sobolev space](https://en.wikipedia.org/wiki/Sobolev_space) $H^2(S^1)$. On that domain it is self-adjoint, not merely symmetric: in Fourier coefficients it is multiplication by $c^2n^2$ on the sequences with $\sum n^4|c_n|^2 < \infty$. That there is no spectrum besides these eigenvalues follows from the completeness of the eigenfunctions, proved in the complex-numbers fold further down.
+
+</details>
+:::
+
+**4. Every shape is a sum of these waves.** From the 1740s on, Jean d'Alembert, Leonhard Euler and Daniel Bernoulli argued about the vibrating string. D'Alembert showed in 1747 that a string can move in essentially any smooth shape. Bernoulli held that every vibration is a sum of simple modes, which for a string are sine-shaped. Euler, who allowed a plucked string's sharp corner as a starting shape, objected that a sum of sines could not represent such arbitrary shapes, and d'Alembert doubted that such a sum was physical at all.
 
 Bernoulli was right, in a sense that took mathematicians more than a century to make precise. Every shape of the loop, corners included, is a sum of its eigenfunctions: its [Fourier series](glossary.qmd#fourier-series),
 $$
@@ -194,28 +185,10 @@ $$
 $$
 just as a vector's component along an axis is its dot product with that axis. (The constant term is written $a_0/2$ so that the same formula also gives $a_0$: for $n = 0$, $\int_0^{2\pi}\cos^2 0\,d\theta = 2\pi$, not $\pi$.)
 
-**Released, each wave swings at its own frequency.** From rest in the shape $f$,
-$$
-\begin{aligned} u(\theta, t) &= \frac{a_0}{2} + \sum_{n=1}^{\infty} q_n(\theta)\,\cos(c\,n\,t), \\ q_n(\theta) &= a_n\cos n\theta + b_n\sin n\theta. \end{aligned}
-$$
-Every term returns to its starting value after the time $2\pi/c$, so the whole motion repeats, and any sound it makes has a pitch. Build a plucked shape out of waves, then let it go:
-
-```{=html}
-<div class="ins">
-<div class="panel">
-  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
-  <div class="slider"><label for="cM" style="min-width:12rem">Waves used, up to</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
-  <div class="controls"><button id="cGo" class="primary" aria-pressed="false">Let go</button><button id="cHear">Hear the loop, at the plucked point</button></div>
-  <div class="readout" id="cShapeRead"></div>
-  <p class="cap">The loop is cut open and laid flat; its two edges are the same point. Dashed: the exact motion (once let go, the bump splits into two half-height copies that travel apart). Solid: the sum of the waves so far, each swinging at its own frequency.</p>
-</div>
-</div>
-```
-
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>The same series with complex numbers, and why every shape is a sum of waves <span class="needs">uses complex numbers; the second half, functional analysis</span></summary>
 
-**With complex numbers.** With Euler's formula $e^{in\theta} = \cos n\theta + i\sin n\theta$, the pair $\cos n\theta, \sin n\theta$ can be traded for the pair $e^{in\theta}, e^{-in\theta}$, and $A e^{in\theta} = n^2 e^{in\theta}$. The Fourier series becomes
+**With complex numbers.** With Euler's formula $e^{in\theta} = \cos n\theta + i\sin n\theta$, the pair $\cos n\theta, \sin n\theta$ can be traded for the pair $e^{in\theta}, e^{-in\theta}$, and $A e^{in\theta} = c^2n^2 e^{in\theta}$. The Fourier series becomes
 $$
 f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{1}{2\pi}\int_0^{2\pi} f(\theta)\,e^{-in\theta}\,d\theta ,
 $$
@@ -238,9 +211,48 @@ the second identity being [Parseval's](https://en.wikipedia.org/wiki/Parseval%27
 </details>
 :::
 
+## 4 · On the spectrum diagram
+
+On the continuous loop, mode $n$ sits exactly on the line $n$×, at $f_n = n f_1$ from the result box. With a few beads, the stems sit below the lines, the higher modes furthest below; on a ring of $N$ beads, mode $k$'s frequency divided by mode 1's is $\sin(\pi k/N)/\sin(\pi/N)$ ([page 2](ring.qmd)), which tends to $k$ as $N$ grows. The ring of beads approaches the loop from below:
+
+| mode | 8 beads | 32 beads | loop |
+|:--|--:|--:|--:|
+| 1 | 1 | 1 | 1 |
+| 2 | 1.848 | 1.990 | 2 |
+| 3 | 2.414 | 2.962 | 3 |
+| 4 | 2.613 | 3.904 | 4 |
+
+: Each mode's frequency divided by the lowest, for rings of 8 and 32 beads and for the continuous loop. {.striped}
+
+**Why beads fall short.** A bead feels only its two neighbors. When a crest is many beads wide, that is enough to sense the bend almost exactly. When a crest is only a few beads wide, the neighbors sit partway down the wave, and the bead underestimates how sharply the string bends: the second difference is smaller than $h^2$ times the curvature. So the pull is weaker than *n*² times, and the frequency falls short of *n*×, the more so the shorter the wave. Crowd in more beads and any given wave becomes many beads wide: its shortfall vanishes.
+
+## 5 · What we hear {#what-we-hear}
+
+**Released, each wave swings at its own frequency.** From rest in the shape $f$, with the coefficients $a_n$, $b_n$ of its Fourier series,
+$$
+\begin{aligned} u(\theta, t) &= \frac{a_0}{2} + \sum_{n=1}^{\infty} q_n(\theta)\,\cos(2\pi f_n t), \\ q_n(\theta) &= a_n\cos n\theta + b_n\sin n\theta. \end{aligned}
+$$
+The sound is this sum: each mode contributes a pure tone at its own frequency $f_n$, as strong as the shape contains it. The demos synthesize exactly that: the button in the first demo adds the first modes' frequencies, mode 1 set to 196 Hz, quieter for higher modes; the "Hear the loop" button below adds the plucked shape's modes with the strengths from its Fourier series.
+
+**Why exactly on the lines.** Every term returns to its starting value after the time $1/f_1 = 2\pi/c$, so the whole motion repeats, and the sound it makes is a note at $f_1$, when $f_1$ is in the range we hear as pitch. The tension, the mass and the size of the loop cannot spoil this; they only set $f_1 = c/2\pi$. The whole-number lines of the pitch ruler come from one fact: a wave on a loop must close up, so it has a whole number of crests. Press the first demo's button at a few bead counts: with few beads the chord sounds less clear; on the loop the modes fuse into one note ([page 0](note.qmd)).
+
+Build a plucked shape out of waves, then let it go:
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
+  <div class="slider"><label for="cM" style="min-width:12rem">Waves used, up to</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
+  <div class="controls"><button id="cGo" class="primary" aria-pressed="false">Let go</button><button id="cHear">Hear the loop, at the plucked point</button></div>
+  <div class="readout" id="cShapeRead"></div>
+  <p class="cap">The loop is cut open and laid flat; its two edges are the same point. Dashed: the exact motion (once let go, the bump splits into two half-height copies that travel apart). Solid: the sum of the waves so far, each swinging at its own frequency.</p>
+</div>
+</div>
+```
+
 ## What we found
 
-Newton's law, applied to beads and then to a continuous loop, gave the wave equation $u_{tt} = -c^2Au$, with the operator $A = -d^2/d\theta^2$ acting on shapes that close up. Its spectrum is $0, 1, 4, 9, \dots$: a wave must close up, so it has a whole number $n$ of crests, and the string pulls it back $n^2$ times harder. The frequencies, proportional to the square roots, are exactly 0, 1, 2, 3, … times one base frequency, which is why the loop's frequencies land on the lines. Writing a shape as a sum of the eigenfunctions is its Fourier series, and every shape, corners included, can be written that way. Every later page has the same pattern with a different operator: a list of eigenvalues that grows without end, and a set of simple shapes from which every shape is built. Only the list and the shapes change.
+Newton's law, applied to beads and then to a continuous loop, gave the wave equation $u_{tt} = c^2u_{\theta\theta}$. Read as $u_{tt} = -Au$, its operator is $A = -c^2\,d^2/d\theta^2$, acting on shapes that close up. Its spectrum is $\lambda_n = c^2n^2$: a wave must close up, so it has a whole number $n$ of crests, and the string pulls it back $n^2$ times harder. The frequencies, $\sqrt{\lambda_n}/2\pi$, are exactly 0, 1, 2, 3, … times one base frequency: on the spectrum diagram, every stem on a line. Writing a shape as a sum of the eigenfunctions is its Fourier series, and every shape, corners included, can be written that way; released, each term sounds at its own frequency, and together they repeat exactly: a note. Every later page has the same pattern with a different operator: a list of eigenvalues that grows without end, and a set of simple shapes from which every shape is built. Only the list and the shapes change.
 
 ## The next puzzle
 

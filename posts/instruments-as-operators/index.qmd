@@ -41,31 +41,33 @@ Pluck a string and you get a note you could hum. Strike a drum and you get a thu
 
 **2. A pluck sets many of them going at once.** What you hear is a chord of the modes' frequencies: the lowest, called the [fundamental](glossary.qmd#fundamental), and the [overtones](glossary.qmd#partial) above it. They are the stems on the ruler above.
 
-**3. Whether that chord sounds like one note depends on how the frequencies line up.** If they sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, the sound repeats itself many times a second, and the ear hears that repetition rate as the [pitch](glossary.qmd#pitch). A string's modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead's land at 1×, 1.59×, 2.14×, 2.30×, …: a few fall near a line by chance, but no frequency we hear as pitch fits them all. The sound never repeats, and it dies fast: a thud.
+**3. Whether that chord sounds like one note depends on how the frequencies line up.** If they sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, the sound repeats itself many times a second, and the ear hears that repetition rate as the [pitch](glossary.qmd#pitch). A string's modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead's land at 1×, 1.59×, 2.14×, 2.30×, …: a few fall near a line by chance, but no frequency we hear as pitch fits them all. The sound doesn't repeat at any rate we hear as pitch, and it dies fast: a thud.
 
 ::: {.northstar}
 **The idea behind the whole series.** How an instrument is built, stretched and held decides its modes and their frequencies. Put the frequencies you hear on the pitch ruler: **on the lines, a note; off the lines, a clang or a thud.** More exactly, you hear a note when they all sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch. Each instrument page puts its instrument on the ruler to see which.
 :::
 
+[Skip to the journey ↓](#the-journey)
+
 ## The mathematics: one recipe, every instrument
 
-Behind every page is the same two-step recipe. It is the mathematical heart of the series.
+Behind every page is the same recipe, and it is the mathematical heart of the series: Newton's law gives each instrument an operator, and the operator's spectrum gives its frequencies. The page [The spectrum of an operator](spectrum.qmd) lays the idea out in full and runs it on every instrument; here are its two steps.
 
 **1. Derive the instrument's operator from first principles.** Take one small piece of the instrument (a bit of string, a slab of air, a slice of steel, a patch of drumhead) and apply Newton's law: mass times acceleration equals the force on it. The force comes from the material: tension, air pressure, or the stiffness of bent steel. Worked out, the force on the piece turns out to depend only on the shape of the instrument around it, through a fixed rule. Dividing by the mass gives an equation of the same form for every instrument,
 $$
 u_{tt} = -A\,u ,
 $$
-where $u$ is the instrument's shape (how far each point is from rest), $u_{tt}$ is its [acceleration](glossary.qmd#partial-derivative), and $A$ is the [operator]: the rule that takes a shape and returns minus the restoring force per unit mass. How the instrument is held (ends tied, clamped, open, free) decides which shapes $A$ may act on, and is part of the operator.
+where $u$ is the instrument's shape (how far each point is from rest; for a tube, the air pressure), $u_{tt}$ is its [acceleration](glossary.qmd#partial-derivative), and $A$ is the [operator]: the rule that takes a shape and returns minus the restoring force per unit mass. How the instrument is held (ends tied, clamped, open, free) decides which shapes $A$ may act on, and is part of the operator.
 
 **2. Find its spectrum.** A [mode](glossary.qmd#mode) is a shape that the operator only rescales,
 $$
 A\,X = \lambda\,X ,
 $$
-for some number $\lambda$, an [eigenvalue](glossary.qmd#eigenvalue). Such a shape swings in place as $X\cos(\sqrt{\lambda}\,t + \phi)$, so it sounds at the frequency
+for some number $\lambda$, an [eigenvalue](glossary.qmd#eigenvalue). Every operator here has $\lambda \ge 0$ (where $\lambda = 0$ occurs, it is the whole instrument drifting, which makes no sound). For $\lambda > 0$ such a shape swings in place as $X\cos(\sqrt{\lambda}\,t + \phi)$, so it sounds at the frequency
 $$
 f = \frac{\sqrt{\lambda}}{2\pi} .
 $$
-The list of all the eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). So the frequencies an instrument can make are fixed by its operator; how you play it only decides how strongly each one sounds.
+The list of all the eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). So the frequencies an instrument rings at on its own, once struck or plucked, are fixed by its operator; how you strike or pluck it only decides how strongly each one sounds. A steady bow or breath can do more: it can lock the sound onto exact whole-number multiples (pages 4 and 6b).
 
 Each instrument page carries out both steps in full, from Newton's law to the frequencies:
 
@@ -102,6 +104,7 @@ A clear pitch means the frequencies you hear sit at, or very near, whole-number 
   <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">As a plucked note fades, its pitch barely sags. The reason is the simplest vibrating thing there is.</span></li>
   <li><a href="ring.html"><span class="n">2</span><span class="t">How can a tangled wobble be a few simple motions?</span></a><span class="hint">Pluck one bead on a ring of beads: the mess turns out to be a chord.</span></li>
   <li><a href="circle.html"><span class="n">3</span><span class="t">Why does a loop of string land exactly on the lines?</span></a><span class="hint">The cleanest case of all, and where the lines on the ruler come from.</span></li>
+  <li><a href="spectrum.html"><span class="n">★</span><span class="t">The spectrum of an operator</span></a><span class="hint">The recipe behind every page, from Newton's law to the sound, run on every instrument.</span></li>
   <li class="part">Instruments</li>
   <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">Touch a violin string at its middle and the note leaps up.</span></li>
   <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Same length; one end closed.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
@@ -118,7 +121,7 @@ A clear pitch means the frequencies you hear sit at, or very near, whole-number 
 
 The demo sounds in this list are simplified: the piano pair exaggerates the string's stiffness, and the two drums play every mode equally loud.
 
-Short on time? Pages 0, 4 and 8, the note, the string and the drum, carry the main idea, each with its operator derived and its spectrum worked out; page 3 shows the recipe in its simplest form. The [map](map.qmd) has every instrument's sound side by side, reading paths by depth, and the reference tables. Blue words link to the [glossary](glossary.qmd).
+Short on time? Read each page's puzzle and the short summary box under its demo: about half an hour for the whole series. Or pages 0, 4 and 8, the note, the string and the drum, carry the main idea, and 4 and 8 derive their operators and spectra in full; page 3 shows the recipe in its simplest form. The [map](map.qmd) has every instrument's sound side by side, reading paths by depth, and the reference tables. Blue words link to the [glossary](glossary.qmd).
 
 ::: {.made}
 *How this was made.* The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.

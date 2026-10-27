@@ -10,18 +10,18 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 6 Kalimba](kalimba.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [7 Piano →](piano.qmd)
+[← 6 Kalimba](kalimba.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [7 Piano →](piano.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). About 3 minutes for the puzzle and the gist; about 15 with the mathematics, plus the folds.
+Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). Uses partial derivatives, as on page 6, plus Fourier series (page 3). About 3 minutes for the summary; about 15 with the mathematics.
 :::
 
 ::: {.puzzle}
 A harmonica reed is a little brass bar, fixed at one end and free at the other, like a kalimba tine, with the same overtones, in the ideal model, at 6.27 and 17.55 times its fundamental. Pluck it and you hear them. Blow it and they are gone: every frequency in the note lands exactly on the whole-number lines. Where did they go?
 :::
 
-Pluck the reed, then blow it, and compare the stems with the gray whole-number lines.
+Listen first: pluck the reed, then blow it, and compare the stems with the gray whole-number lines.
 
 ```{=html}
 <style>
@@ -49,20 +49,35 @@ Pluck the reed, then blow it, and compare the stems with the gray whole-number l
 
 
 ::: {.gist}
-**The gist.** A steadily blown note does not contain the reed's overtones at their own frequencies. The reed becomes a valve that chops the airflow into puffs, and you hear mainly the puffs. A steadily blown reed settles into one motion that repeats exactly, so the puffs repeat too, and a sound that repeats has frequencies only on the whole-number lines. Below: the reed's operator and its spectrum are the kalimba tine's, which is what a pluck sounds like; blowing adds one more piece of mathematics, a repeating sound.
+**The recipe on this instrument, in brief.**
+
+- *Newton's law* on a thin slice of brass gives the same bending equation as the kalimba tine (page 6).
+- *The operator* is $\kappa^2\,d^4/dx^4$, riveted at one end and free at the other.
+- *Its spectrum* is the tine's: frequencies in the ratios $1 : 6.27 : 17.55 : \cdots$.
+- *On the diagram*: plucked, the overtones sit off the lines; blown, every stem sits on a line.
+- *What we hear*: plucked, the spectrum; blown, the reed chops the air into puffs that repeat exactly, and a repeating sound has frequencies only at whole-number multiples, so the reed's own overtones never appear.
+
+Skip to [what we hear](#what-we-hear) if you only want the answer.
 :::
 
-## The operator
+## 1 · Newton's law: the equation of motion
 
-A reed is a thin brass bar, riveted at one end over a slot and free at the other: the same kind of bar as a kalimba tine. So Newton's law on one thin slice of it goes exactly as on the [kalimba page](kalimba.qmd), which derives each step with figures. In short, with $u(x, t)$ the reed's sideways displacement at distance $x$ from the rivet:
+A reed is a thin brass bar, riveted at one end over a slot and free at the other: the same kind of bar as a kalimba tine. So Newton's law on one thin slice of it goes exactly as on the [kalimba page](kalimba.qmd), which derives each step with figures. In short, with $u(x, t)$ the reed's sideways displacement at distance $x$ from the rivet, $\rho$ the density of brass and $S$ the area of the reed's cross-section:
 
-**1. Bending.** Bending the reed stretches its outer fibers and squeezes its inner ones; their turning effects add up to the bending moment $M = EI\,u_{xx}$, where $E$ is brass's [Young's modulus](glossary.qmd#youngs-modulus) and $I$ the [second moment of area](glossary.qmd#second-moment) of the cross-section.
+**1. Bending stretches the outside and squeezes the inside.** The turning effects of those stretched and squeezed fibers add up to the bending moment $M = EI\,u_{xx}$, where $E$ is brass's [Young's modulus](glossary.qmd#youngs-modulus) and $I$ the [second moment of area](glossary.qmd#second-moment) of the cross-section.
 
-**2. Shear.** The turning effects on a thin slice balance, so the sideways force across each cut is $V = -M_x = -EI\,u_{xxx}$.
+**2. A change in bending along the reed means a sideways force.** The turning effects on a thin slice balance, so the sideways force across each cut is $V = -M_x = -EI\,u_{xxx}$.
 
-**3. Newton's law.** The difference of the sideways forces on the slice's two faces accelerates its mass $\rho S\,dx$: $\rho S\,u_{tt} = V_x = -EI\,u_{xxxx}$.
+**3. Newton's law on the slice.** The difference of the sideways forces on the slice's two faces accelerates its mass $\rho S\,dx$:
+$$
+\rho S\,u_{tt} = V_x = -EI\,u_{xxxx} .
+$$
 
-**4. The ends.** At the rivet the reed can neither move nor tilt, $u = u_x = 0$; at the free tip nothing bends or pushes it, $u_{xx} = u_{xxx} = 0$.
+**What we assumed.** As on the kalimba page: small motions, a uniform bar clamped at exactly one point, no rotational inertia or shear deformation of the slices. Also no damping and no air around the reed: in the model every mode rings forever. Real reeds are not exactly uniform, so their overtones differ somewhat from the ideal values below.
+
+## 2 · The operator
+
+Dividing by the mass per unit length $\rho S$ puts the equation in the series' form $u_{tt} = -A\,u$. The ends complete the operator: at the rivet the reed can neither move nor tilt, $u = u_x = 0$; at the free tip nothing bends or pushes it, $u_{xx} = u_{xxx} = 0$.
 
 ::: {.result}
 **The reed's operator** is the tine's:
@@ -72,30 +87,28 @@ u_{tt} = -A\,u, \qquad A = \kappa^2\,\frac{d^4}{dx^4}, \\
 \kappa^2 = \frac{EI}{\rho S} = \frac{E h^2}{12\rho},
 \end{gathered}
 $$
-with $u = u_x = 0$ at the rivet and $u_{xx} = u_{xxx} = 0$ at the tip. The last form of $\kappa^2$ is for a rectangular reed of width $w$ and thickness $h$, where $I = wh^3/12$ and the cross-section area is $S = wh$.
+with $u = u_x = 0$ at the rivet and $u_{xx} = u_{xxx} = 0$ at the tip. The last form of $\kappa^2$ is for a rectangular reed of width $w$ and thickness $h$, where $I = wh^3/12$ and $S = wh$. In words: the force per unit mass pulling each point back is the fourth derivative of the shape, times a constant set by the brass and the thickness.
 :::
 
-**What we assumed.** As on the kalimba page: small motions, a uniform bar clamped at exactly one point, no rotational inertia or shear deformation of the slices. Real reeds are not exactly uniform, so their overtones differ somewhat from the ideal values below.
+## 3 · Its spectrum
 
-## Its spectrum
-
-A [mode](glossary.qmd#mode) is a shape the operator only rescales; each eigenvalue $\lambda$ gives a frequency $f = \sqrt\lambda/2\pi$, and the list of eigenvalues is the [spectrum](glossary.qmd#spectrum). The operator and the end conditions are the tine's, so the spectrum is too: the kalimba page solves the four end conditions and finds a mode exactly when $\cos\beta L\,\cosh\beta L = -1$, with roots $\beta L = 1.8751,\ 4.6941,\ 7.8548, \dots$, and frequencies $\omega = \kappa\beta^2$.
+A [mode](glossary.qmd#mode) is a shape the operator only rescales, $AX = \lambda X$; it swings at the angular frequency $\sqrt\lambda$, so its frequency is $f = \sqrt\lambda/2\pi$, and the list of eigenvalues is the [spectrum](glossary.qmd#spectrum). The operator and the end conditions are the tine's, so the spectrum is too. The kalimba page writes $\lambda = \kappa^2\beta^4$, solves the four end conditions, and finds a mode exactly when $\cos\beta L\,\cosh\beta L = -1$, with roots $\beta L = 1.8751,\ 4.6941,\ 7.8548, \dots$; the angular frequencies are $\sqrt\lambda = \kappa\beta^2$.
 
 ::: {.result}
-**The reed's spectrum.** Frequencies in the ratios $1 : 6.27 : 17.55 : \cdots$, off the whole-number lines, with the lowest
+**The reed's spectrum.** Eigenvalues $\lambda_n = \kappa^2\beta_n^4$, frequencies $f_n = \kappa\beta_n^2/2\pi$, in the ratios $1 : 6.27 : 17.55 : \cdots$, off the whole-number lines, with the lowest
 $$
 f_1 = \frac{(1.8751)^2}{2\pi}\cdot\frac{h}{L^2}\sqrt{\frac{E}{12\rho}} .
 $$
 The width $w$ cancels: it decides how much air the reed moves, not its pitch. Low reeds are long, high reeds are short.
 :::
 
-## On the pitch ruler
+## 4 · On the spectrum diagram
 
-Plucked, the reed's overtones sit at 6.27× and 17.55×, off the gray lines, and die almost at once, as on the kalimba. Blown, the stems sit at 1×, 2×, 3×, 4×, …, every one on a line. Each stem's height is how strong that frequency is in the sound. Same reed; only the way it is played differs.
+Plucked, the demo's stems are the spectrum just computed: $1\times$, then the overtones at $6.27\times$ and $17.55\times$, off the gray lines, dying almost at once, as on the kalimba. Blown, the stems sit at $1\times, 2\times, 3\times, 4\times, \dots$, every one on a line, and none at $6.27\times$. Each stem's height is how strong that frequency is in the sound. Same reed, same operator; only the way it is played differs. Stage 5 explains the blown stems.
 
-## What the spectrum explains
+## 5 · What we hear {#what-we-hear}
 
-**Plucked: you hear the spectrum.** Pluck a reed and it rings at its own frequencies, the spectrum above: a fundamental with overtones at 6.27 and 17.55 times it, off the lines, dying fast, just like a kalimba tine.
+**Plucked: you hear the spectrum.** A plucked reed rings at its own frequencies, the result box of stage 3: the sound is a sum $\sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, each term fading at its own rate. The overtones at 6.27 and 17.55 times the fundamental are off the lines and die fast, just like a kalimba tine's. The demo's plucked sound is synthesized exactly this way.
 
 **Blown: the reed becomes a valve.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. The sound comes mainly from the chopped airflow; the acoustics writer Colin Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency $f_p$ slightly below its first mode's, so the puffs of air repeat at that rate too. Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here (fold below). Granting that it does, the rest is mathematics:
 
@@ -103,14 +116,14 @@ Plucked, the reed's overtones sit at 6.27× and 17.55×, off the gray lines, and
 2. *A repeating function is a Fourier series.* By the [circle page](circle.qmd), a function of period $P$ is a sum of $\cos(2\pi nt/P)$ and $\sin(2\pi nt/P)$ for $n = 0, 1, 2, \dots$, so it contains only the frequencies $n f_p$.
 3. *So the note lands on the lines.* The blown sound has frequencies only at whole-number multiples of the playing frequency, with strong odd and even multiples (Pykett). How strong each one is depends on the shape of a single puff: short, sharp puffs give strong high partials.
 
-The argument uses only that the motion repeats, not which modes make it up. That is why the reed's own overtone frequencies, 6.27 and 17.55 times $f_1$, do not appear in a steadily blown note.
+The argument uses only that the motion repeats, not which modes make it up. That is why the reed's own overtone frequencies, 6.27 and 17.55 times $f_1$, do not appear in a steadily blown note: that is where they went.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Why the reed locks into one repeating motion, and how the demo makes its sound</summary>
 
 A steady oscillation kept going by a steady push, like this one, is called a [self-sustained oscillation](glossary.qmd#self-sustained), and the repeating cycle it settles into a *limit cycle*; the bowed string and the clarinet reed are others. That the blown reed settles into one is observed, and reproduced by nonlinear models of reeds; it is not derived here. A plausible picture, not a derivation: the airflow feeds energy mainly into the first mode, the other modes are not kept going at their own frequencies, and in the repeating cycle they move only as they are pushed, at whole-number multiples of $f_p$.
 
-The demo's sound is a model: one puff shape, chosen so that the open part of each cycle is short, repeated at the playing frequency, then passed through two broad peaks, a stand-in for resonances of the player's mouth and the instrument. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.
+The demo's blown sound is a model: one puff shape, chosen so that the open part of each cycle is short, repeated at the playing frequency, then passed through two broad peaks, a stand-in for resonances of the player's mouth and the instrument. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.
 
 </details>
 :::
@@ -170,7 +183,7 @@ The demo uses the full quotient with the original mode shape, which is accurate 
 
 ## What we found
 
-Newton's law on a slice of brass gave the reed the kalimba tine's operator, $\kappa^2\,d^4/dx^4$, riveted at one end and free at the other, and the same spectrum, $1 : 6.27 : 17.55$, off the whole-number lines. Plucked, that spectrum is what you hear, and the overtones die fast. Blown, the reed chops the air into puffs that repeat, and a repeating sound has frequencies only on the lines, so you hear a clean note. The operator decides which frequencies an object can vibrate at; the way it is driven decides what you hear.
+Newton's law on a slice of brass (stage 1) gave the reed the kalimba tine's operator (stage 2), $\kappa^2\,d^4/dx^4$, riveted at one end and free at the other, and the same spectrum (stage 3), $1 : 6.27 : 17.55$, off the whole-number lines (stage 4). Plucked, that spectrum is what you hear, and the overtones die fast. Blown, the reed chops the air into puffs that repeat, and a repeating sound has frequencies only on the lines, so you hear a clean note. The operator decides the frequencies an object vibrates at on its own; a steady drive can lock it into others, and decides what you hear.
 
 ::: {.family}
 **Same operator as the kalimba.** Accordion, concertina and harmonium reeds are [free reeds](glossary.qmd#free-reed) too: they swing freely through a slot, unlike a clarinet's reed, which beats against the mouthpiece. All of them are cantilevers like the kalimba's tine: same operator, same ends, smaller and thinner, usually of brass in harmonicas and harmoniums and of steel in accordions and concertinas. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.

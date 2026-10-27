@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[The Shape of a Sound](index.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
+[The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
 :::
 
 Technical words in the series link here, usually the first time they appear on a page. Each entry gives a plain definition and a link to a fuller explanation.
@@ -97,7 +97,7 @@ Technical words in the series link here, usually the first time they appear on a
 ## Vibration
 
 [Partial derivative, $u_t$, $u_{xx}$]{#partial-derivative}
-: For a function of several variables, such as the height $u(x, t)$ of a string at position $x$ and time $t$, the rate of change in one variable with the others held fixed. Subscripts name the variable: $u_t$ is the velocity of the point at $x$, $u_{tt}$ its acceleration, $u_x$ the slope of the string, and $u_{xx}$ how fast that slope changes along it, which for small slopes is its curvature. [Wikipedia](https://en.wikipedia.org/wiki/Partial_derivative)
+: For a function of several variables, such as the height $u(x, t)$ of a string at position $x$ and time $t$, the rate of change in one variable with the others held fixed. Subscripts name the variable: $u_t$ is the velocity of the point at $x$, $u_{tt}$ its acceleration, $u_x$ the slope of the string, and $u_{xx}$ how fast that slope changes along it, which for small slopes is its curvature. Mixed subscripts mean one derivative after another: $u_{xt}$ is the rate of change in $t$ of the slope $u_x$; for a smooth function the order does not matter, $u_{xt} = u_{tx}$. [Wikipedia](https://en.wikipedia.org/wiki/Partial_derivative)
 
 [Proportional, $\propto$]{#proportional}
 : $a \propto b$ means that $a$ is a fixed number times $b$. So $f \propto 1/L^2$ means that halving $L$ multiplies $f$ by four. [Wikipedia](https://en.wikipedia.org/wiki/Proportionality_(mathematics))
@@ -160,7 +160,7 @@ Technical words in the series link here, usually the first time they appear on a
 : How the shape of a bar's cross-section resists bending, written $I$. For a rectangle of width $w$ and thickness $h$, $I = wh^3/12$: doubling the thickness makes the bar eight times harder to bend. [Wikipedia](https://en.wikipedia.org/wiki/Second_moment_of_area)
 
 [Hyperbolic functions, cosh and sinh]{#hyperbolic}
-: $\cosh x = (e^x + e^{-x})/2$ and $\sinh x = (e^x - e^{-x})/2$. They satisfy $\cosh^2 x - \sinh^2 x = 1$, much as $\cos^2 + \sin^2 = 1$. In a bar they describe the part of the bending that grows or fades along the bar instead of wiggling. [Wikipedia](https://en.wikipedia.org/wiki/Hyperbolic_functions)
+: $\cosh x = (e^x + e^{-x})/2$ and $\sinh x = (e^x - e^{-x})/2$. They satisfy $\cosh^2 x - \sinh^2 x = 1$, much as $\cos^2 + \sin^2 = 1$. Differentiating the definitions gives $(\cosh x)' = \sinh x$ and $(\sinh x)' = \cosh x$, with no sign change, and $\cosh 0 = 1$, $\sinh 0 = 0$. In a bar they describe the part of the bending that grows or fades along the bar instead of wiggling. [Wikipedia](https://en.wikipedia.org/wiki/Hyperbolic_functions)
 
 [Bulk modulus, adiabatic]{#bulk-modulus}
 : How hard a material is to compress: the pressure needed, divided by the fraction by which the volume shrinks. In a sound wave the squeezes are too quick for heat to flow in or out, which is called adiabatic, and for air this gives about $1.4 \times$ atmospheric pressure. [Wikipedia](https://en.wikipedia.org/wiki/Bulk_modulus)
@@ -201,13 +201,13 @@ Technical words in the series link here, usually the first time they appear on a
 : $e^{i\theta} = \cos\theta + i\sin\theta$, where $i^2 = -1$. It packs a cosine and a sine into one expression that is easier to multiply and differentiate. [Wikipedia](https://en.wikipedia.org/wiki/Euler%27s_formula)
 
 [Operator]{#operator}
-: A rule that takes a function and returns another function. In this series the operator $A$ takes a shape $u$ of the instrument and returns minus the restoring force on it, per unit mass, so that the motion obeys $u_{tt} = -Au$. It comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Example: $A = -c^2\,d^2/d\theta^2$ on shapes of a loop. Pages 3 and 4 drop the constant $c^2$ and work with $-d^2/d\theta^2$, whose eigenvalues $\lambda$ give frequencies $c\sqrt\lambda/2\pi$. [Wikipedia](https://en.wikipedia.org/wiki/Operator_(mathematics))
+: A rule that takes a function and returns another function. In this series the operator $A$ takes a shape $u$ of the instrument (for air in a tube, its pressure) and returns minus its acceleration: for a string or a bar, minus the restoring force per unit mass. So the motion obeys $u_{tt} = -Au$. The operator includes its constant, for example $A = -c^2\,d^2/dx^2$ for a string with $c^2 = T/\mu$, and comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Each eigenvalue $\lambda$ of $A$ gives a frequency $\sqrt{\lambda}/2\pi$. The idea is laid out on [The spectrum of an operator](spectrum.qmd). [Wikipedia](https://en.wikipedia.org/wiki/Operator_(mathematics))
 
 [Eigenfunction]{#eigenfunction}
 : A nonzero function $f$ that an operator only rescales: $Af = \lambda f$. Example: $-\frac{d^2}{d\theta^2}\cos 3\theta = 9\cos 3\theta$. [Wikipedia](https://en.wikipedia.org/wiki/Eigenfunction)
 
 [Spectrum]{#spectrum}
-: For every instrument in this series, the list of its operator's eigenvalues; the frequencies are their square roots divided by $2\pi$ (when the constant $c^2$ is dropped from the operator, multiply by $c$ too). (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers $\lambda$ for which $A - \lambda$ has no well-behaved inverse, which can contain more than eigenvalues.) [Wikipedia](https://en.wikipedia.org/wiki/Spectrum_(functional_analysis))
+: For every instrument in this series, the list of its operator's eigenvalues $\lambda$; the frequencies are $\sqrt{\lambda}/2\pi$. (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers $\lambda$ for which $A - \lambda$ has no well-behaved inverse, which can contain more than eigenvalues.) See [The spectrum of an operator](spectrum.qmd). [Wikipedia](https://en.wikipedia.org/wiki/Spectrum_(functional_analysis))
 
 [Inner product]{#inner-product}
 : A way to multiply two vectors or two functions to get a number, generalizing the dot product. For functions on the circle, $\langle f, g\rangle = \int_0^{2\pi} f\,\bar g\,d\theta$, where $\bar g$ is the complex conjugate of $g$, which is just $g$ when $g$ is real. Two functions are perpendicular if it is zero. [Wikipedia](https://en.wikipedia.org/wiki/Inner_product_space)
@@ -239,7 +239,7 @@ Technical words in the series link here, usually the first time they appear on a
 ## Shape and spectrum
 
 [Weyl's law]{#weyl}
-: For a drum of area $A$, the number $N(\lambda)$ of eigenvalues below a large number $\lambda$ is close to $A\lambda/4\pi$, so the spectrum "hears" the area. A second term, $-P\sqrt\lambda/4\pi$ with $P$ the perimeter, is proved only under extra conditions, but for drums with smooth or polygonal rims the perimeter can be heard anyway, by a smoother count ([page 9](shape.qmd)). [Wikipedia](https://en.wikipedia.org/wiki/Weyl_law)
+: For a drum of area $|\Omega|$, the number $N(\Lambda)$ of eigenvalues of $-\Delta$ below a large number $\Lambda$ is close to $|\Omega|\Lambda/4\pi$, so the spectrum "hears" the area. A second term, $-P\sqrt\Lambda/4\pi$ with $P$ the perimeter, is proved only under extra conditions, but for drums with smooth or polygonal rims the perimeter can be heard anyway, by a smoother count ([page 9](shape.qmd)). [Wikipedia](https://en.wikipedia.org/wiki/Weyl_law)
 
 [Isospectral]{#isospectral}
 : Having the same spectrum, counted with multiplicity. Gordon, Webb and Wolpert found two differently shaped drums that are isospectral. [Wikipedia: Hearing the shape of a drum](https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum)

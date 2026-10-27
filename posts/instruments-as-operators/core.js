@@ -276,9 +276,9 @@
   // Piano: stiff string with pinned ends; hammer at 1/8 of the length; fundamental kept at the nominal pitch.
   M.piano = {
     F0: 261.63,
-    B: function (key, mult) { return 0.0004 * (mult == null ? 1 : mult) * Math.pow(2, (key - 60) / 12); },
+    B: function (key, mult) { return 0.00044 * (mult == null ? 1 : mult) * Math.pow(2, (key - 60) / 12); },
     partials: function (opt) {
-      opt = opt || {}; var B = opt.B == null ? 0.0004 : opt.B, f1 = opt.f1 || 261.63, out = [];
+      opt = opt || {}; var B = opt.B == null ? 0.00044 : opt.B, f1 = opt.f1 || 261.63, out = [];
       var tau1 = 3 * Math.pow(262 / f1, 0.6), roll = opt.rolloff || 14;
       for (var n = 1; n <= 60; n++) {
         var r = n * Math.sqrt((1 + B * n * n) / (1 + B));
