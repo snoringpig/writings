@@ -1,0 +1,139 @@
+---
+title: "Map of the series"
+subtitle: "Reading paths, every page at a glance, and the instruments side by side"
+date-modified: 2026-10-26
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+---
+
+::: {.series-nav .slim}
+[Series](index.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
+:::
+
+## How to read this series
+
+Every page opens with a puzzle you can hear or see, builds the explanation, and ends with what we found and the next puzzle. The step-by-step derivations and proofs are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the [glossary](glossary.qmd), and the symbol $\propto$ means "proportional to".
+
+- **The gist, 5 minutes.** The [series page](index.qmd): one puzzle, its answer, and the idea behind the whole series.
+- **The core idea, about 35 minutes.** Read [0 · What is a note?](note.qmd), [3 · The circle](circle.qmd), [4 · A string with ends](violin.qmd) and [8 · The drum](drum.qmd), skipping the folds. They carry both points: a pitch is a repeating sound, the circle is the smallest operator and its spectrum, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not.
+- **The whole story, about an hour and a half.** Pages 0 to 8 in order, each answering the question the last one raised.
+- **Everything, about three hours.** All the pages, including [9 · What the spectrum knows](shape.qmd) and the [epilogue](epilogue.qmd), with the folds open.
+
+Here for one puzzle? The series page lists every page by its question, and each page says at the top which earlier page it builds on. Already know Fourier series? Start at page 4. The times assume reading about 120 words a minute, plus a minute or two per demo.
+
+## All pages
+
+In the table, $\partial_x$ means a derivative in $x$, so $-c^2\partial_x^2$ is the string's $-c^2\,d^2/dx^2$; $\kappa^2 = EI/\rho S$ is a bar's stiffness constant ([page 6](kalimba.qmd)); $\Delta$ is the [Laplacian](glossary.qmd#laplacian); [circulant](glossary.qmd#circulant) matrices and [Bessel](glossary.qmd#bessel) zeros are explained on pages 2 and 8.
+
+| Page | New idea | Operator | Frequencies |
+|:--|:--|:--|:--|
+| [0 · What is a note?](note.qmd) | a note is a sound that repeats; its partials are whole-number multiples | | $f, 2f, 3f, \dots$ |
+| [1 · One mass on a spring](oscillator.qmd) | one restoring force, one frequency | the number $k/m$ | $\sqrt{k/m}/2\pi$ |
+| [2 · Beads on a ring](ring.qmd) | many masses: eigenvectors of a matrix | circulant matrix | $\propto \sin(\pi k/N)$ |
+| [3 · The circle](circle.qmd) | the smallest operator spectrum; Fourier series | $-c^2\,d^2/d\theta^2$ on a loop | $\propto n$, exactly |
+| [4 · A string with ends](violin.qmd) | boundary conditions are part of the operator | $-c^2\,d^2/dx^2$, ends tied | $\propto n$ |
+| [5 · An air column](clarinet.qmd) | closing one end halves the lowest frequency and keeps only its odd multiples | the same, on pressure | $\propto 2n - 1$ |
+| [6 · Change the order](kalimba.qmd) | bending: four derivatives spread the overtones; the clamped and free ends move them off the whole numbers | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
+| [6b · The harmonica](harmonica.qmd) | the excitation, not the operator, can set the overtones | the same as 6 | heard as $\propto n$ |
+| [7 · The piano](piano.qmd) | operators add; the pedals act on damping and forcing, not on the spectrum | $-c^2\partial_x^2 + \kappa^2\partial_x^4$ | $n\sqrt{1 + Bn^2}$ |
+| [8 · The drum](drum.qmd) | two dimensions; no clear pitch | $-c^2\Delta$ on a disk | Bessel zeros |
+| [9 · What the spectrum knows](shape.qmd) | the spectrum hears area and perimeter, but not always the shape | $-c^2\Delta$ on any region | Weyl's law |
+| [10 · Did instruments shape our scales?](epilogue.qmd) | the spectrum decides which intervals sound smooth | the bar's, with free ends | $1 : 2.76 : 5.40$ |
+
+: Every page, its new idea, its operator and its frequencies. {.striped}
+
+## Families
+
+<details><summary>Instruments that are the same up to constants</summary>
+
+Instruments in one family share one rule for the restoring force, so they are close to the same mathematical object with different constants. The last column says what still differs inside a family: for air columns the ends, which are part of the operator, and for drums the air around the head, which matters for timpani.
+
+| Family | Operator and boundary | Demos | What varies inside the family |
+|:--|:--|:--|:--|
+| Strings under tension | $-c^2\partial_x^2$, tied ends | [Violin](violin.qmd) | length, tension, mass per length; plucked (guitar, harp) or bowed (violin, cello) |
+| Air columns | $-c^2\partial_x^2$ on pressure | [Clarinet](clarinet.qmd), with a flute switch | the boundary condition: one end closed (clarinet, pan pipes) or both open (flute) |
+| Clamped bars | $\kappa^2\partial_x^4$, clamped base, free tip | [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) | steel tine or brass reed; plucked or blown, which decides whether you hear harmonics |
+| Stiff strings | $-c^2\partial_x^2 + \kappa^2\partial_x^4$, pinned ends | [Piano](piano.qmd) | stiffness, rising toward the treble |
+| Membranes | $-c^2\Delta$ on a disk | [Drum](drum.qmd) | tension and size; the air under a timpani head |
+
+</details>
+
+
+## All the sounds side by side
+
+<details><summary>The partials of each instrument's sound, as it is usually played</summary>
+
+These are the partials of the sound, which for blown and bowed instruments differ from the operator's own frequencies. Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each [partial](glossary.qmd#partial) is excited.
+
+```{=html}
+<div class="ins">
+<div class="strip">
+  <div><span class="nm">Violin</span><svg class="mini" data-mini="violin" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="violin">—</span><button class="primary" data-play="violin">Play</button></div>
+  <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">modes 1, 3, 5, 7, 9</span><button class="primary" data-play="clarinet">Play</button></div>
+  <div><span class="nm">Kalimba</span><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="kalimba">—</span><button class="primary" data-play="kalimba">Play</button></div>
+  <div><span class="nm">Harmonica</span><svg class="mini" data-mini="harmonica" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="harmonica">—</span><button class="primary" data-play="harmonica">Play</button></div>
+  <div><span class="nm">Piano</span><svg class="mini" data-mini="piano" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="piano">—</span><button class="primary" data-play="piano">Play</button></div>
+  <div><span class="nm">Drum</span><svg class="mini" data-mini="drum" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="drum">—</span><button class="primary" data-play="drum">Play</button></div>
+</div>
+</div>
+```
+
+</details>
+
+## Comparison
+
+<details><summary>Every instrument side by side: force, operator, boundary, eigen-condition, ratios, excitation</summary>
+
+| | Violin | Clarinet | Kalimba | Harmonica | Piano | Drum |
+|:--|:--|:--|:--|:--|:--|:--|
+| Restoring force | tension | air pressure | bending | bending | tension + bending | tension, in 2D |
+| Newton's law on | a segment | a slab of air | a slice: torque, then force | a slice, as for the kalimba | a segment, both forces added | a patch, via the divergence theorem |
+| Operator | $-c^2\partial_x^2$ | $-c^2\partial_x^2$ on pressure | $\kappa^2\partial_x^4$ | $\kappa^2\partial_x^4$ | $-c^2\partial_x^2+\kappa^2\partial_x^4$ | $-c^2\Delta$ |
+| Boundary | $u=0$ at both ends | $p_x=0$ at reed, $p=0$ at open end | $u=u'=0$ at clamp, $u''=u'''=0$ at tip | same as the kalimba | $u=u''=0$ at both ends | $u=0$ on the rim |
+| Eigen-condition | $\sin kL=0$ | $\cos kL=0$ | $\cos\beta L\cosh\beta L=-1$ | $\cos\beta L\cosh\beta L=-1$ | $\sin kL=0$ | $J_m(ka)=0$ |
+| Mode ratios | $n$ | $2n-1$ | 1, 6.27, 17.55 | 1, 6.27, 17.55 | $n\sqrt{(1+Bn^2)/(1+B)}$ | 1, 1.59, 2.14 |
+| Excitation | bow, sustained | reed, sustained | thumb pluck | airflow, sustained | felt hammer | stick |
+| What you hear | exact harmonics | odd harmonics dominate; overblows a [twelfth](glossary.qmd#octave) | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
+
+</details>
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  var DEF = {
+    violin: function () { return M.violin.partials(); },
+    clarinet: function () { return M.clarinet.partials(); },
+    kalimba: function () { return M.kalimba.partials(); },
+    harmonica: function () { return M.harmonica.partials(); },
+    piano: function () { return M.piano.partials({ B: 0.0012 }); },
+    drum: function () { return M.drum.partials({ r: 0.35 }); }
+  };
+  var SUSTAINED = { violin: 1, clarinet: 1, harmonica: 1 };
+  function draw() {
+    document.querySelectorAll("svg[data-mini]").forEach(function (svg) {
+      C.stems(svg, DEF[svg.getAttribute("data-mini")](), { W: 200, H: 58, rmax: 8, fs: 9, sw: 2, labelEvery: 2 });
+    });
+    document.querySelectorAll("[data-ratios]").forEach(function (el) {
+      el.textContent = DEF[el.getAttribute("data-ratios")]().map(function (p) { return p.ratio; }).sort(function (a, b) { return a - b; }).slice(0, 4).map(function (r) { return r.toFixed(2); }).join(", ");
+    });
+  }
+  function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
+  document.querySelectorAll("[data-play]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var id = b.getAttribute("data-play"), f = M[id].F0, buf;
+      if (SUSTAINED[id]) buf = fadeOut(C.render(C.toHz(DEF[id](), f), 1.8), 0.4);
+      else buf = C.render(C.toHz(DEF[id](), f), id === "piano" ? 3.2 : 2.6);
+      C.play(buf, 0.8);
+    });
+  });
+  C.onTheme(draw);
+  draw();
+})();
+</script>
+```

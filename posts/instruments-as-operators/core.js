@@ -153,7 +153,7 @@
         hit.addEventListener("click", function () { opt.onPick(i); });
       }
     });
-    if (off.length) {
+    if (off.length && !opt.noOff) {
       var lt = el("text", { x: R, y: top + 4, "text-anchor": "end", "font-size": opt.fs }, svg);
       lt.textContent = "→ " + off.map(function (r) { return r.toFixed(1) + "×"; }).join(", ");
       lt.setAttribute("style", "fill:" + C.rgb("--accent"));

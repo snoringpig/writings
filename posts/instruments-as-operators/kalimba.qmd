@@ -1,6 +1,6 @@
 ---
-title: "6 · Change the order"
-subtitle: "The kalimba · Instruments as Operators"
+title: "Why does a kalimba sound clean?"
+subtitle: "6 · The kalimba"
 format:
   html:
     html-math-method: katex
@@ -9,19 +9,15 @@ date-modified: 2026-10-26
 resources: [core.js, ins.css]
 ---
 
-::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), **6 Kalimba**, [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
-:::
-
-::: {.pageinfo}
-**Builds on** [page 4](violin.qmd), for boundary conditions. About 8 minutes, plus 5 for the folds.
+::: {.series-nav .slim}
+[← 5 Air column](clarinet.qmd) · [Series](index.qmd) · [Map](map.qmd) · [6b Harmonica →](harmonica.qmd)
 :::
 
 ::: {.puzzle}
-**The puzzle.** Halve the length of a string and its pitch rises an octave. Halve the length of a kalimba tine and its pitch rises two octaves. And a tine's first overtone is at 6.27 times its fundamental frequency, nowhere near a whole number, yet a kalimba sounds like a clean note. Why?
+A kalimba tine's first [overtone](glossary.qmd#partial) sits at 6.27 times its [fundamental](glossary.qmd#fundamental), nowhere near a whole number. Overtones off the whole numbers are what make a bell clang. So why does a kalimba sound like a clean note?
 :::
 
-Tap the tines below, or drag across several. They are drawn to scale: each tine's length follows from its pitch by the rule this page derives, and the long low tines are not twice as long as the high ones an octave up. Then tick the box that lets the overtones ring as long as the fundamental, and listen to how the sound changes.
+Tap a tine. Then tick the box that keeps the overtones ringing, and tap it again.
 
 ```{=html}
 <style>
@@ -48,17 +44,35 @@ Tap the tines below, or drag across several. They are drawn to scale: each tine'
 </div>
 ```
 
-::: {.family}
-**Same operator, different constants.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other. The [harmonica](harmonica.qmd), next, has the same operator and the same ends, but it is blown instead of plucked, and that decides what you hear.
+::: {.gist}
+**The gist.** The overtones really are off the whole numbers, and you hear them as the brief metallic click at the start of each note. But they die within a fraction of a second, while the fundamental rings on. One frequency left on its own always sounds like a note. Tick the box to keep the overtones ringing, and the same tine clangs like a bell.
 :::
 
-## A bar resists bending
+## On the pitch ruler
 
-**The operator.** A bar of [Young's modulus](glossary.qmd#youngs-modulus) $E$ (how stiff the steel is), cross-section area $S$, [second moment of area](glossary.qmd#second-moment) $I$ (how the cross-section's shape resists bending) and density $\rho$ obeys
+Here is one tine's spectrum: 1×, then 6.27× and 17.55×, far from the gray whole-number lines. Tap a stem to see the shape of that mode.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <h3>Modes of one tine · tap a stem</h3>
+    <svg class="spec" id="kSpec" viewBox="0 0 320 120" aria-label="Partials of a plucked tine"></svg>
+    <canvas id="kShape" style="height:140px" aria-label="Side view of the selected tine mode"></canvas>
+    <div class="readout" id="kSel"></div>
+  </div>
+</div>
+```
+
+## How it works
+
+**A tine resists bending.** A string is held straight by tension. A tine is under no tension at all; it springs back because steel resists being bent. Bending is measured by curvature, which takes two derivatives, and the force on each piece of the tine comes from how the bending changes along it, which takes two more. So the tine's equation has four derivatives where the string's had two:
 $$
-u_{tt} = -\kappa^2\,u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho S}.
+u_{tt} = -\kappa^2\,u_{xxxx},
 $$
-This is the [Euler–Bernoulli beam](glossary.qmd#beam) equation. The operator is $\kappa^2\,d^4/dx^4$, with four derivatives. Two of them measure how sharply the bar is bent, its curvature $u_{xx}$; the bar resists bending with a turning effect, the *bending moment*, proportional to it. Two more turn that into a net force: one derivative turns the change of bending moment along the bar into the sideways force across each cut, the *shear force*, and another turns the change of shear force along the bar into the net force on each piece.
+with $\kappa^2$ collecting the steel's stiffness and the tine's mass ([Euler–Bernoulli beam](glossary.qmd#beam)).
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a thin slice to four derivatives <span class="needs">uses integrals over an area</span></summary>
 
 ```{=html}
 <div class="ins">
@@ -78,9 +92,6 @@ This is the [Euler–Bernoulli beam](glossary.qmd#beam) equation. The operator i
   </div>
 </div>
 ```
-
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a thin slice to four derivatives <span class="needs">uses integrals over an area</span></summary>
 
 **1. Bending stresses.** Bend the bar. Fibers on the outside of the curve stretch and fibers on the inside compress, while a middle line, the *neutral axis*, keeps its length.
 
@@ -125,22 +136,22 @@ We neglect the slice's resistance to being spun, its rotational inertia, which i
 </details>
 :::
 
+**Half the length, two octaves up.** A string's frequency goes like $1/L$; with four derivatives, a tine's goes like $1/L^2$. Halve a tine and its pitch rises by a factor of 4, two octaves. That is why the low tines in the demo are not twice as long as the high ones an octave up, and why kalimba makers tune a tine by sliding it over the bridge to change its free length.
+
+**Overtones off the lines.** Four derivatives spread the frequencies apart, roughly like 1, 9, 25, … instead of 1, 2, 3, …. The way the tine is held, clamped at one end and free at the other, then nudges them off the whole numbers, to 1, 6.27, 17.55, …. Held differently, pinned at both ends, the same equation would give 1, 4, 9, 16: whole numbers again.
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Where 1 : 6.27 : 17.55 comes from: the four end conditions <span class="needs">uses hyperbolic functions, a 2×2 determinant and integration by parts</span></summary>
+
 **Boundary conditions.** The bending moment is $EI\,u_{xx}$ and the shear force is $-EI\,u_{xxx}$ (the fold derives both). At the base the tine is held down, so it can neither move nor tilt: $u = 0$ and $u_x = 0$. A bar held this way at one end and free at the other is called a [cantilever](glossary.qmd#cantilever). At the free tip nothing pushes or bends the bar, so both the moment and the shear force vanish: $u_{xx} = 0$ and $u_{xxx} = 0$. That is two conditions at each end, four in all.
 
 **Spectrum.** Substituting a mode $X(x)\cos\omega t$ into the equation gives $\kappa^2 X'''' = \omega^2 X$. Write $\omega/\kappa = \beta^2$, so that $X'''' = \beta^4 X$; the number $\beta$ plays the role of the string's [wavenumber](glossary.qmd#wavenumber). Four functions solve this equation: $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh y = (e^y + e^{-y})/2$ and $\sinh y = (e^y - e^{-y})/2$ are the [hyperbolic functions](glossary.qmd#hyperbolic). So $X$ is a combination of the four with four unknown constants. The four boundary conditions are four equations for those constants, and they have a solution other than all zeros exactly when
 $$
 \cos\beta L\,\cosh\beta L = -1 .
 $$
-The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, close to $(n - \tfrac12)\pi$ from the second one on. Since $\omega \propto \beta^2$, the frequency ratios are
-$$
-1 : 6.27 : 17.55 : 34.39 : \cdots, \qquad \text{growing like } (2n-1)^2 .
-$$
-For a string, frequency is proportional to the wavenumber; for a bar, to its square. That change of order spreads the overtones apart, roughly like $n^2$ instead of $n$. It does not by itself move them off the whole numbers: with *pinned* ends, held in place but free to pivot, so $u = u_{xx} = 0$ at both ends, the shapes $\sin(n\pi x/L)$ satisfy the conditions, four derivatives multiply them by $(n\pi/L)^4$, and the frequencies are in the ratios $1 : 4 : 9 : 16$, all whole numbers. What moves them off is the clamped base and the free tip, which shift the low roots: the first is 1.8751 instead of $\pi/2 \approx 1.571$, and if every root were exactly $(n - \tfrac12)\pi$ the ratios would be the whole numbers $1 : 9 : 25$.
+The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, close to $(n - \tfrac12)\pi$ from the second one on. Since $\omega \propto \beta^2$, the frequency ratios are $1 : 6.27 : 17.55 : 34.39 : \cdots$, growing like $(2n-1)^2$. With *pinned* ends, held in place but free to pivot, so $u = u_{xx} = 0$ at both ends, the shapes $\sin(n\pi x/L)$ satisfy the conditions, four derivatives multiply them by $(n\pi/L)^4$, and the ratios are $1 : 4 : 9 : 16$. The clamp and the free tip shift the low roots instead: the first is $1.8751$, not $\pi/2 \approx 1.571$.
 
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The four boundary conditions give cos βL cosh βL = −1 <span class="needs">uses a 2×2 determinant and integration by parts</span></summary>
-
-The solutions of $X'''' = \beta^4X$ are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh$ and $\sinh$ are the [hyperbolic functions](https://en.wikipedia.org/wiki/Hyperbolic_functions), whose fourth derivatives also return them times $\beta^4$.
+**Deriving the condition.** The solutions of $X'''' = \beta^4X$ are combinations of $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh$ and $\sinh$ are the [hyperbolic functions](https://en.wikipedia.org/wiki/Hyperbolic_functions), whose fourth derivatives also return them times $\beta^4$.
 
 1. *Clamped base.* $X(0) = 0$ and $X'(0) = 0$ leave $X = a\,(\cos\beta x - \cosh\beta x) + b\,(\sin\beta x - \sinh\beta x)$.
 2. *Free tip.* Differentiating, and dropping the common factors $\beta^2$ and $\beta^3$, the conditions $X''(L) = 0$ and $X'''(L) = 0$ read, with the shorthand $C_1 = \cos\beta L$, $S_1 = \sin\beta L$, $C_2 = \cosh\beta L$, $S_2 = \sinh\beta L$:
@@ -159,23 +170,12 @@ The operator $d^4/dx^4$ with these four conditions is symmetric, by integrating 
 </details>
 :::
 
-```{=html}
-<div class="ins">
-<div class="panel">
-    <h3>Modes of one tine · tap a stem</h3>
-    <svg class="spec" id="kSpec" viewBox="0 0 320 120" aria-label="Partials of a plucked tine"></svg>
-    <canvas id="kShape" style="height:140px" aria-label="Side view of the selected tine mode"></canvas>
-    <div class="readout" id="kSel"></div>
-  </div>
-</div>
-```
-
-**Tuning.** Since $\beta_1 = 1.8751/L$ and $\omega = \kappa\beta^2$, the lowest frequency is $f_1 \propto \kappa/L^2$ ($\propto$ means "proportional to"), so halving a tine's free length raises its pitch by a factor of 4, two octaves. Kalimba makers tune a tine by sliding it over the bridge to change its free length.
-
-**Why it still sounds pitched.** Plucked at the tip, a tine starts in the bent shape that a steady push at the tip produces. In that shape the second mode moves only about $1/6.27^2 \approx 2.5\%$ as far as the first (fold below). But what you hear is driven by the force the tine puts on the bridge, as on the [string page](violin.qmd), and for the same displacement a higher mode pushes harder. At the clamp, which in this model is where the tine presses on the bridge, the second mode's bending moment is about 16% of the first's and its shear force about 55%. The bridge feels both, so either way the overtone is far stronger in the sound than 2.5% suggests: it is the brief metallic clink of the attack. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on. What remains is close to a single frequency, and a sound made of essentially one frequency repeats, so it has a clear pitch.
+**Why the note still sounds clean.** The overtone is not weak: in the force on the bridge it starts at roughly 16 to 55% of the fundamental, and that is the click you hear. What keeps the note clean is that it dies within a fraction of a second. Chapman measured exactly this on a real kalimba: one strong overtone near 6.27 times the fundamental, gone soon after the attack.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>How strongly a pluck at the tip excites each mode <span class="needs">uses integration by parts</span></summary>
+
+Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, dying away quickly after the attack. A real tine rests on a bridge partway along rather than being perfectly clamped, and he found that the measured ratios depend on how the bridge divides the tine's length, which is one reason they spread. The steps below compute, for the ideal tine, how much of each mode a pluck starts.
 
 1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still in a bent shape $u_0$, so the bar's restoring force balances the push.
 2. *Split it into modes.* Write $u_0 = \sum_n c_n X_n$, with each mode scaled so that $\int_0^L X_n^2\,dx = L$. Inside the tine nothing pushes, so $EI\,u_0'''' = 0$ there; the push enters only at the tip, as the shear force there. Now compute $\int_0^L EI\,u_0\,X_n''''\,dx$ in two ways. First, $EI\,X_n'''' = \rho S\,\omega_n^2X_n$ (the mode equation), and the modes are perpendicular, so only the $c_n$ term survives: the integral is $\rho S L\,\omega_n^2\,c_n$. Second, integrate by parts four times to move the derivatives onto $u_0$, as in the fold above. Inside, $EI\,u_0'''' = 0$; at the clamp both $u_0$ and $X_n$ vanish with their slopes; at the tip $X_n'' = X_n''' = 0$ and $u_0'' = 0$. The one term left is the tip's shear force times $X_n(L)$, which is $F\,X_n(L)$. So $\rho S L\,\omega_n^2\,c_n = F\,X_n(L)$. This is page 1's spring again: mode $n$ is a spring of stiffness proportional to $\omega_n^2$, pushed with a force proportional to its value at the tip, and it gives way by force over stiffness.
@@ -185,17 +185,19 @@ The operator $d^4/dx^4$ with these four conditions is symmetric, by integrating 
 </details>
 :::
 
-Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, dying away quickly after the attack. A real tine is not perfectly clamped: Chapman models it as clamped at one end, resting on the bridge partway along, and free at the tip, and finds that the measured overtone ratios depend on how the tine's length is divided by the bridge, which is one reason they spread.
-
 ## What we found
 
-A bar under no tension springs back because it resists bending. Its operator has four derivatives instead of two, so the frequencies spread apart, growing roughly like the square of the mode number. The clamped base and free tip then move them off the whole numbers: 1, 6.27, 17.55, … times the lowest. With pinned ends the same operator would give 1, 4, 9, 16.
+On the pitch ruler, a kalimba tine's frequencies are off the lines, so by the series' rule it should clang. It doesn't, because the off-line overtones die almost at once and leave one frequency ringing.
+
+::: {.family}
+**Same math elsewhere.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other.
+:::
 
 ## The next puzzle
 
-A harmonica reed is the same kind of bar, fixed at one end and free at the other, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck one and you hear them. Yet a harmonica, blown, plays notes whose overtones are exact whole-number multiples. Where did the bar's own overtones go?
+A harmonica reed is the same kind of bar, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck one and you hear them. Yet a harmonica, blown, plays notes whose overtones are exact whole-number multiples. Where did the bar's own overtones go?
 
-[← An air column](clarinet.qmd) · [Next: the harmonica →](harmonica.qmd)
+[← 5 · An air column](clarinet.qmd) · [Next: 6b · the harmonica →](harmonica.qmd)
 
 ::: {.refs}
 **References.** D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustical Society of America, 2008. Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory) and [Cantilever](https://en.wikipedia.org/wiki/Cantilever). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2 (bars).

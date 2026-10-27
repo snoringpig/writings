@@ -10,8 +10,8 @@ resources: [core.js, ins.css]
 aliases: [foundations.html]
 ---
 
-::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), **3 The circle** · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
+::: {.series-nav .slim}
+[← 2 Beads on a ring](ring.qmd) · [Series](index.qmd) · [Map](map.qmd) · [4 String →](violin.qmd)
 :::
 
 ::: {.pageinfo}

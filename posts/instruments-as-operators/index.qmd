@@ -1,6 +1,6 @@
 ---
-title: "Instruments as Operators"
-subtitle: "Newton's law gives an operator, its spectrum gives the frequencies, the way you play gives the sound"
+title: "Why a String Sings and a Drum Thuds"
+subtitle: "The mathematics of musical sound, one instrument at a time"
 date: 2026-10-25
 date-modified: 2026-10-26
 categories: [math, music]
@@ -11,154 +11,73 @@ format:
 resources: [core.js, ins.css]
 ---
 
-::: {.series-nav}
-**Series** · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · [Glossary](glossary.qmd)
+Pluck a string and you get a note you could hum. Strike a drum and you get a thud. Both are a stretched piece of material, set shaking. So why do they sound so different?
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <div class="duo">
+    <div>
+      <div class="controls"><button class="primary" data-hook="string">▶ Pluck a string</button></div>
+      <svg class="spec" id="rulerString" viewBox="0 0 320 96" aria-label="The frequencies in a plucked string's sound, as multiples of the lowest: they sit on the whole-number lines"></svg>
+    </div>
+    <div>
+      <div class="controls"><button class="primary" data-hook="drum">▶ Strike a drum</button></div>
+      <svg class="spec" id="rulerDrum" viewBox="0 0 320 96" aria-label="The frequencies in a struck drum's sound, as multiples of the lowest: they fall between the whole-number lines"></svg>
+    </div>
+  </div>
+  <p class="cap">Each blue stem is one frequency in the sound, drawn as a multiple of the lowest, and its height is how loud it is. The gray lines mark 1×, 2×, 3×, …: call this the <em>pitch ruler</em>.</p>
+</div>
+</div>
+```
+
+## The answer in three steps
+
+**1. Everything that vibrates has a few favourite shapes.** A string can swing as one arc, as two halves moving in opposite directions, as three thirds, and so on. Each of these shapes, called a [mode](glossary.qmd#mode), swings at its own frequency.
+
+```{=html}
+<svg class="fig" viewBox="0 0 320 112" role="img" aria-label="The first three modes of a string: one arc, two halves, three thirds, at 1, 2 and 3 times the lowest frequency"><path class="dash" d="M 40 22 L 280 22"/><path class="acc" d="M 40.0 22.0 L 42.0 21.7 L 44.0 21.4 L 46.0 21.1 L 48.0 20.9 L 50.0 20.6 L 52.0 20.3 L 54.0 20.0 L 56.0 19.7 L 58.0 19.4 L 60.0 19.2 L 62.0 18.9 L 64.0 18.6 L 66.0 18.3 L 68.0 18.1 L 70.0 17.8 L 72.0 17.5 L 74.0 17.3 L 76.0 17.0 L 78.0 16.8 L 80.0 16.5 L 82.0 16.3 L 84.0 16.0 L 86.0 15.8 L 88.0 15.5 L 90.0 15.3 L 92.0 15.1 L 94.0 14.9 L 96.0 14.6 L 98.0 14.4 L 100.0 14.2 L 102.0 14.0 L 104.0 13.8 L 106.0 13.6 L 108.0 13.5 L 110.0 13.3 L 112.0 13.1 L 114.0 12.9 L 116.0 12.8 L 118.0 12.6 L 120.0 12.5 L 122.0 12.3 L 124.0 12.2 L 126.0 12.1 L 128.0 12.0 L 130.0 11.8 L 132.0 11.7 L 134.0 11.6 L 136.0 11.5 L 138.0 11.5 L 140.0 11.4 L 142.0 11.3 L 144.0 11.2 L 146.0 11.2 L 148.0 11.1 L 150.0 11.1 L 152.0 11.1 L 154.0 11.0 L 156.0 11.0 L 158.0 11.0 L 160.0 11.0 L 162.0 11.0 L 164.0 11.0 L 166.0 11.0 L 168.0 11.1 L 170.0 11.1 L 172.0 11.1 L 174.0 11.2 L 176.0 11.2 L 178.0 11.3 L 180.0 11.4 L 182.0 11.5 L 184.0 11.5 L 186.0 11.6 L 188.0 11.7 L 190.0 11.8 L 192.0 12.0 L 194.0 12.1 L 196.0 12.2 L 198.0 12.3 L 200.0 12.5 L 202.0 12.6 L 204.0 12.8 L 206.0 12.9 L 208.0 13.1 L 210.0 13.3 L 212.0 13.5 L 214.0 13.6 L 216.0 13.8 L 218.0 14.0 L 220.0 14.2 L 222.0 14.4 L 224.0 14.6 L 226.0 14.9 L 228.0 15.1 L 230.0 15.3 L 232.0 15.5 L 234.0 15.8 L 236.0 16.0 L 238.0 16.3 L 240.0 16.5 L 242.0 16.8 L 244.0 17.0 L 246.0 17.3 L 248.0 17.5 L 250.0 17.8 L 252.0 18.1 L 254.0 18.3 L 256.0 18.6 L 258.0 18.9 L 260.0 19.2 L 262.0 19.4 L 264.0 19.7 L 266.0 20.0 L 268.0 20.3 L 270.0 20.6 L 272.0 20.9 L 274.0 21.1 L 276.0 21.4 L 278.0 21.7 L 280.0 22.0"/><path class="acc" opacity="0.35" d="M 40.0 22.0 L 42.0 22.3 L 44.0 22.6 L 46.0 22.9 L 48.0 23.1 L 50.0 23.4 L 52.0 23.7 L 54.0 24.0 L 56.0 24.3 L 58.0 24.6 L 60.0 24.8 L 62.0 25.1 L 64.0 25.4 L 66.0 25.7 L 68.0 25.9 L 70.0 26.2 L 72.0 26.5 L 74.0 26.7 L 76.0 27.0 L 78.0 27.2 L 80.0 27.5 L 82.0 27.7 L 84.0 28.0 L 86.0 28.2 L 88.0 28.5 L 90.0 28.7 L 92.0 28.9 L 94.0 29.1 L 96.0 29.4 L 98.0 29.6 L 100.0 29.8 L 102.0 30.0 L 104.0 30.2 L 106.0 30.4 L 108.0 30.5 L 110.0 30.7 L 112.0 30.9 L 114.0 31.1 L 116.0 31.2 L 118.0 31.4 L 120.0 31.5 L 122.0 31.7 L 124.0 31.8 L 126.0 31.9 L 128.0 32.0 L 130.0 32.2 L 132.0 32.3 L 134.0 32.4 L 136.0 32.5 L 138.0 32.5 L 140.0 32.6 L 142.0 32.7 L 144.0 32.8 L 146.0 32.8 L 148.0 32.9 L 150.0 32.9 L 152.0 32.9 L 154.0 33.0 L 156.0 33.0 L 158.0 33.0 L 160.0 33.0 L 162.0 33.0 L 164.0 33.0 L 166.0 33.0 L 168.0 32.9 L 170.0 32.9 L 172.0 32.9 L 174.0 32.8 L 176.0 32.8 L 178.0 32.7 L 180.0 32.6 L 182.0 32.5 L 184.0 32.5 L 186.0 32.4 L 188.0 32.3 L 190.0 32.2 L 192.0 32.0 L 194.0 31.9 L 196.0 31.8 L 198.0 31.7 L 200.0 31.5 L 202.0 31.4 L 204.0 31.2 L 206.0 31.1 L 208.0 30.9 L 210.0 30.7 L 212.0 30.5 L 214.0 30.4 L 216.0 30.2 L 218.0 30.0 L 220.0 29.8 L 222.0 29.6 L 224.0 29.4 L 226.0 29.1 L 228.0 28.9 L 230.0 28.7 L 232.0 28.5 L 234.0 28.2 L 236.0 28.0 L 238.0 27.7 L 240.0 27.5 L 242.0 27.2 L 244.0 27.0 L 246.0 26.7 L 248.0 26.5 L 250.0 26.2 L 252.0 25.9 L 254.0 25.7 L 256.0 25.4 L 258.0 25.1 L 260.0 24.8 L 262.0 24.6 L 264.0 24.3 L 266.0 24.0 L 268.0 23.7 L 270.0 23.4 L 272.0 23.1 L 274.0 22.9 L 276.0 22.6 L 278.0 22.3 L 280.0 22.0"/><circle cx="40" cy="22" r="2.5" class="fillacc"/><circle cx="280" cy="22" r="2.5" class="fillacc"/><text x="290" y="26">1×</text><path class="dash" d="M 40 56 L 280 56"/><path class="acc" d="M 40.0 56.0 L 42.0 55.4 L 44.0 54.9 L 46.0 54.3 L 48.0 53.7 L 50.0 53.2 L 52.0 52.6 L 54.0 52.1 L 56.0 51.5 L 58.0 51.0 L 60.0 50.5 L 62.0 50.0 L 64.0 49.5 L 66.0 49.1 L 68.0 48.6 L 70.0 48.2 L 72.0 47.8 L 74.0 47.5 L 76.0 47.1 L 78.0 46.8 L 80.0 46.5 L 82.0 46.2 L 84.0 46.0 L 86.0 45.7 L 88.0 45.5 L 90.0 45.4 L 92.0 45.2 L 94.0 45.1 L 96.0 45.1 L 98.0 45.0 L 100.0 45.0 L 102.0 45.0 L 104.0 45.1 L 106.0 45.1 L 108.0 45.2 L 110.0 45.4 L 112.0 45.5 L 114.0 45.7 L 116.0 46.0 L 118.0 46.2 L 120.0 46.5 L 122.0 46.8 L 124.0 47.1 L 126.0 47.5 L 128.0 47.8 L 130.0 48.2 L 132.0 48.6 L 134.0 49.1 L 136.0 49.5 L 138.0 50.0 L 140.0 50.5 L 142.0 51.0 L 144.0 51.5 L 146.0 52.1 L 148.0 52.6 L 150.0 53.2 L 152.0 53.7 L 154.0 54.3 L 156.0 54.9 L 158.0 55.4 L 160.0 56.0 L 162.0 56.6 L 164.0 57.1 L 166.0 57.7 L 168.0 58.3 L 170.0 58.8 L 172.0 59.4 L 174.0 59.9 L 176.0 60.5 L 178.0 61.0 L 180.0 61.5 L 182.0 62.0 L 184.0 62.5 L 186.0 62.9 L 188.0 63.4 L 190.0 63.8 L 192.0 64.2 L 194.0 64.5 L 196.0 64.9 L 198.0 65.2 L 200.0 65.5 L 202.0 65.8 L 204.0 66.0 L 206.0 66.3 L 208.0 66.5 L 210.0 66.6 L 212.0 66.8 L 214.0 66.9 L 216.0 66.9 L 218.0 67.0 L 220.0 67.0 L 222.0 67.0 L 224.0 66.9 L 226.0 66.9 L 228.0 66.8 L 230.0 66.6 L 232.0 66.5 L 234.0 66.3 L 236.0 66.0 L 238.0 65.8 L 240.0 65.5 L 242.0 65.2 L 244.0 64.9 L 246.0 64.5 L 248.0 64.2 L 250.0 63.8 L 252.0 63.4 L 254.0 62.9 L 256.0 62.5 L 258.0 62.0 L 260.0 61.5 L 262.0 61.0 L 264.0 60.5 L 266.0 59.9 L 268.0 59.4 L 270.0 58.8 L 272.0 58.3 L 274.0 57.7 L 276.0 57.1 L 278.0 56.6 L 280.0 56.0"/><path class="acc" opacity="0.35" d="M 40.0 56.0 L 42.0 56.6 L 44.0 57.1 L 46.0 57.7 L 48.0 58.3 L 50.0 58.8 L 52.0 59.4 L 54.0 59.9 L 56.0 60.5 L 58.0 61.0 L 60.0 61.5 L 62.0 62.0 L 64.0 62.5 L 66.0 62.9 L 68.0 63.4 L 70.0 63.8 L 72.0 64.2 L 74.0 64.5 L 76.0 64.9 L 78.0 65.2 L 80.0 65.5 L 82.0 65.8 L 84.0 66.0 L 86.0 66.3 L 88.0 66.5 L 90.0 66.6 L 92.0 66.8 L 94.0 66.9 L 96.0 66.9 L 98.0 67.0 L 100.0 67.0 L 102.0 67.0 L 104.0 66.9 L 106.0 66.9 L 108.0 66.8 L 110.0 66.6 L 112.0 66.5 L 114.0 66.3 L 116.0 66.0 L 118.0 65.8 L 120.0 65.5 L 122.0 65.2 L 124.0 64.9 L 126.0 64.5 L 128.0 64.2 L 130.0 63.8 L 132.0 63.4 L 134.0 62.9 L 136.0 62.5 L 138.0 62.0 L 140.0 61.5 L 142.0 61.0 L 144.0 60.5 L 146.0 59.9 L 148.0 59.4 L 150.0 58.8 L 152.0 58.3 L 154.0 57.7 L 156.0 57.1 L 158.0 56.6 L 160.0 56.0 L 162.0 55.4 L 164.0 54.9 L 166.0 54.3 L 168.0 53.7 L 170.0 53.2 L 172.0 52.6 L 174.0 52.1 L 176.0 51.5 L 178.0 51.0 L 180.0 50.5 L 182.0 50.0 L 184.0 49.5 L 186.0 49.1 L 188.0 48.6 L 190.0 48.2 L 192.0 47.8 L 194.0 47.5 L 196.0 47.1 L 198.0 46.8 L 200.0 46.5 L 202.0 46.2 L 204.0 46.0 L 206.0 45.7 L 208.0 45.5 L 210.0 45.4 L 212.0 45.2 L 214.0 45.1 L 216.0 45.1 L 218.0 45.0 L 220.0 45.0 L 222.0 45.0 L 224.0 45.1 L 226.0 45.1 L 228.0 45.2 L 230.0 45.4 L 232.0 45.5 L 234.0 45.7 L 236.0 46.0 L 238.0 46.2 L 240.0 46.5 L 242.0 46.8 L 244.0 47.1 L 246.0 47.5 L 248.0 47.8 L 250.0 48.2 L 252.0 48.6 L 254.0 49.1 L 256.0 49.5 L 258.0 50.0 L 260.0 50.5 L 262.0 51.0 L 264.0 51.5 L 266.0 52.1 L 268.0 52.6 L 270.0 53.2 L 272.0 53.7 L 274.0 54.3 L 276.0 54.9 L 278.0 55.4 L 280.0 56.0"/><circle cx="40" cy="56" r="2.5" class="fillacc"/><circle cx="280" cy="56" r="2.5" class="fillacc"/><text x="290" y="60">2×</text><path class="dash" d="M 40 90 L 280 90"/><path class="acc" d="M 40.0 90.0 L 42.0 89.1 L 44.0 88.3 L 46.0 87.4 L 48.0 86.6 L 50.0 85.8 L 52.0 85.0 L 54.0 84.3 L 56.0 83.5 L 58.0 82.9 L 60.0 82.2 L 62.0 81.6 L 64.0 81.1 L 66.0 80.6 L 68.0 80.2 L 70.0 79.8 L 72.0 79.5 L 74.0 79.3 L 76.0 79.1 L 78.0 79.0 L 80.0 79.0 L 82.0 79.0 L 84.0 79.1 L 86.0 79.3 L 88.0 79.5 L 90.0 79.8 L 92.0 80.2 L 94.0 80.6 L 96.0 81.1 L 98.0 81.6 L 100.0 82.2 L 102.0 82.9 L 104.0 83.5 L 106.0 84.3 L 108.0 85.0 L 110.0 85.8 L 112.0 86.6 L 114.0 87.4 L 116.0 88.3 L 118.0 89.1 L 120.0 90.0 L 122.0 90.9 L 124.0 91.7 L 126.0 92.6 L 128.0 93.4 L 130.0 94.2 L 132.0 95.0 L 134.0 95.7 L 136.0 96.5 L 138.0 97.1 L 140.0 97.8 L 142.0 98.4 L 144.0 98.9 L 146.0 99.4 L 148.0 99.8 L 150.0 100.2 L 152.0 100.5 L 154.0 100.7 L 156.0 100.9 L 158.0 101.0 L 160.0 101.0 L 162.0 101.0 L 164.0 100.9 L 166.0 100.7 L 168.0 100.5 L 170.0 100.2 L 172.0 99.8 L 174.0 99.4 L 176.0 98.9 L 178.0 98.4 L 180.0 97.8 L 182.0 97.1 L 184.0 96.5 L 186.0 95.7 L 188.0 95.0 L 190.0 94.2 L 192.0 93.4 L 194.0 92.6 L 196.0 91.7 L 198.0 90.9 L 200.0 90.0 L 202.0 89.1 L 204.0 88.3 L 206.0 87.4 L 208.0 86.6 L 210.0 85.8 L 212.0 85.0 L 214.0 84.3 L 216.0 83.5 L 218.0 82.9 L 220.0 82.2 L 222.0 81.6 L 224.0 81.1 L 226.0 80.6 L 228.0 80.2 L 230.0 79.8 L 232.0 79.5 L 234.0 79.3 L 236.0 79.1 L 238.0 79.0 L 240.0 79.0 L 242.0 79.0 L 244.0 79.1 L 246.0 79.3 L 248.0 79.5 L 250.0 79.8 L 252.0 80.2 L 254.0 80.6 L 256.0 81.1 L 258.0 81.6 L 260.0 82.2 L 262.0 82.9 L 264.0 83.5 L 266.0 84.3 L 268.0 85.0 L 270.0 85.8 L 272.0 86.6 L 274.0 87.4 L 276.0 88.3 L 278.0 89.1 L 280.0 90.0"/><path class="acc" opacity="0.35" d="M 40.0 90.0 L 42.0 90.9 L 44.0 91.7 L 46.0 92.6 L 48.0 93.4 L 50.0 94.2 L 52.0 95.0 L 54.0 95.7 L 56.0 96.5 L 58.0 97.1 L 60.0 97.8 L 62.0 98.4 L 64.0 98.9 L 66.0 99.4 L 68.0 99.8 L 70.0 100.2 L 72.0 100.5 L 74.0 100.7 L 76.0 100.9 L 78.0 101.0 L 80.0 101.0 L 82.0 101.0 L 84.0 100.9 L 86.0 100.7 L 88.0 100.5 L 90.0 100.2 L 92.0 99.8 L 94.0 99.4 L 96.0 98.9 L 98.0 98.4 L 100.0 97.8 L 102.0 97.1 L 104.0 96.5 L 106.0 95.7 L 108.0 95.0 L 110.0 94.2 L 112.0 93.4 L 114.0 92.6 L 116.0 91.7 L 118.0 90.9 L 120.0 90.0 L 122.0 89.1 L 124.0 88.3 L 126.0 87.4 L 128.0 86.6 L 130.0 85.8 L 132.0 85.0 L 134.0 84.3 L 136.0 83.5 L 138.0 82.9 L 140.0 82.2 L 142.0 81.6 L 144.0 81.1 L 146.0 80.6 L 148.0 80.2 L 150.0 79.8 L 152.0 79.5 L 154.0 79.3 L 156.0 79.1 L 158.0 79.0 L 160.0 79.0 L 162.0 79.0 L 164.0 79.1 L 166.0 79.3 L 168.0 79.5 L 170.0 79.8 L 172.0 80.2 L 174.0 80.6 L 176.0 81.1 L 178.0 81.6 L 180.0 82.2 L 182.0 82.9 L 184.0 83.5 L 186.0 84.3 L 188.0 85.0 L 190.0 85.8 L 192.0 86.6 L 194.0 87.4 L 196.0 88.3 L 198.0 89.1 L 200.0 90.0 L 202.0 90.9 L 204.0 91.7 L 206.0 92.6 L 208.0 93.4 L 210.0 94.2 L 212.0 95.0 L 214.0 95.7 L 216.0 96.5 L 218.0 97.1 L 220.0 97.8 L 222.0 98.4 L 224.0 98.9 L 226.0 99.4 L 228.0 99.8 L 230.0 100.2 L 232.0 100.5 L 234.0 100.7 L 236.0 100.9 L 238.0 101.0 L 240.0 101.0 L 242.0 101.0 L 244.0 100.9 L 246.0 100.7 L 248.0 100.5 L 250.0 100.2 L 252.0 99.8 L 254.0 99.4 L 256.0 98.9 L 258.0 98.4 L 260.0 97.8 L 262.0 97.1 L 264.0 96.5 L 266.0 95.7 L 268.0 95.0 L 270.0 94.2 L 272.0 93.4 L 274.0 92.6 L 276.0 91.7 L 278.0 90.9 L 280.0 90.0"/><circle cx="40" cy="90" r="2.5" class="fillacc"/><circle cx="280" cy="90" r="2.5" class="fillacc"/><text x="290" y="94">3×</text></svg>
+```
+
+**2. A pluck sets all of them going at once.** What you hear is a chord of the modes' frequencies: the stems on the ruler above.
+
+**3. Whether that chord sounds like one note depends on how the frequencies line up.** If they sit at whole-number multiples, 1×, 2×, 3×, …, the sound repeats itself many times a second, and the ear hears one [pitch](glossary.qmd#pitch). A string's modes do exactly that. A drum's land at 1×, 1.59×, 2.14×, 2.30×, …, between the lines, so its sound never repeats, and you hear a thud.
+
+::: {.northstar}
+**The idea behind the whole series.** Shape and material decide an instrument's modes and their frequencies. On the pitch ruler: on the lines, a note; off the lines, a clang or a thud. Mathematically, Newton's law turns each instrument into an [operator], and its frequencies are the operator's [spectrum](glossary.qmd#spectrum). Each page finds one instrument's spectrum and puts it on the ruler.
 :::
+
+[operator]: glossary.qmd#operator
+
+## The journey
+
+```{=html}
+<div class="ins">
+<ol class="journey">
+  <li class="part">The idea</li>
+  <li><a href="note.html"><span class="n">0</span><span class="t">What makes a sound a note?</span></a><span class="hint">Take away a note's own frequency and you still hear it.</span><span class="controls"><button data-g="note">▶ The note</button><button data-g="nofund">▶ Without it</button></span></li>
+  <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">One mass on a spring.</span></li>
+  <li><a href="ring.html"><span class="n">2</span><span class="t">How do you untangle a plucked ring of beads?</span></a><span class="hint">A few regular motions, all at once.</span></li>
+  <li><a href="circle.html"><span class="n">3</span><span class="t">Why are a loop's frequencies exactly 1, 2, 3, …?</span></a><span class="hint">The smallest spectrum, and Fourier series.</span></li>
+  <li class="part">Instruments</li>
+  <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">The violin and the string's ends.</span></li>
+  <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Same length, one closed end.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
+  <li><a href="kalimba.html"><span class="n">6</span><span class="t">Why does a kalimba sound clean?</span></a><span class="hint">Its overtones are off the lines.</span><span class="controls"><button data-g="kal">▶ Kalimba tine</button></span></li>
+  <li><a href="harmonica.html"><span class="n">6b</span><span class="t">Where did the harmonica reed's overtones go?</span></a><span class="hint">The same bar as the kalimba; blowing forces a note anyway.</span><span class="controls"><button data-g="kal">▶ Plucked</button><button data-g="harm">▶ Blown</button></span></li>
+  <li><a href="piano.html"><span class="n">7</span><span class="t">Why do piano tuners stretch octaves?</span></a><span class="hint">An exactly 2 : 1 octave wobbles (notes simplified).</span><span class="controls"><button data-g="oct">▶ Exactly 2 : 1</button><button data-g="str">▶ Stretched</button></span></li>
+  <li><a href="drum.html"><span class="n">8</span><span class="t">Why does a drum thud?</span></a><span class="hint">Two dimensions, and Chladni's sand.</span></li>
+  <li class="part">Beyond</li>
+  <li><a href="shape.html"><span class="n">9</span><span class="t">Can you hear the shape of a drum?</span></a><span class="hint">Two different drums, every mode equally loud.</span><span class="controls"><button data-g="gA">▶ Drum A</button><button data-g="gB">▶ Drum B</button></span></li>
+  <li><a href="epilogue.html"><span class="n">10</span><span class="t">Did instruments shape our scales?</span></a><span class="hint">Why some note pairs sound smooth.</span></li>
+</ol>
+</div>
+```
+
+Short on time? Pages 0, 3, 4 and 8 carry the main idea. The [map](map.qmd) has reading paths by depth, a table of every page's operator and spectrum, and the instrument families. Blue words link to the [glossary](glossary.qmd).
 
 ::: {.made}
 *How this was made.* The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.
 :::
-
-Here are six sounds that need explaining. Play them, and try to guess why each one happens.
-
-```{=html}
-<div class="ins">
-<div class="gallery">
-  <div class="pcard">
-    <p class="q">Why does a string sing and a drum thud?</p>
-    <p class="b">Both are pulled tight and set vibrating. One gives a note you could hum; the other doesn't.</p>
-    <div class="controls"><button data-g="string">Pluck a string</button><button data-g="drum">Strike a drum</button></div>
-    <p class="go">Answered on <a href="violin.html">page 4</a> and <a href="drum.html">page 8</a></p>
-  </div>
-  <div class="pcard">
-    <p class="q">How can you hear a frequency that isn't there?</p>
-    <p class="b">Remove a note's own frequency completely, and you still hear the same note.</p>
-    <div class="controls"><button data-g="note">The note</button><button data-g="nofund">Without its own frequency</button></div>
-    <p class="go">Answered on <a href="note.html">page 0</a></p>
-  </div>
-  <div class="pcard">
-    <p class="q">Why is a clarinet almost an octave deeper than a flute?</p>
-    <p class="b">They are about the same length. The difference is one closed end.</p>
-    <div class="controls"><button data-g="flute">A flute-like tube</button><button data-g="clar">The same tube, closed at one end</button></div>
-    <p class="go">Answered on <a href="clarinet.html">page 5</a></p>
-  </div>
-  <div class="pcard">
-    <p class="q">Why do these two sound so different?</p>
-    <p class="b">A kalimba tine and a harmonica reed are the same kind of bar, with the same <a href="glossary.html#partial">overtones</a> far off the whole-number multiples.</p>
-    <div class="controls"><button data-g="kal">Kalimba tine, plucked</button><button data-g="harm">Harmonica reed, blown</button></div>
-    <p class="go">Answered on <a href="kalimba.html">page 6</a> and <a href="harmonica.html">6b</a></p>
-  </div>
-  <div class="pcard">
-    <p class="q">Why do piano tuners avoid exact octaves?</p>
-    <p class="b">An octave tuned to exactly 2 : 1 wobbles; a slightly stretched one doesn't. To make the wobble easy to hear, these are simplified notes: only their lowest partials, with the stiffness exaggerated.</p>
-    <div class="controls"><button data-g="oct">Exactly 2 : 1</button><button data-g="str">Stretched</button></div>
-    <p class="go">Answered on <a href="piano.html">page 7</a></p>
-  </div>
-  <div class="pcard">
-    <p class="q">Can you hear the shape of a drum?</p>
-    <p class="b">These two drums have different shapes. Played with every <a href="glossary.html#mode">mode</a> equally loud, which no real strike does, they sound identical.</p>
-    <div class="controls"><button data-g="gA">Drum A</button><button data-g="gB">Drum B</button></div>
-    <p class="go">Answered on <a href="shape.html">page 9</a></p>
-  </div>
-</div>
-</div>
-```
-
-And one question beyond the mathematics: did the instruments people built shape the scales they play? That is the [epilogue](epilogue.qmd).
-
-## Two ideas answer all six
-
-1. **An instrument's frequencies come from the [spectrum](glossary.qmd#spectrum) of an [operator].** The operator is a rule that takes a shape of the instrument, a bent string or a dented drumhead, and gives back the force pulling it back toward rest (per unit mass, and with a minus sign, so that the motion obeys $u_{tt} = -Au$, where $u$ is the shape, $u_{tt}$ its [acceleration](glossary.qmd#partial-derivative) and $A$ the operator). The shapes it only rescales are the instrument's [modes](glossary.qmd#mode); the rescaling factors are its [eigenvalues](glossary.qmd#eigenvalue), and the list of them is the spectrum. Each frequency is proportional to the square root of an eigenvalue. The simplest case is a loop of string, where the operator is $-c^2\,d^2/d\theta^2$, minus the second derivative times a constant $c^2$, and writing a shape in its modes is the [Fourier series](glossary.qmd#fourier-series).
-2. **A clear [pitch](glossary.qmd#pitch) means the frequencies you hear sit at, or very near, whole-number multiples of one frequency, a frequency in the range we hear as pitch, from a few dozen to a few thousand hertz.** Then the sound repeats, or nearly repeats, and the repetition rate is the pitch. Since the frequencies come from the spectrum, whether they line up is decided by the operator and the instrument's shape. How you play decides how loud each frequency is, with one refinement: a steady bow or breath can lock the motion into exact repetition, close to one of the operator's frequencies, even when the operator's overtones are off the grid.
-
-[operator]: glossary.qmd#operator
-
-## How to read this series
-
-Every page opens with a puzzle you can hear or see, builds the explanation, and ends with what we found and the next puzzle. The step-by-step derivations and proofs are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the [glossary](glossary.qmd), and the symbol $\propto$ means "proportional to".
-
-- **The gist, 5 minutes.** This page: the six puzzles above and the two ideas that answer them.
-- **The core idea, about 35 minutes.** Read [0 · What is a note?](note.qmd), [3 · The circle](circle.qmd), [4 · A string with ends](violin.qmd) and [8 · The drum](drum.qmd), skipping the folds. They carry both points: a pitch is a repeating sound, the circle is the smallest operator and its spectrum, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not.
-- **The whole story, about an hour and a half.** Pages 0 to 8 in order, each answering the question the last one raised.
-- **Everything, about three hours.** All the pages, including [9 · What the spectrum knows](shape.qmd) and the [epilogue](epilogue.qmd), with the folds open.
-
-Here for one puzzle? Each one above links to the page that answers it, and each page says at the top which earlier page it builds on and how long it takes. Already know Fourier series? Start at page 4. The times assume reading about 120 words a minute, plus a minute or two per demo.
-
-## All pages
-
-In the table, $\partial_x$ means a derivative in $x$, so $-c^2\partial_x^2$ is the string's $-c^2\,d^2/dx^2$; $\kappa^2 = EI/\rho S$ is a bar's stiffness constant ([page 6](kalimba.qmd)); $\Delta$ is the [Laplacian](glossary.qmd#laplacian); [circulant](glossary.qmd#circulant) matrices and [Bessel](glossary.qmd#bessel) zeros are explained on pages 2 and 8.
-
-| Page | New idea | Operator | Frequencies |
-|:--|:--|:--|:--|
-| [0 · What is a note?](note.qmd) | a note is a sound that repeats; its partials are whole-number multiples | | $f, 2f, 3f, \dots$ |
-| [1 · One mass on a spring](oscillator.qmd) | one restoring force, one frequency | the number $k/m$ | $\sqrt{k/m}/2\pi$ |
-| [2 · Beads on a ring](ring.qmd) | many masses: eigenvectors of a matrix | circulant matrix | $\propto \sin(\pi k/N)$ |
-| [3 · The circle](circle.qmd) | the smallest operator spectrum; Fourier series | $-c^2\,d^2/d\theta^2$ on a loop | $\propto n$, exactly |
-| [4 · A string with ends](violin.qmd) | boundary conditions are part of the operator | $-c^2\,d^2/dx^2$, ends tied | $\propto n$ |
-| [5 · An air column](clarinet.qmd) | closing one end halves the lowest frequency and keeps only its odd multiples | the same, on pressure | $\propto 2n - 1$ |
-| [6 · Change the order](kalimba.qmd) | bending: four derivatives spread the overtones; the clamped and free ends move them off the whole numbers | $\kappa^2\,d^4/dx^4$ | $1 : 6.27 : 17.55$ |
-| [6b · The harmonica](harmonica.qmd) | the excitation, not the operator, can set the overtones | the same as 6 | heard as $\propto n$ |
-| [7 · The piano](piano.qmd) | operators add; the pedals act on damping and forcing, not on the spectrum | $-c^2\partial_x^2 + \kappa^2\partial_x^4$ | $n\sqrt{1 + Bn^2}$ |
-| [8 · The drum](drum.qmd) | two dimensions; no clear pitch | $-c^2\Delta$ on a disk | Bessel zeros |
-| [9 · What the spectrum knows](shape.qmd) | the spectrum hears area and perimeter, but not always the shape | $-c^2\Delta$ on any region | Weyl's law |
-| [10 · Did instruments shape our scales?](epilogue.qmd) | the spectrum decides which intervals sound smooth | the bar's, with free ends | $1 : 2.76 : 5.40$ |
-
-: Every page, its new idea, its operator and its frequencies. {.striped}
-
-## Families
-
-<details><summary>Instruments that are the same up to constants</summary>
-
-Instruments in one family share one rule for the restoring force, so they are close to the same mathematical object with different constants. The last column says what still differs inside a family: for air columns the ends, which are part of the operator, and for drums the air around the head, which matters for timpani.
-
-| Family | Operator and boundary | Demos | What varies inside the family |
-|:--|:--|:--|:--|
-| Strings under tension | $-c^2\partial_x^2$, tied ends | [Violin](violin.qmd) | length, tension, mass per length; plucked (guitar, harp) or bowed (violin, cello) |
-| Air columns | $-c^2\partial_x^2$ on pressure | [Clarinet](clarinet.qmd), with a flute switch | the boundary condition: one end closed (clarinet, pan pipes) or both open (flute) |
-| Clamped bars | $\kappa^2\partial_x^4$, clamped base, free tip | [Kalimba](kalimba.qmd), [Harmonica](harmonica.qmd) | steel tine or brass reed; plucked or blown, which decides whether you hear harmonics |
-| Stiff strings | $-c^2\partial_x^2 + \kappa^2\partial_x^4$, pinned ends | [Piano](piano.qmd) | stiffness, rising toward the treble |
-| Membranes | $-c^2\Delta$ on a disk | [Drum](drum.qmd) | tension and size; the air under a timpani head |
-
-</details>
-
-
-## All the sounds side by side
-
-<details><summary>The partials of each instrument's sound, as it is usually played</summary>
-
-These are the partials of the sound, which for blown and bowed instruments differ from the operator's own frequencies. Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each [partial](glossary.qmd#partial) is excited.
-
-```{=html}
-<div class="ins">
-<div class="strip">
-  <div><span class="nm">Violin</span><svg class="mini" data-mini="violin" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="violin">—</span><button class="primary" data-play="violin">Play</button></div>
-  <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">modes 1, 3, 5, 7, 9</span><button class="primary" data-play="clarinet">Play</button></div>
-  <div><span class="nm">Kalimba</span><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="kalimba">—</span><button class="primary" data-play="kalimba">Play</button></div>
-  <div><span class="nm">Harmonica</span><svg class="mini" data-mini="harmonica" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="harmonica">—</span><button class="primary" data-play="harmonica">Play</button></div>
-  <div><span class="nm">Piano</span><svg class="mini" data-mini="piano" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="piano">—</span><button class="primary" data-play="piano">Play</button></div>
-  <div><span class="nm">Drum</span><svg class="mini" data-mini="drum" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="drum">—</span><button class="primary" data-play="drum">Play</button></div>
-</div>
-</div>
-```
-
-</details>
-
-## Comparison
-
-<details><summary>Every instrument side by side: force, operator, boundary, eigen-condition, ratios, excitation</summary>
-
-| | Violin | Clarinet | Kalimba | Harmonica | Piano | Drum |
-|:--|:--|:--|:--|:--|:--|:--|
-| Restoring force | tension | air pressure | bending | bending | tension + bending | tension, in 2D |
-| Newton's law on | a segment | a slab of air | a slice: torque, then force | a slice, as for the kalimba | a segment, both forces added | a patch, via the divergence theorem |
-| Operator | $-c^2\partial_x^2$ | $-c^2\partial_x^2$ on pressure | $\kappa^2\partial_x^4$ | $\kappa^2\partial_x^4$ | $-c^2\partial_x^2+\kappa^2\partial_x^4$ | $-c^2\Delta$ |
-| Boundary | $u=0$ at both ends | $p_x=0$ at reed, $p=0$ at open end | $u=u'=0$ at clamp, $u''=u'''=0$ at tip | same as the kalimba | $u=u''=0$ at both ends | $u=0$ on the rim |
-| Eigen-condition | $\sin kL=0$ | $\cos kL=0$ | $\cos\beta L\cosh\beta L=-1$ | $\cos\beta L\cosh\beta L=-1$ | $\sin kL=0$ | $J_m(ka)=0$ |
-| Mode ratios | $n$ | $2n-1$ | 1, 6.27, 17.55 | 1, 6.27, 17.55 | $n\sqrt{(1+Bn^2)/(1+B)}$ | 1, 1.59, 2.14 |
-| Excitation | bow, sustained | reed, sustained | thumb pluck | airflow, sustained | felt hammer | stick |
-| What you hear | exact harmonics | odd harmonics dominate; overblows a [twelfth](glossary.qmd#octave) | pitch plus a brief clink | exact harmonics, from the chopped airflow | near-harmonic; stretched octaves | inharmonic: a thud |
-
-</details>
 
 ```{=html}
 <script src="core.js"></script>
@@ -166,33 +85,20 @@ These are the partials of the sound, which for blown and bowed instruments diffe
 (function () {
   "use strict";
   var C = Core, M = C.models;
-  var DEF = {
-    violin: function () { return M.violin.partials(); },
-    clarinet: function () { return M.clarinet.partials(); },
-    kalimba: function () { return M.kalimba.partials(); },
-    harmonica: function () { return M.harmonica.partials(); },
-    piano: function () { return M.piano.partials({ B: 0.0012 }); },
-    drum: function () { return M.drum.partials({ r: 0.35 }); }
+  function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
+  // ---- the opening pair: a plucked string and a struck drum, on the pitch ruler ----
+  var HOOK = {
+    string: { parts: function () { return M.violin.partials({ pluck: 0.2 }); }, f: 196, dur: 2.6, svg: "rulerString" },
+    drum: { parts: function () { return M.drum.partials({ r: 0.35 }); }, f: 140, dur: 2.4, svg: "rulerDrum" }
   };
-  var SUSTAINED = { violin: 1, clarinet: 1, harmonica: 1 };
-  function draw() {
-    document.querySelectorAll("svg[data-mini]").forEach(function (svg) {
-      C.stems(svg, DEF[svg.getAttribute("data-mini")](), { W: 200, H: 58, rmax: 8, fs: 9, sw: 2, labelEvery: 2 });
-    });
-    document.querySelectorAll("[data-ratios]").forEach(function (el) {
-      el.textContent = DEF[el.getAttribute("data-ratios")]().map(function (p) { return p.ratio; }).sort(function (a, b) { return a - b; }).slice(0, 4).map(function (r) { return r.toFixed(2); }).join(", ");
+  function drawRulers() {
+    Object.keys(HOOK).forEach(function (k) {
+      C.stems(document.getElementById(HOOK[k].svg), HOOK[k].parts(), { W: 320, H: 96, rmax: 6, fs: 9, sw: 2.5, noOff: true });
     });
   }
-  function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
-  document.querySelectorAll("[data-play]").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var id = b.getAttribute("data-play"), f = M[id].F0, buf;
-      if (SUSTAINED[id]) buf = fadeOut(C.render(C.toHz(DEF[id](), f), 1.8), 0.4);
-      else buf = C.render(C.toHz(DEF[id](), f), id === "piano" ? 3.2 : 2.6);
-      C.play(buf, 0.8);
-    });
+  document.querySelectorAll("[data-hook]").forEach(function (b) {
+    b.addEventListener("click", function () { var h = HOOK[b.getAttribute("data-hook")]; C.play(C.render(C.toHz(h.parts(), h.f), h.dur), 0.75); });
   });
-
   // ---- the six puzzles ----
   function harmonics(f, n, odd, skip1) { var out = []; for (var k = 1; k <= n; k++) { if (odd && k % 2 === 0) continue; if (skip1 && k === 1) continue; out.push({ f: f * k, amp: 1 / k, tau: 10 }); } return out; }
   // Octave puzzle: simplified stiff-string notes, only the lowest partials, so the tuner's 2 : 1 beat (C4's 2nd partial against C5) stands out.
@@ -217,8 +123,8 @@ These are the partials of the sound, which for blown and bowed instruments diffe
   document.querySelectorAll("[data-g]").forEach(function (b) {
     b.addEventListener("click", function () { C.play(G[b.getAttribute("data-g")](), 0.75); });
   });
-  C.onTheme(draw);
-  draw();
+  C.onTheme(drawRulers);
+  drawRulers();
 })();
 </script>
 ```
