@@ -110,7 +110,7 @@ $$
 g = n\, s_1 \sin\theta .
 $$
 
-Every click adds the same amount of gap: the relation is linear. Only the slope, $s_1\sin\theta$, depends on the grinder. With $\theta = 19^\circ$ (a placeholder: KINGrinder does not publish θ; see the fold below), 60 clicks gives a gap of about 650 µm.
+Every click adds the same amount of gap: the relation is linear. Only the slope, $s_1\sin\theta$, depends on the grinder. With $\theta = 19^\circ$ (a placeholder: KINGrinder does not publish θ; see "What is θ on the P0?" below), 60 clicks gives a gap of about 650 µm.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span> Why the gap grows by s·sin θ<span class="needs">uses: right-angle trigonometry</span></summary>
@@ -148,7 +148,7 @@ Mo et al. measured a commercial espresso powder by laser diffraction and found 2
 </details>
 :::
 
-Fines matter far beyond their share, for two reasons.
+Fines matter far beyond their share (about 29% of an espresso grind by volume, Mo et al.), for two reasons.
 
 - **They give up their flavor almost at once.** A fragment smaller than a cell is a piece of a broken cell, so nothing holds its contents in, and water simply washes them out. Bigger particles have to be extracted by *diffusion*, molecules spreading out through the particle by random motion, which is slow ([Gagné, *Dynamics of Coffee Extraction*](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)).
 - **They choke the flow.** How easily water passes through a bed of grounds is weighted heavily toward the smallest particles. If 20% of the grounds' volume is 40 µm fines instead of 300 µm grounds, the standard packed-bed model says the flow at a given pressure drops to about a fifth (fold below). This is why grinders that make more fines have to be set coarser for espresso ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution)).
@@ -244,7 +244,7 @@ Real coffee departs from this model in known ways. Broken cells at the surface w
 
 ## Back to the dial
 
-Start from a chart, then let taste steer. The preset buttons above sit inside Honest Coffee Guide's P0 click ranges, which for the V60 is 38–65 clicks ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/)). Brew, taste, and move a few clicks at a time: sour and thin means fewer clicks, bitter and harsh means more. With θ = 19°, each click moves the main peak by about 11 µm, under 2% of a pour-over grind, so a few clicks is a gentle step.
+Start from a chart, then let taste steer. The preset buttons above sit inside Honest Coffee Guide's P0 click ranges; the V60's is 38–65 clicks ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/)). Brew, taste, and move a few clicks at a time: sour and thin means fewer clicks, bitter and harsh means more. With θ = 19°, each click moves the main peak by about 11 µm, under 2% of a pour-over grind, so a few clicks is a gentle step.
 
 ## What we found
 
