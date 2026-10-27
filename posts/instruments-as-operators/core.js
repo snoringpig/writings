@@ -132,7 +132,7 @@
   // parts: [{ratio, amp}]; opt: {W,H,rmax,labelEvery,fs,sw,onPick,sel}
   C.stems = function (svg, parts, opt) {
     while (svg.firstChild) svg.removeChild(svg.firstChild);
-    var W = opt.W, H = opt.H, L = 6, R = W - 6, base = H - (opt.fs + 6), top = 12, RMAX = opt.rmax, amax = 0;
+    var W = opt.W, H = opt.H, L = 6, R = W - 6 - 0.6 * opt.fs, base = H - (opt.fs + 6), top = 12, RMAX = opt.rmax, amax = 0;
     parts.forEach(function (p) { amax = Math.max(amax, Math.abs(p.amp)); });
     amax = amax || 1;
     function xOf(r) { return L + (R - L) * r / RMAX; }
@@ -153,7 +153,7 @@
         hit.addEventListener("click", function () { opt.onPick(i); });
       }
     });
-    if (off.length) {
+    if (off.length && !opt.noOff) {
       var lt = el("text", { x: R, y: top + 4, "text-anchor": "end", "font-size": opt.fs }, svg);
       lt.textContent = "→ " + off.map(function (r) { return r.toFixed(1) + "×"; }).join(", ");
       lt.setAttribute("style", "fill:" + C.rgb("--accent"));

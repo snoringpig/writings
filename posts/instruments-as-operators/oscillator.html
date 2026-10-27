@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1 · One mass on a spring – No Man’s Land</title>
+<title>Why does a fading note stay in tune? – No Man’s Land</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -160,8 +160,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">1 · One mass on a spring</h1>
-<p class="subtitle lead">Instruments as Operators</p>
+<h1 class="title">Why does a fading note stay in tune?</h1>
+<p class="subtitle lead">1 · The spring</p>
 </div>
 
 
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 26, 2026</p>
+      <p class="date-modified">October 27, 2026</p>
     </div>
   </div>
     
@@ -184,59 +184,82 @@ window.Quarto = {
 </header>
 
 
-<div class="series-nav">
-<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <strong>1 Oscillator</strong>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/note.html">← 0 Note</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/ring.html">2 Beads →</a></p>
 </div>
 <div class="pageinfo">
-<p><strong>Builds on</strong> nothing. About 5 minutes, plus 2 for the folded proof.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/note.html">page 0, the note</a>. About 6 minutes, plus the folds.</p>
 </div>
 <div class="puzzle">
-<p><strong>The puzzle.</strong> Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note barely changes pitch. Why doesn’t a smaller vibration go slower?</p>
+<p>Pluck a guitar string and let it ring. Over a few seconds the vibration shrinks to almost nothing, yet the note’s pitch barely sags. Why doesn’t a smaller swing go slower?</p>
 </div>
-<p>Start with the simplest thing that vibrates: a mass on a spring. Pull it down and let go, and it bobs at a steady rate, faster with a stiffer spring and slower with a heavier mass. Now change how far you pull it. It travels further, but each bob takes exactly as long.</p>
+<p>Start with the simplest thing that vibrates: a mass on a spring. Change how far you pull it, and watch how long each bob takes.</p>
 <div class="ins">
 <div class="panel">
   <canvas id="oCanvas" style="height:200px" aria-label="A mass on a spring bobbing"></canvas>
-  <div class="slider"><label for="oK" style="min-width:9rem">Stiffness k</label><input type="range" id="oK" min="10" max="200" step="1" value="40"><output id="oKo"></output></div>
-  <div class="slider"><label for="oM" style="min-width:9rem">Mass m</label><input type="range" id="oM" min="0.1" max="2" step="0.05" value="1"><output id="oMo"></output></div>
+  <div class="slider"><label for="oK" style="min-width:9rem">Stiffness</label><input type="range" id="oK" min="10" max="200" step="1" value="40"><output id="oKo"></output></div>
+  <div class="slider"><label for="oM" style="min-width:9rem">Mass</label><input type="range" id="oM" min="0.1" max="2" step="0.05" value="1"><output id="oMo"></output></div>
   <div class="slider"><label for="oA" style="min-width:9rem">How far you pull</label><input type="range" id="oA" min="0.1" max="1" step="0.05" value="0.6"><output id="oAo"></output></div>
   <div class="controls"><button id="oPlay" class="primary">Hear it, 200 times faster</button></div>
   <div class="readout" id="oRead"></div>
   <p class="cap">The animation runs in real time. A real mass on a spring bobs a few times a second, too slowly to hear, so the sound plays the same motion 200 times faster.</p>
 </div>
 </div>
-<section id="why-the-size-of-the-swing-doesnt-matter" class="level2">
-<h2 class="anchored" data-anchor-id="why-the-size-of-the-swing-doesnt-matter">Why the size of the swing doesn’t matter</h2>
-<p>A spring pulled a distance <span class="math inline">x</span> from its resting position (for a hanging spring, the position where the spring’s pull balances gravity) pulls back with force <span class="math inline">-kx</span>: this is <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke’s law</a>, and the constant <span class="math inline">k</span> is the spring’s stiffness. Newton’s second law says force equals mass times acceleration, so <span class="math display">
+<div class="gist">
+<p><strong>The gist.</strong> A spring pulls back twice as hard when it is stretched twice as far. So a swing twice as big has twice as far to go, but moves twice as fast all the way, and takes exactly as long. As long as the pull stays proportional to the stretch, the rate is set by the spring’s stiffness and the mass, never by the size of the swing. A vibrating string, as later pages show, is many such springs at once.</p>
+</div>
+<section id="on-the-pitch-ruler" class="level2">
+<h2 class="anchored" data-anchor-id="on-the-pitch-ruler">On the pitch ruler</h2>
+<p>A mass on a spring has just one frequency, so on the pitch ruler it is a single stem: a pure tone. The readout gives that frequency. The frequency goes as the square root of stiffness over mass: four times the stiffness doubles it, four times the mass halves it, and the size of the pull never enters. A note needs more than one stem; the next page finds where the others come from.</p>
+</section>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
+<p><strong>The pull is proportional to the stretch.</strong> A spring pulled some distance from rest pulls back with a force proportional to that distance: twice as far, twice the pull. This is <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke’s law</a>. Newton’s law turns force into acceleration, so the mass always accelerates back toward rest, in proportion to how far away it is. The steady back-and-forth that results has exactly one frequency.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>Newton’s law, and the one frequency it allows <span class="needs">uses derivatives</span>
+</summary>
+<p>A spring pulled a distance <span class="math inline">x</span> from its resting position (for a hanging spring, the position where the spring’s pull balances gravity) pulls back with force <span class="math inline">-kx</span>; the constant <span class="math inline">k</span> is the spring’s stiffness. Newton’s second law says force equals mass times acceleration, so <span class="math display">
 m\,\ddot x = -k\,x, \qquad\text{that is}\qquad \ddot x = -\lambda\,x \quad\text{with}\quad \lambda = k/m .
 </span> Here <span class="math inline">\ddot x</span> means the second derivative of position with respect to time, the acceleration. Try a steady oscillation <span class="math inline">x = A\cos(\omega t + \phi)</span>. Differentiating twice gives <span class="math inline">\ddot x = -\omega^2 x</span>, so it solves the equation exactly when <span class="math inline">\omega^2 = \lambda</span>. The number <span class="math inline">\omega</span> is the <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a>, in radians per second. The cosine repeats each time <span class="math inline">\omega t</span> grows by <span class="math inline">2\pi</span>, so one cycle takes <span class="math inline">2\pi/\omega</span> seconds, and the motion repeats <span class="math inline">f = \omega/2\pi</span> times a second: <span class="math display">
 f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
-</span> The amplitude <span class="math inline">A</span> and the starting phase <span class="math inline">\phi</span> are free: they record how you started the motion, and they do not appear in <span class="math inline">f</span>. A real string also loses energy, which this model leaves out. Adding a friction force proportional to the velocity, <span class="math inline">-2m\gamma\,\dot x</span>, gives <span class="math inline">x = Ae^{-\gamma t}\cos(\omega_d t + \phi)</span> with <span class="math inline">\omega_d = \sqrt{k/m - \gamma^2}</span>, as long as the friction is light (<span class="math inline">\gamma^2 &lt; k/m</span>); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, <span class="math inline">\omega_d</span>, still does not depend on <span class="math inline">A</span>.</p>
+</span> The amplitude <span class="math inline">A</span> and the starting phase <span class="math inline">\phi</span> are free: they record how you started the motion, and they do not appear in <span class="math inline">f</span>.</p>
+</details>
+</div>
+<p><strong>Twice the swing, the same time.</strong> Take any motion of the mass and double it: twice as far from rest at every moment. The pull doubles too, so the acceleration doubles, which is exactly what the doubled motion needs. So the doubled motion is also a motion of the mass, and it repeats just as often. Friction shrinks the swing, which is why a note fades, but light friction of the usual kind, proportional to speed, does not make the rate depend on the size of the swing either.</p>
+<p>This needs the pull to be exactly proportional to the stretch. Pulled very far, a real spring stops obeying Hooke’s law, and then a bigger swing does change the rate. A string shows a small version of this: a hard pluck stretches it, raising its tension, so the note starts very slightly sharp and settles as it fades (J. O. Smith, <em>Physical Audio Signal Processing</em>). That is why the pitch barely sags, rather than not at all.</p>
 <div class="derive">
 <details>
 <summary>
 <span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude <span class="needs">uses the uniqueness of solutions of a differential equation</span>
 </summary>
-<p><em>Every solution is <span class="math inline">A\cos(\omega t + \phi)</span>.</em> The equation <span class="math inline">\ddot x = -\lambda x</span> is linear: sums and multiples of solutions are solutions. A solution is determined by its starting position <span class="math inline">x(0)</span> and starting velocity <span class="math inline">\dot x(0)</span>; this is the uniqueness theorem for <a href="https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem">ordinary differential equations</a>. The functions <span class="math inline">\cos\omega t</span> and <span class="math inline">\sin\omega t</span>, with <span class="math inline">\omega = \sqrt\lambda</span>, are solutions with starting data <span class="math inline">(1, 0)</span> and <span class="math inline">(0, \omega)</span>. So the solution with data <span class="math inline">(x_0, v_0)</span> is <span class="math inline">x_0\cos\omega t + (v_0/\omega)\sin\omega t</span>. By the formula <span class="math inline">\cos(\omega t + \phi) = \cos\omega t\cos\phi - \sin\omega t\sin\phi</span>, this equals <span class="math inline">A\cos(\omega t + \phi)</span> with <span class="math inline">A = \sqrt{x_0^2 + (v_0/\omega)^2}</span>, <span class="math inline">\cos\phi = x_0/A</span> and <span class="math inline">\sin\phi = -v_0/(\omega A)</span>.</p>
+<p><em>Every solution is <span class="math inline">A\cos(\omega t + \phi)</span>.</em> The equation <span class="math inline">\ddot x = -\lambda x</span> is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a>: sums and multiples of solutions are solutions. A solution is determined by its starting position <span class="math inline">x(0)</span> and starting velocity <span class="math inline">\dot x(0)</span>; this is the uniqueness theorem for <a href="https://en.wikipedia.org/wiki/Picard%E2%80%93Lindel%C3%B6f_theorem">ordinary differential equations</a>. The functions <span class="math inline">\cos\omega t</span> and <span class="math inline">\sin\omega t</span>, with <span class="math inline">\omega = \sqrt\lambda</span>, are solutions with starting data <span class="math inline">(1, 0)</span> and <span class="math inline">(0, \omega)</span>. So the solution with data <span class="math inline">(x_0, v_0)</span> is <span class="math inline">x_0\cos\omega t + (v_0/\omega)\sin\omega t</span>. By the formula <span class="math inline">\cos(\omega t + \phi) = \cos\omega t\cos\phi - \sin\omega t\sin\phi</span>, this equals <span class="math inline">A\cos(\omega t + \phi)</span> with <span class="math inline">A = \sqrt{x_0^2 + (v_0/\omega)^2}</span>, <span class="math inline">\cos\phi = x_0/A</span> and <span class="math inline">\sin\phi = -v_0/(\omega A)</span>.</p>
 <p><em>Amplitude cannot change the pitch.</em> If <span class="math inline">x(t)</span> is a solution, so is <span class="math inline">2x(t)</span>, by linearity, and it has the same period. Real springs stop obeying Hooke’s law when stretched far; then the equation is no longer linear and the frequency does depend on amplitude (<a href="https://en.wikipedia.org/wiki/Anharmonicity">anharmonicity</a>). Strings show a small version of this: a hard pluck stretches the string, raising its tension, so the note starts slightly sharp and settles as it fades. For the gentle vibrations of most playing, the linear law holds well.</p>
+<p><em>With friction.</em> A real string also loses energy. Adding a friction force proportional to the velocity, <span class="math inline">-2m\gamma\,\dot x</span>, gives <span class="math inline">x = Ae^{-\gamma t}\cos(\omega_d t + \phi)</span> with <span class="math inline">\omega_d = \sqrt{k/m - \gamma^2}</span>, as long as the friction is light (<span class="math inline">\gamma^2 &lt; k/m</span>); differentiating twice checks it. The swing shrinks, so the motion no longer repeats exactly, but the rate of its swings, <span class="math inline">\omega_d</span>, still does not depend on <span class="math inline">A</span>.</p>
+</details>
+</div>
+<p><strong>In the series’ language.</strong> The pull per unit mass is the displacement times one number, the stiffness divided by the mass, with the direction reversed. The rule “multiply by that number” is the <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a> in its smallest form, and the frequency comes from it: its square root, divided by 2π. On the next page the one number becomes a table of numbers, a matrix, with many frequencies; later, a rule acting on whole shapes. The frequencies always come from the operator’s special numbers, its <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a>.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>The operator and its one eigenvalue
+</summary>
+<p>Write the equation as <span class="math inline">\ddot x = -\lambda x</span>. The restoring force per unit mass is <span class="math inline">-\lambda x</span>: multiply the displacement by <span class="math inline">\lambda</span> and reverse its direction. We call the rule “multiply by <span class="math inline">\lambda</span>” the operator, and keep the minus sign in the equation. The one allowed angular frequency is <span class="math inline">\omega = \sqrt\lambda</span>.</p>
+<p>On the next page the single displacement <span class="math inline">x</span> becomes a list of displacements, one per bead, and the number <span class="math inline">\lambda</span> becomes a matrix. Later it becomes a differential operator acting on shapes. In every case <strong>the allowed angular frequencies <span class="math inline">\omega = 2\pi f</span> are the square roots of the operator’s eigenvalues</strong>. The next page defines eigenvalues properly; for one mass there is one eigenvalue, the number <span class="math inline">\lambda = k/m</span> itself.</p>
 </details>
 </div>
 </section>
-<section id="the-operator-in-its-smallest-form" class="level2">
-<h2 class="anchored" data-anchor-id="the-operator-in-its-smallest-form">The operator, in its smallest form</h2>
-<p>Write the equation as <span class="math inline">\ddot x = -\lambda x</span>. The restoring force per unit mass is <span class="math inline">-\lambda x</span>: multiply the displacement by <span class="math inline">\lambda</span> and reverse its direction. We call the rule “multiply by <span class="math inline">\lambda</span>” the operator, and keep the minus sign in the equation. The one allowed angular frequency is <span class="math inline">\omega = \sqrt\lambda</span>.</p>
-<p>On the next page the single displacement <span class="math inline">x</span> becomes a list of displacements, one per bead, and the number <span class="math inline">\lambda</span> becomes a table of numbers, a matrix. Later it becomes a rule acting on whole shapes, a differential <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>. The pattern never changes: <strong>the allowed angular frequencies <span class="math inline">\omega = 2\pi f</span> are the square roots of the operator’s <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a></strong>, the numbers by which it rescales its special shapes. The next page defines them properly; for one mass there is one eigenvalue, the number <span class="math inline">\lambda = k/m</span> itself.</p>
-</section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>Newton’s law, with a restoring force proportional to the displacement, allows exactly one frequency. It is set by the stiffness and the mass, not by how far the mass swings, and that is why a fading note keeps its pitch, to a very good approximation.</p>
+<p>Newton’s law, with a pull proportional to the stretch, allows exactly one frequency. It is set by the stiffness and the mass, not by how far the mass swings, and that is why a fading note keeps its pitch, very nearly. One mass gives one stem on the pitch ruler; a note needs many.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
-<p>One mass gives one frequency. A note has many, all sounding at once. Where do the others come from? Add more masses, and let them pull on one another.</p>
-<p><a href="../../posts/instruments-as-operators/note.html">← What is a note?</a> · <a href="../../posts/instruments-as-operators/ring.html">Next: beads on a ring →</a></p>
+<p>One mass gives one frequency, but a note has many. Where do the others come from? Let several masses pull on one another.</p>
+<p><a href="../../posts/instruments-as-operators/note.html">← 0 · Note</a> · <a href="../../posts/instruments-as-operators/ring.html">Next: 2 · Beads →</a></p>
 <div class="refs">
-<p><strong>References.</strong> Wikipedia, <a href="https://en.wikipedia.org/wiki/Simple_harmonic_motion">Simple harmonic motion</a> and <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke’s law</a>. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 1.</p>
+<p><strong>References.</strong> Wikipedia, <a href="https://en.wikipedia.org/wiki/Simple_harmonic_motion">Simple harmonic motion</a>, <a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke’s law</a> and <a href="https://en.wikipedia.org/wiki/Anharmonicity">Anharmonicity</a>. J. O. Smith III, <a href="https://www.dsprelated.com/freebooks/pasp/Tension_Modulation.html">Tension modulation</a>, in <em>Physical Audio Signal Processing</em>, for the pitch glide of a hard-plucked string. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 1.</p>
 </div>
 <script src="core.js"></script>
 <script>
@@ -249,7 +272,7 @@ f = \frac{1}{2\pi}\sqrt{\frac{k}{m}} .
     document.getElementById("oKo").textContent = k.toFixed(0) + " N/m";
     document.getElementById("oMo").textContent = m.toFixed(2) + " kg";
     document.getElementById("oAo").textContent = (A * 10).toFixed(1) + " cm";
-    document.getElementById("oRead").innerHTML = "f = (1/2&pi;)&radic;(k/m) = <b>" + f().toFixed(2) + " Hz</b> · one bob every <b>" + (1 / f()).toFixed(2) + " s</b>, however far you pull";
+    document.getElementById("oRead").innerHTML = "<b>" + f().toFixed(2) + " Hz</b>: one bob every <b>" + (1 / f()).toFixed(2) + " s</b>, however far you pull";
   }
   [["oK", function (v) { k = v; }], ["oM", function (v) { m = v; }], ["oA", function (v) { A = v; }]].forEach(function (p) {
     var el = document.getElementById(p[0]); el.addEventListener("input", function () { p[1](parseFloat(el.value)); read(); });

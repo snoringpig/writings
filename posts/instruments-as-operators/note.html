@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>0 · What is a note? – No Man’s Land</title>
+<title>What makes a sound a note? – No Man’s Land</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -160,8 +160,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">0 · What is a note?</h1>
-<p class="subtitle lead">Instruments as Operators</p>
+<h1 class="title">What makes a sound a note?</h1>
+<p class="subtitle lead">0 · The note</p>
 </div>
 
 
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 26, 2026</p>
+      <p class="date-modified">October 27, 2026</p>
     </div>
   </div>
     
@@ -184,20 +184,21 @@ window.Quarto = {
 </header>
 
 
-<div class="series-nav">
-<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <strong>0 Note</strong>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/oscillator.html">1 Spring →</a></p>
 </div>
 <div class="pageinfo">
-<p><strong>Start here.</strong> About 6 minutes, plus 4 for the folded proof.</p>
+<p>Start here. About 7 minutes, plus the folds.</p>
 </div>
 <div class="puzzle">
-<p><strong>The puzzle.</strong> Below is a note at 220 <a href="../../posts/instruments-as-operators/glossary.html#hertz">hertz</a>. Remove its 220 Hz component completely and play it again. The pitch does not change. If a note’s pitch is not one of its frequencies, what is it?</p>
+<p>Below is a note at 220 <a href="../../posts/instruments-as-operators/glossary.html#hertz">hertz</a>, vibrations per second. Take away its 220 Hz part completely and play it again: you still hear the same note. If a note’s pitch is not one of its frequencies, what is it?</p>
 </div>
+<p>Play the note, then the note without its 220 Hz part, and watch the wave.</p>
 <div class="ins">
 <div class="panel">
   <div class="controls">
-    <button id="nBright">The note</button><button id="nMissing">The note without its 220 Hz part</button>
-    <button id="nPlay" class="primary">Play</button>
+    <button id="nBright" class="primary">▶ The note</button><button id="nMissing" class="primary">▶ Without its 220 Hz part</button>
+    <button id="nPlay">Play again</button>
   </div>
   <canvas id="nWave" style="height:120px" aria-label="Waveform over three repetitions"></canvas>
   <svg class="spec" id="nSpec" viewbox="0 0 320 90" style="max-width:520px" aria-label="Strength of each component"></svg>
@@ -209,36 +210,27 @@ window.Quarto = {
   <p class="cap">The wave over three repetitions; gray ticks mark each repetition, every 1/220 of a second. Stems (the vertical lines): how strong each component is, at 1, 2, 3, … times 220 Hz.</p>
 </div>
 </div>
-<p>Watch the wave while you switch between the two. Removing the 220 Hz component changes the wave’s shape, but not how often it repeats: still every 1/220 of a second. The components left are at 440, 660, 880, … Hz, and each of them goes through a whole number of cycles in 1/220 of a second (2, 3, 4, …), so together they still repeat after exactly that time. They do not all fit into 1/440 of a second: 660 Hz would need one and a half cycles. That repetition is what you hear as the pitch. The effect is called the <a href="https://en.wikipedia.org/wiki/Missing_fundamental">missing fundamental</a>, the fundamental being the component at the repetition rate itself, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.</p>
-<section id="a-note-is-a-pattern-that-repeats" class="level2">
-<h2 class="anchored" data-anchor-id="a-note-is-a-pattern-that-repeats">A note is a pattern that repeats</h2>
-<p>Sound is air pressure rising and falling. When the pattern repeats every <span class="math inline">P</span> seconds, with <span class="math inline">P</span> the shortest such time, you hear a note, and its <a href="../../posts/instruments-as-operators/glossary.html#pitch">pitch</a> is the repetition rate <span class="math inline">f = 1/P</span>, measured in hertz, repetitions per second. This holds for repetition rates in the range where we hear pitch, from a few dozen to a few thousand times a second; much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.</p>
-<p>A pure tone is a single cosine wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier’s theorem, and page 3 shows where it comes from. These tones are its <a href="../../posts/instruments-as-operators/glossary.html#harmonic">harmonics</a>, and the one at the repetition rate itself is the <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>. Open “Mix your own” above and try the presets: the wave’s shape changes, and so does the sound’s color, its <a href="../../posts/instruments-as-operators/glossary.html#timbre">timbre</a>, but as long as the pattern repeats 220 times a second, the pitch stays put.</p>
-<p>In symbols: a pressure signal <span class="math inline">p(t)</span> is <a href="../../posts/instruments-as-operators/glossary.html#periodic">periodic</a> with period <span class="math inline">P</span> if <span class="math inline">p(t + P) = p(t)</span> for every <span class="math inline">t</span>. Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a>, <span class="math display">
-p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
-</span> The <span class="math inline">n = 0</span> term is a constant, the average pressure, usually zero. The possible frequencies <span class="math inline">nf</span> are fixed by the period alone, and a given sound may use only some of them: a pure tone uses only <span class="math inline">f</span>. The amplitudes <span class="math inline">b_n</span> and the phases <span class="math inline">\phi_n</span> carry everything else about the sound’s shape, and the ear is mostly insensitive to the phases.</p>
+<div class="gist">
+<p><strong>The gist.</strong> A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave’s shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time.</p>
+</div>
+<section id="the-pitch-ruler" class="level2">
+<h2 class="anchored" data-anchor-id="the-pitch-ruler">The pitch ruler</h2>
+<p>The stems under the wave are the note’s frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the <em>pitch ruler</em>, and every page of this series puts an instrument on it. A note’s frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>. Hearing the pitch without it is called the <a href="https://en.wikipedia.org/wiki/Missing_fundamental">missing fundamental</a> effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.</p>
+<p>Open “Mix your own” and try the presets. The stems’ heights change, and so does the sound’s color, its <a href="../../posts/instruments-as-operators/glossary.html#timbre">timbre</a>, but the pitch stays put as long as the base frequency does. Keep only 2×, 4×, 6× and 8×, and the sound repeats twice as often: the base becomes 440 Hz, and the pitch jumps up an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave</a>.</p>
 </section>
-<section id="why-whole-numbers-matter" class="level2">
-<h2 class="anchored" data-anchor-id="why-whole-numbers-matter">Why whole numbers matter</h2>
-<p>Turn it around. If an object vibrates at several frequencies at once, its sound repeats only when those frequencies are whole-number multiples of one common frequency. For two tones, that means their frequency ratio is a fraction <span class="math inline">j/k</span> of whole numbers, in lowest terms; the pattern then repeats every <span class="math inline">k</span> cycles of the lower tone. Only a small <span class="math inline">k</span> gives a repetition fast enough to hear as one pitch. Try it:</p>
-<div class="ins">
-<div class="panel">
-  <div class="controls"><button id="r2">2 : 1</button><button id="r15">3 : 2</button><button id="r159">1.59 : 1 (a drum)</button><button id="rPlay" class="primary">Play</button></div>
-  <div class="slider"><label for="ratio">Ratio</label><input type="range" id="ratio" min="1" max="3" step="0.01" value="2"><output id="ratioOut">2.00×</output></div>
-  <div class="readout" id="ratioMsg"></div>
-  <canvas id="ratioWave" style="height:120px" aria-label="Sum of two tones over six cycles of the lower one"></canvas>
-  <p class="cap">Gray ticks mark cycles of the lower tone. At 2 : 1 the sum repeats every cycle; at 3 : 2 every two; at 1.59 : 1, which is 159/100, it lines up only after 100 cycles of the lower tone, far too slowly to hear as one pitch.</p>
-</div>
-</div>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
+<p><strong>A note is a pattern that repeats.</strong> Sound is air pressure rising and falling. When the pattern repeats, you hear a note, and its <a href="../../posts/instruments-as-operators/glossary.html#pitch">pitch</a> is the repetition rate, measured in hertz. This holds for rates in the range where we hear pitch, from a few dozen to a few thousand times a second (for a recognizable melody, roughly 30 Hz to 4 or 5 kHz: Pressnitzer and colleagues measured the lower limit; the upper one is the traditional limit, which Oxenham and colleagues revisit). Much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.</p>
+<p><strong>Every repeating sound is a chord on the lines.</strong> A pure tone is a single sine-shaped wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier’s theorem, and page 3 shows where it comes from. These tones are the sound’s <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a>, and the one at the repetition rate itself is the fundamental. The repetition rate sets the pitch, whether or not the fundamental is actually there; the partials’ strengths set the timbre.</p>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is rational
+<span class="label">Precisely</span>Periodic signals and their Fourier series <span class="needs">uses sums of cosines</span>
 </summary>
-<p>Let <span class="math inline">s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)</span> with <span class="math inline">0 &lt; f_1 &lt; f_2</span>.</p>
-<p><em>If the ratio is rational, <span class="math inline">s</span> is periodic.</em> Write <span class="math inline">f_2/f_1 = j/k</span> in lowest terms and put <span class="math inline">P = k/f_1</span>. Then <span class="math inline">f_1P = k</span> and <span class="math inline">f_2P = j</span> are whole numbers, so both cosines return to their starting values after time <span class="math inline">P</span>, and <span class="math inline">s(t+P) = s(t)</span>.</p>
-<p><em>If <span class="math inline">s</span> is periodic, the ratio is rational.</em> Suppose <span class="math inline">s(t+P) = s(t)</span> for all <span class="math inline">t</span>, with <span class="math inline">P &gt; 0</span>. At <span class="math inline">t = 0</span> this gives <span class="math inline">s(P) = s(0) = 2</span>. A sum of two cosines equals 2 only when both cosines equal 1, so <span class="math inline">\cos(2\pi f_1P) = \cos(2\pi f_2P) = 1</span>, which means <span class="math inline">f_1P</span> and <span class="math inline">f_2P</span> are whole numbers. So <span class="math inline">f_2/f_1 = (f_2P)/(f_1P)</span> is a ratio of whole numbers. Since <span class="math inline">f_2/f_1 = j/k</span>, we have <span class="math inline">k\,(f_2P) = j\,(f_1P)</span>, so <span class="math inline">k</span> divides <span class="math inline">j\,(f_1P)</span>; as <span class="math inline">j</span> and <span class="math inline">k</span> share no factor, <span class="math inline">k</span> divides the whole number <span class="math inline">f_1P</span>. So every period is a multiple of <span class="math inline">k/f_1</span>, and <span class="math inline">k/f_1</span> is the shortest one.</p>
-<p>The shortest period <span class="math inline">k/f_1</span> grows with the denominator <span class="math inline">k</span>. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as “simple enough” is a question of perception, not mathematics; see <a href="https://en.wikipedia.org/wiki/Pitch_(music)">pitch</a>.</p>
+<p>Sound is a pressure signal <span class="math inline">p(t)</span>. It is <a href="../../posts/instruments-as-operators/glossary.html#periodic">periodic</a> with period <span class="math inline">P</span> if <span class="math inline">p(t + P) = p(t)</span> for every <span class="math inline">t</span>; take <span class="math inline">P</span> to be the shortest such time. The pitch is the repetition rate <span class="math inline">f = 1/P</span>, for rates in the range where we hear pitch.</p>
+<p>Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a>, <span class="math display">
+p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
+</span> The <span class="math inline">n = 0</span> term is a constant, the average pressure, usually zero. The possible frequencies <span class="math inline">nf</span> are fixed by the period alone, and a given sound may use only some of them: a pure tone uses only <span class="math inline">f</span>. The amplitudes <span class="math inline">b_n</span> and the phases <span class="math inline">\phi_n</span> carry everything else about the sound’s shape, and the ear is mostly insensitive to the phases.</p>
 </details>
 </div>
 <div class="qa">
@@ -249,18 +241,40 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
 <p>No.&nbsp;A note is a sound whose pressure repeats every <span class="math inline">P</span> seconds, and its pitch is the repetition rate <span class="math inline">f = 1/P</span>. By the Fourier series above, its components can only be at <span class="math inline">f, 2f, 3f, \dots</span>, and usually several are present at once. The repetition rate sets the pitch, whether or not a component at <span class="math inline">f</span> itself is present, and the weights <span class="math inline">b_n</span> set the timbre: a piano C4 and a violin C4 share <span class="math inline">f</span> and differ in their <span class="math inline">b_n</span>. So a note corresponds to a period, not to a single frequency.</p>
 </details>
 </div>
+<p><strong>Why whole numbers matter.</strong> Turn it around. If something vibrates at several frequencies at once, its sound repeats only when they are all whole-number multiples of one common frequency. For two tones, the ratio of their frequencies must be a fraction, such as 3/2; the sound then repeats every 2 cycles of the lower tone. A ratio like 1.59, which is 159/100, repeats only every 100 cycles of the lower tone, far too slowly to hear as one pitch. Try it:</p>
+<div class="ins">
+<div class="panel">
+  <div class="controls"><button id="r2" class="primary">▶ 2 : 1</button><button id="r15" class="primary">▶ 3 : 2</button><button id="r159" class="primary">▶ 1.59 : 1 (a drum)</button><button id="rPlay">Play the slider's ratio</button></div>
+  <div class="slider"><label for="ratio">Ratio</label><input type="range" id="ratio" min="1" max="3" step="0.01" value="2"><output id="ratioOut">2.00×</output></div>
+  <div class="readout" id="ratioMsg"></div>
+  <canvas id="ratioWave" style="height:120px" aria-label="Sum of two tones over six cycles of the lower one"></canvas>
+  <p class="cap">Gray ticks mark cycles of the lower tone. At 2 : 1 the sum repeats every cycle; at 3 : 2 every two; at 1.59 : 1, which is 159/100, it lines up only after 100 cycles of the lower tone, far too slowly to hear as one pitch.</p>
+</div>
+</div>
+<p>Not every instrument is exact. Frequencies very near whole-number multiples still sound like one note: a piano’s are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is a fraction <span class="needs">uses cosines and divisibility</span>
+</summary>
+<p>Let <span class="math inline">s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)</span> with <span class="math inline">0 &lt; f_1 &lt; f_2</span>.</p>
+<p><em>If the ratio is rational, <span class="math inline">s</span> is periodic.</em> Write <span class="math inline">f_2/f_1 = j/k</span> in lowest terms and put <span class="math inline">P = k/f_1</span>. Then <span class="math inline">f_1P = k</span> and <span class="math inline">f_2P = j</span> are whole numbers, so both cosines return to their starting values after time <span class="math inline">P</span>, and <span class="math inline">s(t+P) = s(t)</span>.</p>
+<p><em>If <span class="math inline">s</span> is periodic, the ratio is rational.</em> Suppose <span class="math inline">s(t+P) = s(t)</span> for all <span class="math inline">t</span>, with <span class="math inline">P &gt; 0</span>. At <span class="math inline">t = 0</span> this gives <span class="math inline">s(P) = s(0) = 2</span>. A sum of two cosines equals 2 only when both cosines equal 1, so <span class="math inline">\cos(2\pi f_1P) = \cos(2\pi f_2P) = 1</span>, which means <span class="math inline">f_1P</span> and <span class="math inline">f_2P</span> are whole numbers. So <span class="math inline">f_2/f_1 = (f_2P)/(f_1P)</span> is a ratio of whole numbers. Since <span class="math inline">f_2/f_1 = j/k</span>, we have <span class="math inline">k\,(f_2P) = j\,(f_1P)</span>, so <span class="math inline">k</span> divides <span class="math inline">j\,(f_1P)</span>; as <span class="math inline">j</span> and <span class="math inline">k</span> share no factor, <span class="math inline">k</span> divides the whole number <span class="math inline">f_1P</span>. So every period is a multiple of <span class="math inline">k/f_1</span>, and <span class="math inline">k/f_1</span> is the shortest one.</p>
+<p>The shortest period <span class="math inline">k/f_1</span> grows with the denominator <span class="math inline">k</span>. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as “simple enough”, and how near to whole-number multiples is near enough, are questions of perception, not mathematics; see <a href="https://en.wikipedia.org/wiki/Pitch_(music)">pitch</a>.</p>
+</details>
+</div>
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>A note is a sound that repeats. Its pitch is how often it repeats, and so one note is a sum of tones at whole-number multiples of that rate.</p>
+<p>A note is a sound that repeats, and its pitch is how often it repeats. So a note’s frequencies sit on the lines of one pitch ruler, whole-number multiples of one base frequency, and that base frequency need not be present itself. Every later page puts an instrument on this ruler: on the lines, a note; off the lines, a clang or a thud.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
-<p>So a clear note needs frequencies at exact whole-number multiples of one frequency. A guitar string is just a piece of wire, and a drumhead just a sheet of plastic. Why would the wire vibrate at exactly 1, 2, 3, … times one frequency, and the drumhead not? To find out, start with the simplest thing that vibrates at all: one mass on a spring.</p>
-<p><em>On the core path (pages 0, 3, 4, 8)?</em> Skip ahead to <a href="../../posts/instruments-as-operators/circle.html">3 · The circle</a>.</p>
-<p><a href="../../posts/instruments-as-operators/oscillator.html">Next: one mass on a spring →</a></p>
+<p>Why would a wire vibrate at 1, 2, 3, … times one frequency, and a drumhead not? Start with the simplest thing that vibrates at all: one mass on a spring.</p>
+<p><em>Short on time?</em> Pages 0, 4 and 8 carry the main idea: skip ahead to <a href="../../posts/instruments-as-operators/violin.html">4 · Why does a light touch make a string jump an octave?</a></p>
+<p><a href="../../posts/instruments-as-operators/oscillator.html">Next: 1 · Spring →</a></p>
 <div class="refs">
-<p><strong>References.</strong> D. J. Benson, <em>Music: A Mathematical Offering</em>, Cambridge University Press, 2006, for Fourier series and pitch. Wikipedia, <a href="https://en.wikipedia.org/wiki/Missing_fundamental">Missing fundamental</a> and <a href="https://en.wikipedia.org/wiki/Pitch_(music)">Pitch (music)</a>.</p>
+<p><strong>References.</strong> D. J. Benson, <em>Music: A Mathematical Offering</em>, Cambridge University Press, 2006, for Fourier series and pitch. Wikipedia, <a href="https://en.wikipedia.org/wiki/Missing_fundamental">Missing fundamental</a> and <a href="https://en.wikipedia.org/wiki/Pitch_(music)">Pitch (music)</a>. D. Pressnitzer, R. D. Patterson and K. Krumbholz, <a href="https://www.pdn.cam.ac.uk/node/469">The lower limit of melodic pitch</a>, <em>J. Acoust. Soc. Am.</em> 109 (2001). A. J. Oxenham and colleagues, <a href="https://experts.umn.edu/en/publications/pitch-perception-beyond-the-traditional-existence-region-of-pitch/">Pitch perception beyond the traditional existence region of pitch</a>, <em>PNAS</em> 108 (2011).</p>
 </div>
 <script src="core.js"></script>
 <script>
@@ -277,16 +291,18 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
     var el = document.getElementById("h" + (i + 1)); inputs.push(el);
     el.addEventListener("input", function () { amp[i] = parseFloat(el.value); draw(); });
   })(n - 1);
+  function gcd(a, b) { while (b) { var t = b; b = a % b; a = t; } return a; }
   function setAll(a) { amp = a.slice(); inputs.forEach(function (el, i) { el.value = amp[i]; }); draw(); }
   document.getElementById("nPure").addEventListener("click", function () { setAll([1, 0, 0, 0, 0, 0, 0, 0]); });
-  document.getElementById("nBright").addEventListener("click", function () { setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); });
+  document.getElementById("nBright").addEventListener("click", function () { setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); playMix(); });
   document.getElementById("nHollow").addEventListener("click", function () { setAll([1, 0, 1 / 3, 0, 1 / 5, 0, 1 / 7, 0]); });
-  document.getElementById("nMissing").addEventListener("click", function () { setAll([0, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); });
+  document.getElementById("nMissing").addEventListener("click", function () { setAll([0, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); playMix(); });
   function fadeOut(b, s) { var dd = b.getChannelData(0), k = Math.floor(s * b.sampleRate); for (var i = 0; i < k; i++) dd[dd.length - 1 - i] *= i / k; return b; }
-  document.getElementById("nPlay").addEventListener("click", function () {
+  function playMix() {
     var parts = amp.map(function (a, i) { return { f: F * (i + 1), amp: a, tau: 10 }; });
     C.play(fadeOut(C.render(parts, 1.6), 0.3), 0.7);
-  });
+  }
+  document.getElementById("nPlay").addEventListener("click", playMix);
   var wv = document.getElementById("nWave");
   function draw() {
     inputs.forEach(function (el, i) { document.getElementById("h" + (i + 1) + "o").textContent = amp[i].toFixed(2); });
@@ -298,8 +314,10 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
     x.strokeStyle = C.rgb("--accent"); x.lineWidth = 2 * d; x.beginPath();
     ys.forEach(function (y, i) { var py = H / 2 - (mx ? y / mx : 0) * (H / 2 - 10 * d); if (i) x.lineTo(i, py); else x.moveTo(i, py); }); x.stroke();
     C.stems(document.getElementById("nSpec"), amp.map(function (a, i) { return { ratio: i + 1, amp: a }; }), { W: 320, H: 90, rmax: 8, fs: 8, sw: 3 });
-    var any = amp.some(function (a) { return a > 0; });
-    document.getElementById("nRead").innerHTML = any ? "repeats every <b>1/220 s = 4.5 ms</b>, so the pitch is <b>220 Hz</b>" + (amp[0] === 0 ? ", even with no 220 Hz component" : "") : "silence";
+    var any = amp.some(function (a) { return a > 0; }), g = 0;
+    amp.forEach(function (a, i) { if (a > 0) g = gcd(g, i + 1); });
+    var fr = F * g;
+    document.getElementById("nRead").innerHTML = any ? "repeats every <b>1/" + fr + " s = " + (1000 / fr).toFixed(1) + " ms</b>, so the pitch is <b>" + fr + " Hz</b>" + (amp[g - 1] === 0 ? ", even with no " + fr + " Hz component" : "") : "silence";
   }
   // two-tone ratio demo
   var rs = document.getElementById("ratio"), ro = document.getElementById("ratioOut"), msg = document.getElementById("ratioMsg"), cv = document.getElementById("ratioWave");
@@ -317,10 +335,11 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
   }
   function setR(v) { rs.value = v; wave(); }
   rs.addEventListener("input", wave);
-  document.getElementById("r2").addEventListener("click", function () { setR(2); });
-  document.getElementById("r15").addEventListener("click", function () { setR(1.5); });
-  document.getElementById("r159").addEventListener("click", function () { setR(1.59); });
-  document.getElementById("rPlay").addEventListener("click", function () { var r = parseFloat(rs.value); C.play(fadeOut(C.render([{ f: 220, amp: 1, tau: 10 }, { f: 220 * r, amp: 0.7, tau: 10 }], 2), 0.3), 0.7); });
+  function playR() { var r = parseFloat(rs.value); C.play(fadeOut(C.render([{ f: 220, amp: 1, tau: 10 }, { f: 220 * r, amp: 0.7, tau: 10 }], 2), 0.3), 0.7); }
+  document.getElementById("r2").addEventListener("click", function () { setR(2); playR(); });
+  document.getElementById("r15").addEventListener("click", function () { setR(1.5); playR(); });
+  document.getElementById("r159").addEventListener("click", function () { setR(1.59); playR(); });
+  document.getElementById("rPlay").addEventListener("click", playR);
   window.addEventListener("resize", function () { draw(); wave(); });
   C.onTheme(function () { draw(); wave(); });
   setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); wave();

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3 · The circle – No Man’s Land</title>
+<title>Why does a loop of string land exactly on the lines? – No Man’s Land</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -160,8 +160,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">3 · The circle</h1>
-<p class="subtitle lead">Instruments as Operators</p>
+<h1 class="title">Why does a loop of string land exactly on the lines?</h1>
+<p class="subtitle lead">3 · A loop of string</p>
 </div>
 
 
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 26, 2026</p>
+      <p class="date-modified">October 27, 2026</p>
     </div>
   </div>
     
@@ -184,68 +184,37 @@ window.Quarto = {
 </header>
 
 
-<div class="series-nav">
-<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <strong>3 The circle</strong> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/ring.html">← 2 Beads</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/violin.html">4 String →</a></p>
 </div>
 <div class="pageinfo">
-<p><strong>Builds on</strong> <a href="../../posts/instruments-as-operators/ring.html">page 2</a>. If you skipped it: on a string of tension <span class="math inline">T</span> with beads spaced <span class="math inline">h</span> apart, bead <span class="math inline">j</span> at height <span class="math inline">u_j</span> feels the force <span class="math inline">\frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})</span>, which pulls it toward the average of its two neighbors, and the loop’s motion splits into waves called modes, each with its own frequency. About 10 minutes, plus 12 for the folded proofs.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/ring.html">page 2, beads on a ring</a>. About 9 minutes, plus the folds.</p>
 </div>
 <div class="puzzle">
-<p><strong>The puzzle.</strong> Keep a loop of beads the same size and the same total weight, but share that weight among more and more beads. The frequencies creep toward 1, 2, 3, … times the lowest, and in the limit, a continuous loop of string, they land on the whole numbers exactly. Why exactly? And a harder question, which the best mathematicians of the 18th century argued about for decades: can every shape of a string be built from these simple waves?</p>
+<p>Keep a loop of beads the same size and the same weight, but share that weight among more and more beads. The frequencies creep toward 1, 2, 3, … times the lowest, and on a continuous loop of string they land on the whole numbers exactly. Why exactly? And a harder question, argued over for decades in the 18th century: can every shape of a string be built from these simple waves?</p>
 </div>
-<p>Slide the number of beads from a few up to the last position, the continuous loop, and watch the stems settle onto the whole-number grid.</p>
+<p>Slide the number of beads up to the last position, the continuous loop, and watch the stems settle onto the lines.</p>
 <div class="ins">
 <div class="panel">
   <canvas id="cRing" style="height:220px" aria-label="Beads on a ring swinging in their lowest mode"></canvas>
-  <div class="slider"><label for="cN">Beads N</label><input type="range" id="cN" min="0" max="16" step="1" value="3"><output id="cNo"></output></div>
+  <div class="slider"><label for="cN">Beads</label><input type="range" id="cN" min="0" max="16" step="1" value="3"><output id="cNo"></output></div>
   <svg class="spec" id="cSpec" viewbox="0 0 320 100" style="max-width:520px" aria-label="Frequencies of the first modes relative to the lowest"></svg>
   <div class="readout" id="cRead"></div>
   <div class="controls"><button id="cPlay" class="primary">Hear the first modes together</button></div>
-  <p class="cap">Stems (the vertical lines): frequencies of the first ten distinct modes as multiples of the lowest, against the whole-number grid. The last slider position is the continuous loop. Each mode is played with loudness 1/k, so that the high ones are not shrill. With few beads the frequencies don't line up and the sound is less clear; on the continuous loop they are whole-number multiples, so they repeat together and fuse into one note (page 0).</p>
+  <p class="cap">Stems: the first ten frequencies, as multiples of the lowest; the slider's last position is the continuous loop. Higher modes are drawn and played quieter, so they are not shrill.</p>
 </div>
 </div>
-<p>The second question has a history. From the 1740s on, Jean d’Alembert, Leonhard Euler and Daniel Bernoulli all worked on the vibrating string. D’Alembert showed in 1747 that a string can move in essentially any smooth shape. Bernoulli held that every vibration is a sum of simple modes, which for a string are sine-shaped. Euler objected that a sum of sines could not represent an arbitrary shape, such as a string plucked into a sharp corner, and d’Alembert doubted that such a sum was physical at all. The argument went on for decades. This page answers the first question, and then the second.</p>
-<section id="why-exactly-whole-numbers" class="level2">
-<h2 class="anchored" data-anchor-id="why-exactly-whole-numbers">Why exactly whole numbers</h2>
-<p><strong>From beads to a loop.</strong> Measure position around the loop by the angle <span class="math inline">\theta</span>, and choose units so that the loop has circumference <span class="math inline">2\pi</span>. Bead <span class="math inline">j</span> sits at <span class="math inline">\theta_j = jh</span> with <span class="math inline">h = 2\pi/N</span>. Let <span class="math inline">\mu</span> be the mass per unit length, so each bead has mass <span class="math inline">m = \mu h</span>, and write <span class="math inline">u(\theta, t)</span> for the height of the loop at angle <span class="math inline">\theta</span> and time <span class="math inline">t</span>, so that <span class="math inline">u_j(t) = u(\theta_j, t)</span>. Dividing the bead equation from the <a href="../../posts/instruments-as-operators/ring.html">previous page</a> by <span class="math inline">m</span> gives <span class="math display">
-\ddot u_j = \frac{T}{\mu}\cdot\frac{u_{j+1} - 2u_j + u_{j-1}}{h^2}.
-</span> The fraction on the right has a simple meaning. <span class="math inline">(u_{j+1} - u_j)/h</span> is the slope of the string just to the right of bead <span class="math inline">j</span>, and <span class="math inline">(u_j - u_{j-1})/h</span> the slope just to the left. Their difference, divided by <span class="math inline">h</span> once more, measures how fast the slope changes: the second derivative. So as the beads crowd together, <span class="math inline">h \to 0</span>, the bead equation becomes <span class="math display">
-\frac{\partial^2 u}{\partial t^2} = c^2\,\frac{\partial^2 u}{\partial \theta^2}, \qquad c^2 = \frac{T}{\mu}.
-</span> Here <span class="math inline">u</span> depends on two things, the angle and the time. The symbol <span class="math inline">\partial u/\partial t</span>, a <a href="../../posts/instruments-as-operators/glossary.html#partial-derivative">partial derivative</a>, is the derivative in time with the angle held fixed, and <span class="math inline">\partial u/\partial\theta</span> the derivative in angle with the time held fixed; the second derivatives are also written <span class="math inline">u_{tt}</span> and <span class="math inline">u_{\theta\theta}</span>. This is the <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a>. The constant <span class="math inline">c</span> is the speed at which a bump travels around the loop; the second demo shows it.</p>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Step-by-step derivation</span>Why the second difference becomes the second derivative <span class="needs">uses Taylor’s theorem</span>
-</summary>
-<p>Expand the neighbors with <a href="https://en.wikipedia.org/wiki/Taylor%27s_theorem">Taylor’s theorem</a>, assuming the shape has four continuous derivatives: <span class="math display">
-u(\theta \pm h) = u \pm h\,u' + \tfrac{h^2}{2}u'' \pm \tfrac{h^3}{6}u''' + O(h^4),
-</span> where <span class="math inline">O(h^4)</span> stands for terms no bigger than a constant times <span class="math inline">h^4</span>. Add the two expansions and subtract <span class="math inline">2u</span>. The odd terms cancel in pairs: <span class="math display">
-u(\theta + h) - 2u(\theta) + u(\theta - h) = h^2 u''(\theta) + O(h^4).
-</span> Divide by <span class="math inline">h^2</span>: the fraction equals <span class="math inline">u'' + O(h^2)</span>, which tends to <span class="math inline">u''</span>. What was held fixed: the circumference, the tension <span class="math inline">T</span>, and the mass per length <span class="math inline">\mu</span>. So as the beads multiply, each one gets lighter in proportion.</p>
-<svg class="fig" viewbox="0 0 420 150" role="img" aria-label="Three neighboring beads on a curve; where the curve bends down, the middle one sits above the average of the outer two by about minus h squared times u double prime over two">
-  <path class="acc" d="M 40 120 Q 210 -10 380 120"></path>
-  <path class="dash" d="M 100 78 L 320 78"></path>
-  <circle cx="100" cy="78" r="6" class="fillacc"></circle><circle cx="210" cy="55" r="7" class="fillacc"></circle><circle cx="320" cy="78" r="6" class="fillacc"></circle>
-  <path class="neg" d="M 210 55 L 210 78"></path>
-  <text x="80" y="104">θ − h</text><text x="200" y="104">θ</text><text x="300" y="104">θ + h</text>
-  <text x="222" y="72">gap ≈ −h² u''/2</text>
-</svg>
-<p>The middle bead sits above the average of its neighbors by about <span class="math inline">-\tfrac{h^2}{2}u''</span>, which is positive where the curve bends down (<span class="math inline">u'' &lt; 0</span>). That is why the force on a bead, and so its acceleration, is proportional to the curvature <span class="math inline">u''</span>.</p>
-</details>
+<div class="gist">
+<p><strong>The gist.</strong> A wave that runs around a loop must close up on itself, so it has a whole number of crests: 1, 2, 3, …. A wave with <em>n</em> crests is <em>n</em> times shorter, and a string pulls a shorter wave back harder: <em>n</em>² times harder, so it swings <em>n</em> times faster. That puts the frequencies exactly at 1, 2, 3, … times the lowest. And yes: every shape of the string, even one with a sharp corner, is a sum of these waves.</p>
 </div>
-<p><strong>The operator.</strong> Write the wave equation as <span class="math display">
-u_{tt} = -c^2 A u, \qquad A = -\frac{d^2}{d\theta^2}.
-</span> The operator <span class="math inline">A</span> takes a shape <span class="math inline">f(\theta)</span> and returns a new shape, <span class="math inline">-f''</span>. Strictly, the operator in the sense of the <a href="../../posts/instruments-as-operators/index.html">series page</a>, minus the restoring force per unit mass, is <span class="math inline">c^2A</span>; the constant <span class="math inline">c^2</span> only scales the eigenvalues, so this page works with <span class="math inline">A</span> and puts <span class="math inline">c</span> back in the frequencies. The minus sign is a convention that makes <span class="math inline">A</span> of a bump positive at the bump; the restoring force per unit mass is <span class="math inline">-c^2 Af</span>, which pulls the bump back down. If you read page 2, <span class="math inline">A</span> is the continuous version of the beads’ matrix <span class="math inline">K/h^2</span>.</p>
-<p><strong>Which shapes.</strong> A shape on the loop is a function <span class="math inline">f(\theta)</span> that returns to itself after one turn: <span class="math inline">f(\theta + 2\pi) = f(\theta)</span>.</p>
-<p><strong>Eigenfunctions and eigenvalues.</strong> An <a href="../../posts/instruments-as-operators/glossary.html#eigenfunction">eigenfunction</a> of <span class="math inline">A</span> is a shape that <span class="math inline">A</span> only rescales: <span class="math inline">Af = \lambda f</span> for some number <span class="math inline">\lambda</span>, called the <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a>. Try <span class="math inline">\cos n\theta</span>, a wave with <span class="math inline">n</span> crests around the loop. Its second derivative is <span class="math inline">-n^2\cos n\theta</span>, so <span class="math display">
-A\cos n\theta = n^2\cos n\theta, \qquad A\sin n\theta = n^2\sin n\theta .
-</span> These shapes close up after one turn exactly when <span class="math inline">n</span> is a whole number. So the <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> of <span class="math inline">A</span>, the list of its eigenvalues, is <span class="math inline">0, 1, 4, 9, 16, \dots</span> Each <span class="math inline">n^2</span> with <span class="math inline">n \ge 1</span> belongs to two eigenfunctions, <span class="math inline">\cos n\theta</span> and <span class="math inline">\sin n\theta</span>, which are the same wave shifted by a quarter of a wavelength; <span class="math inline">n = 0</span> belongs to the constant shape, the whole loop lifted at once. The first fold below proves that there are no other eigenvalues.</p>
-<p><strong>Frequencies.</strong> The shape <span class="math inline">\cos(n\theta)\cos(\omega t)</span> solves the wave equation when <span class="math inline">\omega^2 = c^2 n^2</span>: differentiate it twice in <span class="math inline">t</span> and twice in <span class="math inline">\theta</span> and compare. Here <span class="math inline">\omega</span> is the <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a>, in radians per second, and the frequency in hertz is <span class="math inline">f = \omega/2\pi</span>. So mode <span class="math inline">n</span> sounds at <span class="math inline">f_n = cn/2\pi</span>, exactly <span class="math inline">n</span> times the lowest. (In ordinary units, for a loop of circumference <span class="math inline">\ell</span>, this is <span class="math inline">f_n = nc/\ell</span>: the time for a bump to travel once around, <span class="math inline">\ell/c</span>, is the period of the lowest mode.) The eigenvalues are perfect squares; the frequencies, proportional to their square roots, are whole-number multiples of one frequency. The ring of beads approaches this from below:</p>
+<section id="on-the-pitch-ruler" class="level2">
+<h2 class="anchored" data-anchor-id="on-the-pitch-ruler">On the pitch ruler</h2>
+<p>With a few beads, the stems sit below the lines, the higher modes furthest below. As the beads multiply they climb toward the lines, and on the continuous loop mode <em>k</em> sits exactly on the line <em>k</em>×. Press the button at a few bead counts: with few beads the chord sounds less clear; on the loop the modes fuse into one note (<a href="../../posts/instruments-as-operators/note.html">page 0</a>). The ring of beads approaches the loop from below:</p>
 <table class="table-striped caption-top table">
-<caption>Frequency of mode <span class="math inline">k</span> divided by the frequency of mode 1. On the ring of <span class="math inline">N</span> beads the ratio is <span class="math inline">\sin(\pi k/N)/\sin(\pi/N)</span>.</caption>
+<caption>Each mode’s frequency divided by the lowest, for rings of 8 and 32 beads and for the continuous loop.</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">mode <span class="math inline">k</span></th>
+<th style="text-align: left;">mode</th>
 <th style="text-align: right;">8 beads</th>
 <th style="text-align: right;">32 beads</th>
 <th style="text-align: right;">loop</th>
@@ -278,6 +247,61 @@ A\cos n\theta = n^2\cos n\theta, \qquad A\sin n\theta = n^2\sin n\theta .
 </tr>
 </tbody>
 </table>
+</section>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
+<p><strong>A wave must close up.</strong> A loop has no ends: a wave that runs once around must arrive back exactly where it started. So the simple waves on a loop have a whole number of crests, 1, 2, 3, …, plus one motion with none, in which the whole loop lifts at once and makes no sound. As the beads crowd together, the bead equation of page 2 becomes the equation of a continuous string, the <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a>.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>From beads to the wave equation <span class="needs">uses partial derivatives and Taylor’s theorem</span>
+</summary>
+<p>Measure position around the loop by the angle <span class="math inline">\theta</span>, and choose units so that the loop has circumference <span class="math inline">2\pi</span>. Bead <span class="math inline">j</span> sits at <span class="math inline">\theta_j = jh</span> with <span class="math inline">h = 2\pi/N</span>. Let <span class="math inline">\mu</span> be the mass per unit length, so each bead has mass <span class="math inline">m = \mu h</span>, and write <span class="math inline">u(\theta, t)</span> for the height of the loop at angle <span class="math inline">\theta</span> and time <span class="math inline">t</span>, so that <span class="math inline">u_j(t) = u(\theta_j, t)</span>. On a string of tension <span class="math inline">T</span>, bead <span class="math inline">j</span> feels the force <span class="math inline">\frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})</span> (<a href="../../posts/instruments-as-operators/ring.html">page 2</a>). Dividing by <span class="math inline">m</span> gives <span class="math display">
+\ddot u_j = \frac{T}{\mu}\cdot\frac{u_{j+1} - 2u_j + u_{j-1}}{h^2}.
+</span> The fraction on the right has a simple meaning. <span class="math inline">(u_{j+1} - u_j)/h</span> is the slope of the string just to the right of bead <span class="math inline">j</span>, and <span class="math inline">(u_j - u_{j-1})/h</span> the slope just to the left. Their difference, divided by <span class="math inline">h</span> once more, measures how fast the slope changes: the second derivative. So as the beads crowd together, <span class="math inline">h \to 0</span>, the bead equation becomes <span class="math display">
+\frac{\partial^2 u}{\partial t^2} = c^2\,\frac{\partial^2 u}{\partial \theta^2}, \qquad c^2 = \frac{T}{\mu}.
+</span> Here <span class="math inline">u</span> depends on two things, the angle and the time. The symbol <span class="math inline">\partial u/\partial t</span>, a <a href="../../posts/instruments-as-operators/glossary.html#partial-derivative">partial derivative</a>, is the derivative in time with the angle held fixed, and <span class="math inline">\partial u/\partial\theta</span> the derivative in angle with the time held fixed; the second derivatives are also written <span class="math inline">u_{tt}</span> and <span class="math inline">u_{\theta\theta}</span>. This is the <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a>. The constant <span class="math inline">c</span> is the speed at which a bump travels around the loop; the second demo below shows it.</p>
+<p><strong>Why the second difference becomes the second derivative.</strong> Expand the neighbors with <a href="https://en.wikipedia.org/wiki/Taylor%27s_theorem">Taylor’s theorem</a>, assuming the shape has four continuous derivatives: <span class="math display">
+u(\theta \pm h) = u \pm h\,u' + \tfrac{h^2}{2}u'' \pm \tfrac{h^3}{6}u''' + O(h^4),
+</span> where <span class="math inline">O(h^4)</span> stands for terms no bigger than a constant times <span class="math inline">h^4</span>. Add the two expansions and subtract <span class="math inline">2u</span>. The odd terms cancel in pairs: <span class="math display">
+u(\theta + h) - 2u(\theta) + u(\theta - h) = h^2 u''(\theta) + O(h^4).
+</span> Divide by <span class="math inline">h^2</span>: the fraction equals <span class="math inline">u'' + O(h^2)</span>, which tends to <span class="math inline">u''</span>. (For the table above: on a ring of <span class="math inline">N</span> beads, mode <span class="math inline">k</span>’s frequency divided by mode 1’s is <span class="math inline">\sin(\pi k/N)/\sin(\pi/N)</span>, from <a href="../../posts/instruments-as-operators/ring.html">page 2</a>, which tends to <span class="math inline">k</span> as <span class="math inline">N</span> grows.) What was held fixed: the circumference, the tension <span class="math inline">T</span>, and the mass per length <span class="math inline">\mu</span>. So as the beads multiply, each one gets lighter in proportion.</p>
+<svg class="fig" viewbox="0 0 420 150" role="img" aria-label="Three neighboring beads on a curve; where the curve bends down, the middle one sits above the average of the outer two by about minus h squared times u double prime over two">
+  <path class="acc" d="M 40 120 Q 210 -10 380 120"></path>
+  <path class="dash" d="M 100 78 L 320 78"></path>
+  <circle cx="100" cy="78" r="6" class="fillacc"></circle><circle cx="210" cy="55" r="7" class="fillacc"></circle><circle cx="320" cy="78" r="6" class="fillacc"></circle>
+  <path class="neg" d="M 210 55 L 210 78"></path>
+  <text x="80" y="104">θ − h</text><text x="200" y="104">θ</text><text x="300" y="104">θ + h</text>
+  <text x="222" y="72">gap ≈ −h² u''/2</text>
+</svg>
+<p>The middle bead sits above the average of its neighbors by about <span class="math inline">-\tfrac{h^2}{2}u''</span>, which is positive where the curve bends down (<span class="math inline">u'' &lt; 0</span>). That is why the force on a bead, and so its acceleration, is proportional to the curvature <span class="math inline">u''</span>.</p>
+</details>
+</div>
+<p><strong>A shorter wave is pulled back harder.</strong> On a string, the pull on each bit is proportional to how sharply the string bends there. Squeeze a wave into half the length, at the same height, and it bends 4 times as sharply (the slope doubles, and it changes over half the distance: 2 × 2 = 4), so the pull is 4 times as strong. A wave with <em>n</em> crests is <em>n</em> times shorter than the one-crest wave, so it is pulled back <em>n</em>² times harder. Frequency goes as the square root of the pull, as for the mass on a spring (<a href="../../posts/instruments-as-operators/oscillator.html">page 1</a>), so the wave with <em>n</em> crests swings exactly <em>n</em> times faster than the one-crest wave.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>The operator, its eigenfunctions and the frequencies <span class="needs">uses derivatives</span>
+</summary>
+<p><strong>The operator.</strong> Write the wave equation as <span class="math display">
+u_{tt} = -c^2 A u, \qquad A = -\frac{d^2}{d\theta^2}.
+</span> The operator <span class="math inline">A</span> takes a shape <span class="math inline">f(\theta)</span> and returns a new shape, <span class="math inline">-f''</span>. Strictly, the operator in the sense of the <a href="../../posts/instruments-as-operators/index.html">series page</a>, minus the restoring force per unit mass, is <span class="math inline">c^2A</span>; the constant <span class="math inline">c^2</span> only scales the eigenvalues, so this page works with <span class="math inline">A</span> and puts <span class="math inline">c</span> back in the frequencies. The minus sign is a convention that makes <span class="math inline">A</span> of a bump positive at the bump; the restoring force per unit mass is <span class="math inline">-c^2 Af</span>, which pulls the bump back down. If you read page 2, <span class="math inline">A</span> is the continuous version of the beads’ matrix <span class="math inline">K/h^2</span>.</p>
+<p><strong>Which shapes.</strong> A shape on the loop is a function <span class="math inline">f(\theta)</span> that returns to itself after one turn: <span class="math inline">f(\theta + 2\pi) = f(\theta)</span>.</p>
+<p><strong>Eigenfunctions and eigenvalues.</strong> An <a href="../../posts/instruments-as-operators/glossary.html#eigenfunction">eigenfunction</a> of <span class="math inline">A</span> is a shape that <span class="math inline">A</span> only rescales: <span class="math inline">Af = \lambda f</span> for some number <span class="math inline">\lambda</span>, called the <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a>. Try <span class="math inline">\cos n\theta</span>, a wave with <span class="math inline">n</span> crests around the loop. Its second derivative is <span class="math inline">-n^2\cos n\theta</span>, so <span class="math display">
+A\cos n\theta = n^2\cos n\theta, \qquad A\sin n\theta = n^2\sin n\theta .
+</span> These shapes close up after one turn exactly when <span class="math inline">n</span> is a whole number. So the <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> of <span class="math inline">A</span>, the list of its eigenvalues, is <span class="math inline">0, 1, 4, 9, 16, \dots</span> Each <span class="math inline">n^2</span> with <span class="math inline">n \ge 1</span> belongs to two eigenfunctions, <span class="math inline">\cos n\theta</span> and <span class="math inline">\sin n\theta</span>, which are the same wave shifted by a quarter of a wavelength; <span class="math inline">n = 0</span> belongs to the constant shape, the whole loop lifted at once. The proof fold a little further down shows that there are no other eigenvalues.</p>
+<p><strong>Frequencies.</strong> The shape <span class="math inline">\cos(n\theta)\cos(\omega t)</span> solves the wave equation when <span class="math inline">\omega^2 = c^2 n^2</span>: differentiate it twice in <span class="math inline">t</span> and twice in <span class="math inline">\theta</span> and compare. Here <span class="math inline">\omega</span> is the <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a>, in radians per second, and the frequency in hertz is <span class="math inline">f = \omega/2\pi</span>. So mode <span class="math inline">n</span> sounds at <span class="math inline">f_n = cn/2\pi</span>, exactly <span class="math inline">n</span> times the lowest. (In ordinary units, for a loop of circumference <span class="math inline">\ell</span>, this is <span class="math inline">f_n = nc/\ell</span>: the time for a bump to travel once around, <span class="math inline">\ell/c</span>, is the period of the lowest mode.) The eigenvalues are perfect squares; the frequencies, proportional to their square roots, are whole-number multiples of one frequency. The table under the first demo shows the ring of beads approaching this from below.</p>
+</details>
+</div>
+<div class="qa">
+<details>
+<summary>
+<span class="label">Reader question</span>How is a mode’s shape related to its swinging in time?
+</summary>
+<p>Both come from <a href="../../posts/instruments-as-operators/glossary.html#separation-of-variables">separating variables</a>. Look for a motion in which the shape stays fixed and only its size changes: <span class="math inline">u = X(\theta)\,q(t)</span>. Substituting into <span class="math inline">u_{tt} = c^2u_{\theta\theta}</span> and dividing by <span class="math inline">Xq</span> gives <span class="math inline">q''/q = c^2X''/X</span>. The left side depends only on <span class="math inline">t</span> and the right only on <span class="math inline">\theta</span>. Changing <span class="math inline">t</span> alone cannot change the right side, so the left side cannot change either; the same holds the other way round, so both sides equal one constant. That constant cannot be positive, because <span class="math inline">A</span> has no negative eigenvalues (Step 1 of the proof below), so we call it <span class="math inline">-\omega^2</span>. That splits the equation in two. In time, <span class="math inline">q'' = -\omega^2 q</span>, so <span class="math inline">q = \cos(\omega t + \phi)</span>, times any constant: the mass on a spring. (For <span class="math inline">\omega = 0</span> the solution is <span class="math inline">q = a + bt</span> instead: the loop drifts as a whole.) In space, <span class="math inline">-X'' = (\omega/c)^2 X</span> with <span class="math inline">X</span> periodic: the eigenvalue problem for <span class="math inline">A</span>, which allows only <span class="math inline">\omega/c = n</span>. The space part chooses the frequency, and the time part swings at it. The time factor is a cosine, for every nonzero frequency, for every instrument in this series, because every operator here has no negative eigenvalues and every equation has two time derivatives and no friction term; damping, added on page 7, multiplies the cosine by a decaying factor. Everything instrument-specific lives in the space part.</p>
+</details>
+</div>
+<p>In the series’ language, the rule that takes a shape and returns the pull on it is the loop’s <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>. The waves with <em>n</em> crests are the shapes it only rescales, its <a href="../../posts/instruments-as-operators/glossary.html#eigenfunction">eigenfunctions</a>. The scale factors, proportional to 0, 1, 4, 9, …, are its <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a>, and their list is its <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>. The frequencies go as their square roots: 0, 1, 2, 3, … times one base frequency. This loop is the smallest example in the series of an operator and its spectrum.</p>
 <div class="derive">
 <details>
 <summary>
@@ -285,20 +309,42 @@ A\cos n\theta = n^2\cos n\theta, \qquad A\sin n\theta = n^2\sin n\theta .
 </summary>
 <p><em>Step 1: no eigenvalue is negative.</em> For periodic shapes <span class="math inline">f</span> and <span class="math inline">g</span>, <a href="https://en.wikipedia.org/wiki/Integration_by_parts">integrate by parts</a> twice. The boundary terms are values at <span class="math inline">\theta = 2\pi</span> minus values at <span class="math inline">\theta = 0</span>, which cancel because the shapes are periodic: <span class="math display">
 \int_0^{2\pi} (Af)\,g\,d\theta = -\int_0^{2\pi} f''g\,d\theta = \int_0^{2\pi} f'g'\,d\theta = -\int_0^{2\pi} f g''\,d\theta = \int_0^{2\pi} f\,(Ag)\,d\theta .
-</span> An operator with this property is called <em>symmetric</em>, by analogy with a symmetric matrix. (With the right choice of allowed shapes it is also <a href="../../posts/instruments-as-operators/glossary.html#self-adjoint">self-adjoint</a>, the stronger property that the spectral theorem in the fold below needs.) If <span class="math inline">Af = \lambda f</span> with <span class="math inline">f</span> not identically zero, take <span class="math inline">g = f</span> in the middle expression: <span class="math inline">\lambda\int_0^{2\pi} f^2\,d\theta = \int_0^{2\pi}(f')^2\,d\theta \ge 0</span>, so <span class="math inline">\lambda \ge 0</span>. (For a complex-valued <span class="math inline">f</span>, use <span class="math inline">\int f\bar f\,d\theta = \int |f|^2\,d\theta</span> instead, as in the complex-form fold below; the same computation shows that <span class="math inline">\lambda</span> is real and at least 0.)</p>
+</span> An operator with this property is called <em>symmetric</em>, by analogy with a symmetric matrix. (With the right choice of allowed shapes it is also <a href="../../posts/instruments-as-operators/glossary.html#self-adjoint">self-adjoint</a>, the stronger property that the spectral theorem in the complex-numbers fold further down needs.) If <span class="math inline">Af = \lambda f</span> with <span class="math inline">f</span> not identically zero, take <span class="math inline">g = f</span> in the middle expression: <span class="math inline">\lambda\int_0^{2\pi} f^2\,d\theta = \int_0^{2\pi}(f')^2\,d\theta \ge 0</span>, so <span class="math inline">\lambda \ge 0</span>. (For a complex-valued <span class="math inline">f</span>, use <span class="math inline">\int f\bar f\,d\theta = \int |f|^2\,d\theta</span> instead, as in the complex-numbers fold further down; the same computation shows that <span class="math inline">\lambda</span> is real and at least 0.)</p>
 <p><em>Step 2: solve the equation.</em> <span class="math inline">Af = \lambda f</span> means <span class="math inline">f'' = -\lambda f</span>.</p>
 <ul>
 <li>If <span class="math inline">\lambda = 0</span>, then <span class="math inline">f = a + b\theta</span>, which returns to itself after one turn only when <span class="math inline">b = 0</span>. Eigenvalue 0, eigenfunctions the constants.</li>
 <li>If <span class="math inline">\lambda &gt; 0</span>, write <span class="math inline">\lambda = s^2</span> with <span class="math inline">s &gt; 0</span>; then <span class="math inline">f = a\cos s\theta + b\sin s\theta</span>, a wave that repeats every <span class="math inline">2\pi/s</span> radians. It returns to itself after one full turn exactly when <span class="math inline">2\pi</span> is a whole number of these periods, that is, when <span class="math inline">s</span> is a whole number <span class="math inline">n</span>. Eigenvalue <span class="math inline">n^2</span>, eigenfunctions <span class="math inline">\cos n\theta</span> and <span class="math inline">\sin n\theta</span>.</li>
 </ul>
 <p><em>Step 3: eigenfunctions for different eigenvalues are perpendicular</em>, in the sense used below: <span class="math inline">\int_0^{2\pi} \cos n\theta\cos m\theta\,d\theta = 0</span> for <span class="math inline">n \ne m</span>, and similarly for sines and for a sine against a cosine. This can be checked directly with the product formulas for cosines, and it also follows from Step 1, just as for a symmetric matrix.</p>
-<p><em>For readers who know functional analysis:</em> <span class="math inline">A</span> is not defined on every square-integrable function, only on those with two derivatives in <span class="math inline">L^2</span>, the <a href="https://en.wikipedia.org/wiki/Sobolev_space">Sobolev space</a> <span class="math inline">H^2(S^1)</span>. On that domain it is self-adjoint, not merely symmetric: in Fourier coefficients it is multiplication by <span class="math inline">n^2</span> on the sequences with <span class="math inline">\sum n^4|c_n|^2 &lt; \infty</span>. That there is no spectrum besides these eigenvalues follows from the completeness of the eigenfunctions, the Theorem fold below.</p>
+<p><em>For readers who know functional analysis:</em> <span class="math inline">A</span> is not defined on every square-integrable function, only on those with two derivatives in <span class="math inline">L^2</span>, the <a href="https://en.wikipedia.org/wiki/Sobolev_space">Sobolev space</a> <span class="math inline">H^2(S^1)</span>. On that domain it is self-adjoint, not merely symmetric: in Fourier coefficients it is multiplication by <span class="math inline">n^2</span> on the sequences with <span class="math inline">\sum n^4|c_n|^2 &lt; \infty</span>. That there is no spectrum besides these eigenvalues follows from the completeness of the eigenfunctions, proved in the complex-numbers fold further down.</p>
 </details>
 </div>
-</section>
-<section id="who-was-right" class="level2">
-<h2 class="anchored" data-anchor-id="who-was-right">Who was right</h2>
-<p>Bernoulli, in a sense that took mathematicians more than a century to make precise. Every shape of the loop, corners included, is a sum of the operator’s eigenfunctions. Euler’s worry was reasonable, since every sine is smooth and a corner is not, but an infinite sum of smooth waves need not be smooth.</p>
+<div class="qa">
+<details>
+<summary>
+<span class="label">Reader question</span>The equation of one wave has one frequency in it. Where does an infinite list come from?
+</summary>
+<p>In the equation <span class="math inline">u'' + k^2u = 0</span>, the number <span class="math inline">k</span> is chosen in advance, and for each <span class="math inline">k</span> it has the two solutions <span class="math inline">\cos k\theta</span> and <span class="math inline">\sin k\theta</span>. The eigenvalue question runs the other way: for which <span class="math inline">k</span> does a solution go once around the loop and come back to itself? Every whole number <span class="math inline">k</span> does, and nothing limits how many times a wave may wind around, so the list never ends. The count matches the number of ways the system can move: <span class="math inline">N</span> beads have <span class="math inline">N</span> eigenvalues, counted with repetitions, and a continuous loop has infinitely many.</p>
+<p><em>For readers who know functional analysis:</em> on an infinite straight string, with no loop to close up and no ends, every <span class="math inline">k \ge 0</span> gives a bounded wave <span class="math inline">e^{ikx}</span> and the spectrum is the whole half-line <span class="math inline">[0, \infty)</span>. Strictly, these waves are not eigenfunctions, because <span class="math inline">\int|e^{ikx}|^2\,dx</span> is infinite. This is one reason the general definition of <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> is more than a list of eigenvalues. A bounded instrument, closed up or with ends that are not too irregular, has a discrete list.</p>
+</details>
+</div>
+<p><strong>Why beads fall short.</strong> A bead feels only its two neighbors. When a crest is many beads wide, that is enough to sense the bend almost exactly. When a crest is only a few beads wide, the neighbors sit partway down the wave, and the bead underestimates how sharply the string bends. So the pull is weaker than <em>n</em>² times, and the frequency falls short of <em>n</em>×, the more so the shorter the wave. Crowd in more beads and any given wave becomes many beads wide: its shortfall vanishes.</p>
+<p><strong>Every shape is a sum of these waves.</strong> From the 1740s on, Jean d’Alembert, Leonhard Euler and Daniel Bernoulli argued about the vibrating string. D’Alembert showed in 1747 that a string can move in essentially any smooth shape. Bernoulli held that every vibration is a sum of simple modes, which for a string are sine-shaped. Euler, who allowed a plucked string’s sharp corner as a starting shape, objected that a sum of sines could not represent such arbitrary shapes, and d’Alembert doubted that such a sum was physical at all.</p>
+<p>Bernoulli was right, in a sense that took mathematicians more than a century to make precise. Every shape of the loop, corners included, is a sum of its simple waves: its <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a>. The doubt is natural, since every wave is smooth and a corner is not, but an infinite sum of smooth waves need not be smooth. Released, each wave swings at its own frequency, and all of them are whole-number multiples of the lowest, so the whole motion repeats, and any sound it makes has a pitch. Build a plucked shape out of waves, then let it go:</p>
+<div class="ins">
+<div class="panel">
+  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
+  <div class="slider"><label for="cM" style="min-width:12rem">Waves used, up to</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
+  <div class="controls"><button id="cGo" class="primary" aria-pressed="false">Let go</button><button id="cHear">Hear the loop, at the plucked point</button></div>
+  <div class="readout" id="cShapeRead"></div>
+  <p class="cap">The loop is cut open and laid flat; its two edges are the same point. Dashed: the exact motion (once let go, the bump splits into two half-height copies that travel apart). Solid: the sum of the waves so far, each swinging at its own frequency.</p>
+</div>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>How much of each wave a shape contains <span class="needs">uses integrals</span>
+</summary>
 <p><strong>The Fourier series is the eigenfunction expansion.</strong> With the beads we wrote the starting shape as a sum of eigenvectors and let each one swing on its own. Here the same move reads <span class="math display">
 f(\theta) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos n\theta + b_n\sin n\theta\big),
 </span> the <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a> of <span class="math inline">f</span>. To find the numbers <span class="math inline">a_n</span> and <span class="math inline">b_n</span>, use the fact that the eigenfunctions are perpendicular. For whole numbers <span class="math inline">n \ne m</span>, <span class="math display">
@@ -307,67 +353,35 @@ f(\theta) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos n\theta + b_n\sin n\
 a_n = \frac{1}{\pi}\int_0^{2\pi} f(\theta)\cos n\theta\,d\theta, \qquad b_n = \frac{1}{\pi}\int_0^{2\pi} f(\theta)\sin n\theta\,d\theta,
 </span> just as a vector’s component along an axis is its dot product with that axis. The constant term is written <span class="math inline">a_0/2</span> so that the same formula also gives <span class="math inline">a_0</span>: for <span class="math inline">n = 0</span>, <span class="math inline">\int_0^{2\pi}\cos^2 0\,d\theta = 2\pi</span>, not <span class="math inline">\pi</span>. Released from rest in the shape <span class="math inline">f</span>, each eigenfunction swings at its own frequency: <span class="math display">
 u(\theta, t) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos n\theta + b_n\sin n\theta\big)\cos(c\,n\,t).
-</span> Every term returns to its starting value after the time <span class="math inline">2\pi/c</span>, so the whole motion repeats, and any sound it makes has a pitch. The demo below builds a plucked shape, corner and all, out of cosines and lets it go. The folds below give the same series in complex notation and state the theorem that settles the old argument.</p>
-<div class="ins">
-<div class="panel">
-  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
-  <div class="slider"><label for="cM" style="min-width:12rem">Eigenfunctions used, up to n =</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
-  <div class="controls"><button id="cGo" class="primary" aria-pressed="false">Let go</button><button id="cHear">Hear the loop, at the plucked point</button></div>
-  <div class="readout" id="cShapeRead"></div>
-  <p class="cap">The loop is cut open and laid flat: the left and right edges are the same point. Dashed: the plucked shape, and, once released, the exact motion, in which the bump splits into two copies of half the height that travel apart in opposite directions. Solid: the sum of the eigenfunctions cos nθ up to the chosen n, each swinging at its own frequency.</p>
-</div>
-</div>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Complex form</span>The same series with <span class="math inline">e^{in\theta}</span>, and the space of all shapes <span class="needs">uses complex numbers</span>
-</summary>
-<p>With Euler’s formula <span class="math inline">e^{in\theta} = \cos n\theta + i\sin n\theta</span>, the pair <span class="math inline">\cos n\theta, \sin n\theta</span> can be traded for the pair <span class="math inline">e^{in\theta}, e^{-in\theta}</span>, and <span class="math inline">A e^{in\theta} = n^2 e^{in\theta}</span>. The Fourier series becomes <span class="math display">
-f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{1}{2\pi}\int_0^{2\pi} f(\theta)\,e^{-in\theta}\,d\theta ,
-</span> with <span class="math inline">c_{\pm n} = (a_n \mp i b_n)/2</span> for <span class="math inline">n \ge 1</span> and <span class="math inline">c_0 = a_0/2</span>. The perpendicularity above becomes <span class="math inline">\langle e^{in\theta}, e^{im\theta}\rangle = 0</span> for <span class="math inline">n \ne m</span>, for the <a href="../../posts/instruments-as-operators/glossary.html#inner-product">inner product</a> <span class="math inline">\langle f, g\rangle = \int_0^{2\pi} f\,\bar g\,d\theta</span>; the bar, complex conjugation, is what makes <span class="math inline">\langle f, f\rangle</span> a positive number for complex-valued <span class="math inline">f</span>. The natural space of shapes is <a href="../../posts/instruments-as-operators/glossary.html#l2"><span class="math inline">L^2(S^1)</span></a>, all functions on the circle <span class="math inline">S^1</span> with <span class="math inline">\int_0^{2\pi}|f|^2\,d\theta</span> finite: the shapes of finite “total squared height”.</p>
+</span> Every term returns to its starting value after the time <span class="math inline">2\pi/c</span>, so the whole motion repeats. The demo above builds a plucked shape, corner and all, out of cosines and lets it go. The next fold gives the same series in complex notation and states the theorem that settles the old argument.</p>
 </details>
 </div>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Theorem</span>Every shape is a sum of eigenfunctions <span class="needs">advanced: uses functional analysis</span>
+<span class="label">Precisely</span>The same series with complex numbers, and why every shape is a sum of waves <span class="needs">uses complex numbers; the second half, functional analysis</span>
 </summary>
-<p><strong>Statement.</strong> The functions <span class="math inline">e^{in\theta}/\sqrt{2\pi}</span>, <span class="math inline">n \in \mathbb{Z}</span>, form an orthonormal basis of <span class="math inline">L^2(S^1)</span>. That is, for every <span class="math inline">f</span> in <span class="math inline">L^2(S^1)</span>, <span class="math display">
+<p><strong>With complex numbers.</strong> With Euler’s formula <span class="math inline">e^{in\theta} = \cos n\theta + i\sin n\theta</span>, the pair <span class="math inline">\cos n\theta, \sin n\theta</span> can be traded for the pair <span class="math inline">e^{in\theta}, e^{-in\theta}</span>, and <span class="math inline">A e^{in\theta} = n^2 e^{in\theta}</span>. The Fourier series becomes <span class="math display">
+f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{1}{2\pi}\int_0^{2\pi} f(\theta)\,e^{-in\theta}\,d\theta ,
+</span> with <span class="math inline">c_{\pm n} = (a_n \mp i b_n)/2</span> for <span class="math inline">n \ge 1</span> and <span class="math inline">c_0 = a_0/2</span>. The perpendicularity above becomes <span class="math inline">\langle e^{in\theta}, e^{im\theta}\rangle = 0</span> for <span class="math inline">n \ne m</span>, for the <a href="../../posts/instruments-as-operators/glossary.html#inner-product">inner product</a> <span class="math inline">\langle f, g\rangle = \int_0^{2\pi} f\,\bar g\,d\theta</span>; the bar, complex conjugation, is what makes <span class="math inline">\langle f, f\rangle</span> a positive number for complex-valued <span class="math inline">f</span>. The natural space of shapes is <a href="../../posts/instruments-as-operators/glossary.html#l2"><span class="math inline">L^2(S^1)</span></a>, all functions on the circle <span class="math inline">S^1</span> with <span class="math inline">\int_0^{2\pi}|f|^2\,d\theta</span> finite: the shapes of finite “total squared height”.</p>
+<p><strong>Every shape is a sum of eigenfunctions.</strong> The functions <span class="math inline">e^{in\theta}/\sqrt{2\pi}</span>, <span class="math inline">n \in \mathbb{Z}</span>, form an orthonormal basis of <span class="math inline">L^2(S^1)</span>. That is, for every <span class="math inline">f</span> in <span class="math inline">L^2(S^1)</span>, <span class="math display">
 \Big\| f - \sum_{|n| \le M} c_n e^{in\theta} \Big\| \to 0 \quad (M \to \infty), \qquad \frac{1}{2\pi}\int_0^{2\pi}|f|^2\,d\theta = \sum_n |c_n|^2 ,
 </span> the second identity being <a href="https://en.wikipedia.org/wiki/Parseval%27s_theorem">Parseval’s</a>.</p>
 <p><strong>Why it needs a proof.</strong> For a symmetric <span class="math inline">N\times N</span> matrix, <span class="math inline">N</span> perpendicular eigenvectors automatically span everything, because the space has dimension <span class="math inline">N</span>. Here there are infinitely many eigenfunctions and the space is infinite-dimensional, so one has to show that no shape is perpendicular to all of them. One standard proof shows that trigonometric sums can approximate any continuous periodic function uniformly (<a href="https://en.wikipedia.org/wiki/Fej%C3%A9r%27s_theorem">Fejér’s theorem</a>), and that continuous functions are dense in <span class="math inline">L^2</span>. See Stein and Shakarchi, chapters 2 and 3.</p>
 <p><strong>Pointwise.</strong> Convergence in <span class="math inline">L^2</span> is convergence of the total squared error. At individual points more care is needed: there are continuous functions whose Fourier series diverge at a point. For the shapes on this page, continuous and made of straight pieces, the series converges at every point. The plucked triangle’s coefficients shrink like <span class="math inline">1/n^2</span>, which is why a few terms already look right in the demo.</p>
-<p><strong>What it took.</strong> The old argument could not be settled until “sum” had a precise meaning for infinitely many terms. Fourier claimed such expansions for arbitrary functions in his 1807 work on heat. Dirichlet proved in 1829 that the series converges at every point for a broad class of functions, including shapes with corners; the <span class="math inline">L^2</span> statement above belongs to the early 20th century; and that the Fourier series of every <span class="math inline">L^2</span> function converges at almost every point was proved only in 1966, by Lennart Carleson (<a href="https://en.wikipedia.org/wiki/Carleson%27s_theorem">Wikipedia</a>). In the <span class="math inline">L^2</span> sense, Bernoulli was right and Euler’s corner is no obstacle.</p>
+<p><strong>What it took.</strong> The old argument could not be settled until “sum” had a precise meaning for infinitely many terms. Fourier claimed such expansions for arbitrary functions in his 1807 work on heat. Dirichlet proved in 1829 that the series converges at every point for a broad class of functions, including shapes with corners; the <span class="math inline">L^2</span> statement above belongs to the early 20th century; and that the Fourier series of every <span class="math inline">L^2</span> function converges at almost every point was proved only in 1966, by Lennart Carleson (<a href="https://en.wikipedia.org/wiki/Carleson%27s_theorem">Wikipedia</a>). In the <span class="math inline">L^2</span> sense, Bernoulli was right, and a corner is no obstacle.</p>
 <p><strong>The pattern for every later page.</strong> Each instrument’s operator <span class="math inline">A</span> will be self-adjoint and nonnegative, and <span class="math inline">(A + 1)^{-1}</span> will be a compact operator. The <a href="https://en.wikipedia.org/wiki/Compact_operator_on_Hilbert_space#Spectral_theorem">spectral theorem for compact self-adjoint operators</a> then gives the same three facts as here: a list of real eigenvalues growing to infinity, perpendicular eigenfunctions, and an expansion of every shape in them. Only the list and the shapes change.</p>
-</details>
-</div>
-<div class="qa">
-<details>
-<summary>
-<span class="label">Reader question</span><span class="math inline">u'' + k^2u = 0</span> has a single <span class="math inline">k</span>. Where does an infinite list of frequencies come from?
-</summary>
-<p>In that equation <span class="math inline">k</span> was chosen in advance, and for each <span class="math inline">k</span> it has the two solutions <span class="math inline">\cos k\theta</span> and <span class="math inline">\sin k\theta</span>. The eigenvalue question runs the other way: for which <span class="math inline">k</span> does a solution go once around the loop and come back to itself? Every whole number <span class="math inline">k</span> does, and nothing limits how many times a wave may wind around, so the list never ends. The count matches the number of ways the system can move: <span class="math inline">N</span> beads have <span class="math inline">N</span> eigenvalues, counted with repetitions, and a continuous loop has infinitely many.</p>
-<p><em>For readers who know functional analysis:</em> on an infinite straight string, with no loop to close up and no ends, every <span class="math inline">k \ge 0</span> gives a bounded wave <span class="math inline">e^{ikx}</span> and the spectrum is the whole half-line <span class="math inline">[0, \infty)</span>. Strictly, these waves are not eigenfunctions, because <span class="math inline">\int|e^{ikx}|^2\,dx</span> is infinite. This is one reason the general definition of <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> is more than a list of eigenvalues. A bounded instrument, closed up or with ends that are not too irregular, has a discrete list.</p>
-</details>
-</div>
-<div class="qa">
-<details>
-<summary>
-<span class="label">Reader question</span>How is the shape <span class="math inline">\cos n\theta</span> related to the factor <span class="math inline">\cos(\omega_n t)</span>?
-</summary>
-<p>Both come from <a href="../../posts/instruments-as-operators/glossary.html#separation-of-variables">separating variables</a>. Look for a motion in which the shape stays fixed and only its size changes: <span class="math inline">u = X(\theta)\,q(t)</span>. Substituting into <span class="math inline">u_{tt} = c^2u_{\theta\theta}</span> and dividing by <span class="math inline">Xq</span> gives <span class="math inline">q''/q = c^2X''/X</span>. The left side depends only on <span class="math inline">t</span> and the right only on <span class="math inline">\theta</span>. Changing <span class="math inline">t</span> alone cannot change the right side, so the left side cannot change either; the same holds the other way round, so both sides equal one constant. That constant cannot be positive, because <span class="math inline">A</span> has no negative eigenvalues (Step 1 of the proof above), so we call it <span class="math inline">-\omega^2</span>. That splits the equation in two. In time, <span class="math inline">q'' = -\omega^2 q</span>, so <span class="math inline">q = \cos(\omega t + \phi)</span>, times any constant: the mass on a spring. (For <span class="math inline">\omega = 0</span> the solution is <span class="math inline">q = a + bt</span> instead: the loop drifts as a whole.) In space, <span class="math inline">-X'' = (\omega/c)^2 X</span> with <span class="math inline">X</span> periodic: the eigenvalue problem for <span class="math inline">A</span>, which allows only <span class="math inline">\omega/c = n</span>. The space part chooses the frequency, and the time part swings at it. The time factor is a cosine, for every nonzero frequency, for every instrument in this series, because every operator here has no negative eigenvalues and every equation has two time derivatives and no friction term; damping, added on page 7, multiplies the cosine by a decaying factor. Everything instrument-specific lives in the space part.</p>
 </details>
 </div>
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>A continuous loop of string has an <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>, <span class="math inline">-\tfrac{d^2}{d\theta^2}</span>, acting on its shapes; it is what the beads’ matrix becomes when they crowd together. Its eigenvalues are exactly <span class="math inline">0, 1, 4, 9, \dots</span>, so the frequencies are exactly <span class="math inline">0, 1, 2, 3, \dots</span> times a base frequency. Writing a shape as a sum of this operator’s eigenfunctions is the <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a>. This is the smallest example of an operator’s spectrum: one dimension, no ends, the same string everywhere. Every later page follows the same pattern, with a different operator: a list of eigenvalues that grows without end, eigenfunctions that are perpendicular to one another, and every shape a sum of eigenfunctions. Only the list and the shapes change.</p>
+<p>A wave on a loop must close up, so it has a whole number of crests, and a string pulls a wave <em>n</em> times shorter back <em>n</em>² times harder, so it swings <em>n</em> times faster. That is why the loop’s frequencies land exactly on the lines. In the series’ language, the loop’s operator has eigenvalues 0, 1, 4, 9, …, and writing a shape as a sum of its eigenfunctions is the Fourier series. Every later page has the same pattern with a different operator: a list of eigenvalues that grows without end, and a set of simple shapes from which every shape is built. Only the list and the shapes change.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
-<p>As far as I know, no common instrument is a closed loop of string; a violin string is tied down at both ends. What do the ends change? And here is something guitarists use every day: touch a vibrating string lightly at its exact middle, and the note jumps up an octave. Why?</p>
-<p><em>On the core path?</em> Next is <a href="../../posts/instruments-as-operators/violin.html">4 · A string with ends</a>.</p>
-<p><a href="../../posts/instruments-as-operators/ring.html">← Beads on a ring</a> · <a href="../../posts/instruments-as-operators/violin.html">Next: a string with ends →</a></p>
+<p>Real strings are tied down at both ends. What do the ends change, and why does a light touch at the middle make the note jump an octave?</p>
+<p><a href="../../posts/instruments-as-operators/ring.html">← 2 · Beads</a> · <a href="../../posts/instruments-as-operators/violin.html">Next: 4 · String →</a></p>
 <div class="refs">
 <p><strong>References.</strong> J. O. Smith, <a href="https://ccrma.stanford.edu/~jos/sasp/Daniel_Bernoulli_s_Modal_Decomposition.html">Daniel Bernoulli’s modal decomposition</a>, CCRMA, Stanford, for the history of the debate. E. M. Stein and R. Shakarchi, <em>Fourier Analysis: An Introduction</em>, Princeton University Press, 2003, chapters 1–3 (the wave equation, convergence of Fourier series, <span class="math inline">L^2</span> theory). Wikipedia, <a href="https://en.wikipedia.org/wiki/Wave_equation">Wave equation</a>, <a href="https://en.wikipedia.org/wiki/Fourier_series">Fourier series</a>, <a href="https://en.wikipedia.org/wiki/Self-adjoint_operator">Self-adjoint operator</a>, <a href="https://en.wikipedia.org/wiki/Parseval%27s_theorem">Parseval’s theorem</a> and <a href="https://en.wikipedia.org/wiki/Compact_operator_on_Hilbert_space">Compact operator on Hilbert space</a>.</p>
 </div>
@@ -387,8 +401,8 @@ f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{1}{2
     var k5 = Math.min(5, kmax()), r = ratio(k5), cents = 1200 * Math.log2(r / k5);
     document.getElementById("cNo").textContent = isFinite(N) ? N : "∞";
     document.getElementById("cRead").innerHTML = isFinite(N)
-      ? N + " beads: mode " + k5 + " sounds at <b>" + r.toFixed(3) + "×</b> the lowest instead of " + k5 + "×, " + Math.abs(cents).toFixed(0) + " cents flat (a cent is a hundredth of a piano semitone)"
-      : "A continuous loop: mode k sounds at exactly <b>k×</b> the lowest";
+      ? N + " beads: mode " + k5 + " sounds at <b>" + r.toFixed(2) + "×</b> the lowest, not " + k5 + "×"
+      : "A continuous loop: every mode sounds at <b>exactly</b> a whole-number multiple of the lowest";
   }
   function drawRing(now) {
     var d = C.fit(rc), W = rc.width, H = rc.height, cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.34, t = (now - t0) / 1000, s = 0.22 * Math.cos(2 * Math.PI * 0.5 * t);
@@ -421,7 +435,7 @@ f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{1}{2
   function readB() {
     document.getElementById("cMo").textContent = M;
     var e = 0; for (var i = 0; i <= 400; i++) { var th = 2 * Math.PI * i / 400; e = Math.max(e, Math.abs(partial(th, 0) - exact(th, 0))); }
-    document.getElementById("cShapeRead").innerHTML = "cos 0θ, cos θ, …, cos " + M + "θ: largest gap from the plucked shape <b>" + e.toFixed(3) + "</b> (peak height 1)";
+    document.getElementById("cShapeRead").innerHTML = "Waves with up to " + M + " crests: the sum misses the plucked shape by at most <b>" + e.toFixed(2) + "</b>, on a peak 1 high";
   }
   function drawShape(now) {
     var d = C.fit(sc), W = sc.width, H = sc.height, L = 12 * d, R = W - 12 * d, base = H * 0.78, amp = H * 0.6;
@@ -437,7 +451,7 @@ f(\theta) = \sum_{n=-\infty}^{\infty} c_n\,e^{in\theta}, \qquad c_n = \frac{1}{2
     for (var i = 0; i <= 600; i++) { var th = 2 * Math.PI * i / 600, y = base - amp * partial(th, tg); if (i) sx.lineTo(X(th), y); else sx.moveTo(X(th), y); }
     sx.stroke();
     sx.fillStyle = C.rgb("--muted"); sx.font = (11 * d) + "px 'IBM Plex Mono', monospace";
-    sx.fillText("θ = 0", L, H - 4 * d); var tw = sx.measureText("θ = 2π (same point)").width; sx.fillText("θ = 2π (same point)", R - tw, H - 4 * d);
+    sx.fillText("start", L, H - 4 * d); var tw = sx.measureText("one turn later (same point)").width; sx.fillText("one turn later (same point)", R - tw, H - 4 * d);
   }
   var ms = document.getElementById("cM");
   ms.addEventListener("input", function () { M = parseInt(ms.value, 10); readB(); });

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9 · What the spectrum knows – No Man’s Land</title>
+<title>Can you hear the shape of a drum? – No Man’s Land</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -160,8 +160,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">9 · What the spectrum knows</h1>
-<p class="subtitle lead">Instruments as Operators</p>
+<h1 class="title">Can you hear the shape of a drum?</h1>
+<p class="subtitle lead">9 · The shape of a drum</p>
 </div>
 
 
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 26, 2026</p>
+      <p class="date-modified">October 27, 2026</p>
     </div>
   </div>
     
@@ -184,14 +184,14 @@ window.Quarto = {
 </header>
 
 
-<div class="series-nav">
-<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <a href="../../posts/instruments-as-operators/drum.html">8 Drum</a> · <span class="part">Beyond</span> <strong>9 Shape</strong>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/drum.html">← 8 Drum</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/epilogue.html">10 Scales →</a></p>
 </div>
 <div class="pageinfo">
-<p><strong>Builds on</strong> <a href="../../posts/instruments-as-operators/drum.html">page 8</a>: a drum’s operator and its modes. About 8 minutes, plus 8 for the folds.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/drum.html">page 8, the drum</a>. About 9 minutes, plus the folds.</p>
 </div>
 <div class="puzzle">
-<p><strong>The puzzle.</strong> In 1966 Mark Kac wrote about a question he had first heard from Salomon Bochner, and it became famous: if you could hear every frequency a drum makes, perfectly, could you work out the drum’s shape? The two drums below have different shapes. Listen to them.</p>
+<p>In 1966 the mathematician Mark Kac asked: if you could hear every frequency a drum makes, perfectly, could you work out the drum’s shape? The two drums below have different shapes. Listen to them.</p>
 </div>
 <p>Play each drum with every mode equally loud. Then click a drum to strike it at a point, and compare.</p>
 <div class="ins">
@@ -210,33 +210,55 @@ window.Quarto = {
   </div>
   <div class="controls" id="gModes" role="group" aria-label="Show one mode on both drums"></div>
   <div class="readout" id="gRead"></div>
-  <p class="cap">Color shows the selected mode: one color where the drumhead is up, the other where it is down, at the same moment. Both drums show the mode with the same frequency, and the shapes differ. Clicking a drum strikes it there, as heard by a sensor at the struck point; the stems show how strongly each of the first 12 modes is then excited. Frequencies are scaled so the lowest mode is 150 Hz.</p>
+  <p class="cap">Color shows the selected mode: one color where the drumhead is up, the other where it is down. Both drums show the mode with the same frequency, in different shapes. Click a drum to strike it there; the stems then show how strongly each of the first 12 modes starts, heard at the struck point. The lowest frequency is set to 150 Hz.</p>
 </div>
 </div>
-<section id="what-a-list-of-frequencies-can-tell-you" class="level2">
-<h2 class="anchored" data-anchor-id="what-a-list-of-frequencies-can-tell-you">What a list of frequencies can tell you</h2>
-<p><strong>The question.</strong> A drum’s operator, from the <a href="../../posts/instruments-as-operators/drum.html">drum page</a>, is <span class="math inline">-c^2\Delta</span> on the drumhead <span class="math inline">\Omega</span>, a bounded region of the plane in one piece, with <span class="math inline">u = 0</span> on the rim. Here <span class="math inline">\Delta</span> is the <a href="../../posts/instruments-as-operators/glossary.html#laplacian">Laplacian</a>. Write <span class="math inline">\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots</span> for the eigenvalues of <span class="math inline">-\Delta</span>, each repeated as many times as it occurs (its <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a>). The drum’s frequencies are then <span class="math inline">f_k = \frac{c}{2\pi}\sqrt{\lambda_k}</span>. Kac’s question, in these terms, is whether the list <span class="math inline">\lambda_1, \lambda_2, \dots</span> determines the shape of <span class="math inline">\Omega</span>.</p>
-<p><strong>What can be heard: area and perimeter.</strong> Count the eigenvalues up to <span class="math inline">\lambda</span>: <span class="math inline">N(\lambda) = \#\{k : \lambda_k \le \lambda\}</span>, where <span class="math inline">\#</span> means “the number of”. For large <span class="math inline">\lambda</span>, <span class="math display">
-N(\lambda) \approx \frac{A}{4\pi}\,\lambda \;-\; \frac{P}{4\pi}\sqrt{\lambda},
-</span> where <span class="math inline">A</span> is the area of the drum and <span class="math inline">P</span> the length of its rim, and “<span class="math inline">\approx</span>” means that the error, divided by <span class="math inline">\sqrt\lambda</span>, shrinks to zero as <span class="math inline">\lambda</span> grows. The first term is <a href="../../posts/instruments-as-operators/glossary.html#weyl">Weyl’s law</a>. Hermann Weyl proved it in 1911, and later work extended it to every drum. So the area can be heard: it is <span class="math inline">4\pi</span> times the rate at which <span class="math inline">N</span> grows.</p>
-<p>The second term is subtler. Weyl conjectured it, and Victor Ivrii proved it in 1980 for drums with smooth rims, provided that closed billiard paths are rare. A billiard path is the path of a ball rolling inside the drum and bouncing off the rim, angle in equal to angle out; it is closed if it comes back to where it started, heading the same way. “Rare” means that if you pick a starting point and a direction at random, the chance of landing on a closed path is zero. Ivrii conjectured that this always holds; it has not been proved. The square and the rectangle in the demo have corners, which his theorem does not cover, but for them the formula can be checked by counting, as in the first fold below. The perimeter can be heard in any case, for every drum whose rim is smooth or a polygon, by a smoother way of counting; that is the second fold.</p>
-<p>So from the list of frequencies alone one can recover the area and the perimeter. The demo counts the eigenvalues of three drums with the same area.</p>
+<div class="gist">
+<p><strong>The gist.</strong> No.&nbsp;These two drums have different shapes but exactly the same frequencies: every <a href="../../posts/instruments-as-operators/glossary.html#mode">mode</a> of one has a partner on the other at the same frequency, so played with every mode equally loud, they sound identical. The list of frequencies still knows a lot. It fixes a drum’s area and, for a smooth or straight-sided rim, the length of its rim, and that is enough to recognize a round drum. Click to strike the drums, though, and they sound different: their modes have different shapes, so a strike starts them with different strengths.</p>
+</div>
+<section id="on-the-pitch-ruler" class="level2">
+<h2 class="anchored" data-anchor-id="on-the-pitch-ruler">On the pitch ruler</h2>
+<p>Here are both drums’ first twelve frequencies, as multiples of the lowest: 1×, 1.20×, 1.43×, 1.60×, 1.69×, 1.90×, 2.04×, …. Like the drum on <a href="../../posts/instruments-as-operators/drum.html">page 8</a>, they sit off the gray whole-number lines, so neither drum has a clear pitch. And the two lists are the same to every digit computed: the stems under drum A and drum B stand in the same places. Each stem’s height is how strongly a strike at the clicked point starts that mode: all equal until you click, then different on the two drums, because it depends on the mode’s shape at the struck point.</p>
+</section>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
+<p><strong>A list of frequencies comes from a list of eigenvalues.</strong> In the series’ language: on page 8 the drumhead became an <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>, a rule that turns a shape of the drumhead into the force pulling it back toward rest. Its <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a> give the drum’s frequencies, and its <a href="../../posts/instruments-as-operators/glossary.html#eigenfunction">eigenfunctions</a> are the mode shapes. Kac’s question asks whether the frequencies alone, with nothing about the mode shapes, fix the shape of the drumhead.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Kac’s question in symbols <span class="needs">uses the Laplacian (page 8)</span>
+</summary>
+<p>A drum’s operator, from the <a href="../../posts/instruments-as-operators/drum.html">drum page</a>, is <span class="math inline">-c^2\Delta</span> on the drumhead <span class="math inline">\Omega</span>, a bounded region of the plane in one piece, with <span class="math inline">u = 0</span> on the rim. Here <span class="math inline">\Delta</span> is the <a href="../../posts/instruments-as-operators/glossary.html#laplacian">Laplacian</a>. Write <span class="math inline">\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots</span> for the eigenvalues of <span class="math inline">-\Delta</span>, each repeated as many times as it occurs (its <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a>). The drum’s frequencies are then <span class="math inline">f_k = \frac{c}{2\pi}\sqrt{\lambda_k}</span>. Kac’s question, in these terms, is whether the list <span class="math inline">\lambda_1, \lambda_2, \dots</span> determines the shape of <span class="math inline">\Omega</span>. Kac wrote that he had first heard the question posed this way about ten years earlier, from Salomon Bochner.</p>
+</details>
+</div>
+<p><strong>The list knows the area and the length of the rim.</strong> Count how many of a drum’s frequencies lie below some limit. As the limit rises, the count grows in proportion to the drum’s area: twice the area, about twice as many modes below any high limit. This is <a href="../../posts/instruments-as-operators/glossary.html#weyl">Weyl’s law</a>, from 1911, so the area can be heard. The count also falls short of the area’s share, by an amount in proportion to the length of the rim: holding the rim still costs the drum some modes. (Proved, in a slightly smoothed form, for every rim that is smooth or made of straight pieces; the fold has the details.) The demo counts the frequencies of three drums with the same area: once the area’s share, the same for all three, is taken away, the drum with the longest rim sits lowest.</p>
 <div class="ins">
 <div class="panel">
-  <canvas id="wC" style="height:260px" aria-label="Eigenvalue counts of three drums of equal area against Weyl's formula"></canvas>
+  <canvas id="wC" style="height:260px" aria-label="How many modes three drums of equal area have below a rising frequency limit, against Weyl's formula"></canvas>
   <div class="controls" role="group" aria-label="What to plot">
-    <button id="wRaw" aria-pressed="true">Count N(λ)</button>
-    <button id="wRem" aria-pressed="false">Count minus the area term</button>
+    <button id="wRaw" aria-pressed="true">Modes below the limit</button>
+    <button id="wRem" aria-pressed="false">Minus the area's share</button>
   </div>
-  <div class="slider"><label for="wL">Up to λ =</label><input type="range" id="wL" min="40" max="400" step="10" value="400"><output id="wLo"></output></div>
+  <div class="slider"><label for="wL">Frequency limit</label><input type="range" id="wL" min="40" max="400" step="10" value="400"><output id="wLo"></output></div>
   <div class="readout" id="wRead"></div>
-  <p class="cap">Three drums, each of area π: <span style="color:var(--accent)">a disk of radius 1</span>, <span style="color:var(--pos)">a square</span>, and <span style="color:var(--neg)">a rectangle 4 times as long as it is wide</span>. Steps: the true counts, computed from the exact eigenvalues. Dashed: Weyl's two-term formula. Gray: the area term λ/4 alone, shared by all three. Subtracting it leaves roughly −P√λ/4π, so the longer rim gives the lower curve.</p>
+  <p class="cap">Three drums of equal area: <span style="color:var(--accent)">a disk</span>, <span style="color:var(--pos)">a square</span>, <span style="color:var(--neg)">a long rectangle</span>. Steps: the true counts. Dashed: Weyl's formula, area and rim together. Gray: the area's share alone, the same for all three.</p>
 </div>
 </div>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Proof sketch</span>Weyl’s law for a square, by counting dots
+<span class="label">Precisely</span>Weyl’s law and the rim term <span class="needs">uses limits</span>
+</summary>
+<p>Count the eigenvalues up to <span class="math inline">\lambda</span>: <span class="math inline">N(\lambda) = \#\{k : \lambda_k \le \lambda\}</span>, where <span class="math inline">\#</span> means “the number of”. For large <span class="math inline">\lambda</span>, <span class="math display">
+N(\lambda) \approx \frac{A}{4\pi}\,\lambda \;-\; \frac{P}{4\pi}\sqrt{\lambda},
+</span> where <span class="math inline">A</span> is the area of the drum and <span class="math inline">P</span> the length of its rim, and “<span class="math inline">\approx</span>” means that the error, divided by <span class="math inline">\sqrt\lambda</span>, shrinks to zero as <span class="math inline">\lambda</span> grows. The first term is Weyl’s law. Hermann Weyl proved it in 1911, and later work extended it to every drum. So the area can be heard: it is <span class="math inline">4\pi</span> times the rate at which <span class="math inline">N</span> grows. In the demo all three drums have area <span class="math inline">\pi</span> (a disk of radius 1, a square, and a rectangle 4 times as long as it is wide), so the area’s share is <span class="math inline">\lambda/4</span>, and “minus the area’s share” plots <span class="math inline">N(\lambda) - \lambda/4</span>, roughly <span class="math inline">-P\sqrt\lambda/4\pi</span>: the longer the rim, the lower the curve. The demo’s frequency limit is shown as a multiple of the disk’s lowest frequency, <span class="math inline">\sqrt{\lambda/\lambda_1}</span>.</p>
+<p>The second term is subtler. Weyl conjectured it, and Victor Ivrii proved it in 1980 for drums with smooth rims, provided that closed billiard paths are rare. A billiard path is the path of a ball rolling inside the drum and bouncing off the rim, angle in equal to angle out; it is closed if it comes back to where it started, heading the same way. “Rare” means that if you pick a starting point and a direction at random, the chance of landing on a closed path is zero. Ivrii conjectured that this always holds; it has not been proved. The square and the rectangle in the demo have corners, which his theorem does not cover, but for them the formula can be checked by counting, as in the next fold. The perimeter can be heard in any case, for every drum whose rim is smooth or a polygon, by a smoother way of counting; that is the fold after it.</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof sketch</span>Weyl’s law for a square, by counting dots <span class="needs">uses partial derivatives</span>
 </summary>
 <p>Take the square of side <span class="math inline">s</span>. Its eigenfunctions are <span class="math inline">\sin(m\pi x/s)\sin(n\pi y/s)</span> for whole numbers <span class="math inline">m, n \ge 1</span>, with eigenvalues <span class="math inline">(\pi/s)^2(m^2 + n^2)</span>; substituting them into the equation checks this, as for the circle on <a href="../../posts/instruments-as-operators/circle.html">page 3</a>. So <span class="math inline">N(\lambda)</span> is the number of dots <span class="math inline">(m, n)</span>, with <span class="math inline">m, n \ge 1</span>, inside the quarter circle of radius <span class="math inline">R = s\sqrt\lambda/\pi</span>.</p>
 <svg class="fig" viewbox="0 0 260 215" role="img" aria-label="Grid points inside a quarter circle, each owning a unit square, with thin strips along the axes left uncovered">
@@ -279,12 +301,21 @@ Z(t) = \frac{A}{4\pi t} - \frac{P}{8\sqrt{\pi t}} + (\text{terms that stay bound
 </span> Knowing <span class="math inline">Z</span>, one reads off <span class="math inline">A</span> from the first term and then <span class="math inline">P</span> from the second. Kac gave this argument in his 1966 paper. Åke Pleijel had already proved the formula for smooth rims in 1954, by another method; Henry McKean and Isadore Singer proved in 1967 the next, constant term, which Kac had conjectured, from an argument that was not a full proof: <span class="math inline">(1 - h)/6</span> for a drum with <span class="math inline">h</span> holes and a smooth rim; and Michiel van den Berg and Sivakolundu Srisatkunarajah proved the formula for polygons in 1988. Unlike <span class="math inline">N</span>, <span class="math inline">Z</span> needs no condition on billiard paths, because averaging over a range of eigenvalues smooths out the bunching.</p>
 </details>
 </div>
-<p><strong>A drum you can hear: the disk.</strong> Of all shapes with a given area, the disk has the shortest rim: <span class="math inline">P^2 \ge 4\pi A</span>, with equality only for the disk. This is the <a href="https://en.wikipedia.org/wiki/Isoperimetric_inequality">isoperimetric inequality</a>. Both sides can be heard. So a drum, with a smooth or polygonal rim, that has exactly the frequencies of a disk has the disk’s area and perimeter, so <span class="math inline">P^2 = 4\pi A</span>, so it is a disk. Kac pointed this out in his 1966 paper (section 10): “By pitch alone one can thus determine whether a drum is circular or not!” Some shapes, then, can be heard.</p>
-<p><strong>What cannot be heard.</strong> For shapes without a rim the answer was already known to be no, at least in 16 dimensions, and Kac said so: two years before his paper, John Milnor had found two different shapes with the same spectrum in 16 dimensions, two <em>flat tori</em>, the 16-dimensional version of a video-game screen whose edges wrap around, so that leaving on the right brings you back on the left. Whether this could happen in the plane stayed open for 26 years. In 1992 Carolyn Gordon, David Webb and Scott Wolpert answered Kac’s question: no. They found two different polygons whose operators have the same eigenvalues with the same multiplicities, the two drums at the top of this page. Such drums are called <a href="../../posts/instruments-as-operators/glossary.html#isospectral">isospectral</a>. Since area and perimeter can be heard, they must share them, and they do: each is made of seven right triangles with two short sides of length 1, so the area is <span class="math inline">3.5</span>, and each has perimeter <span class="math inline">6 + 3\sqrt2</span>.</p>
+<p><strong>So a round drum can be heard.</strong> Of all shapes with the same area, the disk has the shortest rim. Both the area and the rim’s length can be heard, so a drum, with a smooth or straight-sided rim, that has exactly a disk’s frequencies has the disk’s area and the disk’s rim length, and so it must be a disk. Kac pointed this out in his 1966 paper: “By pitch alone one can thus determine whether a drum is circular or not!”</p>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Why it works</span>Transplantation: carrying a mode from one drum to the other <span class="needs">uses the Laplacian (page 8)</span>
+<span class="label">Precisely</span>The disk argument in symbols <span class="needs">uses the isoperimetric inequality</span>
+</summary>
+<p>The <a href="https://en.wikipedia.org/wiki/Isoperimetric_inequality">isoperimetric inequality</a> says that every drum satisfies <span class="math inline">P^2 \ge 4\pi A</span>, with equality only for the disk. Both sides can be heard, by the folds above. So a drum, with a smooth or polygonal rim, that has exactly the frequencies of a disk has the disk’s area and perimeter, so <span class="math inline">P^2 = 4\pi A</span>, so it is a disk. Kac makes this remark in section 10 of his 1966 paper.</p>
+</details>
+</div>
+<p><strong>But in general, no.</strong> Two years before Kac’s paper, John Milnor had found two different shapes with the same frequencies, and Kac said so; but they were 16-dimensional and had no rim. (They are <em>flat tori</em>: 16-dimensional versions of a video-game screen whose edges wrap around, so that leaving on the right brings you back on the left.) For drums in the plane the question stayed open for 26 years. In 1992 Carolyn Gordon, David Webb and Scott Wolpert answered it: no. They found two different polygons with exactly the same frequencies, repeats included: the two drums at the top of this page. Such drums are called <a href="../../posts/instruments-as-operators/glossary.html#isospectral">isospectral</a>. Since area and rim length can be heard, they must share them, and they do: each is made of seven copies of the same right triangle, with two short sides of length 1, so each has area 3.5 and rim length <span class="math inline">6 + 3\sqrt2</span>.</p>
+<p>Why do they share every frequency? Cut each drum into its seven triangles. Any mode of drum A can be rebuilt on drum B: fill each of B’s triangles with three triangle-shaped pieces of the mode, taken from A’s triangles, turned or flipped to fit, some with their signs reversed. With the right recipe, the pieces join smoothly across every seam and stay still on B’s rim, so the result is a mode of B, at the same frequency. The recipe runs backwards too, so the two drums have exactly the same frequencies, with the same number of modes at each.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>Transplantation: carrying a mode from one drum to the other <span class="needs">uses the Laplacian (page 8)</span>
 </summary>
 <p>Cut each drum along its seams into its seven triangles. Take any eigenfunction <span class="math inline">X</span> of drum A, with eigenvalue <span class="math inline">\lambda</span>. On each triangle of drum B, place a sum of three pieces of <span class="math inline">X</span>, each taken from one of A’s triangles, turned or reflected to fit, and some with a minus sign. Each piece satisfies <span class="math inline">-\Delta X = \lambda X</span>, so the sum does too, inside each triangle. With the right choice of pieces and signs, the result is zero on B’s rim, and across every seam of B both its values and its slopes match. A function that satisfies the equation on both sides of a line, with values and slopes matching on the line, satisfies it across the line too, a standard fact about this equation. At the points where several seams meet, one more standard fact closes the gap: a solution that stays bounded around a single point, and satisfies the equation everywhere near it except possibly at the point itself, satisfies it there too. So the result is an eigenfunction of B with the same <span class="math inline">\lambda</span>. The construction can be reversed, so each eigenvalue has the same multiplicity on both drums.</p>
 <p>This argument is called <em>transplantation</em>. It grew out of work of Peter Buser on surfaces in the 1980s and of Pierre Bérard around 1992; the version for drums like these is in a 1994 paper of Buser, John Conway, Peter Doyle and Klaus-Dieter Semmler. The seven formulas, with pictures, are in Cleve Moler’s blog post on transplantation, and in S. J. Chapman’s article, which does the same by folding paper. Gordon, Webb and Wolpert’s own proof used a method of Toshikazu Sunada from 1985 for building isospectral spaces from group theory; <a href="https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum">Wikipedia</a> has an overview.</p>
@@ -293,7 +324,7 @@ Z(t) = \frac{A}{4\pi t} - \frac{P}{8\sqrt{\pi t}} + (\text{terms that stay bound
 <div class="derive">
 <details>
 <summary>
-<span class="label">Method</span>How the numbers on this page were computed <span class="needs">uses matrices, as on page 2</span>
+<span class="label">Details</span>How the numbers on this page were computed <span class="needs">uses matrices, as on page 2</span>
 </summary>
 <p>Each drum is covered by a square grid of spacing <span class="math inline">h</span>, and the Laplacian is replaced by its five-point version: at each grid point, the sum of the four neighbors minus four times the point, divided by <span class="math inline">h^2</span>. This is the bead model of <a href="../../posts/instruments-as-operators/ring.html">page 2</a> in two dimensions. Grid points on the rim are held at zero. The drums’ corners sit on grid points, so whether each point is inside, on the rim, or outside is decided with exact whole-number arithmetic.</p>
 <p>At <span class="math inline">h = 1/40</span> and <span class="math inline">h = 1/80</span> the two drums give the same first twelve eigenvalues to a relative difference of <span class="math inline">3\times10^{-14}</span>, which is rounding error. This is expected, as far as I can tell, because the grid lines up with every triangle’s edges, so transplantation works for the grid model too; Moler’s post transplants grid eigenvectors in the same way. Combining the two grids (<a href="https://en.wikipedia.org/wiki/Richardson_extrapolation">Richardson extrapolation</a>) gives values within 0.03% of the high-accuracy values in Table 3.1 of Driscoll’s paper, after multiplying his by 4: his drums are twice the size of these. That is a check, not a precise computation: Richardson’s trick assumes the grid error shrinks like <span class="math inline">h^2</span>, and the drums’ inward-pointing corners slow that down. The page uses Driscoll’s values.</p>
@@ -301,16 +332,16 @@ Z(t) = \frac{A}{4\pi t} - \frac{P}{8\sqrt{\pi t}} + (\text{terms that stay bound
 <p>The scripts are <a href="gww.py">gww.py</a> for the eigenvalues and <a href="gww_modes.py">gww_modes.py</a> for the mode pictures. The corner coordinates are those in Moler’s first post. The mode pictures use the coarser grid <span class="math inline">h = 1/40</span>, sampled every <span class="math inline">0.1</span>.</p>
 </details>
 </div>
-<p><strong>Same frequencies, not the same sound.</strong> A struck drum’s sound is a sum of its modes, each at its own frequency and with a strength that depends on where it is struck and where it is heard. The two drums share the frequencies. The mode shapes differ, so the strengths from a strike at a given point differ, and so does the <a href="../../posts/instruments-as-operators/glossary.html#timbre">timbre</a>. What the drums share is the answer to “which frequencies can this drum make”, which is exactly the spectrum.</p>
+<p><strong>Same frequencies, not the same sound.</strong> A struck drum’s sound is a sum of its modes, each at its own frequency and with a strength that depends on where it is struck and where it is heard. The two drums share the frequencies. The mode shapes differ, so the strengths from a strike at a given point differ, and so does the <a href="../../posts/instruments-as-operators/glossary.html#timbre">timbre</a>, the color of the sound. What the drums share is the answer to “which frequencies can this drum make”, which is exactly what the spectrum records.</p>
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>The list of a drum’s frequencies determines the drum’s area and its perimeter, and for a disk that is enough to pin down the shape. In general it is not: two differently shaped drums can have exactly the same list. Looking back, every page has used two ideas: an instrument’s frequencies are the spectrum of an operator, and a clear pitch means the frequencies you hear sit at or near whole-number multiples of one frequency. This page asked the reverse question, what the spectrum says about the instrument; the study of such questions is called <em>spectral geometry</em>.</p>
+<p>A drum’s list of frequencies knows its area and the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every frequency. On the pitch ruler, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. Every earlier page went from an instrument to its spectrum; this one went backwards, asking what the spectrum says about the instrument. The study of such questions is called <em>spectral geometry</em>.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
-<p>One question is left, and it goes beyond mathematics. An instrument’s spectrum decides which pairs of notes sound smooth together on it. Did the instruments people built shape the music they made?</p>
-<p><a href="../../posts/instruments-as-operators/drum.html">← The drum</a> · <a href="../../posts/instruments-as-operators/epilogue.html">Next: did instruments shape our scales? →</a></p>
+<p>One question is left, and it goes beyond mathematics: did the instruments people built shape the music they made?</p>
+<p><a href="../../posts/instruments-as-operators/drum.html">← 8 · Drum</a> · <a href="../../posts/instruments-as-operators/epilogue.html">Next: 10 · Scales →</a></p>
 <div class="refs">
 <p><strong>References.</strong> Å. Pleijel, “A study of certain Green’s functions with applications in the theory of vibrating membranes”, <em>Arkiv för Matematik</em> 2 (1954), 553–569. M. Kac, “Can one hear the shape of a drum?”, <em>American Mathematical Monthly</em> 73 (1966), part II, 1–23 (<a href="https://www.maa.org/programs/maa-awards/writing-awards/can-one-hear-the-shape-of-a-drum">MAA</a>). C. Gordon, D. Webb and S. Wolpert, “One cannot hear the shape of a drum”, <em>Bulletin of the AMS</em> 27 (1992), 134–138 (<a href="https://www.ams.org/bull/1992-27-01/S0273-0979-1992-00289-6/">AMS</a>, <a href="https://arxiv.org/abs/math/9207215">arXiv</a>). T. A. Driscoll, “Eigenmodes of isospectral drums”, <em>SIAM Review</em> 39 (1997) (<a href="https://doi.org/10.1137/S0036144595285069">DOI</a>, <a href="https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf">PDF</a>), Table 3.1. C. Moler, “Can one hear the shape of a drum?”, Cleve’s Corner, MathWorks, August 2012: <a href="https://blogs.mathworks.com/cleve/2012/08/06/can-one-hear-the-shape-of-a-drum-part-1-eigenvalues/">part 1, eigenvalues</a>, <a href="https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/">part 2, eigenfunctions</a>, <a href="https://blogs.mathworks.com/cleve/2012/08/20/can-one-hear-the-shape-of-a-drum-part-3-transplantation/">part 3, transplantation</a>. S. J. Chapman, “Drums that sound the same”, <em>American Mathematical Monthly</em> 102 (1995), 124–138. P. Buser, J. Conway, P. Doyle and K.-D. Semmler, “Some planar isospectral domains”, <em>International Mathematics Research Notices</em> 1994, 391–400 (<a href="https://arxiv.org/abs/1005.1839">arXiv</a>). J. Milnor, “Eigenvalues of the Laplace operator on certain manifolds”, <em>PNAS</em> 51 (1964), 542. H. P. McKean and I. M. Singer, “Curvature and the eigenvalues of the Laplacian”, <em>Journal of Differential Geometry</em> 1 (1967), 43–69 (<a href="https://projecteuclid.org/download/pdf_1/euclid.jdg/1214427880">Project Euclid</a>). M. van den Berg and S. Srisatkunarajah, “Heat equation for a region in R² with a polygonal boundary”, <em>Journal of the London Mathematical Society</em> 37 (1988), 119–127. Wikipedia, <a href="https://en.wikipedia.org/wiki/Weyl_law">Weyl law</a> (Weyl 1911, Ivrii 1980) and <a href="https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum">Hearing the shape of a drum</a>.</p>
 </div>
@@ -372,8 +403,7 @@ Z(t) = \frac{A}{4\pi t} - \frac{P}{8\sqrt{\pi t}} + (\text{terms that stay bound
     C.play(C.render(a.map(function (v, k) { return { f: F1 * ratio(k), amp: v, tau: tau(k) }; }), 2.6), 0.75);
   }
   function read() {
-    var r = []; for (var k = 0; k < 12; k++) r.push(ratio(k).toFixed(3));
-    document.getElementById("gRead").innerHTML = "Mode " + (sel + 1) + ": eigenvalue <b>" + LAM[sel].toFixed(4) + "</b> on both drums, " + (F1 * ratio(sel)).toFixed(1) + " Hz · frequency ratios of both drums: " + r.join(", ");
+    document.getElementById("gRead").innerHTML = "Mode " + (sel + 1) + ": <b>" + (F1 * ratio(sel)).toFixed(0) + " Hz</b> on both drums, <b>" + ratio(sel).toFixed(2) + "×</b> the lowest";
   }
   function all() { D.forEach(function (d) { draw(d); stems(d); }); read(); }
   var box = document.getElementById("gModes");
@@ -403,6 +433,7 @@ Z(t) = \frac{A}{4\pi t} - \frac{P}{8\sqrt{\pi t}} + (\text{terms that stay bound
   for (var a = 1; a < 40; a++) for (var b = 1; b < 40; b++) { var v = Math.PI * (a * a + b * b); if (v <= 400) EV.square.push(v); var w = Math.PI * (a * a / 4 + 4 * b * b); if (w <= 400) EV.rect.push(w); }
   ["disk", "square", "rect"].forEach(function (k) { sortUp(EV[k]); });
   var SH = [{ k: "disk", c: "--accent", P: 2 * Math.PI, name: "disk" }, { k: "square", c: "--pos", P: 4 * Math.sqrt(Math.PI), name: "square" }, { k: "rect", c: "--neg", P: 5 * Math.sqrt(Math.PI), name: "rectangle" }];
+  function fLim() { return Math.sqrt(LMAX / EV.disk[0]).toFixed(1); }
   function count(arr, l) { var n = 0; while (n < arr.length && arr[n] <= l) n++; return n; }
   function weyl(s, l) { return l / 4 - s.P * Math.sqrt(l) / (4 * Math.PI); }
   function drawW() {
@@ -413,8 +444,8 @@ Z(t) = \frac{A}{4\pi t} - \frac{P}{8\sqrt{\pi t}} + (\text{terms that stay bound
     ctx.clearRect(0, 0, W, H);
     ctx.strokeStyle = C.rgb("--grid"); ctx.lineWidth = d; ctx.beginPath(); ctx.moveTo(L, B); ctx.lineTo(R, B); ctx.moveTo(L, T); ctx.lineTo(L, B); ctx.stroke();
     ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace";
-    ctx.fillText("0", L - 4 * d, B + 14 * d); var tl = "λ = " + LMAX; ctx.fillText(tl, R - ctx.measureText(tl).width, B + 14 * d);
-    ctx.fillText(rem ? "N − λ/4" : "N(λ)", 2 * d, T + 8 * d);
+    ctx.fillText("0", L - 4 * d, B + 14 * d); var tl = "limit " + fLim() + "×"; ctx.fillText(tl, R - ctx.measureText(tl).width, B + 14 * d);
+    ctx.fillText(rem ? "count − area's share" : "count", 2 * d, T + 8 * d);
     if (rem) { ctx.strokeStyle = C.rgb("--muted"); ctx.beginPath(); ctx.moveTo(L, Y(0)); ctx.lineTo(R, Y(0)); ctx.stroke(); }
     else { ctx.strokeStyle = C.rgb("--muted"); ctx.lineWidth = 1.5 * d; ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(LMAX), Y(LMAX / 4)); ctx.stroke(); }
     SH.forEach(function (s) {
@@ -425,8 +456,8 @@ Z(t) = \frac{A}{4\pi t} - \frac{P}{8\sqrt{\pi t}} + (\text{terms that stay bound
       for (var i = 0; i <= 200; i++) { var l = LMAX * i / 200, v = weyl(s, l) - (rem ? l / 4 : 0); if (!rem) v = Math.max(0, v); var y = Y(v); if (i) ctx.lineTo(X(l), y); else ctx.moveTo(X(l), y); }
       ctx.stroke(); ctx.setLineDash([]);
     });
-    document.getElementById("wLo").textContent = LMAX;
-    document.getElementById("wRead").innerHTML = "Up to λ = " + LMAX + ": " + SH.map(function (s) { return s.name + " <b>" + count(EV[s.k], LMAX) + "</b> (formula " + weyl(s, LMAX).toFixed(1) + ")"; }).join(" · ");
+    document.getElementById("wLo").textContent = fLim() + "× the disk's lowest";
+    document.getElementById("wRead").innerHTML = "Modes below the limit: " + SH.map(function (s) { return s.name + " <b>" + count(EV[s.k], LMAX) + "</b>"; }).join(", ") + " (Weyl's formula: " + SH.map(function (s) { return weyl(s, LMAX).toFixed(1); }).join(", ") + ")";
   }
   var wl = document.getElementById("wL"); wl.addEventListener("input", function () { LMAX = parseInt(wl.value, 10); drawW(); });
   var bR = document.getElementById("wRaw"), bM = document.getElementById("wRem");

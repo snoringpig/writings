@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8 · The drum – No Man’s Land</title>
+<title>Why does a drum thud? – No Man’s Land</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -160,8 +160,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">8 · The drum</h1>
-<p class="subtitle lead">Two dimensions · Instruments as Operators</p>
+<h1 class="title">Why does a drum thud?</h1>
+<p class="subtitle lead">8 · The drum</p>
 </div>
 
 
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 26, 2026</p>
+      <p class="date-modified">October 27, 2026</p>
     </div>
   </div>
     
@@ -184,27 +184,16 @@ window.Quarto = {
 </header>
 
 
-<div class="series-nav">
-<p><a href="../../posts/instruments-as-operators/index.html">Series</a> · <span class="part">The idea</span> <a href="../../posts/instruments-as-operators/note.html">0 Note</a>, <a href="../../posts/instruments-as-operators/oscillator.html">1 Oscillator</a>, <a href="../../posts/instruments-as-operators/ring.html">2 Beads on a ring</a>, <a href="../../posts/instruments-as-operators/circle.html">3 The circle</a> · <span class="part">Instruments</span> <a href="../../posts/instruments-as-operators/violin.html">4 String</a>, <a href="../../posts/instruments-as-operators/clarinet.html">5 Air column</a>, <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba</a>, <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica</a>, <a href="../../posts/instruments-as-operators/piano.html">7 Piano</a>, <strong>8 Drum</strong> · <span class="part">Beyond</span> <a href="../../posts/instruments-as-operators/shape.html">9 Shape</a>, <a href="../../posts/instruments-as-operators/epilogue.html">10 Epilogue</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/piano.html">← 7 Piano</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/shape.html">9 Drum shape →</a></p>
 </div>
 <div class="pageinfo">
-<p><strong>Builds on</strong> <a href="../../posts/instruments-as-operators/violin.html">page 4</a>; the loop of <a href="../../posts/instruments-as-operators/circle.html">page 3</a> reappears inside the drum. About 7 minutes, plus 5 for the folds.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>; the loop of <a href="../../posts/instruments-as-operators/circle.html">page 3</a> reappears inside the drum. About 9 minutes, plus the folds.</p>
 </div>
 <div class="puzzle">
-<p><strong>The puzzle.</strong> In 1808 Ernst Chladni showed the French Institute in Paris, the body that then held the Academy of Sciences, a trick: sprinkle sand on a metal plate, draw a violin bow along its edge, and the sand leaps into intricate patterns, a different one for each note. What draws the patterns? And why does a drum, struck, give a thud where a string gives a note?</p>
+<p>A drumhead is a sheet pulled tight: a string with a second dimension. Pluck a string and you get a note you could hum. Strike a drum and you get a thud. What changes when the string becomes a sheet?</p>
 </div>
-<p>Here is the same trick on a drumhead. Pick a note and watch where the sand goes.</p>
-<div class="ins">
-<div class="panel">
-  <canvas id="sCanvas" style="height:320px" aria-label="Sand on a vibrating drumhead gathering where the head stays still"></canvas>
-  <div class="controls" id="sModes" role="group" aria-label="Which note to drive the drumhead at"></div>
-  <div class="controls"><button id="sShake" class="primary">Sprinkle fresh sand</button><button id="sHear">Hear this note</button></div>
-  <div class="readout" id="sRead"></div>
-  <p class="cap">Each button drives the drumhead at one of its own frequencies, given as a multiple of the lowest. Every grain is jostled in proportion to how much the head moves under it, so grains drift until they reach a place where the head stays still. Chladni used stiff metal plates, whose operator involves bending, not tension; the sand behaves the same way on both.</p>
-</div>
-</div>
-<p>Napoleon offered a prize for a mathematical explanation of Chladni’s patterns. It was won in 1816 by Sophie Germain, the first woman to receive the grand prize in mathematics of the Paris Academy. Her theory had errors, and the Academy was still not fully satisfied with it; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. The lines the sand draws are the places where the surface does not move, and finding them is the same kind of problem as finding the frequencies: for a drumhead, the problem on this page; for Chladni’s plates, the same problem with the plate’s own operator.</p>
-<p>Now strike the drum itself. Tap the head anywhere below.</p>
+<p>Strike the drum: tap the head anywhere, then tap dead center and compare.</p>
 <style>
 #head { max-width: 440px; aspect-ratio: 1; margin: 0 auto; height: auto; cursor: crosshair; }
 .patch text { font-family: var(--f-mono); font-size: 12px; fill: var(--ink); }
@@ -218,14 +207,31 @@ window.Quarto = {
   <canvas id="head" aria-label="Drumhead. Tap anywhere to strike it there."></canvas>
   <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="ten">Tension ×</label><input type="range" id="ten" min="0.5" max="2" step="0.05" value="1"><output id="teno">1.00</output></div>
   <div class="readout" id="dRead" style="padding:0.4rem 0.25rem 0">Tap the head anywhere. The ring marks where we listen.</div>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">The motion is the actual sum of the 40 lowest modes, slowed about 300 times. Strike dead center and only the round modes, those with no lines through the center, appear. Strike on a line where a mode stays still and that mode stays silent.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">The motion is the sum of the 40 lowest modes, slowed about 300 times. Dead center sounds only the round modes; a strike on a mode's still line leaves that mode silent.</p>
 </section>
 </div>
-<div class="family">
-<p><strong>Same operator, different constants, as a first model.</strong> Toms, snares and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it, and the air in and around a drum changes the operator a little. A timpani’s kettle and the air it encloses shift the head’s modes enough to matter: measured, the modes with one, two, three and four lines through the center, and no still circle inside, sit close to 2, 3, 4 and 5 times a common base frequency, which gives a timpani a pitch that a tom lacks (HyperPhysics; Fletcher and Rossing, chapter 18). The note is normally heard at the frequency of the first of these, the “2”, with the next two a fifth and an octave above it (Institute of Musical Acoustics, Vienna); HyperPhysics notes that the missing base, an octave lower, may be heard instead.</p>
+<div class="gist">
+<p><strong>The gist.</strong> A drumhead has favorite shapes too, its <a href="../../posts/instruments-as-operators/glossary.html#mode">modes</a>, but for an ideal drumhead their frequencies land at 1×, 1.59×, 2.14×, 2.30×, … the lowest: off the lines of the pitch ruler, so the sound doesn’t repeat at any rate we hear as pitch; and it fades fast. Together, a thud. Tap dead center and only the modes with no still lines through the center sound; tap anywhere else and more join in.</p>
 </div>
-<section id="a-sheet-pulled-tight" class="level2">
-<h2 class="anchored" data-anchor-id="a-sheet-pulled-tight">A sheet pulled tight</h2>
+<section id="on-the-pitch-ruler" class="level2">
+<h2 class="anchored" data-anchor-id="on-the-pitch-ruler">On the pitch ruler</h2>
+<p>These are the frequencies in your last strike, as multiples of the lowest. After 1×, the next few, 1.59×, 2.14× and 2.30×, sit between the lines. Higher up the stems crowd together, so some land near a line by chance, such as 2.92× and 4.06×; but no base frequency in the range we hear as pitch puts them all on or near lines. Each stem’s height is how strongly that mode sounds at the listening ring for the strike you made: strike somewhere else and the heights change, never the positions. Tap a stem to see that mode on the drumhead and hear it alone.</p>
+<div class="ins">
+<div class="panel">
+    <h3 class="anchored">Partials of the last strike · tap a stem</h3>
+    <svg class="spec" id="dSpec" viewbox="0 0 320 120" aria-label="Partials of the last strike"></svg>
+    <div class="readout" id="dSel"></div>
+  </div>
+</div>
+</section>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
+<p><strong>A sheet pulled tight.</strong> On a string, tension pulls each point toward the average height of its two neighbors. On a sheet, it pulls each point toward the average height of all the points around it, and the further a point sits from that average, the harder it is pulled back. The rim is held still. In the series’ language, this rule, written with the <a href="../../posts/instruments-as-operators/glossary.html#laplacian">Laplacian</a>, is the drum’s <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>, and the still rim is its <a href="../../posts/instruments-as-operators/glossary.html#boundary-condition">boundary condition</a>.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Step-by-step derivation</span>The drum’s equation, from Newton’s law for a patch <span class="needs">uses partial derivatives and the divergence theorem</span>
+</summary>
 <p><strong>The operator.</strong> A drumhead with tension <span class="math inline">T</span>, measured as force per unit length of any cut through it, and mass <span class="math inline">\sigma</span> per unit area obeys <span class="math display">
 u_{tt} = c^2\,\Delta u, \qquad \Delta u = u_{xx} + u_{yy}, \qquad c^2 = \frac{T}{\sigma}, \qquad u = 0 \text{ on the rim}.
 </span> The operator is <span class="math inline">-c^2\Delta</span>; <span class="math inline">\Delta</span>, the <a href="../../posts/instruments-as-operators/glossary.html#laplacian">Laplacian</a>, adds the second partial derivatives in the two directions across the sheet. On a string, the restoring force was proportional to how far a point sits below the average of its two neighbors; on a sheet it is proportional to how far a point sits below the average of the points around it, and that is what <span class="math inline">\Delta u</span> measures.</p>
@@ -243,11 +249,6 @@ u_{tt} = c^2\,\Delta u, \qquad \Delta u = u_{xx} + u_{yy}, \qquad c^2 = \frac{T}
     <p class="cap">Tension pulls outward all around the edge. Where the sheet bulges, the pulls tilt and their vertical parts add up to T times the Laplacian of u, per unit area.</p>
   </div>
 </div>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Step-by-step derivation</span>Newton’s law for a patch of drumhead <span class="needs">uses multivariable calculus</span>
-</summary>
 <ol type="1">
 <li>Take any small patch <span class="math inline">D</span> of the head. Along each short piece <span class="math inline">ds</span> of its edge, the sheet outside pulls with force <span class="math inline">T\,ds</span>, along the surface and outward.</li>
 <li>For small slopes the vertical part of that pull is <span class="math inline">T\,\partial_n u\,ds</span>, where <span class="math inline">\partial_n u</span> is the slope of the head in the outward direction across the edge. This is the string’s <span class="math inline">T\sin\theta \approx T\tan\theta</span> again.</li>
@@ -257,10 +258,17 @@ T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
 <li>Newton’s law for the patch reads <span class="math inline">\iint_D \sigma\,u_{tt}\,dA = T\iint_D \Delta u\,dA</span>. This holds for every patch, however small, so the integrands are equal at every point: <span class="math inline">\sigma u_{tt} = T\Delta u</span>.</li>
 </ol>
 <p>In one dimension a patch is a segment, its edge is its two endpoints, and step 3 is the fundamental theorem of calculus, <span class="math inline">u_x(b) - u_x(a) = \int_a^b u_{xx}\,dx</span>. That is the string’s equation again.</p>
-<p>What was assumed: small slopes, a tension that is the same everywhere and does not change as the head moves, no bending stiffness, and no air. The air matters for real drums, as the note above says.</p>
+<p>What was assumed: small slopes, a tension that is the same everywhere and does not change as the head moves, no bending stiffness, and no air. The air matters for real drums, as the timpani section below says.</p>
 </details>
 </div>
-<p><strong>Spectrum, and the sand’s lines.</strong> A mode is a fixed shape <span class="math inline">X</span> swinging as <span class="math inline">X\cos\omega t</span>, with <span class="math inline">-\Delta X = k^2 X</span> where <span class="math inline">k = \omega/c</span>, and <span class="math inline">X = 0</span> on the rim. For a round drum of radius <span class="math inline">a</span>, measure position by the distance <span class="math inline">r</span> from the center and the angle <span class="math inline">\theta</span>. Going once around the drum, a mode must return to itself, so its dependence on the angle is <span class="math inline">\cos m\theta</span> or <span class="math inline">\sin m\theta</span> with <span class="math inline">m</span> a whole number: the loop of <a href="../../posts/instruments-as-operators/circle.html">page 3</a>, inside the drum. Its dependence on <span class="math inline">r</span> is a <a href="../../posts/instruments-as-operators/glossary.html#bessel">Bessel function</a>, so the modes are <span class="math display">
+<p><strong>Spokes and circles.</strong> On a round drum, each mode has its own pattern of still lines: some straight lines through the center, like spokes, and some circles around it. Going once around the drum, a mode must come back to itself, so around the center it repeats a whole number of times: the loop of <a href="../../posts/instruments-as-operators/circle.html">page 3</a>, inside the drum. Outward from the center, the shape is a <a href="../../posts/instruments-as-operators/glossary.html#bessel">Bessel function</a>, a wave whose swings slowly shrink, and the rim must sit exactly where that wave crosses zero.</p>
+<p><strong>Why the frequencies miss the lines.</strong> Those zero crossings set the frequencies. For the modes with no spokes, the crossings come at nearly even steps, but the first step is short, so the later crossings are not multiples of the first: the frequencies go 1 : 2.30 : 3.60. Each number of spokes gives its own sequence, shifted by a different amount, and the sequences interleave at unrelated places. Merged, they give the drum’s list 1×, 1.59×, 2.14×, 2.30×, 2.65×, 2.92×, …, scattered between the lines. One more pattern: every mode with spokes comes in a pair, the same pattern turned, with exactly the same frequency. That is the round drum’s symmetry, heard in its spectrum.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Bessel functions and the frequencies of a round drum <span class="needs">uses polar coordinates</span>
+</summary>
+<p>A mode is a fixed shape <span class="math inline">X</span> swinging as <span class="math inline">X\cos\omega t</span>, with <span class="math inline">-\Delta X = k^2 X</span> where <span class="math inline">k = \omega/c</span>, and <span class="math inline">X = 0</span> on the rim. For a round drum of radius <span class="math inline">a</span>, measure position by the distance <span class="math inline">r</span> from the center and the angle <span class="math inline">\theta</span>. Going once around the drum, a mode must return to itself, so its dependence on the angle is <span class="math inline">\cos m\theta</span> or <span class="math inline">\sin m\theta</span> with <span class="math inline">m</span> a whole number, and its dependence on <span class="math inline">r</span> is a Bessel function, so the modes are <span class="math display">
 J_m(k r)\cos m\theta \quad\text{and}\quad J_m(kr)\sin m\theta, \qquad m = 0, 1, 2, \dots
 </span> The Bessel function <span class="math inline">J_m</span> plays the part that the sine played on a string: it wiggles like a cosine or sine whose swings slowly shrink. Its zeros are not whole-number multiples of the first one: those of <span class="math inline">J_0</span> are at <span class="math inline">2.405,\ 5.520,\ 8.654, \dots</span>, in the ratios <span class="math inline">1 : 2.30 : 3.60</span>. They are spaced by about <span class="math inline">\pi</span>, but shifted: the first is about <span class="math inline">0.77\pi</span>, not <span class="math inline">\pi</span>, so the later ones are not multiples of it. <span class="math inline">J_0</span> starts at 1 at the center; <span class="math inline">J_1</span>, <span class="math inline">J_2</span>, … start at 0.</p>
 <svg class="fig" viewbox="0 0 420 170" role="img" aria-label="Graphs of the Bessel functions J0 and J1: wiggles like a cosine and a sine whose swings shrink, crossing zero at points that are not whole-number multiples of the first">
@@ -281,11 +289,12 @@ J_m(k r)\cos m\theta \quad\text{and}\quad J_m(kr)\sin m\theta, \qquad m = 0, 1, 
 <p>The rim condition <span class="math inline">J_m(ka) = 0</span> says <span class="math inline">ka</span> must be a zero of <span class="math inline">J_m</span>. Writing <span class="math inline">j_{m,n}</span> for the <span class="math inline">n</span>-th positive zero, <span class="math inline">k = j_{m,n}/a</span> and <span class="math inline">f = ck/2\pi</span>, so <span class="math display">
 f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
 </span> Listed in order, the frequencies relative to the lowest are <span class="math inline">1,\ 1.593,\ 2.136,\ 2.295,\ 2.653,\ 2.917, \dots</span> No base frequency in the pitch range puts them near whole-number multiples: the zeros of each <span class="math inline">J_m</span> are spaced by about <span class="math inline">\pi</span> but shifted, by an amount that depends on <span class="math inline">m</span>, and the zeros of <span class="math inline">J_0</span>, of <span class="math inline">J_1</span>, of <span class="math inline">J_2</span> and so on interleave at unrelated places. So the sound does not repeat and there is no clear pitch. Each frequency with <span class="math inline">m \ge 1</span> belongs to two modes, the cosine and the sine, which are the same pattern turned: the round head’s symmetry, visible as a <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a> of 2.</p>
-<p>The sand demo shows these shapes directly. The mode <span class="math inline">J_m(kr)\cos m\theta</span> is zero where <span class="math inline">\cos m\theta = 0</span>, at <span class="math inline">2m</span> angles, which pair up into <span class="math inline">m</span> lines through the center, and along the circles where <span class="math inline">J_m(kr) = 0</span> inside the rim, <span class="math inline">n - 1</span> of them for the <span class="math inline">n</span>-th zero. Those are exactly the lines where the sand collects.</p>
+</details>
+</div>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Step-by-step derivation</span>Separation of variables in polar coordinates <span class="needs">uses multivariable calculus</span>
+<span class="label">Step-by-step derivation</span>Separation of variables in polar coordinates <span class="needs">uses partial derivatives</span>
 </summary>
 <ol type="1">
 <li><em>Look for a fixed shape.</em> A mode is <span class="math inline">u = X(r, \theta)\cos\omega t</span> with <span class="math inline">-\Delta X = k^2X</span>, <span class="math inline">k = \omega/c</span>, and <span class="math inline">X = 0</span> at <span class="math inline">r = a</span>.</li>
@@ -300,24 +309,48 @@ f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
 <p>Each frequency with <span class="math inline">m \ge 1</span> belongs to exactly two modes because Bessel functions of different whole-number orders never share a positive zero; this was conjectured by Bourget and proved by Carl Ludwig Siegel in 1929. The zeros have no closed form; this page computes them numerically. For large <span class="math inline">n</span> they approach <span class="math inline">j_{m,n} \approx (n + \tfrac m2 - \tfrac14)\pi</span>, evenly spaced for one fixed <span class="math inline">m</span>, but the different <span class="math inline">m</span> interleave, and the low ones are not close to any common grid.</p>
 </details>
 </div>
-<p><strong>Where you strike.</strong> Number the modes <span class="math inline">X_1, X_2, \dots</span> in order of frequency. A sharp strike, a brief push at a point <span class="math inline">p</span>, gives mode <span class="math inline">i</span> a starting speed in proportion to <span class="math inline">X_i(p)</span>, the mode’s height at the point struck, the same rule as the piano’s hammer on page 7. We model what you hear as the speed of the head at a listening point <span class="math inline">q</span>, which picks up mode <span class="math inline">i</span> in proportion to <span class="math inline">X_i(q)</span>. Dividing by <span class="math inline">\iint X_i^2\,dA</span>, the integral of the mode’s square over the head, removes the arbitrary size of each shape. So mode <span class="math inline">i</span> sounds with weight <span class="math inline">X_i(p)\,X_i(q)\big/\iint X_i^2\,dA</span>. (A real drum radiates sound from its whole head, and some modes radiate better than others; this model ignores that.) Strike the center and only the round modes, <span class="math inline">m = 0</span>, sound, because every other mode has zero height there. Timpanists strike between halfway and three-quarters of the way out from the center, near the still lines of several modes, which keeps those modes quiet (HyperPhysics); for the first four modes with one still circle inside, for example, that circle lies between 0.44 and 0.65 of the radius. The lowest mode, which dies away fast and is not musically useful, is excited less there than by a strike at the center. Tap a stem to see one mode on the drumhead and hear it alone.</p>
+<p><strong>The sand draws the still lines.</strong> In 1808 Ernst Chladni showed the French Institute in Paris, the body that then held the Academy of Sciences, a trick: sprinkle sand on a metal plate, draw a violin bow along its edge, and the sand leaps into a pattern, a different one for each note. The sand is jostled wherever the plate moves and comes to rest where it doesn’t, so each pattern is one mode’s still lines. Here is the same trick on a drumhead: pick a frequency and watch where the sand goes.</p>
 <div class="ins">
 <div class="panel">
-    <h3 class="anchored">Partials of the last strike · tap a stem</h3>
-    <svg class="spec" id="dSpec" viewbox="0 0 320 120" aria-label="Partials of the last strike"></svg>
-    <div class="readout" id="dSel"></div>
-  </div>
+  <canvas id="sCanvas" style="height:320px" aria-label="Sand on a vibrating drumhead gathering where the head stays still"></canvas>
+  <div class="controls" id="sModes" role="group" aria-label="Which note to drive the drumhead at"></div>
+  <div class="controls"><button id="sShake" class="primary">Sprinkle fresh sand</button><button id="sHear">Hear this note</button></div>
+  <div class="readout" id="sRead"></div>
+  <p class="cap">Each button drives the drumhead at one of its own frequencies, given as a multiple of the lowest. Every grain is jostled in proportion to how much the head moves under it, so grains drift until they reach a place where the head stays still. Chladni used stiff metal plates, whose operator involves bending, not tension; the sand behaves the same way on both.</p>
 </div>
+</div>
+<p>Napoleon offered a prize for explaining the patterns. Sophie Germain won it in 1816, the first woman to receive the Paris Academy’s grand prize in mathematics, with a theory that still had errors; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. Finding the still lines and finding the frequencies are one problem: on a drumhead, the one on this page; on a plate, the same problem with the plate’s own operator.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Where the sand collects <span class="needs">uses polar coordinates</span>
+</summary>
+<p>The mode <span class="math inline">J_m(kr)\cos m\theta</span> with <span class="math inline">k = j_{m,n}/a</span> is zero where <span class="math inline">\cos m\theta = 0</span>, at <span class="math inline">2m</span> angles, which pair up into <span class="math inline">m</span> lines through the center, and along the circles where <span class="math inline">J_m(kr) = 0</span> inside the rim, <span class="math inline">n - 1</span> of them for the <span class="math inline">n</span>-th zero. Those are exactly the lines where the sand collects.</p>
+</details>
+</div>
+<p><strong>Where you strike.</strong> A sharp strike starts each mode in proportion to how far that mode moves at the point struck. Every mode with spokes stays still at the center, so a strike at dead center sounds only the round modes, those with no spokes; a strike on one of a mode’s still lines leaves that mode silent. Timpanists strike between halfway and three-quarters of the way out from the center, near the still lines of several modes, which keeps those modes quiet (HyperPhysics).</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>How strongly a strike excites each mode, in this model <span class="needs">uses integrals over an area</span>
+</summary>
+<p>Number the modes <span class="math inline">X_1, X_2, \dots</span> in order of frequency. A sharp strike, a brief push at a point <span class="math inline">p</span>, gives mode <span class="math inline">i</span> a starting speed in proportion to <span class="math inline">X_i(p)</span>, the mode’s height at the point struck, the same rule as the piano’s hammer on page 7. We model what you hear as the speed of the head at a listening point <span class="math inline">q</span>, which picks up mode <span class="math inline">i</span> in proportion to <span class="math inline">X_i(q)</span>. Dividing by <span class="math inline">\iint X_i^2\,dA</span>, the integral of the mode’s square over the head, removes the arbitrary size of each shape. So mode <span class="math inline">i</span> sounds with weight <span class="math inline">X_i(p)\,X_i(q)\big/\iint X_i^2\,dA</span>. (A real drum radiates sound from its whole head, and some modes radiate better than others; this model ignores that.) For the timpani strike point: for the first four modes with one still circle inside, that circle lies between 0.44 and 0.65 of the radius. The lowest mode, which dies away fast and is not musically useful, is excited less there than by a strike at the center.</p>
+</details>
+</div>
+<p><strong>The exception: timpani.</strong> A timpani does have a pitch. Its kettle and the air it encloses shift the head’s modes enough to matter: measured, the modes with one, two, three and four lines through the center, and no still circle inside, sit close to 2, 3, 4 and 5 times a common base frequency (HyperPhysics; Fletcher and Rossing). The note is normally heard at the first of these, the “2”, with the next two a <a href="../../posts/instruments-as-operators/glossary.html#octave">fifth</a> and an octave above it (Vienna’s Institute of Musical Acoustics); the missing base, an octave lower, may be heard instead (HyperPhysics). Pulled near the lines, the drum gives a note.</p>
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>On a surface the operator is the <a href="../../posts/instruments-as-operators/glossary.html#laplacian">Laplacian</a>. For a round drum its eigenfunctions are built from <a href="../../posts/instruments-as-operators/glossary.html#bessel">Bessel functions</a>, and the frequencies are set by their zeros, which are not near whole-number multiples of any one frequency. That is why a drum has no clear pitch. The lines where each mode stays still are what Chladni’s sand made visible, on plates.</p>
+<p>On the pitch ruler, a drum’s frequencies are off the lines, and its sound fades fast: a thud. The drum taught three things. A round drum’s modes come in families, one for each number of spokes. Within a family the steps between frequencies are nearly even but the first step is short, and the families interleave, so the frequencies miss the lines. And the drum’s round symmetry shows up as pairs of modes with exactly the same frequency. Change what surrounds the head, as a timpani’s kettle does, and the frequencies can be pulled back near the lines.</p>
+<div class="family">
+<p><strong>Same operator, different constants, as a first model.</strong> Toms, snares and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it, and the air in and around a drum changes the operator a little.</p>
+</div>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
-<p>The shape of the drum sets its frequencies. Turn that around: if you could hear every frequency a drum makes, perfectly, could you work out its shape? Mark Kac made this question famous in 1966.</p>
-<p><em>On the core path?</em> This is its last page. <a href="../../posts/instruments-as-operators/shape.html">Page 9</a> turns the question around, if you want more.</p>
-<p><a href="../../posts/instruments-as-operators/piano.html">← The piano</a> · <a href="../../posts/instruments-as-operators/shape.html">Next: what the spectrum knows →</a></p>
+<p>Turn the question around: if you could hear every frequency a drum makes, could you work out its shape?</p>
+<p>Short on time? This is the last page of the short path through the series, pages 0, 4 and 8. <a href="../../posts/instruments-as-operators/shape.html">Page 9</a> takes it up, if you want more.</p>
+<p><a href="../../posts/instruments-as-operators/piano.html">← 7 · Piano</a> · <a href="../../posts/instruments-as-operators/shape.html">Next: 9 · Drum shape →</a></p>
 <div class="refs">
 <p><strong>References.</strong> <a href="https://hyperphysics.gsu.edu/hbase/Music/timpani.html">The Timpani</a>, HyperPhysics, Georgia State University. <a href="https://www.mdw.ac.at/iwk/wiener-pauke/?l=en">The Viennese timpani</a>, Institute of Musical Acoustics (Wiener Klangstil), University of Music and Performing Arts Vienna. The Chladni and Germain history: <a href="https://www.irishtimes.com/news/science/the-extraordinary-talent-and-superior-genius-of-sophie-germain-1.4130947">The ‘extraordinary talent and superior genius’ of Sophie Germain</a>, <em>The Irish Times</em>. Wikipedia, <a href="https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane">Vibrations of a circular membrane</a>, <a href="https://en.wikipedia.org/wiki/Bessel_function">Bessel function</a> and <a href="https://en.wikipedia.org/wiki/Divergence_theorem">Divergence theorem</a>. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums).</p>
 </div>
@@ -347,9 +380,7 @@ f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
     lastParts = C.models.drum.partials({ r: r, th: th });
     C.play(C.render(C.toHz(lastParts, F0()), 2.6), 0.85);
     dspec();
-    var top = lastParts.map(function (p, i) { return { i: i, a: Math.abs(p.amp) }; }).sort(function (a, b) { return b.a - a.a; }).slice(0, 3)
-      .map(function (o) { var d = lastParts[o.i].mode; return "(" + d.m + "," + d.n + ")"; }).join(" ");
-    document.getElementById("dRead").innerHTML = "struck at r = <b>" + r.toFixed(2) + "</b> a · loudest modes " + top + " · fundamental " + F0().toFixed(0) + " Hz";
+    document.getElementById("dRead").innerHTML = "struck <b>" + Math.round(100 * r) + "%</b> of the way out from the center · lowest frequency <b>" + F0().toFixed(0) + " Hz</b> · tap a stem to hear one mode";
   }
   cv.addEventListener("pointerdown", function (e) {
     var b = cv.getBoundingClientRect(), x = ((e.clientX - b.left) / b.width) * 2 - 1, y = 1 - ((e.clientY - b.top) / b.height) * 2, r = Math.hypot(x, y);
@@ -364,7 +395,8 @@ f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
     C.stems(document.getElementById("dSpec"), p, { W: 320, H: 120, rmax: 12, fs: 9, sw: 2.5, sel: sel, onPick: function (i) {
       sel = i; dspec(); var d = p[i].mode; solo = MODES.indexOf(d); soloT0 = performance.now();
       C.play(C.render([{ f: F0() * d.ratio, amp: 1, tau: 0.8 }], 1.4), 0.6);
-      document.getElementById("dSel").innerHTML = "mode (" + d.m + ", " + d.n + ") · j = <b>" + d.j.toFixed(4) + "</b> · <b>" + d.ratio.toFixed(3) + "</b>× · " + d.m + " nodal diameters, " + (d.n - 1) + " nodal circles";
+      var pl = function (k, w) { return (k === 0 ? "no" : k) + " " + w + (k === 1 ? "" : "s"); };
+      document.getElementById("dSel").innerHTML = "this mode: <b>" + d.ratio.toFixed(2) + "×</b> the lowest · " + pl(d.m, "still line") + " through the center, " + pl(d.n - 1, "still circle") + " inside the rim";
     } });
   }
 
