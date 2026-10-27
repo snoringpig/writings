@@ -50,7 +50,7 @@ Here are six sounds that need explaining. Play them, and try to guess why each o
   </div>
   <div class="pcard">
     <p class="q">Why do piano tuners avoid exact octaves?</p>
-    <p class="b">An octave tuned to exactly 2 : 1 wobbles; a slightly stretched one doesn't. Stiffness exaggerated here so the wobble is easy to hear.</p>
+    <p class="b">An octave tuned to exactly 2 : 1 wobbles; a slightly stretched one doesn't. To make the wobble easy to hear, these are simplified notes: only their lowest partials, with the stiffness exaggerated.</p>
     <div class="controls"><button data-g="oct">Exactly 2 : 1</button><button data-g="str">Stretched</button></div>
     <p class="go">Answered on <a href="piano.html">page 7</a></p>
   </div>
@@ -195,8 +195,9 @@ These are the partials of the sound, which for blown and bowed instruments diffe
 
   // ---- the six puzzles ----
   function harmonics(f, n, odd, skip1) { var out = []; for (var k = 1; k <= n; k++) { if (odd && k % 2 === 0) continue; if (skip1 && k === 1) continue; out.push({ f: f * k, amp: 1 / k, tau: 10 }); } return out; }
-  var BL = 0.0024, BU = 0.0048, LOW = 261.63, P2 = Math.sqrt((1 + 4 * BL) / (1 + BL));
-  function pianoNote(f1, B) { return C.toHz(M.piano.partials({ B: B, f1: f1 }), f1); }
+  // Octave puzzle: simplified stiff-string notes, only the lowest partials, so the tuner's 2 : 1 beat (C4's 2nd partial against C5) stands out.
+  var BS = 0.0024, LOW = 261.63, P2 = Math.sqrt((1 + 4 * BS) / (1 + BS));
+  function stiffNote(f1, amps) { return amps.map(function (a, i) { var n = i + 1; return { f: f1 * n * Math.sqrt((1 + BS * n * n) / (1 + BS)), amp: a, tau: 3 }; }); }
   var GWW = [2.53794399980, 3.65550971352, 5.17555935622, 6.53755744376, 7.24807786256, 9.20929499840, 10.5969856913, 11.5413953956, 12.3370055014, 13.0536540557, 14.3138624643, 15.8713026200];
   function gww() { return GWW.map(function (v, k) { return { f: 150 * Math.sqrt(v / GWW[0]), amp: 1, tau: 1.4 / (1 + 0.12 * k) }; }); }
   var G = {
@@ -208,8 +209,8 @@ These are the partials of the sound, which for blown and bowed instruments diffe
     clar: function () { return fadeOut(C.render(harmonics(343 / 2.4, 15, true), 1.6), 0.3); },
     kal: function () { return C.render(C.toHz(M.kalimba.partials(), 523.25), 2.4); },
     harm: function () { return fadeOut(C.render(C.toHz(M.harmonica.partials(), 523.25), 1.6), 0.3); },
-    oct: function () { return C.render(pianoNote(LOW, BL).concat(pianoNote(2 * LOW, BU)), 4); },
-    str: function () { return C.render(pianoNote(LOW, BL).concat(pianoNote(2 * LOW * P2, BU)), 4); },
+    oct: function () { return C.render(stiffNote(LOW, [1, 0.7, 0.3]).concat(stiffNote(2 * LOW, [0.7, 0.25])), 4); },
+    str: function () { return C.render(stiffNote(LOW, [1, 0.7, 0.3]).concat(stiffNote(2 * LOW * P2, [0.7, 0.25])), 4); },
     gA: function () { return C.render(gww(), 2.4); },
     gB: function () { return C.render(gww(), 2.4); }
   };
