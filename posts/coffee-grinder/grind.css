@@ -1,0 +1,92 @@
+/* Styles for "What One Click Does" (posts/coffee-grinder). Same visual language as the Instruments posts. */
+:root {
+  --paper: #ffffff; --panel: #f2f3f0; --ink: #1c2230; --muted: #586070; --rule: #d2d6ce;
+  --accent: #2e4bb0; --pos: #c9572f; --neg: #2b67b3;
+  --espresso: #6b3e26; --moka: #a8662f; --pour: #2e7d6b; --press: #4a5fb0; --fines: #c9a227;
+  --f-ui: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+.gr { font-size: 1rem; line-height: 1.5; color: var(--ink); }
+.gr * { box-sizing: border-box; }
+.gr .panel { background: var(--panel); border-radius: 10px; padding: 0.85rem; display: grid; gap: 0.65rem; min-width: 0; margin: 1rem 0 1.5rem; }
+.gr h3 { font-family: var(--f-ui); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.35rem; }
+.gr .cap { font-family: var(--f-ui); font-size: 0.88rem; color: var(--muted); margin: 0; line-height: 1.45; }
+.gr .controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.gr button { font-family: var(--f-ui); font-size: 0.95rem; color: var(--ink); background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 0.4rem 0.75rem; min-height: 2.3rem; cursor: pointer; }
+.gr button:hover { border-color: var(--muted); }
+.gr button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.gr button[aria-pressed="true"] { background: #fff; color: var(--accent); border-color: var(--accent); }
+.gr button:focus-visible, .gr input:focus-visible, .gr canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.gr .slider { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; font-family: var(--f-ui); font-size: 0.92rem; color: var(--muted); }
+.gr .slider input[type=range] { flex: 1 1 10rem; min-width: 0; accent-color: var(--accent); }
+.gr .slider output { font-family: var(--f-mono); color: var(--ink); min-width: 4.5rem; font-variant-numeric: tabular-nums; }
+.gr label.check { font-family: var(--f-ui); font-size: 0.92rem; color: var(--muted); display: inline-flex; gap: 0.4rem; align-items: center; }
+.gr .readout { font-family: var(--f-mono); font-size: 0.86rem; font-variant-numeric: tabular-nums; color: var(--muted); line-height: 1.55; }
+.gr .readout b { color: var(--ink); font-weight: 500; }
+.gr canvas { display: block; width: 100%; touch-action: pan-y; }
+
+/* The 3D stage: canvas with HTML labels laid over it. */
+.gr .stage { position: relative; width: 100%; height: clamp(360px, 62vw, 470px); background: #fbfbf9; border-radius: 8px; overflow: hidden; }
+.gr .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+.gr .stage canvas:active { cursor: grabbing; }
+@media (max-width: 500px) { .gr .stage .lab { font-size: 0.7rem; } .gr table.verdict { font-size: 0.82rem; } }
+.gr .stage .lab { position: absolute; transform: translate(-50%, -50%); font-family: var(--f-ui); font-size: 0.78rem; line-height: 1.2; color: var(--ink); background: rgba(255,255,255,0.82); border: 1px solid var(--rule); border-radius: 4px; padding: 0.1rem 0.35rem; pointer-events: none; white-space: nowrap; }
+.gr .stage .lab.hidden { display: none; }
+.gr .stage .hint { position: absolute; left: 0.6rem; bottom: 0.45rem; font-family: var(--f-ui); font-size: 0.78rem; color: var(--muted); pointer-events: none; }
+.gr .stage .badge { position: absolute; right: 0.6rem; top: 0.5rem; font-family: var(--f-ui); font-size: 0.78rem; color: var(--pos); background: rgba(255,255,255,0.85); border-radius: 4px; padding: 0.05rem 0.35rem; pointer-events: none; }
+.gr .twocol { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 0.75rem; }
+@media (max-width: 700px) { .gr .twocol { grid-template-columns: minmax(0, 1fr); } }
+.gr .card { background: #fff; border-radius: 8px; padding: 0.55rem 0.6rem; min-width: 0; display: grid; gap: 0.35rem; align-content: start; }
+.gr .clickrow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.5rem; align-items: center; }
+.gr .clickrow button { min-width: 2.6rem; font-family: var(--f-mono); }
+.gr .bigclicks { font-family: var(--f-mono); font-size: 1.35rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.gr .legend { display: flex; flex-wrap: wrap; gap: 0.25rem 0.85rem; font-family: var(--f-ui); font-size: 0.82rem; color: var(--muted); }
+.gr .legend i { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 2px; vertical-align: -0.1rem; margin-right: 0.3rem; }
+.gr details.more summary { cursor: pointer; font-family: var(--f-ui); font-size: 0.92rem; color: var(--accent); }
+.gr details.more[open] summary { margin-bottom: 0.4rem; }
+.gr table.verdict { width: 100%; border-collapse: collapse; font-family: var(--f-ui); font-size: 0.9rem; }
+.gr table.verdict td, .gr table.verdict th { padding: 0.25rem 0.35rem; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.gr table.verdict th { font-weight: 500; color: var(--muted); }
+.gr table.verdict td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.gr .tag { display: inline-block; border-radius: 8px; padding: 0 0.5rem; font-size: 0.82rem; line-height: 1.35; }
+.gr .tag.under { background: #e7eefb; color: #2b4f9a; }
+.gr .tag.ok { background: #e3f3ec; color: #22684f; }
+.gr .tag.over { background: #fbe9e2; color: #9a3d1d; }
+.gr .noscript { font-family: var(--f-ui); color: var(--pos); }
+
+/* Page furniture, shared look with the other posts. */
+.made { font-size: 0.85rem; color: var(--muted); margin: 0 0 1.5rem; }
+.made p { margin: 0; }
+.pageinfo { font-size: 0.86rem; color: var(--muted); margin: 0 0 0.75rem; line-height: 1.5; }
+.pageinfo p { margin: 0; }
+.puzzle { border-left: 3px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0 0 1.25rem; font-size: 1.05rem; }
+.puzzle p { margin: 0; }
+.puzzle p + p { margin-top: 0.45rem; }
+.takeaways { background: var(--panel); border-radius: 8px; padding: 0.7rem 0.95rem; margin: 0 0 1.5rem; }
+.takeaways p { margin: 0 0 0.3rem; }
+.takeaways ol { margin: 0; padding-left: 1.25rem; }
+.takeaways li { margin: 0.2rem 0; }
+.family { border-left: 2px solid var(--rule); padding: 0.1rem 0 0.1rem 0.9rem; margin: 0.75rem 0 1.5rem; color: var(--muted); font-size: 0.95rem; }
+.family p { margin: 0; }
+.result { border-left: 2px solid var(--accent); padding: 0.1rem 0 0.1rem 0.9rem; margin: 1rem 0 1.25rem; }
+.result p { margin: 0 0 0.25rem; }
+.derive { margin: 0.75rem 0 1.25rem; }
+.derive details { border-left: 2px solid var(--accent); padding: 0.15rem 0 0.15rem 0.9rem; }
+.derive summary { cursor: pointer; color: var(--accent); font-size: 0.95rem; }
+.derive details[open] summary { margin-bottom: 0.5rem; }
+.derive .label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
+.needs { font-family: var(--f-ui); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; padding: 0 0.45rem; margin-left: 0.35rem; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.refs { font-size: 0.86rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.75rem; margin: 2.25rem 0 1rem; line-height: 1.55; }
+.refs p { margin: 0 0 0.4rem; }
+.refs a { color: inherit; }
+svg.fig { display: block; width: 100%; max-width: 440px; height: auto; margin: 0.5rem auto 0.75rem; }
+svg.fig text { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; fill: var(--ink); }
+svg.fig .ink { stroke: var(--ink); fill: none; stroke-width: 1.6; }
+svg.fig .acc { stroke: var(--accent); fill: none; stroke-width: 2; }
+svg.fig .pos { stroke: var(--pos); fill: none; stroke-width: 2; }
+svg.fig .dash { stroke: var(--muted); fill: none; stroke-width: 1; stroke-dasharray: 4 3; }
+svg.fig .steel { fill: #d9dde2; stroke: none; }
+/* Narrow screens: wide equations and tables scroll inside themselves instead of widening the page. */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; position: relative; }
+@media (max-width: 700px) { main table { display: block; overflow-x: auto; position: relative; } }
