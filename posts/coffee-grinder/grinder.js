@@ -388,7 +388,7 @@
   function updateReadout() {
     const g = gReal(), mp = G.mainPeakUm(g), f = G.finesShare(g), bs = G.brewsFor(mp);
     const where = state.n === 0 ? "burrs touching: never grind here"
-      : bs.length ? "inside the range for <b>" + bs.map(b => b.name.toLowerCase()).join("</b> and <b>") + "</b>"
+      : bs.length ? "inside the range for <b>" + bs.map(b => b.name.toLowerCase().replace("v60", "V60")).join("</b> and <b>") + "</b>"
       : (mp < 180 ? "finer than espresso (Turkish-coffee territory)" : "coarser than French press (cold-brew territory)");
     read.innerHTML = "Inner burr lowered <b>" + (state.n * G.STEP_UM / 1000).toFixed(2) + " mm</b> → exit gap <b>" + fmtUm(g) + "</b> (θ = " + state.theta + "°)<br>" +
       "Main peak ≈ <b>" + fmtUm(mp) + "</b>, fines ≈ <b>" + Math.round(f * 100) + "%</b> of the coffee · " + where;

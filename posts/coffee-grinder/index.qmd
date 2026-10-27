@@ -1,6 +1,6 @@
 ---
 title: "What One Click Does"
-subtitle: "A coffee grinder opened up in 3D: how a 1/30 mm turn of the dial sets the grind for espresso, moka, pour-over and French press"
+subtitle: "A coffee grinder opened up in 3D: how one click, 1/30 mm of burr travel, sets the grind for espresso, moka, pour-over and French press"
 date: 2026-10-26
 date-modified: 2026-10-26
 categories: [physics, coffee]
@@ -16,7 +16,7 @@ resources: [model.js, grinder.js, clocks.js, grind.css, numbers.py]
 :::
 
 ::: {.pageinfo}
-Needs: squares, square roots and one right triangle. The folded sections use calculus. Reading time: about 10 minutes, plus 10 for the folds.
+Needs: squares, square roots and the sine in one right triangle. The folded sections use calculus. Reading time: about 10 minutes, plus 10 for the folds.
 :::
 
 ::: {.puzzle}
@@ -28,16 +28,16 @@ Why does each brew method need its own size? And what does one click of the grin
 ::: {.takeaways}
 If you take away three things:
 
-1. **A click slides the inner burr a fixed distance along the shaft.** The cutting surfaces are slanted, so the gap at the exit widens by a smaller, still fixed, amount per click. That gap caps the size of what comes out.
-2. **A grind is a spread of sizes, not one size.** A main peak follows the gap. A second peak of *fines*, fragments of single cells about 25–50 µm across, stays where it is. Fines give up their flavor almost at once and slow the water down.
+1. **A click slides the inner burr a fixed distance along the shaft.** The cutting surfaces are slanted, so the gap at the exit widens by a smaller, still fixed, amount per click. That gap sets the size of what comes out.
+2. **A grind is a spread of sizes, not one size.** A main peak follows the gap. A second peak of *fines*, fragments of single cells 25–50 µm across (1 µm is a thousandth of a millimetre), stays where it is. Fines give up their flavor almost at once and slow the water down.
 3. **Each brew method needs grounds whose diffusion time matches its contact time.** Diffusion time grows like the square of the particle size, so ten times the contact time calls for grounds about three times bigger.
 :::
 
 ## The machine
 
-A [burr grinder](https://en.wikipedia.org/wiki/Burr_mill) crushes beans between two hardened cutters called *burrs*. In a *conical* burr grinder like the KINGrinder P0, the outer burr is a fixed ring and the inner burr is a cone that turns inside it when you crank the handle ([Counter Culture](https://counterculturecoffee.com/blogs/counter-culture-coffee/deep-dive-coffee-grinder-burrs)). Beans drop into the wide top of the space between them, where big blades crack them. The pieces are carried down a gap that narrows toward the bottom, and they leave through its narrowest part, the *exit gap*.
+A [burr grinder](https://en.wikipedia.org/wiki/Burr_mill) crushes beans between two hardened cutters called *burrs*. A *conical* burr set is an inner cone surrounded by an outer burr that sits around it like a collar ([Counter Culture](https://counterculturecoffee.com/blogs/counter-culture-coffee/deep-dive-coffee-grinder-burrs)). In a hand grinder like the KINGrinder P0, the collar stays still and the cone turns when you crank the handle. Beans drop into the wide top of the space between them, where big blades crack them. The pieces are carried down a gap that narrows toward the bottom, and they leave through its narrowest part, the *exit gap*.
 
-Set a number of clicks, then press **Grind**. Each piece that falls into the cup stands for the same volume of coffee, and the histogram on the right counts them. (1 µm, a *micrometre* or *micron*, is a thousandth of a millimetre.)
+Set a number of clicks, then press **Grind**. Each piece that falls into the cup stands for the same volume of coffee, and the "Sizes coming out" histogram counts them.
 
 ```{=html}
 <div class="gr" id="grinder">
@@ -69,7 +69,7 @@ Set a number of clicks, then press **Grind**. Each piece that falls into the cup
     <button data-clicks="25">Espresso 25</button>
     <button data-clicks="45">Moka 45</button>
     <button data-clicks="60">Pour-over 60</button>
-    <button data-clicks="95">French press 95</button>
+    <button data-clicks="80">French press 80</button>
   </div>
   <div class="readout" id="readout"></div>
   <div class="twocol">
@@ -80,7 +80,7 @@ Set a number of clicks, then press **Grind**. Each piece that falls into the cup
     </div>
     <div class="card">
       <h3>Sizes coming out</h3>
-      <canvas id="hist" aria-label="Histogram of particle sizes on a log scale from 10 micrometres to 3 millimetres, with the model curve, a dashed line at the exit gap, and coloured bands above it for the usual size ranges of espresso, moka pot, pour-over and French press."></canvas>
+      <canvas id="hist" aria-label="Histogram of particle sizes on a log scale from 10 micrometres to 3 millimetres, with the model curve, a dashed line at the exit gap, and coloured bands above it for the usual size ranges of espresso, moka pot, V60 pour-over and French press."></canvas>
       <div class="legend"><span><i style="background:rgba(201,162,39,0.75)"></i>fines (under 100 µm)</span><span><i style="background:rgba(90,53,32,0.6)"></i>main peak</span><span>line: the model; bars: what fell into the cup</span></div>
       <p class="cap">Size axis is logarithmic: each tick is about 3× the last. The coloured bands are the usual ranges for each brew method from Honest Coffee Guide; a band lights up when the main peak sits inside it.</p>
     </div>
@@ -88,103 +88,111 @@ Set a number of clicks, then press **Grind**. Each piece that falls into the cup
   <details class="more">
     <summary>Assumption: the burr angle θ</summary>
     <div class="slider"><label for="theta">θ, cutting surface to shaft</label><input type="range" id="theta" min="8" max="40" step="1" value="19"><output id="thetaOut">19°</output></div>
-    <p class="cap">KINGrinder does not publish this angle. 19° is a placeholder chosen so the model agrees with Honest Coffee Guide's click chart for the P0 (see the next section). The shape of the burrs and of the size curve is stylized; the 1/30 mm per click is the manufacturer's figure.</p>
+    <p class="cap">KINGrinder does not publish this angle. 19° is a placeholder (see "What is θ on the P0?" below). The shapes of the burrs and of the size curve are stylized; the 0.0333 mm per click is the manufacturer's figure.</p>
   </details>
 </div>
 </div>
 ```
 
-Things to try: watch the dashed line and the main peak move together as you change the clicks; notice that the pale fines peak hardly moves at all; and at 0 clicks, where the burrs touch, nothing gets through.
+Things to try: watch the dashed line and the main peak move together as you change the clicks; notice that the pale fines peak hardly moves; and at 0 clicks, where the burrs touch, nothing gets through.
 
 ## What a click moves
 
-The dial under the inner burr works like a nut on a screw. KINGrinder gives the P0 30 clicks per full turn of the dial and 0.0333 mm per click ([KINGrinder](https://www.kingrinder.com/store/products/p0)), so one full turn moves the burr 1 mm. Turning the dial toward zero raises the cone into the ring until the burrs touch. That touch point is *zero*, and the clicks count from it. Each click away from zero lowers the cone by
+The dial under the inner burr works like a nut on a screw. KINGrinder gives the P0 30 clicks per full turn of the dial and 0.0333 mm of adjustment per click ([KINGrinder](https://www.kingrinder.com/store/products/p0)). We read that as travel of the burr along the shaft, so one full turn moves it 1 mm. Turning the dial toward zero raises the cone into the collar until the burrs touch. That touch point is *zero*, and the clicks count from it. Each click away from zero lowers the cone by
 
 $$
 s_1 = \frac{1\ \text{mm}}{30} \approx 33.3\ \mu\text{m}.
 $$
 
-The gap does not open by 33.3 µm per click, though. Look at the close-up: the inner surface slides *along the shaft* by $s = n\,s_1$ after $n$ clicks, but the gap is measured *straight across* the two surfaces, which lean at an angle $\theta$ to the shaft. In the right triangle formed by $s$, the gap $g$ and the surface, $g$ is the side opposite $\theta$:
+The gap does not open by 33.3 µm per click, though. Look at the close-up. After $n$ clicks the inner surface has slid a distance $s = n\,s_1$ *along the shaft*, but the gap is measured *straight across* the two surfaces, which lean at an angle $\theta$ to the shaft. The slide $s$, the gap $g$ and the surface make a right triangle with $s$ as its hypotenuse and $\theta$ the angle between $s$ and the surface. The gap is the side opposite $\theta$, so
 
 $$
 g = n\, s_1 \sin\theta .
 $$
 
-This relation is linear: every click adds the same amount of gap, and twice the clicks means twice the gap. Only the slope depends on the grinder.
+Every click adds the same amount of gap: the relation is linear. Only the slope, $s_1\sin\theta$, depends on the grinder. With $\theta = 19^\circ$, 60 clicks gives a gap of about 650 µm.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span> Why the gap grows by s·sin θ<span class="needs">uses: right-angle trigonometry</span></summary>
 
 Model the two cutting surfaces near the exit as cones with the same half-angle $\theta$, which touch along the bottom zone at zero clicks. This is a modelling choice; real burrs differ in detail. Cut the grinder through its axis. Each surface becomes a straight line leaning at $\theta$ to the shaft, and at zero clicks the two lines coincide.
 
-Lower the inner burr by $s$. Every point of its line moves straight down by $s$, so its new line is parallel to the old one. Pick a point $A$ on the outer line and let $A'$ be the point straight below it on the new inner line, so $|AA'| = s$. Drop a perpendicular from $A$ to the inner line, meeting it at $F$. The triangle $AFA'$ has a right angle at $F$. Its side $A'F$ lies along the inner line, so the angle at $A'$ is the angle between that line and the vertical, which is $\theta$. The side opposite $A'$ is $AF$, so by the definition of the sine, $|AF| = s\sin\theta$. Because the lines are parallel, $|AF|$ is the distance between them everywhere, which is the gap.
+Lower the inner burr by $s$. Every point of its line moves straight down by $s$, so its new line is parallel to the old one. Pick a point $A$ on the outer line. At zero clicks $A$ was also on the inner line, so the point $A'$ that started at $A$ now sits straight below it on the new inner line, with $|AA'| = s$. Drop a perpendicular from $A$ to the new inner line, meeting it at $F$. The triangle $AFA'$ has a right angle at $F$. Its side $A'F$ lies along the inner line, so the angle at $A'$ is the angle between that line and the vertical, which is $\theta$. The side opposite that angle is $AF$, so by the definition of the sine, $|AF| = s\sin\theta$. Because the lines are parallel, $|AF|$ is the distance between them everywhere, which is the gap.
 
-Two other lengths sometimes get called "the gap." The horizontal (radial) distance between the lines is $s\tan\theta$, which is slightly larger. A particle is stopped by the shortest distance between the surfaces, which is the perpendicular one, $s\sin\theta$. A flat-burr grinder has its two discs at right angles to the shaft, so $\theta = 90^\circ$ and there the gap equals the travel.
+Two other lengths are sometimes called "the gap": the travel $s$ along the shaft, and the horizontal (radial) distance between the lines, $s\tan\theta$. A particle is stopped by the shortest distance between the surfaces, which is the perpendicular one, $s\sin\theta$. A flat-burr grinder has its two discs at right angles to the shaft, so $\theta = 90^\circ$, and there the gap equals the travel.
 </details>
 :::
 
-KINGrinder does not publish $\theta$ for the P0. Honest Coffee Guide's chart for the P0 pairs clicks with microns at an almost constant 10.7 µm per click across all four brew methods ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/); computed in [numbers.py](numbers.py)). In our formula that slope means $\sin\theta = 10.7/33.3 \approx 0.32$, or $\theta \approx 19^\circ$, which is the default in the figure. A ratio that constant suggests the chart was made by a linear conversion rather than measured click by click, so treat 19° as a placeholder, not a measurement of the burr. With it, 60 clicks gives a gap of $60 \times 33.3 \times 0.326 \approx 650$ µm.
+::: {.derive}
+<details><summary><span class="label">Reader question</span> What is θ on the P0?</summary>
+
+KINGrinder does not publish it. Honest Coffee Guide lists click ranges for the P0 ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/)). Set against the micron ranges of its general chart, they pair clicks and microns at an almost constant 10.7 µm per click across all four brew methods, and the P0 chart itself draws 0–130 clicks against 0–1400 µm, which is 10.8 µm per click ([numbers.py](numbers.py)). In our formula a slope of 10.7 µm per click means $\sin\theta = 10.7/33.3 \approx 0.32$, or $\theta \approx 19^\circ$, so that is the figure's default. A ratio that constant suggests a linear conversion rather than a click-by-click measurement, so 19° is a placeholder, not a measurement of the burr.
+</details>
+:::
 
 ::: {.family}
-Most conical grinders, hand or electric, use this same arrangement of a turning cone inside a fixed ring. Flat-burr grinders use two parallel discs instead. Their gap is set at right angles to the discs, so one unit of travel is one unit of gap, the case $\theta = 90^\circ$ of the formula.
+Conical grinders, hand or electric, are built around this same cone in a collar. Flat-burr grinders use two parallel discs instead. Their gap is set at right angles to the discs, so one unit of travel is one unit of gap: the case $\theta = 90^\circ$ of the formula.
 :::
 
 ## What comes out is a spread
 
 The histogram never shows a single bar. Two peaks appear.
 
-- **The main peak** is the pieces that were broken down until they fit through the exit gap. Its position follows the gap. In the model it is centred on the gap, which is a modelling choice; real particles are not spheres, and a long piece can slip through endwise.
-- **The fines peak** is made of particles under about 100 µm. It sits at 25–50 µm whatever the setting, because fines are fragments of single cells, and the cells of a roasted bean are 25–50 µm across ([Mo et al. 2023](https://www.nature.com/articles/s41598-023-42380-y)). When a particle shatters between the burrs, the cells along the break are torn open, and some come off as fragments.
-
-In an espresso grind measured by Mo et al., about 29% of the coffee was fines. For coarser settings the model lowers that share in proportion to 1/gap. The reasoning is that smaller pieces mean more broken surface per gram, and so more fines. This is a plausible picture, not a measurement.
+- **The main peak** is made of the pieces broken down until they fit through the exit gap, and its position follows the gap. The model centres it on the gap, so about half of it is bigger than the gap. That is a modelling choice: real pieces are not spheres, and a long one can slip through endwise.
+- **The fines peak** is made of particles under about 100 µm. It sits at 25–50 µm whatever the setting, because fines are fragments of single cells, and the cells of a roasted bean are 25–50 µm across ([Mo et al. 2023](https://www.nature.com/articles/s41598-023-42380-y)).
 
 Fines matter far beyond their share, for two reasons.
 
-- **They give up their flavor almost at once.** In a fragment smaller than a cell, every cell is broken open, and water simply washes the soluble material out. Bigger particles have to be extracted by *diffusion*, molecules spreading out through the particle by random motion, which is slow ([Gagné, *Dynamics of Coffee Extraction*](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)).
-- **They choke the flow.** How easily water passes through a bed of grounds is set mostly by the *smallest* particles. In the standard model of a packed bed, adding 20% fines at 40 µm to a bed of 300 µm grounds cuts the flow at a given pressure to about a fifth (fold below; [numbers.py](numbers.py)). This is why grinders that make more fines have to be set coarser for the same espresso flow ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution)).
+- **They give up their flavor almost at once.** A fragment smaller than a cell is a piece of a broken cell, so nothing holds its contents in, and water simply washes them out. Bigger particles have to be extracted by *diffusion*, molecules spreading out through the particle by random motion, which is slow ([Gagné, *Dynamics of Coffee Extraction*](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)).
+- **They choke the flow.** How easily water passes through a bed of grounds is weighted heavily toward the smallest particles. If 20% of the grounds' volume is 40 µm fines instead of 300 µm grounds, the standard packed-bed model says the flow at a given pressure drops to about a fifth (fold below). This is why grinders that make more fines have to be set coarser for espresso ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution)).
 
-At the coarse end sit the *boulders*. Their cores barely extract. In an experiment cited by Gagné, water reached only about 100 µm into a particle, about five layers of cells in his estimate ([Gagné, *Extracting Shells of Coffee*](https://coffeeadastra.com/2019/01/17/extracting-shells-of-coffee/)).
+::: {.derive}
+<details><summary><span class="label">Method</span> How much of the grind is fines, in the model<span class="needs">uses: nothing new</span></summary>
+
+Mo et al. measured a commercial espresso powder by laser diffraction and found 29% of its volume below 100 µm. The model pins the fines share at 29% when the main peak is at 250 µm and lowers it in proportion to 1/gap for coarser settings, keeping it between 5% and 45%. The reasoning is that smaller pieces mean more broken surface per gram, and so more fines. This is a plausible picture, not a measurement. Mo et al.'s coarser powders point the same way: as the volume-mean size grew from 308 to 342, 372 and 673 µm, the fines share fell from 29% to 27.5%, 20.3% and 9.7%. A 1/size rule would predict 13% for the coarsest powder, so it gets the direction right, not the numbers.
+</details>
+:::
 
 ::: {.derive}
 <details><summary><span class="label">Method</span> Why the smallest particles control the flow<span class="needs">uses: the Kozeny–Carman equation</span></summary>
 
-Slow flow through a packed bed obeys [Darcy's law](https://en.wikipedia.org/wiki/Darcy%27s_law): the flow per unit area is $q = k\,\Delta p/(\mu L)$. Here $\Delta p$ is the pressure across the bed, $L$ is its depth, $\mu$ is the viscosity of water, and $k$ is the bed's *permeability*. The [Kozeny–Carman equation](https://en.wikipedia.org/wiki/Kozeny%E2%80%93Carman_equation) (Kozeny 1927, Carman 1937) estimates $k$ from the grains. In Carman's form, which uses the grains' surface area per unit of grain volume $S_v$,
+Slow flow through a packed bed obeys [Darcy's law](https://en.wikipedia.org/wiki/Darcy%27s_law): the flow per unit area is $q = k\,\Delta p/(\mu L)$. Here $\Delta p$ is the pressure across the bed, $L$ is its depth, $\mu$ is the viscosity of water, and $k$ is the bed's *permeability*. The Kozeny–Carman equation (Kozeny 1927; Carman 1937) estimates $k$ from the grains. In Carman's form, which uses the grains' surface area per unit of grain volume $S_v$,
 
 $$
 k = \frac{\varepsilon^3}{5\,S_v^2\,(1-\varepsilon)^2},
 $$
 
-where $\varepsilon$ is the fraction of the bed that is open space. For spheres of diameter $d$, $S_v = 6/d$, which gives the familiar $k = d^2\varepsilon^3/\big(180(1-\varepsilon)^2\big)$. So at fixed packing, permeability grows like the square of the grain size.
+where $\varepsilon$ is the fraction of the bed that is open space. For spheres of diameter $d$, $S_v = 6/d$, which gives $k = d^2\varepsilon^3/\big(180(1-\varepsilon)^2\big)$. So at fixed packing, permeability grows like the square of the grain size. ([Wikipedia's version](https://en.wikipedia.org/wiki/Kozeny%E2%80%93Carman_equation) uses 150 in place of 180, an empirical fit; the ratio below does not depend on the constant.)
 
 For a mixture, add up surface and volume. If a volume fraction $f_i$ of the grains has diameter $d_i$, then
 $$
 S_v = \sum_i f_i \frac{6}{d_i} = \frac{6}{d_{32}}, \qquad d_{32} = \Big(\sum_i \frac{f_i}{d_i}\Big)^{-1},
 $$
-where $d_{32}$ is the [Sauter mean diameter](https://en.wikipedia.org/wiki/Sauter_mean_diameter). Because each size enters as $f_i/d_i$, small grains carry heavy weight. With 20% of the volume at 40 µm and 80% at 300 µm, $d_{32} = 1/(0.2/40 + 0.8/300) \approx 130$ µm. Permeability then falls by $(130/300)^2 \approx 0.19$ compared with no fines. This assumes the packing $\varepsilon$ stays the same. In practice fines also fill the pores and migrate, which makes things worse.
+where $d_{32}$ is the [Sauter mean diameter](https://en.wikipedia.org/wiki/Sauter_mean_diameter). Because each size enters as $f_i/d_i$, small grains carry heavy weight. With 20% of the volume at 40 µm and 80% at 300 µm, $d_{32} = 1/(0.2/40 + 0.8/300) \approx 130$ µm, and permeability falls to $(130/300)^2 \approx 0.19$ times its value with no fines ([numbers.py](numbers.py)). This assumes the packing $\varepsilon$ stays the same. In practice fines also fill the pores and migrate, which makes things worse.
 </details>
 :::
 
 ## Why each brew method needs its own size
 
-Brewing is a race between two clocks. The first is the **contact time**, how long water and coffee are together, and the brew method sets it. An espresso shot runs about 25 s, by the Italian Espresso National Institute's standard ([Wikipedia, *Espresso*](https://en.wikipedia.org/wiki/Espresso)). A V60 pour-over takes 3 to 3½ minutes ([Coava](https://coavacoffee.com/brew-methods/v60)). A French press steeps for 4 minutes ([Seattle Coffee Gear](https://www.seattlecoffeegear.com/pages/product-resources/bodum-brazil-french-press-8-cup-product-guide)).
+Brewing is a race between two clocks. The first is the **contact time**, how long water and coffee are together, and the brew method sets it. An espresso shot runs about 25 s by the Italian Espresso National Institute's standard ([Wikipedia, *Espresso*](https://en.wikipedia.org/wiki/Espresso)). A V60 pour-over takes 3 to 3½ minutes ([Coava](https://coavacoffee.com/brew-methods/v60)). A French press steeps for 4 minutes ([Seattle Coffee Gear](https://www.seattlecoffeegear.com/pages/product-resources/bodum-brazil-french-press-8-cup-product-guide)).
 
-The second is the **diffusion time**, how long the flavor needs to get out of a particle. In a pure-diffusion model this time grows like the *square* of the particle's size: twice the size, four times the time (proof in the fold). Matching the two clocks gives a rule:
+The second is the **diffusion time**, how long the flavor needs to get out of a particle. In a pure-diffusion model this time grows like the *square* of the particle's size: twice the size, four times the time (proof in the fold below). Matching the two clocks gives a rule:
 
 $$
 d \propto \sqrt{T},
 $$
 
-where $d$ is the particle size and $T$ the contact time. Ten times the contact time calls for grounds $\sqrt{10} \approx 3.2$ times bigger.
+where $d$ is the particle size, $T$ the contact time, and $\propto$ means "proportional to." Ten times the contact time calls for grounds $\sqrt{10} \approx 3.2$ times bigger.
 
-The rule fixes ratios, so it needs one anchor. Anchor it at espresso: 25 s with about 250 µm grounds. Then it predicts the other three methods.
+The rule fixes ratios, so it needs one anchor. Anchor it at espresso: 25 s with grounds of about 250 µm, a typical espresso median ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution) gives 200–300 µm). Then it predicts the other three methods.
 
 | Method | Contact time | Predicted size $250\ \mu\text{m}\sqrt{T/25\ \text{s}}$ | Usual range (Honest Coffee Guide) |
 |---|---|---|---|
 | Moka pot | ~1½ min (rough) | ≈ 470 µm | 360–660 µm |
-| Pour-over | 3¼ min | ≈ 700 µm | 410–930 µm |
+| V60 pour-over | 3¼ min | ≈ 700 µm | 400–700 µm |
 | French press | 4 min | ≈ 775 µm | 690–1300 µm |
 
-All three predictions land inside the usual ranges ([Honest Coffee Guide](https://honestcoffeeguide.com/coffee-grind-size-chart/)). That is a rough check of one scaling law with one fitted number, not a proof. The ranges are guidance built from recipes, not lab measurements, and we found no standard figure for how long water flows through a moka pot's grounds, so its time is only an estimate.
+All three predictions land inside the usual ranges, the V60 right at the top edge of its range ([Honest Coffee Guide](https://honestcoffeeguide.com/coffee-grind-size-chart/)). That is a rough check of one scaling law with one fitted number, not a proof. The site gives no measurement method for its ranges, and we found no standard figure for how long water flows through a moka pot's grounds, so the moka time is only an estimate.
 
 Drag across the chart, or use the slider, to pick a particle size. The chart follows the grinder above until you touch it.
 
@@ -203,16 +211,18 @@ Drag across the chart, or use the slider, to pick a particle size. The chart fol
 </div>
 ```
 
-The last column is what you taste when you dial in. If the water leaves before the flavor is out, the cup is sour and thin. Grind finer and the diffusion clock speeds up. If the water stays long after the easy flavors are out, it pulls out bitter, harsh compounds. Grind coarser.
+The last column is what you taste when you dial in, by the usual rule of thumb. If the water leaves before the flavor is out, the cup is sour and thin; grind finer and the diffusion clock speeds up. If the water stays on, it keeps pulling out the slow-extracting compounds, which include the bitter and astringent ones ([Gagné](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)); grind coarser.
+
+The big pieces at the coarse end of a grind, sometimes called *boulders*, keep their cores longest. In an experiment cited by Gagné, water reached only about 100 µm into a particle, about five layers of his ~20 µm cells, or two to four of Mo et al.'s 25–50 µm cells ([Gagné, *Extracting Shells of Coffee*](https://coffeeadastra.com/2019/01/17/extracting-shells-of-coffee/)). That does not contradict the $d^2$ rule. In pure diffusion the depth reached grows like $\sqrt{Dt}$, so 100 µm is how far the water got in that experiment's time, not a wall.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span> Why diffusion time grows like size squared<span class="needs">uses: partial derivatives</span></summary>
 
 Let $c(\mathbf{x}, t)$ be the concentration of a flavor compound inside a particle. Diffusion with a constant coefficient $D$ obeys
 $$
-\frac{\partial c}{\partial t} = D\,\nabla^2 c .
+\frac{\partial c}{\partial t} = D\,\nabla^2 c ,
 $$
-Treat the particle as starting uniformly loaded and its surface as held at zero, meaning the outside water carries the compound away. Now compare a particle with its copy scaled up by a factor $\lambda$. Write $\tilde c(\mathbf{x}, t) = c(\mathbf{x}/\lambda,\ t/\lambda^2)$. By the chain rule, $\partial_t \tilde c = \lambda^{-2}\,\partial_t c$ and $\nabla^2 \tilde c = \lambda^{-2}\,\nabla^2 c$, so $\tilde c$ satisfies the same equation. It also has the same starting state and the same boundary condition on the scaled particle. By uniqueness of solutions to this problem, $\tilde c$ is *the* solution for the big particle. So the big particle at time $\lambda^2 t$ is in exactly the state of the small one at time $t$. In particular, the time to extract any fixed fraction scales like $\lambda^2$, that is, like $d^2$.
+where $\nabla^2$ is the [Laplacian](https://en.wikipedia.org/wiki/Laplace_operator), the sum of the second derivatives in the three directions. Treat the particle as starting uniformly loaded and its surface as held at zero, meaning the outside water carries the compound away. Now compare it with its copy scaled up by a factor $\lambda$, and write $\tilde c(\mathbf{x}, t) = c(\mathbf{x}/\lambda,\ t/\lambda^2)$. By the chain rule, $\partial_t \tilde c(\mathbf{x}, t) = \lambda^{-2}\,(\partial_t c)(\mathbf{x}/\lambda, t/\lambda^2)$ and $\nabla^2 \tilde c(\mathbf{x}, t) = \lambda^{-2}\,(\nabla^2 c)(\mathbf{x}/\lambda, t/\lambda^2)$, so $\tilde c$ satisfies the same equation. It also has the same starting state and the same boundary condition on the scaled particle. By uniqueness of solutions to this problem, $\tilde c$ is *the* solution for the big particle. So the big particle at time $\lambda^2 t$ is in exactly the state of the small one at time $t$. In particular, the time to extract any fixed fraction scales like $\lambda^2$, that is, like $d^2$.
 
 For a sphere of radius $R$ the solution is classical (Crank, *The Mathematics of Diffusion*, ch. 6). The fraction extracted after time $t$ is
 $$
@@ -220,45 +230,45 @@ F(t) = 1 - \frac{6}{\pi^2}\sum_{n=1}^{\infty} \frac{1}{n^2}\, e^{-n^2\pi^2 D t /
 $$
 Time enters only through $Dt/R^2$, which is the scaling again. For example, $F = 0.77$ at $Dt/R^2 = 0.1$, and $F = 0.92$ at $0.2$ ([numbers.py](numbers.py)).
 
-Real coffee departs from this model in known ways. Broken cells at the surface wash out at once (the fines effect), so small particles get a head start that does not scale. Cells and pores are not uniform. In immersion the outside liquid fills up with coffee and stops being a perfect sink. Temperature and stirring differ between methods. Gagné's model of extraction, which includes several of these effects, is not a simple power law ([Gagné](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)). So $d^2$ is the backbone of the story, not all of it.
+Real coffee departs from this model in known ways. Broken cells at the surface wash out at once (the fines effect), so small particles get a head start that does not scale. Cells and pores are not uniform. In immersion the outside liquid fills up with coffee and stops being a perfect sink. Temperature and stirring differ between methods. Gagné's model builds in deeper layers of cells that extract more slowly than the surface; it leaves out erosion and stirring, he notes it is untested against data, and the extraction speed it gives is not a simple power law of particle size ([Gagné](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)). So $d^2$ is the backbone of the story, not all of it.
 </details>
 :::
 
-**Flow adds a second set of limits.** In *percolation* methods, water flows through a bed of grounds: espresso, moka and pour-over. There the grind also controls how fast water gets through. The bed's *permeability*, how easily water passes through it, grows like $d^2$ (see the fold in the previous section).
+**Flow adds a second set of limits.** In *percolation* methods (espresso, moka, pour-over), water flows through a bed of grounds, so the grind also sets how fast water gets through. The bed's *permeability*, how easily water passes through it, grows like $d^2$ (fold in the previous section).
 
-- **Espresso.** A bed fine enough to extract in 25 s resists flow strongly, so the machine pushes with a pump at 9 bar. One *bar* is about the pressure of the atmosphere. Nine bar is about 1800 times the push of the few centimetres of water standing in a pour-over cone: 5 cm of water presses at about 0.005 bar ([numbers.py](numbers.py)).
-- **Moka pot.** Steam in the lower chamber pushes at about 1–2 bar ([Wikipedia, *Moka pot*](https://en.wikipedia.org/wiki/Moka_pot), citing Navarini et al. 2009). That is a fifth to a ninth of espresso's push, one reason moka grinds sit coarser than espresso grinds.
-- **Pour-over.** Gravity alone does the pushing. A finer grind both extracts faster *and* slows the drawdown, which lengthens the contact time. Both effects push in the same direction, which is why pour-over is so touchy about grind.
-- **French press.** This is *immersion*: the coffee steeps in the water, and nothing has to flow through the bed. The limit comes at the end, when you press. Particles small enough to pass the metal mesh end up in the cup as grit ([Seattle Coffee Gear](https://www.seattlecoffeegear.com/pages/product-resources/bodum-brazil-french-press-8-cup-product-guide)). That is a reason to grind coarser than the diffusion clock alone asks for: its prediction of 775 µm sits near the bottom of the usual French press range.
+- **Espresso.** A bed fine enough to extract in 25 s resists flow strongly, so a pump pushes at 9 bar. One *bar* is about the pressure of the atmosphere, and 9 bar is about 1800 times the push of 5 cm of water standing in a pour-over cone ([numbers.py](numbers.py)).
+- **Moka pot.** Steam and heated air in the lower chamber push at about 1–2 bar ([Wikipedia, *Moka pot*](https://en.wikipedia.org/wiki/Moka_pot), citing Navarini et al. 2009), between a ninth and a quarter of espresso's push. That is one reason moka grinds sit coarser.
+- **Pour-over.** Gravity alone pushes. A finer grind both extracts faster *and* slows the *drawdown*, the time the water takes to drain through, which lengthens the contact time. Both effects push the same way, which is why pour-over is touchy about grind.
+- **French press.** This is *immersion*: the coffee steeps, and nothing has to flow through the bed. The limit comes when you press: particles small enough to pass the metal mesh end up in the cup as grit ([Seattle Coffee Gear](https://www.seattlecoffeegear.com/pages/product-resources/bodum-brazil-french-press-8-cup-product-guide)). That is a reason to grind coarser than the diffusion clock asks; its 775 µm sits near the bottom of the French press range.
 
 ## Back to the dial
 
-To find your setting, start from a chart, then let taste steer. Honest Coffee Guide suggests 39–86 clicks for pour-over on the P0 ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/)). Brew, taste, and move a few clicks at a time: sour and thin means fewer clicks, bitter and harsh means more. Each click moves the main peak by about 11 µm (with θ = 19°), roughly 2% of a pour-over grind. That is why a few clicks is a gentle step.
+Start from a chart, then let taste steer. The preset buttons above sit inside Honest Coffee Guide's P0 click ranges, which for pour-over is 39–86 clicks ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/)). Brew, taste, and move a few clicks at a time: sour and thin means fewer clicks, bitter and harsh means more. With θ = 19°, each click moves the main peak by about 11 µm, under 2% of a pour-over grind, so a few clicks is a gentle step.
 
 ## What we found
 
-A click is a fixed slide of the inner burr along the shaft, and the slanted burr surfaces turn it into a smaller, fixed widening of the exit gap, $g = n\,s_1\sin\theta$. The gap moves the main peak of the grind; the fines, fragments of single cells, stay at 25–50 µm and dominate both fast extraction and flow resistance. Each brew method then picks the size whose diffusion time, growing like $d^2$, matches its contact time: anchored at espresso, $d \propto \sqrt{T}$ lands inside the usual ranges for moka, pour-over and French press, with pressure and filters setting the remaining limits.
+A click is a fixed slide of the inner burr along the shaft, and the slanted burr surfaces turn it into a smaller, fixed widening of the exit gap, $g = n\,s_1\sin\theta$. The gap moves the main peak of the grind; the fines, fragments of single cells, stay at 25–50 µm and dominate both fast extraction and flow resistance. Each brew method then wants the size whose diffusion time, growing like $d^2$, matches its contact time. Anchored at espresso, $d \propto \sqrt{T}$ lands inside the usual ranges for moka, pour-over and French press, with pressure and filters setting the remaining limits.
 
 ::: {.refs}
 **Sources.**
 
-KINGrinder, [P0 Lightweight Manual Hand Coffee Grinder](https://www.kingrinder.com/store/products/p0), product page (0.0333 mm per click, 30 clicks per turn, SUS420 conical burr, five blades).
+KINGrinder, [P0 Lightweight Manual Hand Coffee Grinder](https://www.kingrinder.com/store/products/p0), product page, in Japanese (0.0333 mm of adjustment per click, 30 clicks per turn, SUS420 conical burr, five blades).
 
-Honest Coffee Guide, [Coffee grind size chart](https://honestcoffeeguide.com/coffee-grind-size-chart/) and [KINGrinder P0 grind settings](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/). Size ranges are given as where most grounds should fall, based on recipes and feedback, not lab measurement.
+Honest Coffee Guide, [Coffee grind size chart](https://honestcoffeeguide.com/coffee-grind-size-chart/) (ranges "where the majority of grounds should lie", from guides, recipes and feedback; no measurement method given) and [KINGrinder P0 grind settings](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/).
 
-C. Mo, R. Johnston, L. Navarini, F. Suggi Liverani, M. Ellero, [Exploring the link between coffee matrix microstructure and flow properties using combined X-ray microtomography and smoothed particle hydrodynamics simulations](https://www.nature.com/articles/s41598-023-42380-y), *Scientific Reports* 13, 16374 (2023). Fines peak at 25–50 µm because fines are cell fragments; espresso grind with 29% fines.
+C. Mo, R. Johnston, L. Navarini, F. Suggi Liverani, M. Ellero, [Exploring the link between coffee matrix microstructure and flow properties using combined X-ray microtomography and smoothed particle hydrodynamics simulations](https://www.nature.com/articles/s41598-023-42380-y), *Scientific Reports* 13, 16374 (2023). Fines peak at 25–50 µm because fines are cell fragments; fines shares of four commercial powders, by laser diffraction.
 
 J. Gagné, [Extracting Shells of Coffee](https://coffeeadastra.com/2019/01/17/extracting-shells-of-coffee/) and [The Dynamics of Coffee Extraction](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/), *Coffee ad Astra* (2019).
 
-Kaffeemacher, [Coffee particle distribution decoded](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution).
+Kaffeemacher, [Coffee particle distribution decoded](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution) (fines below 100 µm; espresso medians of about 200–300 µm; fines-heavy grinders set coarser).
 
-Counter Culture Coffee, [Deep dive: coffee grinder burrs](https://counterculturecoffee.com/blogs/counter-culture-coffee/deep-dive-coffee-grinder-burrs).
+Counter Culture Coffee, [Deep dive: coffee grinder burrs](https://counterculturecoffee.com/blogs/counter-culture-coffee/deep-dive-coffee-grinder-burrs) (conical burrs: an inner cone inside an outer collar).
 
-Wikipedia, [Espresso](https://en.wikipedia.org/wiki/Espresso) (INEI parameters: 9 ± 1 bar, 25 ± 5 s) and [Moka pot](https://en.wikipedia.org/wiki/Moka_pot) (1–2 bar, citing L. Navarini et al., "Experimental investigation of steam pressure coffee extraction in a stove-top coffee maker", *Applied Thermal Engineering*, 2009, [doi:10.1016/j.applthermaleng.2008.05.014](https://doi.org/10.1016/j.applthermaleng.2008.05.014)).
+Wikipedia, [Espresso](https://en.wikipedia.org/wiki/Espresso) (INEI parameters: 9 ± 1 bar, 25 ± 5 s) and [Moka pot](https://en.wikipedia.org/wiki/Moka_pot) (1–2 bar, citing L. Navarini, E. Nobile, F. Pinto, A. Scheri, F. Suggi-Liverani, "Experimental investigation of steam pressure coffee extraction in a stove-top coffee maker", *Applied Thermal Engineering* 29(5–6), 998–1004 (2009), [doi:10.1016/j.applthermaleng.2008.05.014](https://doi.org/10.1016/j.applthermaleng.2008.05.014)).
 
 Coava Coffee, [V60 brew guide](https://coavacoffee.com/brew-methods/v60) (3:00–3:30). Seattle Coffee Gear, [Bodum Brazil French press guide](https://www.seattlecoffeegear.com/pages/product-resources/bodum-brazil-french-press-8-cup-product-guide) (4 min steep; fines pass the mesh).
 
-Wikipedia, [Darcy's law](https://en.wikipedia.org/wiki/Darcy%27s_law), [Kozeny–Carman equation](https://en.wikipedia.org/wiki/Kozeny%E2%80%93Carman_equation), [Sauter mean diameter](https://en.wikipedia.org/wiki/Sauter_mean_diameter), [Burr mill](https://en.wikipedia.org/wiki/Burr_mill).
+P. C. Carman, "Fluid flow through granular beds", *Transactions of the Institution of Chemical Engineers* 15, 150–166 (1937) (the constant 5, and 180 for spheres). Wikipedia, [Darcy's law](https://en.wikipedia.org/wiki/Darcy%27s_law), [Kozeny–Carman equation](https://en.wikipedia.org/wiki/Kozeny%E2%80%93Carman_equation), [Sauter mean diameter](https://en.wikipedia.org/wiki/Sauter_mean_diameter), [Laplace operator](https://en.wikipedia.org/wiki/Laplace_operator), [Burr mill](https://en.wikipedia.org/wiki/Burr_mill).
 
 J. Crank, *The Mathematics of Diffusion*, 2nd ed., Oxford University Press (1975), ch. 6 (diffusion in a sphere).
 

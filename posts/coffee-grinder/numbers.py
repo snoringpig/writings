@@ -62,3 +62,13 @@ def F(x, N=200):  # x = D t / R^2
     return 1 - 6 / math.pi**2 * sum(math.exp(-(n*n) * math.pi**2 * x) / (n*n) for n in range(1, N))
 for x in (0.01, 0.05, 0.1, 0.2, 0.3):
     print(f"Dt/R^2 = {x:.2f} -> fraction extracted {F(x):.3f}")
+
+# 9. Values quoted in the text
+g60 = 60 * step_um * math.sin(math.radians(19))
+print(f"gap at 60 clicks, theta 19 deg = {g60:.0f} um; one click = {step_um*math.sin(math.radians(19)):.2f} um = {100*step_um*math.sin(math.radians(19))/g60:.1f}% of it")
+print(f"moka 1-2 bar vs espresso 9 bar: 1/9 = {1/9:.3f}, 2/9 = 1/{9/2:.1f}")
+print(f"P0 chart drawn 0-130 clicks against 0-1400 um: {1400/130:.2f} um/click")
+for name, n, T in (("espresso", 25, 25), ("moka", 45, 90), ("pour-over", 60, 195), ("French press", 80, 240)):
+    d = n * step_um * math.sin(math.radians(19))
+    tau = anchor_T * (d / anchor_d) ** 2
+    print(f"preset {name:12s} {n:3d} clicks -> main peak {d:5.0f} um, diffusion time {tau:5.0f} s, contact/diffusion = {T/tau:.2f}")

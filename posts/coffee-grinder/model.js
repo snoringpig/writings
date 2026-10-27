@@ -4,13 +4,14 @@
   "use strict";
   const STEP_UM = 1000 / 30; // SOURCE: KINGrinder P0, 0.0333 mm per click, 30 clicks per turn (1 mm per turn)
 
-  // SOURCE (sizes): Honest Coffee Guide grind-size chart, ranges "where most grounds should fall".
+  // SOURCE (sizes): Honest Coffee Guide grind-size chart, ranges "where the majority of grounds should lie"
+  //                 (no measurement method given). Pour-over uses the site's V60 range, to match the V60 time.
   // SOURCE (times): espresso 25 ± 5 s (INEI, via Wikipedia "Espresso"); pour-over 3:00-3:30 (Coava V60 recipe);
   //                 French press 4 min steep (Seattle Coffee Gear, Bodum guide). MODEL: moka 1-2 min, rough.
   const BREWS = [
     { key: "espresso", name: "Espresso", lo: 180, hi: 380, t: 25, t0: 20, t1: 30, how: "9 bar pump", color: "#6b3e26" },
     { key: "moka", name: "Moka pot", lo: 360, hi: 660, t: 90, t0: 60, t1: 120, how: "1–2 bar steam", color: "#a8662f", rough: true },
-    { key: "pour", name: "Pour-over", lo: 410, hi: 930, t: 195, t0: 180, t1: 210, how: "gravity", color: "#2e7d6b" },
+    { key: "pour", name: "Pour-over (V60)", lo: 400, hi: 700, t: 195, t0: 180, t1: 210, how: "gravity", color: "#2e7d6b" },
     { key: "press", name: "French press", lo: 690, hi: 1300, t: 240, t0: 236, t1: 244, how: "steep, then mesh", color: "#4a5fb0" },
   ];
 
@@ -21,7 +22,9 @@
   // MODEL: volume-weighted size distribution, as a density over u = ln(size / um).
   // Fines peak fixed at 38 um (fines are cell fragments; cells are 25-50 um, Mo et al. 2023).
   // Main peak centred on the gap (a modelling choice), log-width 0.38.
-  // Fines volume share ~ 1 / gap, pinned at 29% for a 250 um espresso grind (Mo et al. 2023, Type E).
+  // MODEL: fines volume share ~ 1 / gap, pinned at 29% when the main peak is at 250 um (our espresso anchor),
+  // clamped to 5-45%. The 29% is Mo et al. 2023's commercial espresso powder (29% by volume below 100 um,
+  // laser diffraction); their powder had a volume-mean size of 308 um, so the pinning is approximate.
   const FINES_UM = 38, FINES_SD = 0.42, MAIN_SD = 0.38;
   function mainPeakUm(g) { return Math.max(g, 20); }
   function finesShare(g) { return Math.min(0.45, Math.max(0.05, 0.29 * 250 / mainPeakUm(g))); }
