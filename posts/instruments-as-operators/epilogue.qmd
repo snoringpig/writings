@@ -1,33 +1,33 @@
 ---
-title: "10 · Did instruments shape our scales?"
-subtitle: "Epilogue · Instruments as Operators"
+title: "Did instruments shape our scales?"
+subtitle: "10 · Scales"
 format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-26
+date-modified: 2026-10-27
 resources: [core.js, ins.css]
 ---
 
-::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), **10 Epilogue** · [Glossary](glossary.qmd)
+::: {.series-nav .slim}
+[← 9 Drum shape](shape.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd)
 :::
 
 ::: {.pageinfo}
-**Builds on** [page 0](note.qmd), for harmonics, and [page 6](kalimba.qmd), for bars. About 10 minutes, plus 4 for the folds.
+Builds on [page 0, the note](note.qmd), for partials, and [page 6, the kalimba](kalimba.qmd), for bars. About 8 minutes, plus the folds.
 :::
 
 ::: {.puzzle}
-**The puzzle.** Play two notes an [octave](glossary.qmd#octave) apart, then two notes a [semitone](glossary.qmd#semitone) apart, the smallest step on a piano. The octave sounds smooth and the semitone sounds rough. Why? And why does a Javanese gamelan, an orchestra of tuned metal bars and gongs, use scales that fit no piano? One answer, argued by the engineer and musician William Sethares, is that it depends on the instruments: on their spectra.
+Play two notes an [octave](glossary.qmd#octave) apart, then two notes a [semitone](glossary.qmd#semitone) apart, the smallest step on a piano. The octave sounds smooth and the semitone sounds rough. Why? And why does a Javanese gamelan, an orchestra of tuned metal bars and gongs, use scales that fit no piano?
 :::
 
-Pick a sound, then slide the interval between two notes of that sound and listen. The curve shows how rough each interval is.
+Pick a sound, then slide the interval between two notes of that sound and listen. The curve shows how rough each interval sounds.
 
 ```{=html}
 <div class="ins">
 <div class="panel">
   <div class="controls" role="group" aria-label="Which instrument's sound">
-    <button id="eHarm" aria-pressed="true">String-like (harmonic)</button><button id="eBar" aria-pressed="false">Metal bar</button>
+    <button id="eHarm" aria-pressed="true">String-like</button><button id="eBar" aria-pressed="false">Metal bar</button>
   </div>
   <canvas id="eCurve" style="height:230px" aria-label="Roughness of two notes as a function of the interval between them"></canvas>
   <div class="slider"><label for="eA">Interval (frequency ratio)</label><input type="range" id="eA" min="1" max="3" step="0.001" value="1.5"><output id="eAo"></output></div>
@@ -36,40 +36,44 @@ Pick a sound, then slide the interval between two notes of that sound and listen
   </div>
   <div class="controls"><button id="ePlay" class="primary">Play the two notes</button></div>
   <div class="readout" id="eRead"></div>
-  <p class="cap">Solid: the roughness of two notes of the chosen sound, against the frequency ratio between them, lower note at 262 Hz. Faint: the other sound, for comparison. Each curve is scaled to its own highest point, so compare where the dips are, not the heights. Dots: the smoothest intervals, where the curve dips. The string-like sound has six harmonics with strengths falling by a factor 0.88 each; the metal bar has the first four modes of a uniform bar free at both ends, with strengths 1, 0.7, 0.5, 0.35. Both sets of strengths are chosen for illustration.</p>
+  <p class="cap">Solid: roughness of two notes of the chosen sound against the ratio between them, lower note at 262 Hz; faint: the other sound. Dots: the dips. Each curve is scaled to its own peak, so compare where the dips are, not the heights.</p>
 </div>
 </div>
 ```
 
-With the string-like sound, the curve dips at $6/5$, $5/4$, $4/3$, $3/2$, $5/3$ and $2$: the intervals of Western harmony. Switch to the metal bar and the dips move. The octave $2 : 1$ is no longer a dip; a slightly narrower interval, about $1.96$, is smoother.
+::: {.gist}
+**The gist.** Two notes sound rough when their [partials](glossary.qmd#partial) sit close together but not on top of each other, so they [beat](glossary.qmd#beats). A string-like sound has its partials on the lines of the pitch ruler, and then the partials of two notes land exactly on each other at simple whole-number ratios, such as 3 : 2 and 2 : 1: those intervals sound smooth. A metal bar's partials are off the lines, so its smooth intervals move, and the exact octave is no longer one of them. The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on.
+:::
 
-## Where roughness comes from
+## On the roughness curve
 
-Two pure tones close in frequency produce [beats](glossary.qmd#beats): their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation, and Sethares fitted a formula to their curve, written $\delta$ below. In that formula the roughness of two pure tones near middle C is greatest when they are about 22 Hz apart, and falls off on both sides: tones much closer beat too slowly to sound rough, and tones much further apart are heard as two separate, smooth tones.
+The curve shows how rough two notes of the chosen sound are, against the ratio between their frequencies, from 1 (the same note) to 3. The dips are the smoothest intervals. With the string-like sound, up to the octave, the dips sit at 6 : 5, 5 : 4, 4 : 3, 3 : 2, 5 : 3 and 2 : 1: the intervals of Western harmony. Switch to the metal bar and the dips move. The octave, 2 : 1, is no longer a dip; a slightly narrower interval, about 1.96, is smoother.
 
-A note from a real instrument is several pure tones at once, its [partials](glossary.qmd#partial). For two such notes, Sethares adds up the roughness of every pair of partials, from either note, each weighted by the product of the two partials' amplitudes:
-$$
-D(\alpha) = \sum_{\text{pairs } i < j} a_i a_j\; \delta\big(\min(f_i, f_j),\ |f_i - f_j|\big).
-$$
-Here the list $f_1, f_2, \dots$ holds the partials of both notes: those of the lower note, and those of the upper note, whose frequencies are $\alpha$ times the lower note's; $a_i$ is the amplitude of partial $f_i$. The roughness $\delta$ of two pure tones depends on how far apart they are and, a little, on how high they are, hence its two inputs. The curve in the demo is $D(\alpha)$.
+## How it works
+
+**Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness. In Sethares' fit to their results, the roughest separation near middle C is about 22 Hz. A note from a real instrument is several pure tones at once, its partials, so for two notes Sethares adds up the roughness of every pair of partials. That sum is the curve in the demo.
 
 ::: {.derive}
-<details><summary><span class="label">Formula</span>The roughness of two pure tones</summary>
+<details><summary><span class="label">Precisely</span>The roughness of two notes, in symbols <span class="needs">uses the exponential function</span></summary>
 
 Sethares' fit to Plomp and Levelt's data, for two pure tones of equal loudness, the lower at frequency $f$ and the other $x$ hertz above it, is
 $$
 \delta(f, x) = e^{-3.5\,s\,x} - e^{-5.75\,s\,x}, \qquad s = \frac{0.24}{0.021\,f + 19},
 $$
-with frequencies in hertz. It is zero at $x = 0$, rises to a peak at $x = \ln(5.75/3.5)/(2.25\,s)$, about 22 Hz near middle C, and then decays. For tones of amplitudes $a_1$ and $a_2$, Sethares multiplies by $a_1 a_2$, as in $D(\alpha)$ above. The factor $s$ makes the roughest separation grow with the frequency, as Plomp and Levelt found: tones high up must be further apart, in hertz, to sound equally smooth. The formula describes average listeners' judgments of roughness for pure tones; it is a fitted curve, not derived from first principles.
+with frequencies in hertz. It is zero at $x = 0$, rises to a peak at $x = \ln(5.75/3.5)/(2.25\,s)$, about 22 Hz near middle C, and then decays. For tones of amplitudes $a_1$ and $a_2$, Sethares multiplies by $a_1 a_2$, as in $D(\alpha)$ below. The factor $s$ makes the roughest separation grow with the frequency, as Plomp and Levelt found: tones high up must be further apart, in hertz, to sound equally smooth. The formula describes average listeners' judgments of roughness for pure tones; it is a fitted curve, not derived from first principles.
+
+For two notes, Sethares adds up the roughness of every pair of partials, from either note, each weighted by the product of the two partials' amplitudes:
+$$
+D(\alpha) = \sum_{\text{pairs } i < j} a_i a_j\; \delta\big(\min(f_i, f_j),\ |f_i - f_j|\big).
+$$
+Here the list $f_1, f_2, \dots$ holds the partials of both notes: those of the lower note, and those of the upper note, whose frequencies are $\alpha$ times the lower note's; $a_i$ is the amplitude of partial $f_i$. The roughness $\delta$ of two pure tones depends on how far apart they are and, a little, on how high they are, hence its two inputs. The curve in the demo is $D(\alpha)$. In the demo, the string-like sound has six partials with strengths falling by a factor 0.88 each, and the metal bar has the first four modes of a uniform bar free at both ends, with strengths 1, 0.7, 0.5 and 0.35. Both sets of strengths are chosen for illustration.
 
 </details>
 :::
 
-## Why the dips sit where they do
+**Partials that coincide don't beat.** In a string-like sound the partials of the lower note sit at 1, 2, 3, … times its frequency, and those of the upper note at the same multiples of the upper note's frequency. When the ratio between the notes is a ratio of small whole numbers, say 3 : 2, many partials of the two notes land exactly on each other: the lower note's third partial and the upper note's second both sit at three times the lower note's frequency. Partials that coincide do not beat. Move off 3 : 2 and those pairs pull apart, by a few hertz and then by tens of hertz, into the range where beating sounds roughest. So each simple ratio sits at the bottom of a dip. This extends the idea behind the whole series: frequencies on the lines give a clear pitch, and they also make whole-number intervals smooth.
 
-For a harmonic sound, the partials of the lower note are at $f, 2f, 3f, \dots$ and those of the upper note at $\alpha f, 2\alpha f, 3\alpha f, \dots$. When $\alpha$ is a ratio of small whole numbers, say $3/2$, many partials of the two notes land exactly on each other: the lower note's third partial and the upper note's second are both at $3f$. Partials that coincide do not beat. Move $\alpha$ off $3/2$ and the pairs that coincided pull apart, by a few hertz and then by tens of hertz, into the range where beating sounds roughest. So each simple ratio sits at the bottom of a dip. The smooth intervals of a harmonic sound are the simple whole-number ratios, which extends the second idea of this series: frequencies at whole-number multiples of one frequency give a clear pitch, and they also make whole-number intervals smooth.
-
-A uniform bar free at both ends, such as a glockenspiel bar, has the kalimba's operator with different ends, and its partials are at $1,\ 2.756,\ 5.404,\ 8.933$ times the lowest, as the fold below shows. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too, as discussed below.) Now the coincidences happen elsewhere. At $\alpha = 2.756$ the upper note's fundamental lands on the lower note's second partial. At $\alpha = 5.404/2.756 \approx 1.961$ the upper note's second partial lands on the lower note's third, and that is the dip just below the octave. At $\alpha = 2$ nothing lines up.
+**A metal bar moves the dips.** A uniform bar free at both ends, such as a glockenspiel bar, has the kalimba's operator with different ends, and its partials are at 1, 2.756, 5.404 and 8.933 times the lowest: off the lines. Now the coincidences happen elsewhere. At a ratio of 2.756, the upper note's lowest partial lands on the lower note's second. At about 1.961, the upper note's second partial lands on the lower note's third (1.961 × 2.756 ≈ 5.404), and that is the dip just below the octave. At exactly 2, nothing lines up. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too.)
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>The modes of a bar free at both ends <span class="needs">uses a 2×2 determinant and hyperbolic functions</span></summary>
@@ -91,21 +95,15 @@ Besides $\beta = 0$, which belongs to the bar moving or rotating rigidly without
 </details>
 :::
 
-## The gamelan
+**The gamelan.** Sethares measured the spectra of gamelan metallophones, instruments of tuned metal bars, and reports that "the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans". The demo's bars are idealized, not measured gamelan bars, so it shows the mechanism, not his result; real gamelan bars are shaped by their makers, and tunings vary from one gamelan to another.
 
-Sethares measured the spectra of gamelan metallophones and reports that "the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans". The bars in the demo above are idealized uniform bars, not measured gamelan instruments, so the demo shows the mechanism, not his gamelan result; real gamelan bars are shaped and tuned by their makers, and tunings vary from one gamelan to another.
-
-## How far does this go?
-
-The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for consonant chords followed *harmonicity*, whether the frequencies fit one harmonic series (whole-number multiples $f, 2f, 3f, \dots$ of one frequency), more than it followed beating, and grew with musical training. In 2016 McDermott and colleagues found that the Tsimane', a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.
-
-So the spectrum decides what sounds rough, a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world's music is an open, argued question.
+**Roughness is not the whole story.** The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for [consonant](glossary.qmd#consonance) chords followed *harmonicity*, whether the frequencies fit one [harmonic series](glossary.qmd#harmonic-series), more than it followed beating, and grew with musical training. In 2016 McDermott and colleagues found that the Tsimane', a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.
 
 ## What we found
 
-An instrument's spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it: for harmonic instruments, the simple whole-number ratios of Western harmony; for metal bars, other intervals. The operator of page 6, with different ends, may reach as far as the tuning of an orchestra.
+An instrument's spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it: for instruments with their partials on the lines, the simple whole-number ratios of Western harmony; for metal bars, with their partials off the lines, other intervals. That much is a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world's music is an open, argued question.
 
-[← What the spectrum knows](shape.qmd) · [Back to the series](index.qmd)
+[← 9 · Drum shape](shape.qmd) · [Back to the series](index.qmd) · [Map](map.qmd)
 
 ::: {.refs}
 **References.**
@@ -165,9 +163,9 @@ The free bar's modes: Wikipedia, [Euler–Bernoulli beam theory](https://en.wiki
   function read() {
     var cents = 1200 * Math.log2(alpha), m = minima[which], near = m.reduce(function (b, a) { return Math.abs(a - alpha) < Math.abs(b - alpha) ? a : b; }, m[0]);
     document.getElementById("eAo").textContent = alpha.toFixed(3);
-    document.getElementById("eRead").innerHTML = SPEC[which].name + " · ratio <b>" + alpha.toFixed(3) + "</b> = " + Math.round(cents) + " cents · roughness " + D(SPEC[which], alpha).toFixed(3) +
-      " · smoothest intervals of this sound: " + m.map(function (a) { return a.toFixed(3); }).join(", ") +
-      (which === "bar" ? " · bar partials at " + BAR.map(function (r) { return r.toFixed(3); }).join(", ") : "");
+    var rel = D(SPEC[which], alpha) / Math.max.apply(null, curves[which]);
+    var feel = Math.abs(near - alpha) < 0.006 ? "at a dip: as smooth as it gets nearby" : rel < 0.3 ? "fairly smooth for this sound" : rel < 0.6 ? "somewhat rough for this sound" : "rough for this sound";
+    document.getElementById("eRead").innerHTML = SPEC[which].name + " · ratio <b>" + alpha.toFixed(3) + "</b>, " + Math.round(cents) + ' <a href="glossary.html#cents">cents</a> · <b>' + feel + "</b>";
     draw();
   }
   var sl = document.getElementById("eA");

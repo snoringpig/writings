@@ -1,16 +1,16 @@
 ---
 title: "Glossary"
-subtitle: "Instruments as Operators"
+subtitle: "The Shape of a Sound"
 format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-26
+date-modified: 2026-10-27
 resources: [core.js, ins.css]
 ---
 
-::: {.series-nav}
-[Series](index.qmd) · [The idea]{.part} [0 Note](note.qmd), [1 Oscillator](oscillator.qmd), [2 Beads on a ring](ring.qmd), [3 The circle](circle.qmd) · [Instruments]{.part} [4 String](violin.qmd), [5 Air column](clarinet.qmd), [6 Kalimba](kalimba.qmd), [6b Harmonica](harmonica.qmd), [7 Piano](piano.qmd), [8 Drum](drum.qmd) · [Beyond]{.part} [9 Shape](shape.qmd), [10 Epilogue](epilogue.qmd) · **Glossary**
+::: {.series-nav .slim}
+[The Shape of a Sound](index.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
 :::
 
 Technical words in the series link here, usually the first time they appear on a page. Each entry gives a plain definition and a link to a fuller explanation.
@@ -57,7 +57,7 @@ Technical words in the series link here, usually the first time they appear on a
 : A unit for small differences in pitch: one hundredth of an equal-tempered semitone, so an octave is 1200 cents. Two frequencies in the ratio $r$ are $1200\log_2 r$ cents apart. Trained listeners notice a few cents. [Wikipedia](https://en.wikipedia.org/wiki/Cent_(music))
 
 [Octave, fifth, twelfth]{#octave}
-: Musical intervals, named by frequency ratio. An octave is a ratio of 2. A fifth is the ratio $3/2$ when tuned to the simple ratio, and $2^{7/12} \approx 1.498$ in equal temperament. A twelfth, an octave plus a fifth, is about 3. Two notes an octave apart sound like "the same note, higher". [Wikipedia](https://en.wikipedia.org/wiki/Interval_(music))
+: Musical intervals, named by frequency ratio. An octave is a ratio of 2. A fifth is the ratio $3/2$ when tuned to the simple ratio, and $2^{7/12} \approx 1.498$ in equal temperament. A twelfth, an octave plus a fifth, is about 3. Smaller intervals, by their simple ratios: the minor third $6/5$, the major third $5/4$, the fourth $4/3$ and the major sixth $5/3$. Two notes an octave apart sound like "the same note, higher". [Wikipedia](https://en.wikipedia.org/wiki/Interval_(music))
 
 [Beats]{#beats}
 : When two pure tones of nearly equal frequency sound together, their sum swells and fades in loudness at a rate equal to the difference of their frequencies. Tuners listen for beats; fast beats are heard as roughness. [Wikipedia](https://en.wikipedia.org/wiki/Beat_(acoustics))

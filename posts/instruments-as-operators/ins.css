@@ -103,3 +103,25 @@ svg.fig .dash { stroke: var(--muted); fill: none; stroke-width: 1; stroke-dashar
 svg.fig .fillacc { fill: var(--accent); } svg.fig .fillpos { fill: var(--pos); } svg.fig .fillneg { fill: var(--neg); }
 svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
 .needs { font-family: var(--f-ui); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; padding: 0 0.45rem; margin-left: 0.35rem; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+/* Gist-first layout: the north star, the gist box, the two-ruler opening, the journey list, the slim page nav. */
+.northstar { border: 1px solid var(--accent); border-radius: 10px; padding: 0.85rem 1.05rem; margin: 1.25rem 0 1.75rem; font-size: 1.02rem; }
+.northstar p { margin: 0; }
+.gist { background: var(--panel); border-radius: 10px; padding: 0.85rem 1.05rem; margin: 0.5rem 0 1.75rem; font-size: 1.05rem; line-height: 1.55; }
+.gist p { margin: 0; }
+.ins .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.85rem; }
+.ins .duo > div { display: grid; gap: 0.35rem; }
+.ins ol.journey { list-style: none; padding: 0; margin: 0.5rem 0 1.25rem; border-top: 1px solid var(--rule); }
+.ins ol.journey li { display: grid; grid-template-columns: 1fr auto; column-gap: 0.75rem; row-gap: 0.15rem; align-items: center; padding: 0.6rem 0.2rem; border-bottom: 1px solid var(--rule); }
+.ins ol.journey li.part { display: block; font-family: var(--f-ui); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 1rem 0.2rem 0.35rem; border-bottom: none; }
+.ins ol.journey a { grid-column: 1; text-decoration: none; color: var(--ink); display: flex; gap: 0.6rem; align-items: baseline; }
+.ins ol.journey a:hover .t { color: var(--accent); }
+.ins ol.journey .n { font-family: var(--f-mono); font-size: 0.85rem; color: var(--muted); min-width: 1.6rem; }
+.ins ol.journey .t { font-weight: 600; }
+.ins ol.journey .hint { grid-column: 1; font-size: 0.9rem; color: var(--muted); padding-left: 2.2rem; }
+.ins ol.journey .controls { grid-column: 2; grid-row: 1 / span 2; justify-content: flex-end; }
+.ins ol.journey button { font-size: 0.85rem; min-height: 2rem; padding: 0.25rem 0.6rem; }
+@media (max-width: 640px) { .ins ol.journey li { grid-template-columns: 1fr; } .ins ol.journey .controls { grid-column: 1; grid-row: auto; justify-content: flex-start; padding-left: 2.2rem; } }
+.series-nav.slim { font-size: 0.86rem; display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; }
+
+.needs { display: inline-block; max-width: 100%; }
+@media (max-width: 640px) { .needs { display: block; width: fit-content; margin: 0.3rem 0 0; border-radius: 0.5rem; padding: 0.1rem 0.5rem; } }
