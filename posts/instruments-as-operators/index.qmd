@@ -2,7 +2,7 @@
 title: "The Shape of a Sound"
 subtitle: "The mathematics of musical sound, one instrument at a time"
 date: 2026-10-25
-date-modified: 2026-10-26
+date-modified: 2026-10-27
 categories: [math, music]
 format:
   html:
