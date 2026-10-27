@@ -65,7 +65,7 @@ A drum's operator, from the [drum page](drum.qmd), is $-c^2\Delta$ on the drumhe
 </details>
 :::
 
-**The list knows the area and the length of the rim.** Count how many of a drum's frequencies lie below some limit. As the limit rises, the count grows in proportion to the drum's area: twice the area, about twice as many modes below any high limit. This is [Weyl's law](glossary.qmd#weyl), from 1911, so the area can be heard. The count also falls short of the area's share, by an amount in proportion to the length of the rim: holding the rim still costs the drum some modes. (For the count itself this is proved only for some drums; for a slightly smoothed version of the count it is proved for every drum whose rim is smooth or made of straight pieces, which is enough to hear the rim's length.) The demo counts the frequencies of three drums with the same area: once the area's share, the same for all three, is taken away, the drum with the longest rim sits lowest.
+**The list knows the area and the length of the rim.** Count how many of a drum's frequencies lie below some limit. As the limit rises, the count grows in proportion to the drum's area: twice the area, about twice as many modes below any high limit. This is [Weyl's law](glossary.qmd#weyl), from 1911, so the area can be heard. The count also falls short of the area's share, by an amount in proportion to the length of the rim: holding the rim still costs the drum some modes. (Proved, in a slightly smoothed form, for every rim that is smooth or made of straight pieces; the fold has the details.) The demo counts the frequencies of three drums with the same area: once the area's share, the same for all three, is taken away, the drum with the longest rim sits lowest.
 
 ```{=html}
 <div class="ins">

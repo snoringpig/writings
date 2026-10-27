@@ -51,7 +51,7 @@ The curve shows how rough two notes of the chosen sound are, against the ratio b
 
 ## How it works
 
-**Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation. In Sethares' fit to their results, the roughest separation near middle C is about 22 Hz. A note from a real instrument is several pure tones at once, its partials, so for two notes Sethares adds up the roughness of every pair of partials. That sum is the curve in the demo.
+**Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness. In Sethares' fit to their results, the roughest separation near middle C is about 22 Hz. A note from a real instrument is several pure tones at once, its partials, so for two notes Sethares adds up the roughness of every pair of partials. That sum is the curve in the demo.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>The roughness of two notes, in symbols <span class="needs">uses the exponential function</span></summary>
@@ -164,7 +164,7 @@ The free bar's modes: Wikipedia, [Euler–Bernoulli beam theory](https://en.wiki
     var cents = 1200 * Math.log2(alpha), m = minima[which], near = m.reduce(function (b, a) { return Math.abs(a - alpha) < Math.abs(b - alpha) ? a : b; }, m[0]);
     document.getElementById("eAo").textContent = alpha.toFixed(3);
     var rel = D(SPEC[which], alpha) / Math.max.apply(null, curves[which]);
-    var feel = Math.abs(near - alpha) < 0.006 ? "at a dip: as smooth as it gets nearby" : rel < 0.3 ? "fairly smooth" : rel < 0.6 ? "somewhat rough" : "rough";
+    var feel = Math.abs(near - alpha) < 0.006 ? "at a dip: as smooth as it gets nearby" : rel < 0.3 ? "fairly smooth for this sound" : rel < 0.6 ? "somewhat rough for this sound" : "rough for this sound";
     document.getElementById("eRead").innerHTML = SPEC[which].name + " · ratio <b>" + alpha.toFixed(3) + "</b>, " + Math.round(cents) + ' <a href="glossary.html#cents">cents</a> · <b>' + feel + "</b>";
     draw();
   }

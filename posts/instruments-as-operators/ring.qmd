@@ -32,18 +32,18 @@ Press "Hear this motion" on the tangle. Then press a mode button and hear it aga
   <div class="controls"><button id="rPluck">Pluck one bead</button><button id="rPlay" class="primary">Hear this motion</button></div>
   <svg class="spec" id="rSpec" viewBox="0 0 320 100" style="max-width:520px" aria-label="Frequencies of the modes relative to the lowest"></svg>
   <div class="readout" id="rRead"></div>
-  <p class="cap">Mode k is a wave that fits k times around the ring. The beads are drawn moving in and out of the circle; real ones move out of the page.</p>
+  <p class="cap">Mode k is a wave that fits k times around the ring; in mode 0 all the beads just move together. The beads are drawn moving in and out of the circle; real ones move out of the page.</p>
 </div>
 </div>
 ```
 
 ::: {.gist}
-**The gist.** Each regular motion is a wave that fits a whole number of times around the ring. In it, every bead swings at the same frequency and the shape never changes, as if the whole ring were one mass on a spring. Such a motion is called a [mode](glossary.qmd#mode). The tangle is all the modes at once, each at its own frequency: a chord. Press "Hear this motion" on the tangle, then on a single mode.
+**The gist.** Each regular motion is a wave that fits a whole number of times around the ring. In it, every bead swings at the same frequency and the shape never changes, as if the whole ring were one mass on a spring. Such a motion is called a [mode](glossary.qmd#mode). The tangle is all the modes at once, each at its own frequency: a chord.
 :::
 
 ## On the pitch ruler
 
-The stems are the modes' frequencies, as multiples of mode 1's, the slowest wave that swings back and forth. Each stem's height is how much of that mode the current motion contains. Apart from mode 1 itself, they generally miss the lines (with 6 beads, the top mode happens to land on 2×). With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.
+The stems are the modes' frequencies, as multiples of mode 1's, the slowest wave that swings back and forth. Each stem's height is how much of that mode the current motion contains. Apart from mode 1 itself, they generally miss the lines. With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.
 
 ## How it works
 
@@ -141,14 +141,14 @@ With [Euler's formula](glossary.qmd#euler-formula) $e^{ix} = \cos x + i\sin x$, 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>How near to whole numbers <span class="needs">uses the sine function</span></summary>
 
-By the eigenvalues above, mode $k$ has angular frequency $\omega_k = 2\sqrt{T/(mh)}\,\sin(\pi k/N)$, so its frequency is proportional to $\sin(\pi k/N)$, which is not proportional to $k$: the beads are not exactly harmonic. For small $k$, $\sin(\pi k/N) \approx \pi k/N$, so the low modes are nearly harmonic, and the ratio $\sin(\pi k/N)/\sin(\pi/N)$ tends to $k$ as $N$ grows. The modes near $k = N/2$ stay far from the whole-number grid: for an even number of beads the largest ratio is $1/\sin(\pi/N)$ (slightly less for an odd number), and for any number of beads it is about $N/\pi$ once there are many, not $N/2$.
+By the eigenvalues above, mode $k$ has angular frequency $\omega_k = 2\sqrt{T/(mh)}\,\sin(\pi k/N)$, so its frequency is proportional to $\sin(\pi k/N)$, which is not proportional to $k$: the beads are not exactly harmonic. For small $k$, $\sin(\pi k/N) \approx \pi k/N$, so the low modes are nearly harmonic, and the ratio $\sin(\pi k/N)/\sin(\pi/N)$ tends to $k$ as $N$ grows. The modes near $k = N/2$ stay far from the whole-number grid: for an even number of beads the largest ratio is $1/\sin(\pi/N)$ (slightly less for an odd number), and for any number of beads it is about $N/\pi$ once there are many, not $N/2$. A mode can land on a line by coincidence: with 6 beads, the top mode sits at exactly 2×.
 
 </details>
 :::
 
 ## What we found
 
-Many coupled masses move in a few special shapes, modes, each swinging at its own frequency like a single mass on a spring, and any motion, even a tangle, is all of them at once: a chord. Finding the modes means finding the special shapes of one matrix, the ring's operator. On a ring the modes are waves, and the low ones sit near the lines of the pitch ruler, but not on them.
+Many coupled masses move in a few special shapes, modes, each swinging at its own frequency like a single mass on a spring, and any motion, even a tangle, is a sum of them: a chord. Finding the modes means finding the special shapes of one matrix, the ring's operator. On a ring the modes are waves, and the low ones sit near the lines of the pitch ruler, but not on them.
 
 ## The next puzzle
 

@@ -54,7 +54,7 @@ Open "Mix your own" and try the presets. The stems' heights change, and so does 
 
 ## How it works
 
-**A note is a pattern that repeats.** Sound is air pressure rising and falling. When the pattern repeats, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate, measured in hertz. This holds for rates in the range where we hear pitch, from a few dozen to a few thousand times a second (for a recognizable melody, roughly 30 Hz to 4 or 5 kHz: Pressnitzer and colleagues; Oxenham and colleagues). Much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.
+**A note is a pattern that repeats.** Sound is air pressure rising and falling. When the pattern repeats, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate, measured in hertz. This holds for rates in the range where we hear pitch, from a few dozen to a few thousand times a second (for a recognizable melody, roughly 30 Hz to 4 or 5 kHz: Pressnitzer and colleagues measured the lower limit; the upper one is the traditional limit, which Oxenham and colleagues revisit). Much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.
 
 **Every repeating sound is a chord on the lines.** A pure tone is a single sine-shaped wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier's theorem, and page 3 shows where it comes from. These tones are the sound's [partials](glossary.qmd#partial), and the one at the repetition rate itself is the fundamental. The repetition rate sets the pitch, whether or not the fundamental is actually there; the partials' strengths set the timbre.
 

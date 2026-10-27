@@ -68,7 +68,7 @@ Listen to an octave tuned to exactly 2 : 1, then to a stretched one. The slow wo
     <div class="slider"><label for="oMult">Stiffness ×</label><input type="range" id="oMult" min="1" max="12" step="0.5" value="6"><output id="oMulto">6.0</output></div>
     <label class="check"><input type="checkbox" id="oAll"> Play every partial</label>
     <div class="readout" id="oRead"></div>
-    <p class="cap">Each note plays only its lowest partials, so the one beat a tuner listens for stands out. Stiffness starts at 6 times a real middle C wire's, so the wobble is quick enough to hear; at 1 it is a slow swell every few seconds.</p>
+    <p class="cap">Until you tick "Play every partial", each note plays only its lowest partials (C4: 1 to 3, C5: 1 and 2), so the one beat a tuner listens for stands out and the stretched octave is steady. Stiffness starts at 6 times a real middle C wire's, so the wobble is quick enough to hear; at 1 it is a slow swell every few seconds.</p>
   </div>
 </div>
 ```
@@ -231,7 +231,7 @@ whose solution $e^{-\gamma_m t}\cos\big(\sqrt{\omega_m^2 - \gamma_m^2}\,t\big)$ 
 
 ## What we found
 
-On the pitch ruler, a piano's overtones sit slightly sharp of the lines, more so the higher they go: close enough that you hear one clear note, far enough that an exact octave beats. In the series' language, the piano adds one new idea: operators add. The wire is pulled tight like a string and resists bending like a bar, so its [operator](glossary.qmd#operator), the rule that turns a shape of the wire into the force pulling it back, is the sum of the string's and the bar's. The hammer, the dampers and the pedals act on the rest of the string's equation, and none of them moves a frequency, apart from tiny shifts that weak damping causes.
+On the pitch ruler, a piano's overtones sit slightly sharp of the lines, more so the higher they go: close enough that you hear one clear note, far enough that an exact octave beats. In the series' language, the piano adds one new idea: operators add. The wire is pulled tight like a string and resists bending like a bar, so its [operator](glossary.qmd#operator), the rule that turns a shape of the wire into the force pulling it back, is the sum of the string's and the bar's. The hammer, the dampers and the pedals act on how the modes start and die, and none of them moves a frequency by more than a hair.
 
 ::: {.family}
 **Every real string is a little stiff.** Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.
@@ -239,7 +239,7 @@ On the pitch ruler, a piano's overtones sit slightly sharp of the lines, more so
 
 ## Play the whole piano
 
-Every control here changes how strongly the modes start or how fast they die; none moves a frequency. Hold keys to play and release them to damp; try the pedals, and watch the stems in the panel above shrink without moving.
+Every key and pedal here changes how strongly the modes start or how fast they die; none moves a frequency. (The stiffness slider is different: it changes the wire itself, so it moves the frequencies.) Hold keys to play and release them to damp; try the pedals, and watch the stems in the panel above shrink without moving.
 
 ```{=html}
 <div class="ins">
@@ -270,7 +270,7 @@ On a grand piano the middle pedal is usually the *sostenuto*, which holds up onl
 </details>
 :::
 
-**Inside the piano.** An upright piano with its front panel removed, one octave of it. Press a key and watch the hammer start the string's modes and the felt damper stop them.
+**Inside the piano.** An upright piano with its front panel removed, one octave of it. Press a key and watch the hammer start the string's modes and the felt damper damp the ones that move under it.
 
 ```{=html}
 <div class="ins">
@@ -281,7 +281,7 @@ On a grand piano the middle pedal is usually the *sostenuto*, which holds up onl
   <div class="eqx plain" aria-label="What each part does; the active part lights up">
     <span class="t" id="tF">hammer: starts the modes</span>
     <span class="t op" id="tT">the wire's tension and stiffness: set the frequencies</span>
-    <span class="t" id="tDamp">damper: stops the modes</span>
+    <span class="t" id="tDamp">damper: damps the modes that move under it</span>
   </div>
   <div class="actnote" id="actNote" aria-live="polite">Press a key. The hammer pushes the string for a moment, then the string rings in its own modes.</div>
   <div class="mini2" style="padding-top:0.6rem">

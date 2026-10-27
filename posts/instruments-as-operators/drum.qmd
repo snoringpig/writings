@@ -215,7 +215,7 @@ On the pitch ruler, a drum's frequencies are off the lines, and its sound fades 
 
 Turn the question around: if you could hear every frequency a drum makes, could you work out its shape?
 
-Short on time? This is the last page of the short path through the series, pages 0, 4 and 8. [Page 9](shape.qmd) turns the question around, if you want more.
+Short on time? This is the last page of the short path through the series, pages 0, 4 and 8. [Page 9](shape.qmd) takes it up, if you want more.
 
 [← 7 · Piano](piano.qmd) · [Next: 9 · Drum shape →](shape.qmd)
 

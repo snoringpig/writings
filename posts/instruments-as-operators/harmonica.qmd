@@ -87,7 +87,7 @@ The demo's sound is a model: one puff shape, chosen so that the open part of eac
 </details>
 :::
 
-The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a sound that repeats. On those instruments the string's or tube's own frequencies already sit nearly on the lines, so the push and the instrument agree, and locking is easy. A free reed's own frequencies are far off the lines, which lets you hear that the way it is driven, not the reed's own frequencies, decides where a blown note's overtones sit.
+The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a sound that repeats. On those instruments the string's or tube's own frequencies already sit nearly on the lines, so the push and the instrument agree, and locking is easy. A free reed's own overtones are far off the lines, which lets you hear that the way it is driven, not the reed's own frequencies, decides where a blown note's overtones sit.
 
 **Tuning a reed with a file.** Reed makers tune by scraping metal off, and where they scrape decides the direction. The first mode bends most near the rivet and moves most near the tip. Thin the reed near the rivet and you remove stiffness where it counts: the pitch drops. Thin it near the tip and you remove mass where it counts: the pitch rises. It is the spring of [page 1](oscillator.qmd) again, where frequency grows with stiffness and falls with mass. Try it below.
 

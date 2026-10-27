@@ -21,7 +21,7 @@ Builds on [page 4, the violin string](violin.qmd). About 8 minutes, plus the fol
 A clarinet and a flute are about the same length. Yet the clarinet's lowest note is almost an [octave](glossary.qmd#octave) below the flute's. And when players [overblow](glossary.qmd#overblow), making the tube jump to its next mode, the flute jumps up an octave while the clarinet jumps an [octave and a fifth](glossary.qmd#octave). The same equation governs the air in both tubes. What is different?
 :::
 
-Hold the blow button on the clarinet, then switch the same tube to a flute and blow again. The register key makes either tube jump to its next mode.
+Hold the blow button on the clarinet, then switch the same tube to a flute and blow again. The register key (on the flute it stands in for blowing harder) makes either tube jump to its next mode.
 
 ```{=html}
 <style>
@@ -190,7 +190,7 @@ A kalimba tine is springy steel that nothing stretches, and its overtones sit fa
     if (voice) { var a = C.ac(); voice.osc.frequency.setTargetAtTime(freq(), a.currentTime, 0.01); voice.osc.setPeriodicWave(C.wave(a, parts())); voice.lp.frequency.value = flute ? 3500 : 4500; }
     var f = freq(), nn = C.noteName(f), L = Leff();
     labelFingerings();
-    document.getElementById("cRead").innerHTML = "sounding length <b>" + (L * 100).toFixed(1) + " cm</b> · mode " + modeN() + ", at <b>" + (flute ? modeN() : 2 * modeN() - 1) + "×</b> the tube's lowest · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? ", " + Math.abs(nn.cents) + " cents " + (nn.cents > 0 ? "sharp" : "flat") : "");
+    document.getElementById("cRead").innerHTML = "mode " + modeN() + ", at <b>" + (flute ? modeN() : 2 * modeN() - 1) + "×</b> the tube's lowest · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? ", " + Math.abs(nn.cents) + " cents " + (nn.cents > 0 ? "sharp" : "flat") : "");
     C.stems(document.getElementById("cSpec"), parts().slice(0, 12), { W: 320, H: 90, rmax: 12, fs: 8, sw: 2.5 });
   }
   var blow = document.getElementById("blow");

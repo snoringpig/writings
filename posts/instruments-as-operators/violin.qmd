@@ -117,7 +117,7 @@ Let the finger touch the string at the distance $s$ from the [nut](glossary.qmd#
 </details>
 :::
 
-**Where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle. What reaches your ear is the string's push on the bridge, and for the same height a shape with more arches has steeper ends, so it pushes harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard (near the end, each shape starts in proportion to its steepness there; fold below): the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still exactly where you pulled; the rest push the bridge less and less, the more arches they have: a mellow, hollow sound.
+**Where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle. What reaches your ear is the string's push on the bridge, and for the same height a shape with more arches has steeper ends, so it pushes harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard (near the end, a shape with n arches starts about 1/n as large but is n times as steep, so the pushes come out about equal; fold below): the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still exactly where you pulled; the rest push the bridge less and less, the more arches they have: a mellow, hollow sound.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>How much of each shape a pluck starts <span class="needs">uses integration by parts</span></summary>
