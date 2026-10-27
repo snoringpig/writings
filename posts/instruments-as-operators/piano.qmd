@@ -1,11 +1,11 @@
 ---
-title: "7 · The piano"
-subtitle: "Operators add · Instruments as Operators"
+title: "Why do piano tuners stretch octaves?"
+subtitle: "7 · The piano"
 format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-26
+date-modified: 2026-10-27
 resources: [core.js, ins.css]
 ---
 
@@ -14,28 +14,14 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-**Builds on** [page 4](violin.qmd) for the string and [page 6](kalimba.qmd) for bending. About 15 minutes, plus 9 for the folds.
+Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). About 10 minutes, plus the folds.
 :::
 
 ::: {.puzzle}
-**The puzzle.** Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](glossary.qmd#equal-temperament), the textbook tuning. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
+Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](glossary.qmd#equal-temperament), the tuning in which all twelve semitones are the same ratio. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
 :::
 
 Listen to an octave tuned to exactly 2 : 1, then to a stretched one. The slow wobble in loudness is called a [beat](glossary.qmd#beats).
-
-```{=html}
-<div class="ins">
-<div class="panel">
-    <div class="controls"><button id="o21">C4 + C5, exactly 2 : 1</button><button id="ost" class="primary">C4 + C5, stretched</button></div>
-    <div class="slider"><label for="oMult">Stiffness ×</label><input type="range" id="oMult" min="1" max="12" step="0.5" value="6"><output id="oMulto">6.0</output></div>
-    <label class="check"><input type="checkbox" id="oAll"> Play every partial</label>
-    <div class="readout" id="oRead"></div>
-    <p class="cap">At first each note keeps only its lowest partials (C4: 1 to 3, C5: 1 and 2), so the one beat a tuner listens for stands out: the exactly 2 : 1 octave wobbles at the rate shown, and the stretched one is steady. The stiffness starts at about 6 times a real middle C wire's so that the wobble is quick enough to hear; at 1 it is a slow swell every few seconds. Tick "Play every partial" to hear whole notes: then the stretched octave wobbles too, from the lower note's 4th partial against the upper note's 2nd, the compromise described below.</p>
-  </div>
-</div>
-```
-
-Then play the whole piano with the mouse or your computer keys. Release a key and its felt [damper](glossary.qmd#damper) drops back onto the string and stops it.
 
 ```{=html}
 <style>
@@ -74,36 +60,58 @@ Then play the whole piano with the mouse or your computer keys. Release a key an
 
 ```{=html}
 <div class="ins">
-<section class="instrument" aria-labelledby="play">
-  <div class="controls" style="padding:0 0.25rem 0.5rem">
-    <button id="octDown" aria-label="Move the computer-key window down an octave">◀ Octave (Z)</button>
-    <span class="readout" id="winRead"></span>
-    <button id="octUp" aria-label="Move the computer-key window up an octave">Octave (X) ▶</button>
+<div class="panel">
+    <div class="controls"><button id="o21">C4 + C5, exactly 2 : 1</button><button id="ost" class="primary">C4 + C5, stretched</button></div>
+    <div class="slider"><label for="oMult">Stiffness ×</label><input type="range" id="oMult" min="1" max="12" step="0.5" value="6"><output id="oMulto">6.0</output></div>
+    <label class="check"><input type="checkbox" id="oAll"> Play every partial</label>
+    <div class="readout" id="oRead"></div>
+    <p class="cap">At first each note keeps only its lowest partials (C4: 1 to 3, C5: 1 and 2), so the one beat a tuner listens for stands out: the exactly 2 : 1 octave wobbles at the rate shown, and the stretched one is steady. The stiffness starts at about 6 times a real middle C wire's so that the wobble is quick enough to hear; at 1 it is a slow swell every few seconds. Tick "Play every partial" to hear whole notes: then the stretched octave wobbles too, from the lower note's 4th partial against the upper note's 2nd, the compromise described below.</p>
   </div>
-  <div class="kbdwrap" id="kbdwrap"><div class="kbd" id="kbd" aria-label="Piano keyboard, A0 to C8"></div></div>
-  <div class="pedals" style="padding:0.75rem 0.25rem 0" role="group" aria-label="Pedals">
-    <button id="pSoft" aria-pressed="false">Soft<small>left pedal</small></button>
-    <button id="pMute" aria-pressed="false">Practice mute<small>middle pedal</small></button>
-    <button id="pSus" aria-pressed="false">Sustain<small>right pedal · Space</small></button>
-  </div>
-  <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="mult">Stiffness ×</label><input type="range" id="mult" min="0" max="12" step="0.5" value="1"><output id="multo">1.0</output></div>
-  <div class="readout" id="pRead" style="padding:0.4rem 0.25rem 0">Hold keys to sound them; release to damp. Computer keys: A W S E D F T G Y H U J K O L P ; ' play the highlighted range.</div>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Releasing a key drops its felt damper and the note stops. The top 20 keys have no dampers, as on a real piano. Sustain lifts every damper; Soft and Practice mute change how the hammer meets the string. The stiffness rises toward the treble; its size here is illustrative.</p>
-</section>
 </div>
 ```
 
-::: {.family}
-**Every real string is a little stiff.** Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.
+::: {.gist}
+**The gist.** A piano wire is pulled tight like a string, but it is also stiff steel, like a kalimba tine, and stiffness pushes its overtones slightly sharp, more so the higher they go. A tuner sets an octave by matching the upper note to the lower note's second partial, and on a stiff wire that partial sits a little above twice the fundamental. Tune to exactly 2 : 1 and the two beat; stretch the octave and they agree. Raise the stiffness slider and the beat gets faster.
 :::
 
-## Two restoring forces at once
+## On the pitch ruler
+
+Here are the frequencies of a piano note, middle C until you play another key on the piano further down. They sit a little sharp of the gray lines, and the higher the [partial](glossary.qmd#partial), the further sharp; the readout gives the shift in [cents](glossary.qmd#cents), hundredths of a semitone. The low partials are so close to the lines that the ear still hears one clear note. Each stem's height is how strongly the hammer starts that mode; the hammer strikes an eighth of the way along, where the 8th and 16th modes stand still, so those two are nearly silent.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <h3>Partials of the last key</h3>
+    <svg class="spec" id="pSpec" viewBox="0 0 320 120" aria-label="Partials of the last key played"></svg>
+    <div class="readout" id="pPart"></div>
+    <p class="cap">Hammer at 1/8 of the length, where the 8th and 16th modes have a still point, so those partials nearly vanish. Try the soft and mute pedals: the stems shrink at the top, but none of them moves.</p>
+  </div>
+</div>
+```
+
+## How it works
+
+**A piano wire is a string and a bar at once.** Tension pulls the wire straight, as on a violin, and the steel also resists being bent, as in a kalimba tine. The two restoring forces simply add. Bending resists short wiggles far more than long ones, so it barely touches the fundamental but pushes the high overtones sharp. For a middle C wire, the 10th partial (the fundamental counts as the 1st) sits about a third of a semitone above ten times the fundamental. Short treble strings, thick for their length, are the stiffest: the string is slightly [inharmonic](glossary.qmd#inharmonic).
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The operator and its spectrum <span class="needs">uses partial derivatives</span></summary>
 
 **The operator.** Forces per unit length add. Tension contributes $T\,u_{xx}$, as for the [string](violin.qmd), and bending contributes $-EI\,u_{xxxx}$, as for the [kalimba](kalimba.qmd), so with $\mu$ the mass per unit length (density times cross-section area, the $\rho S$ of the kalimba page)
 $$
 \mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx}, \qquad\text{that is}\qquad u_{tt} = -\mathcal{L}u, \quad \mathcal{L} = -c^2\partial_x^2 + \kappa^2\partial_x^4 ,
 $$
 with $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$. Here $\partial_x^2$ means two derivatives in $x$, the same as the subscript $xx$, and $\mathcal{L}$ is this page's operator, playing the role $A$ played before. Treat the ends as *pinned*: held in place but free to pivot, so $u = 0$ and, since a pivot exerts no bending moment and the moment is $EI\,u_{xx}$, also $u_{xx} = 0$. Real piano strings are held a little more firmly than that, which shifts the numbers slightly but not the picture.
+
+**Spectrum.** Pinned ends make $\sin(n\pi x/L)$ an eigenfunction of both terms at once, so here the two operators' eigenvalues simply add; that is special to pinned ends, where the two operators share their eigenfunctions, and with clamped ends the formula needs a small correction. Substituting gives $\omega^2 = c^2k^2 + \kappa^2 k^4$ with $k = n\pi/L$, so
+$$
+f_n = n f_0\sqrt{1 + Bn^2}, \qquad B = \frac{\pi^2 EI}{T L^2},
+$$
+where $f_0 = c/2L$ is the lowest frequency the same string would have without stiffness. The actual fundamental is $f_1 = f_0\sqrt{1 + B}$.
+
+The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials](glossary.qmd#partial) run noticeably sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic). For a middle C wire $B$ is about $4.4\times10^{-4}$, and the 10th partial sits about 37 [cents](glossary.qmd#cents) sharp of ten times the fundamental; the next fold has the arithmetic. Since $I$ grows like the fourth power of the wire's diameter and $B$ falls like $1/L^2$, short treble strings, thick for their length, are the stiffest.
+
+</details>
+:::
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a short piece of wire to the operator and its spectrum <span class="needs">uses partial derivatives</span></summary>
@@ -150,34 +158,52 @@ Taking square roots gives $f_n = n f_0\sqrt{1 + Bn^2}$, with $f_0 = c/2L$ and $B
 </details>
 :::
 
-**Spectrum.** Pinned ends make $\sin(n\pi x/L)$ an eigenfunction of both terms at once, so here the two operators' eigenvalues simply add; that is special to pinned ends, where the two operators share their eigenfunctions, and with clamped ends the formula needs a small correction. Substituting gives $\omega^2 = c^2k^2 + \kappa^2 k^4$ with $k = n\pi/L$, so
-$$
-f_n = n f_0\sqrt{1 + Bn^2}, \qquad B = \frac{\pi^2 EI}{T L^2},
-$$
-where $f_0 = c/2L$ is the lowest frequency the same string would have without stiffness. The actual fundamental is $f_1 = f_0\sqrt{1 + B}$.
+**Why exact octaves beat.** A tuner sets an octave by ear, listening for beats between the lower note's second partial and the upper note's fundamental. Two nearly equal frequencies played together beat at a rate equal to their difference. On a stiff wire the lower note's second partial is a little more than twice its fundamental, so an upper note tuned to exactly twice the fundamental sits just below that partial, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise. Repeated across the keyboard, this is *stretch tuning*: the top of a piano ends up sharp and the bottom flat, compared with equal temperament. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
 
-The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials](glossary.qmd#partial) run noticeably sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic). For a middle C wire $B$ is about $4.4\times10^{-4}$, and the 10th partial sits about 37 [cents](glossary.qmd#cents) sharp of ten times the fundamental; the fold above has the arithmetic. Since $I$ grows like the fourth power of the wire's diameter and $B$ falls like $1/L^2$, short treble strings, thick for their length, are the stiffest.
-
-```{=html}
-<div class="ins">
-<div class="panel">
-    <h3>Partials of the last key</h3>
-    <svg class="spec" id="pSpec" viewBox="0 0 320 120" aria-label="Partials of the last key played"></svg>
-    <div class="readout" id="pPart"></div>
-    <p class="cap">Hammer at 1/8 of the length, where the 8th and 16th modes have a still point, so those partials nearly vanish. Try the soft and mute pedals: the stems shrink at the top, but none of them moves.</p>
-  </div>
-</div>
-```
-
-## Why exact octaves beat
+::: {.derive}
+<details><summary><span class="label">Precisely</span>How much wider than 2 : 1 <span class="needs">uses square-root approximations</span></summary>
 
 A tuner sets an octave by listening for [beats](glossary.qmd#beats), a slow wobble in loudness, between the lower note's second partial and the upper note's fundamental. Beats happen when two nearly equal frequencies add, at a rate equal to their difference. The lower note's fundamental is $f_0\sqrt{1+B}$ and its second partial is $2f_0\sqrt{1+4B}$. Their ratio is $2\sqrt{(1+4B)/(1+B)} \approx 2\,(1 + 2B)(1 - B/2) \approx 2\,(1 + 3B/2)$, using $\sqrt{1+x} \approx 1 + x/2$ and $1/\sqrt{1+x} \approx 1 - x/2$ for small $x$: the second partial is more than twice the fundamental by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental therefore sits a little below that second partial, and the two beat. To silence the beats the tuner raises the upper note until its fundamental matches the lower note's second partial, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise. Repeated across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), in which every semitone is exactly the ratio $2^{1/12}$, the top of a piano is tuned sharp and the bottom flat.
 
-That answers the opening puzzle: on a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
+</details>
+:::
 
-## Hammer, dampers and pedals
+**Hammer, dampers and pedals: none of them moves a frequency.** The frequencies belong to the operator, set by the wire's tension and stiffness. The hammer decides how much of each mode starts: a mode is excited in proportion to its own height where the hammer hits, so a mode that stands still there stays silent. The felt dampers decide how fast each mode dies: a mode is damped in proportion to how much it moves under the felt. Every control a pianist touches acts on one of these two. Only the tuner's wrench, which changes the tension, touches the operator.
 
-A second question: what do the pedals actually do to the sound? None of them moves a frequency, apart from tiny shifts explained below.
+| Control | What it changes | Effect |
+|:--|:--|:--|
+| key held down | lifts that note's damper | the note rings |
+| key released | drops the damper on the string | the modes die, each at its own rate |
+| [sustain pedal](https://en.wikipedia.org/wiki/Sustain_pedal) (right) | lifts every damper | released notes ring on |
+| [soft pedal](glossary.qmd#soft-pedal) (left) | the hammer blow: on a grand it strikes fewer strings, with a softer part of its felt; on an upright it starts closer to the strings | quieter; high modes weaker |
+| [practice mute](glossary.qmd#practice-pedal) (middle, on uprights) | the hammer blow: a felt strip sits between hammer and string | much quieter; most high modes gone |
+| tuning pin | the operator: the tension | every frequency moves |
+
+Play the whole piano with the mouse or your computer keys. Release a key and its felt [damper](glossary.qmd#damper) drops back onto the string and stops it; try the pedals, and watch the stems in the panel above shrink without moving.
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <div class="controls" style="padding:0 0.25rem 0.5rem">
+    <button id="octDown" aria-label="Move the computer-key window down an octave">◀ Octave (Z)</button>
+    <span class="readout" id="winRead"></span>
+    <button id="octUp" aria-label="Move the computer-key window up an octave">Octave (X) ▶</button>
+  </div>
+  <div class="kbdwrap" id="kbdwrap"><div class="kbd" id="kbd" aria-label="Piano keyboard, A0 to C8"></div></div>
+  <div class="pedals" style="padding:0.75rem 0.25rem 0" role="group" aria-label="Pedals">
+    <button id="pSoft" aria-pressed="false">Soft<small>left pedal</small></button>
+    <button id="pMute" aria-pressed="false">Practice mute<small>middle pedal</small></button>
+    <button id="pSus" aria-pressed="false">Sustain<small>right pedal · Space</small></button>
+  </div>
+  <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="mult">Stiffness ×</label><input type="range" id="mult" min="0" max="12" step="0.5" value="1"><output id="multo">1.0</output></div>
+  <div class="readout" id="pRead" style="padding:0.4rem 0.25rem 0">Hold keys to sound them; release to damp. Computer keys: A W S E D F T G Y H U J K O L P ; ' play the highlighted range.</div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Releasing a key drops its felt damper and the note stops. The top 20 keys have no dampers, as on a real piano. Sustain lifts every damper; Soft and Practice mute change how the hammer meets the string. The stiffness rises toward the treble; its size here is illustrative.</p>
+</section>
+</div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>The full string equation, the hammer weights and the damping rates <span class="needs">uses integrals of products of modes and a first-order approximation</span></summary>
 
 The operator is only part of the string's equation. A real string is also pushed by the hammer and loses energy to [damping](glossary.qmd#damping); here $f(x,t)$ is a force, not a frequency:
 $$
@@ -190,10 +216,9 @@ Both effects are read off the mode shapes $X_n(x) = \sin(n\pi x/L)$. A hammer bl
 $$
 \gamma_n = \frac{\int_W b\,X_n^2\,dx}{2\mu\int_0^L X_n^2\,dx}.
 $$
-A mode is damped in proportion to how much it moves under the felt, and its frequency shifts only by an amount proportional to $\gamma_n^2$, negligible for weak damping. A mode with a node under the felt barely notices the damper: in the view below, slide the damper to $L/8$, where the hammer also sits, and the 8th mode, which has a still point there, is not excited and barely damped.
+A mode is damped in proportion to how much it moves under the felt, and its frequency shifts only by an amount proportional to $\gamma_n^2$, negligible for weak damping. A mode with a node under the felt barely notices the damper: in the view of the inside of the piano further down, slide the damper to $L/8$, where the hammer also sits, and the 8th mode, which has a still point there, is not excited and barely damped.
 
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>Where the hammer weights and the damping rates come from <span class="needs">uses integrals of products of modes and a first-order approximation</span></summary>
+In the table above, the dampers and the sustain pedal change $b$; the soft pedal and the practice mute change $f$; only the tuning pin changes the operator.
 
 **1. Expand in modes.** Write $u(x,t) = \sum_n q_n(t)\,X_n(x)$, with $\mathcal{L}X_n = \omega_n^2X_n$ and the pinned conditions.
 
@@ -216,20 +241,15 @@ whose solution $e^{-\gamma_m t}\cos\big(\sqrt{\omega_m^2 - \gamma_m^2}\,t\big)$ 
 </details>
 :::
 
-| Control | Term it changes | Effect |
-|:--|:--|:--|
-| key held down | $b$: lifts that note's damper | the note rings |
-| key released | $b$: drops the damper on the string | mode $n$ decays at rate $\gamma_n$ |
-| [sustain pedal](https://en.wikipedia.org/wiki/Sustain_pedal) (right) | $b$: lifts every damper | released notes ring on |
-| [soft pedal](glossary.qmd#soft-pedal) (left) | $f$: on a grand the hammer strikes fewer strings, with a softer part of its felt; on an upright it starts closer to the strings | quieter; high modes weaker |
-| [practice mute](glossary.qmd#practice-pedal) (middle, on uprights) | $f$: a felt strip sits between hammer and string | much quieter; most high modes gone |
-| tuning pin | operator: the tension $T$ | every frequency moves |
+::: {.derive}
+<details><summary><span class="label">Details</span>Grand pianos: the middle pedal and the two-stage decay</summary>
 
 On a grand piano the middle pedal is usually the *sostenuto*, which holds up only the dampers of keys already down. Most notes have two or three strings, and Weinreich showed that their [coupling](glossary.qmd#coupling) through the bridge, each string's motion slightly shaking the others, produces the piano's two-stage decay: a loud start that fades fast, then a quiet, long *aftersound*. A grand's soft pedal strikes fewer of the strings, so the coupled motion starts differently. This model leaves the coupling out.
 
-## Inside the piano
+</details>
+:::
 
-An upright piano with its front panel removed, one octave of it. Each key, hammer and damper below moves as the corresponding term of the equation says: the hammer is $f$, the felt on the string is $b$, and the string's motion is a sum of the operator's modes.
+**Inside the piano.** An upright piano with its front panel removed, one octave of it. Each key, hammer and damper below moves as the equation says: the hammer starts the modes, the felt on the string damps them, and the string's motion is a sum of the operator's modes.
 
 ```{=html}
 <div class="ins">
@@ -258,7 +278,7 @@ An upright piano with its front panel removed, one octave of it. Each key, hamme
 </div>
 ```
 
-Where the dampers touch the string matters, and the formula for $\gamma_n$ says why. Mode $n$ is damped in proportion to its motion under the felt. Close to an end every low mode barely moves, so a damper there hardly damps the bass. In most modern uprights the dampers sit below the hammers, nearer the middle of the string; in older "birdcage" uprights they sat above the hammers, near the end. Piano restorers report that the under-damper design stops the strings better, partly because its dampers are closer to the middle of the string (Sykes). The slider in the view above moves the damper and shows the effect on each mode.
+Where the dampers touch the string matters, because each mode is damped in proportion to its motion under the felt. Close to an end every low mode barely moves, so a damper there hardly damps the bass. In most modern uprights the dampers sit below the hammers, nearer the middle of the string; in older "birdcage" uprights they sat above the hammers, near the end. Piano restorers report that the under-damper design stops the strings better, partly because its dampers are closer to the middle of the string (Sykes). The slider in the view above moves the damper and shows the effect on each mode.
 
 ::: {.qa}
 <details><summary><span class="label">Reader question</span>What does a damper do, and what would a piano without dampers sound like?</summary>
@@ -270,13 +290,17 @@ Without dampers, releasing a key would do nothing: every string would ring until
 
 ## What we found
 
-Operators add. A piano wire is pulled tight like a string and resists bending like a bar, so its operator is the sum of the two, and its overtones run slightly sharp of the whole numbers. The rest of a real string's equation, damping and forcing, is where the hammer, the dampers and the pedals act, and none of them moves a frequency, apart from tiny shifts that weak damping causes.
+On the pitch ruler, a piano's overtones sit slightly sharp of the lines, more so the higher they go: close enough that you hear one clear note, far enough that an exact octave beats. The operator taught one new thing: operators add. A piano wire is pulled tight like a string and resists bending like a bar, so its operator is the sum of the two. The hammer, the dampers and the pedals act on the rest of the string's equation, the forcing and the damping, and none of them moves a frequency, apart from tiny shifts that weak damping causes.
+
+::: {.family}
+**Every real string is a little stiff.** Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.
+:::
 
 ## The next puzzle
 
 Every instrument so far has been one-dimensional: a string, a tube, a bar. In 1808 Ernst Chladni showed Paris that a vibrating plate, sprinkled with sand, draws patterns, a different one for each note. What draws them? And why does a drum give a thud where a string gives a note?
 
-[← The harmonica](harmonica.qmd) · [Next: the drum →](drum.qmd)
+[← 6b · Harmonica](harmonica.qmd) · [Next: 8 · Drum →](drum.qmd)
 
 ::: {.refs}
 **References.** Wikipedia, [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity), [Piano pedals](https://en.wikipedia.org/wiki/Piano_pedals), [Sustain pedal](https://en.wikipedia.org/wiki/Sustain_pedal) and [Soft pedal](https://en.wikipedia.org/wiki/Soft_pedal). G. Weinreich, [The coupled motion of piano strings](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990. Sykes Pianos, [Over-damped vs under-damped upright pianos](https://sykespianos.co.uk/post/2018/12/21/over-damped-vs-under-damped-upright-pianos), 2018. N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 12. The string dimensions used for $B$ are rough illustrative values.
@@ -374,7 +398,7 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
   ms.addEventListener("input", function () { mult = parseFloat(ms.value); mo.textContent = mult.toFixed(1); pspec(); });
   function pspec() {
     var p = partsFor(last);
-    C.stems(document.getElementById("pSpec"), p, { W: 320, H: 120, rmax: 16, fs: 8, sw: 2, labelEvery: 2 });
+    C.stems(document.getElementById("pSpec"), p, { W: 320, H: 120, rmax: 16, fs: 8, sw: 2, labelEvery: 2, noOff: true });
     var r10 = p[9] ? p[9].ratio : null;
     document.getElementById("pPart").innerHTML = C.noteName(C.mtof(last)).name + " · partial 2 at <b>" + (1200 * Math.log2(p[1].ratio / 2)).toFixed(1) + "¢</b> sharp" + (r10 ? " · partial 10 at <b>" + (1200 * Math.log2(r10 / 10)).toFixed(0) + "¢</b> sharp" : "");
   }

@@ -1,11 +1,11 @@
 ---
-title: "5 · An air column"
-subtitle: "The clarinet and the flute · Instruments as Operators"
+title: "Why is a clarinet almost an octave deeper than a flute?"
+subtitle: "5 · The clarinet and the flute"
 format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-26
+date-modified: 2026-10-27
 resources: [core.js, ins.css]
 ---
 
@@ -14,11 +14,11 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-**Builds on** [page 4](violin.qmd): the boundary condition decides which eigenfunctions are allowed. About 7 minutes, plus 4 for the folds.
+Builds on [page 4, the violin string](violin.qmd). About 8 minutes, plus the folds.
 :::
 
 ::: {.puzzle}
-**The puzzle.** A clarinet and a flute are about the same length. Yet the clarinet's lowest note is almost an [octave](glossary.qmd#octave) below the flute's. And when the players [overblow](glossary.qmd#overblow), making the tube jump to its next mode (a flutist by blowing faster, a clarinetist by pressing the [register key](glossary.qmd#overblow)), the flute jumps up an octave while the clarinet jumps an [octave and a fifth](glossary.qmd#octave). The same equation governs the air in both tubes. What is different?
+A clarinet and a flute are about the same length. Yet the clarinet's lowest note is almost an [octave](glossary.qmd#octave) below the flute's. And when players [overblow](glossary.qmd#overblow), making the tube jump to its next mode, the flute jumps up an octave while the clarinet jumps an [octave and a fifth](glossary.qmd#octave). The same equation governs the air in both tubes. What is different?
 :::
 
 Play a fingering on the clarinet, then switch the same tube to a flute, open at both ends, and play it again. Then hold the register key, which makes the tube jump to its next mode, on each; on the flute it stands in for blowing faster.
@@ -47,17 +47,17 @@ Play a fingering on the clarinet, then switch the same tube to a flute, open at 
 </div>
 ```
 
-::: {.family}
-**Same operator, other ends.** Stopped organ pipes and pan pipes are closed at one end like the clarinet and share its odd-harmonic spectrum. Open organ pipes share the flute's. Oboes and saxophones have cone-shaped tubes instead of cylinders, a different operator, which this series does not cover.
+::: {.gist}
+**The gist.** Only the ends differ. A flute is open at both ends, and its lowest note fits half a wave of pressure into the tube. A clarinet is closed at the reed, and its lowest note fits only a quarter of a wave: a wave twice as long, so a note an octave lower. A tube closed at one end also skips every second mode, so the clarinet's next mode up is 3 times its lowest, an octave and a fifth. Switch the demo between clarinet and flute and watch the stems.
 :::
 
-## Same equation, other ends
+## On the pitch ruler
 
-**The operator.** Let $p(x, t)$ be the air pressure in the tube minus room pressure. It obeys the wave equation again,
-$$
-p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
-$$
-where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-modulus), its resistance to being squeezed (this $K$ has nothing to do with the bead matrix of page 2). The constant $c$ is the speed of sound, about 343 m/s at 20 °C. So the operator is again $-c^2\,d^2/dx^2$, now acting on pressure shapes along the tube.
+The stems under the demo are the frequencies in the sound, on a ruler whose gray lines are whole-number multiples of the note being played. The flute's stems sit on every line. The clarinet's sit on the lines too, but the strong ones are at 1, 3, 5, 7, …; the even ones are faint. Both sounds are notes. What the closed end changes is which lines are strong, and how low the whole ruler starts.
+
+## How it works
+
+**Same equation, other ends.** The air in a tube obeys the same [wave equation](glossary.qmd#wave-equation) as a string, with the air pressure in place of the string's sideways displacement and the speed of sound, about 343 m/s, in place of the string's wave speed (fold below). What differs is the ends. At an open end the air meets the room, so the pressure there stays at room pressure, just as a string's tied end stays put. At the clarinet's reed the opening is nearly shut, so the air there cannot move back and forth, and the pressure swings most there.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>Newton's law for a slab of air <span class="needs">uses partial derivatives</span></summary>
@@ -83,7 +83,18 @@ What was assumed: the tube is narrow compared with the sound's wavelength, so th
 </details>
 :::
 
-**Boundary conditions.** At an open end the air in the tube meets the room, so the pressure there is room pressure: $p = 0$. This is approximate: the air just outside moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end, an amount called the *end correction*. At the clarinet's reed the opening is nearly shut, so the air there cannot move back and forth. Air that never moves has no acceleration, so the net push on it is zero; that push is set by how fast the pressure changes along the tube, $p_x$, so $p_x = 0$ there (step 2 of the derivation, with $\xi$ the air's displacement along the tube). The first of these is the string's Dirichlet condition. The second, a condition on the slope, is called a *Neumann condition*.
+**Half a wave or a quarter.** The flute's lowest mode has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet's lowest mode swings most at the reed and has room pressure at the open end: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end. Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and the open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The two end conditions and the two spectra <span class="needs">uses derivatives</span></summary>
+
+**The operator.** Let $p(x, t)$ be the air pressure in the tube minus room pressure. The fold above shows that it obeys the wave equation again,
+$$
+p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
+$$
+where $\rho$ is the density of air and $K$ its [bulk modulus](glossary.qmd#bulk-modulus), its resistance to being squeezed (this $K$ has nothing to do with the bead matrix of page 2). The constant $c$ is the speed of sound, about 343 m/s at 20 °C. So the operator is again $-c^2\,d^2/dx^2$, now acting on pressure shapes along the tube.
+
+**Boundary conditions.** At an open end the air in the tube meets the room, so the pressure there is room pressure: $p = 0$. This is approximate: the air just outside moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end, an amount called the *end correction*. At the clarinet's reed the opening is nearly shut, so the air there cannot move back and forth. Air that never moves has no acceleration, so the net push on it is zero; that push is set by how fast the pressure changes along the tube, $p_x$, so $p_x = 0$ there (step 2 of the fold above, with $\xi$ the air's displacement along the tube). The first of these is the string's Dirichlet condition. The second, a condition on the slope, is called a *Neumann condition*.
 
 **Spectrum.** A mode is a pressure shape $X(x)$ with $-X'' = k^2 X$, so $X = a\cos kx + b\sin kx$, and its frequency is $f = ck/2\pi$. For the clarinet, $X'(0) = bk = 0$ at the reed forces $b = 0$, leaving $X = \cos kx$, and $X(L) = 0$ at the open end needs $\cos kL = 0$, so $kL = (2n - 1)\pi/2$ and $f_n = (2n-1)c/4L$. For the flute, open at both ends, the conditions are the string's, and give $\sin(n\pi x/L)$. So
 
@@ -92,10 +103,12 @@ What was assumed: the tube is narrow compared with the sound's wavelength, so th
 | flute | open, open | $\sin(n\pi x/L)$ | $f_n = n\,\dfrac{c}{2L}$ |
 | clarinet | closed, open | $\cos\big((2n-1)\pi x/2L\big)$ | $f_n = (2n-1)\,\dfrac{c}{4L}$ |
 
-Two consequences can be heard in the demo.
+The lowest frequencies are $c/2L$ and $c/4L$: a ratio of exactly 2 for the same ideal tube. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
 
-- **An octave lower, almost.** An octave is a frequency ratio of 2. The same ideal tube sounds $c/4L$ closed at one end but $c/2L$ open at both, exactly an octave lower. Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and the end corrections differ, so the real interval comes out a bit less than an octave.
-- **A twelfth, not an octave.** The clarinet's register key opens a small hole near the top of the tube. An open hole lets air in and out, pulling the pressure there toward room pressure, which spoils the fundamental, a mode that needs pressure variation at that point. For one note in the lower part of the low register (the notes played without the key), the hole sits about a third of the way down the sounding tube, right where that note's $3f_1$ mode has no pressure variation anyway, so the open hole does not disturb that mode (Wolfe). For the other notes the hole is off that point, well off for the lowest and highest notes you play with the key (Wolfe), and a second effect helps: the air in a small hole has mass, and the faster it must move back and forth, the harder it is to move. At the fundamental's lower frequency it moves more easily, so the hole leaks enough to spoil that mode; at the higher frequency of the $3f_1$ mode it moves much less, so the hole acts almost as a plug. Either way the tube jumps to the $3f_1$ mode. That is a ratio of 3, called a twelfth: an octave and a fifth, where a fifth is the ratio 3/2. A flutist overblows without a key, by blowing faster, and the flute's next mode is $2f_1$, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
+</details>
+:::
+
+**Only odd multiples.** The flute's higher modes fit 2, 3, 4, … half waves into the tube, so its modes sit at every whole-number multiple of its lowest. The clarinet's must keep the pressure swinging most at the reed and at room level at the open end, and that fits 1, 3, 5, … quarter waves, with nothing in between: only odd multiples. So when a clarinetist presses the register key, the tube jumps to 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). A flutist overblows by blowing faster, and the flute's next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Why only odd harmonics: the closed tube is a quarter of a loop <span class="needs">uses the circle's eigenfunctions (page 3)</span></summary>
@@ -111,17 +124,29 @@ So the clarinet's modes are the odd harmonics of a loop four tube-lengths long, 
 </details>
 :::
 
-**The reed.** The reed is a valve. When the pressure in the mouthpiece drops, it closes, and when the pressure rises, it opens, so the air column, through the pressure it creates, drives the reed that feeds it. In normal playing this settles into a [periodic](glossary.qmd#periodic) oscillation, like the bowed string, at a playing frequency close to the tube's lowest mode. A periodic sound can have partials only at whole-number multiples of the playing frequency, but it may have them at all of them, so the distinction matters: the tube's *modes* are odd multiples only, but the clarinet's *sound* contains even harmonics too. In the low register, the lowest notes of the instrument, the even harmonics are weak because the tube has no resonance to support them, but they are not absent. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.
+::: {.derive}
+<details><summary><span class="label">Details</span>How the register key picks out the 3× mode</summary>
+
+The clarinet's register key opens a small hole near the top of the tube. An open hole lets air in and out, pulling the pressure there toward room pressure, which spoils the fundamental, a mode that needs pressure variation at that point. For one note in the lower part of the low register (the notes played without the key), the hole sits about a third of the way down the sounding tube, right where that note's $3f_1$ mode has no pressure variation anyway, so the open hole does not disturb that mode (Wolfe). For the other notes the hole is off that point, well off for the lowest and highest notes you play with the key (Wolfe), and a second effect helps: the air in a small hole has mass, and the faster it must move back and forth, the harder it is to move. At the fundamental's lower frequency it moves more easily, so the hole leaks enough to spoil that mode; at the higher frequency of the $3f_1$ mode it moves much less, so the hole acts almost as a plug. Either way the tube jumps to the $3f_1$ mode.
+
+</details>
+:::
+
+**Why the sound still lands on every line.** The reed is a valve: when the pressure in the mouthpiece drops it closes, and when the pressure rises it opens, so the air column drives the reed that feeds it. In normal playing this settles into a [periodic](glossary.qmd#periodic) oscillation, a sound that repeats, at a playing frequency close to the tube's lowest mode. A sound that repeats has frequencies only at whole-number multiples of its repetition rate ([page 0](note.qmd)), but it may have all of them. So the tube's *modes* are odd multiples only, while the clarinet's *sound* has even multiples too: weak in the low register, where no mode of the tube supports them, but not absent.
 
 ## What we found
 
-The string's operator also governs the air pressure in a tube. Changing the boundary condition at one end, from "pressure equals the room's" to "the air cannot move", halves the lowest frequency and keeps only its odd multiples: the clarinet's modes are at 1, 3, 5, … times $c/4L$. In the sound, which repeats, the even harmonics are weak rather than gone.
+On the pitch ruler, both tubes play notes: their sound repeats, so its frequencies sit on the lines. The ends decide which lines are strong and where the ruler starts. The string's operator also governs the air pressure in a tube, and changing the condition at one end, from "pressure equals the room's" to "the air cannot move", halves the lowest frequency and keeps only its odd multiples as modes: 1, 3, 5, … times the speed of sound divided by four tube lengths.
+
+::: {.family}
+**Same operator, other ends.** Stopped organ pipes and pan pipes are closed at one end like the clarinet and share its odd-harmonic spectrum. Open organ pipes share the flute's. Oboes and saxophones have cone-shaped tubes instead of cylinders, a different operator, which this series does not cover.
+:::
 
 ## The next puzzle
 
-So far every restoring force has been a pull or a push along the material: tension along a string, pressure along a tube. A kalimba tine is different, because nothing stretches it. Halve a string's length and its pitch rises one octave; halve a tine's length and its pitch rises two. Why?
+So far every restoring force has been a pull or a push along the material: tension along a string, pressure along a tube. A kalimba tine is springy steel that nothing stretches, and its first overtone sits at 6.27 times its fundamental, far off the lines. Overtones off the lines are what make a bell clang. Why does a kalimba sound clean?
 
-[← A string with ends](violin.qmd) · [Next: change the order →](kalimba.qmd)
+[← 4 · String](violin.qmd) · [Next: 6 · Kalimba →](kalimba.qmd)
 
 ::: {.refs}
 **References.** J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html) and [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW. N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 8 (pipes) and chapter 15 (woodwind reed instruments).
@@ -161,7 +186,7 @@ So far every restoring force has been a pull or a push along the material: tensi
   function update() {
     if (voice) { var a = C.ac(); voice.osc.frequency.setTargetAtTime(freq(), a.currentTime, 0.01); voice.osc.setPeriodicWave(C.wave(a, parts())); voice.lp.frequency.value = flute ? 3500 : 4500; }
     var f = freq(), nn = C.noteName(f), L = Leff();
-    document.getElementById("cRead").innerHTML = "sounding length <b>" + (L * 100).toFixed(1) + " cm</b> · mode " + (flute ? modeN() + " → " + modeN() + "c/2L" : modeN() + " → " + (2 * modeN() - 1) + "c/4L") + " · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? (nn.cents > 0 ? " +" : " ") + nn.cents + "¢" : "");
+    document.getElementById("cRead").innerHTML = "sounding length <b>" + (L * 100).toFixed(1) + " cm</b> · mode " + modeN() + ", at <b>" + (flute ? modeN() : 2 * modeN() - 1) + "×</b> the tube's lowest · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? (nn.cents > 0 ? " +" : " ") + nn.cents + "¢" : "");
     C.stems(document.getElementById("cSpec"), parts().slice(0, 12), { W: 320, H: 90, rmax: 12, fs: 8, sw: 2.5 });
   }
   var blow = document.getElementById("blow");

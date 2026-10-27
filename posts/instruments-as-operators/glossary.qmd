@@ -1,6 +1,6 @@
 ---
 title: "Glossary"
-subtitle: "Instruments as Operators"
+subtitle: "The Shape of a Sound"
 format:
   html:
     html-math-method: katex

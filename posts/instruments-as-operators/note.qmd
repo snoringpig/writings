@@ -1,11 +1,11 @@
 ---
-title: "0 · What is a note?"
-subtitle: "Instruments as Operators"
+title: "What makes a sound a note?"
+subtitle: "0 · The note"
 format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-26
+date-modified: 2026-10-27
 resources: [core.js, ins.css]
 ---
 
@@ -14,12 +14,14 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-**Start here.** About 6 minutes, plus 4 for the folded proof.
+Start here. About 7 minutes, plus the folds.
 :::
 
 ::: {.puzzle}
-**The puzzle.** Below is a note at 220 [hertz](glossary.qmd#hertz). Remove its 220 Hz component completely and play it again. The pitch does not change. If a note's pitch is not one of its frequencies, what is it?
+Below is a note at 220 [hertz](glossary.qmd#hertz), vibrations per second. Take away its 220 Hz part completely and play it again: you still hear the same note. If a note's pitch is not one of its frequencies, what is it?
 :::
+
+Play the note, then the note without its 220 Hz part, and watch the wave.
 
 ```{=html}
 <div class="ins">
@@ -40,23 +42,45 @@ resources: [core.js, ins.css]
 </div>
 ```
 
-Watch the wave while you switch between the two. Removing the 220 Hz component changes the wave's shape, but not how often it repeats: still every 1/220 of a second. The components left are at 440, 660, 880, … Hz, and each of them goes through a whole number of cycles in 1/220 of a second (2, 3, 4, …), so together they still repeat after exactly that time. They do not all fit into 1/440 of a second: 660 Hz would need one and a half cycles. That repetition is what you hear as the pitch. The effect is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental), the fundamental being the component at the repetition rate itself, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
+::: {.gist}
+**The gist.** A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave's shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time.
+:::
 
-## A note is a pattern that repeats
+## The pitch ruler
 
-Sound is air pressure rising and falling. When the pattern repeats every $P$ seconds, with $P$ the shortest such time, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate $f = 1/P$, measured in hertz, repetitions per second. This holds for repetition rates in the range where we hear pitch, from a few dozen to a few thousand times a second; much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.
+The stems under the wave are the note's frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the *pitch ruler*, and every page of this series puts an instrument on it. A note's frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. This effect is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental), and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
 
-A pure tone is a single cosine wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier's theorem, and page 3 shows where it comes from. These tones are its [harmonics](glossary.qmd#harmonic), and the one at the repetition rate itself is the [fundamental](glossary.qmd#fundamental). Open "Mix your own" above and try the presets: the wave's shape changes, and so does the sound's color, its [timbre](glossary.qmd#timbre), but as long as the pattern repeats 220 times a second, the pitch stays put.
+Open "Mix your own" and try the presets. The stems' heights change, and so does the sound's color, its [timbre](glossary.qmd#timbre), but the pitch stays put as long as the base frequency does. Keep only 2×, 4×, 6× and 8×, and the sound repeats twice as often: the base becomes 440 Hz, and the pitch jumps up an octave.
 
-In symbols: a pressure signal $p(t)$ is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$. Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its [Fourier series](glossary.qmd#fourier-series),
+## How it works
+
+**A note is a pattern that repeats.** Sound is air pressure rising and falling. When the pattern repeats, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate, measured in hertz. This holds for rates in the range where we hear pitch, from a few dozen to a few thousand times a second; much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.
+
+**Every repeating sound is a chord on the lines.** A pure tone is a single smooth wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier's theorem, and page 3 shows where it comes from. These tones are the sound's [harmonics](glossary.qmd#harmonic), and the one at the repetition rate itself is the [fundamental](glossary.qmd#fundamental). The repetition rate sets the pitch, whether or not the fundamental is actually there; the harmonics' strengths set the timbre.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Periodic signals and their Fourier series <span class="needs">uses sums of cosines</span></summary>
+
+Sound is a pressure signal $p(t)$. It is [periodic](glossary.qmd#periodic) with period $P$ if $p(t + P) = p(t)$ for every $t$; take $P$ to be the shortest such time. The pitch is the repetition rate $f = 1/P$, for rates in the range where we hear pitch.
+
+Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its [Fourier series](glossary.qmd#fourier-series),
 $$
 p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
 $$
 The $n = 0$ term is a constant, the average pressure, usually zero. The possible frequencies $nf$ are fixed by the period alone, and a given sound may use only some of them: a pure tone uses only $f$. The amplitudes $b_n$ and the phases $\phi_n$ carry everything else about the sound's shape, and the ear is mostly insensitive to the phases.
 
-## Why whole numbers matter
+</details>
+:::
 
-Turn it around. If an object vibrates at several frequencies at once, its sound repeats only when those frequencies are whole-number multiples of one common frequency. For two tones, that means their frequency ratio is a fraction $j/k$ of whole numbers, in lowest terms; the pattern then repeats every $k$ cycles of the lower tone. Only a small $k$ gives a repetition fast enough to hear as one pitch. Try it:
+::: {.qa}
+<details><summary><span class="label">Reader question</span>Is a musical note one frequency?</summary>
+
+No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is the repetition rate $f = 1/P$. By the Fourier series above, its components can only be at $f, 2f, 3f, \dots$, and usually several are present at once. The repetition rate sets the pitch, whether or not a component at $f$ itself is present, and the weights $b_n$ set the timbre: a piano C4 and a violin C4 share $f$ and differ in their $b_n$. So a note corresponds to a period, not to a single frequency.
+
+</details>
+:::
+
+**Why whole numbers matter.** Turn it around. If something vibrates at several frequencies at once, its sound repeats only when they are all whole-number multiples of one common frequency. For two tones, the ratio of their frequencies must be a fraction, such as 3/2; the sound then repeats every 2 cycles of the lower tone. A ratio like 1.59, which is 159/100, repeats only every 100 cycles of the lower tone, far too slowly to hear as one pitch. Try it:
 
 ```{=html}
 <div class="ins">
@@ -70,8 +94,10 @@ Turn it around. If an object vibrates at several frequencies at once, its sound 
 </div>
 ```
 
+Real instruments are never exact. Frequencies very near whole-number multiples still sound like one note: a piano's are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.
+
 ::: {.derive}
-<details><summary><span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is rational</summary>
+<details><summary><span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is a fraction <span class="needs">uses cosines and divisibility</span></summary>
 
 Let $s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)$ with $0 < f_1 < f_2$.
 
@@ -79,30 +105,22 @@ Let $s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)$ with $0 < f_1 < f_2$.
 
 *If $s$ is periodic, the ratio is rational.* Suppose $s(t+P) = s(t)$ for all $t$, with $P > 0$. At $t = 0$ this gives $s(P) = s(0) = 2$. A sum of two cosines equals 2 only when both cosines equal 1, so $\cos(2\pi f_1P) = \cos(2\pi f_2P) = 1$, which means $f_1P$ and $f_2P$ are whole numbers. So $f_2/f_1 = (f_2P)/(f_1P)$ is a ratio of whole numbers. Since $f_2/f_1 = j/k$, we have $k\,(f_2P) = j\,(f_1P)$, so $k$ divides $j\,(f_1P)$; as $j$ and $k$ share no factor, $k$ divides the whole number $f_1P$. So every period is a multiple of $k/f_1$, and $k/f_1$ is the shortest one.
 
-The shortest period $k/f_1$ grows with the denominator $k$. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as "simple enough" is a question of perception, not mathematics; see [pitch](https://en.wikipedia.org/wiki/Pitch_(music)).
-
-</details>
-:::
-
-::: {.qa}
-<details><summary><span class="label">Reader question</span>Is a musical note one frequency?</summary>
-
-No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is the repetition rate $f = 1/P$. By the Fourier series above, its components can only be at $f, 2f, 3f, \dots$, and usually several are present at once. The repetition rate sets the pitch, whether or not a component at $f$ itself is present, and the weights $b_n$ set the timbre: a piano C4 and a violin C4 share $f$ and differ in their $b_n$. So a note corresponds to a period, not to a single frequency.
+The shortest period $k/f_1$ grows with the denominator $k$. A ratio like 1.59 = 159/100 is rational, but its pattern repeats only every 100 cycles of the lower tone, far too slowly for the ear to hear as one pitch. How the ear decides what counts as "simple enough", and how near to whole-number multiples is near enough, are questions of perception, not mathematics; see [pitch](https://en.wikipedia.org/wiki/Pitch_(music)).
 
 </details>
 :::
 
 ## What we found
 
-A note is a sound that repeats. Its pitch is how often it repeats, and so one note is a sum of tones at whole-number multiples of that rate.
+A note is a sound that repeats, and its pitch is how often it repeats. So a note's frequencies sit on the lines of one pitch ruler, whole-number multiples of one base frequency, and that base frequency need not be present itself. Every later page puts an instrument on this ruler: on the lines, a note; off the lines, a clang or a thud.
 
 ## The next puzzle
 
-So a clear note needs frequencies at exact whole-number multiples of one frequency. A guitar string is just a piece of wire, and a drumhead just a sheet of plastic. Why would the wire vibrate at exactly 1, 2, 3, … times one frequency, and the drumhead not? To find out, start with the simplest thing that vibrates at all: one mass on a spring.
+A guitar string is just a piece of wire, and a drumhead just a sheet of plastic. Why would the wire vibrate at 1, 2, 3, … times one frequency, and the drumhead not? Start with the simplest thing that vibrates at all, one mass on a spring. It answers a smaller puzzle first: as a plucked note fades, why does its pitch barely sag?
 
-*On the core path (pages 0, 3, 4, 8)?* Skip ahead to [3 · The circle](circle.qmd).
+*Short on time?* Pages 0, 4 and 8 carry the main idea: skip ahead to [4 · Why does a light touch make a string jump an octave?](violin.qmd)
 
-[Next: one mass on a spring →](oscillator.qmd)
+[Next: 1 · Spring →](oscillator.qmd)
 
 ::: {.refs}
 **References.** D. J. Benson, *Music: A Mathematical Offering*, Cambridge University Press, 2006, for Fourier series and pitch. Wikipedia, [Missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) and [Pitch (music)](https://en.wikipedia.org/wiki/Pitch_(music)).
@@ -124,6 +142,7 @@ So a clear note needs frequencies at exact whole-number multiples of one frequen
     var el = document.getElementById("h" + (i + 1)); inputs.push(el);
     el.addEventListener("input", function () { amp[i] = parseFloat(el.value); draw(); });
   })(n - 1);
+  function gcd(a, b) { while (b) { var t = b; b = a % b; a = t; } return a; }
   function setAll(a) { amp = a.slice(); inputs.forEach(function (el, i) { el.value = amp[i]; }); draw(); }
   document.getElementById("nPure").addEventListener("click", function () { setAll([1, 0, 0, 0, 0, 0, 0, 0]); });
   document.getElementById("nBright").addEventListener("click", function () { setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); });
@@ -145,8 +164,10 @@ So a clear note needs frequencies at exact whole-number multiples of one frequen
     x.strokeStyle = C.rgb("--accent"); x.lineWidth = 2 * d; x.beginPath();
     ys.forEach(function (y, i) { var py = H / 2 - (mx ? y / mx : 0) * (H / 2 - 10 * d); if (i) x.lineTo(i, py); else x.moveTo(i, py); }); x.stroke();
     C.stems(document.getElementById("nSpec"), amp.map(function (a, i) { return { ratio: i + 1, amp: a }; }), { W: 320, H: 90, rmax: 8, fs: 8, sw: 3 });
-    var any = amp.some(function (a) { return a > 0; });
-    document.getElementById("nRead").innerHTML = any ? "repeats every <b>1/220 s = 4.5 ms</b>, so the pitch is <b>220 Hz</b>" + (amp[0] === 0 ? ", even with no 220 Hz component" : "") : "silence";
+    var any = amp.some(function (a) { return a > 0; }), g = 0;
+    amp.forEach(function (a, i) { if (a > 0) g = gcd(g, i + 1); });
+    var fr = F * g;
+    document.getElementById("nRead").innerHTML = any ? "repeats every <b>1/" + fr + " s = " + (1000 / fr).toFixed(1) + " ms</b>, so the pitch is <b>" + fr + " Hz</b>" + (amp[g - 1] === 0 ? ", even with no " + fr + " Hz component" : "") : "silence";
   }
   // two-tone ratio demo
   var rs = document.getElementById("ratio"), ro = document.getElementById("ratioOut"), msg = document.getElementById("ratioMsg"), cv = document.getElementById("ratioWave");

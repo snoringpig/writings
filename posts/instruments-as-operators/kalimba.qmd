@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd). About 6 minutes, plus the folds.
+Builds on [page 4, the violin string](violin.qmd). About 7 minutes, plus the folds.
 :::
 
 ::: {.puzzle}
