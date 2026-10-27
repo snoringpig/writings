@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4](violin.qmd). About 6 minutes, plus the folds.
+Builds on [page 4, the violin string](violin.qmd). About 6 minutes, plus the folds.
 :::
 
 ::: {.puzzle}
@@ -41,7 +41,7 @@ Tap a tine. Then tick the box that keeps the overtones ringing, and tap it again
   <canvas id="kal" style="height:300px" aria-label="Seventeen kalimba tines. Tap a tine to pluck it; drag across tines for a glissando."></canvas>
   <div class="controls" style="padding:0.5rem 0.25rem 0">
     <label class="check"><input type="checkbox" id="keq"> Overtones ring as long as the fundamental</label>
-    <span class="readout" id="kRead">Tap a tine, or drag across several.</span>
+    <span class="readout" id="kRead" style="flex-basis:100%">Tap a tine, or drag across several.</span>
   </div>
   <p class="cap" style="padding:0.4rem 0.25rem 0">The tines are drawn to scale: a tine half as long sounds two octaves higher, as this page explains.</p>
 </section>
@@ -49,12 +49,12 @@ Tap a tine. Then tick the box that keeps the overtones ringing, and tap it again
 ```
 
 ::: {.gist}
-**The gist.** The overtones really are off the whole numbers, and you do hear them, as the brief metallic click at the start of each note. But they die within a fraction of a second, while the fundamental rings on. A single frequency in the pitch range, left ringing on its own, repeats, so it is heard as a note. Tick the box to keep the overtones ringing, and the same tine clangs like a bell.
+**The gist.** The overtones really are off the whole numbers, and you do hear them, as the brief metallic click at the start of each note. But they die within a fraction of a second, while the fundamental rings on. The fundamental, left ringing on its own, is a clean note. Tick the box to keep the overtones ringing, and the same tine clangs like a bell.
 :::
 
 ## On the pitch ruler
 
-Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how strongly a pluck starts that mode, measured by the shear force at the clamp. Tap a stem to see the shape of that mode.
+Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how hard that mode [pushes sideways](glossary.qmd#moment) on the bridge just after a pluck, in a simple model where the tine is clamped right at the bridge; that push is what the instrument's body turns into sound. Tap a stem to see the shape of that mode.
 
 ```{=html}
 <div class="ins">
@@ -69,7 +69,7 @@ Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-numbe
 
 ## How it works
 
-**A tine resists bending.** A string is held straight by tension. A tine is under no tension at all: it springs back because steel resists being bent. That one change, bending instead of stretching, is behind both of the tine's surprises below. In the equation of motion it shows up as four derivatives where the string had two (fold).
+**A tine resists bending.** A string is held straight by tension. A tine is under no tension at all: it springs back because steel resists being bent. That one change, bending instead of stretching, is behind both of the tine's surprises below, through one fact: stretch a shape to twice the length, and a string pulls it back 4 times more weakly, but a tine pushes it back 16 times more weakly. (In the equation of motion, four derivatives where the string had two; the fold shows why.)
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>The tine's equation: four derivatives instead of two <span class="needs">uses partial derivatives and integrals over an area</span></summary>
@@ -80,7 +80,7 @@ u_{tt} = -\kappa^2\,u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho S}.
 $$
 Its operator is $\kappa^2\,d^4/dx^4$, where the string's was $-c^2\,d^2/dx^2$. Two of the four derivatives measure how sharply the tine is bent, its curvature $u_{xx}$; the steel answers with a turning effect, the *bending moment*, proportional to it. One more turns the change of bending moment along the tine into the sideways force across each cut, the *shear force*, and the last turns the change of shear force along the tine into the net force on each piece.
 
-**Why $1/L^2$.** Stretch a tine and its mode shapes to twice the length. Each of the four derivatives along the tine is then half as large, so the restoring force on the same shape is $2^4 = 16$ times weaker, while the mass per unit length is unchanged. Frequency goes as the square root of force over mass, so it drops by a factor of 4: frequency goes as $1/L^2$. For a string, two derivatives give $2^2 = 4$ and a factor of 2: frequency as $1/L$.
+**Why $1/L^2$.** Take a tine twice as long, with the same cross-section; its mode shapes stretch to twice the length. Each of the four derivatives along the tine is then half as large, so the restoring force on the same shape is $2^4 = 16$ times weaker, while the mass per unit length is unchanged. Frequency goes as the square root of force over mass, so it drops by a factor of 4: frequency goes as $1/L^2$. For a string, two derivatives give $2^2 = 4$ and a factor of 2: frequency as $1/L$.
 
 The derivation, step by step:
 
@@ -146,9 +146,9 @@ We neglect the slice's resistance to being spun, its rotational inertia, which i
 </details>
 :::
 
-**Half the length, two octaves up.** A string half as long sounds an octave higher. A tine half as long sounds two octaves higher: its frequency goes as one over the length squared, because of those four derivatives (fold above). That is why the low tines in the demo are not twice as long as the high ones an octave up. Kalimba makers tune a tine by sliding it over the bridge to change its free length, and this makes a small slide go a long way.
+**Half the length, two octaves up.** A string half as long sounds an octave higher. A tine half as long sounds two octaves higher. Halving the length makes the push-back on each shape 16 times stronger, where a string's gets 4 times stronger, and frequency goes as the square root of the push-back (page 1): $\sqrt{16} = 4$ times the frequency, two octaves, against the string's $\sqrt{4} = 2$, one octave. So a tine's frequency goes as one over its length squared. That is why the low tines in the demo are not twice as long as the high ones an octave up. Kalimba makers tune a tine by sliding it over the bridge to change its free length, and this makes a small slide go a long way.
 
-**Overtones off the lines.** Four derivatives make the frequencies grow like the square of the mode number instead of the number itself, so they spread far apart. Where exactly they land depends on how the tine is held. Pinned at both ends, they would be 1, 4, 9, 16: whole numbers. Clamped at one end and free at the other, as a tine is, they are 1, 6.27, 17.55, …: off the whole numbers.
+**Overtones off the lines.** The same fact spreads the overtones out. Higher modes bend in shorter humps, and for a tine, shorter humps push back much harder, so the frequencies grow like the square of the mode number instead of the number itself. Where exactly they land depends on how the tine is held. Pinned at both ends, they would be 1, 4, 9, 16: whole numbers. Clamped at one end and free at the other, as a tine is, they are 1, 6.27, 17.55, …: off the whole numbers.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>Where 1 : 6.27 : 17.55 comes from: the four end conditions <span class="needs">uses hyperbolic functions, a 2×2 determinant and integration by parts</span></summary>
@@ -159,7 +159,7 @@ We neglect the slice's resistance to being spun, its rotational inertia, which i
 $$
 \cos\beta L\,\cosh\beta L = -1 .
 $$
-The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, close to $(n - \tfrac12)\pi$ from the second one on. Since $\omega \propto \beta^2$, the frequency ratios are $1 : 6.27 : 17.55 : 34.39 : \cdots$, growing like $(2n-1)^2$. With *pinned* ends, held in place but free to pivot, so $u = u_{xx} = 0$ at both ends, the shapes $\sin(n\pi x/L)$ satisfy the conditions, four derivatives multiply them by $(n\pi/L)^4$, and the ratios are $1 : 4 : 9 : 16$. The clamp and the free tip shift the low roots instead: the first is $1.8751$, not $\pi/2 \approx 1.571$.
+The roots are $\beta L = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, close to $(n - \tfrac12)\pi$ from the second one on. Since $\omega \propto \beta^2$, the frequency ratios are $1 : 6.27 : 17.55 : 34.39 : \cdots$, growing like $(2n-1)^2$. With *pinned* ends, held in place but free to pivot, so $u = u_{xx} = 0$ at both ends, the shapes $\sin(n\pi x/L)$ satisfy the conditions, four derivatives multiply them by $(n\pi/L)^4$, and the ratios are $1 : 4 : 9 : 16$. The later roots sit near $(n - \tfrac12)\pi$; if all of them did, the ratios would be the whole numbers $1 : 9 : 25$. The clamp and the free tip shift the first root most: it is $1.8751$, not $\pi/2 \approx 1.571$.
 
 **Deriving the condition.**
 
@@ -180,7 +180,7 @@ The operator $d^4/dx^4$ with these four conditions is symmetric, by integrating 
 </details>
 :::
 
-**Why the note still sounds clean.** The overtone is not faint. A pluck barely moves the second mode, but what you hear is the push on the bridge, and in that push the overtone starts out strong: it is the click at the start of each note (fold below). What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on. Why it dies so fast is not computed here; the page takes it from measurement. The acoustician D. M. F. Chapman found exactly this pattern on a real kalimba: one dominant overtone, at 5.9 to 6.8 times the fundamental, gone soon after the attack.
+**Why the note still sounds clean.** You might guess the overtone is too quiet to hear. It isn't. In how far the tine swings, the overtone is tiny; but the body hears the push on the bridge, not the swing, and in that push the overtone starts strong (fold below). That strong start is the click at the beginning of each note. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on. Why it dies so fast is not computed here; the page takes it from measurement. The acoustician D. M. F. Chapman found exactly this pattern on a real kalimba: one dominant overtone, at 5.9 to 6.8 times the fundamental, gone soon after the attack.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>How strongly a pluck at the tip excites each mode <span class="needs">uses integration by parts</span></summary>
@@ -197,7 +197,7 @@ Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found o
 
 ## What we found
 
-On the pitch ruler, a kalimba tine's frequencies are off the lines, so by the series' rule it should clang. It doesn't, because the off-line overtones die almost at once and leave one frequency ringing. Along the way, the operator taught two things: four derivatives make the frequencies grow like the square of the mode number, and the way the ends are held decides whether they land on whole numbers.
+On the pitch ruler, a kalimba tine's frequencies are off the lines, so by the series' rule it should clang. It doesn't, because the off-line overtones die almost at once and leave one frequency ringing. Along the way, the tine's equation taught two things: bending, with four derivatives where a string has two, makes the frequencies grow like the square of the mode number, and the way the ends are held decides whether they land on whole numbers.
 
 ::: {.family}
 **Same math elsewhere.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other.

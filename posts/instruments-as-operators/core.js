@@ -132,7 +132,7 @@
   // parts: [{ratio, amp}]; opt: {W,H,rmax,labelEvery,fs,sw,onPick,sel}
   C.stems = function (svg, parts, opt) {
     while (svg.firstChild) svg.removeChild(svg.firstChild);
-    var W = opt.W, H = opt.H, L = 6, R = W - 6, base = H - (opt.fs + 6), top = 12, RMAX = opt.rmax, amax = 0;
+    var W = opt.W, H = opt.H, L = 6, R = W - 6 - 0.6 * opt.fs, base = H - (opt.fs + 6), top = 12, RMAX = opt.rmax, amax = 0;
     parts.forEach(function (p) { amax = Math.max(amax, Math.abs(p.amp)); });
     amax = amax || 1;
     function xOf(r) { return L + (R - L) * r / RMAX; }
