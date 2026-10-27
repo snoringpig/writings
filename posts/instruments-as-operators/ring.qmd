@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 1, the spring](oscillator.qmd). About 7 minutes, plus the folds.
+Builds on [page 1, the spring](oscillator.qmd). About 2 minutes for the puzzle and the gist; about 20 with the mathematics, plus the folds.
 :::
 
 ::: {.puzzle}
@@ -38,24 +38,14 @@ Press "Hear this motion" on the tangle. Then press a mode button and hear it aga
 ```
 
 ::: {.gist}
-**The gist.** Each regular motion is a wave that fits a whole number of times around the ring. In it, every bead swings at the same frequency and the shape never changes, as if the whole ring were one mass on a spring. Such a motion is called a [mode](glossary.qmd#mode). The tangle is all the modes at once, each at its own frequency: a chord.
+**The gist.** Each clean tone is a wave that fits a whole number of times around the ring. In it, every bead swings at the same frequency and the shape never changes, as if the whole ring were one mass on a spring. Such a motion is called a [mode](glossary.qmd#mode). The tangle is all the modes at once, each at its own frequency: a chord. Below, Newton's law turns the ring into an operator, a matrix, and that matrix's eigenvectors are the clean tones.
 :::
 
-## On the pitch ruler
+## The operator
 
-The stems are the modes' frequencies, as multiples of mode 1's, the slowest wave that swings back and forth. Each stem's height is how much of that mode the current motion contains. Apart from mode 1 itself, they generally miss the lines. With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.
+As on page 1, apply Newton's law to one piece of the instrument, here one bead, and find the force. It will turn out to depend on the bead's neighbors as well as on the bead itself, so the rule that turns the shape into the force acts on all the beads at once.
 
-## How it works
-
-**Each bead is pulled toward its neighbors.** The string on each side of a bead pulls along itself. When the bead sits above both neighbors, the two pulls together point down, and the further it sits above their average, the harder it is pulled back. So each bead is a mass on a spring, except that where its spring pulls it depends on where its neighbors are.
-
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The force on one bead <span class="needs">uses derivatives and a small-angle approximation</span></summary>
-
-Let $u_j$ be the height of bead $j$, with beads spaced $h$ apart along a string of tension $T$, each of mass $m$. Because the loop closes, bead $N$ is next to bead 1, so indices are counted around the ring. (This is an idealization: a real loop of string would need something to hold it out against its own tension. The model keeps only the sideways pulls between neighbors, exactly as for a straight string whose two ends are joined.) For small displacements, Newton's law for bead $j$ is
-$$
-m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
-$$
+Let $u_j$ be the height of bead $j$, with $N$ beads, each of mass $m$, spaced $h$ apart along a string of tension $T$. Because the loop closes, bead $N$ is next to bead 1, so bead numbers are counted around the ring. (This is an idealization: a real loop of string would need something to hold it out against its own tension. The model keeps only the sideways pulls between neighbors, exactly as for a straight string whose two ends are joined.)
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 160" role="img" aria-label="A bead pulled by the string toward its two neighbors">
@@ -69,60 +59,82 @@ $$
 </svg>
 ```
 
-1. The string between beads $j$ and $j+1$ pulls bead $j$ along itself with force $T$.
-2. Its slope is $(u_{j+1} - u_j)/h$. Let $\theta$ be the angle that piece of string makes with the horizontal. For small slopes the vertical part of the pull is $T\sin\theta \approx T\tan\theta = T(u_{j+1} - u_j)/h$.
-3. The string on the other side contributes $T(u_{j-1} - u_j)/h$.
-4. Adding the two and applying Newton's law gives the equation above. The bracket $u_{j+1} - 2u_j + u_{j-1}$ is twice the gap between the average of the neighbors and bead $j$ itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up.
+**1. One side's pull.** The string between beads $j$ and $j+1$ pulls bead $j$ along itself with force $T$. That piece of string rises by $u_{j+1} - u_j$ over a distance $h$, so its slope is $(u_{j+1} - u_j)/h$. If $\theta$ is the angle it makes with the horizontal, then for small slopes the vertical part of the pull is
+$$
+T\sin\theta \approx T\tan\theta = \frac{T}{h}\,(u_{j+1} - u_j) .
+$$
 
-The assumptions are small slopes and a tension that does not change as the string flexes.
+**2. The other side.** The string on the other side pulls in the same way, with vertical part
+$$
+\frac{T}{h}\,(u_{j-1} - u_j) .
+$$
 
-</details>
-:::
+**3. Newton's law for one bead.** Adding the two pulls and setting the total equal to mass times acceleration,
+$$
+m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
+$$
+The bracket is twice the gap between the average of the two neighbors and bead $j$ itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up. So each bead is a mass on a spring, except that where its spring pulls it depends on where its neighbors are.
 
-**Some shapes keep their shape.** Most starting shapes change as they move: that is the tangle. But in a few special shapes, every bead is pulled back in proportion to its own height, by the same factor for every bead. Then every bead is a mass on the same spring, they all swing in step, and the shape only grows and shrinks. That is a mode, with one frequency. And any motion, even the tangle, is a sum of modes, each swinging on its own: a chord.
-
-In the series' language, write all the heights as one list. The pulls on all the beads come from one table of numbers, a matrix, applied to that list: the ring's [operator](glossary.qmd#operator). A mode's shape is an [eigenvector](glossary.qmd#eigenvector) of the matrix, a list that the matrix only rescales; the rescaling factor is its [eigenvalue](glossary.qmd#eigenvalue), and the mode's frequency goes as its square root. The list of all the eigenvalues is the matrix's [spectrum](glossary.qmd#spectrum).
-
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The matrix, its eigenvectors, and why each one is a mode <span class="needs">uses matrices</span></summary>
-
-**The matrix.** Collect the heights into a column $u = (u_1, \dots, u_N)$. The equations for all beads at once read $\ddot u = -\frac{T}{mh}\,K u$, where $K$ is the $N\times N$ matrix with 2 on the diagonal, $-1$ just above and below it, and $-1$ in the two corners, because bead 1 and bead $N$ are neighbors. For $N = 5$,
+**4. All the beads at once.** Collect the heights into one column $u = (u_1, \dots, u_N)$. The $N$ equations become one,
+$$
+\ddot u = -\frac{T}{mh}\,K\,u ,
+$$
+where $K$ is the $N\times N$ matrix with 2 on the diagonal, $-1$ just above and below it, and $-1$ in the two corners, because bead 1 and bead $N$ are neighbors. For $N = 5$,
 $$
 K = \begin{pmatrix} 2 & -1 & 0 & 0 & -1\\ -1 & 2 & -1 & 0 & 0\\ 0 & -1 & 2 & -1 & 0\\ 0 & 0 & -1 & 2 & -1\\ -1 & 0 & 0 & -1 & 2 \end{pmatrix}.
 $$
-Here $Ku$ is the column whose $j$-th entry is row $j$ of $K$ times $u$: multiply each entry of row $j$ by the matching entry of $u$, and add. Row $j$ has 2 in place $j$ and $-1$ in places $j - 1$ and $j + 1$, so $(Ku)_j = 2u_j - u_{j-1} - u_{j+1}$, and the matrix equation is the bead equation for every bead at once. Each row of $K$ is the row above shifted one place to the right, wrapping around; a matrix with this property is called [circulant](glossary.qmd#circulant).
+Here $Ku$ is the column whose $j$-th entry is row $j$ of $K$ times $u$: multiply each entry of row $j$ by the matching entry of $u$, and add. Row $j$ has 2 in place $j$ and $-1$ in places $j - 1$ and $j + 1$, so $(Ku)_j = 2u_j - u_{j-1} - u_{j+1}$, which is the bead equation for every bead at once. Each row of $K$ is the row above shifted one place to the right, wrapping around; a matrix with this property is called [circulant](glossary.qmd#circulant).
 
-**Eigenvectors and eigenvalues.** A nonzero column $v$ is an eigenvector of $K$, with eigenvalue $\lambda$, if $Kv = \lambda v$: the matrix only rescales it, possibly by zero. The set of all eigenvalues is the spectrum of $K$.
+::: {.result}
+**The operator.**
+$$
+\ddot u = -A\,u, \qquad A = \frac{T}{mh}\,K ,
+$$
+a matrix acting on the list of all the beads' heights. On page 1 the operator was one number; here it is a table of numbers.
+:::
 
-**Modes.** If $Kv = \lambda v$, then $u(t) = v\cos(\omega t)$ is a motion of the beads, provided $\omega^2 = \frac{T}{mh}\lambda$. To check, differentiate twice: $\ddot u = -\omega^2 v\cos\omega t$, while $-\frac{T}{mh}Ku = -\frac{T}{mh}\lambda v\cos\omega t$. Every bead swings at the same [angular frequency](glossary.qmd#angular-frequency) $\omega$ (radians per second; page 1), in the fixed shape $v$. This is the mass on a spring again, once for each eigenvector.
+**What we assumed.** Small slopes, a tension that does not change as the string flexes, point-like beads on a massless string, and the idealized closed ring described above.
 
-**A small example, three beads.** For $N = 3$,
+## Its spectrum
+
+A mode is a shape that keeps its form while it swings. Most starting shapes change as they move: that is the tangle. But in a few special shapes, every bead is pulled back in proportion to its own height, by the same factor for every bead. Then every bead is a mass on the same spring, they all swing in step, and the shape only grows and shrinks. In matrix language, a nonzero column $v$ is an [eigenvector](glossary.qmd#eigenvector) of $K$, with [eigenvalue](glossary.qmd#eigenvalue) $\lambda$, if
+$$
+K v = \lambda\, v ,
+$$
+so the matrix only rescales it, possibly by zero. The list of all the eigenvalues is the matrix's [spectrum](glossary.qmd#spectrum).
+
+**1. Each eigenvector is a mode.** If $Kv = \lambda v$, try $u(t) = v\cos(\omega t)$. Differentiating twice gives $\ddot u = -\omega^2 v\cos\omega t$, while $-\frac{T}{mh}Ku = -\frac{T}{mh}\lambda\, v\cos\omega t$. These agree when
+$$
+\omega^2 = \frac{T}{mh}\,\lambda .
+$$
+Every bead swings at the same [angular frequency](glossary.qmd#angular-frequency) $\omega$ (radians per second; page 1), in the fixed shape $v$: the mass on a spring again, once for each eigenvector.
+
+**2. A small example, three beads.** For $N = 3$,
 $$
 K = \begin{pmatrix} 2 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 2 \end{pmatrix}.
 $$
-Row $j$ of this $K$ gives $(Kv)_j = 3v_j - (v_1 + v_2 + v_3)$. The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$, so it is an eigenvector with eigenvalue 0: every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts. Any column whose entries add up to zero gives $(Kv)_j = 3v_j$, so $Kv = 3v$. Every such column is a combination $a(1, -1, 0) + b(0, 1, -1)$, so these eigenvectors fill a whole plane: every one is built from those two shapes, and neither of the two is a multiple of the other. The eigenvalues are $0, 3, 3$, with 3 counted twice: it has [multiplicity](glossary.qmd#multiplicity) 2.
+Row $j$ gives $(Kv)_j = 3v_j - (v_1 + v_2 + v_3)$. The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$: an eigenvector with eigenvalue 0. Every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts; this is the mode 0 of the demo. Any column whose entries add up to zero gives $(Kv)_j = 3v_j$, so $Kv = 3v$. Every such column is a combination $a(1, -1, 0) + b(0, 1, -1)$, so these eigenvectors fill a whole plane: every one is built from those two shapes, and neither of the two is a multiple of the other. The eigenvalues are $0, 3, 3$, with 3 counted twice: it has [multiplicity](glossary.qmd#multiplicity) 2.
 
-</details>
+**3. Any number of beads: the modes are waves.** On a ring no bead is special, so try waves that fit a whole number of times around: $v_j = \cos(2\pi jk/N)$, a wave with $k$ crests. The identity $\cos(a + b) + \cos(a - b) = 2\cos a\cos b$, with $a = 2\pi jk/N$ and $b = 2\pi k/N$, gives $v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j$, so
+$$
+\begin{aligned}
+(Kv)_j &= 2v_j - v_{j+1} - v_{j-1} \\
+&= \big(2 - 2\cos(2\pi k/N)\big)\,v_j \\
+&= 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j ,
+\end{aligned}
+$$
+using $1 - \cos 2x = 2\sin^2 x$. The same holds for $v_j = \sin(2\pi jk/N)$. These are the shapes the mode buttons play. At the beads, a wave with $N - k$ crests looks exactly like one with $k$ crests (the cosine is the same and the sine changes sign), so the different eigenvalues come from $k = 0, 1, \dots$ up to $N/2$, rounded down, and each one from $k = 1$ up to just below $N/2$ has two eigenvectors, a cosine and a sine. (At $k = 0$, and at $k = N/2$ when $N$ is even, the sine is zero at every bead, so only the cosine is left.) A wave with more crests bends more sharply from bead to bead, so each bead is pulled back harder and the wave swings faster.
+
+::: {.result}
+**The spectrum.** Eigenvectors: the waves $\cos(2\pi jk/N)$ and $\sin(2\pi jk/N)$ with $k$ crests. Eigenvalues of $K$: $4\sin^2(\pi k/N)$. Angular frequencies: $\omega_k = 2\sqrt{T/(mh)}\,\sin(\pi k/N)$, so mode $k$ sounds at $\sin(\pi k/N)/\sin(\pi/N)$ times mode 1.
 :::
+
+In the 1730s Daniel Bernoulli studied systems like this, weights strung along a flexible thread and a hanging chain, and came to believe that every vibration is built from such simple motions; in 1753 he put this forward as a general principle. For the beads it is a theorem, and writing a motion as a sum of these waves is the [discrete Fourier transform](glossary.qmd#dft).
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Every motion is a sum of modes <span class="needs">uses linear algebra</span></summary>
 
 The matrix $K$ is symmetric: the entry in row $i$, column $j$ equals the entry in row $j$, column $i$. By the [spectral theorem for symmetric matrices](https://en.wikipedia.org/wiki/Spectral_theorem), $K$ has a basis of $N$ mutually [orthogonal](glossary.qmd#orthogonal) (perpendicular) eigenvectors $v^{(1)}, \dots, v^{(N)}$ with real eigenvalues $\lambda_1, \dots, \lambda_N$. Write the motion as $u(t) = \sum_k a_k(t)\,v^{(k)}$. Substituting into $\ddot u = -\frac{T}{mh}Ku$ and taking the dot product with $v^{(k)}$, which removes every other term because they are perpendicular, gives $\ddot a_k = -\omega_k^2 a_k$ with $\omega_k^2 = \frac{T}{mh}\lambda_k$: each coefficient obeys its own mass-on-a-spring equation. With starting shape $u(0) = \sum_k c_k v^{(k)}$ and starting velocity $\dot u(0) = \sum_k d_k v^{(k)}$, and by the uniqueness of solutions from page 1, every motion is $u(t) = \sum_k \big(c_k\cos\omega_k t + \frac{d_k}{\omega_k}\sin\omega_k t\big)v^{(k)}$, read as $c_k + d_k t$ when $\omega_k = 0$. The eigenvalues are nonnegative because $u \cdot Ku = \sum_j u_j(2u_j - u_{j+1} - u_{j-1}) = \sum_j (u_{j+1} - u_j)^2 \ge 0$, by regrouping the terms around the ring; for an eigenvector this equals $\lambda\,(u\cdot u)$.
-
-</details>
-:::
-
-**The modes are waves around the ring.** On a ring no bead is special, so the special shapes are waves that fit a whole number of times around: a wave with one crest, two crests, three, and so on. A wave with more crests bends more sharply from bead to bead, so each bead is pulled back harder and the wave swings faster. In the 1730s Daniel Bernoulli studied systems like this, weights strung along a flexible thread and a hanging chain, and came to believe that every vibration is built from such simple motions; in 1753 he put this forward as a general principle.
-
-::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>The waves and their eigenvalues, for any number of beads <span class="needs">uses trigonometric identities</span></summary>
-
-Try the column $v_j = \cos(2\pi jk/N)$, a wave with $k$ crests around the ring. The identity $\cos(a + b) + \cos(a - b) = 2\cos a\cos b$, with $a = 2\pi jk/N$ and $b = 2\pi k/N$, gives $v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j$, so
-$$
-(Kv)_j = 2v_j - v_{j+1} - v_{j-1} = \big(2 - 2\cos(2\pi k/N)\big)\,v_j = 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j ,
-$$
-using $1 - \cos 2x = 2\sin^2 x$. The same holds for $v_j = \sin(2\pi jk/N)$. These are the shapes the mode buttons play, and the eigenvalues are $4\sin^2(\pi k/N)$. At the beads, a wave with $N - k$ crests looks exactly like one with $k$ crests (the cosine is the same and the sine changes sign), so the different eigenvalues come from $k = 0, 1, \dots$ up to $N/2$, rounded down, and each one from $k = 1$ up to just below $N/2$ has two eigenvectors, a cosine and a sine. (At $k = 0$, and at $k = N/2$ when $N$ is even, the sine is zero at every bead, so only the cosine is left.) Writing any motion as a sum of these waves splits it into separate masses on springs, one per wave; that splitting is the [discrete Fourier transform](glossary.qmd#dft).
 
 </details>
 :::
@@ -135,20 +147,27 @@ With [Euler's formula](glossary.qmd#euler-formula) $e^{ix} = \cos x + i\sin x$, 
 </details>
 :::
 
+## On the pitch ruler
+
+The stems are the modes' frequencies from the result box, as multiples of mode 1's, the slowest wave that swings back and forth. Each stem's height is how much of that mode the current motion contains. Apart from mode 1 itself, they generally miss the lines. With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.
+
+## What the spectrum explains
+
+**The jangle is a chord.** Pluck one bead and the starting shape is not a wave; but it is a sum of waves, and each wave swings at its own frequency, $\omega_k$, as if it were alone. So the plucked ring sounds all those frequencies at once. They sit off the lines, so the chord is a jangle. Start the ring in one wave's shape and only that one frequency sounds: a pure tone. The clean tones were in the jangle all along, as its eigenvectors.
 
 **Almost whole numbers.** A long wave, with few crests, spreads over many beads, and to it the beads look like a smooth string; its frequency grows in step with its number of crests, almost exactly as whole numbers do. A short wave, with crests only a bead or two apart, feels the gaps between the beads, and its frequency falls behind. That is why the low stems sit near the lines and close in as you add beads, while the high ones stay off.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>How near to whole numbers <span class="needs">uses the sine function</span></summary>
 
-By the eigenvalues above, mode $k$ has angular frequency $\omega_k = 2\sqrt{T/(mh)}\,\sin(\pi k/N)$, so its frequency is proportional to $\sin(\pi k/N)$, which is not proportional to $k$: the beads are not exactly harmonic. For small $k$, $\sin(\pi k/N) \approx \pi k/N$, so the low modes are nearly harmonic, and the ratio $\sin(\pi k/N)/\sin(\pi/N)$ tends to $k$ as $N$ grows. The modes near $k = N/2$ stay far from the whole-number grid: for an even number of beads the largest ratio is $1/\sin(\pi/N)$ (slightly less for an odd number), and for any number of beads it is about $N/\pi$ once there are many, not $N/2$. A mode can land on a line by coincidence: with 6 beads, the top mode sits at exactly 2×.
+Mode $k$ has angular frequency $\omega_k = 2\sqrt{T/(mh)}\,\sin(\pi k/N)$, so its frequency is proportional to $\sin(\pi k/N)$, which is not proportional to $k$: the beads are not exactly harmonic. For small $k$, $\sin(\pi k/N) \approx \pi k/N$, so the low modes are nearly harmonic, and the ratio $\sin(\pi k/N)/\sin(\pi/N)$ tends to $k$ as $N$ grows. The modes near $k = N/2$ stay far from the whole-number grid: for an even number of beads the largest ratio is $1/\sin(\pi/N)$ (slightly less for an odd number), and for any number of beads it is about $N/\pi$ once there are many, not $N/2$. A mode can land on a line by coincidence: with 6 beads, the top mode sits at exactly 2×.
 
 </details>
 :::
 
 ## What we found
 
-Many coupled masses move in a few special shapes, modes, each swinging at its own frequency like a single mass on a spring, and any motion, even a tangle, is a sum of them: a chord. Finding the modes means finding the special shapes of one matrix, the ring's operator. On a ring the modes are waves, and the low ones sit near the lines of the pitch ruler, but not on them.
+Newton's law for each bead gave the ring's operator: the matrix $\frac{T}{mh}K$, acting on the list of heights. Its eigenvectors are waves around the ring, its eigenvalues are $4\sin^2(\pi k/N)$ times $T/(mh)$, and their square roots give the modes' frequencies. Any motion, even a tangle, is a sum of modes: a chord. On a ring the low modes sit near the lines of the pitch ruler, but not on them.
 
 ## The next puzzle
 

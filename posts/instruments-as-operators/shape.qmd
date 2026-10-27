@@ -14,7 +14,7 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 :::
 
 ::: {.pageinfo}
-Builds on [page 8, the drum](drum.qmd). About 9 minutes, plus the folds.
+Builds on [page 8, the drum](drum.qmd). About 3 minutes for the puzzle and the gist; about 15 with the mathematics, plus the folds.
 :::
 
 ::: {.puzzle}
@@ -46,26 +46,57 @@ Play each drum with every mode equally loud. Then click a drum to strike it at a
 ```
 
 ::: {.gist}
-**The gist.** No. These two drums have different shapes but exactly the same frequencies: every [mode](glossary.qmd#mode) of one has a partner on the other at the same frequency, so played with every mode equally loud, they sound identical. The list of frequencies still knows a lot. It fixes a drum's area and, for a smooth or straight-sided rim, the length of its rim, and that is enough to recognize a round drum. Click to strike the drums, though, and they sound different: their modes have different shapes, so a strike starts them with different strengths.
+**The gist.** No. These two drums have different shapes but exactly the same frequencies: every [mode](glossary.qmd#mode) of one has a partner on the other at the same frequency, so played with every mode equally loud, they sound identical. The list of frequencies still knows a lot. It fixes a drum's area and, for a smooth or straight-sided rim, the length of its rim, and that is enough to recognize a round drum. Click to strike the drums, though, and they sound different: their modes have different shapes, so a strike starts them with different strengths. Below, the drum's operator from page 8 turns Kac's question into a question about its spectrum, and a formula for counting that spectrum shows what can be heard.
 :::
+
+## The drum's operator and its spectrum
+
+Every earlier page went from an instrument to its operator, and from the operator to its spectrum. This page asks the reverse: given the spectrum, what can we say about the instrument? So first, the operator, which [page 8](drum.qmd) derived from Newton's law.
+
+**The operator.** Let the drumhead be a region $\Omega$ of the plane, in one piece, and let $u(x, y, t)$ be the height of the head above the point $(x, y)$ at time $t$. On page 8, Newton's law for one small patch of the head, pulled by the tension in its edges, gave the drum's equation
+$$
+u_{tt} = c^2\,\Delta u \ \text{ inside } \Omega, \qquad u = 0 \ \text{ on the rim},
+$$
+where $\Delta u = u_{xx} + u_{yy}$ is the [Laplacian](glossary.qmd#laplacian), which measures how far $u$ at a point sits below the average of $u$ around it, and $c^2$ is the tension divided by the mass per unit area. In the series' form $u_{tt} = -A\,u$, the [operator](glossary.qmd#operator) is $A = -c^2\Delta$, acting on shapes that are zero on the rim.
+
+**Its spectrum.** A mode is a shape $X$ that the operator only rescales. Writing the rescaling factor as $c^2\lambda$, the shape must satisfy
+$$
+-\Delta X = \lambda X \ \text{ inside } \Omega, \qquad X = 0 \ \text{ on the rim}.
+$$
+The numbers $\lambda$ for which this has a solution other than $X = 0$ are the [eigenvalues](glossary.qmd#eigenvalue) of $-\Delta$ on $\Omega$, and the solutions $X$ are its [eigenfunctions](glossary.qmd#eigenfunction), the mode shapes. List the eigenvalues in order, $\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots$, each repeated as many times as it occurs (its [multiplicity](glossary.qmd#multiplicity)). A mode with eigenvalue $\lambda_k$ swings at
+$$
+f_k = \frac{c}{2\pi}\sqrt{\lambda_k}.
+$$
+
+::: {.result}
+**The drum's operator:** $A = -c^2\Delta$ on the drumhead $\Omega$, with $u = 0$ on the rim.
+
+**Its spectrum:** $c^2\lambda_1 \le c^2\lambda_2 \le \cdots$, where $-\Delta X_k = \lambda_k X_k$ and $X_k = 0$ on the rim. The frequencies are $f_k = \frac{c}{2\pi}\sqrt{\lambda_k}$.
+
+In words: apart from the one overall factor $c$, the frequencies are decided by the shape of $\Omega$ alone.
+:::
+
+**Kac's question, precisely.** Suppose we know $c$, so that hearing every frequency means knowing every $\lambda_k$. Does the list $\lambda_1, \lambda_2, \lambda_3, \dots$ determine $\Omega$? It can only do so up to sliding and turning the drum, which changes no frequency. (Kac wrote that he had first heard the question posed this way about ten years earlier, from Salomon Bochner.)
 
 ## On the pitch ruler
 
 Here are both drums' first twelve frequencies, as multiples of the lowest: 1×, 1.20×, 1.43×, 1.60×, 1.69×, 1.90×, 2.04×, …. Like the drum on [page 8](drum.qmd), they sit off the gray whole-number lines, so neither drum has a clear pitch. And the two lists are the same to every digit computed: the stems under drum A and drum B stand in the same places. Each stem's height is how strongly a strike at the clicked point starts that mode: all equal until you click, then different on the two drums, because it depends on the mode's shape at the struck point.
 
-## How it works
+## What the spectrum knows
 
-**A list of frequencies comes from a list of eigenvalues.** In the series' language: on page 8 the drumhead became an [operator](glossary.qmd#operator), a rule that turns a shape of the drumhead into the force pulling it back toward rest. Its [eigenvalues](glossary.qmd#eigenvalue) give the drum's frequencies, and its [eigenfunctions](glossary.qmd#eigenfunction) are the mode shapes. Kac's question asks whether the frequencies alone, with nothing about the mode shapes, fix the shape of the drumhead.
+**Counting the frequencies: area and rim.** Count the eigenvalues up to a limit $\lambda$:
+$$
+N(\lambda) = \#\{k : \lambda_k \le \lambda\},
+$$
+where $\#$ means "the number of". For a high limit,
+$$
+N(\lambda) \approx \frac{A}{4\pi}\,\lambda \;-\; \frac{P}{4\pi}\sqrt{\lambda},
+$$
+where $A$ is the drum's area and $P$ the length of its rim. In words: the number of modes below a high limit grows in proportion to the area, so twice the area gives about twice as many modes; and it falls short of the area's share by an amount in proportion to the rim's length, because holding the rim still costs the drum some modes.
 
-::: {.derive}
-<details><summary><span class="label">Precisely</span>Kac's question in symbols <span class="needs">uses the Laplacian (page 8)</span></summary>
+The first term is [Weyl's law](glossary.qmd#weyl). Hermann Weyl proved it in 1911, and later work extended it to every drum. So the area can be heard: it is $4\pi$ times the rate at which $N(\lambda)$ grows. The second term is subtler. For the count itself it is proved only for some drums: Victor Ivrii proved it in 1980 for smooth rims on which closed billiard paths are rare (fold below). For a slightly smoothed version of the count it is proved for every drum whose rim is smooth or made of straight pieces, and that is enough to hear the rim's length. Where the second term holds, "$\approx$" means that the error, divided by $\sqrt\lambda$, shrinks to zero as $\lambda$ grows.
 
-A drum's operator, from the [drum page](drum.qmd), is $-c^2\Delta$ on the drumhead $\Omega$, a bounded region of the plane in one piece, with $u = 0$ on the rim. Here $\Delta$ is the [Laplacian](glossary.qmd#laplacian). Write $\lambda_1 \le \lambda_2 \le \lambda_3 \le \cdots$ for the eigenvalues of $-\Delta$, each repeated as many times as it occurs (its [multiplicity](glossary.qmd#multiplicity)). The drum's frequencies are then $f_k = \frac{c}{2\pi}\sqrt{\lambda_k}$. Kac's question, in these terms, is whether the list $\lambda_1, \lambda_2, \dots$ determines the shape of $\Omega$. Kac wrote that he had first heard the question posed this way about ten years earlier, from Salomon Bochner.
-
-</details>
-:::
-
-**The list knows the area and the length of the rim.** Count how many of a drum's frequencies lie below some limit. As the limit rises, the count grows in proportion to the drum's area: twice the area, about twice as many modes below any high limit. This is [Weyl's law](glossary.qmd#weyl), from 1911, so the area can be heard. The count also falls short of the area's share, by an amount in proportion to the length of the rim: holding the rim still costs the drum some modes. (Proved, in a slightly smoothed form, for every rim that is smooth or made of straight pieces; the fold has the details.) The demo counts the frequencies of three drums with the same area: once the area's share, the same for all three, is taken away, the drum with the longest rim sits lowest.
+The demo counts the modes of three drums with the same area. Once the area's share, the same for all three, is taken away, the drum with the longest rim sits lowest.
 
 ```{=html}
 <div class="ins">
@@ -82,17 +113,12 @@ A drum's operator, from the [drum page](drum.qmd), is $-c^2\Delta$ on the drumhe
 </div>
 ```
 
-
 ::: {.derive}
-<details><summary><span class="label">Precisely</span>Weyl's law and the rim term <span class="needs">uses limits</span></summary>
+<details><summary><span class="label">Precisely</span>What the demo plots, and Ivrii's condition on billiard paths <span class="needs">uses limits</span></summary>
 
-Count the eigenvalues up to $\lambda$: $N(\lambda) = \#\{k : \lambda_k \le \lambda\}$, where $\#$ means "the number of". For large $\lambda$,
-$$
-N(\lambda) \approx \frac{A}{4\pi}\,\lambda \;-\; \frac{P}{4\pi}\sqrt{\lambda},
-$$
-where $A$ is the area of the drum and $P$ the length of its rim, and "$\approx$" means that the error, divided by $\sqrt\lambda$, shrinks to zero as $\lambda$ grows. The first term is Weyl's law. Hermann Weyl proved it in 1911, and later work extended it to every drum. So the area can be heard: it is $4\pi$ times the rate at which $N$ grows. In the demo all three drums have area $\pi$ (a disk of radius 1, a square, and a rectangle 4 times as long as it is wide), so the area's share is $\lambda/4$, and "minus the area's share" plots $N(\lambda) - \lambda/4$, roughly $-P\sqrt\lambda/4\pi$: the longer the rim, the lower the curve. The demo's frequency limit is shown as a multiple of the disk's lowest frequency, $\sqrt{\lambda/\lambda_1}$.
+In the demo all three drums have area $\pi$ (a disk of radius 1, a square, and a rectangle 4 times as long as it is wide), so the area's share is $\lambda/4$, and "minus the area's share" plots $N(\lambda) - \lambda/4$, roughly $-P\sqrt\lambda/4\pi$: the longer the rim, the lower the curve. The demo's frequency limit is shown as a multiple of the disk's lowest frequency, $\sqrt{\lambda/\lambda_1}$.
 
-The second term is subtler. Weyl conjectured it, and Victor Ivrii proved it in 1980 for drums with smooth rims, provided that closed billiard paths are rare. A billiard path is the path of a ball rolling inside the drum and bouncing off the rim, angle in equal to angle out; it is closed if it comes back to where it started, heading the same way. "Rare" means that if you pick a starting point and a direction at random, the chance of landing on a closed path is zero. Ivrii conjectured that this always holds; it has not been proved. The square and the rectangle in the demo have corners, which his theorem does not cover, but for them the formula can be checked by counting, as in the next fold. The perimeter can be heard in any case, for every drum whose rim is smooth or a polygon, by a smoother way of counting; that is the fold after it.
+Ivrii's condition: a billiard path is the path of a ball rolling inside the drum and bouncing off the rim, angle in equal to angle out; it is closed if it comes back to where it started, heading the same way. "Rare" means that if you pick a starting point and a direction at random, the chance of landing on a closed path is zero. Ivrii conjectured that this always holds; it has not been proved. The square and the rectangle in the demo have corners, which his theorem does not cover, but for them the formula can be checked by counting, as in the next fold. The perimeter can be heard in any case, for every drum whose rim is smooth or a polygon, by a smoother way of counting; that is the fold after it.
 
 </details>
 :::
@@ -154,15 +180,11 @@ Knowing $Z$, one reads off $A$ from the first term and then $P$ from the second.
 </details>
 :::
 
-**So a round drum can be heard.** Of all shapes with the same area, the disk has the shortest rim. Both the area and the rim's length can be heard, so a drum, with a smooth or straight-sided rim, that has exactly a disk's frequencies has the disk's area and the disk's rim length, and so it must be a disk. Kac pointed this out in his 1966 paper: "By pitch alone one can thus determine whether a drum is circular or not!"
-
-::: {.derive}
-<details><summary><span class="label">Precisely</span>The disk argument in symbols <span class="needs">uses the isoperimetric inequality</span></summary>
-
-The [isoperimetric inequality](https://en.wikipedia.org/wiki/Isoperimetric_inequality) says that every drum satisfies $P^2 \ge 4\pi A$, with equality only for the disk. Both sides can be heard, by the folds above. So a drum, with a smooth or polygonal rim, that has exactly the frequencies of a disk has the disk's area and perimeter, so $P^2 = 4\pi A$, so it is a disk. Kac makes this remark in section 10 of his 1966 paper.
-
-</details>
-:::
+**So a round drum can be heard.** Of all shapes with the same area, the disk has the shortest rim. This is the [isoperimetric inequality](https://en.wikipedia.org/wiki/Isoperimetric_inequality): every drum satisfies
+$$
+P^2 \ge 4\pi A,
+$$
+with equality only for the disk. Both sides can be heard, for a rim that is smooth or made of straight pieces. So a drum with such a rim that has exactly a disk's frequencies has the disk's area and rim length, so $P^2 = 4\pi A$, so it is a disk. Kac pointed this out in section 10 of his 1966 paper: "By pitch alone one can thus determine whether a drum is circular or not!"
 
 **But in general, no.** Two years before Kac's paper, John Milnor had found two different shapes with the same frequencies, and Kac said so; but they were 16-dimensional and had no rim. (They are *flat tori*: 16-dimensional versions of a video-game screen whose edges wrap around, so that leaving on the right brings you back on the left.) For drums in the plane the question stayed open for 26 years. In 1992 Carolyn Gordon, David Webb and Scott Wolpert answered it: no. They found two different polygons with exactly the same frequencies, repeats included: the two drums at the top of this page. Such drums are called [isospectral](glossary.qmd#isospectral). Since area and rim length can be heard, they must share them, and they do: each is made of seven copies of the same right triangle, with two short sides of length 1, so each has area 3.5 and rim length $6 + 3\sqrt2$.
 
@@ -196,7 +218,7 @@ The scripts are [gww.py](gww.py) for the eigenvalues and [gww_modes.py](gww_mode
 
 ## What we found
 
-A drum's list of frequencies knows its area and the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every frequency. On the pitch ruler, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. Every earlier page went from an instrument to its spectrum; this one went backwards, asking what the spectrum says about the instrument. The study of such questions is called *spectral geometry*.
+The drum's operator, from Newton's law on page 8, is $A = -c^2\Delta$ with the rim held still, and its spectrum is the list of eigenvalues $c^2\lambda_k$ of that problem, giving the frequencies $f_k = \frac{c}{2\pi}\sqrt{\lambda_k}$. Counting that spectrum with Weyl's law recovers the drum's area and, for smooth or straight-sided rims, the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every eigenvalue. On the pitch ruler, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. Every earlier page went from an operator to its spectrum; this one went backwards, asking what the spectrum says about the operator, and so about the instrument. The study of such questions is called *spectral geometry*.
 
 ## The next puzzle
 
