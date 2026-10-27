@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 0 Note](note.qmd) · [Series](index.qmd) · [Map](map.qmd) · [2 Beads →](ring.qmd)
+[← 0 Note](note.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [2 Beads →](ring.qmd)
 :::
 
 ::: {.pageinfo}
@@ -27,8 +27,8 @@ Start with the simplest thing that vibrates: a mass on a spring. Change how far 
 <div class="ins">
 <div class="panel">
   <canvas id="oCanvas" style="height:200px" aria-label="A mass on a spring bobbing"></canvas>
-  <div class="slider"><label for="oK" style="min-width:9rem">Stiffness k</label><input type="range" id="oK" min="10" max="200" step="1" value="40"><output id="oKo"></output></div>
-  <div class="slider"><label for="oM" style="min-width:9rem">Mass m</label><input type="range" id="oM" min="0.1" max="2" step="0.05" value="1"><output id="oMo"></output></div>
+  <div class="slider"><label for="oK" style="min-width:9rem">Stiffness</label><input type="range" id="oK" min="10" max="200" step="1" value="40"><output id="oKo"></output></div>
+  <div class="slider"><label for="oM" style="min-width:9rem">Mass</label><input type="range" id="oM" min="0.1" max="2" step="0.05" value="1"><output id="oMo"></output></div>
   <div class="slider"><label for="oA" style="min-width:9rem">How far you pull</label><input type="range" id="oA" min="0.1" max="1" step="0.05" value="0.6"><output id="oAo"></output></div>
   <div class="controls"><button id="oPlay" class="primary">Hear it, 200 times faster</button></div>
   <div class="readout" id="oRead"></div>
@@ -38,16 +38,16 @@ Start with the simplest thing that vibrates: a mass on a spring. Change how far 
 ```
 
 ::: {.gist}
-**The gist.** A spring pulls back twice as hard when it is stretched twice as far. So a swing twice as big has twice as far to go, but moves twice as fast all the way, and takes exactly as long. The rate is set by the spring's stiffness and the mass, never by the size of the swing. A vibrating string, as later pages show, is many such springs at once.
+**The gist.** A spring pulls back twice as hard when it is stretched twice as far. So a swing twice as big has twice as far to go, but moves twice as fast all the way, and takes exactly as long. As long as the pull stays proportional to the stretch, the rate is set by the spring's stiffness and the mass, never by the size of the swing. A vibrating string, as later pages show, is many such springs at once.
 :::
 
 ## On the pitch ruler
 
-A mass on a spring has just one frequency, so on the pitch ruler it is a single stem: a pure tone. The readout gives that frequency. Four times the stiffness doubles it, four times the mass halves it, and the size of the pull never enters. A note needs more than one stem; the next page finds where the others come from.
+A mass on a spring has just one frequency, so on the pitch ruler it is a single stem: a pure tone. The readout gives that frequency. The frequency goes as the square root of stiffness over mass: four times the stiffness doubles it, four times the mass halves it, and the size of the pull never enters. A note needs more than one stem; the next page finds where the others come from.
 
 ## How it works
 
-**The pull is proportional to the stretch.** A spring pulled some distance from rest pulls back with a force proportional to that distance: twice as far, twice the pull. This is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law). Newton's law turns force into acceleration, so the mass always accelerates back toward rest, in proportion to how far away it is. The steady back-and-forth that results has exactly one frequency (fold).
+**The pull is proportional to the stretch.** A spring pulled some distance from rest pulls back with a force proportional to that distance: twice as far, twice the pull. This is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law). Newton's law turns force into acceleration, so the mass always accelerates back toward rest, in proportion to how far away it is. The steady back-and-forth that results has exactly one frequency.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>Newton's law, and the one frequency it allows <span class="needs">uses derivatives</span></summary>
@@ -65,9 +65,9 @@ The amplitude $A$ and the starting phase $\phi$ are free: they record how you st
 </details>
 :::
 
-**Twice the swing, the same time.** Take any motion of the mass and double it: twice as far from rest at every moment. The pull doubles too, so the acceleration doubles, which is exactly what the doubled motion needs. So the doubled motion is also a motion of the mass, and it repeats just as often. Friction shrinks the swing, which is why a note fades, but light friction does not make the rate depend on the size of the swing either.
+**Twice the swing, the same time.** Take any motion of the mass and double it: twice as far from rest at every moment. The pull doubles too, so the acceleration doubles, which is exactly what the doubled motion needs. So the doubled motion is also a motion of the mass, and it repeats just as often. Friction shrinks the swing, which is why a note fades, but light friction of the usual kind, proportional to speed, does not make the rate depend on the size of the swing either.
 
-This needs the pull to be exactly proportional to the stretch. Pulled very far, a real spring stops obeying Hooke's law, and then a bigger swing does change the rate. A string shows a small version of this: a hard pluck stretches it, raising its tension, so the note starts very slightly sharp and settles as it fades. That is why the pitch barely sags, rather than not at all.
+This needs the pull to be exactly proportional to the stretch. Pulled very far, a real spring stops obeying Hooke's law, and then a bigger swing does change the rate. A string shows a small version of this: a hard pluck stretches it, raising its tension, so the note starts very slightly sharp and settles as it fades (J. O. Smith, *Physical Audio Signal Processing*). That is why the pitch barely sags, rather than not at all.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Every motion is of this form, and the pitch cannot depend on amplitude <span class="needs">uses the uniqueness of solutions of a differential equation</span></summary>
@@ -81,7 +81,7 @@ This needs the pull to be exactly proportional to the stretch. Pulled very far, 
 </details>
 :::
 
-**The operator, in its smallest form.** Divide the spring's pull by the mass and you get a rule: take the displacement, multiply it by the number $k/m$, and reverse its direction. That rule is the [operator](glossary.qmd#operator) in its smallest form, and the one frequency comes from its number: the square root of $k/m$ is the angular frequency. On the next page the single number becomes a table of numbers, a matrix; later, a rule acting on whole shapes. The pattern never changes: the frequencies come from the square roots of the operator's [eigenvalues](glossary.qmd#eigenvalue), the numbers by which it rescales its special shapes.
+**In the series' language.** The pull per unit mass is the displacement times one number, the stiffness divided by the mass, with the direction reversed. The rule "multiply by that number" is the [operator](glossary.qmd#operator) in its smallest form, and the frequency comes from it: its square root, divided by 2π. On the next page the one number becomes a table of numbers, a matrix, with many frequencies; later, a rule acting on whole shapes. The frequencies always come from the operator's special numbers, its [eigenvalues](glossary.qmd#eigenvalue).
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>The operator and its one eigenvalue</summary>
@@ -99,12 +99,12 @@ Newton's law, with a pull proportional to the stretch, allows exactly one freque
 
 ## The next puzzle
 
-One mass gives one frequency. A note has many, all sounding at once. Where do the others come from? Add more masses and let them pull on one another: pluck one bead on a ring of beads, and the tangle that follows turns out to be a chord.
+One mass gives one frequency, but a note has many. Where do the others come from? Let several masses pull on one another.
 
 [← 0 · Note](note.qmd) · [Next: 2 · Beads →](ring.qmd)
 
 ::: {.refs}
-**References.** Wikipedia, [Simple harmonic motion](https://en.wikipedia.org/wiki/Simple_harmonic_motion), [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law) and [Anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 1.
+**References.** Wikipedia, [Simple harmonic motion](https://en.wikipedia.org/wiki/Simple_harmonic_motion), [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law) and [Anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity). J. O. Smith III, [Tension modulation](https://www.dsprelated.com/freebooks/pasp/Tension_Modulation.html), in *Physical Audio Signal Processing*, for the pitch glide of a hard-plucked string. N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 1.
 :::
 
 ```{=html}
@@ -119,7 +119,7 @@ One mass gives one frequency. A note has many, all sounding at once. Where do th
     document.getElementById("oKo").textContent = k.toFixed(0) + " N/m";
     document.getElementById("oMo").textContent = m.toFixed(2) + " kg";
     document.getElementById("oAo").textContent = (A * 10).toFixed(1) + " cm";
-    document.getElementById("oRead").innerHTML = "f = (1/2&pi;)&radic;(k/m) = <b>" + f().toFixed(2) + " Hz</b> · one bob every <b>" + (1 / f()).toFixed(2) + " s</b>, however far you pull";
+    document.getElementById("oRead").innerHTML = "<b>" + f().toFixed(2) + " Hz</b>: one bob every <b>" + (1 / f()).toFixed(2) + " s</b>, however far you pull";
   }
   [["oK", function (v) { k = v; }], ["oM", function (v) { m = v; }], ["oA", function (v) { A = v; }]].forEach(function (p) {
     var el = document.getElementById(p[0]); el.addEventListener("input", function () { p[1](parseFloat(el.value)); read(); });

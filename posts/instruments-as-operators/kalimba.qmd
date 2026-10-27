@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 5 Clarinet](clarinet.qmd) · [Series](index.qmd) · [Map](map.qmd) · [6b Harmonica →](harmonica.qmd)
+[← 5 Clarinet](clarinet.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [6b Harmonica →](harmonica.qmd)
 :::
 
 ::: {.pageinfo}
@@ -18,7 +18,7 @@ Builds on [page 4, the violin string](violin.qmd). About 7 minutes, plus the fol
 :::
 
 ::: {.puzzle}
-A kalimba tine's first [overtone](glossary.qmd#partial) sits at 6.27 times its [fundamental](glossary.qmd#fundamental), nowhere near a whole number. Overtones off the whole numbers are what make a bell clang. So why does a kalimba sound like a clean note?
+A kalimba tine's first [overtone](glossary.qmd#partial) sits at about 6.3 times its [fundamental](glossary.qmd#fundamental), nowhere near a whole number. Overtones off the whole numbers are what make a bell clang. So why does a kalimba sound like a clean note?
 :::
 
 Tap a tine. Then tick the box that keeps the overtones ringing, and tap it again.
@@ -54,7 +54,7 @@ Tap a tine. Then tick the box that keeps the overtones ringing, and tap it again
 
 ## On the pitch ruler
 
-Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how hard that mode [pushes sideways](glossary.qmd#moment) on the bridge just after a pluck; that push is what the instrument's body turns into sound. Tap a stem to see the shape of that mode.
+Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how hard that mode [pushes sideways](glossary.qmd#moment) on the bridge just after a pluck, one of the two loads a tine puts on the bridge (the fold at the end has both). Tap a stem to see the shape of that mode.
 
 ```{=html}
 <div class="ins">
@@ -69,7 +69,7 @@ Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-numbe
 
 ## How it works
 
-**A tine resists bending.** A string is held straight by tension. A tine is under no tension at all: it springs back because steel resists being bent. That one change, bending instead of stretching, is behind both of the tine's surprises below, through one fact: squeeze a shape into half the length, and a string pulls it back 4 times harder, but a tine pushes it back 16 times harder. (In the equation of motion, four derivatives where the string had two; the fold shows why.)
+**A tine resists bending.** A string is held straight by tension. A tine is under no tension at all: it springs back because steel resists being bent. That one change, bending instead of stretching, is behind both of the tine's surprises below, through one fact: squeeze a shape into half the length, and a string pulls it back 4 times harder, but a tine pushes it back 16 times harder. Why 4 and 16? Squeezing a shape into half the length doubles every rate of change along it. A string's pull depends on its bending, a rate of change of a rate of change: 2 × 2 = 4. A tine's push depends on how that bending itself changes along the tine, twice over: 2 × 2 × 2 × 2 = 16. (In the equation of motion, four derivatives where the string had two; the fold has the details.)
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>The tine's equation: four derivatives instead of two <span class="needs">uses partial derivatives and integrals over an area</span></summary>
@@ -146,7 +146,7 @@ We neglect the slice's resistance to being spun, its rotational inertia, which i
 </details>
 :::
 
-**Half the length, two octaves up.** A string half as long sounds an octave higher. A tine half as long sounds two octaves higher: its push-back grows 16 times instead of 4, and frequency goes as the square root of the push-back (page 1), so it rises 4 times instead of 2. A tine's frequency goes as one over its length squared. That is why the low tines in the demo are not twice as long as the high ones an octave up. Kalimba makers tune a tine by sliding it over the bridge to change its free length, and this makes a small slide go a long way.
+**Half the length, two octaves up.** A string half as long sounds an octave higher. A tine half as long sounds two octaves higher: its push-back grows 16 times instead of 4, and frequency goes as the square root of the push-back (page 1), so it rises 4 times instead of 2. A tine's frequency goes as one over its length squared. That is why the low tines in the demo are not twice as long as the high ones an octave up. Kalimba makers tune a tine by sliding it over the bridge to change its free length (Kalimba Magic), and this makes a small slide go a long way.
 
 **Overtones off the lines.** The same fact spreads the overtones out. Higher modes bend in shorter humps, and for a tine, shorter humps push back much harder, so the frequencies grow like the square of the mode number instead of the number itself. Where exactly they land depends on how the tine is held. Pinned at both ends, they would be 1, 4, 9, 16: whole numbers. Clamped at one end and free at the other, as a tine is, they are 1, 6.27, 17.55, …: off the whole numbers.
 
@@ -205,12 +205,12 @@ On the pitch ruler, a kalimba tine's frequencies are off the lines, so by the se
 
 ## The next puzzle
 
-A harmonica reed is the same kind of bar, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck one and you hear them. Yet a harmonica, blown, plays notes whose overtones are exact whole-number multiples. Where did the bar's own overtones go?
+A harmonica reed is the same kind of bar, with the same off-line overtones. Blown, though, its notes land exactly on the lines. Where did the overtones go?
 
 [← 5 · Clarinet](clarinet.qmd) · [Next: 6b · Harmonica →](harmonica.qmd)
 
 ::: {.refs}
-**References.** D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustical Society of America, 2008. Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory) and [Cantilever](https://en.wikipedia.org/wiki/Cantilever). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2 (bars).
+**References.** D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustical Society of America, 2008. Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory) and [Cantilever](https://en.wikipedia.org/wiki/Cantilever), and [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity) for a bell's spectrum. Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2 (bars).
 :::
 
 ```{=html}

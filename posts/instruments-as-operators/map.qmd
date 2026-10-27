@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[Series](index.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
+[The Shape of a Sound](index.qmd) · [Map](map.qmd) · [Glossary](glossary.qmd)
 :::
 
 ## All the sounds side by side

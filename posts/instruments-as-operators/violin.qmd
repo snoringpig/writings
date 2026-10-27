@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 3 Loop](circle.qmd) · [Series](index.qmd) · [Map](map.qmd) · [5 Clarinet →](clarinet.qmd)
+[← 3 Loop](circle.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [5 Clarinet →](clarinet.qmd)
 :::
 
 ::: {.pageinfo}
@@ -21,7 +21,7 @@ Builds on [page 3, the loop of string](circle.qmd). About 10 minutes, plus the f
 Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an [octave](glossary.qmd#octave). Touch it a third of the way along and it jumps to three times the frequency. How can a feather-light finger, which does not even shorten the string, change the note so much?
 :::
 
-Pluck the string, then pick a point to touch and pluck again. String players call these notes [harmonics](glossary.qmd#string-harmonics).
+Pluck the string, then pick a point to touch and pluck again. String players call these touched notes [harmonics](glossary.qmd#string-harmonics).
 
 ```{=html}
 <div class="ins">
@@ -35,7 +35,7 @@ Pluck the string, then pick a point to touch and pluck again. String players cal
   <div class="controls"><button id="tPluck" class="primary">Pluck</button></div>
   <svg class="spec" id="tSpec" viewBox="0 0 320 96" style="max-width:520px" aria-label="Strength of each mode a quarter second after the pluck"></svg>
   <div class="readout" id="tRead"></div>
-  <p class="cap">Left end: the <a href="glossary.html#bridge">nut</a>, near the tuning pegs; right end: the bridge. The motion is slowed down for the eye; the modes fade at their real rates. Stems: how strong each mode is a quarter of a second after the pluck, at 1, 2, 3, … times the open string's 196 Hz. The finger is modeled as extra <a href="glossary.html#damping">damping</a>, energy loss, on every mode that moves under it.</p>
+  <p class="cap">Left end: the <a href="glossary.html#bridge">nut</a>, near the tuning pegs; right end: the bridge. The motion is slowed for the eye. Stems: how far each mode still swings a quarter of a second after the pluck.</p>
 </div>
 </div>
 ```
@@ -46,11 +46,11 @@ Pluck the string, then pick a point to touch and pluck again. String players cal
 
 ## On the pitch ruler
 
-An open string's frequencies sit exactly on the lines: 1×, 2×, 3×, …. Each stem's height is how strong that mode still is a quarter of a second after the pluck. Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the high stems are relatively tall, and at the middle every second stem is missing even without a finger.
+In this ideal model, an open string's frequencies sit exactly on the lines: 1×, 2×, 3×, …. Each stem's height is how far that mode still swings a quarter of a second after the pluck. Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the stems shrink slowly as they go up, and at the middle they shrink fast, with every second stem missing even without a finger.
 
 ## How it works
 
-**Tied ends keep half of the loop's waves.** A string tied at both ends can only take shapes that stay still at the ends: one arch, two arches, three, …. Each is exactly half of a wave on a loop twice as long, so the reason from page 3 still holds: a shape with *n* arches is *n* times shorter, is pulled back *n*² times harder, and swings *n* times faster. The frequencies are exactly 1, 2, 3, … times the lowest, which itself rises with the tension and falls with the string's length and its weight per length. One thing does change: on a loop each frequency had two waves, one shifted along the loop; on a string a wave cannot run around, it reflects at the ends, and each frequency has a single shape, a [standing wave](glossary.qmd#standing-wave).
+**Tied ends keep half of the loop's waves.** A string tied at both ends can only take shapes that stay still at the ends: one arch, two arches, three, …. Each is exactly half of a wave on a loop twice as long, so the reason from page 3 still holds (a shorter wave bends more sharply, and the string pulls back in proportion to how sharply it bends): a shape with *n* arches is *n* times shorter, is pulled back *n*² times harder, and swings *n* times faster. The frequencies are exactly 1, 2, 3, … times the lowest, which itself rises with the tension and falls with the string's length and its weight per length. One thing does change: on a loop each frequency had two waves, one shifted along the loop; on a string a wave cannot run around, it reflects at the ends, and each frequency has a single shape, a [standing wave](glossary.qmd#standing-wave).
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>The string's operator and its frequencies <span class="needs">uses derivatives and integration by parts</span></summary>
@@ -107,7 +107,7 @@ Its eigenvectors are $v_j = \sin\big(n\pi j/(N+1)\big)$, the sampled sines, with
 </details>
 :::
 
-**A light touch keeps only the shapes that are still under the finger.** Where a shape has a still point, a [node](glossary.qmd#node), the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. At the middle, the shapes with a node there are the ones with an even number of arches: 2, 4, 6, …, at 2, 4, 6, … times the open string's frequency, a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a fifth up (a factor 2 times a factor 3/2). This is a model of the finger, in which it drains each shape in proportion to how much that shape moves under it. The [piano page](piano.qmd) derives this rule for the piano's felt dampers; for a finger it is a rough guide, not an exact law.
+**A light touch keeps only the shapes that are still under the finger.** Where a shape has a still point, a [node](glossary.qmd#node), the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. At the middle, the shapes with a node there are the ones with an even number of arches: 2, 4, 6, …, at 2, 4, 6, … times the open string's frequency, a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a [fifth](glossary.qmd#octave) up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the [piano page](piano.qmd) derives for felt dampers.)
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Which modes survive a light touch <span class="needs">uses the sine function</span></summary>
@@ -117,7 +117,7 @@ Let the finger touch the string at the distance $s$ from the [nut](glossary.qmd#
 </details>
 :::
 
-**Where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle. What reaches your ear is the string's push on the bridge, and for the same height a shape with more arches has steeper ends, so it pushes harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard: the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still exactly where you pulled; the rest push the bridge less and less, the more arches they have: a mellow, hollow sound.
+**Where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle. What reaches your ear is the string's push on the bridge, and for the same height a shape with more arches has steeper ends, so it pushes harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard (near the end, each shape starts in proportion to its steepness there; fold below): the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still exactly where you pulled; the rest push the bridge less and less, the more arches they have: a mellow, hollow sound.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>How much of each shape a pluck starts <span class="needs">uses integration by parts</span></summary>
@@ -133,7 +133,7 @@ Measuring $x_p$ from the bridge instead only flips the sign of every second $b_n
 </details>
 :::
 
-**Pressing down makes a new end.** Pressing a finger firmly onto the fingerboard is different: it ties the string down there, and only the piece between the finger and the [bridge](glossary.qmd#bridge) sounds. A shorter string sounds higher: two-thirds of the length sounds a fifth up, half the length an octave up, and the semitone positions bunch closer together toward the bridge. Play a whole violin: press and hold a string to bow it, slide sideways to finger it, or switch to plucking.
+**Pressing down makes a new end.** Pressing a finger firmly onto the fingerboard is different: it ties the string down there, and only the piece between the finger and the [bridge](glossary.qmd#bridge) sounds. A shorter string sounds higher: two-thirds of the length sounds a fifth up, half the length an octave up, and the [semitone](glossary.qmd#semitone) positions bunch closer together toward the bridge. Play a whole violin: press and hold a string to bow it, slide sideways to finger it, or switch to plucking.
 
 
 
@@ -144,10 +144,10 @@ Measuring $x_p$ from the bridge instead only flips the sign of every second $b_n
   <div class="controls" style="padding:0.5rem 0.25rem 0">
     <button id="mBow" aria-pressed="true">Bow (hold)</button><button id="mPizz" aria-pressed="false">Pizzicato, plucked (tap)</button>
     <label class="check"><input type="checkbox" id="body" checked> Wooden body</label>
-    <span class="readout" id="vRead">Press and hold a string. Slide left and right to finger it.</span>
+    <span class="readout" id="vRead" style="flex-basis:100%">Press and hold a string. Slide left and right to finger it.</span>
   </div>
   <svg class="spec" id="playSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the note being played, as heard through the body"></svg>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge is the nut, right edge the bridge. The ticks mark equal-tempered semitones, at fractions 1 − 2<sup>−k/12</sup> of the length. The stems are the partials you hear. The body passes each partial on at its own frequency, only louder or quieter (it is linear, as explained below), so switching it off or on changes their heights, never their positions. Its resonances, the frequencies at which it vibrates most easily, here (about 280, 470, 550 and 2700 Hz) are rough values chosen to illustrate; see the references.</p>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge: the nut; right edge: the bridge. Ticks: where the finger goes for each semitone (fold below). Stems: the partials you hear; switching the body off or on changes their heights, never their positions.</p>
 </section>
 </div>
 ```
@@ -160,7 +160,7 @@ The *nut* is the end of the string near the tuning pegs, and an [open string](gl
 </details>
 :::
 
-**The bow locks the note.** A bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per period. In 1860 Hermann von Helmholtz watched this through a *vibration microscope*: the string forms two straight pieces joined by one sharp corner, which races between the bridge and the finger. This is [Helmholtz motion](glossary.qmd#helmholtz-motion). It repeats exactly, so its partials sit exactly on the lines. That matters because a real string is slightly stiff, and its own frequencies run a little sharp of the lines ([page 7](piano.qmd)): plucked, each mode rings at its own slightly sharp frequency and fades; bowed, the stick and slip lock the whole motion into exact repetition. That locking comes from the bow's friction, which is not [linear](glossary.qmd#linear); it is observed, not derived here.
+**The bow locks the note.** A bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per period. By 1860 Hermann von Helmholtz had watched this through a *vibration microscope*: the string forms two straight pieces joined by one sharp corner, which races between the bridge and the finger. This is [Helmholtz motion](glossary.qmd#helmholtz-motion). It repeats exactly, so its partials sit exactly on the lines. That matters because a real string is slightly stiff, and its own frequencies run a little sharp of the lines ([page 7](piano.qmd)): plucked, each mode rings at its own slightly sharp frequency and fades; bowed, the stick and slip lock the whole motion into exact repetition. The locking comes from the bow's friction, which is not [linear](glossary.qmd#linear); this page shows it but does not derive it.
 
 ```{=html}
 <div class="ins">
@@ -168,7 +168,7 @@ The *nut* is the end of the string near the tuning pegs, and an [open string](gl
     <canvas id="helm" style="height:180px" aria-label="Slow-motion string shape"></canvas>
     <div class="controls"><button id="hBow" aria-pressed="true">Bowed</button><button id="hPluck" aria-pressed="false">Plucked at 1/4</button></div>
     <svg class="spec" id="vSpec" viewBox="0 0 320 110" style="max-width:520px" aria-label="Partials of the bridge force"></svg>
-    <p class="cap">Slowed about 500 times. The faint lens-shaped outline is the path the corner traces. Stems: partials of the bridge force.</p>
+    <p class="cap">Slowed about 500 times. The faint lens-shaped outline is the path the corner traces. Stems: the partials of the push on the bridge.</p>
   </div>
 </div>
 ```
@@ -214,7 +214,7 @@ Tying a string's ends down keeps half of the loop's waves, so its frequencies st
 
 ## The next puzzle
 
-A flute and a clarinet are both tubes of air, and about the same length. Yet the clarinet's lowest note is almost an octave below the flute's, and when the players overblow, making the tube jump to its next mode, the flute jumps up an octave while the clarinet jumps an octave and a fifth. The same operator governs the air in both. What is different?
+A clarinet and a flute are tubes of air of about the same length, yet the clarinet sounds almost an octave lower. What is different?
 
 Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thud?](drum.qmd)
 
@@ -294,7 +294,7 @@ Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thu
   function readout(si, s) {
     var f = freqOf(si, s), nn = C.noteName(f);
     playSpec(f);
-    document.getElementById("vRead").innerHTML = OPEN[si].n + " string · finger at <b>" + s.toFixed(3) + "</b> L · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? (nn.cents > 0 ? " +" : " ") + nn.cents + "¢" : "");
+    document.getElementById("vRead").innerHTML = OPEN[si].n + " string · finger " + Math.round(100 * s) + "% of the way to the bridge · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? ", " + Math.abs(nn.cents) + " cents " + (nn.cents > 0 ? "sharp" : "flat") : "");
   }
   cv.addEventListener("pointerdown", function (e) {
     var p = locate(e); cv.setPointerCapture(e.pointerId); readout(p.si, p.s);
@@ -414,7 +414,7 @@ Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thu
     document.getElementById("tPo").textContent = pluckP.toFixed(2) + " of the length";
     var sv = survivors(), txt;
     if (!sv) txt = "open string: every mode sounds, lowest " + F1 + " Hz";
-    else txt = "only modes with a still point under the finger survive: n = " + sv.slice(0, 4).join(", ") + ", … · you hear <b>" + (sv[0] * F1) + " Hz</b>, " + NAMES[sv[0]];
+    else txt = "only modes with a still point under the finger survive: modes " + sv.slice(0, 4).join(", ") + ", … · you hear <b>" + (sv[0] * F1) + " Hz</b>, " + NAMES[sv[0]];
     document.getElementById("tRead").innerHTML = txt + " · plucked " + (pluckP < 0.12 ? "near the bridge: bright" : pluckP > 0.4 ? "near the middle: mellow, even modes weak" : "between bridge and middle");
     var parts = amps.map(function (a, i) { return { ratio: i + 1, amp: Math.abs(a) * Math.exp(-gam[i] * 0.25) }; });
     C.stems(document.getElementById("tSpec"), parts, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3 });

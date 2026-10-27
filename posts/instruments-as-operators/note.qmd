@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[Series](index.qmd) · [Map](map.qmd) · [1 Spring →](oscillator.qmd)
+[The Shape of a Sound](index.qmd) · [Map](map.qmd) · [1 Spring →](oscillator.qmd)
 :::
 
 ::: {.pageinfo}
@@ -27,8 +27,8 @@ Play the note, then the note without its 220 Hz part, and watch the wave.
 <div class="ins">
 <div class="panel">
   <div class="controls">
-    <button id="nBright">The note</button><button id="nMissing">The note without its 220 Hz part</button>
-    <button id="nPlay" class="primary">Play</button>
+    <button id="nBright" class="primary">▶ The note</button><button id="nMissing" class="primary">▶ Without its 220 Hz part</button>
+    <button id="nPlay">Play again</button>
   </div>
   <canvas id="nWave" style="height:120px" aria-label="Waveform over three repetitions"></canvas>
   <svg class="spec" id="nSpec" viewBox="0 0 320 90" style="max-width:520px" aria-label="Strength of each component"></svg>
@@ -48,15 +48,15 @@ Play the note, then the note without its 220 Hz part, and watch the wave.
 
 ## The pitch ruler
 
-The stems under the wave are the note's frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the *pitch ruler*, and every page of this series puts an instrument on it. A note's frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. This effect is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental), and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
+The stems under the wave are the note's frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the *pitch ruler*, and every page of this series puts an instrument on it. A note's frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the [fundamental](glossary.qmd#fundamental). Hearing the pitch without it is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
 
-Open "Mix your own" and try the presets. The stems' heights change, and so does the sound's color, its [timbre](glossary.qmd#timbre), but the pitch stays put as long as the base frequency does. Keep only 2×, 4×, 6× and 8×, and the sound repeats twice as often: the base becomes 440 Hz, and the pitch jumps up an octave.
+Open "Mix your own" and try the presets. The stems' heights change, and so does the sound's color, its [timbre](glossary.qmd#timbre), but the pitch stays put as long as the base frequency does. Keep only 2×, 4×, 6× and 8×, and the sound repeats twice as often: the base becomes 440 Hz, and the pitch jumps up an [octave](glossary.qmd#octave).
 
 ## How it works
 
-**A note is a pattern that repeats.** Sound is air pressure rising and falling. When the pattern repeats, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate, measured in hertz. This holds for rates in the range where we hear pitch, from a few dozen to a few thousand times a second; much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.
+**A note is a pattern that repeats.** Sound is air pressure rising and falling. When the pattern repeats, you hear a note, and its [pitch](glossary.qmd#pitch) is the repetition rate, measured in hertz. This holds for rates in the range where we hear pitch, from a few dozen to a few thousand times a second (for a recognizable melody, roughly 30 Hz to 4 or 5 kHz: Pressnitzer and colleagues; Oxenham and colleagues). Much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.
 
-**Every repeating sound is a chord on the lines.** A pure tone is a single smooth wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier's theorem, and page 3 shows where it comes from. These tones are the sound's [harmonics](glossary.qmd#harmonic), and the one at the repetition rate itself is the [fundamental](glossary.qmd#fundamental). The repetition rate sets the pitch, whether or not the fundamental is actually there; the harmonics' strengths set the timbre.
+**Every repeating sound is a chord on the lines.** A pure tone is a single sine-shaped wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier's theorem, and page 3 shows where it comes from. These tones are the sound's [partials](glossary.qmd#partial), and the one at the repetition rate itself is the fundamental. The repetition rate sets the pitch, whether or not the fundamental is actually there; the partials' strengths set the timbre.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Periodic signals and their Fourier series <span class="needs">uses sums of cosines</span></summary>
@@ -85,7 +85,7 @@ No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is
 ```{=html}
 <div class="ins">
 <div class="panel">
-  <div class="controls"><button id="r2">2 : 1</button><button id="r15">3 : 2</button><button id="r159">1.59 : 1 (a drum)</button><button id="rPlay" class="primary">Play</button></div>
+  <div class="controls"><button id="r2" class="primary">▶ 2 : 1</button><button id="r15" class="primary">▶ 3 : 2</button><button id="r159" class="primary">▶ 1.59 : 1 (a drum)</button><button id="rPlay">Play the slider's ratio</button></div>
   <div class="slider"><label for="ratio">Ratio</label><input type="range" id="ratio" min="1" max="3" step="0.01" value="2"><output id="ratioOut">2.00×</output></div>
   <div class="readout" id="ratioMsg"></div>
   <canvas id="ratioWave" style="height:120px" aria-label="Sum of two tones over six cycles of the lower one"></canvas>
@@ -94,7 +94,7 @@ No. A note is a sound whose pressure repeats every $P$ seconds, and its pitch is
 </div>
 ```
 
-Real instruments are never exact. Frequencies very near whole-number multiples still sound like one note: a piano's are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.
+Not every instrument is exact. Frequencies very near whole-number multiples still sound like one note: a piano's are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is a fraction <span class="needs">uses cosines and divisibility</span></summary>
@@ -116,14 +116,14 @@ A note is a sound that repeats, and its pitch is how often it repeats. So a note
 
 ## The next puzzle
 
-A guitar string is just a piece of wire, and a drumhead just a sheet of plastic. Why would the wire vibrate at 1, 2, 3, … times one frequency, and the drumhead not? Start with the simplest thing that vibrates at all, one mass on a spring. It answers a smaller puzzle first: as a plucked note fades, why does its pitch barely sag?
+Why would a wire vibrate at 1, 2, 3, … times one frequency, and a drumhead not? Start with the simplest thing that vibrates at all: one mass on a spring.
 
 *Short on time?* Pages 0, 4 and 8 carry the main idea: skip ahead to [4 · Why does a light touch make a string jump an octave?](violin.qmd)
 
 [Next: 1 · Spring →](oscillator.qmd)
 
 ::: {.refs}
-**References.** D. J. Benson, *Music: A Mathematical Offering*, Cambridge University Press, 2006, for Fourier series and pitch. Wikipedia, [Missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) and [Pitch (music)](https://en.wikipedia.org/wiki/Pitch_(music)).
+**References.** D. J. Benson, *Music: A Mathematical Offering*, Cambridge University Press, 2006, for Fourier series and pitch. Wikipedia, [Missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) and [Pitch (music)](https://en.wikipedia.org/wiki/Pitch_(music)). D. Pressnitzer, R. D. Patterson and K. Krumbholz, [The lower limit of melodic pitch](https://www.pdn.cam.ac.uk/node/469), *J. Acoust. Soc. Am.* 109 (2001). A. J. Oxenham and colleagues, [Pitch perception beyond the traditional existence region of pitch](https://experts.umn.edu/en/publications/pitch-perception-beyond-the-traditional-existence-region-of-pitch/), *PNAS* 108 (2011).
 :::
 
 ```{=html}
@@ -145,14 +145,15 @@ A guitar string is just a piece of wire, and a drumhead just a sheet of plastic.
   function gcd(a, b) { while (b) { var t = b; b = a % b; a = t; } return a; }
   function setAll(a) { amp = a.slice(); inputs.forEach(function (el, i) { el.value = amp[i]; }); draw(); }
   document.getElementById("nPure").addEventListener("click", function () { setAll([1, 0, 0, 0, 0, 0, 0, 0]); });
-  document.getElementById("nBright").addEventListener("click", function () { setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); });
+  document.getElementById("nBright").addEventListener("click", function () { setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); playMix(); });
   document.getElementById("nHollow").addEventListener("click", function () { setAll([1, 0, 1 / 3, 0, 1 / 5, 0, 1 / 7, 0]); });
-  document.getElementById("nMissing").addEventListener("click", function () { setAll([0, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); });
+  document.getElementById("nMissing").addEventListener("click", function () { setAll([0, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); playMix(); });
   function fadeOut(b, s) { var dd = b.getChannelData(0), k = Math.floor(s * b.sampleRate); for (var i = 0; i < k; i++) dd[dd.length - 1 - i] *= i / k; return b; }
-  document.getElementById("nPlay").addEventListener("click", function () {
+  function playMix() {
     var parts = amp.map(function (a, i) { return { f: F * (i + 1), amp: a, tau: 10 }; });
     C.play(fadeOut(C.render(parts, 1.6), 0.3), 0.7);
-  });
+  }
+  document.getElementById("nPlay").addEventListener("click", playMix);
   var wv = document.getElementById("nWave");
   function draw() {
     inputs.forEach(function (el, i) { document.getElementById("h" + (i + 1) + "o").textContent = amp[i].toFixed(2); });
@@ -185,10 +186,11 @@ A guitar string is just a piece of wire, and a drumhead just a sheet of plastic.
   }
   function setR(v) { rs.value = v; wave(); }
   rs.addEventListener("input", wave);
-  document.getElementById("r2").addEventListener("click", function () { setR(2); });
-  document.getElementById("r15").addEventListener("click", function () { setR(1.5); });
-  document.getElementById("r159").addEventListener("click", function () { setR(1.59); });
-  document.getElementById("rPlay").addEventListener("click", function () { var r = parseFloat(rs.value); C.play(fadeOut(C.render([{ f: 220, amp: 1, tau: 10 }, { f: 220 * r, amp: 0.7, tau: 10 }], 2), 0.3), 0.7); });
+  function playR() { var r = parseFloat(rs.value); C.play(fadeOut(C.render([{ f: 220, amp: 1, tau: 10 }, { f: 220 * r, amp: 0.7, tau: 10 }], 2), 0.3), 0.7); }
+  document.getElementById("r2").addEventListener("click", function () { setR(2); playR(); });
+  document.getElementById("r15").addEventListener("click", function () { setR(1.5); playR(); });
+  document.getElementById("r159").addEventListener("click", function () { setR(1.59); playR(); });
+  document.getElementById("rPlay").addEventListener("click", playR);
   window.addEventListener("resize", function () { draw(); wave(); });
   C.onTheme(function () { draw(); wave(); });
   setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); wave();

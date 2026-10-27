@@ -10,11 +10,11 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 6b Harmonica](harmonica.qmd) · [Series](index.qmd) · [Map](map.qmd) · [8 Drum →](drum.qmd)
+[← 6b Harmonica](harmonica.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [8 Drum →](drum.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). About 10 minutes, plus the folds.
+Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). About 8 minutes, plus the folds and the playable piano.
 :::
 
 ::: {.puzzle}
@@ -55,6 +55,9 @@ Listen to an octave tuned to exactly 2 : 1, then to a stretched one. The slow wo
 .actnote { text-align: center; font-size: 0.95rem; min-height: 2.8em; padding: 0.5rem 0.5rem 0; color: var(--ink); max-width: 46rem; margin: 0 auto; }
 #act3d .controls button small { display: block; font-size: 0.75rem; opacity: 0.75; }
 .eqx span.t.mod { box-shadow: inset 0 0 0 1.5px rgba(46, 75, 176, 0.6); }
+.eqx.plain { font-family: var(--f-ui); font-size: 0.9rem; line-height: 1.6; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 0.6rem; }
+.eqx.plain span.t { border: 1px solid var(--rule); }
+@media (hover: none) and (pointer: coarse) { .kbonly { display: none; } }
 </style>
 ```
 
@@ -65,18 +68,18 @@ Listen to an octave tuned to exactly 2 : 1, then to a stretched one. The slow wo
     <div class="slider"><label for="oMult">Stiffness ×</label><input type="range" id="oMult" min="1" max="12" step="0.5" value="6"><output id="oMulto">6.0</output></div>
     <label class="check"><input type="checkbox" id="oAll"> Play every partial</label>
     <div class="readout" id="oRead"></div>
-    <p class="cap">At first each note keeps only its lowest partials (C4: 1 to 3, C5: 1 and 2), so the one beat a tuner listens for stands out: the exactly 2 : 1 octave wobbles at the rate shown, and the stretched one is steady. The stiffness starts at about 6 times a real middle C wire's so that the wobble is quick enough to hear; at 1 it is a slow swell every few seconds. Tick "Play every partial" to hear whole notes: then the stretched octave wobbles too, from the lower note's 4th partial against the upper note's 2nd, the compromise described below.</p>
+    <p class="cap">Each note plays only its lowest partials, so the one beat a tuner listens for stands out. Stiffness starts at 6 times a real middle C wire's, so the wobble is quick enough to hear; at 1 it is a slow swell every few seconds.</p>
   </div>
 </div>
 ```
 
 ::: {.gist}
-**The gist.** A piano wire is pulled tight like a string, but it is also stiff steel, like a kalimba tine, and stiffness pushes its overtones slightly sharp, more so the higher they go. A tuner sets an octave by matching the upper note to the lower note's second partial, and on a stiff wire that partial sits a little above twice the fundamental. Tune to exactly 2 : 1 and the two beat; stretch the octave and they agree. Raise the stiffness slider and the beat gets faster.
+**The gist.** A piano wire is pulled tight like a string, but it is also stiff steel, like a kalimba tine, and stiffness pushes its overtones slightly sharp, more so the higher they go. A tuner sets an octave by matching the upper note to the lower note's second [partial](glossary.qmd#partial), the second frequency in its sound, and on a stiff wire that partial sits a little above twice the fundamental. Tune to exactly 2 : 1 and the two beat; stretch the octave and they agree. Raise the stiffness slider and the beat gets faster.
 :::
 
 ## On the pitch ruler
 
-Here are the frequencies of a piano note, middle C until you play another key on the piano further down. They sit a little sharp of the gray lines, and the higher the [partial](glossary.qmd#partial), the further sharp; the readout gives the shift in [cents](glossary.qmd#cents), hundredths of a semitone. The low partials are so close to the lines that the ear still hears one clear note. Each stem's height is how strongly the hammer starts that mode; the hammer strikes an eighth of the way along, where the 8th and 16th modes stand still, so those two are nearly silent.
+Here are the frequencies of a piano note, middle C, or the last key you played on the keyboard below. They sit a little sharp of the gray lines, and the higher the [partial](glossary.qmd#partial), the further sharp; the readout gives the shift in [cents](glossary.qmd#cents), hundredths of a semitone. The low partials are so close to the lines that the ear still hears one clear note. Each stem's height is how strongly the hammer starts that mode; the hammer strikes an eighth of the way along, where the 8th and 16th modes stand still, so those two are nearly silent.
 
 ```{=html}
 <div class="ins">
@@ -84,17 +87,17 @@ Here are the frequencies of a piano note, middle C until you play another key on
     <h3>Partials of the last key</h3>
     <svg class="spec" id="pSpec" viewBox="0 0 320 120" aria-label="Partials of the last key played"></svg>
     <div class="readout" id="pPart"></div>
-    <p class="cap">Hammer at 1/8 of the length, where the 8th and 16th modes have a still point, so those partials nearly vanish. Try the soft and mute pedals: the stems shrink at the top, but none of them moves.</p>
+    <p class="cap">Try the soft pedal or the practice mute on the keyboard below: the high stems shrink, but none of them moves.</p>
   </div>
 </div>
 ```
 
 ## How it works
 
-**A piano wire is a string and a bar at once.** Tension pulls the wire straight, as on a violin, and the steel also resists being bent, as in a kalimba tine. The two restoring forces simply add. Bending resists short wiggles far more than long ones, so it barely touches the fundamental but pushes the high overtones sharp. For a middle C wire, the 10th partial (the fundamental counts as the 1st) sits about a third of a semitone above ten times the fundamental. Short treble strings, thick for their length, are the stiffest: the string is slightly [inharmonic](glossary.qmd#inharmonic).
+**A piano wire is a string and a bar at once.** Tension pulls the wire straight, as on a violin, and the steel also resists being bent, as in a kalimba tine. The two restoring forces simply add. Bending resists short wiggles far more than long ones, so it barely touches the fundamental but pushes the high overtones sharp: the string is slightly [inharmonic](glossary.qmd#inharmonic). For a middle C wire, the 10th partial (the fundamental counts as the 1st) sits about a third of a semitone above ten times the fundamental. Short treble strings, thick for their length, are the stiffest.
 
 ::: {.derive}
-<details><summary><span class="label">Precisely</span>The operator and its spectrum <span class="needs">uses partial derivatives</span></summary>
+<details><summary><span class="label">Precisely</span>The wire's equation and its frequencies <span class="needs">uses partial derivatives</span></summary>
 
 **The operator.** Forces per unit length add. Tension contributes $T\,u_{xx}$, as for the [string](violin.qmd), and bending contributes $-EI\,u_{xxxx}$, as for the [kalimba](kalimba.qmd), so with $\mu$ the mass per unit length (density times cross-section area, the $\rho S$ of the kalimba page)
 $$
@@ -114,7 +117,7 @@ The stiffness constant $B$ is small, but it multiplies $n^2$, so high [partials]
 :::
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a short piece of wire to the operator and its spectrum <span class="needs">uses partial derivatives</span></summary>
+<details><summary><span class="label">Step-by-step derivation</span>From Newton's law on a short piece of wire to its frequencies <span class="needs">uses partial derivatives</span></summary>
 
 **1. One small piece.** Follow the stretch of wire between $x$ and $x+dx$. Its mass is $\mu\,dx$ and its vertical acceleration is $u_{tt}$, so Newton's law says $\mu\,dx\,u_{tt}$ equals the net vertical force on it. Two forces act: the pull of tension, and the wire's resistance to bending.
 
@@ -158,7 +161,7 @@ Taking square roots gives $f_n = n f_0\sqrt{1 + Bn^2}$, with $f_0 = c/2L$ and $B
 </details>
 :::
 
-**Why exact octaves beat.** A tuner sets an octave by ear, listening for beats between the lower note's second partial and the upper note's fundamental. Two nearly equal frequencies played together beat at a rate equal to their difference. On a stiff wire the lower note's second partial is a little more than twice its fundamental, so an upper note tuned to exactly twice the fundamental sits just below that partial, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise. Repeated across the keyboard, this is *stretch tuning*: the top of a piano ends up sharp and the bottom flat, compared with equal temperament. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
+**Why exact octaves beat.** A tuner sets an octave by ear, listening for beats between the lower note's second partial and the upper note's fundamental. Two nearly equal frequencies played together beat at a rate equal to their difference. On a stiff wire the lower note's second partial is a little more than twice its fundamental, so an upper note tuned to exactly twice the fundamental sits just below that partial, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise; tick "Play every partial" in the demo at the top to hear it, as the stretched octave then wobbles too. Repeated across the keyboard, this is *stretch tuning*: the top of a piano ends up sharp and the bottom flat, compared with equal temperament. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>How much wider than 2 : 1 <span class="needs">uses square-root approximations</span></summary>
@@ -168,7 +171,12 @@ A tuner sets an octave by listening for [beats](glossary.qmd#beats), a slow wobb
 </details>
 :::
 
-**Hammer, dampers and pedals: none of them moves a frequency.** The frequencies belong to the operator, set by the wire's tension and stiffness. The hammer decides how much of each mode starts: a mode is excited in proportion to its own height where the hammer hits, so a mode that stands still there stays silent. The felt dampers decide how fast each mode dies: a mode is damped in proportion to how much it moves under the felt. Every control a pianist touches acts on one of these two. Only the tuner's wrench, which changes the tension, touches the operator.
+**Hammer, dampers and pedals: none of them moves a frequency.** The frequencies belong to the wire itself, set by its tension and stiffness. The hammer decides how much of each mode starts, and the felt dampers decide how fast each mode dies. Every control a pianist touches does one of these two things; only the tuner's wrench, which changes the tension, moves the frequencies. You can try them all on the whole piano further down.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>What each control changes</summary>
+
+The hammer starts each mode in proportion to the mode's own height where the hammer hits, so a mode that stands still there stays silent. In a simple model, the felt dampers make each mode die at a rate proportional to how much it moves under the felt. The pedals act on one or the other:
 
 | Control | What it changes | Effect |
 |:--|:--|:--|
@@ -179,28 +187,8 @@ A tuner sets an octave by listening for [beats](glossary.qmd#beats), a slow wobb
 | [practice mute](glossary.qmd#practice-pedal) (middle, on uprights) | the hammer blow: a felt strip sits between hammer and string | much quieter; most high modes gone |
 | tuning pin | the operator: the tension | every frequency moves |
 
-Play the whole piano with the mouse or your computer keys. Release a key and its felt [damper](glossary.qmd#damper) drops back onto the string and stops it; try the pedals, and watch the stems in the panel above shrink without moving.
-
-```{=html}
-<div class="ins">
-<section class="instrument" aria-labelledby="play">
-  <div class="controls" style="padding:0 0.25rem 0.5rem">
-    <button id="octDown" aria-label="Move the computer-key window down an octave">◀ Octave (Z)</button>
-    <span class="readout" id="winRead"></span>
-    <button id="octUp" aria-label="Move the computer-key window up an octave">Octave (X) ▶</button>
-  </div>
-  <div class="kbdwrap" id="kbdwrap"><div class="kbd" id="kbd" aria-label="Piano keyboard, A0 to C8"></div></div>
-  <div class="pedals" style="padding:0.75rem 0.25rem 0" role="group" aria-label="Pedals">
-    <button id="pSoft" aria-pressed="false">Soft<small>left pedal</small></button>
-    <button id="pMute" aria-pressed="false">Practice mute<small>middle pedal</small></button>
-    <button id="pSus" aria-pressed="false">Sustain<small>right pedal · Space</small></button>
-  </div>
-  <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="mult">Stiffness ×</label><input type="range" id="mult" min="0" max="12" step="0.5" value="1"><output id="multo">1.0</output></div>
-  <div class="readout" id="pRead" style="padding:0.4rem 0.25rem 0">Hold keys to sound them; release to damp. Computer keys: A W S E D F T G Y H U J K O L P ; ' play the highlighted range.</div>
-  <p class="cap" style="padding:0.4rem 0.25rem 0">Releasing a key drops its felt damper and the note stops. The top 20 keys have no dampers, as on a real piano. Sustain lifts every damper; Soft and Practice mute change how the hammer meets the string. The stiffness rises toward the treble; its size here is illustrative.</p>
-</section>
-</div>
-```
+</details>
+:::
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>The full string equation, the hammer weights and the damping rates <span class="needs">uses integrals of products of modes and a first-order approximation</span></summary>
@@ -241,6 +229,39 @@ whose solution $e^{-\gamma_m t}\cos\big(\sqrt{\omega_m^2 - \gamma_m^2}\,t\big)$ 
 </details>
 :::
 
+## What we found
+
+On the pitch ruler, a piano's overtones sit slightly sharp of the lines, more so the higher they go: close enough that you hear one clear note, far enough that an exact octave beats. In the series' language, the piano adds one new idea: operators add. The wire is pulled tight like a string and resists bending like a bar, so its [operator](glossary.qmd#operator), the rule that turns a shape of the wire into the force pulling it back, is the sum of the string's and the bar's. The hammer, the dampers and the pedals act on the rest of the string's equation, and none of them moves a frequency, apart from tiny shifts that weak damping causes.
+
+::: {.family}
+**Every real string is a little stiff.** Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.
+:::
+
+## Play the whole piano
+
+Every control here changes how strongly the modes start or how fast they die; none moves a frequency. Hold keys to play and release them to damp; try the pedals, and watch the stems in the panel above shrink without moving.
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <div class="controls" style="padding:0 0.25rem 0.5rem">
+    <button id="octDown" aria-label="Move down an octave">◀ Octave<span class="kbonly"> (Z)</span></button>
+    <span class="readout" id="winRead"></span>
+    <button id="octUp" aria-label="Move up an octave">Octave<span class="kbonly"> (X)</span> ▶</button>
+  </div>
+  <div class="kbdwrap" id="kbdwrap"><div class="kbd" id="kbd" aria-label="Piano keyboard, A0 to C8"></div></div>
+  <div class="pedals" style="padding:0.75rem 0.25rem 0" role="group" aria-label="Pedals">
+    <button id="pSoft" aria-pressed="false">Soft<small>left pedal</small></button>
+    <button id="pMute" aria-pressed="false">Practice mute<small>middle pedal</small></button>
+    <button id="pSus" aria-pressed="false">Sustain<small>right pedal<span class="kbonly"> · Space</span></small></button>
+  </div>
+  <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="mult">Stiffness ×</label><input type="range" id="mult" min="0" max="12" step="0.5" value="1"><output id="multo">1.0</output></div>
+  <div class="readout" id="pRead" style="padding:0.4rem 0.25rem 0">Hold keys to sound them; release to damp.<span class="kbonly"> Computer keys A W S E D F T G Y H U J K O L P ; ' play the highlighted range.</span></div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Release a key and its felt damper stops the note; the top 20 keys have no dampers, as on a real piano. Stiffness rises toward the treble; its size here is illustrative.</p>
+</section>
+</div>
+```
+
 ::: {.derive}
 <details><summary><span class="label">Details</span>Grand pianos: the middle pedal and the two-stage decay</summary>
 
@@ -249,7 +270,7 @@ On a grand piano the middle pedal is usually the *sostenuto*, which holds up onl
 </details>
 :::
 
-**Inside the piano.** An upright piano with its front panel removed, one octave of it. Each key, hammer and damper below moves as the equation says: the hammer starts the modes, the felt on the string damps them, and the string's motion is a sum of the operator's modes.
+**Inside the piano.** An upright piano with its front panel removed, one octave of it. Press a key and watch the hammer start the string's modes and the felt damper stop them.
 
 ```{=html}
 <div class="ins">
@@ -257,28 +278,32 @@ On a grand piano the middle pedal is usually the *sostenuto*, which holds up onl
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <div class="act-wrap"><canvas id="act3dCanvas" aria-label="Upright piano with the front panel removed, one octave. Click a key to play it; drag to turn the view."></canvas><div class="act-tools"><button id="aLabels" aria-pressed="true">Labels</button><button id="aReset">Reset view</button></div></div>
-  <div class="eqx" aria-label="String equation with the active terms highlighted">
-    <span class="t" id="tAcc">&mu;&thinsp;<i>u</i><sub>tt</sub></span> +
-    <span class="t" id="tDamp"><i>b</i>(<i>x</i>,&thinsp;<i>t</i>)&thinsp;<i>u</i><sub>t</sub></span> =
-    <span class="t op" id="tT"><i>T</i>&thinsp;<i>u</i><sub>xx</sub> &minus; <i>EI</i>&thinsp;<i>u</i><sub>xxxx</sub></span> +
-    <span class="t" id="tF"><i>f</i>(<i>x</i>,&thinsp;<i>t</i>)</span>
+  <div class="eqx plain" aria-label="What each part does; the active part lights up">
+    <span class="t" id="tF">hammer: starts the modes</span>
+    <span class="t op" id="tT">the wire's tension and stiffness: set the frequencies</span>
+    <span class="t" id="tDamp">damper: stops the modes</span>
   </div>
-  <div class="eqkey"><span><b>damping</b> <i>b</i>: dampers, sustain pedal</span><span><b>operator</b>: frequencies and mode shapes</span><span><b>forcing</b> <i>f</i>: hammer, soft and mute pedals</span></div>
-  <div class="actnote" id="actNote" aria-live="polite">Press a key. The hammer pushes the string for a moment (the forcing <i>f</i>), then the string rings in the modes of the operator.</div>
+  <div class="actnote" id="actNote" aria-live="polite">Press a key. The hammer pushes the string for a moment, then the string rings in its own modes.</div>
   <div class="mini2" style="padding-top:0.6rem">
     <div><canvas id="actWave" aria-label="Shape of the last string played"></canvas><div class="cap" id="actWaveCap">String of the last key: hammer mark and damper felt shown.</div></div>
     <div><canvas id="actModes" aria-label="Amplitude of each mode now, and how strongly the damper acts on it"></canvas><div class="cap">Bars: amplitude of modes 1–16 now. Ticks below: how hard the damper pulls on each mode.</div></div>
   </div>
   <div class="controls" style="padding-top:0.6rem">
-    <button id="aSoft" aria-pressed="false">Soft pedal<small>changes <i>f</i></small></button><button id="aMute" aria-pressed="false">Practice mute<small>changes <i>f</i></small></button><button id="aSus" aria-pressed="false">Sustain pedal<small>lifts the dampers out of <i>b</i></small></button>
+    <button id="aSoft" aria-pressed="false">Soft pedal<small>a gentler hammer</small></button><button id="aMute" aria-pressed="false">Practice mute<small>felt softens the blow</small></button><button id="aSus" aria-pressed="false">Sustain pedal<small>lifts every damper</small></button>
   </div>
-  <div class="slider" style="padding-top:0.4rem"><label for="aXd">Damper position along the string</label><input type="range" id="aXd" min="0.04" max="0.5" step="0.005" value="0.22"><output id="aXdo">0.220 L</output></div>
-  <p class="cap" style="padding-top:0.3rem">Click and hold a key, or use A W S E D F T G Y H U J K for C4 to C5 and Space for sustain. Drag to turn the view. An upright piano with its front panel removed, as when you open your own. The string motion is slowed and exaggerated for the eye; the sound is real time. Slide the damper up toward 0.05 L to get an old "birdcage" upright, whose dampers sit near the end of the string and barely touch the low modes. While this view is on screen, the computer keys play it instead of the full keyboard above.</p>
+  <div class="slider" style="padding-top:0.4rem"><label for="aXd">Damper position along the string</label><input type="range" id="aXd" min="0.04" max="0.5" step="0.005" value="0.22"><output id="aXdo">0.22 of the length</output></div>
+  <p class="cap" style="padding-top:0.3rem">Click and hold a key<span class="kbonly"> (or A W S E D F T G Y H U J K, and Space for sustain; while this view is on screen they play it instead of the keyboard above)</span>; drag to turn the view. The string motion is slowed and exaggerated; the sound is real time. Slide the damper toward the end of the string for an old "birdcage" upright.</p>
 </section>
 </div>
 ```
 
+::: {.derive}
+<details><summary><span class="label">Details</span>Where the dampers sit: under-damper and birdcage uprights</summary>
+
 Where the dampers touch the string matters, because each mode is damped in proportion to its motion under the felt. Close to an end every low mode barely moves, so a damper there hardly damps the bass. In most modern uprights the dampers sit below the hammers, nearer the middle of the string; in older "birdcage" uprights they sat above the hammers, near the end. Piano restorers report that the under-damper design stops the strings better, partly because its dampers are closer to the middle of the string (Sykes). The slider in the view above moves the damper and shows the effect on each mode.
+
+</details>
+:::
 
 ::: {.qa}
 <details><summary><span class="label">Reader question</span>What does a damper do, and what would a piano without dampers sound like?</summary>
@@ -288,17 +313,9 @@ Without dampers, releasing a key would do nothing: every string would ring until
 </details>
 :::
 
-## What we found
-
-On the pitch ruler, a piano's overtones sit slightly sharp of the lines, more so the higher they go: close enough that you hear one clear note, far enough that an exact octave beats. The operator taught one new thing: operators add. A piano wire is pulled tight like a string and resists bending like a bar, so its operator is the sum of the two. The hammer, the dampers and the pedals act on the rest of the string's equation, the forcing and the damping, and none of them moves a frequency, apart from tiny shifts that weak damping causes.
-
-::: {.family}
-**Every real string is a little stiff.** Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.
-:::
-
 ## The next puzzle
 
-Every instrument so far has been one-dimensional: a string, a tube, a bar. In 1808 Ernst Chladni showed Paris that a vibrating plate, sprinkled with sand, draws patterns, a different one for each note. What draws them? And why does a drum give a thud where a string gives a note?
+Every instrument so far has been a line: a string, a tube, a bar. What changes when it becomes a sheet, and why does a drum thud?
 
 [← 6b · Harmonica](harmonica.qmd) · [Next: 8 · Drum →](drum.qmd)
 
@@ -317,6 +334,8 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
   var CODES = ["KeyA", "KeyW", "KeyS", "KeyE", "KeyD", "KeyF", "KeyT", "KeyG", "KeyY", "KeyH", "KeyU", "KeyJ", "KeyK", "KeyO", "KeyL", "KeyP", "Semicolon", "Quote"];
   var LABEL = ["A", "W", "S", "E", "D", "F", "T", "G", "Y", "H", "U", "J", "K", "O", "L", "P", ";", "'"];
   var ped = { sus: false, soft: false, mute: false }, held = {}, voices = {};
+  // touch screens have no computer keys: hide the key letters and the key window there
+  var TOUCH = !!(window.matchMedia && window.matchMedia("(hover: none) and (pointer: coarse)").matches);
   var kbd = document.getElementById("kbd"), wrap = document.getElementById("kbdwrap"), btn = {}, wi = 0;
   for (var k = LOW; k <= HIGH; k++) if (!BLACK[k % 12]) wi++;
   kbd.style.width = (wi * WK) + "px";
@@ -330,11 +349,11 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
   }
   function labels() {
     for (var k = LOW; k <= HIGH; k++) {
-      var i = k - base, inWin = i >= 0 && i < CODES.length, b = btn[k];
+      var i = k - base, inWin = !TOUCH && i >= 0 && i < CODES.length, b = btn[k];
       b.classList.toggle("win", inWin);
       b.textContent = inWin ? LABEL[i] : (k % 12 === 0 ? C.noteName(C.mtof(k)).name : "");
     }
-    document.getElementById("winRead").innerHTML = "computer keys: <b>" + C.noteName(C.mtof(base)).name + "–" + C.noteName(C.mtof(base + CODES.length - 1)).name + "</b>";
+    document.getElementById("winRead").innerHTML = TOUCH ? "" : "computer keys: <b>" + C.noteName(C.mtof(base)).name + "–" + C.noteName(C.mtof(base + CODES.length - 1)).name + "</b>";
     var el = btn[base]; if (el) wrap.scrollLeft = Math.max(0, parseFloat(el.style.left) - wrap.clientWidth / 2 + 4 * WK);
   }
   function shift(d) { base = Math.max(LOW + (12 - LOW % 12) % 12, Math.min(96, base + 12 * d)); labels(); }
@@ -352,7 +371,7 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
     voices[k] = C.pianoStrike(k, mult, ped.soft, ped.mute, level());
     held[k] = true; btn[k].classList.add("on"); last = k; pspec();
     var nn = C.noteName(C.mtof(k));
-    document.getElementById("pRead").innerHTML = "<b>" + nn.name + "</b> · " + C.mtof(k).toFixed(1) + " Hz · B = <b>" + C.models.piano.B(k, mult).toExponential(1) + "</b>" + (k >= UNDAMPED ? " · no damper" : "");
+    document.getElementById("pRead").innerHTML = "<b>" + nn.name + "</b> · " + C.mtof(k).toFixed(1) + " Hz" + (k >= UNDAMPED ? " · no damper" : "");
   }
   function release(k) {
     if (!held[k]) return; delete held[k]; btn[k].classList.remove("on");
@@ -400,7 +419,7 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
     var p = partsFor(last);
     C.stems(document.getElementById("pSpec"), p, { W: 320, H: 120, rmax: 16, fs: 8, sw: 2, labelEvery: 2, noOff: true });
     var r10 = p[9] ? p[9].ratio : null;
-    document.getElementById("pPart").innerHTML = C.noteName(C.mtof(last)).name + " · partial 2 at <b>" + (1200 * Math.log2(p[1].ratio / 2)).toFixed(1) + "¢</b> sharp" + (r10 ? " · partial 10 at <b>" + (1200 * Math.log2(r10 / 10)).toFixed(0) + "¢</b> sharp" : "");
+    document.getElementById("pPart").innerHTML = C.noteName(C.mtof(last)).name + " · 2nd partial <b>" + (1200 * Math.log2(p[1].ratio / 2)).toFixed(1) + " cents</b> sharp" + (r10 ? " · 10th partial <b>" + (1200 * Math.log2(r10 / 10)).toFixed(0) + " cents</b> sharp" : "");
   }
   // The octave demo has its own stiffness, so the beat can be made quick enough to hear without changing the keyboard.
   var om = 6, oAll = false;
@@ -409,8 +428,8 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
   function r2(k) { return rn(2, oB(k)); }
   function octRead() {
     var f = C.mtof(60), B4 = oB(60), B5 = oB(72), f5s = f * r2(60);
-    var txt = "exactly 2 : 1: C4's 2nd partial beats against C5 at <b>" + (f * (r2(60) - 2)).toFixed(2) + " Hz</b> · stretched: no beat there, octave <b>" + (1200 * Math.log2(r2(60) / 2)).toFixed(1) + "¢</b> wide";
-    if (oAll) txt += " · C4's 4th partial against C5's 2nd: <b>" + Math.abs(f * rn(4, B4) - 2 * f * rn(2, B5)).toFixed(2) + " Hz</b> exact, <b>" + Math.abs(f * rn(4, B4) - f5s * rn(2, B5)).toFixed(2) + " Hz</b> stretched";
+    var txt = "exactly 2 : 1: wobbles <b>" + (f * (r2(60) - 2)).toFixed(1) + " times a second</b> · stretched: steady, the octave <b>" + (1200 * Math.log2(r2(60) / 2)).toFixed(0) + " cents</b> wider";
+    if (oAll) txt += " · with every partial, C4's 4th against C5's 2nd wobbles <b>" + Math.abs(f * rn(4, B4) - 2 * f * rn(2, B5)).toFixed(1) + "</b> times a second exact, <b>" + Math.abs(f * rn(4, B4) - f5s * rn(2, B5)).toFixed(1) + "</b> stretched";
     document.getElementById("oRead").innerHTML = txt;
   }
   // The lowest partials only, with fixed strengths, so the 2 : 1 pair dominates.
@@ -440,9 +459,14 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
   "use strict";
   var C = Core, T = window.THREE, host = document.getElementById("act3d");
   if (!host) return;
-  if (!T || !T.OrbitControls) { host.querySelector(".act-wrap").innerHTML = "<p class='cap' style='padding:1rem'>The 3D view needs WebGL and could not load here.</p>"; return; }
+  function fallback() { host.innerHTML = "<p class='cap' style='padding:0.5rem 0.25rem'>The 3D view of the inside of the piano needs WebGL, which this browser could not start.</p>"; }
+  if (!T || !T.OrbitControls) { fallback(); return; }
   var cv = document.getElementById("act3dCanvas"), note = document.getElementById("actNote");
-  var renderer = new T.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+  var probe = document.createElement("canvas");
+  if (!(probe.getContext("webgl") || probe.getContext("experimental-webgl"))) { fallback(); return; }
+  var renderer;
+  try { renderer = new T.WebGLRenderer({ canvas: cv, antialias: true, alpha: true }); if (!renderer.getContext()) throw new Error("no context"); }
+  catch (err) { fallback(); return; }
   var scene = new T.Scene(), camera = new T.PerspectiveCamera(38, 1, 0.1, 300);
   var controls = new T.OrbitControls(camera, cv);
   controls.enableDamping = true; controls.minDistance = 6; controls.maxDistance = 70;
@@ -579,25 +603,25 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
     var K = KEYS[i]; if (K.voice) C.pianoStop(K.voice, 0.008);
     K.voice = C.pianoStrike(K.k, 1, ped.soft, ped.mute, level()); visStart(K, K.voice);
     K.held = true; K.hitT = performance.now() / 1000; sel = i;
-    say("<b>Hammer strike.</b> The key's back end lifts the action and throws the hammer at the strings, about 1/8 of the way down from the top. That brief push is the forcing <i>f</i>. It sets how much of each mode rings (the bars) and cannot add a frequency the operator does not have." +
+    say("<b>Hammer strike.</b> The key's back end lifts the action and throws the hammer at the strings, about 1/8 of the way down from the top. That brief push sets how much of each mode rings (the bars); it cannot add a frequency the wire does not already have." +
         (ped.soft ? " With the soft pedal down the hammer starts closer to the strings, so it arrives more gently." : "") + (ped.mute ? " The mute felt softens the blow further." : ""));
   }
   function release(i) {
     var K = KEYS[i]; if (!K.held) return; K.held = false;
-    if (ped.sus) { say("<b>Key released, sustain down.</b> The damper stays away from the strings, so the dampers add nothing to <i>b</i> and the note rings on at the operator's frequencies."); return; }
+    if (ped.sus) { say("<b>Key released, sustain down.</b> The damper stays away from the strings, so the note rings on at its own frequencies."); return; }
     if (K.voice && !K.voice.released) K.voice = C.pianoDamp(K.voice, dmp); visDamp(K);
-    say("<b>Key released.</b> The damper swings back onto the strings and adds the damping term <i>b</i>(<i>x</i>)<i>u</i><sub>t</sub> where the felt touches. Mode <i>n</i> now dies at a rate proportional to how much it moves under the felt (the orange ticks); its frequency does not change.");
+    say("<b>Key released.</b> The damper swings back and presses its felt on the strings. Each mode now dies at a rate proportional to how much it moves under the felt (the orange ticks); its frequency does not change.");
   }
   function setPed(name, on) {
     ped[name] = on; document.getElementById({ soft: "aSoft", mute: "aMute", sus: "aSus" }[name]).setAttribute("aria-pressed", on);
     if (name === "sus") {
-      if (on) say("<b>Sustain pedal down.</b> Its rod pushes the damper lift rail, which swings every damper away from the strings at once, so the dampers add nothing to <i>b</i> on any string: notes ring after you let go. The operator is untouched, so each note keeps its frequencies.");
-      else { KEYS.forEach(function (K) { if (!K.held && K.voice && !K.voice.released) { K.voice = C.pianoDamp(K.voice, dmp); visDamp(K); } }); say("<b>Sustain pedal up.</b> The dampers fall back onto every string that is not held, and <i>b</i> returns."); }
+      if (on) say("<b>Sustain pedal down.</b> Its rod pushes the damper lift rail, which swings every damper away from the strings at once, so notes ring after you let go. Nothing touches the wire's tension or stiffness, so each note keeps its frequencies.");
+      else { KEYS.forEach(function (K) { if (!K.held && K.voice && !K.voice.released) { K.voice = C.pianoDamp(K.voice, dmp); visDamp(K); } }); say("<b>Sustain pedal up.</b> The dampers fall back onto every string that is not held."); }
     } else if (name === "soft") {
-      say(on ? "<b>Soft pedal down.</b> On an upright it moves the hammer rail toward the strings, so every hammer starts its swing closer and lands more gently. Only the forcing <i>f</i> changes: quieter notes and weaker high modes, at the same frequencies."
+      say(on ? "<b>Soft pedal down.</b> On an upright it moves the hammer rail toward the strings, so every hammer starts its swing closer and lands more gently. Only the blow changes: quieter notes and weaker high modes, at the same frequencies."
              : "<b>Soft pedal up.</b> The hammers return to their full distance.");
     } else {
-      say(on ? "<b>Practice mute down.</b> A strip of felt drops between the hammers and the strings. The blow that reaches the string, the forcing <i>f</i>, becomes much softer and loses its sharp edge, so most high modes are never excited. The frequencies still do not move."
+      say(on ? "<b>Practice mute down.</b> A strip of felt drops between the hammers and the strings. The blow that reaches the string becomes much softer and loses its sharp edge, so most high modes are never excited. The frequencies still do not move."
              : "<b>Practice mute up.</b> The felt strip lifts out of the way.");
     }
   }
@@ -605,7 +629,7 @@ Every instrument so far has been one-dimensional: a string, a tube, a bar. In 18
   document.getElementById("aMute").addEventListener("click", function () { setPed("mute", !ped.mute); });
   document.getElementById("aSus").addEventListener("click", function () { setPed("sus", !ped.sus); });
   var xs = document.getElementById("aXd"), xo = document.getElementById("aXdo");
-  xs.addEventListener("input", function () { dmp.xd = parseFloat(xs.value); xo.textContent = dmp.xd.toFixed(3) + " L"; });
+  xs.addEventListener("input", function () { dmp.xd = parseFloat(xs.value); xo.textContent = dmp.xd.toFixed(2) + " of the length"; });
 
   // ---- input ----
   var ray = new T.Raycaster(), ndc = new T.Vector2(), down = -1;

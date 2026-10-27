@@ -10,15 +10,15 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 6 Kalimba](kalimba.qmd) · [Series](index.qmd) · [Map](map.qmd) · [7 Piano →](piano.qmd)
+[← 6 Kalimba](kalimba.qmd) · [The Shape of a Sound](index.qmd) · [Map](map.qmd) · [7 Piano →](piano.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). About 8 minutes, plus the folds.
+Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). About 7 minutes, plus the folds.
 :::
 
 ::: {.puzzle}
-A harmonica reed is a little brass bar, fixed at one end and free at the other, like a kalimba tine, with the same overtones at 6.27 and 17.55 times its fundamental. Pluck it and you hear them. Blow it and they are gone: every frequency in the note lands exactly on the whole-number lines. Where did they go?
+A harmonica reed is a little brass bar, fixed at one end and free at the other, like a kalimba tine, with the same overtones, in the ideal model, at 6.27 and 17.55 times its fundamental. Pluck it and you hear them. Blow it and they are gone: every frequency in the note lands exactly on the whole-number lines. Where did they go?
 :::
 
 Pluck the reed, then blow it, and compare the stems with the gray whole-number lines.
@@ -42,7 +42,7 @@ Pluck the reed, then blow it, and compare the stems with the gray whole-number l
 <div class="panel">
     <div class="controls"><button id="pluckR">Pluck the C5 reed</button><button id="blowR" class="primary">Blow the C5 reed</button></div>
     <svg class="spec" id="hSpec" viewBox="0 0 320 110" aria-label="Partials of the plucked or blown reed"></svg>
-    <p class="cap" id="hCap">Same operator, same boundary conditions, same reed. Only the excitation differs. (C5 is the C an octave above middle C.)</p>
+    <p class="cap" id="hCap">Same reed; only how you play it differs. (C5 is the C an octave above middle C.)</p>
   </div>
 </div>
 ```
@@ -53,7 +53,7 @@ Pluck the reed, then blow it, and compare the stems with the gray whole-number l
 
 ## On the pitch ruler
 
-Plucked, the reed's stems sit at 1×, 6.27× and 17.55×, off the gray lines, and the overtones die almost at once, as on the kalimba. Blown, the stems sit at 1×, 2×, 3×, 4×, …, every one on a line. Each stem's height is how strong that frequency is in the sound. Same reed, same operator; only the way it is driven differs.
+Plucked, the reed's overtones sit at 6.27× and 17.55×, off the gray lines, and die almost at once, as on the kalimba. Blown, the stems sit at 1×, 2×, 3×, 4×, …, every one on a line. Each stem's height is how strong that frequency is in the sound. Same reed; only the way it is played differs.
 
 ## How it works
 
@@ -75,7 +75,7 @@ The width $w$ cancels, so it affects how much air the reed moves, not its pitch.
 </details>
 :::
 
-**Blowing turns the reed into a valve.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. The sound comes mainly from the chopped airflow; Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency slightly below its first mode's, so the puffs of air repeat at that rate too. A sound that repeats has frequencies only at whole-number multiples of its repetition rate ([page 0](note.qmd)). So the blown note lands on the lines, with strong odd and even multiples (Pykett), even though the reed's own overtones do not. Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here; the fold gives a plausible picture.
+**Blowing turns the reed into a valve.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. The sound comes mainly from the chopped airflow; the acoustics writer Colin Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency slightly below its first mode's, so the puffs of air repeat at that rate too. A sound that repeats has frequencies only at whole-number multiples of its repetition rate ([page 0](note.qmd)). So the blown note lands on the lines, with strong odd and even multiples (Pykett), even though the reed's own overtones do not. Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here; the fold gives a plausible picture.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Why a steady train of puffs has only whole-number partials <span class="needs">uses Fourier series (page 3)</span></summary>
@@ -87,7 +87,7 @@ The demo's sound is a model: one puff shape, chosen so that the open part of eac
 </details>
 :::
 
-The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a sound that repeats. On those instruments the operator's own frequencies are already nearly whole-number multiples, so the excitation and the operator agree, and locking is easy. A free reed's are not, which lets you hear that the excitation, not the operator, sets the overtones.
+The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a sound that repeats. On those instruments the string's or tube's own frequencies already sit nearly on the lines, so the push and the instrument agree, and locking is easy. A free reed's own frequencies are far off the lines, which lets you hear that the way it is driven, not the reed's own frequencies, decides where a blown note's overtones sit.
 
 **Tuning a reed with a file.** Reed makers tune by scraping metal off, and where they scrape decides the direction. The first mode bends most near the rivet and moves most near the tip. Thin the reed near the rivet and you remove stiffness where it counts: the pitch drops. Thin it near the tip and you remove mass where it counts: the pitch rises. It is the spring of [page 1](oscillator.qmd) again, where frequency grows with stiffness and falls with mass. Try it below.
 
@@ -97,13 +97,13 @@ The same mechanism drives the bowed string and the clarinet: a steady push, from
     <div class="slider"><label for="fx">Where to file</label><input type="range" id="fx" min="0.02" max="0.98" step="0.01" value="0.1"><output id="fxo">base</output></div>
     <div class="readout" id="fRead"></div>
     <div class="controls"><button id="fPlay" class="primary">Blow the filed reed</button><button id="fOrig">Blow the original</button></div>
-    <p class="cap">Filing removes 25% of the thickness over about a tenth of the reed. The pitch change uses the unfiled mode shape in the Rayleigh quotient, which is accurate when the filing is shallow.</p>
+    <p class="cap">Filing removes a quarter of the thickness over about a tenth of the reed. The pitch change is estimated as in the fold below.</p>
   </div>
 </div>
 ```
 
 ::: {.derive}
-<details><summary><span class="label">Step-by-step derivation</span>Why filing moves the pitch: the Rayleigh quotient <span class="needs">uses integration by parts and a first-order approximation</span></summary>
+<details><summary><span class="label">Step-by-step derivation</span>Why filing moves the pitch: stiffness against mass <span class="needs">uses integration by parts and a first-order approximation</span></summary>
 
 The [Rayleigh quotient](glossary.qmd#rayleigh-quotient) explains the direction. For the first mode,
 $$
@@ -150,7 +150,7 @@ On the pitch ruler, the plucked reed's overtones are off the lines and die fast,
 
 ## The next puzzle
 
-Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](glossary.qmd#equal-temperament), the tuning in which all twelve semitones are the same ratio. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
+Piano tuners deliberately tune octaves a little wider than 2 : 1. Why would exact sound wrong?
 
 [← 6 · Kalimba](kalimba.qmd) · [Next: 7 · Piano →](piano.qmd)
 
@@ -258,7 +258,7 @@ Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stret
   function fRead() {
     var x = parseFloat(fx.value), r = ratio(), cents = 1200 * Math.log2(r);
     fxo.textContent = x < 0.2 ? "near the clamp" : x > 0.8 ? "near the tip" : (x * 100).toFixed(0) + "% along";
-    document.getElementById("fRead").innerHTML = "pitch change <b>" + (cents >= 0 ? "+" : "") + cents.toFixed(0) + "¢</b> · " + (cents < 0 ? "flatter" : "sharper");
+    document.getElementById("fRead").innerHTML = "pitch change: <b>" + Math.abs(cents).toFixed(0) + " cents " + (cents < 0 ? "flatter" : "sharper") + "</b>";
   }
   fx.addEventListener("input", fRead);
   function blowAt(f) { C.play(fadeOut(C.render(C.toHz(C.models.harmonica.partials(), f), 1.3), 0.25), 0.6); }

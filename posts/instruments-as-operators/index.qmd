@@ -26,7 +26,7 @@ Pluck a string and you get a note you could hum. Strike a drum and you get a thu
       <svg class="spec" id="rulerDrum" viewBox="0 0 320 96" aria-label="The frequencies in a struck drum's sound, as multiples of the lowest: they fall between the whole-number lines"></svg>
     </div>
   </div>
-  <p class="cap">Call this the <em>pitch ruler</em>. Its gray lines mark whole-number multiples, 1×, 2×, 3×, …, of one base frequency, here the lowest. Each blue stem is one frequency in the sound; taller means it starts stronger. (The string is plucked a fifth of the way along, so 5× is missing.)</p>
+  <p class="cap">Call this the <em>pitch ruler</em>. Its gray lines mark whole-number multiples, 1×, 2×, 3×, …, of one base frequency, here the lowest. Each blue stem is one frequency in the sound; taller means it starts stronger, for an idealized pluck and strike. (The string is plucked a fifth of the way along, so 5× is missing.)</p>
 </div>
 </div>
 ```
