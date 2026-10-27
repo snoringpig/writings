@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). Uses partial derivatives (explained) and the small-angle approximation. About 3 minutes for the summary; about 25 with the mathematics and the playable piano.
+Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). Maths: up to partial derivatives (explained). About 3 minutes for the summary; about 25 with the mathematics and the playable piano.
 :::
 
 ::: {.puzzle}
@@ -76,16 +76,18 @@ Listen first: an octave tuned to exactly 2 : 1, then a stretched one. The slow w
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-- *Newton's law* on a short piece of piano wire: tension pulls it like a string, and stiff steel pushes back like a kalimba tine. The two forces add.
-- *The operator* is $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$, the string's plus the bar's, with pinned ends.
-- *Its spectrum*: frequencies $f_n = n f_0\sqrt{1 + Bn^2}$, with a small stiffness constant $B$.
-- *On the diagram*: every [partial](glossary.qmd#partial), each single frequency in the sound, sits a little sharp of its line, more so the higher it goes.
-- *What we hear*: one clear note, but the second partial sits a little above twice the fundamental, so an octave tuned to exactly 2 : 1 beats against it; tuners stretch the octave until the beat stops.
+1. *Newton's law* on a short piece of piano wire: tension pulls it like a string, and stiff steel pushes back like a kalimba tine; the two forces add.
+2. *The operator* is the string's plus the bar's, $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$, with pinned ends.
+3. *Its spectrum*: the frequencies are $f_n = n f_0\sqrt{1 + Bn^2}$, with $B$ a small stiffness constant that pushes them a little sharp.
+4. *On the diagram*: every [partial](glossary.qmd#partial), each single frequency in the sound, sits a little sharp of its line, more so the higher it goes.
+5. *What we hear*: one clear note, but the second partial sits a little above twice the fundamental, so an octave tuned to exactly 2 : 1 beats against it; tuners stretch the octave until the beat stops.
 
-Skip to [what we hear](#what-we-hear) if you only want the answer.
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: partial derivatives (explained) and the small-angle approximation.*
 
 Here is where the piano's frequencies come from. Apply Newton's law, mass times acceleration equals force, to one short piece of wire. Two forces act on it, tension and bending, and the piano's whole story is that they add.
 
@@ -142,7 +144,7 @@ Dividing by the mass per unit length puts the equation in the series' form $u_{t
 $$
 A = -c^2\frac{d^2}{dx^2} + \kappa^2\frac{d^4}{dx^4},
 $$
-where $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$, acting on shapes with $u = u_{xx} = 0$ at both ends. The first term is the string's operator, from tension; the second is the kalimba's, from bending. A piano wire is both at once: operators add. In words: the force per unit mass on each point is the string's pull toward the inside of the curve minus the bar's push back against bending.
+where $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$, acting on shapes with $u = u_{xx} = 0$ at both ends. The first term is the string's operator, from tension; the second is the kalimba's, from bending. A piano wire is both at once: operators add. In words: the force per unit mass on each point is the string's pull toward the inside of the curve plus the bar's push back against bending.
 :::
 
 ## 3 · Its spectrum
@@ -196,13 +198,13 @@ Here are the frequencies of a piano note, middle C, or the last key you played o
 
 ## 5 · What we hear {#what-we-hear}
 
-The sound of a struck wire is the sum of its modes, $u = \sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, each fading at its own rate, with the frequencies $f_n$ of stage 3; the demos on this page synthesize it exactly this way. Because the low partials sit so close to the lines, the ear hears one clear note. The stretch shows up when two notes sound together.
-
 **Why exact octaves beat.** A tuner sets an octave by ear, listening for [beats](glossary.qmd#beats) between the lower note's second partial and the upper note's fundamental. Two nearly equal frequencies played together beat at a rate equal to their difference. The spectrum says where the lower note's second partial sits:
 $$
 \frac{f_2}{f_1} = 2\sqrt{\frac{1 + 4B}{1 + B}} \approx 2\Big(1 + \frac{3B}{2}\Big),
 $$
 using $\sqrt{1+x} \approx 1 + x/2$ (square it: $(1 + x/2)^2 = 1 + x + x^2/4$, and $x^2/4$ is tiny) and $1/\sqrt{1+x} \approx 1 - x/2$ for small $x$. So the second partial is more than twice the fundamental, by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental sits just below it, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise; tick "Play every partial" in the demo at the top to hear it, as the stretched octave then wobbles too. Repeated across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), the top of a piano ends up sharp and the bottom flat. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
+
+A struck wire moves as the sum of its modes, $u = \sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, so its sound is a sum of tones at the frequencies $f_n$, each fading at its own rate, with the frequencies $f_n$ of stage 3; the demos on this page synthesize it exactly this way. Because the low partials sit so close to the lines, the ear hears one clear note.
 
 **Hammer, dampers and pedals: none of them moves a frequency.** The frequencies belong to the operator, set by the wire's tension and stiffness. The hammer decides how much of each mode starts, and the felt dampers decide how fast each mode dies. Every control a pianist touches does one of these two things; only the tuner's wrench, which changes the tension, changes the operator and moves the frequencies. You can try them all on the whole piano further down.
 

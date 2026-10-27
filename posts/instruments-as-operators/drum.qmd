@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd) and the loop of [page 3](circle.qmd). Uses partial derivatives, integrals over an area, the divergence theorem and polar coordinates (quoted), and Bessel functions (described, computed numerically). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd) and the loop of [page 3](circle.qmd). Maths: up to Bessel functions (described). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -49,16 +49,18 @@ svg.patch { display: block; width: 100%; max-width: 420px; height: auto; margin:
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-- *Newton's law* on a small patch of the head: tension pulls each point toward the average height of the points around it.
-- *The operator* is $-c^2\Delta$, the two-dimensional version of the string's, with the rim held still.
-- *Its spectrum*, for a round drum, comes from the zeros of Bessel functions: frequencies at 1×, 1.59×, 2.14×, 2.30×, … the lowest.
-- *On the diagram*: those stems fall between the whole-number lines; no base frequency in the range we hear as pitch puts them all on or near lines.
-- *What we hear*: a sound that doesn't repeat at any rate we hear as pitch, and fades fast: a thud. Where you strike changes how loud each mode is, never where it sits.
+1. *Newton's law* on a small patch of the head: tension pulls each point toward the average height of the points around it.
+2. *The operator* is the two-dimensional version of the string's, $-c^2\Delta$, with the rim held still.
+3. *Its spectrum*, for a round drum, comes from the zeros of Bessel functions: frequencies at 1×, 1.59×, 2.14×, 2.30×, … the lowest.
+4. *On the diagram*: those stems fall between the whole-number lines; no base frequency in the range we hear as pitch puts them all on or near lines.
+5. *What we hear*: a sound that doesn't repeat at any rate we hear as pitch, and fades fast: a thud. Where you strike changes how loud each mode is, never where it sits.
 
-Skip to [what we hear](#what-we-hear) if you only want the answer.
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: partial derivatives, integrals over an area, the divergence theorem and polar coordinates (quoted), and Bessel functions (described, computed numerically).*
 
 Here is where the drum's frequencies come from. Apply Newton's law, mass times acceleration equals force, to one small patch of the drumhead. The steps are the string's, with one more dimension.
 
@@ -194,7 +196,9 @@ These are the frequencies in your last strike, as multiples of the lowest: each 
 
 ## 5 · What we hear {#what-we-hear}
 
-The sound of a struck head is the sum of its modes, $u = \sum a_{m,n} X_{m,n} \cos(2\pi f_{m,n} t + \phi_{m,n})$, with the frequencies of stage 3; the drum demo at the top synthesizes it exactly this way, each mode fading at its own rate. The frequencies don't sit at whole-number multiples of any base frequency we hear as pitch, so the sound doesn't repeat at any such rate; and a real head gives its energy to the air quickly, so it fades fast. Together, a thud.
+**Off the lines and fading fast: a thud.** The frequencies of stage 3 don't sit at whole-number multiples of any base frequency we hear as pitch, so the sound doesn't repeat at any such rate; and a real head gives its energy to the air quickly, so it fades fast. Together, a thud.
+
+A struck head moves as the sum of its modes, $u = \sum a_{m,n} X_{m,n} e^{-t/\tau_{m,n}} \cos(2\pi f_{m,n} t + \phi_{m,n})$, each fading at its own rate $\tau_{m,n}$ (damping, added to the model), so its sound is a sum of tones at the frequencies of stage 3; the drum demo at the top synthesizes it exactly this way.
 
 **Why the frequencies miss the lines.** The frequencies are the zeros of the Bessel functions, scaled. For the modes with no spokes, the zeros of $J_0$ come at nearly even steps, about $\pi$ apart, but the first one is short, about $0.77\pi$ rather than $\pi$, so the later zeros are not multiples of the first: the frequencies go 1 : 2.30 : 3.60. Each number of spokes gives its own sequence, shifted by a different amount, and the sequences interleave at unrelated places. Merged, they give the drum's list 1×, 1.59×, 2.14×, 2.30×, 2.65×, 2.92×, …, scattered between the lines. One more pattern: every mode with spokes comes in a pair, the same pattern turned, with exactly the same frequency. That is the round drum's symmetry, heard in its spectrum.
 

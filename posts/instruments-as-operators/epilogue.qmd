@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd), for partials, and [page 6, the kalimba](kalimba.qmd), for bars; the bar's spectrum follows the recipe of [The spectrum of an operator](spectrum.qmd). Uses $e^x$ and $\ln$, and cosh, sinh and a determinant as on page 6. About 4 minutes for the summary; about 20 with the mathematics.
+Builds on [page 0, the note](note.qmd), for partials, and [page 6, the kalimba](kalimba.qmd), for bars. Maths: up to cosh, sinh and a determinant (as on page 6). About 4 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -44,12 +44,13 @@ Listen first: pick a sound, then slide the interval between two notes of that so
 ::: {.gist}
 **The recipe on this page, in brief.** Two notes sound rough when their [partials](glossary.qmd#partial) sit close together but not on top of each other, so they [beat](glossary.qmd#beats); the roughness of two notes is computed from their spectra. So the recipe now runs one step further, from the spectrum to which intervals sound smooth.
 
-- *A string*: its operator, $-c^2\,d^2/dx^2$ with both ends tied (page 4), has its spectrum on the lines, so the partials of two notes land exactly on each other at simple whole-number ratios, such as 3 : 2 and 2 : 1: those intervals sound smooth.
-- *A metal bar*: *Newton's law* on a slice gives the bar's operator, $\kappa^2\,d^4/dx^4$ (page 6), here with both ends free; *its spectrum* sits at 1, 2.756, 5.404, … times the lowest, off the lines.
-- *On the roughness curve*: the bar's smooth intervals move, and the exact octave is no longer one of them.
-- *What we hear*: the octave that is smooth on a string is not the smoothest interval on a bar.
+1. *Newton's law* on a slice of a metal bar gives the bending equation of page 6.
+2. *The operator* is again $\kappa^2\,d^4/dx^4$, now with both ends free; a string's is $-c^2\,d^2/dx^2$ with both ends tied (page 4).
+3. *Its spectrum*: the bar's frequencies sit at 1, 2.756, 5.404, … times the lowest, off the lines; the string's sit on them.
+4. *On the diagram*, here the roughness curve computed from those spectra: a string's smooth intervals are simple whole-number ratios such as 3 : 2 and 2 : 1; a bar's smooth intervals move, and the exact octave is no longer one of them.
+5. *What we hear*: the octave that is smooth on a string is not the smoothest interval on a bar.
 
-The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on. Skip to [what the spectrum does not decide](#not-decide) if you only want the answer.
+The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on. [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## On the roughness curve
@@ -57,6 +58,8 @@ The engineer and musician William Sethares argues that this is one reason scales
 The curve shows how rough two notes of the chosen sound are, against the ratio between their frequencies, from 1 (the same note) to 3. The dips are the smoothest intervals. With the string-like sound, up to the octave, the dips sit at 6 : 5, 5 : 4, 4 : 3, 3 : 2, 5 : 3 and 2 : 1: the intervals of Western harmony. Switch to the metal bar and the dips move. The octave, 2 : 1, is no longer a dip; a slightly narrower interval, about 1.96, is smoother.
 
 ## Roughness, computed from the spectrum
+
+*Mathematics used: $e^x$ and $\ln$, and cosh, sinh and a determinant as on page 6. The bar's spectrum follows the recipe of [The spectrum of an operator](spectrum.qmd).*
 
 **Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness.
 
@@ -90,7 +93,7 @@ $$
 $$
 \cos\beta L\,\cosh\beta L = 1 .
 $$
-5. **The roots.** $\beta = 0$ also solves the equation: it is the eigenvalue $\lambda = 0$, belonging to the bar sliding ($X = 1$) or tilting ($X = x$) as a whole without bending, which makes no sound. The other roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page.
+5. **The roots.** $\lambda = 0$ is also an eigenvalue: $X'''' = 0$ with free ends leaves exactly $X = a + bx$, belonging to the bar sliding ($X = 1$) or tilting ($X = x$) as a whole without bending, which makes no sound. The other roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page.
 
 ::: {.result}
 **The free bar's operator:** $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $X'' = X''' = 0$ at both ends.
@@ -100,7 +103,9 @@ $$
 In words: the same bar as the kalimba's, but with both ends free its overtones sit at different places, still far from whole numbers.
 :::
 
-**A metal bar moves the dips.** With the bar's partials at 1, 2.756, 5.404 and 8.933 times the lowest, the coincidences happen elsewhere. At a ratio of 2.756, the upper note's lowest partial lands on the lower note's second. At about 1.961, the upper note's second partial lands on the lower note's third ($1.961 \times 2.756 \approx 5.404$), and that is the dip just below the octave. At exactly 2, nothing lines up. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too.)
+**What we assumed.** The bar assumptions of page 6 (small slopes, a uniform bar, no rotational inertia or shear deformation of the slices, no damping), and that a glockenspiel bar resting on soft supports near its fundamental's still points vibrates as if both ends were free.
+
+[]{#what-we-hear}**A metal bar moves the dips.** With the bar's partials at 1, 2.756, 5.404 and 8.933 times the lowest, the coincidences happen elsewhere. At a ratio of 2.756, the upper note's lowest partial lands on the lower note's second. At about 1.961, the upper note's second partial lands on the lower note's third ($1.961 \times 2.756 \approx 5.404$), and that is the dip just below the octave. At exactly 2, nothing lines up. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too.)
 
 ## What the spectrum does not decide {#not-decide}
 

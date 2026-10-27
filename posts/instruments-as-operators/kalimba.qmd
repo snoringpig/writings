@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd). Uses partial derivatives, an integral over a cross-section, cosh and sinh, and a 2×2 determinant (all explained). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd). Maths: up to cosh, sinh and a 2×2 determinant (explained). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -51,9 +51,9 @@ Listen first: tap a tine. Then tick the box that keeps the overtones ringing, an
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-1. *Newton's law* on a thin slice of bent steel gives the beam equation, $u_{tt} = -\kappa^2 u_{xxxx}$: four derivatives, where a string had two.
-2. *The operator* is $A = \kappa^2\,d^4/dx^4$, on a tine clamped at one end and free at the other.
-3. *Its spectrum*: the end conditions allow a mode only when $\cos\beta L\cosh\beta L = -1$, which puts the frequencies at $1 : 6.27 : 17.55 : 34.39$.
+1. *Newton's law* on a thin slice of bent steel gives the beam equation $u_{tt} = -\kappa^2 u_{xxxx}$, with four derivatives where a string had two.
+2. *The operator* is $\kappa^2$ times the fourth derivative, $A = \kappa^2\,d^4/dx^4$, on a tine clamped at one end and free at the other.
+3. *Its spectrum*: the end conditions allow a mode only when $\cos\beta L\cosh\beta L = -1$, which puts the frequencies in the ratios $1 : 6.27 : 17.55 : 34.39$, far from whole numbers.
 4. *On the diagram*: the overtones sit far off the whole-number lines.
 5. *What we hear*: a click of off-line overtones at the start, which die within a fraction of a second, and then the fundamental alone: a clean note.
 
@@ -61,6 +61,8 @@ Listen first: tap a tine. Then tick the box that keeps the overtones ringing, an
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: partial derivatives, an integral over a cross-section, cosh and sinh, and a 2×2 determinant (all explained).*
 
 A string is held straight by tension. A tine is under no tension at all: it springs back because steel resists being bent. To find the force behind that, we apply Newton's law, mass times acceleration equals force, to one thin slice of the tine.
 
@@ -210,8 +212,6 @@ Here are one tine's frequencies from the result box, as multiples of the lowest:
 
 ## 5 · What we hear {#what-we-hear}
 
-A plucked tine moves as the sum of its modes, $u = \sum_n a_n X_n(x)\cos(2\pi f_n t + \phi_n)$, each mode fading at its own rate. The demo's sound is made exactly this way: it adds up the first five modes at the frequencies of stage 3, each starting with the strength the pluck fold below computes. The fundamental fades over a couple of seconds and the overtones within a small fraction of that; those fading rates are an illustrative choice matching Chapman's measurements, not computed. Tick the box and every mode fades as slowly as the fundamental. Now the puzzle, and the tine's other surprise.
-
 **Why the note still sounds clean.** You might guess the overtone is too quiet to hear. It isn't. In how far the tine swings, the overtone is tiny; but the body hears the push on the bridge, not the swing, and in that push the overtone starts strong (fold below). That strong start is the click at the beginning of each note. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on, and the fundamental left on its own is a clean note. Why it dies so fast is not computed here; the page takes it from measurement. The acoustician D. M. F. Chapman found exactly this pattern on a real kalimba: one dominant overtone, at 5.9 to 6.8 times the fundamental, gone soon after the attack. With the box ticked, the off-line overtones keep ringing, and the same tine clangs like a bell.
 
 ::: {.derive}
@@ -226,6 +226,8 @@ Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found o
 
 </details>
 :::
+
+A plucked tine moves as the sum of its modes, $u = \sum_n a_n X_n(x)\cos(2\pi f_n t + \phi_n)$, each mode fading at its own rate. The demo's sound is made exactly this way: it adds up the first five modes at the frequencies of stage 3, each starting with its shear-force strength from the fold above (55% for the second mode), as in stage 4. The fundamental fades over a couple of seconds and the overtones within a small fraction of that; those fading rates are an illustrative choice matching Chapman's measurements, not computed. Tick the box and every mode fades as slowly as the fundamental.
 
 **Overtones off the lines.** Higher modes bend in shorter humps, and for a tine shorter humps push back much harder, so the frequencies grow like the square of the mode number instead of the number itself. Where exactly they land is set by the four end conditions: pinned ends would give the whole numbers 1, 4, 9, 16, but a tine is clamped at one end and free at the other, and its spectrum is 1, 6.27, 17.55, …, off the lines.
 

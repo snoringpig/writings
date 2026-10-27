@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd). Uses partial derivatives, including mixed ones (explained). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd). Maths: up to mixed partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -50,16 +50,18 @@ Listen first: hold the blow button on the clarinet, then switch the same tube to
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-1. *Newton's law* on a thin slab of air, with air's resistance to being squeezed, gives the wave equation for the pressure, $p_{tt} = c^2 p_{xx}$.
-2. *The operator* is the string's, $A = -c^2\,d^2/dx^2$, now acting on pressure. Only the ends differ: room pressure at an open end; no pressure slope at the clarinet's nearly closed reed.
-3. *Its spectrum*: the flute's frequencies are $n\,c/2L$; the clarinet's are $(2n-1)\,c/4L$, half as low and odd multiples only.
+1. *Newton's law* on a thin slab of air, with air's resistance to being squeezed, gives the wave equation $p_{tt} = c^2 p_{xx}$ for the pressure.
+2. *The operator* is the string's, $A = -c^2\,d^2/dx^2$, now acting on pressure; only the ends differ: room pressure at an open end, no pressure slope at the clarinet's nearly closed reed.
+3. *Its spectrum*: the flute's frequencies are $n\,c/2L$, the clarinet's $(2n-1)\,c/4L$: half as low, and odd multiples only.
 4. *On the diagram*: both blown sounds sit on the lines; the clarinet's strong stems are the odd ones.
-5. *What we hear*: the clarinet almost an octave below the flute, and overblowing to 3× its lowest frequency, an octave and a fifth.
+5. *What we hear*: the clarinet sounds almost an octave below the flute and overblows to three times its lowest frequency, an octave and a fifth.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: partial derivatives, including mixed ones (explained).*
 
 The air in a tube is a long column of tiny slabs, each pushed back and forth by the pressure on its two faces. We apply Newton's law, mass times acceleration equals force, to one slab, and combine it with the way air pushes back when it is squeezed.
 
@@ -155,15 +157,25 @@ So the clarinet's modes are the odd multiples of a loop four tube-lengths long, 
 
 ## 4 · On the spectrum diagram
 
-The stems under the demo at the top show the frequencies in the blown sound, on a ruler whose gray lines are whole-number multiples of the note being played. The note itself is the frequency of the sounding mode from the result box: for the lowest notes, $f_1 = c/4L$ on the clarinet and $c/2L$ on the flute, with $L$ the tube up to the first open hole. The flute's stems sit on every line. The clarinet's sit on the lines too, but the strong ones are at 1, 3, 5, 7, …, the tube's modes from the box above; in the low register (the lowest notes) the even ones are faint. The heights are how strong each frequency is in the sound.
+The stems below, like those under the demo at the top, show the frequencies in the blown sound, on a ruler whose gray lines are whole-number multiples of the note being played. The note itself is the frequency of the sounding mode from the result box: for the lowest notes, $f_1 = c/4L$ on the clarinet and $c/2L$ on the flute, with $L$ the tube up to the first open hole. The flute's stems sit on every line. The clarinet's sit on the lines too, but the strong ones are at 1, 3, 5, 7, …, the tube's modes from the box above; in the low register (the lowest notes) the even ones are faint. The heights are how strong each frequency is in the sound.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="cS4a" viewBox="0 0 320 96" style="max-width:520px" aria-label="The flute's blown sound: every whole-number multiple"></svg>
+  <svg class="spec" id="cS4b" viewBox="0 0 320 96" style="max-width:520px" aria-label="The clarinet's blown sound: strong odd multiples, faint even ones"></svg>
+  <p class="cap">The blown sounds, as multiples of the note being played: the flute (top) has every whole-number multiple; the clarinet (bottom) has strong odd multiples and faint even ones.</p>
+</div>
+</div>
+```
 
 ## 5 · What we hear {#what-we-hear}
 
-A blown tube does not ring and fade like a plucked string: the reed or the air jet keeps feeding it, and the air settles into one motion that repeats, at a frequency close to the tube's sounding mode from stage 3. The demo's sound is made that way: a repeating wave at that mode's frequency, with the strong odd multiples and faint even ones described below. Now the puzzle.
-
 **Almost an octave deeper.** The flute's lowest mode, $\sin(\pi x/L)$, has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet's, $\cos(\pi x/2L)$, swings most at the reed and has room pressure at the open end: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end. Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and the open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.
 
-**Overblowing: an octave or a twelfth.** The flute's spectrum has every whole-number multiple of its lowest frequency; the clarinet's has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). A flutist overblows by blowing harder, and the flute's next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
+A blown tube does not ring and fade like a plucked string: the reed or the air jet keeps feeding it, and the air settles into one motion that repeats, at a frequency close to the tube's sounding mode from stage 3. The demo's sound is made that way: a repeating wave at that mode's frequency, with the strong odd multiples and faint even ones described below.
+
+**Overblowing: an octave or a twelfth.** The flute's spectrum has every whole-number multiple of its lowest frequency; the clarinet's has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). (The demo keeps the low-register tone colour when the register key is on.) A flutist overblows by blowing harder, and the flute's next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>How the register key picks out the 3× mode</summary>
@@ -298,6 +310,21 @@ A kalimba tine is springy steel that nothing stretches, and its overtones sit fa
   }
   C.onTheme(update);
   update(); requestAnimationFrame(draw);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    C.stems(document.getElementById("cS4a"), M.clarinet.partials({ flute: true }), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+    C.stems(document.getElementById("cS4b"), M.clarinet.partials(), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 ```

@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd). Uses second derivatives. About 2 minutes for the summary; about 15 with the mathematics.
+Builds on [page 0, the note](note.qmd). Maths: up to second derivatives. About 2 minutes for the summary; about 15 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -40,16 +40,18 @@ Listen first: change how far you pull the mass, and watch how long each bob take
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-- *Newton's law* with Hooke's pull gives $m\ddot x = -kx$.
-- *The operator* is the simplest there is: multiply the displacement by $k/m$.
-- *Its spectrum* is that one number, $\lambda = k/m$, so one frequency, $f = \sqrt{k/m}/2\pi$.
-- *On the diagram*: a single stem, a pure tone.
-- *What we hear*: the size of the swing appears nowhere in $f$, so a fading swing keeps its pitch, as long as the pull stays proportional to the stretch.
+1. *Newton's law* with Hooke's pull gives $m\ddot x = -kx$ for one mass on a spring.
+2. *The operator* is the simplest there is: multiply the displacement by a number, $k/m$, the stiffness over the mass.
+3. *Its spectrum* is that one number, $\lambda = k/m$, giving one frequency, $f = \sqrt{k/m}/2\pi$, and no other.
+4. *On the diagram*: a single stem, a pure tone.
+5. *What we hear*: the size of the swing appears nowhere in the frequency, so a fading swing keeps its pitch, as long as the pull stays proportional to the stretch.
 
-Only want the answer? Skip to [what we hear](#what-we-hear).
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: second derivatives.*
 
 Every page of this series runs the same recipe: apply Newton's law, mass times acceleration equals force, to one piece of the instrument; find that the force is a fixed rule applied to the instrument's shape; read off that rule, the [operator](glossary.qmd#operator); find its spectrum; and from the spectrum, what we hear. The [spectrum of an operator](spectrum.qmd) page sets out the recipe in general. For one mass on a spring, the "shape" is a single number, how far the mass is from rest.
 
@@ -114,9 +116,9 @@ One eigenvalue means one stem on the pitch ruler: a pure tone, at $f = \sqrt{k/m
 
 ## 5 · What we hear {#what-we-hear}
 
-The motion is the one mode, $x = a\cos(2\pi f t + \phi)$, and so is the sound: the demo plays exactly this cosine, sped up 200 times, fading slowly.
-
 **Twice the swing, the same time.** The frequency formula contains $k$ and $m$ but not the amplitude. In plain words: take any motion of the mass and double it, twice as far from rest at every moment. The pull doubles too, so the acceleration doubles, which is exactly what the doubled motion needs. So the doubled motion is also a motion of the mass, and it repeats just as often. That is why a fading note keeps its pitch.
+
+The motion is the one mode, $x = a\cos(2\pi f t + \phi)$, and so is the sound: the demo plays exactly this cosine, sped up 200 times, fading slowly.
 
 **Friction fades the note but keeps the rate.** Friction shrinks the swing, which is why a note fades, but light friction of the usual kind, proportional to speed, does not make the rate depend on the size of the swing either.
 

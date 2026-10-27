@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Start here. Uses cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.
+Start here. Maths: cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.
 :::
 
 ::: {.puzzle}

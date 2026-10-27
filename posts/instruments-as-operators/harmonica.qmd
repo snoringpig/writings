@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). Uses partial derivatives, as on page 6, plus Fourier series (page 3). About 3 minutes for the summary; about 15 with the mathematics.
+Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). Maths: up to Fourier series (page 3). About 3 minutes for the summary; about 15 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -51,16 +51,18 @@ Listen first: pluck the reed, then blow it, and compare the stems with the gray 
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-- *Newton's law* on a thin slice of brass gives the same bending equation as the kalimba tine (page 6).
-- *The operator* is $\kappa^2\,d^4/dx^4$, riveted at one end and free at the other.
-- *Its spectrum* is the tine's: frequencies in the ratios $1 : 6.27 : 17.55 : \cdots$.
-- *On the diagram*: plucked, the overtones sit off the lines; blown, every stem sits on a line.
-- *What we hear*: plucked, the spectrum; blown, the reed chops the air into puffs that repeat exactly, and a repeating sound has frequencies only at whole-number multiples, so the reed's own overtones never appear.
+1. *Newton's law* on a thin slice of brass gives the same bending equation as the kalimba tine (page 6).
+2. *The operator* is $\kappa^2$ times the fourth derivative, $\kappa^2\,d^4/dx^4$, on a reed riveted at one end and free at the other.
+3. *Its spectrum* is the tine's: frequencies in the ratios $1 : 6.27 : 17.55$ and so on, off the whole numbers.
+4. *On the diagram*: plucked, the overtones sit off the lines; blown, every stem sits on a line.
+5. *What we hear*: plucked, the spectrum; blown, the reed chops the air into puffs that repeat exactly, and a repeating sound has frequencies only at whole-number multiples, so the reed's own overtones never appear.
 
-Skip to [what we hear](#what-we-hear) if you only want the answer.
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: partial derivatives, as on page 6, plus Fourier series (page 3).*
 
 A reed is a thin brass bar, riveted at one end over a slot and free at the other: the same kind of bar as a kalimba tine. So Newton's law on one thin slice of it goes exactly as on the [kalimba page](kalimba.qmd), which derives each step with figures. In short, with $u(x, t)$ the reed's sideways displacement at distance $x$ from the rivet, $\rho$ the density of brass and $S$ the area of the reed's cross-section:
 
@@ -104,11 +106,23 @@ The width $w$ cancels: it decides how much air the reed moves, not its pitch. Lo
 
 ## 4 · On the spectrum diagram
 
-Plucked, the demo's stems are the spectrum just computed: $1\times$, then the overtones at $6.27\times$ and $17.55\times$, off the gray lines, dying almost at once, as on the kalimba. Blown, the stems sit at $1\times, 2\times, 3\times, 4\times, \dots$, every one on a line, and none at $6.27\times$. Each stem's height is how strong that frequency is in the sound. Same reed, same operator; only the way it is played differs. Stage 5 explains the blown stems.
+Plucked, the stems (below, and in the demo at the top) are the spectrum just computed: $1\times$, then the overtones at $6.27\times$ and $17.55\times$, off the gray lines, dying almost at once, as on the kalimba. Blown, the stems sit at $1\times, 2\times, 3\times, 4\times, \dots$, every one on a line, and none at $6.27\times$. Each stem's height is how strong that frequency is in the sound. Same reed, same operator; only the way it is played differs. Stage 5 explains the blown stems.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="hS4a" viewBox="0 0 320 96" style="max-width:520px" aria-label="The plucked reed: the fundamental and an overtone at 6.27 times it, off the lines"></svg>
+  <svg class="spec" id="hS4b" viewBox="0 0 320 96" style="max-width:520px" aria-label="The blown reed: every frequency on a whole-number line"></svg>
+  <p class="cap">Plucked (top): 1× and 6.27×, off the lines (17.55× is off the right edge). Blown (bottom): every stem on a line, none at 6.27×.</p>
+</div>
+</div>
+```
 
 ## 5 · What we hear {#what-we-hear}
 
-**Plucked: you hear the spectrum.** A plucked reed rings at its own frequencies, the result box of stage 3: the sound is a sum $\sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, each term fading at its own rate. The overtones at 6.27 and 17.55 times the fundamental are off the lines and die fast, just like a kalimba tine's. The demo's plucked sound is synthesized exactly this way.
+**Blown, the reed's own overtones never reach the sound.** Blowing turns the reed into a valve that chops the air into puffs, and the puffs repeat exactly; a sound that repeats has frequencies only at whole-number multiples of its rate, so 6.27× and 17.55× have nowhere to appear. The steps below show why; first, what a pluck gives.
+
+**Plucked: you hear the spectrum.** A plucked reed rings at its own frequencies, the result box of stage 3: the reed moves as $\sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, so the sound is a sum of tones at the frequencies $f_n$, each fading at its own rate (damping, added to the model). The overtones at 6.27 and 17.55 times the fundamental are off the lines and die fast, just like a kalimba tine's. The demo's plucked sound is synthesized exactly this way.
 
 **Blown: the reed becomes a valve.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. The sound comes mainly from the chopped airflow; the acoustics writer Colin Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency $f_p$ slightly below its first mode's, so the puffs of air repeat at that rate too. Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here (fold below). Granting that it does, the rest is mathematics:
 
@@ -123,7 +137,7 @@ The argument uses only that the motion repeats, not which modes make it up. That
 
 A steady oscillation kept going by a steady push, like this one, is called a [self-sustained oscillation](glossary.qmd#self-sustained), and the repeating cycle it settles into a *limit cycle*; the bowed string and the clarinet reed are others. That the blown reed settles into one is observed, and reproduced by nonlinear models of reeds; it is not derived here. A plausible picture, not a derivation: the airflow feeds energy mainly into the first mode, the other modes are not kept going at their own frequencies, and in the repeating cycle they move only as they are pushed, at whole-number multiples of $f_p$.
 
-The demo's blown sound is a model: one puff shape, chosen so that the open part of each cycle is short, repeated at the playing frequency, then passed through two broad peaks, a stand-in for resonances of the player's mouth and the instrument. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.
+The demos' blown sounds are models. The "Blow the C5 reed" and filing demos play one puff shape, chosen so that the open part of each cycle is short, repeated at the playing frequency: its whole-number multiples with a smooth roll-off. The chromatic harmonica further down passes the same puff train through two broad peaks, a stand-in for resonances of the player's mouth and the instrument, and adds a little band-passed breath noise. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.
 
 </details>
 :::
@@ -308,6 +322,21 @@ Piano tuners deliberately tune octaves a little wider than 2 : 1. Why would exac
 
   C.onTheme(hspec);
   relabel(); hspec(); fRead();
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    C.stems(document.getElementById("hS4a"), M.harmonica.partials({ plucked: true }), { W: 320, H: 96, rmax: 8, fs: 8, sw: 3, noOff: true });
+    C.stems(document.getElementById("hS4b"), M.harmonica.partials(), { W: 320, H: 96, rmax: 8, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 ```

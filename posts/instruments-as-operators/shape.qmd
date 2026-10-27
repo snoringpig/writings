@@ -14,7 +14,7 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 :::
 
 ::: {.pageinfo}
-Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Uses the Laplacian (page 8). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Maths: up to the Laplacian (page 8). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -48,16 +48,20 @@ Listen first: play each drum with every mode equally loud. Then click a drum to 
 ::: {.gist}
 **The recipe on this page, in brief.** Every earlier page ran the recipe forwards, from an instrument to its sound. This page runs it backwards.
 
-- *Newton's law* on a patch of drumhead gives $u_{tt} = c^2\Delta u$, with the rim held still (page 8).
-- *The operator* is $A = -c^2\Delta$ on the drum's shape, with $u = 0$ on the rim.
-- *Its spectrum*: eigenvalues $\lambda_n = c^2k_n^2$, where $-\Delta X_n = k_n^2 X_n$; so the frequencies are decided by the shape alone, apart from the factor $c$.
-- *On the diagram*: the two drums above have their stems in exactly the same places, off the lines.
-- *What we hear*: played with every mode equally loud, the two drums sound identical; struck at a point, they sound different, because their mode shapes differ.
+1. *Newton's law* on a patch of drumhead gives the drum's equation $u_{tt} = c^2\Delta u$, with the rim held still (page 8).
+2. *The operator* is $-c^2$ times the Laplacian, $A = -c^2\Delta$, on the drum's shape, with the rim held still.
+3. *Its spectrum*: eigenvalues $\lambda_n = c^2k_n^2$, where $-\Delta X_n = k_n^2 X_n$, so apart from the factor $c$ the frequencies are decided by the shape alone.
+4. *On the diagram*: the two drums above have their stems in exactly the same places, off the lines.
+5. *What we hear*: played with every mode equally loud, the two drums sound identical; struck at a point, they sound different, because their mode shapes differ.
 
-So the answer to Kac is no: different shapes can share every frequency. But the spectrum still knows a lot: the drum's area and, for a smooth or straight-sided rim, the length of its rim, enough to recognize a round drum. Skip to [what we hear](#what-we-hear) if you only want the answer.
+So the answer to Kac is no: different shapes can share every frequency. But the spectrum still knows a lot: the drum's area and, for a smooth or straight-sided rim, the length of its rim, enough to recognize a round drum.
+
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: the Laplacian (page 8), and counting.*
 
 This page asks what the spectrum says about the drum. First, the equation, which [page 8](drum.qmd) derived step by step.
 
@@ -67,7 +71,7 @@ u_{tt} = c^2\,\Delta u \ \text{ inside } \Omega, \qquad u = 0 \ \text{ on the ri
 $$
 where $\Delta u = u_{xx} + u_{yy}$ is the [Laplacian](glossary.qmd#laplacian), and $c^2$ is the tension divided by the mass per unit area. The Laplacian is positive where $u$ at a point sits below the average of $u$ around it, and negative where it sits above; the bigger the gap, the bigger the Laplacian. So the equation says: each point of the head accelerates toward the average height around it.
 
-**What we assumed** is listed on page 8: small slopes, a tension that is the same everywhere and does not change as the head moves, no bending stiffness, and no air.
+**What we assumed** is listed on page 8: small slopes, a tension that is the same everywhere and does not change as the head moves, no bending stiffness, no air, and no damping.
 
 ## 2 · The operator
 
@@ -102,15 +106,24 @@ In words: apart from the one overall factor $c$, the frequencies are decided by 
 
 ## 4 · On the spectrum diagram
 
-Here are both drums' first twelve frequencies, as multiples of the lowest, $\sqrt{\lambda_n/\lambda_1} = k_n/k_1$: 1×, 1.20×, 1.43×, 1.60×, 1.69×, 1.90×, 2.04×, …. Like the drum on [page 8](drum.qmd), they sit off the gray whole-number lines, so neither drum has a clear pitch. And the two lists are the same to every digit computed: the stems under drum A and drum B stand in the same places. Each stem's height is how strongly a strike at the clicked point starts that mode: all equal until you click, then different on the two drums, because it depends on the mode's shape at the struck point.
+Here are both drums' first twelve frequencies, as multiples of the lowest, $\sqrt{\lambda_n/\lambda_1} = k_n/k_1$: 1×, 1.20×, 1.43×, 1.60×, 1.69×, 1.90×, 2.04×, …. Like the drum on [page 8](drum.qmd), they sit off the gray whole-number lines, so neither drum has a clear pitch. And the two lists are the same to every digit computed: the stems under drum A and drum B stand in the same places. In the demo, each stem's height is how strongly a strike at the clicked point starts that mode (below, every mode is drawn equally tall): all equal until you click, then different on the two drums, because it depends on the mode's shape at the struck point.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="gS4" viewBox="0 0 320 96" style="max-width:520px" aria-label="The first twelve frequencies shared by both drums, as multiples of the lowest"></svg>
+  <p class="cap">Both drums' first twelve frequencies, as multiples of the lowest, every mode drawn equally tall: drum A and drum B have exactly these stems (Driscoll's values).</p>
+</div>
+</div>
+```
 
 ## 5 · What we hear {#what-we-hear}
 
-**Same frequencies, not the same sound.** A struck drum's sound is a sum of its modes,
+**Same frequencies, not the same sound.** A struck drum moves as a sum of its modes,
 $$
 u = \sum_n a_n X_n \cos(2\pi f_n t + \phi_n),
 $$
-each fading at its own rate, with a strength $a_n$ that depends on where it is struck; what you hear also depends on where you listen. The demo's sound is made exactly this way, from the frequencies in step 3. The two drums share the frequencies $f_n$. The mode shapes $X_n$ differ, so the strengths from a strike at a given point differ, and so does the [timbre](glossary.qmd#timbre), the color of the sound. Played with every mode equally loud, every $a_n = 1$, the two drums sound identical. What the drums share is the answer to "which frequencies can this drum make", which is exactly what the spectrum records.
+so its sound is a sum of tones at the frequencies $f_n$, each fading at its own rate, with a strength $a_n$ that depends on where it is struck; what you hear also depends on where you listen. The demo's sound is made exactly this way, from the frequencies in stage 3. The two drums share the frequencies $f_n$. The mode shapes $X_n$ differ, so the strengths from a strike at a given point differ, and so does the [timbre](glossary.qmd#timbre), the color of the sound. Played with every mode equally loud, every $a_n = 1$, the two drums sound identical. What the drums share is the answer to "which frequencies can this drum make", which is exactly what the spectrum records.
 
 ## What the spectrum knows
 
@@ -246,7 +259,7 @@ The scripts are [gww.py](gww.py) for the eigenvalues and [gww_modes.py](gww_mode
 
 ## What we found
 
-Run forwards, the recipe gives the drum's sound: Newton's law on a patch of head gives $u_{tt} = c^2\Delta u$; the operator is $A = -c^2\Delta$ with the rim held still; its spectrum is the list of eigenvalues $\lambda_n = c^2k_n^2$, with $-\Delta X_n = k_n^2X_n$, and the frequencies are $f_n = \sqrt{\lambda_n}/2\pi$. Run backwards, it asks what the spectrum says about the drum. Counting the spectrum with Weyl's law recovers the drum's area and, for smooth or straight-sided rims, the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every eigenvalue, and so every frequency, though struck at a point they still sound different. On the pitch ruler, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. The study of such questions, what a spectrum says about the shape behind it, is called *spectral geometry*.
+Run forwards, the recipe gives the drum's sound: Newton's law on a patch of head gives $u_{tt} = c^2\Delta u$; the operator is $A = -c^2\Delta$ with the rim held still; its spectrum is the list of eigenvalues $\lambda_n = c^2k_n^2$, with $-\Delta X_n = k_n^2X_n$, and the frequencies are $f_n = \sqrt{\lambda_n}/2\pi$. Run backwards, it asks what the spectrum says about the drum. Counting the spectrum with Weyl's law recovers the drum's area and, for smooth or straight-sided rims, the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every eigenvalue, and so every frequency, though struck at a point they still sound different. On the spectrum diagram, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. The study of such questions, what a spectrum says about the shape behind it, is called *spectral geometry*.
 
 ## The next puzzle
 
@@ -391,6 +404,21 @@ Wikipedia, [Weyl law](https://en.wikipedia.org/wiki/Weyl_law) (Weyl 1911, Ivrii 
   window.addEventListener("resize", drawW);
   C.onTheme(function () { all(); drawW(); });
   all(); drawW();
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    var LAM = [2.53794399980, 3.65550971352, 5.17555935622, 6.53755744376, 7.24807786256, 9.20929499840, 10.5969856913, 11.5413953956, 12.3370055014, 13.0536540557, 14.3138624643, 15.8713026200];
+    C.stems(document.getElementById("gS4"), LAM.map(function (l) { return { ratio: Math.sqrt(l / LAM[0]), amp: 1 }; }), { W: 320, H: 96, rmax: 3, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 ```

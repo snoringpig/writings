@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd); page 3 does the same mathematics on a loop, but is not needed here. Uses partial derivatives (explained) and the small-angle approximation. About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 0, the note](note.qmd); page 3 is not needed. Maths: up to partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -43,16 +43,18 @@ Listen first: pluck the string, then pick a point to touch and pluck again. Stri
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-1. *Newton's law* on a short piece of string under tension gives the wave equation, $u_{tt} = c^2u_{xx}$.
-2. *The operator* is $A = -c^2\,d^2/dx^2$, acting on shapes held still at both ends.
-3. *Its spectrum*: eigenvalues $\lambda_n = (n\pi c/L)^2$, so frequencies $f_n = n f_1$, with $n$ arches in mode $n$.
+1. *Newton's law* on a short piece of string under tension gives the wave equation $u_{tt} = c^2u_{xx}$ for the string's height.
+2. *The operator* is minus $c^2$ times the second derivative, $A = -c^2\,d^2/dx^2$, acting on shapes held still at both ends.
+3. *Its spectrum*: mode $n$ has $n$ arches, eigenvalue $\lambda_n = (n\pi c/L)^2$ and frequency $f_n = n f_1$, a whole-number multiple of the lowest.
 4. *On the diagram*: the stems sit exactly on the whole-number lines.
-5. *What we hear*: a clear note at $f_1$. A light touch at the middle drains every mode that moves under the finger and leaves the even ones, a note an octave up.
+5. *What we hear*: a clear note at the lowest frequency; a light touch at the middle drains every mode that moves under the finger and leaves the even ones, a note an octave up.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: partial derivatives (explained) and the small-angle approximation.*
 
 Apply Newton's law, mass times acceleration equals force, to one short piece of the string. The only force on the piece comes from the tension pulling at its two ends, and it turns out to depend only on how the string bends there.
 
@@ -195,15 +197,18 @@ The *sine series* of a string shape, $u = \sum_n b_n\sin(n\pi x/L)$, is therefor
 
 ## 4 · On the spectrum diagram
 
-The stems under the demo at the top are the frequencies in the result box, drawn as multiples of the lowest: stem $n$ sits at $f_n/f_1 = n$, exactly on line $n$, in this ideal model. Each stem's height is how far that mode still swings a quarter of a second after the pluck; the pluck decides how strongly each mode starts, and the finger decides how fast each one dies (stage 5). Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the stems shrink slowly as they go up, and at the middle they shrink fast, with every second stem missing even without a finger.
+The stems below, like those under the demo at the top, are the frequencies in the result box, drawn as multiples of the lowest: stem $n$ sits at $f_n/f_1 = n$, exactly on line $n$, in this ideal model. Each stem's height is how far that mode still swings a quarter of a second after the pluck; the pluck decides how strongly each mode starts, and the finger decides how fast each one dies (stage 5). Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the stems shrink slowly as they go up, and at the middle they shrink fast, with every second stem missing even without a finger.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="vS4" viewBox="0 0 320 96" style="max-width:520px" aria-label="The open string's modes after a pluck 0.16 of the way from the bridge, at 1, 2, 3, ... times the lowest frequency"></svg>
+  <p class="cap">The open string, plucked 0.16 of its length from the bridge: mode n at n times the lowest frequency, exactly on line n, drawn as far as it swings just after the pluck.</p>
+</div>
+</div>
+```
 
 ## 5 · What we hear {#what-we-hear}
-
-The string's motion is the sum of its modes, each swinging at its own frequency and fading at its own rate:
-$$
-u(x, t) = \sum_{n} a_n\,e^{-t/\tau_n}\sin\frac{n\pi x}{L}\,\cos(2\pi f_n t + \phi_n).
-$$
-The demo's sound is made exactly this way: it adds up these modes at $f_n = n \times 196$ Hz, with the strengths $a_n$ set by the pluck. Because every $f_n$ is a whole multiple of $f_1$, the sum repeats every $1/f_1$ seconds, and a sound that repeats is a note at that rate ([page 0](note.qmd)). Now the puzzle.
 
 **A light touch keeps only the shapes that are still under the finger.** Where a shape has a still point, a [node](glossary.qmd#node), the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. The shape $\sin(n\pi x/L)$ is still at the middle exactly when $n$ is even: 2, 4, 6, … arches, at 2, 4, 6, … times the open string's frequency. The survivors repeat twice as often, so you hear a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a [fifth](glossary.qmd#octave) up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the [piano page](piano.qmd) derives for felt dampers.)
 
@@ -214,6 +219,12 @@ Let the finger touch the string at the distance $s$ from the [nut](glossary.qmd#
 
 </details>
 :::
+
+The string's motion is the sum of its modes, each swinging at its own frequency and fading at its own rate:
+$$
+u(x, t) = \sum_{n} a_n\,e^{-t/\tau_n}\sin\frac{n\pi x}{L}\,\cos(2\pi f_n t + \phi_n).
+$$
+The demo's sound is made this way: it adds up these modes at $f_n = n \times 196$ Hz, each weighted by its push on the bridge, which is what reaches your ear (see "Where you pluck" below); the stems show how far each mode swings. Because every $f_n$ is a whole multiple of $f_1$, apart from the slow fading the sum repeats every $1/f_1$ seconds, and a sound that repeats is a note at that rate ([page 0](note.qmd)).
 
 **Where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle. What reaches your ear is the string's push on the bridge, and for the same height a shape with more arches has steeper ends, so it pushes harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard (near the end, a shape with *n* arches starts about 1/*n* as large but is *n* times as steep, so the pushes come out about equal; fold below): the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still exactly where you pulled; the rest push the bridge less and less, the more arches they have: a mellow, hollow sound.
 
@@ -258,7 +269,7 @@ The *nut* is the end of the string near the tuning pegs, and an [open string](gl
 </details>
 :::
 
-**The bow locks the note.** A bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per period. By 1860 Hermann von Helmholtz had watched this through a *vibration microscope*: the string forms two straight pieces joined by one sharp corner, which races between the bridge and the finger. This is [Helmholtz motion](glossary.qmd#helmholtz-motion). It repeats exactly, so its partials sit exactly on the lines. That matters because a real string is slightly stiff, and its own frequencies run a little sharp of the lines ([page 7](piano.qmd)): plucked, each mode rings at its own slightly sharp frequency and fades; bowed, the stick and slip lock the whole motion into exact repetition. The locking comes from the bow's friction, which is not [linear](glossary.qmd#linear); this page shows it but does not derive it.
+**The bow locks the note.** A bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per period. By 1860 Hermann von Helmholtz had watched this through a *vibration microscope*: the string forms two straight pieces joined by one sharp corner, which races between the bridge and the finger. This is [Helmholtz motion](glossary.qmd#helmholtz-motion). It repeats exactly, so its partials sit exactly on the lines. (The demo's bowed voice adds a gentle vibrato, as players do, which wobbles the lines slightly.) That matters because a real string is slightly stiff, and its own frequencies run a little sharp of the lines ([page 7](piano.qmd)): plucked, each mode rings at its own slightly sharp frequency and fades; bowed, the stick and slip lock the whole motion into exact repetition. The locking comes from the bow's friction, which is not [linear](glossary.qmd#linear); this page shows it but does not derive it.
 
 ```{=html}
 <div class="ins">
@@ -503,7 +514,7 @@ Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thu
   }
   function pluck() {
     setup(); read(); t0 = performance.now();
-    C.play(C.render(amps.map(function (a, i) { return { f: F1 * (i + 1), amp: a, tau: 1 / gam[i] }; }), 3), 0.8);
+    C.play(C.render(amps.map(function (a, i) { return { f: F1 * (i + 1), amp: a * (i + 1), tau: 1 / gam[i] }; }), 3), 0.8); // heard through the bridge force, n times the displacement amplitude
   }
   function draw(now) {
     var d = C.fit(cv), W = cv.width, H = cv.height, L = 18 * d, R = W - 18 * d, y0 = H * 0.5, A = H * 0.32, t = (now - t0) / 1000;
@@ -538,6 +549,21 @@ Reading only the main pages, 0, 4 and 8? Skip ahead to [8 · Why does a drum thu
   document.getElementById("tPluck").addEventListener("click", pluck);
   C.onTheme(read);
   setup(); read(); requestAnimationFrame(draw);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    var p = []; for (var n = 1; n <= 12; n++) p.push({ ratio: n, amp: Math.abs(Math.sin(n * Math.PI * 0.16)) / (n * n) });
+    C.stems(document.getElementById("vS4"), p, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 ```

@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 1, the spring](oscillator.qmd). Uses the small-angle approximation and multiplying a table of numbers by a list (explained). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 1, the spring](oscillator.qmd). Maths: up to matrices (explained). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -40,16 +40,18 @@ Listen first: press "Hear this motion" on the tangle, then press a mode button a
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
-- *Newton's law* for one bead: it is pulled toward the average of its two neighbors.
-- *The operator* is a matrix, $A = \frac{T}{mh}K$, acting on the list of all the beads' heights; the ring closing on itself is its boundary condition.
-- *Its spectrum*: the eigenvectors are waves around the ring, with eigenvalues $\lambda_k = \frac{4T}{mh}\sin^2(\pi k/N)$.
-- *On the diagram*: the low modes sit near the whole-number lines, the high ones far off.
-- *What we hear*: a pluck starts many waves at once, each at its own frequency: the jangle is a chord, and each clean tone is one of its eigenvectors.
+1. *Newton's law* for one bead: it is pulled toward the average of its two neighbors.
+2. *The operator* is a matrix, $A = \frac{T}{mh}K$, acting on the list of all the beads' heights; the ring closing on itself is its boundary condition.
+3. *Its spectrum*: the eigenvectors are waves around the ring; the wave with $k$ crests has eigenvalue $\frac{4T}{mh}\sin^2(\pi k/N)$, so its frequency grows more slowly than the number of crests.
+4. *On the diagram*: the low modes sit near the whole-number lines, the high ones far off.
+5. *What we hear*: a pluck starts many waves at once, each at its own frequency, so the jangle is a chord, and each clean tone is one of its eigenvectors.
 
-Only want the answer? Skip to [what we hear](#what-we-hear).
+[Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
 
 ## 1 · Newton's law: the equation of motion
+
+*Mathematics used: the small-angle approximation and multiplying a table of numbers by a list (explained).*
 
 As on page 1, apply Newton's law to one piece of the instrument, here one bead, and find the force. It will turn out to depend on the bead's neighbors as well as on the bead itself.
 
@@ -83,7 +85,7 @@ m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
 $$
 The bracket is twice the gap between the average of the two neighbors and bead $j$ itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up. So each bead is a mass on a spring, except that where its spring pulls it depends on where its neighbors are.
 
-**What we assumed.** Small slopes, a tension that does not change as the string flexes, point-like beads on a massless string, and the idealized closed ring described above.
+**What we assumed.** Small slopes, a tension that does not change as the string flexes, point-like beads on a massless string, no friction, and the idealized closed ring described above.
 
 ## 2 · The operator
 
@@ -163,13 +165,23 @@ With [Euler's formula](glossary.qmd#euler-formula) $e^{ix} = \cos x + i\sin x$, 
 
 ## 4 · On the spectrum diagram
 
-The stems are the frequencies $f_k$ from the result box, as multiples of mode 1's, the slowest wave that swings back and forth: mode $k$ stands at $\sin(\pi k/N)/\sin(\pi/N)$. Each stem's height is how much of that mode the current motion contains. Apart from mode 1 itself, they generally miss the lines. With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.
+The stems are the frequencies $f_k$ from the result box, as multiples of mode 1's, the slowest wave that swings back and forth: mode $k$ stands at $\sin(\pi k/N)/\sin(\pi/N)$. In the demo at the top, each stem's height is how much of that mode the current motion contains; below, every mode is drawn equally tall. Apart from mode 1 itself, they generally miss the lines. With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="rS4a" viewBox="0 0 320 96" style="max-width:520px" aria-label="Mode frequencies of 8 beads as multiples of mode 1"></svg>
+  <svg class="spec" id="rS4b" viewBox="0 0 320 96" style="max-width:520px" aria-label="Mode frequencies of 24 beads as multiples of mode 1"></svg>
+  <p class="cap">Each mode's frequency as a multiple of mode 1's, every mode drawn equally tall: 8 beads (top), 24 beads (bottom). Adding beads pulls the low modes onto the lines; the high ones stay off.</p>
+</div>
+</div>
+```
 
 ## 5 · What we hear {#what-we-hear}
 
-Any motion of the ring is a sum of modes, $u(t) = \sum_k a_k\, v^{(k)}\cos(2\pi f_k t + \phi_k)$, each swinging at its own frequency as if it were alone (the proof is in the fold above). The demo's sound is exactly this sum: it adds the modes' frequencies $f_k$, with mode 1 set to 196 Hz, each as strong as the motion contains it.
-
 **The jangle is a chord.** Pluck one bead and the starting shape is not a wave; but it is a sum of waves, and each wave swings at its own frequency. So the plucked ring sounds all those frequencies at once. They sit off the lines, so the chord is a jangle. Start the ring in one wave's shape and only that one frequency sounds: a pure tone. The clean tones were in the jangle all along, as its eigenvectors.
+
+Any motion of the ring is a sum of modes, $u(t) = \sum_k a_k\, v^{(k)}\cos(2\pi f_k t + \phi_k)$, each swinging at its own frequency as if it were alone (the proof is in the fold above). The demo's sound is exactly this sum: it adds the modes' frequencies $f_k$, with mode 1 set to 196 Hz, each as strong as the motion contains it.
 
 **Almost whole numbers.** A long wave, with few crests, spreads over many beads, and to it the beads look like a smooth string; its frequency grows in step with its number of crests, almost exactly as whole numbers do. A short wave, with crests only a bead or two apart, feels the gaps between the beads, and its frequency falls behind. That is why the low stems sit near the lines and close in as you add beads, while the high ones stay off.
 
@@ -263,6 +275,24 @@ The beads' low frequencies creep toward the lines as you add beads. With infinit
   document.getElementById("rNo").textContent = N;
   C.onTheme(spec);
   pluck(); requestAnimationFrame(draw);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    [["rS4a", 8], ["rS4b", 24]].forEach(function (q) {
+      var N = q[1], p = [];
+      for (var k = 1; k <= N / 2; k++) p.push({ ratio: Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N), amp: 1 });
+      C.stems(document.getElementById(q[0]), p, { W: 320, H: 96, rmax: 8, fs: 8, sw: 3, noOff: true });
+    });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 ```
