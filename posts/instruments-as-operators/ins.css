@@ -56,15 +56,15 @@
 .derive summary { cursor: pointer; color: var(--accent); font-size: 0.95rem; }
 .derive details[open] summary { margin-bottom: 0.5rem; }
 .derive .label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
-.derive svg.fig { display: block; width: 100%; max-width: 420px; height: auto; margin: 0.5rem auto 0.75rem; }
-.derive svg.fig text { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; fill: var(--ink); }
-.derive svg.fig .ink { stroke: var(--ink); fill: none; stroke-width: 1.6; }
-.derive svg.fig .acc { stroke: var(--accent); fill: none; stroke-width: 2; }
-.derive svg.fig .pos { stroke: var(--pos); fill: none; stroke-width: 2; }
-.derive svg.fig .neg { stroke: var(--neg); fill: none; stroke-width: 2; }
-.derive svg.fig .dash { stroke: var(--muted); fill: none; stroke-width: 1; stroke-dasharray: 4 3; }
-.derive svg.fig .fillacc { fill: var(--accent); } .derive svg.fig .fillpos { fill: var(--pos); } .derive svg.fig .fillneg { fill: var(--neg); }
-.derive svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
+svg.fig { display: block; width: 100%; max-width: 420px; height: auto; margin: 0.5rem auto 0.75rem; }
+svg.fig text { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; fill: var(--ink); }
+svg.fig .ink { stroke: var(--ink); fill: none; stroke-width: 1.6; }
+svg.fig .acc { stroke: var(--accent); fill: none; stroke-width: 2; }
+svg.fig .pos { stroke: var(--pos); fill: none; stroke-width: 2; }
+svg.fig .neg { stroke: var(--neg); fill: none; stroke-width: 2; }
+svg.fig .dash { stroke: var(--muted); fill: none; stroke-width: 1; stroke-dasharray: 4 3; }
+svg.fig .fillacc { fill: var(--accent); } svg.fig .fillpos { fill: var(--pos); } svg.fig .fillneg { fill: var(--neg); }
+svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
 /* Page layers: the one-line new idea at the top, the references at the bottom. */
 .newidea { background: var(--panel); border-radius: 8px; padding: 0.7rem 0.95rem; margin: 0 0 1.5rem; font-size: 1rem; }
 .newidea p { margin: 0; }
@@ -75,7 +75,7 @@
 .ins .hsliders .slider output { min-width: 3rem; }
 /* Narrow screens: wide equations and tables scroll inside themselves instead of widening the page. */
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; position: relative; }
-@media (max-width: 700px) { main table { display: block; overflow-x: auto; position: relative; } }
+@media (max-width: 700px) { main table { display: block; overflow-x: auto; position: relative; } main table a { white-space: nowrap; } main table td, main table th { white-space: nowrap; } }
 .series-nav .part { font-size: 0.7rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-right: 0.15rem; }
 .newidea p + p { margin-top: 0.45rem; font-size: 0.92rem; color: var(--muted); }
 /* Puzzle-first pages: a small line on what the page builds on, the opening puzzle, the gallery of puzzles. */

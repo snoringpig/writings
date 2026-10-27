@@ -185,7 +185,7 @@ window.Quarto = {
 
 
 <div class="series-nav slim">
-<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
 </div>
 <p>Technical words in the series link here, usually the first time they appear on a page. Each entry gives a plain definition and a link to a fuller explanation.</p>
 <section id="sound" class="level2">
@@ -303,7 +303,7 @@ The middle pedal on many uprights. It lowers a strip of felt between the hammers
 <dl>
 <dt><span id="partial-derivative">Partial derivative, <span class="math inline">u_t</span>, <span class="math inline">u_{xx}</span></span></dt>
 <dd>
-For a function of several variables, such as the height <span class="math inline">u(x, t)</span> of a string at position <span class="math inline">x</span> and time <span class="math inline">t</span>, the rate of change in one variable with the others held fixed. Subscripts name the variable: <span class="math inline">u_t</span> is the velocity of the point at <span class="math inline">x</span>, <span class="math inline">u_{tt}</span> its acceleration, <span class="math inline">u_x</span> the slope of the string, and <span class="math inline">u_{xx}</span> how fast that slope changes along it, which for small slopes is its curvature. <a href="https://en.wikipedia.org/wiki/Partial_derivative">Wikipedia</a>
+For a function of several variables, such as the height <span class="math inline">u(x, t)</span> of a string at position <span class="math inline">x</span> and time <span class="math inline">t</span>, the rate of change in one variable with the others held fixed. Subscripts name the variable: <span class="math inline">u_t</span> is the velocity of the point at <span class="math inline">x</span>, <span class="math inline">u_{tt}</span> its acceleration, <span class="math inline">u_x</span> the slope of the string, and <span class="math inline">u_{xx}</span> how fast that slope changes along it, which for small slopes is its curvature. Mixed subscripts mean one derivative after another: <span class="math inline">u_{xt}</span> is the rate of change in <span class="math inline">t</span> of the slope <span class="math inline">u_x</span>; for a smooth function the order does not matter, <span class="math inline">u_{xt} = u_{tx}</span>. <a href="https://en.wikipedia.org/wiki/Partial_derivative">Wikipedia</a>
 </dd>
 <dt><span id="proportional">Proportional, <span class="math inline">\propto</span></span></dt>
 <dd>
@@ -387,7 +387,7 @@ How the shape of a bar’s cross-section resists bending, written <span class="m
 </dd>
 <dt><span id="hyperbolic">Hyperbolic functions, cosh and sinh</span></dt>
 <dd>
-<span class="math inline">\cosh x = (e^x + e^{-x})/2</span> and <span class="math inline">\sinh x = (e^x - e^{-x})/2</span>. They satisfy <span class="math inline">\cosh^2 x - \sinh^2 x = 1</span>, much as <span class="math inline">\cos^2 + \sin^2 = 1</span>. In a bar they describe the part of the bending that grows or fades along the bar instead of wiggling. <a href="https://en.wikipedia.org/wiki/Hyperbolic_functions">Wikipedia</a>
+<span class="math inline">\cosh x = (e^x + e^{-x})/2</span> and <span class="math inline">\sinh x = (e^x - e^{-x})/2</span>. They satisfy <span class="math inline">\cosh^2 x - \sinh^2 x = 1</span>, much as <span class="math inline">\cos^2 + \sin^2 = 1</span>. Differentiating the definitions gives <span class="math inline">(\cosh x)' = \sinh x</span> and <span class="math inline">(\sinh x)' = \cosh x</span>, with no sign change, and <span class="math inline">\cosh 0 = 1</span>, <span class="math inline">\sinh 0 = 0</span>. In a bar they describe the part of the bending that grows or fades along the bar instead of wiggling. <a href="https://en.wikipedia.org/wiki/Hyperbolic_functions">Wikipedia</a>
 </dd>
 <dt><span id="bulk-modulus">Bulk modulus, adiabatic</span></dt>
 <dd>
@@ -444,7 +444,7 @@ Writing a list of <span class="math inline">N</span> numbers, indexed by <span c
 </dd>
 <dt><span id="operator">Operator</span></dt>
 <dd>
-A rule that takes a function and returns another function. In this series the operator <span class="math inline">A</span> takes a shape <span class="math inline">u</span> of the instrument and returns minus the restoring force on it, per unit mass, so that the motion obeys <span class="math inline">u_{tt} = -Au</span>. It comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Example: <span class="math inline">A = -c^2\,d^2/d\theta^2</span> on shapes of a loop. Pages 3 and 4 drop the constant <span class="math inline">c^2</span> and work with <span class="math inline">-d^2/d\theta^2</span>, whose eigenvalues <span class="math inline">\lambda</span> give frequencies <span class="math inline">c\sqrt\lambda/2\pi</span>. <a href="https://en.wikipedia.org/wiki/Operator_(mathematics)">Wikipedia</a>
+A rule that takes a function and returns another function. In this series the operator <span class="math inline">A</span> takes a shape <span class="math inline">u</span> of the instrument (for air in a tube, its pressure) and returns minus its acceleration: for a string or a bar, minus the restoring force per unit mass. So the motion obeys <span class="math inline">u_{tt} = -Au</span>. The operator includes its constant, for example <span class="math inline">A = -c^2\,d^2/dx^2</span> for a string with <span class="math inline">c^2 = T/\mu</span>, and comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Each eigenvalue <span class="math inline">\lambda</span> of <span class="math inline">A</span> gives a frequency <span class="math inline">\sqrt{\lambda}/2\pi</span>. The idea is laid out on <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a>. <a href="https://en.wikipedia.org/wiki/Operator_(mathematics)">Wikipedia</a>
 </dd>
 <dt><span id="eigenfunction">Eigenfunction</span></dt>
 <dd>
@@ -452,7 +452,7 @@ A nonzero function <span class="math inline">f</span> that an operator only resc
 </dd>
 <dt><span id="spectrum">Spectrum</span></dt>
 <dd>
-For every instrument in this series, the list of its operator’s eigenvalues; the frequencies are their square roots divided by <span class="math inline">2\pi</span> (when the constant <span class="math inline">c^2</span> is dropped from the operator, multiply by <span class="math inline">c</span> too). (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers <span class="math inline">\lambda</span> for which <span class="math inline">A - \lambda</span> has no well-behaved inverse, which can contain more than eigenvalues.) <a href="https://en.wikipedia.org/wiki/Spectrum_(functional_analysis)">Wikipedia</a>
+For every instrument in this series, the list of its operator’s eigenvalues <span class="math inline">\lambda</span>; the frequencies are <span class="math inline">\sqrt{\lambda}/2\pi</span>. (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers <span class="math inline">\lambda</span> for which <span class="math inline">A - \lambda</span> has no well-behaved inverse, which can contain more than eigenvalues.) See <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a>. <a href="https://en.wikipedia.org/wiki/Spectrum_(functional_analysis)">Wikipedia</a>
 </dd>
 <dt><span id="inner-product">Inner product</span></dt>
 <dd>
@@ -497,7 +497,7 @@ The ratio of a shape’s stored energy to its mass-weighted size, for example <s
 <dl>
 <dt><span id="weyl">Weyl’s law</span></dt>
 <dd>
-For a drum of area <span class="math inline">A</span>, the number <span class="math inline">N(\lambda)</span> of eigenvalues below a large number <span class="math inline">\lambda</span> is close to <span class="math inline">A\lambda/4\pi</span>, so the spectrum “hears” the area. A second term, <span class="math inline">-P\sqrt\lambda/4\pi</span> with <span class="math inline">P</span> the perimeter, is proved only under extra conditions, but for drums with smooth or polygonal rims the perimeter can be heard anyway, by a smoother count (<a href="../../posts/instruments-as-operators/shape.html">page 9</a>). <a href="https://en.wikipedia.org/wiki/Weyl_law">Wikipedia</a>
+For a drum of area <span class="math inline">|\Omega|</span>, the number <span class="math inline">N(\Lambda)</span> of eigenvalues of <span class="math inline">-\Delta</span> below a large number <span class="math inline">\Lambda</span> is close to <span class="math inline">|\Omega|\Lambda/4\pi</span>, so the spectrum “hears” the area. A second term, <span class="math inline">-P\sqrt\Lambda/4\pi</span> with <span class="math inline">P</span> the perimeter, is proved only under extra conditions, but for drums with smooth or polygonal rims the perimeter can be heard anyway, by a smoother count (<a href="../../posts/instruments-as-operators/shape.html">page 9</a>). <a href="https://en.wikipedia.org/wiki/Weyl_law">Wikipedia</a>
 </dd>
 <dt><span id="isospectral">Isospectral</span></dt>
 <dd>

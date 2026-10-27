@@ -185,10 +185,10 @@ window.Quarto = {
 
 
 <div class="series-nav slim">
-<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/oscillator.html">1 Spring →</a></p>
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/oscillator.html">1 Spring →</a></p>
 </div>
 <div class="pageinfo">
-<p>Start here. About 7 minutes, plus the folds.</p>
+<p>Start here. Math: cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.</p>
 </div>
 <div class="puzzle">
 <p>Below is a note at 220 <a href="../../posts/instruments-as-operators/glossary.html#hertz">hertz</a>, vibrations per second. Take away its 220 Hz part completely and play it again: you still hear the same note. If a note’s pitch is not one of its frequencies, what is it?</p>
@@ -211,27 +211,22 @@ window.Quarto = {
 </div>
 </div>
 <div class="gist">
-<p><strong>The gist.</strong> A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave’s shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time.</p>
+<p><strong>The gist.</strong> A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave’s shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time. This page is the last step of the series’ recipe, what we hear; every later page starts from Newton’s law, computes an instrument’s frequencies as the spectrum of an operator, and checks whether they sit on these whole-number lines.</p>
 </div>
 <section id="the-pitch-ruler" class="level2">
 <h2 class="anchored" data-anchor-id="the-pitch-ruler">The pitch ruler</h2>
-<p>The stems under the wave are the note’s frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the <em>pitch ruler</em>, and every page of this series puts an instrument on it. A note’s frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>. Hearing the pitch without it is called the <a href="https://en.wikipedia.org/wiki/Missing_fundamental">missing fundamental</a> effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.</p>
+<p>The stems under the wave are the note’s frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the <em>pitch ruler</em>, and every page of this series puts an instrument on it: stems on the pitch ruler, one per mode, make the spectrum diagram that stage 4 of every instrument page draws. A note’s frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>. Hearing the pitch without it is called the <a href="https://en.wikipedia.org/wiki/Missing_fundamental">missing fundamental</a> effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.</p>
 <p>Open “Mix your own” and try the presets. The stems’ heights change, and so does the sound’s color, its <a href="../../posts/instruments-as-operators/glossary.html#timbre">timbre</a>, but the pitch stays put as long as the base frequency does. Keep only 2×, 4×, 6× and 8×, and the sound repeats twice as often: the base becomes 440 Hz, and the pitch jumps up an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave</a>.</p>
 </section>
 <section id="how-it-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
 <p><strong>A note is a pattern that repeats.</strong> Sound is air pressure rising and falling. When the pattern repeats, you hear a note, and its <a href="../../posts/instruments-as-operators/glossary.html#pitch">pitch</a> is the repetition rate, measured in hertz. This holds for rates in the range where we hear pitch, from a few dozen to a few thousand times a second (for a recognizable melody, roughly 30 Hz to 4 or 5 kHz: Pressnitzer and colleagues measured the lower limit; the upper one is the traditional limit, which Oxenham and colleagues revisit). Much slower repetition is heard as a rhythm. Middle C, called C4, repeats about 262 times a second.</p>
 <p><strong>Every repeating sound is a chord on the lines.</strong> A pure tone is a single sine-shaped wave, the sound of a tuning fork. Any repeating pattern can be built from pure tones at 1, 2, 3, … times its repetition rate, and from no others; this is Fourier’s theorem, and page 3 shows where it comes from. These tones are the sound’s <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a>, and the one at the repetition rate itself is the fundamental. The repetition rate sets the pitch, whether or not the fundamental is actually there; the partials’ strengths set the timbre.</p>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Precisely</span>Periodic signals and their Fourier series <span class="needs">uses sums of cosines</span>
-</summary>
-<p>Sound is a pressure signal <span class="math inline">p(t)</span>. It is <a href="../../posts/instruments-as-operators/glossary.html#periodic">periodic</a> with period <span class="math inline">P</span> if <span class="math inline">p(t + P) = p(t)</span> for every <span class="math inline">t</span>; take <span class="math inline">P</span> to be the shortest such time. The pitch is the repetition rate <span class="math inline">f = 1/P</span>, for rates in the range where we hear pitch.</p>
-<p>Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a>, <span class="math display">
-p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
+<p>In symbols: sound is a pressure signal <span class="math inline">p(t)</span>. It is <a href="../../posts/instruments-as-operators/glossary.html#periodic">periodic</a> with period <span class="math inline">P</span> if <span class="math inline">p(t + P) = p(t)</span> for every <span class="math inline">t</span>; take <span class="math inline">P</span> to be the shortest such time. The pitch is the repetition rate <span class="math inline">f = 1/P</span>, for rates in the range where we hear pitch. Any periodic signal that is not too wild (continuous and made of smooth pieces is plenty) is the sum of its <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a>: with <span class="math inline">f = 1/P</span>, <span class="math display">
+p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n) .
 </span> The <span class="math inline">n = 0</span> term is a constant, the average pressure, usually zero. The possible frequencies <span class="math inline">nf</span> are fixed by the period alone, and a given sound may use only some of them: a pure tone uses only <span class="math inline">f</span>. The amplitudes <span class="math inline">b_n</span> and the phases <span class="math inline">\phi_n</span> carry everything else about the sound’s shape, and the ear is mostly insensitive to the phases.</p>
-</details>
+<div class="result">
+<p><strong>A note, in symbols.</strong> A sound that repeats every <span class="math inline">P</span> seconds contains only the frequencies <span class="math inline">f, 2f, 3f, \dots</span> with <span class="math inline">f = 1/P</span>: whole-number multiples of its repetition rate, which is its pitch.</p>
 </div>
 <div class="qa">
 <details>
@@ -241,7 +236,7 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
 <p>No.&nbsp;A note is a sound whose pressure repeats every <span class="math inline">P</span> seconds, and its pitch is the repetition rate <span class="math inline">f = 1/P</span>. By the Fourier series above, its components can only be at <span class="math inline">f, 2f, 3f, \dots</span>, and usually several are present at once. The repetition rate sets the pitch, whether or not a component at <span class="math inline">f</span> itself is present, and the weights <span class="math inline">b_n</span> set the timbre: a piano C4 and a violin C4 share <span class="math inline">f</span> and differ in their <span class="math inline">b_n</span>. So a note corresponds to a period, not to a single frequency.</p>
 </details>
 </div>
-<p><strong>Why whole numbers matter.</strong> Turn it around. If something vibrates at several frequencies at once, its sound repeats only when they are all whole-number multiples of one common frequency. For two tones, the ratio of their frequencies must be a fraction, such as 3/2; the sound then repeats every 2 cycles of the lower tone. A ratio like 1.59, which is 159/100, repeats only every 100 cycles of the lower tone, far too slowly to hear as one pitch. Try it:</p>
+<p><strong>Why whole numbers matter.</strong> Turn it around. If something vibrates at several frequencies at once, its sound repeats only when they are all whole-number multiples of one common frequency. For two tones, the ratio of their frequencies must be a fraction, such as 3/2; the sound then repeats every 2 cycles of the lower tone. The reason is short. Write the ratio in lowest terms, <span class="math inline">f_2/f_1 = j/k</span>, and wait <span class="math inline">P = k/f_1</span> seconds. In that time the lower tone completes <span class="math inline">f_1P = k</span> whole cycles and the upper one <span class="math inline">f_2P = j</span> whole cycles, so both are back where they started, and the sum begins again: it repeats every <span class="math inline">k</span> cycles of the lower tone. A ratio like 1.59, which is 159/100, repeats only every 100 cycles of the lower tone, far too slowly to hear as one pitch. Try it:</p>
 <div class="ins">
 <div class="panel">
   <div class="controls"><button id="r2" class="primary">▶ 2 : 1</button><button id="r15" class="primary">▶ 3 : 2</button><button id="r159" class="primary">▶ 1.59 : 1 (a drum)</button><button id="rPlay">Play the slider's ratio</button></div>
@@ -252,10 +247,11 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
 </div>
 </div>
 <p>Not every instrument is exact. Frequencies very near whole-number multiples still sound like one note: a piano’s are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.</p>
+<p><strong>Where the frequencies come from.</strong> This page took the frequencies as given. Every later page computes them. Newton’s law, applied to a small piece of the instrument, gives a rule that turns the instrument’s shape into the force pulling it back: the instrument’s <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>. Writing the motion as <span class="math inline">u_{tt} = -A\,u</span>, where <span class="math inline">u</span> is the instrument’s shape (how far each point is from rest), <span class="math inline">u_{tt}</span> its acceleration and <span class="math inline">A</span> the operator, each special number <span class="math inline">\lambda</span> of <span class="math inline">A</span>, an <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a>, gives one frequency, <span class="math inline">f = \sqrt{\lambda}/2\pi</span>. The list of eigenvalues is the operator’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>. Whether the spectrum lands on the lines of the pitch ruler is the first test of whether the instrument plays a note; pages 6 and 6b show what the spectrum alone does not decide. The <a href="../../posts/instruments-as-operators/spectrum.html">spectrum of an operator</a> page sets out this recipe, from Newton’s law to what we hear, and runs it on every instrument.</p>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Proof</span>Two tones repeat together exactly when their frequency ratio is a fraction <span class="needs">uses cosines and divisibility</span>
+<span class="label">Proof</span>The converse: if two tones repeat together, their ratio is a fraction, and the shortest period <span class="needs">uses cosines and divisibility</span>
 </summary>
 <p>Let <span class="math inline">s(t) = \cos(2\pi f_1 t) + \cos(2\pi f_2 t)</span> with <span class="math inline">0 &lt; f_1 &lt; f_2</span>.</p>
 <p><em>If the ratio is rational, <span class="math inline">s</span> is periodic.</em> Write <span class="math inline">f_2/f_1 = j/k</span> in lowest terms and put <span class="math inline">P = k/f_1</span>. Then <span class="math inline">f_1P = k</span> and <span class="math inline">f_2P = j</span> are whole numbers, so both cosines return to their starting values after time <span class="math inline">P</span>, and <span class="math inline">s(t+P) = s(t)</span>.</p>
@@ -266,7 +262,7 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n), \qquad f = 1/P .
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>A note is a sound that repeats, and its pitch is how often it repeats. So a note’s frequencies sit on the lines of one pitch ruler, whole-number multiples of one base frequency, and that base frequency need not be present itself. Every later page puts an instrument on this ruler: on the lines, a note; off the lines, a clang or a thud.</p>
+<p>A note is a sound that repeats, and its pitch is how often it repeats. So a note’s frequencies sit on the lines of one pitch ruler, whole-number multiples of one base frequency, and that base frequency need not be present itself. Every later page derives an instrument’s operator from Newton’s law, computes its spectrum, and puts the frequencies on this ruler: on the lines, a note; off the lines, a clang or a thud.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>

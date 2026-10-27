@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The spectrum of an operator – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The spectrum of an operator</h1>
+<p class="subtitle lead">The idea behind every page</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 27, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p>Builds on <a href="../../posts/instruments-as-operators/oscillator.html">pages 1</a>, <a href="../../posts/instruments-as-operators/ring.html">2</a> and <a href="../../posts/instruments-as-operators/circle.html">3</a>, but stands on its own. Math: up to integration by parts. About 3 minutes for the flowchart and the idea in brief; about 30 with the mathematics.</p>
+</div>
+<div class="puzzle">
+<p>Pluck a string, blow into a tube, tap a steel tine, strike a drum. Four different objects, four different sounds, and one recipe predicts all four. This page lays out the recipe, shows why it works, and runs it on every instrument in the series.</p>
+</div>
+<svg class="fig" viewbox="0 0 350 286" role="img" aria-label="The recipe in five stages: 1, Newton's law gives the equation of motion u_tt = minus A u; 2, the operator A, with how the instrument is held; 3, its spectrum, A X = lambda X, with frequencies f_n = square root of lambda_n over 2 pi; 4, the spectrum diagram, one stem per mode at f_n; 5, what we hear, the sum of the modes, tones at the frequencies f_n">
+<defs><marker id="sp-arr" viewbox="0 0 10 10" refx="5" refy="5" markerwidth="6" markerheight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fillacc"></path></marker></defs>
+<g>
+<rect class="bar" x="10" y="4" width="330" height="44" rx="6"></rect><text x="24" y="22">1  Newton's law: the equation of motion</text><text x="42" y="39" style="fill:var(--muted);font-size:11px">mass × acceleration = force  →  uₜₜ = −A u</text>
+<path class="acc" d="M175 48 L175 57" marker-end="url(#sp-arr)"></path>
+<rect class="bar" x="10" y="62" width="330" height="44" rx="6"></rect><text x="24" y="80">2  The operator</text><text x="42" y="97" style="fill:var(--muted);font-size:11px">A, together with how the instrument is held</text>
+<path class="acc" d="M175 106 L175 115" marker-end="url(#sp-arr)"></path>
+<rect class="bar" x="10" y="120" width="330" height="44" rx="6"></rect><text x="24" y="138">3  Its spectrum</text><text x="42" y="155" style="fill:var(--muted);font-size:11px">A X = λ X :  λ₁, λ₂, …   fₙ = √λₙ / 2π</text>
+<path class="acc" d="M175 164 L175 173" marker-end="url(#sp-arr)"></path>
+<rect class="bar" x="10" y="178" width="330" height="44" rx="6"></rect><text x="24" y="196">4  On the spectrum diagram</text><text x="42" y="213" style="fill:var(--muted);font-size:11px">one stem per mode, at fₙ</text>
+<path class="acc" d="M175 222 L175 231" marker-end="url(#sp-arr)"></path>
+<rect class="bar" x="10" y="236" width="330" height="44" rx="6"></rect><text x="24" y="254">5  What we hear</text><text x="42" y="271" style="fill:var(--muted);font-size:11px">the modes' sum: tones at the frequencies fₙ</text>
+</g>
+</svg>
+<div class="gist">
+<p><strong>The idea in brief: the operator decides where the stems stand; how you pluck or strike decides how tall they are.</strong> Physics gives the operator: Newton’s law, applied to one small piece of the instrument, always comes out as <span class="math inline">u_{tt} = -A\,u</span>, where the <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a> <span class="math inline">A</span> turns a shape of the instrument into minus the acceleration it causes. Mathematics gives the frequencies: a shape that <span class="math inline">A</span> only rescales, <span class="math inline">AX = \lambda X</span>, swings at <span class="math inline">f = \sqrt{\lambda}/2\pi</span>, and every motion is a sum of such shapes, so the list of eigenvalues, the <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>, fixes the frequencies. (A steady bow or breath can do more: it can lock the sound onto exact whole-number multiples, pages 4, 5 and 6b.) The last section runs the recipe on every instrument in the series.</p>
+</div>
+<section id="what-an-operator-is" class="level2">
+<h2 class="anchored" data-anchor-id="what-an-operator-is">1 · What an operator is</h2>
+<p><em>Mathematics used on this page: derivatives, partial derivatives and integration by parts.</em></p>
+<p>The same pattern appears three times on pages 1 to 3, each time on a bigger object.</p>
+<p><strong>One mass on a spring</strong> (page 1). The spring pulls back with force <span class="math inline">-kx</span>, so Newton’s law reads <span class="math inline">m\ddot x = -kx</span>, that is <span class="math display">
+\ddot x = -A\,x, \qquad A = \text{multiply by } \frac{k}{m} .
+</span> Here <span class="math inline">A</span> acts on a single number, the displacement.</p>
+<p><strong>Beads on a ring</strong> (page 2). Each bead of mass <span class="math inline">m</span> is pulled by the string toward its two neighbors, a distance <span class="math inline">h</span> away, with force <span class="math inline">\frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})</span> for small motions. All the beads at once: <span class="math display">
+\ddot u = -A\,u, \qquad A = \frac{T}{mh}\,K ,
+</span> where <span class="math inline">u</span> is the list of all the beads’ heights and <span class="math inline">K</span> is a square table of numbers, a <a href="../../posts/instruments-as-operators/glossary.html#matrix-vector">matrix</a>, with 2 down its diagonal, <span class="math inline">-1</span> beside it, and <span class="math inline">-1</span> in the two corners, where the ring closes. Here <span class="math inline">A</span> acts on a list.</p>
+<p><strong>A string</strong> (pages 3 and 4). In the limit of many beads, the pull on each bit of string is tension times curvature, and Newton’s law becomes the <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a> <span class="math display">
+u_{tt} = c^2\,u_{xx}, \qquad\text{that is}\qquad u_{tt} = -A\,u, \quad A = -c^2\,\frac{d^2}{dx^2}, \quad c^2 = \frac{T}{\mu} .
+</span> Here <span class="math inline">u(x, t)</span> is the height of the string at position <span class="math inline">x</span> and time <span class="math inline">t</span>, subscripts are <a href="../../posts/instruments-as-operators/glossary.html#partial-derivative">partial derivatives</a>, and <span class="math inline">A</span> acts on a whole shape, a function of <span class="math inline">x</span>.</p>
+<div class="result">
+<p><strong>Definition.</strong> For a vibrating object, the <em>operator</em> <span class="math inline">A</span> is the rule that takes a shape of the object (how far each point is from rest; for a tube, the air pressure) and returns minus the acceleration it causes at every point (for a string or a bar, minus the restoring force per unit mass). It acts only on the shapes allowed by how the object is held. Newton’s law then reads <span class="math display">
+u_{tt} = -A\,u .
+</span> In words: the acceleration of every point is the restoring force on it, per unit mass.</p>
+</div>
+<p>Why does every instrument come out this way? Because for small motions every restoring force in the series is proportional to the shape: tension pulls a curved string back in proportion to its curvature, squeezed air pushes back in proportion to the squeeze, bent steel pushes back through the change of its bending. Double the shape and the force doubles; add two shapes and their forces add. So <span class="math inline">A</span> is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a>: <span class="math inline">A(au + bv) = a\,Au + b\,Av</span> for numbers <span class="math inline">a</span>, <span class="math inline">b</span>. That is all the next sections use. (Larger motions break this, and with it the recipe; see page 1 on amplitude.)</p>
+</section>
+<section id="why-a-mode-swings-at-λ-2π" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-mode-swings-at-λ-2π">2 · Why a mode swings at √λ / 2π</h2>
+<p>A <a href="../../posts/instruments-as-operators/glossary.html#mode">mode</a> is a shape that the operator only rescales, <span class="math display">
+A\,X = \lambda\,X ,
+</span> for some number <span class="math inline">\lambda</span>, an <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a> of <span class="math inline">A</span>; the shape <span class="math inline">X</span> is an <a href="../../posts/instruments-as-operators/glossary.html#eigenfunction">eigenfunction</a> (for the beads, an <a href="../../posts/instruments-as-operators/glossary.html#eigenvector">eigenvector</a>). The list of all the eigenvalues, each counted as many times as it has modes (its <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a>), is the operator’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>. Here is why each eigenvalue is a frequency.</p>
+<ol type="1">
+<li><strong>Start the object in the shape of a mode and let go.</strong> Try a motion that keeps that shape and only changes its size: <span class="math inline">u(x, t) = X(x)\,q(t)</span>, with <span class="math inline">AX = \lambda X</span>.</li>
+<li><strong>Newton’s law for this motion.</strong> The left side is <span class="math inline">u_{tt} = X\,q''</span>. The right side is <span class="math inline">-Au = -q\,AX = -\lambda\,q\,X</span>, since <span class="math inline">A</span> is linear and <span class="math inline">q(t)</span> is just a number at each moment. So <span class="math inline">X\,q'' = -\lambda\,q\,X</span>, and dividing by <span class="math inline">X</span>, <span class="math display">
+q'' = -\lambda\,q .
+</span></li>
+<li><strong>This is page 1’s spring.</strong> For <span class="math inline">\lambda &gt; 0</span> its solutions are <span class="math inline">q(t) = \cos(\sqrt{\lambda}\,t + \phi)</span>, times any number: the shape swings with <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a> <span class="math inline">\omega = \sqrt{\lambda}</span>. For <span class="math inline">\lambda = 0</span> the solutions are <span class="math inline">q = a + bt</span>: the whole object drifting, with no sound. A negative <span class="math inline">\lambda</span> would give exponential growth; section 3 shows it never happens.</li>
+</ol>
+<div class="result">
+<p><strong>Eigenvalues are frequencies.</strong> A mode with eigenvalue <span class="math inline">\lambda &gt; 0</span> swings in place at <span class="math display">
+f = \frac{\sqrt{\lambda}}{2\pi} .
+</span> In words: <span class="math inline">\lambda</span> is restoring force per unit mass per unit displacement, a stiffness over a mass, and the frequency goes as its square root, as for a mass on a spring.</p>
+</div>
+</section>
+<section id="why-every-motion-is-a-chord" class="level2">
+<h2 class="anchored" data-anchor-id="why-every-motion-is-a-chord">3 · Why every motion is a chord</h2>
+<p>Modes alone would be a curiosity if the object could also move in other ways. It cannot: every motion is a sum of modes, each at its own frequency. Three facts about <span class="math inline">A</span> make this so. They all come from one identity.</p>
+<p><strong>The identity: the operator is symmetric.</strong> Measure how much two shapes <span class="math inline">f</span> and <span class="math inline">g</span> overlap by <span class="math display">
+\langle f, g\rangle = \int_0^L f(x)\,g(x)\,dx
+</span> (for the beads, <span class="math inline">\sum_j f_j g_j</span>; for a drum, an integral over the head). For the string, <a href="https://en.wikipedia.org/wiki/Integration_by_parts">integrate by parts</a> once: <span class="math display">
+\langle Af, g\rangle = -c^2\int_0^L f''\,g\,dx = -c^2\big[f'\,g\big]_0^L + c^2\int_0^L f'\,g'\,dx .
+</span> If the ends are tied, <span class="math inline">g(0) = g(L) = 0</span> and the bracket vanishes. (It also vanishes on a loop, where the two ends are the same point, and at a closed tube end, where <span class="math inline">f' = 0</span>.) What is left, <span class="math inline">c^2\int f'g'\,dx</span>, does not change when <span class="math inline">f</span> and <span class="math inline">g</span> swap places. So <span class="math display">
+\langle Af, g\rangle = \langle f, Ag\rangle .
+</span> This is what it means for <span class="math inline">A</span> to be <em>symmetric</em>. For a kalimba tine, integrating by parts twice gives <span class="math inline">\kappa^2\int f''g''\,dx</span>, with every boundary term killed by the clamped and free ends; for a drum, the two-dimensional version gives <span class="math inline">c^2\iint \nabla f\cdot\nabla g\,dA</span> (here <span class="math inline">\nabla f = (f_x, f_y)</span>, the slope in each direction, and <span class="math inline">\nabla f\cdot\nabla g = f_x g_x + f_y g_y</span>), with the rim term killed by the fixed rim. The same holds for every instrument in the series: each way of holding an instrument that appears here makes the boundary terms vanish.</p>
+<p><strong>Fact 1: modes with different frequencies are perpendicular.</strong> If <span class="math inline">AX = \lambda X</span> and <span class="math inline">AY = \mu Y</span>, then <span class="math inline">\lambda\langle X, Y\rangle = \langle AX, Y\rangle = \langle X, AY\rangle = \mu\langle X, Y\rangle</span>. If <span class="math inline">\lambda \neq \mu</span>, this forces <span class="math inline">\langle X, Y\rangle = 0</span>: the two shapes do not overlap at all, in the sense above. (Modes that share an eigenvalue, like a loop’s cosine and sine, can be chosen perpendicular too.)</p>
+<p><strong>Fact 2: no eigenvalue is negative.</strong> Put <span class="math inline">g = f</span> in the identity: <span class="math inline">\langle Af, f\rangle = c^2\int (f')^2\,dx \ge 0</span>. For a mode, <span class="math inline">\lambda\langle X, X\rangle = \langle AX, X\rangle \ge 0</span>, so <span class="math inline">\lambda \ge 0</span>. The physics is energy. Let <span class="math display">
+E(t) = \tfrac12\langle u_t, u_t\rangle + \tfrac12\langle Au, u\rangle .
+</span> Times the mass per unit length, the first term is the kinetic energy and the second the energy stored in the stretched string (<span class="math inline">\tfrac12 T\int u_x^2\,dx</span>). Using symmetry, <span class="math inline">E' = \langle u_t, u_{tt}\rangle + \langle Au, u_t\rangle = \langle u_t, u_{tt} + Au\rangle = 0</span> by Newton’s law: energy is conserved, and since the stored part can never be negative, no mode can grow exponentially (a mode with <span class="math inline">\lambda = 0</span> can only drift). For the string, zero occurs only for a shape with no slope anywhere, the whole string moving at once, which a tied end forbids. (For a bar with both ends free, the zero modes are the bar sliding and tilting as a whole.)</p>
+<p><strong>Fact 3: the modes are complete.</strong> Every allowed shape <span class="math inline">f</span> is a sum of modes, <span class="math inline">f = \sum_n a_n X_n</span>, and Fact 1 gives the amounts: taking the overlap of both sides with <span class="math inline">X_m</span> kills every term but one, so <span class="math display">
+a_n = \frac{\langle f, X_n\rangle}{\langle X_n, X_n\rangle} .
+</span> For the beads this is the spectral theorem for symmetric matrices, used on page 2. For strings, tubes, bars and drums it is a theorem of analysis (fold below); on the loop it is Fourier’s theorem, page 3.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Completeness for differential operators <span class="needs">uses functional analysis</span>
+</summary>
+<p>Work in the space <span class="math inline">L^2</span> of shapes with finite <span class="math inline">\int f^2</span>, with the overlap above as inner product. On its natural domain (shapes with enough derivatives and the boundary conditions), each operator in the series is <a href="../../posts/instruments-as-operators/glossary.html#self-adjoint">self-adjoint</a>, not merely symmetric, and non-negative. Its inverse, or <span class="math inline">(A + 1)^{-1}</span> where <span class="math inline">0</span> is an eigenvalue (the loop, free ends), is a compact operator: for one-dimensional objects it is an integral operator with a continuous kernel, the Green’s function; for a drum on a bounded region this is Rellich’s theorem. The spectral theorem for compact self-adjoint operators then gives an orthonormal basis of <span class="math inline">L^2</span> made of eigenfunctions, with eigenvalues <span class="math inline">\lambda_1 \le \lambda_2 \le \cdots \to \infty</span>, each of finite multiplicity. For one-dimensional problems this is <a href="https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory">Sturm–Liouville theory</a>; Courant and Hilbert, volume 1, chapters V and VI, treat all the cases in this series. The series converges in the <span class="math inline">L^2</span> sense; for one-dimensional problems and smooth shapes satisfying the boundary conditions it also converges uniformly.</p>
+</details>
+</div>
+<p>Now put the three facts together. Start the object in any shape <span class="math inline">u(x, 0) = f(x)</span> with any velocity <span class="math inline">u_t(x, 0) = g(x)</span>, and expand both in modes, <span class="math inline">f = \sum a_n X_n</span> and <span class="math inline">g = \sum b_n X_n</span>. Each term <span class="math inline">X_n(x)\cos(\omega_n t)</span> and <span class="math inline">X_n(x)\sin(\omega_n t)</span> obeys Newton’s law by section 2, and since <span class="math inline">A</span> is linear, so does any sum of them. The sum <span class="math display">
+u(x, t) = \sum_n X_n(x)\Big(a_n\cos\omega_n t + \frac{b_n}{\omega_n}\sin\omega_n t\Big), \qquad \omega_n = \sqrt{\lambda_n},
+</span> matches the starting shape and velocity, so it is the motion (two motions with the same start differ by one that starts flat and at rest; its energy is 0 and stays 0, so they are the same). (A mode with <span class="math inline">\lambda_n = 0</span> contributes <span class="math inline">a_n + b_n t</span> instead: drifting, no sound.)</p>
+<div class="result">
+<p><strong>Every motion is a chord.</strong> Whatever you do to the instrument, its free motion is a sum of its modes, each swinging at its own frequency <span class="math inline">f_n = \sqrt{\lambda_n}/2\pi</span>. The spectrum fixes the frequencies; the start (how and where you pluck or strike) fixes only the amounts <span class="math inline">a_n</span> and <span class="math inline">b_n</span>.</p>
+</div>
+</section>
+<section id="how-the-instrument-is-held-is-part-of-the-operator" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-instrument-is-held-is-part-of-the-operator">4 · How the instrument is held is part of the operator</h2>
+<p>The rule alone is not the operator: the allowed shapes are part of it. Take the same rule, <span class="math inline">-c^2\,d^2/dx^2</span>, on a piece of length <span class="math inline">L</span>, and hold the ends in three ways. Writing <span class="math inline">X</span> as a sine or cosine of <span class="math inline">kx</span>, so that <span class="math inline">AX = c^2k^2X</span>, each way of holding picks out different values of <span class="math inline">k</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Held</th>
+<th style="text-align: left;">Modes</th>
+<th style="text-align: left;">Eigenvalues <span class="math inline">\lambda_n</span></th>
+<th style="text-align: left;">Frequencies <span class="math inline">f_n</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">as a loop: <span class="math inline">X(x + L) = X(x)</span></td>
+<td style="text-align: left;"><span class="math inline">\cos\frac{2\pi n x}{L}</span>, <span class="math inline">\sin\frac{2\pi n x}{L}</span></td>
+<td style="text-align: left;"><span class="math inline">\big(\frac{2\pi n c}{L}\big)^2</span></td>
+<td style="text-align: left;"><span class="math inline">\frac{nc}{L}</span>: <span class="math inline">0, 1, 2, 3, \dots</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">both ends tied (string; flute, on pressure): <span class="math inline">X(0) = X(L) = 0</span></td>
+<td style="text-align: left;"><span class="math inline">\sin\frac{n\pi x}{L}</span></td>
+<td style="text-align: left;"><span class="math inline">\big(\frac{n\pi c}{L}\big)^2</span></td>
+<td style="text-align: left;"><span class="math inline">\frac{nc}{2L}</span>: <span class="math inline">1, 2, 3, \dots</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">one end closed (clarinet, on pressure): <span class="math inline">X'(0) = 0</span>, <span class="math inline">X(L) = 0</span></td>
+<td style="text-align: left;"><span class="math inline">\cos\frac{(2n-1)\pi x}{2L}</span></td>
+<td style="text-align: left;"><span class="math inline">\big(\frac{(2n-1)\pi c}{2L}\big)^2</span></td>
+<td style="text-align: left;"><span class="math inline">\frac{(2n-1)c}{4L}</span>: <span class="math inline">1, 3, 5, \dots</span></td>
+</tr>
+</tbody>
+</table>
+<p>(On the loop each <span class="math inline">n \ge 1</span> has two modes, the cosine and the sine; page 3 uses a loop of length <span class="math inline">2\pi</span>, where <span class="math inline">f_n = nc/2\pi</span>.) The same happens for a bar, where the rule is <span class="math inline">\kappa^2\,d^4/dx^4</span>: clamped at one end and free at the other (kalimba, harmonica reed), the frequencies stand in the ratios <span class="math inline">1 : 6.27 : 17.55</span>; pinned at both ends, <span class="math inline">1 : 4 : 9</span>; free at both ends (glockenspiel), <span class="math inline">1 : 2.76 : 5.40</span>. Change how the instrument is held and you change its spectrum, without touching the physics of the material.</p>
+</section>
+<section id="from-the-spectrum-to-the-sound" class="level2">
+<h2 class="anchored" data-anchor-id="from-the-spectrum-to-the-sound">5 · From the spectrum to the sound</h2>
+<p>The spectrum gives the frequencies. Three more things decide what reaches your ear.</p>
+<p><strong>How you play sets the heights.</strong> The amounts <span class="math inline">a_n</span>, <span class="math inline">b_n</span> come from the starting shape and velocity, so where and how you pluck or strike decides which modes start and how strongly. A string plucked a fifth of the way along starts no 5th mode, because that mode stands still at the pluck point (page 4); a drum struck at its center starts only the round modes (page 8). On the spectrum diagram, the stems stand at the frequencies the spectrum gives, and their heights are set by the playing.</p>
+<p><strong>Each mode fades at its own rate.</strong> Real instruments lose energy to friction, to the air and to their supports. For light losses each mode still swings at very nearly its own frequency, and its size fades away (page 1, and the piano’s dampers on page 7). So the sound is <span class="math display">
+p(t) \approx \sum_n c_n\, e^{-t/\tau_n}\cos(2\pi f_n t + \phi_n),
+</span> with the frequencies <span class="math inline">f_n</span> from the spectrum and amounts and fading times <span class="math inline">c_n</span>, <span class="math inline">\tau_n</span> from the playing, the losses and the way the instrument passes its motion to the air. That passing on is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a> too (a violin’s body, for instance), so it changes the heights of the stems, never their positions (page 4). Every plucked or struck sound in this series’ demos is made exactly this way: a sum of sine waves at the frequencies from the spectrum, each fading at its own rate. The bowed and blown sounds (pages 4, 5 and 6b) are made differently: a wave repeating at the playing frequency, so their frequencies are its whole-number multiples (apart from the violin’s gentle vibrato and the chromatic harmonica’s breath noise). The frequencies come from the operator; the amounts and fading times are modelling choices, rough values chosen to illustrate.</p>
+<p><strong>Then the ear.</strong> If the frequencies you hear sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, you hear a note (page 0).</p>
+<p>What the operator does not decide, the series also shows. A kalimba’s off-line overtones fade within a fraction of a second, so what you hear is mostly one frequency (page 6). And a steady bow or breath is not a free vibration at all: it keeps feeding energy in, and the motion locks into one exactly repeating pattern near one of the modes’ frequencies, usually the lowest (observed, not derived in this series), so the sound sits exactly on the lines even when the operator’s other frequencies do not (the violin, page 4; the clarinet’s sound, page 5; the harmonica, page 6b).</p>
+</section>
+<section id="the-recipe-on-every-instrument" class="level2">
+<h2 class="anchored" data-anchor-id="the-recipe-on-every-instrument">6 · The recipe on every instrument</h2>
+<p>Each card runs one instrument through the same five stages as its own page, in compact form; the link at the bottom leads to the page with every step derived. The stems show the spectrum on the spectrum diagram, as multiples of the lowest frequency; the button plays the sound made from it.</p>
+<style>
+.recipe { background: var(--panel); border-radius: 10px; padding: 0.75rem 1rem 0.65rem; margin: 0.9rem 0; }
+.recipe > p { margin: 0 0 0.4rem; }
+.recipe ol { margin: 0.45rem 0 0.4rem; padding-left: 1.3rem; }
+.recipe > p:last-child { margin: 0; font-size: 0.92rem; }
+.recipe li { margin: 0.12rem 0; }
+.recipe .rdemo { display: flex; align-items: center; gap: 0.6rem 0.9rem; flex-wrap: wrap; margin: 0.35rem 0 0.1rem; }
+.recipe .rdemo svg.mini { width: 230px; max-width: 100%; flex: 0 1 230px; }
+.recipe .rdemo .tag { font-family: var(--f-ui); font-size: 0.8rem; color: var(--muted); }
+</style>
+<div class="recipe">
+<p><strong>A mass on a spring</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="spring" viewbox="0 0 200 58" aria-label="One stem at 1 times"></svg><button data-play="spring">▶ Play</button><span class="tag">a pure tone</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on the mass, with the spring pulling back with force <span class="math inline">-kx</span> (<a href="https://en.wikipedia.org/wiki/Hooke%27s_law">Hooke’s law</a>): <span class="math inline">m\ddot x = -kx</span>.</li>
+<li><em>The operator</em>: <span class="math inline">A</span> multiplies by <span class="math inline">k/m</span>; there is nothing to hold.</li>
+<li><em>Its spectrum</em>: one eigenvalue, <span class="math inline">\lambda = k/m</span>, so one frequency, <span class="math inline">f = \sqrt{k/m}\,/2\pi</span>.</li>
+<li><em>On the diagram</em>: a single stem.</li>
+<li><em>What you hear</em>: a pure tone, at the same pitch however far you pull the mass, as long as the pull stays proportional to the stretch.</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/oscillator.html">Every step on page 1 →</a></p>
+</div>
+<div class="recipe">
+<p><strong>Beads on a ring</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="beads" viewbox="0 0 200 58" aria-label="Eight beads: stems at 1, 1.85, 2.41 and 2.61 times"></svg><button data-play="beads">▶ Play</button><span class="tag">8 beads, every mode equally strong</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on each bead, pulled toward its two neighbors by the string’s tension <span class="math inline">T</span>: <span class="math inline">m\,\ddot u_j = \frac{T}{h}\,(u_{j+1} - 2u_j + u_{j-1})</span>, the beads numbered around the ring.</li>
+<li><em>The operator</em>: <span class="math inline">A = \frac{T}{mh}K</span>, a matrix acting on the list of heights; held as a ring, so bead <span class="math inline">N + 1</span> is bead 1.</li>
+<li><em>Its spectrum</em>: the modes are waves <span class="math inline">\cos\frac{2\pi jk}{N}</span> and <span class="math inline">\sin\frac{2\pi jk}{N}</span> that fit <span class="math inline">k</span> times around the ring, with <span class="math inline">\lambda_k = \frac{4T}{mh}\sin^2\frac{\pi k}{N}</span>, so <span class="math inline">f_k = \frac{1}{\pi}\sqrt{\frac{T}{mh}}\,\sin\frac{\pi k}{N}</span>.</li>
+<li><em>On the diagram</em>: for 8 beads, stems at 1, 1.85, 2.41 and 2.61 times the lowest; the low ones near the lines, the high ones well below.</li>
+<li><em>What you hear</em>: one bead plucked, a jangle of all the modes; started in a single mode, one clean tone.</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/ring.html">Every step on page 2 →</a></p>
+</div>
+<div class="recipe">
+<p><strong>A loop of string</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="loop" viewbox="0 0 200 58" aria-label="Stems at 1, 2, 3, ... times, exactly on the lines"></svg><button data-play="loop">▶ Play</button><span class="tag">every stem on a line</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on a short bit of string, where tension pulls along the string so the net pull is tension times curvature: <span class="math inline">u_{tt} = c^2\,u_{\theta\theta}</span>, with <span class="math inline">c^2 = T/\mu</span>, around a loop of length <span class="math inline">2\pi</span>.</li>
+<li><em>The operator</em>: <span class="math inline">A = -c^2\,d^2/d\theta^2</span>, on shapes that close up, <span class="math inline">X(\theta + 2\pi) = X(\theta)</span>.</li>
+<li><em>Its spectrum</em>: <span class="math inline">\cos n\theta</span> and <span class="math inline">\sin n\theta</span> close up only for whole numbers <span class="math inline">n</span>, so <span class="math inline">\lambda_n = c^2 n^2</span>, each <span class="math inline">n \ge 1</span> twice, and <span class="math inline">f_n = nc/2\pi</span>.</li>
+<li><em>On the diagram</em>: every stem exactly on a line, <span class="math inline">1 : 2 : 3 : \cdots</span>.</li>
+<li><em>What you hear</em>: a sound that repeats every <span class="math inline">1/f_1</span> seconds, a note at <span class="math inline">f_1</span>.</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/circle.html">Every step on page 3 →</a></p>
+</div>
+<div class="recipe">
+<p><strong>A violin string</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="string" viewbox="0 0 200 58" aria-label="Plucked a fifth of the way along: stems on every line except 5"></svg><button data-play="string">▶ Play</button><span class="tag">plucked a fifth of the way along</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on a short piece of string under tension <span class="math inline">T</span>, where for small slopes the upward part of each end’s pull is tension times slope: <span class="math inline">u_{tt} = c^2\,u_{xx}</span>, with <span class="math inline">c^2 = T/\mu</span>.</li>
+<li><em>The operator</em>: <span class="math inline">A = -c^2\,d^2/dx^2</span>, with both ends tied, <span class="math inline">u(0) = u(L) = 0</span>.</li>
+<li><em>Its spectrum</em>: <span class="math inline">X = \sin kx</span> with <span class="math inline">\sin kL = 0</span>, so <span class="math inline">k = n\pi/L</span>, <span class="math inline">\lambda_n = (n\pi c/L)^2</span> and <span class="math inline">f_n = \frac{n}{2L}\sqrt{T/\mu}</span>.</li>
+<li><em>On the diagram</em>: every stem on a line; plucked a fifth of the way along, the 5th is missing.</li>
+<li><em>What you hear</em>: a clear note at <span class="math inline">f_1</span>; a light touch at the middle keeps only the even modes, an octave up.</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/violin.html">Every step on page 4 →</a></p>
+</div>
+<div class="recipe">
+<p><strong>A flute and a clarinet</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="flute" viewbox="0 0 200 58" aria-label="Flute tube: stems at 1, 2, 3, ... times"></svg><button data-play="flute">▶ Flute</button><svg class="mini" data-mini="clarinet" viewbox="0 0 200 58" aria-label="Clarinet tube: stems at 1, 3, 5, ... times"></svg><button data-play="clarinet">▶ Clarinet</button><span class="tag">the tubes' spectra; blown, the clarinet's sound also has faint even multiples</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on a thin slab of air, pushed by a pressure difference, <span class="math inline">\rho\,\xi_{tt} = -p_x</span>, with squeezed air pushing back, <span class="math inline">p = -K\xi_x</span>, gives <span class="math inline">p_{tt} = c^2\,p_{xx}</span>, with <span class="math inline">c^2 = K/\rho</span>, for the pressure <span class="math inline">p</span>.</li>
+<li><em>The operator</em>: <span class="math inline">A = -c^2\,d^2/dx^2</span>, on pressure shapes. Flute, open at both ends: <span class="math inline">p(0) = p(L) = 0</span>. Clarinet, closed at the reed: <span class="math inline">p_x(0) = 0</span>, <span class="math inline">p(L) = 0</span>.</li>
+<li><em>Its spectrum</em>: flute, <span class="math inline">\sin kL = 0</span>, so <span class="math inline">f_n = nc/2L</span>; clarinet, <span class="math inline">\cos kL = 0</span>, so <span class="math inline">f_n = (2n-1)c/4L</span>.</li>
+<li><em>On the diagram</em>: the flute’s stems on every line, the clarinet’s on the odd lines only, <span class="math inline">1 : 3 : 5 : \cdots</span>.</li>
+<li><em>What you hear</em>: two notes, the clarinet’s almost an octave lower for the same length; blown, its sound also has faint even multiples (page 5).</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/clarinet.html">Every step on page 5 →</a></p>
+</div>
+<div class="recipe">
+<p><strong>A kalimba tine</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="kalimba" viewbox="0 0 200 58" aria-label="Stems at 1, 6.27 and 17.55 times, off the lines"></svg><button data-play="kalimba">▶ Play</button><span class="tag">the overtones fade almost at once</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on a thin slice of steel, where bending stretches one side and squeezes the other, giving a bending moment <span class="math inline">M = EI\,u_{xx}</span> and a shear force <span class="math inline">V = -M_x</span>: <span class="math inline">\rho S\,u_{tt} = -EI\,u_{xxxx}</span>.</li>
+<li><em>The operator</em>: <span class="math inline">A = \kappa^2\,d^4/dx^4</span>, with <span class="math inline">\kappa^2 = EI/\rho S</span>; clamped at the bridge (<span class="math inline">u = u_x = 0</span>), free at the tip (<span class="math inline">u_{xx} = u_{xxx} = 0</span>).</li>
+<li><em>Its spectrum</em>: <span class="math inline">\cos\beta L\,\cosh\beta L = -1</span>, with <span class="math inline">\lambda = \kappa^2\beta^4</span>, so <span class="math inline">f_n = \kappa\beta_n^2/2\pi</span> with <span class="math inline">\beta_nL = 1.875, 4.694, 7.855, \dots</span>.</li>
+<li><em>On the diagram</em>: stems at 1, 6.27 and 17.55 times the lowest, off the lines.</li>
+<li><em>What you hear</em>: off the lines, but the overtone dies within a fraction of a second: a brief click, then a clean note.</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/kalimba.html">Every step on page 6 →</a></p>
+</div>
+<div class="recipe">
+<p><strong>A harmonica reed</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="reed" viewbox="0 0 200 58" aria-label="Plucked reed: stems at 1, 6.27 and 17.55 times"></svg><button data-play="reed">▶ Plucked</button><button data-play="blown">▶ Blown</button><span class="tag">same reed, two ways of playing</span></div>
+<ol type="1">
+<li><em>Newton’s law</em>: the kalimba tine’s, for a small brass bar riveted at one end.</li>
+<li><em>The operator</em>: the tine’s, with <span class="math inline">\kappa^2 = Eh^2/12\rho</span> for thickness <span class="math inline">h</span>.</li>
+<li><em>Its spectrum</em>: the same ratios, <span class="math inline">1 : 6.27 : 17.55</span>, with <span class="math inline">f_1 = \frac{(1.8751)^2}{2\pi}\,\frac{h}{L^2}\sqrt{\frac{E}{12\rho}}</span>.</li>
+<li><em>On the diagram</em>: plucked, off the lines like the tine; blown, every stem on a line.</li>
+<li><em>What you hear</em>: plucked, this spectrum; blown, the reed chops the airflow into puffs that repeat exactly, and the sound sits at whole-number multiples of the puff rate.</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/harmonica.html">Every step on page 6b →</a></p>
+</div>
+<div class="recipe">
+<p><strong>A piano wire</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="piano" viewbox="0 0 200 58" aria-label="Stems slightly sharp of 1, 2, 3, ... times"></svg><button data-play="piano">▶ Play</button><span class="tag">stiffness exaggerated (B = 0.0012)</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on a short piece of stiff wire, where tension pulls it straight and the steel resists bending, the two forces adding: <span class="math inline">u_{tt} = c^2\,u_{xx} - \kappa^2\,u_{xxxx}</span>, with <span class="math inline">c^2 = T/\mu</span>, <span class="math inline">\kappa^2 = EI/\mu</span>.</li>
+<li><em>The operator</em>: <span class="math inline">A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span>, with the ends pinned, <span class="math inline">u = u_{xx} = 0</span>.</li>
+<li><em>Its spectrum</em>: <span class="math inline">X = \sin kx</span> with <span class="math inline">\sin kL = 0</span> and <span class="math inline">\lambda = c^2k^2 + \kappa^2k^4</span>, so <span class="math inline">f_n = n f_0\sqrt{1 + Bn^2}</span>, with <span class="math inline">f_0 = c/2L</span> and <span class="math inline">B = \pi^2 EI/TL^2</span>.</li>
+<li><em>On the diagram</em>: each stem a little sharp of its line, more so the higher it is.</li>
+<li><em>What you hear</em>: still a clear note, but an octave tuned to exactly 2 : 1 beats, so tuners stretch octaves.</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/piano.html">Every step on page 7 →</a></p>
+</div>
+<div class="recipe">
+<p><strong>A drum</strong></p>
+<div class="ins rdemo"><svg class="mini" data-mini="drum" viewbox="0 0 200 58" aria-label="Many stems scattered between the lines"></svg><button data-play="drum">▶ Play</button><span class="tag">struck about a third of the way out</span></div>
+<ol type="1">
+<li><em>Newton’s law</em> on a small patch of drumhead, where tension <span class="math inline">T</span> pulls all around the patch’s edge and the <a href="../../posts/instruments-as-operators/glossary.html#divergence-theorem">divergence theorem</a> turns the total pull into <span class="math inline">T\,\Delta u</span> per unit area: <span class="math inline">\sigma\,u_{tt} = T\,\Delta u</span>, with <span class="math inline">\Delta u = u_{xx} + u_{yy}</span>, the <a href="../../posts/instruments-as-operators/glossary.html#laplacian">Laplacian</a>.</li>
+<li><em>The operator</em>: <span class="math inline">A = -c^2\,\Delta</span>, with <span class="math inline">c^2 = T/\sigma</span>, and the rim held fixed, <span class="math inline">u = 0</span>.</li>
+<li><em>Its spectrum</em>: for a round drum of radius <span class="math inline">a</span>, <span class="math inline">J_m(ka) = 0</span> (<a href="../../posts/instruments-as-operators/glossary.html#bessel">Bessel functions</a>), with <span class="math inline">\lambda = c^2k^2</span>, so <span class="math inline">f_{m,n} = c\,j_{m,n}/2\pi a</span>.</li>
+<li><em>On the diagram</em>: stems at 1, 1.59, 2.14, 2.30, 2.65, 2.92, … times the lowest, scattered between the lines.</li>
+<li><em>What you hear</em>: a sound that doesn’t repeat at any rate we hear as pitch, and that fades fast: a thud (an ideal head; timpani differ, page 8).</li>
+</ol>
+<p><a href="../../posts/instruments-as-operators/drum.html">Every step on page 8 →</a></p>
+</div>
+<p>The last two pages turn the recipe around. <a href="../../posts/instruments-as-operators/shape.html">Page 9</a> asks how much of a drum’s shape its spectrum determines, and <a href="../../posts/instruments-as-operators/epilogue.html">page 10</a> asks whether the spectra of instruments shaped the scales we play on them.</p>
+</section>
+<section id="what-we-found" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
+<p>One recipe explains every instrument in the series. Newton’s law on a small piece gives an equation of motion of the form <span class="math inline">u_{tt} = -A\,u</span>; the operator <span class="math inline">A</span>, a rule together with the way the instrument is held, is linear and symmetric; its eigenvalues are never negative, and each one, <span class="math inline">\lambda</span>, is a mode swinging at <span class="math inline">f = \sqrt{\lambda}/2\pi</span>; and every motion is a sum of these modes. So the spectrum of the operator fixes where the stems of the spectrum diagram stand, plucking or striking fixes their heights (a steady bow or breath can do more), and the ear hears a note when the stems sit on, or very near, the lines of the pitch ruler.</p>
+<div class="refs">
+<p><strong>References.</strong> N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapters 1–3. R. Courant and D. Hilbert, <em>Methods of Mathematical Physics</em>, vol.&nbsp;1, Interscience, 1953, chapters V and VI. The instrument-specific facts quoted here (the kalimba’s fast-fading overtone, the clarinet’s faint even multiples, the harmonica’s puffs, the glockenspiel’s free bar) are sourced on their own pages. Wikipedia, <a href="https://en.wikipedia.org/wiki/Spectrum_(functional_analysis)">Spectrum (functional analysis)</a>, <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">Eigenvalues and eigenvectors</a>, <a href="https://en.wikipedia.org/wiki/Spectral_theorem">Spectral theorem</a>, <a href="https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory">Sturm–Liouville theory</a> and <a href="https://en.wikipedia.org/wiki/Integration_by_parts">Integration by parts</a>.</p>
+</div>
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function beads(N) { var out = []; for (var k = 1; k <= Math.floor(N / 2); k++) out.push({ ratio: Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N), amp: 1, tau: 1.6 }); return out; }
+  function range(n0, n1, step, amp, tau) { var out = []; for (var n = n0; n <= n1; n += step) out.push({ ratio: n, amp: amp(n), tau: tau ? tau(n) : 2 }); return out; }
+  // what each card's stems show (the spectrum) and what its button plays (the sound made from it)
+  var DEF = {
+    spring:   { stems: function () { return [{ ratio: 1, amp: 1 }]; }, sound: function () { return [{ ratio: 1, amp: 1, tau: 2.5 }]; }, f: 220, dur: 2.4, rmax: 8 },
+    beads:    { stems: function () { return beads(8); }, sound: function () { return beads(8); }, f: 220, dur: 2.4, rmax: 8 },
+    loop:     { stems: function () { return range(1, 8, 1, function (n) { return 1 / n; }); }, sound: function () { return range(1, 24, 1, function (n) { return 1 / n; }, function (n) { return 1.8 / (1 + 0.04 * n * n); }); }, f: 196, dur: 2.6, rmax: 8 },
+    string:   { stems: function () { return M.violin.partials({ pluck: 0.2 }); }, sound: function () { return M.violin.partials({ pluck: 0.2 }); }, f: 196, dur: 2.6, rmax: 8 },
+    flute:    { stems: function () { return range(1, 8, 1, function (n) { return 1 / n; }); }, sound: function () { return M.clarinet.partials({ flute: true }); }, f: 293.66, dur: 1.8, sustained: true, rmax: 8 },
+    clarinet: { stems: function () { return range(1, 8, 2, function (n) { return 1 / n; }); }, sound: function () { return M.clarinet.partials(); }, f: 146.83, dur: 1.8, sustained: true, rmax: 8 },
+    kalimba:  { stems: function () { return M.kalimba.partials(); }, sound: function () { return M.kalimba.partials(); }, f: 440, dur: 2.6, rmax: 18, every: 3 },
+    reed:     { stems: function () { return M.harmonica.partials({ plucked: true }); }, sound: function () { return M.harmonica.partials({ plucked: true }); }, f: 523.25, dur: 2.0, rmax: 18, every: 3 },
+    blown:    { sound: function () { return M.harmonica.partials(); }, f: 523.25, dur: 1.8, sustained: true },
+    piano:    { stems: function () { return M.piano.partials({ B: 0.0012 }); }, sound: function () { return M.piano.partials({ B: 0.0012 }); }, f: 261.63, dur: 3.2, rmax: 8 },
+    drum:     { stems: function () { return M.drum.partials({ r: 0.35 }); }, sound: function () { return M.drum.partials({ r: 0.35 }); }, f: 140, dur: 2.4, rmax: 8 }
+  };
+  function draw() {
+    document.querySelectorAll("svg[data-mini]").forEach(function (svg) {
+      var d = DEF[svg.getAttribute("data-mini")];
+      C.stems(svg, d.stems(), { W: 200, H: 58, rmax: d.rmax, fs: 9, sw: 2, labelEvery: d.every || 2, noOff: true });
+    });
+  }
+  function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
+  document.querySelectorAll("[data-play]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var d = DEF[b.getAttribute("data-play")];
+      var buf = C.render(C.toHz(d.sound(), d.f), d.dur);
+      if (d.sustained) fadeOut(buf, 0.4);
+      C.play(buf, 0.8);
+    });
+  });
+  C.onTheme(draw);
+  draw();
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

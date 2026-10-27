@@ -185,7 +185,7 @@ window.Quarto = {
 
 
 <div class="series-nav slim">
-<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
 </div>
 <section id="all-the-sounds-side-by-side" class="level2">
 <h2 class="anchored" data-anchor-id="all-the-sounds-side-by-side">All the sounds side by side</h2>
@@ -204,12 +204,13 @@ window.Quarto = {
 </section>
 <section id="how-to-read-this-series" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-read-this-series">How to read this series</h2>
-<p>Every page opens with a puzzle you can hear or see, builds the explanation, and ends with what we found and the next puzzle. The step-by-step derivations and proofs are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the <a href="../../posts/instruments-as-operators/glossary.html">glossary</a>, and the symbol <span class="math inline">\propto</span> means “proportional to”.</p>
+<p>The idea behind every page is laid out on <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a>. Every page opens with a puzzle you can hear or see and a short summary of how the recipe answers it. Then each instrument page derives the instrument’s operator from Newton’s law, step by step, and works out its spectrum, the frequencies (page 0 comes before any operator; pages 9 and 10 reuse the operators of pages 8 and 6). Only proofs and side calculations are folded away; each fold says what mathematics it needs beyond high school, if any. Technical words and symbols link to the <a href="../../posts/instruments-as-operators/glossary.html">glossary</a>, and the symbol <span class="math inline">\propto</span> means “proportional to”.</p>
 <ul>
 <li><strong>The gist, 5 minutes.</strong> The <a href="../../posts/instruments-as-operators/index.html">series page</a>: one puzzle, its answer, and the idea behind the whole series.</li>
-<li><strong>The core idea.</strong> Read <a href="../../posts/instruments-as-operators/note.html">0 · What makes a sound a note?</a>, <a href="../../posts/instruments-as-operators/violin.html">4 · Why does a light touch make a string jump an octave?</a> and <a href="../../posts/instruments-as-operators/drum.html">8 · Why does a drum thud?</a>, skipping the folds; add <a href="../../posts/instruments-as-operators/circle.html">3 · Why does a loop of string land exactly on the lines?</a> for the mathematics (about 35 minutes for all four). They carry the main idea: a pitch is a repeating sound, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not. Page 3 shows, in the simplest case, where the lines on the ruler come from.</li>
-<li><strong>The whole story, about an hour and a half.</strong> Pages 0 to 8 in order, each answering the question the last one raised.</li>
-<li><strong>Everything, about three hours.</strong> All the pages, including <a href="../../posts/instruments-as-operators/shape.html">9 · Can you hear the shape of a drum?</a> and the <a href="../../posts/instruments-as-operators/epilogue.html">epilogue</a>, with the folds open.</li>
+<li><strong>The core idea.</strong> Read <a href="../../posts/instruments-as-operators/note.html">0 · What makes a sound a note?</a>, <a href="../../posts/instruments-as-operators/violin.html">4 · Why does a light touch make a string jump an octave?</a> and <a href="../../posts/instruments-as-operators/drum.html">8 · Why does a drum thud?</a>, skipping the folds (about an hour); add <a href="../../posts/instruments-as-operators/circle.html">3 · Why does a loop of string land exactly on the lines?</a> for the recipe in its simplest form. They carry the main idea: a pitch is a repeating sound, the string is a real instrument whose frequencies are whole-number multiples, and the drum is one whose frequencies are not. Page 3 shows, in the simplest case, where the lines on the ruler come from.</li>
+<li><strong>Every puzzle and its answer, about half an hour.</strong> Each page’s puzzle, demo and summary box, pages 0 to 10.</li>
+<li><strong>The whole story with the mathematics, about three and a half hours.</strong> Pages 0 to 8 in order, each deriving its operator and its spectrum, and each answering the question the last one raised.</li>
+<li><strong>Everything, about four and a half hours.</strong> All the pages, including <a href="../../posts/instruments-as-operators/shape.html">9 · Can you hear the shape of a drum?</a> and the <a href="../../posts/instruments-as-operators/epilogue.html">epilogue</a>, with the folds open.</li>
 </ul>
 <p>Here for one puzzle? The series page lists every page by its question, and each page says at the top which earlier page it builds on. Already know Fourier series? Start at page 4. The times assume reading about 120 words a minute, plus a minute or two per demo.</p>
 </section>
@@ -252,48 +253,54 @@ window.Quarto = {
 <td style="text-align: left;"><span class="math inline">\propto n</span>, exactly</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/spectrum.html">★ The spectrum of an operator</a></td>
+<td style="text-align: left;">the recipe: Newton’s law → operator → spectrum → sound, on every instrument</td>
+<td style="text-align: left;"><span class="math inline">u_{tt} = -Au</span></td>
+<td style="text-align: left;"><span class="math inline">\sqrt{\lambda}/2\pi</span></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/violin.html">4 · Why does a light touch make a string jump an octave?</a></td>
 <td style="text-align: left;">boundary conditions are part of the operator</td>
 <td style="text-align: left;"><span class="math inline">-c^2\,d^2/dx^2</span>, ends tied</td>
 <td style="text-align: left;"><span class="math inline">\propto n</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/clarinet.html">5 · Why is a clarinet almost an octave deeper than a flute?</a></td>
 <td style="text-align: left;">closing one end halves the lowest frequency and keeps only its odd multiples</td>
 <td style="text-align: left;">the same, on pressure</td>
 <td style="text-align: left;"><span class="math inline">\propto 2n - 1</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/kalimba.html">6 · Why does a kalimba sound clean?</a></td>
 <td style="text-align: left;">bending: four derivatives spread the overtones; the clamped and free ends move them off the whole numbers</td>
 <td style="text-align: left;"><span class="math inline">\kappa^2\,d^4/dx^4</span></td>
 <td style="text-align: left;"><span class="math inline">1 : 6.27 : 17.55</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/harmonica.html">6b · Where did the harmonica reed’s overtones go?</a></td>
 <td style="text-align: left;">the excitation, not the operator, can set the overtones</td>
 <td style="text-align: left;">the same as 6</td>
 <td style="text-align: left;">heard as <span class="math inline">\propto n</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/piano.html">7 · Why do piano tuners stretch octaves?</a></td>
 <td style="text-align: left;">operators add; the pedals act on damping and forcing, not on the spectrum</td>
 <td style="text-align: left;"><span class="math inline">-c^2\partial_x^2 + \kappa^2\partial_x^4</span></td>
 <td style="text-align: left;"><span class="math inline">n\sqrt{1 + Bn^2}</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/drum.html">8 · Why does a drum thud?</a></td>
 <td style="text-align: left;">two dimensions; no clear pitch</td>
 <td style="text-align: left;"><span class="math inline">-c^2\Delta</span> on a disk</td>
 <td style="text-align: left;">Bessel zeros</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/shape.html">9 · Can you hear the shape of a drum?</a></td>
 <td style="text-align: left;">the spectrum hears area and perimeter, but not always the shape</td>
 <td style="text-align: left;"><span class="math inline">-c^2\Delta</span> on any region</td>
 <td style="text-align: left;">Weyl’s law</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><a href="../../posts/instruments-as-operators/epilogue.html">10 · Did instruments shape our scales?</a></td>
 <td style="text-align: left;">the spectrum decides which intervals sound smooth</td>
 <td style="text-align: left;">the bar’s, with free ends</td>
@@ -355,10 +362,7 @@ Instruments that are the same up to constants
 </section>
 <section id="comparison" class="level2">
 <h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
-<details>
-<summary>
-Every instrument side by side: force, operator, boundary, eigen-condition, ratios, excitation
-</summary>
+<p><strong>Every instrument side by side</strong>: force, operator, boundary, eigen-condition, ratios, excitation.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -446,7 +450,6 @@ Every instrument side by side: force, operator, boundary, eigen-condition, ratio
 </tr>
 </tbody>
 </table>
-</details>
 <script src="core.js"></script>
 <script>
 (function () {

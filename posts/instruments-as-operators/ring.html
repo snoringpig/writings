@@ -185,15 +185,15 @@ window.Quarto = {
 
 
 <div class="series-nav slim">
-<p><a href="../../posts/instruments-as-operators/oscillator.html">← 1 Spring</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/circle.html">3 Loop →</a></p>
+<p><a href="../../posts/instruments-as-operators/oscillator.html">← 1 Spring</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/circle.html">3 Loop →</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/instruments-as-operators/oscillator.html">page 1, the spring</a>. About 7 minutes, plus the folds.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/oscillator.html">page 1, the spring</a>. Math: up to matrices (explained). About 3 minutes for the summary; about 25 with the mathematics.</p>
 </div>
 <div class="puzzle">
 <p>Thread beads on a tight string and join the ends into a ring. Pluck one bead and the ring wobbles in a tangle, and sounds like a jangle. Start it in just the right shape, though, and it swings cleanly and sounds one pure tone. Where were the clean tones hiding in the jangle?</p>
 </div>
-<p>Press “Hear this motion” on the tangle. Then press a mode button and hear it again.</p>
+<p>Listen first: press “Hear this motion” on the tangle, then press a mode button and hear it again.</p>
 <div class="ins">
 <div class="panel">
   <canvas id="rCanvas" style="height:300px" aria-label="Beads on a ring, displacements drawn in and out of the circle"></canvas>
@@ -206,23 +206,21 @@ window.Quarto = {
 </div>
 </div>
 <div class="gist">
-<p><strong>The gist.</strong> Each regular motion is a wave that fits a whole number of times around the ring. In it, every bead swings at the same frequency and the shape never changes, as if the whole ring were one mass on a spring. Such a motion is called a <a href="../../posts/instruments-as-operators/glossary.html#mode">mode</a>. The tangle is all the modes at once, each at its own frequency: a chord.</p>
+<p><strong>The recipe on this instrument, in brief.</strong></p>
+<ol type="1">
+<li><em>Newton’s law</em> for one bead: it is pulled toward the average of its two neighbors.</li>
+<li><em>The operator</em> is a matrix, <span class="math inline">A = \frac{T}{mh}K</span>, acting on the list of all the beads’ heights; the ring closing on itself is its boundary condition.</li>
+<li><em>Its spectrum</em>: the eigenvectors are waves around the ring; the wave with <span class="math inline">k</span> crests has eigenvalue <span class="math inline">\frac{4T}{mh}\sin^2(\pi k/N)</span>, so its frequency grows more slowly than the number of crests.</li>
+<li><em>On the diagram</em>: the low modes sit near the whole-number lines, the high ones far off.</li>
+<li><em>What we hear</em>: a pluck starts many waves at once, each at its own frequency, so the jangle is a chord, and each clean tone is one of its eigenvectors.</li>
+</ol>
+<p><a href="#what-we-hear">Skip to what we hear</a> if you only want the answer.</p>
 </div>
-<section id="on-the-pitch-ruler" class="level2">
-<h2 class="anchored" data-anchor-id="on-the-pitch-ruler">On the pitch ruler</h2>
-<p>The stems are the modes’ frequencies, as multiples of mode 1’s, the slowest wave that swings back and forth. Each stem’s height is how much of that mode the current motion contains. Apart from mode 1 itself, they generally miss the lines. With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.</p>
-</section>
-<section id="how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p><strong>Each bead is pulled toward its neighbors.</strong> The string on each side of a bead pulls along itself. When the bead sits above both neighbors, the two pulls together point down, and the further it sits above their average, the harder it is pulled back. So each bead is a mass on a spring, except that where its spring pulls it depends on where its neighbors are.</p>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Step-by-step derivation</span>The force on one bead <span class="needs">uses derivatives and a small-angle approximation</span>
-</summary>
-<p>Let <span class="math inline">u_j</span> be the height of bead <span class="math inline">j</span>, with beads spaced <span class="math inline">h</span> apart along a string of tension <span class="math inline">T</span>, each of mass <span class="math inline">m</span>. Because the loop closes, bead <span class="math inline">N</span> is next to bead 1, so indices are counted around the ring. (This is an idealization: a real loop of string would need something to hold it out against its own tension. The model keeps only the sideways pulls between neighbors, exactly as for a straight string whose two ends are joined.) For small displacements, Newton’s law for bead <span class="math inline">j</span> is <span class="math display">
-m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
-</span></p>
+<section id="newtons-law-the-equation-of-motion" class="level2">
+<h2 class="anchored" data-anchor-id="newtons-law-the-equation-of-motion">1 · Newton’s law: the equation of motion</h2>
+<p><em>Mathematics used: the small-angle approximation and multiplying a table of numbers by a list (explained).</em></p>
+<p>As on page 1, apply Newton’s law to one piece of the instrument, here one bead, and find the force. It will turn out to depend on the bead’s neighbors as well as on the bead itself.</p>
+<p>Let <span class="math inline">u_j</span> be the height of bead <span class="math inline">j</span>, with <span class="math inline">N</span> beads, each of mass <span class="math inline">m</span>, spaced <span class="math inline">h</span> apart along a string of tension <span class="math inline">T</span>. Because the loop closes, bead <span class="math inline">N</span> is next to bead 1, so bead numbers are counted around the ring. (An idealization: the model keeps only the sideways pulls between neighbors, as for a straight string whose two ends are joined.)</p>
 <svg class="fig" viewbox="0 0 420 160" role="img" aria-label="A bead pulled by the string toward its two neighbors">
   <path class="dash" d="M 20 120 L 400 120"></path>
   <path class="ink" d="M 60 110 L 210 60 L 360 100"></path>
@@ -232,49 +230,60 @@ m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
   <text x="40" y="140">bead j−1</text><text x="190" y="40">bead j</text><text x="340" y="140">bead j+1</text>
   <text x="120" y="76">T</text><text x="280" y="70">T</text><text x="218" y="100">net pull</text>
 </svg>
-<ol type="1">
-<li>The string between beads <span class="math inline">j</span> and <span class="math inline">j+1</span> pulls bead <span class="math inline">j</span> along itself with force <span class="math inline">T</span>.</li>
-<li>Its slope is <span class="math inline">(u_{j+1} - u_j)/h</span>. Let <span class="math inline">\theta</span> be the angle that piece of string makes with the horizontal. For small slopes the vertical part of the pull is <span class="math inline">T\sin\theta \approx T\tan\theta = T(u_{j+1} - u_j)/h</span>.</li>
-<li>The string on the other side contributes <span class="math inline">T(u_{j-1} - u_j)/h</span>.</li>
-<li>Adding the two and applying Newton’s law gives the equation above. The bracket <span class="math inline">u_{j+1} - 2u_j + u_{j-1}</span> is twice the gap between the average of the neighbors and bead <span class="math inline">j</span> itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up.</li>
-</ol>
-<p>The assumptions are small slopes and a tension that does not change as the string flexes.</p>
-</details>
-</div>
-<p><strong>Some shapes keep their shape.</strong> Most starting shapes change as they move: that is the tangle. But in a few special shapes, every bead is pulled back in proportion to its own height, by the same factor for every bead. Then every bead is a mass on the same spring, they all swing in step, and the shape only grows and shrinks. That is a mode, with one frequency. And any motion, even the tangle, is a sum of modes, each swinging on its own: a chord.</p>
-<p>In the series’ language, write all the heights as one list. The pulls on all the beads come from one table of numbers, a matrix, applied to that list: the ring’s <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>. A mode’s shape is an <a href="../../posts/instruments-as-operators/glossary.html#eigenvector">eigenvector</a> of the matrix, a list that the matrix only rescales; the rescaling factor is its <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a>, and the mode’s frequency goes as its square root. The list of all the eigenvalues is the matrix’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>.</p>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Step-by-step derivation</span>The matrix, its eigenvectors, and why each one is a mode <span class="needs">uses matrices</span>
-</summary>
-<p><strong>The matrix.</strong> Collect the heights into a column <span class="math inline">u = (u_1, \dots, u_N)</span>. The equations for all beads at once read <span class="math inline">\ddot u = -\frac{T}{mh}\,K u</span>, where <span class="math inline">K</span> is the <span class="math inline">N\times N</span> matrix with 2 on the diagonal, <span class="math inline">-1</span> just above and below it, and <span class="math inline">-1</span> in the two corners, because bead 1 and bead <span class="math inline">N</span> are neighbors. For <span class="math inline">N = 5</span>, <span class="math display">
+<p><strong>1. The string on one side pulls the bead toward its neighbor.</strong> The string between beads <span class="math inline">j</span> and <span class="math inline">j+1</span> pulls bead <span class="math inline">j</span> along itself with force <span class="math inline">T</span>. That piece of string rises by <span class="math inline">u_{j+1} - u_j</span> over a distance <span class="math inline">h</span>, so its slope is <span class="math inline">(u_{j+1} - u_j)/h</span>. If the string makes a small angle <span class="math inline">\theta</span> with the horizontal, the upward part of the pull is <span class="math inline">T\sin\theta</span>; for a small angle <span class="math inline">\sin\theta \approx \tan\theta</span> (both are about <span class="math inline">\theta</span> in radians), and <span class="math inline">\tan\theta</span> is the slope. So the vertical part of the pull is <span class="math display">
+T\sin\theta \approx T\tan\theta = \frac{T}{h}\,(u_{j+1} - u_j) .
+</span></p>
+<p><strong>2. The string on the other side does the same.</strong> Its vertical part is <span class="math display">
+\frac{T}{h}\,(u_{j-1} - u_j) .
+</span></p>
+<p><strong>3. The two pulls set the bead’s acceleration.</strong> Adding them and setting the total equal to mass times acceleration, <span class="math display">
+m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
+</span> The bracket is twice the gap between the average of the two neighbors and bead <span class="math inline">j</span> itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up. So each bead is a mass on a spring, except that where its spring pulls it depends on where its neighbors are.</p>
+<p><strong>What we assumed.</strong> Small slopes, a tension that does not change as the string flexes, point-like beads on a massless string, no friction, and the idealized closed ring described above.</p>
+</section>
+<section id="the-operator" class="level2">
+<h2 class="anchored" data-anchor-id="the-operator">2 · The operator</h2>
+<p>The force on each bead depends on its neighbors, so the rule that turns the shape into the force acts on all the beads at once. Collect the heights into one column <span class="math inline">u = (u_1, \dots, u_N)</span>. The <span class="math inline">N</span> equations become one, <span class="math display">
+\ddot u = -\frac{T}{mh}\,K\,u ,
+</span> where <span class="math inline">K</span> is a square table of numbers, a matrix, with 2 down its diagonal (top left to bottom right), <span class="math inline">-1</span> just above and below it, and <span class="math inline">-1</span> in the two corners, because bead 1 and bead <span class="math inline">N</span> are neighbors. For <span class="math inline">N = 5</span>, <span class="math display">
 K = \begin{pmatrix} 2 &amp; -1 &amp; 0 &amp; 0 &amp; -1\\ -1 &amp; 2 &amp; -1 &amp; 0 &amp; 0\\ 0 &amp; -1 &amp; 2 &amp; -1 &amp; 0\\ 0 &amp; 0 &amp; -1 &amp; 2 &amp; -1\\ -1 &amp; 0 &amp; 0 &amp; -1 &amp; 2 \end{pmatrix}.
-</span> Here <span class="math inline">Ku</span> is the column whose <span class="math inline">j</span>-th entry is row <span class="math inline">j</span> of <span class="math inline">K</span> times <span class="math inline">u</span>: multiply each entry of row <span class="math inline">j</span> by the matching entry of <span class="math inline">u</span>, and add. Row <span class="math inline">j</span> has 2 in place <span class="math inline">j</span> and <span class="math inline">-1</span> in places <span class="math inline">j - 1</span> and <span class="math inline">j + 1</span>, so <span class="math inline">(Ku)_j = 2u_j - u_{j-1} - u_{j+1}</span>, and the matrix equation is the bead equation for every bead at once. Each row of <span class="math inline">K</span> is the row above shifted one place to the right, wrapping around; a matrix with this property is called <a href="../../posts/instruments-as-operators/glossary.html#circulant">circulant</a>.</p>
-<p><strong>Eigenvectors and eigenvalues.</strong> A nonzero column <span class="math inline">v</span> is an eigenvector of <span class="math inline">K</span>, with eigenvalue <span class="math inline">\lambda</span>, if <span class="math inline">Kv = \lambda v</span>: the matrix only rescales it, possibly by zero. The set of all eigenvalues is the spectrum of <span class="math inline">K</span>.</p>
-<p><strong>Modes.</strong> If <span class="math inline">Kv = \lambda v</span>, then <span class="math inline">u(t) = v\cos(\omega t)</span> is a motion of the beads, provided <span class="math inline">\omega^2 = \frac{T}{mh}\lambda</span>. To check, differentiate twice: <span class="math inline">\ddot u = -\omega^2 v\cos\omega t</span>, while <span class="math inline">-\frac{T}{mh}Ku = -\frac{T}{mh}\lambda v\cos\omega t</span>. Every bead swings at the same <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a> <span class="math inline">\omega</span> (radians per second; page 1), in the fixed shape <span class="math inline">v</span>. This is the mass on a spring again, once for each eigenvector.</p>
-<p><strong>A small example, three beads.</strong> For <span class="math inline">N = 3</span>, <span class="math display">
-K = \begin{pmatrix} 2 &amp; -1 &amp; -1\\ -1 &amp; 2 &amp; -1\\ -1 &amp; -1 &amp; 2 \end{pmatrix}.
-</span> Row <span class="math inline">j</span> of this <span class="math inline">K</span> gives <span class="math inline">(Kv)_j = 3v_j - (v_1 + v_2 + v_3)</span>. The column <span class="math inline">(1, 1, 1)</span> gives <span class="math inline">K(1,1,1) = (0,0,0)</span>, so it is an eigenvector with eigenvalue 0: every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts. Any column whose entries add up to zero gives <span class="math inline">(Kv)_j = 3v_j</span>, so <span class="math inline">Kv = 3v</span>. Every such column is a combination <span class="math inline">a(1, -1, 0) + b(0, 1, -1)</span>, so these eigenvectors fill a whole plane: every one is built from those two shapes, and neither of the two is a multiple of the other. The eigenvalues are <span class="math inline">0, 3, 3</span>, with 3 counted twice: it has <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a> 2.</p>
-</details>
+</span> Here <span class="math inline">Ku</span> is the column whose <span class="math inline">j</span>-th entry is row <span class="math inline">j</span> of <span class="math inline">K</span> times <span class="math inline">u</span>: multiply each entry of row <span class="math inline">j</span> by the matching entry of <span class="math inline">u</span>, and add. Row <span class="math inline">j</span> has 2 in place <span class="math inline">j</span> and <span class="math inline">-1</span> in places <span class="math inline">j - 1</span> and <span class="math inline">j + 1</span>, so <span class="math inline">(Ku)_j = 2u_j - u_{j-1} - u_{j+1}</span>, which is the bead equation for every bead at once. Each row of <span class="math inline">K</span> is the row above shifted one place to the right, wrapping around; a matrix with this property is called <a href="../../posts/instruments-as-operators/glossary.html#circulant">circulant</a>. The two corner entries are the ring’s boundary condition: they are where the loop closes.</p>
+<div class="result">
+<p><strong>The operator.</strong> <span class="math display">
+\ddot u = -A\,u, \qquad A = \frac{T}{mh}\,K ,
+</span> a matrix acting on the list of all the beads’ heights, with the ring closed (bead <span class="math inline">N</span> next to bead 1). In words: on page 1 the operator was one number; here it is a table of numbers, and <span class="math inline">A\,u</span> is the list of restoring forces per unit mass, reversed.</p>
 </div>
+</section>
+<section id="its-spectrum" class="level2">
+<h2 class="anchored" data-anchor-id="its-spectrum">3 · Its spectrum</h2>
+<p>A mode is a shape that keeps its form while it swings. Most starting shapes change as they move: that is the tangle. But in a few special shapes, every bead is pulled back in proportion to its own height, by the same factor for every bead. Then every bead is a mass on the same spring, they all swing in step, and the shape only grows and shrinks. In matrix language, a nonzero column <span class="math inline">v</span> is an <a href="../../posts/instruments-as-operators/glossary.html#eigenvector">eigenvector</a> of <span class="math inline">A</span>, with <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a> <span class="math inline">\lambda</span>, if <span class="math display">
+A v = \lambda\, v ,
+</span> so the matrix only rescales it, possibly by zero. The list of all the eigenvalues is the matrix’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>. Since <span class="math inline">A = \frac{T}{mh}K</span>, the eigenvectors of <span class="math inline">A</span> are those of <span class="math inline">K</span>: if <span class="math inline">Kv = s\,v</span>, then <span class="math inline">Av = \lambda v</span> with <span class="math inline">\lambda = \frac{T}{mh}\,s</span>. So it is enough to find the eigenvectors of the simpler matrix <span class="math inline">K</span>.</p>
+<p><strong>1. Each eigenvector swings like one mass on a spring.</strong> If <span class="math inline">Av = \lambda v</span>, try <span class="math inline">u(t) = v\cos(\omega t)</span>. Differentiating twice gives <span class="math inline">\ddot u = -\omega^2 v\cos\omega t</span>, while <span class="math inline">-Au = -\lambda\, v\cos\omega t</span>. These agree when <span class="math display">
+\omega^2 = \lambda .
+</span> Every bead swings at the same <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a> <span class="math inline">\omega = \sqrt{\lambda}</span> (radians per second; page 1), in the fixed shape <span class="math inline">v</span>: the mass on a spring again, once for each eigenvector, at frequency <span class="math inline">f = \sqrt{\lambda}/2\pi</span>.</p>
+<p><strong>2. With three beads, find the special shapes by hand.</strong> For <span class="math inline">N = 3</span>, <span class="math display">
+K = \begin{pmatrix} 2 &amp; -1 &amp; -1\\ -1 &amp; 2 &amp; -1\\ -1 &amp; -1 &amp; 2 \end{pmatrix}.
+</span> Row <span class="math inline">j</span> gives <span class="math inline">(Kv)_j = 3v_j - (v_1 + v_2 + v_3)</span>. The column <span class="math inline">(1, 1, 1)</span> gives <span class="math inline">K(1,1,1) = (0,0,0)</span>: an eigenvector with <span class="math inline">s = 0</span>. Every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts; this is the mode 0 of the demo. Any column whose entries add up to zero gives <span class="math inline">(Kv)_j = 3v_j</span>, so <span class="math inline">Kv = 3v</span>. Every such column is a combination <span class="math inline">a(1, -1, 0) + b(0, 1, -1)</span>, so these eigenvectors fill a whole plane: every one is built from those two shapes, and neither of the two is a multiple of the other. The eigenvalues of <span class="math inline">K</span> are <span class="math inline">0, 3, 3</span>, with 3 counted twice: it has <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a> 2. Those of <span class="math inline">A</span> are <span class="math inline">0</span> and <span class="math inline">3T/mh</span>, twice.</p>
+<p><strong>3. For any number of beads, the special shapes are waves around the ring.</strong> On a ring no bead is special, so try waves that fit a whole number of times around: <span class="math inline">v_j = \cos(2\pi jk/N)</span>, a wave with <span class="math inline">k</span> crests. The identity <span class="math inline">\cos(a + b) + \cos(a - b) = 2\cos a\cos b</span>, with <span class="math inline">a = 2\pi jk/N</span> and <span class="math inline">b = 2\pi k/N</span>, gives <span class="math inline">v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j</span>, so <span class="math display">
+\begin{aligned}
+(Kv)_j &amp;= 2v_j - v_{j+1} - v_{j-1} \\
+&amp;= \big(2 - 2\cos(2\pi k/N)\big)\,v_j \\
+&amp;= 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j ,
+\end{aligned}
+</span> using <span class="math inline">1 - \cos 2x = 2\sin^2 x</span>. The same holds for <span class="math inline">v_j = \sin(2\pi jk/N)</span>. These are the shapes the mode buttons play. At the beads, a wave with <span class="math inline">N - k</span> crests looks exactly like one with <span class="math inline">k</span> crests (the cosine is the same and the sine changes sign), so the different eigenvalues come from <span class="math inline">k = 0, 1, \dots</span> up to <span class="math inline">N/2</span>, rounded down, and each one from <span class="math inline">k = 1</span> up to just below <span class="math inline">N/2</span> has two eigenvectors, a cosine and a sine. (At <span class="math inline">k = 0</span>, and at <span class="math inline">k = N/2</span> when <span class="math inline">N</span> is even, the sine is zero at every bead, so only the cosine is left.) A wave with more crests bends more sharply from bead to bead, so each bead is pulled back harder and the wave swings faster.</p>
+<div class="result">
+<p><strong>The spectrum.</strong> Eigenvectors: the waves <span class="math inline">\cos(2\pi jk/N)</span> and <span class="math inline">\sin(2\pi jk/N)</span> with <span class="math inline">k</span> crests. Eigenvalues of <span class="math inline">A</span>: <span class="math display">
+\lambda_k = \frac{4T}{mh}\,\sin^2\!\Big(\frac{\pi k}{N}\Big), \qquad f_k = \frac{\sqrt{\lambda_k}}{2\pi} = \frac{1}{\pi}\sqrt{\frac{T}{mh}}\,\sin\frac{\pi k}{N} .
+</span> In words: mode <span class="math inline">k</span> sounds at <span class="math inline">\sin(\pi k/N)/\sin(\pi/N)</span> times mode 1.</p>
+</div>
+<p>In the 1730s Daniel Bernoulli studied systems like this, weights strung along a flexible thread and a hanging chain, and came to believe that every vibration is built from such simple motions; in 1753 he put this forward as a general principle. For the beads it is a theorem, and writing a motion as a sum of these waves is the <a href="../../posts/instruments-as-operators/glossary.html#dft">discrete Fourier transform</a>.</p>
 <div class="derive">
 <details>
 <summary>
 <span class="label">Proof</span>Every motion is a sum of modes <span class="needs">uses linear algebra</span>
 </summary>
-<p>The matrix <span class="math inline">K</span> is symmetric: the entry in row <span class="math inline">i</span>, column <span class="math inline">j</span> equals the entry in row <span class="math inline">j</span>, column <span class="math inline">i</span>. By the <a href="https://en.wikipedia.org/wiki/Spectral_theorem">spectral theorem for symmetric matrices</a>, <span class="math inline">K</span> has a basis of <span class="math inline">N</span> mutually <a href="../../posts/instruments-as-operators/glossary.html#orthogonal">orthogonal</a> (perpendicular) eigenvectors <span class="math inline">v^{(1)}, \dots, v^{(N)}</span> with real eigenvalues <span class="math inline">\lambda_1, \dots, \lambda_N</span>. Write the motion as <span class="math inline">u(t) = \sum_k a_k(t)\,v^{(k)}</span>. Substituting into <span class="math inline">\ddot u = -\frac{T}{mh}Ku</span> and taking the dot product with <span class="math inline">v^{(k)}</span>, which removes every other term because they are perpendicular, gives <span class="math inline">\ddot a_k = -\omega_k^2 a_k</span> with <span class="math inline">\omega_k^2 = \frac{T}{mh}\lambda_k</span>: each coefficient obeys its own mass-on-a-spring equation. With starting shape <span class="math inline">u(0) = \sum_k c_k v^{(k)}</span> and starting velocity <span class="math inline">\dot u(0) = \sum_k d_k v^{(k)}</span>, and by the uniqueness of solutions from page 1, every motion is <span class="math inline">u(t) = \sum_k \big(c_k\cos\omega_k t + \frac{d_k}{\omega_k}\sin\omega_k t\big)v^{(k)}</span>, read as <span class="math inline">c_k + d_k t</span> when <span class="math inline">\omega_k = 0</span>. The eigenvalues are nonnegative because <span class="math inline">u \cdot Ku = \sum_j u_j(2u_j - u_{j+1} - u_{j-1}) = \sum_j (u_{j+1} - u_j)^2 \ge 0</span>, by regrouping the terms around the ring; for an eigenvector this equals <span class="math inline">\lambda\,(u\cdot u)</span>.</p>
-</details>
-</div>
-<p><strong>The modes are waves around the ring.</strong> On a ring no bead is special, so the special shapes are waves that fit a whole number of times around: a wave with one crest, two crests, three, and so on. A wave with more crests bends more sharply from bead to bead, so each bead is pulled back harder and the wave swings faster. In the 1730s Daniel Bernoulli studied systems like this, weights strung along a flexible thread and a hanging chain, and came to believe that every vibration is built from such simple motions; in 1753 he put this forward as a general principle.</p>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Step-by-step derivation</span>The waves and their eigenvalues, for any number of beads <span class="needs">uses trigonometric identities</span>
-</summary>
-<p>Try the column <span class="math inline">v_j = \cos(2\pi jk/N)</span>, a wave with <span class="math inline">k</span> crests around the ring. The identity <span class="math inline">\cos(a + b) + \cos(a - b) = 2\cos a\cos b</span>, with <span class="math inline">a = 2\pi jk/N</span> and <span class="math inline">b = 2\pi k/N</span>, gives <span class="math inline">v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j</span>, so <span class="math display">
-(Kv)_j = 2v_j - v_{j+1} - v_{j-1} = \big(2 - 2\cos(2\pi k/N)\big)\,v_j = 4\sin^2\!\Big(\frac{\pi k}{N}\Big)\,v_j ,
-</span> using <span class="math inline">1 - \cos 2x = 2\sin^2 x</span>. The same holds for <span class="math inline">v_j = \sin(2\pi jk/N)</span>. These are the shapes the mode buttons play, and the eigenvalues are <span class="math inline">4\sin^2(\pi k/N)</span>. At the beads, a wave with <span class="math inline">N - k</span> crests looks exactly like one with <span class="math inline">k</span> crests (the cosine is the same and the sine changes sign), so the different eigenvalues come from <span class="math inline">k = 0, 1, \dots</span> up to <span class="math inline">N/2</span>, rounded down, and each one from <span class="math inline">k = 1</span> up to just below <span class="math inline">N/2</span> has two eigenvectors, a cosine and a sine. (At <span class="math inline">k = 0</span>, and at <span class="math inline">k = N/2</span> when <span class="math inline">N</span> is even, the sine is zero at every bead, so only the cosine is left.) Writing any motion as a sum of these waves splits it into separate masses on springs, one per wave; that splitting is the <a href="../../posts/instruments-as-operators/glossary.html#dft">discrete Fourier transform</a>.</p>
+<p>The matrix <span class="math inline">A</span> is symmetric: the entry in row <span class="math inline">i</span>, column <span class="math inline">j</span> equals the entry in row <span class="math inline">j</span>, column <span class="math inline">i</span>. By the <a href="https://en.wikipedia.org/wiki/Spectral_theorem">spectral theorem for symmetric matrices</a>, <span class="math inline">A</span> has a basis of <span class="math inline">N</span> mutually <a href="../../posts/instruments-as-operators/glossary.html#orthogonal">orthogonal</a> (perpendicular) eigenvectors <span class="math inline">v^{(1)}, \dots, v^{(N)}</span> with real eigenvalues <span class="math inline">\lambda_1, \dots, \lambda_N</span>. Write the motion as <span class="math inline">u(t) = \sum_k a_k(t)\,v^{(k)}</span>. Substituting into <span class="math inline">\ddot u = -Au</span> and taking the dot product with <span class="math inline">v^{(k)}</span>, which removes every other term because they are perpendicular, gives <span class="math inline">\ddot a_k = -\lambda_k a_k</span>: each coefficient obeys its own mass-on-a-spring equation, with <span class="math inline">\omega_k = \sqrt{\lambda_k}</span>. With starting shape <span class="math inline">u(0) = \sum_k c_k v^{(k)}</span> and starting velocity <span class="math inline">\dot u(0) = \sum_k d_k v^{(k)}</span>, and by the uniqueness of solutions from page 1, every motion is <span class="math inline">u(t) = \sum_k \big(c_k\cos\omega_k t + \frac{d_k}{\omega_k}\sin\omega_k t\big)v^{(k)}</span>, read as <span class="math inline">c_k + d_k t</span> when <span class="math inline">\omega_k = 0</span>. The eigenvalues are nonnegative because <span class="math inline">u \cdot Ku = \sum_j u_j(2u_j - u_{j+1} - u_{j-1}) = \sum_j (u_{j+1} - u_j)^2 \ge 0</span>, by regrouping the terms around the ring; for an eigenvector of <span class="math inline">A</span> this gives <span class="math inline">\lambda\,(u\cdot u) = \frac{T}{mh}\,u\cdot Ku \ge 0</span>.</p>
 </details>
 </div>
 <div class="derive">
@@ -285,19 +294,35 @@ K = \begin{pmatrix} 2 &amp; -1 &amp; -1\\ -1 &amp; 2 &amp; -1\\ -1 &amp; -1 &amp
 <p>With <a href="../../posts/instruments-as-operators/glossary.html#euler-formula">Euler’s formula</a> <span class="math inline">e^{ix} = \cos x + i\sin x</span>, the cosine and sine waves combine into <span class="math inline">v_j = e^{2\pi i jk/N}</span> for <span class="math inline">k = 0, 1, \dots, N - 1</span> (here <span class="math inline">i</span> is the imaginary unit and <span class="math inline">j</span> the bead number). Then <span class="math inline">(Kv)_j = \big(2 - e^{2\pi ik/N} - e^{-2\pi ik/N}\big)v_j = 4\sin^2(\pi k/N)\,v_j</span> in one line. These <span class="math inline">N</span> waves are the basis vectors of the discrete Fourier transform, and they are eigenvectors of every circulant matrix, not only this one. Combined with the time factor <span class="math inline">e^{\mp i\omega t}</span>, the waves with <span class="math inline">k</span> and <span class="math inline">N - k</span> crests travel around the ring in opposite directions.</p>
 </details>
 </div>
+</section>
+<section id="on-the-spectrum-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="on-the-spectrum-diagram">4 · On the spectrum diagram</h2>
+<p>The stems are the frequencies <span class="math inline">f_k</span> from the result box, as multiples of mode 1’s, the slowest wave that swings back and forth: mode <span class="math inline">k</span> stands at <span class="math inline">\sin(\pi k/N)/\sin(\pi/N)</span>. In the demo at the top, each stem’s height is how much of that mode the current motion contains; below, every mode is drawn equally tall. Apart from mode 1 itself, they generally miss the lines. With 8 beads, as the demo starts, the modes sit at 1×, 1.85×, 2.41× and 2.61×. Raise the number of beads and the low stems close in on the lines: with 24 beads, modes 2 and 3 are within 2.5% of 2× and 3×. The high modes stay far off.</p>
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="rS4a" viewbox="0 0 320 96" style="max-width:520px" aria-label="Mode frequencies of 8 beads as multiples of mode 1"></svg>
+  <svg class="spec" id="rS4b" viewbox="0 0 320 96" style="max-width:520px" aria-label="Mode frequencies of 24 beads as multiples of mode 1"></svg>
+  <p class="cap">Each mode's frequency as a multiple of mode 1's, every mode drawn equally tall: 8 beads (top), 24 beads (bottom). Adding beads pulls the low modes onto the lines; the high ones stay off.</p>
+</div>
+</div>
+</section>
+<section id="what-we-hear" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-hear">5 · What we hear</h2>
+<p><strong>The jangle is a chord.</strong> Pluck one bead and the starting shape is not a wave; but it is a sum of waves, and each wave swings at its own frequency. So the plucked ring sounds all those frequencies at once. They sit off the lines, so the chord is a jangle. Start the ring in one wave’s shape and only that one frequency sounds: a pure tone. The clean tones were in the jangle all along, as its eigenvectors.</p>
+<p>Any motion of the ring is a sum of modes, <span class="math inline">u(t) = \sum_k a_k\, v^{(k)}\cos(2\pi f_k t + \phi_k)</span>, each swinging at its own frequency as if it were alone (the proof is in the fold above). The demo’s sound is exactly this sum: it adds the modes’ frequencies <span class="math inline">f_k</span>, with mode 1 set to 196 Hz, each as strong as the motion contains it.</p>
 <p><strong>Almost whole numbers.</strong> A long wave, with few crests, spreads over many beads, and to it the beads look like a smooth string; its frequency grows in step with its number of crests, almost exactly as whole numbers do. A short wave, with crests only a bead or two apart, feels the gaps between the beads, and its frequency falls behind. That is why the low stems sit near the lines and close in as you add beads, while the high ones stay off.</p>
 <div class="derive">
 <details>
 <summary>
 <span class="label">Precisely</span>How near to whole numbers <span class="needs">uses the sine function</span>
 </summary>
-<p>By the eigenvalues above, mode <span class="math inline">k</span> has angular frequency <span class="math inline">\omega_k = 2\sqrt{T/(mh)}\,\sin(\pi k/N)</span>, so its frequency is proportional to <span class="math inline">\sin(\pi k/N)</span>, which is not proportional to <span class="math inline">k</span>: the beads are not exactly harmonic. For small <span class="math inline">k</span>, <span class="math inline">\sin(\pi k/N) \approx \pi k/N</span>, so the low modes are nearly harmonic, and the ratio <span class="math inline">\sin(\pi k/N)/\sin(\pi/N)</span> tends to <span class="math inline">k</span> as <span class="math inline">N</span> grows. The modes near <span class="math inline">k = N/2</span> stay far from the whole-number grid: for an even number of beads the largest ratio is <span class="math inline">1/\sin(\pi/N)</span> (slightly less for an odd number), and for any number of beads it is about <span class="math inline">N/\pi</span> once there are many, not <span class="math inline">N/2</span>. A mode can land on a line by coincidence: with 6 beads, the top mode sits at exactly 2×.</p>
+<p>Mode <span class="math inline">k</span> has frequency proportional to <span class="math inline">\sin(\pi k/N)</span>, which is not proportional to <span class="math inline">k</span>: the beads are not exactly harmonic. For small <span class="math inline">k</span>, <span class="math inline">\sin(\pi k/N) \approx \pi k/N</span>, so the low modes are nearly harmonic, and the ratio <span class="math inline">\sin(\pi k/N)/\sin(\pi/N)</span> tends to <span class="math inline">k</span> as <span class="math inline">N</span> grows. The modes near <span class="math inline">k = N/2</span> stay far from the whole-number grid: for an even number of beads the largest ratio is <span class="math inline">1/\sin(\pi/N)</span> (slightly less for an odd number), and for any number of beads it is about <span class="math inline">N/\pi</span> once there are many, not <span class="math inline">N/2</span>. A mode can land on a line by coincidence: with 6 beads, the top mode sits at exactly 2×.</p>
 </details>
 </div>
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>Many coupled masses move in a few special shapes, modes, each swinging at its own frequency like a single mass on a spring, and any motion, even a tangle, is a sum of them: a chord. Finding the modes means finding the special shapes of one matrix, the ring’s operator. On a ring the modes are waves, and the low ones sit near the lines of the pitch ruler, but not on them.</p>
+<p>Newton’s law for each bead gave the equation <span class="math inline">m\ddot u_j = \frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})</span>; written for all the beads at once, it reads <span class="math inline">\ddot u = -Au</span> with the operator <span class="math inline">A = \frac{T}{mh}K</span>, a matrix whose corner entries close the ring. Its eigenvectors are waves around the ring, its eigenvalues are <span class="math inline">\lambda_k = \frac{4T}{mh}\sin^2(\pi k/N)</span>, and their square roots, divided by <span class="math inline">2\pi</span>, are the modes’ frequencies. On the spectrum diagram the low modes sit near the lines but not on them. Any motion, even a tangle, is a sum of modes: the jangle you hear is that chord, and each clean tone is one eigenvector.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
@@ -373,6 +398,21 @@ K = \begin{pmatrix} 2 &amp; -1 &amp; -1\\ -1 &amp; 2 &amp; -1\\ -1 &amp; -1 &amp
   document.getElementById("rNo").textContent = N;
   C.onTheme(spec);
   pluck(); requestAnimationFrame(draw);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    [["rS4a", 8], ["rS4b", 24]].forEach(function (q) {
+      var N = q[1], p = [];
+      for (var k = 1; k <= N / 2; k++) p.push({ ratio: Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N), amp: 1 });
+      C.stems(document.getElementById(q[0]), p, { W: 320, H: 96, rmax: 8, fs: 8, sw: 3, noOff: true });
+    });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 

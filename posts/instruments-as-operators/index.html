@@ -208,7 +208,7 @@ window.Quarto = {
       <svg class="spec" id="rulerDrum" viewbox="0 0 320 96" aria-label="The frequencies in a struck drum's sound, as multiples of the lowest: they fall between the whole-number lines"></svg>
     </div>
   </div>
-  <p class="cap">Call this the <em>pitch ruler</em>. Its gray lines mark whole-number multiples, 1×, 2×, 3×, …, of one base frequency, here the lowest. Each blue stem is one frequency in the sound; taller means it starts stronger, for an idealized pluck and strike. (The string is plucked a fifth of the way along, so 5× is missing.)</p>
+  <p class="cap">Call this the <em>pitch ruler</em>; with one stem per mode, it is the spectrum diagram that stage 4 of every instrument page draws. Its gray lines mark whole-number multiples, 1×, 2×, 3×, …, of one base frequency, here the lowest. Each blue stem is one frequency in the sound; taller means it starts stronger, for an idealized pluck and strike. (The string is plucked a fifth of the way along, so 5× is missing.)</p>
 </div>
 </div>
 <section id="the-answer-in-three-steps" class="level2">
@@ -216,20 +216,100 @@ window.Quarto = {
 <p><strong>1. Everything that vibrates has a set of favorite shapes.</strong> A string can swing as one arc, as two halves moving in opposite directions, as three thirds, and so on. Each of these shapes, called a <a href="../../posts/instruments-as-operators/glossary.html#mode">mode</a>, swings at its own frequency.</p>
 <svg class="fig" viewbox="0 0 320 112" role="img" aria-label="The first three modes of a string: one arc, two halves, three thirds, at 1, 2 and 3 times the lowest frequency"><path class="dash" d="M 40 22 L 280 22"></path><path class="acc" d="M 40 22 C 126.4 7.7 193.6 7.7 280.0 22"></path><path class="acc" opacity="0.35" d="M 40 22 C 126.4 36.3 193.6 36.3 280.0 22"></path><circle cx="40" cy="22" r="2.5" class="fillacc"></circle><circle cx="280" cy="22" r="2.5" class="fillacc"></circle><text x="290" y="26">1×</text><path class="dash" d="M 40 56 L 280 56"></path><path class="acc" d="M 40 56 C 83.2 41.7 116.8 41.7 160.0 56 C 203.2 70.3 236.8 70.3 280.0 56"></path><path class="acc" opacity="0.35" d="M 40 56 C 83.2 70.3 116.8 70.3 160.0 56 C 203.2 41.7 236.8 41.7 280.0 56"></path><circle cx="40" cy="56" r="2.5" class="fillacc"></circle><circle cx="280" cy="56" r="2.5" class="fillacc"></circle><text x="290" y="60">2×</text><path class="dash" d="M 40 90 L 280 90"></path><path class="acc" d="M 40 90 C 68.8 75.7 91.2 75.7 120.0 90 C 148.8 104.3 171.2 104.3 200.0 90 C 228.8 75.7 251.2 75.7 280.0 90"></path><path class="acc" opacity="0.35" d="M 40 90 C 68.8 104.3 91.2 104.3 120.0 90 C 148.8 75.7 171.2 75.7 200.0 90 C 228.8 104.3 251.2 104.3 280.0 90"></path><circle cx="40" cy="90" r="2.5" class="fillacc"></circle><circle cx="280" cy="90" r="2.5" class="fillacc"></circle><text x="290" y="94">3×</text></svg>
 <p><strong>2. A pluck sets many of them going at once.</strong> What you hear is a chord of the modes’ frequencies: the lowest, called the <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>, and the <a href="../../posts/instruments-as-operators/glossary.html#partial">overtones</a> above it. They are the stems on the ruler above.</p>
-<p><strong>3. Whether that chord sounds like one note depends on how the frequencies line up.</strong> If they sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, the sound repeats itself many times a second, and the ear hears that repetition rate as the <a href="../../posts/instruments-as-operators/glossary.html#pitch">pitch</a>. A string’s modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead’s land at 1×, 1.59×, 2.14×, 2.30×, …: a few fall near a line by chance, but no frequency we hear as pitch fits them all. The sound never repeats, and it dies fast: a thud.</p>
+<p><strong>3. Whether that chord sounds like one note depends on how the frequencies line up.</strong> If they sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, the sound repeats itself many times a second, and the ear hears that repetition rate as the <a href="../../posts/instruments-as-operators/glossary.html#pitch">pitch</a>. A string’s modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead’s land at 1×, 1.59×, 2.14×, 2.30×, …: a few fall near a line by chance, but no frequency we hear as pitch fits them all. The sound doesn’t repeat at any rate we hear as pitch, and it dies fast: a thud.</p>
 <div class="northstar">
-<p><strong>The idea behind the whole series.</strong> How an instrument is built, stretched and held decides its modes and their frequencies. Put the frequencies you hear on the pitch ruler: <strong>on the lines, a note; off the lines, a clang or a thud.</strong> More exactly, you hear a note when they all sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch. Each instrument page puts its instrument on the ruler to see which.</p>
+<p><strong>The idea behind the whole series.</strong> Newton’s law turns each instrument into an <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>, and the operator’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> gives its frequencies: how the instrument is built, stretched and held decides them. Put the frequencies you hear on the pitch ruler: <strong>on the lines, a note; off the lines, a clang or a thud.</strong> More exactly, you hear a note when they all sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch. Each instrument page puts its instrument on the ruler to see which.</p>
 </div>
-<p><strong>The mathematics, in one sentence.</strong> Newton’s law turns each instrument into an <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>, a rule that takes a shape of the instrument and gives back the force pulling it back toward rest, and the frequencies come from that operator’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>.</p>
+<p><a href="#the-journey">Skip to the journey ↓</a></p>
+</section>
+<section id="the-mathematics-one-recipe-every-instrument" class="level2">
+<h2 class="anchored" data-anchor-id="the-mathematics-one-recipe-every-instrument">The mathematics: one recipe, every instrument</h2>
+<p>Behind every page is the same recipe, and it is the mathematical heart of the series: Newton’s law gives each instrument an operator, and the operator’s spectrum gives its frequencies. The page <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a> lays the idea out in full and runs it on every instrument; here are its two steps.</p>
+<p><strong>1. Derive the instrument’s operator from first principles.</strong> Take one small piece of the instrument (a bit of string, a slab of air, a slice of steel, a patch of drumhead) and apply Newton’s law: mass times acceleration equals the force on it. The force comes from the material: tension, air pressure, or the stiffness of bent steel. Worked out, the force on the piece turns out to depend only on the shape of the instrument around it, through a fixed rule. Dividing by the mass gives an equation of the same form for every instrument, <span class="math display">
+u_{tt} = -A\,u ,
+</span> where <span class="math inline">u</span> is the instrument’s shape (how far each point is from rest; for a tube, the air pressure), <span class="math inline">u_{tt}</span> is its <a href="../../posts/instruments-as-operators/glossary.html#partial-derivative">acceleration</a>, and <span class="math inline">A</span> is the <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>: the rule that takes a shape and returns minus the restoring force per unit mass. How the instrument is held (ends tied, clamped, open, free) decides which shapes <span class="math inline">A</span> may act on, and is part of the operator.</p>
+<p><strong>2. Find its spectrum.</strong> A <a href="../../posts/instruments-as-operators/glossary.html#mode">mode</a> is a shape that the operator only rescales, <span class="math display">
+A\,X = \lambda\,X ,
+</span> for some number <span class="math inline">\lambda</span>, an <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a>. Every operator here has <span class="math inline">\lambda \ge 0</span> (where <span class="math inline">\lambda = 0</span> occurs, it is the whole instrument drifting, which makes no sound). For <span class="math inline">\lambda &gt; 0</span> such a shape swings in place as <span class="math inline">X\cos(\sqrt{\lambda}\,t + \phi)</span>, so it sounds at the frequency <span class="math display">
+f = \frac{\sqrt{\lambda}}{2\pi} .
+</span> The list of all the eigenvalues is the operator’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>. So the frequencies an instrument rings at on its own, once struck or plucked, are fixed by its operator; how you strike or pluck it only decides how strongly each one sounds. A steady bow or breath can do more: it can lock the sound onto exact whole-number multiples (pages 4, 5 and 6b).</p>
+<p>Each instrument page carries out both steps in full, from Newton’s law to the frequencies:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Page</th>
+<th style="text-align: left;">Newton’s law on</th>
+<th style="text-align: left;">Operator <span class="math inline">A</span></th>
+<th style="text-align: left;">Held</th>
+<th style="text-align: left;">Frequencies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/oscillator.html">1 · Spring</a></td>
+<td style="text-align: left;">one mass</td>
+<td style="text-align: left;">multiply by <span class="math inline">k/m</span></td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">one: <span class="math inline">\sqrt{k/m}/2\pi</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/ring.html">2 · Beads</a></td>
+<td style="text-align: left;">each bead</td>
+<td style="text-align: left;">a matrix</td>
+<td style="text-align: left;">in a ring</td>
+<td style="text-align: left;"><span class="math inline">\propto \sin(\pi k/N)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/circle.html">3 · Loop</a></td>
+<td style="text-align: left;">a bit of string</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,d^2/d\theta^2</span></td>
+<td style="text-align: left;">in a loop</td>
+<td style="text-align: left;"><span class="math inline">\propto n</span>, exactly</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/violin.html">4 · String</a></td>
+<td style="text-align: left;">a bit of string</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,d^2/dx^2</span></td>
+<td style="text-align: left;">both ends tied</td>
+<td style="text-align: left;"><span class="math inline">\propto n</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/clarinet.html">5 · Clarinet</a></td>
+<td style="text-align: left;">a slab of air</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,d^2/dx^2</span>, on pressure</td>
+<td style="text-align: left;">one end closed</td>
+<td style="text-align: left;"><span class="math inline">\propto 2n-1</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/kalimba.html">6 · Kalimba</a></td>
+<td style="text-align: left;">a slice of steel</td>
+<td style="text-align: left;"><span class="math inline">\kappa^2\,d^4/dx^4</span></td>
+<td style="text-align: left;">clamped, free tip</td>
+<td style="text-align: left;"><span class="math inline">1 : 6.27 : 17.55</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/piano.html">7 · Piano</a></td>
+<td style="text-align: left;">a bit of stiff wire</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span></td>
+<td style="text-align: left;">ends pinned</td>
+<td style="text-align: left;"><span class="math inline">n\sqrt{1+Bn^2}</span>, slightly sharp</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/drum.html">8 · Drum</a></td>
+<td style="text-align: left;">a patch of drumhead</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,\Delta</span></td>
+<td style="text-align: left;">rim fixed</td>
+<td style="text-align: left;"><span class="math inline">1 : 1.59 : 2.14 : 2.30</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here <span class="math inline">n = 1, 2, 3, \dots</span> counts the modes, <span class="math inline">N</span> is the number of beads, <span class="math inline">\Delta</span> is the two-dimensional version of <span class="math inline">d^2/dx^2</span> (page 8), and <span class="math inline">\propto</span> means “proportional to”. The constants <span class="math inline">c</span>, <span class="math inline">\kappa</span> and <span class="math inline">B</span> come from tension, density and stiffness; each page derives them. The <a href="../../posts/instruments-as-operators/map.html">map</a> has the full comparison.</p>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Precisely</span>The two ideas, stated exactly <span class="needs">uses derivatives</span>
+<span class="label">Precisely</span>What counts as a note <span class="needs">uses no extra mathematics</span>
 </summary>
-<ol type="1">
-<li><strong>An instrument’s frequencies come from the spectrum of an operator.</strong> Write the instrument’s motion as <span class="math inline">u_{tt} = -Au</span>, where <span class="math inline">u</span> is its shape, <span class="math inline">u_{tt}</span> its <a href="../../posts/instruments-as-operators/glossary.html#partial-derivative">acceleration</a>, and <span class="math inline">A</span> the operator: minus the restoring force per unit mass, acting on the shapes allowed by how the instrument is held. The shapes <span class="math inline">A</span> only rescales are the <a href="../../posts/instruments-as-operators/glossary.html#mode">modes</a>; the rescaling factors are its <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a>, and their list is the spectrum. Each frequency is the square root of an eigenvalue, divided by <span class="math inline">2\pi</span>. The simplest case is a loop of string, where <span class="math inline">A = -c^2\,d^2/d\theta^2</span> and writing a shape in its modes is the <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a> (page 3).</li>
-<li><strong>A clear pitch means the frequencies you hear sit at, or very near, whole-number multiples of one frequency in the pitch range,</strong> from a few dozen to a few thousand hertz. That frequency need not be present itself (page 0). Then the sound repeats, or nearly repeats, and the repetition rate is the pitch. What you hear can differ from the spectrum in two ways: some frequencies die almost at once, leaving the rest (the kalimba, page 6), and a steady bow or breath can lock the motion into exact repetition near one of the operator’s frequencies, even when the operator’s overtones are off the lines (the harmonica, page 6b).</li>
-</ol>
+<p>A clear pitch means the frequencies you hear sit at, or very near, whole-number multiples of one frequency in the pitch range, from a few dozen to a few thousand hertz. That frequency need not be present itself (page 0). Then the sound repeats, or nearly repeats, and the repetition rate is the pitch. What you hear can differ from the spectrum in two ways: some frequencies die almost at once, leaving the rest (the kalimba, page 6), and a steady bow or breath can lock the motion into exact repetition near one of the operator’s frequencies, even when the operator’s overtones are off the lines (the harmonica, page 6b).</p>
 </details>
 </div>
 </section>
@@ -242,6 +322,7 @@ window.Quarto = {
   <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">As a plucked note fades, its pitch barely sags. The reason is the simplest vibrating thing there is.</span></li>
   <li><a href="ring.html"><span class="n">2</span><span class="t">How can a tangled wobble be a few simple motions?</span></a><span class="hint">Pluck one bead on a ring of beads: the mess turns out to be a chord.</span></li>
   <li><a href="circle.html"><span class="n">3</span><span class="t">Why does a loop of string land exactly on the lines?</span></a><span class="hint">The cleanest case of all, and where the lines on the ruler come from.</span></li>
+  <li><a href="spectrum.html"><span class="n">★</span><span class="t">The spectrum of an operator</span></a><span class="hint">The recipe behind every page, from Newton's law to the sound, run on every instrument.</span></li>
   <li class="part">Instruments</li>
   <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">Touch a violin string at its middle and the note leaps up.</span></li>
   <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Same length; one end closed.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
@@ -255,7 +336,7 @@ window.Quarto = {
 </ol>
 </div>
 <p>The demo sounds in this list are simplified: the piano pair exaggerates the string’s stiffness, and the two drums play every mode equally loud.</p>
-<p>Short on time? Pages 0, 4 and 8, the note, the string and the drum, carry the main idea; page 3 adds the mathematics behind it. The <a href="../../posts/instruments-as-operators/map.html">map</a> has every instrument’s sound side by side, reading paths by depth, and the reference tables. Blue words link to the <a href="../../posts/instruments-as-operators/glossary.html">glossary</a>.</p>
+<p>Short on time? Start with <a href="../../posts/instruments-as-operators/spectrum.html">the spectrum of an operator</a>, the idea in one page. Or read each page’s puzzle and the short summary box under its demo: about half an hour for the whole series. Or pages 0, 4 and 8, the note, the string and the drum, carry the main idea, and 4 and 8 derive their operators and spectra in full; page 3 shows the recipe in its simplest form. The <a href="../../posts/instruments-as-operators/map.html">map</a> has every instrument’s sound side by side, reading paths by depth, and the reference tables. Blue words link to the <a href="../../posts/instruments-as-operators/glossary.html">glossary</a>.</p>
 <div class="made">
 <p><em>How this was made.</em> The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.</p>
 </div>

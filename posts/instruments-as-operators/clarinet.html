@@ -185,15 +185,15 @@ window.Quarto = {
 
 
 <div class="series-nav slim">
-<p><a href="../../posts/instruments-as-operators/violin.html">← 4 String</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba →</a></p>
+<p><a href="../../posts/instruments-as-operators/violin.html">← 4 String</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba →</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>. About 8 minutes, plus the folds.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>. Math: up to mixed partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.</p>
 </div>
 <div class="puzzle">
 <p>A clarinet and a flute are about the same length. Yet the clarinet’s lowest note is almost an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave</a> below the flute’s. And when players <a href="../../posts/instruments-as-operators/glossary.html#overblow">overblow</a>, making the tube jump to its next mode, the flute jumps up an octave while the clarinet jumps an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave and a fifth</a>. The same equation governs the air in both tubes. What is different?</p>
 </div>
-<p>Hold the blow button on the clarinet, then switch the same tube to a flute and blow again. The register key (on the flute it stands in for blowing harder) makes either tube jump to its next mode.</p>
+<p>Listen first: hold the blow button on the clarinet, then switch the same tube to a flute and blow again. The register key (on the flute it stands in for blowing harder) makes either tube jump to its next mode.</p>
 <style>
 #blow { min-width: 9rem; min-height: 3rem; font-size: 1.05rem; touch-action: none; user-select: none; -webkit-user-select: none; }
 #blow.on { background: var(--accent); color: var(--paper); border-color: var(--accent); }
@@ -213,20 +213,20 @@ window.Quarto = {
 </section>
 </div>
 <div class="gist">
-<p><strong>The gist.</strong> Only the ends differ. A flute is open at both ends, and its lowest note fits half a wave of pressure into the tube. A clarinet is closed at the reed, and its lowest note fits only a quarter of a wave: a wave twice as long, so a note an octave lower. A tube closed at one end also skips every second mode, so the clarinet’s next mode up is 3 times its lowest, an octave and a fifth. Switch the demo between clarinet and flute and watch the stems.</p>
+<p><strong>The recipe on this instrument, in brief.</strong></p>
+<ol type="1">
+<li><em>Newton’s law</em> on a thin slab of air, with air’s resistance to being squeezed, gives the wave equation <span class="math inline">p_{tt} = c^2 p_{xx}</span> for the pressure.</li>
+<li><em>The operator</em> is the string’s, <span class="math inline">A = -c^2\,d^2/dx^2</span>, now acting on pressure; only the ends differ: room pressure at an open end, no pressure slope at the clarinet’s nearly closed reed.</li>
+<li><em>Its spectrum</em>: the flute’s frequencies are <span class="math inline">n\,c/2L</span>, the clarinet’s <span class="math inline">(2n-1)\,c/4L</span>: half as low, and odd multiples only.</li>
+<li><em>On the diagram</em>: both blown sounds sit on the lines; the clarinet’s strong stems are the odd ones.</li>
+<li><em>What we hear</em>: the clarinet sounds almost an octave below the flute and overblows to three times its lowest frequency, an octave and a fifth.</li>
+</ol>
+<p><a href="#what-we-hear">Skip to what we hear</a> if you only want the answer.</p>
 </div>
-<section id="on-the-pitch-ruler" class="level2">
-<h2 class="anchored" data-anchor-id="on-the-pitch-ruler">On the pitch ruler</h2>
-<p>The stems under the demo are the frequencies in the sound, on a ruler whose gray lines are whole-number multiples of the note being played. The flute’s stems sit on every line. The clarinet’s sit on the lines too, but the strong ones are at 1, 3, 5, 7, …; in the low register (the lowest notes) the even ones are faint. Both sounds are notes. What the closed end changes is which lines are strong, and how low the whole ruler starts.</p>
-</section>
-<section id="how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p><strong>Same equation, other ends.</strong> The air in a tube obeys the same <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a> as a string, with the air pressure in place of the string’s sideways displacement and the speed of sound, about 343 m/s, in place of the string’s wave speed (fold below). What differs is the ends. At an open end the air meets the room, so the pressure there stays at room pressure, just as a string’s tied end stays put. At the clarinet’s reed the opening is nearly shut, so the air there cannot move back and forth: it piles up and thins out against the closed end, and the pressure swings most there.</p>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Step-by-step derivation</span>Newton’s law for a slab of air <span class="needs">uses partial derivatives</span>
-</summary>
+<section id="newtons-law-the-equation-of-motion" class="level2">
+<h2 class="anchored" data-anchor-id="newtons-law-the-equation-of-motion">1 · Newton’s law: the equation of motion</h2>
+<p><em>Mathematics used: partial derivatives, including mixed ones (explained).</em></p>
+<p>The air in a tube is a long column of tiny slabs, each pushed back and forth by the pressure on its two faces. We apply Newton’s law, mass times acceleration equals force, to one slab, and combine it with the way air pushes back when it is squeezed.</p>
 <svg class="fig" viewbox="0 0 420 130" role="img" aria-label="A slab of air in a tube, pushed by pressure on both faces">
   <path class="ink" d="M 20 30 L 400 30 M 20 100 L 400 100"></path>
   <rect x="170" y="31" width="80" height="68" class="bar" opacity="0.5"></rect>
@@ -235,64 +235,51 @@ window.Quarto = {
   <text x="96" y="58">p(x)</text><text x="300" y="58">p(x+dx)</text>
   <text x="180" y="118">slab, mass ρS dx</text>
 </svg>
-<ol type="1">
-<li>Let <span class="math inline">\xi(x, t)</span> be how far the air that normally sits at <span class="math inline">x</span> has moved along the tube, and let the tube’s cross-section have area <span class="math inline">S</span>.</li>
-<li>The slab of air between <span class="math inline">x</span> and <span class="math inline">x + dx</span> has mass <span class="math inline">\rho S\,dx</span>. The only force on it along the tube is the pressure difference between its two faces, <span class="math inline">S\,[p(x) - p(x + dx)] \approx -S\,p_x\,dx</span>. Newton’s law, mass times acceleration equals force, divided by <span class="math inline">S\,dx</span>, is <span class="math inline">\rho\,\xi_{tt} = -p_x</span>.</li>
-<li>The slab’s two faces move by <span class="math inline">\xi(x)</span> and <span class="math inline">\xi(x + dx)</span>, so its length changes by <span class="math inline">\xi(x + dx) - \xi(x) \approx \xi_x\,dx</span>: it is stretched by the fraction <span class="math inline">\xi_x</span>, and its pressure drops in proportion: <span class="math inline">p = -K\,\xi_x</span>. In a sound wave the squeezing is too fast for heat to flow, which is called <a href="../../posts/instruments-as-operators/glossary.html#bulk-modulus">adiabatic</a>; for air this makes <span class="math inline">K</span> about 1.4 times atmospheric pressure.</li>
-<li>Differentiate step 2 in <span class="math inline">x</span> and step 3 twice in <span class="math inline">t</span>: <span class="math inline">\rho\,\xi_{ttx} = -p_{xx}</span> and <span class="math inline">p_{tt} = -K\,\xi_{xtt}</span>. Eliminating <span class="math inline">\xi</span> gives <span class="math inline">p_{tt} = (K/\rho)\,p_{xx}</span>.</li>
-</ol>
-<p>What was assumed: the tube is narrow compared with the sound’s wavelength, so the pressure is the same across it, and the pressure changes are small. Friction with the walls is left out.</p>
-</details>
+<p><strong>1. How far the air moves.</strong> Let <span class="math inline">\xi(x, t)</span> be how far the air that normally sits at <span class="math inline">x</span> has moved along the tube, and let the tube’s cross-section have area <span class="math inline">S</span>. Let <span class="math inline">p(x, t)</span> be the air pressure in the tube minus room pressure. Subscripts are <a href="../../posts/instruments-as-operators/glossary.html#partial-derivative">partial derivatives</a>: <span class="math inline">\xi_t</span> is the rate of change in time with <span class="math inline">x</span> held fixed, <span class="math inline">\xi_x</span> the rate of change along the tube with <span class="math inline">t</span> held fixed.</p>
+<p><strong>2. A pressure difference pushes the slab.</strong> The slab of air between <span class="math inline">x</span> and <span class="math inline">x + dx</span> has mass <span class="math inline">\rho S\,dx</span>, where <span class="math inline">\rho</span> is the density of air. The only force on it along the tube is the pressure difference between its two faces, <span class="math inline">S\,[p(x) - p(x + dx)] \approx -S\,p_x\,dx</span>. Mass times acceleration equals force, divided by <span class="math inline">S\,dx</span>: <span class="math display">
+\rho\,\xi_{tt} = -p_x .
+</span></p>
+<p><strong>3. Squeezed air pushes back.</strong> The slab’s two faces move by <span class="math inline">\xi(x)</span> and <span class="math inline">\xi(x + dx)</span>, so its length changes by <span class="math inline">\xi(x + dx) - \xi(x) \approx \xi_x\,dx</span>: it is stretched by the fraction <span class="math inline">\xi_x</span>, and its pressure drops in proportion, <span class="math display">
+p = -K\,\xi_x ,
+</span> where <span class="math inline">K</span> is the <a href="../../posts/instruments-as-operators/glossary.html#bulk-modulus">bulk modulus</a>, air’s resistance to being squeezed (this <span class="math inline">K</span> has nothing to do with the bead matrix of page 2). In a sound wave the squeezing is too fast for heat to flow, which is called <a href="../../posts/instruments-as-operators/glossary.html#bulk-modulus">adiabatic</a>; for air this makes <span class="math inline">K</span> about 1.4 times atmospheric pressure.</p>
+<p><strong>4. A pressure slope pushes the air, and moving air changes the pressure: together they make a wave.</strong> To combine steps 2 and 3, differentiate both. A <em>mixed</em> subscript means differentiating more than once in turn: <span class="math inline">\xi_{ttx}</span> means twice in <span class="math inline">t</span>, then once in <span class="math inline">x</span>. For a smooth motion the order does not matter, so <span class="math inline">\xi_{xtt} = \xi_{ttx}</span>. Differentiate step 2 once in <span class="math inline">x</span>: <span class="math display">
+\rho\,\xi_{ttx} = -p_{xx} .
+</span> Differentiate step 3 twice in <span class="math inline">t</span>: <span class="math inline">p_{tt} = -K\,\xi_{xtt} = -K\,\xi_{ttx}</span>. Put in <span class="math inline">\xi_{ttx} = -p_{xx}/\rho</span> from the line above, and <span class="math inline">\xi</span> is gone: <span class="math display">
+p_{tt} = \frac{K}{\rho}\,p_{xx} .
+</span> It is the string’s <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a> again, with pressure in place of sideways displacement and <span class="math inline">c = \sqrt{K/\rho}</span>, the speed of sound, about 343 m/s at 20 °C, in place of the string’s wave speed.</p>
+<p><strong>What we assumed.</strong> The tube is a cylinder, narrow compared with the sound’s wavelength, so the pressure is the same across it; the pressure changes are small; friction with the walls is left out. A real clarinet’s bore is not exactly cylindrical, and its holes and bell matter; they refine the numbers below, not the picture.</p>
+</section>
+<section id="the-operator" class="level2">
+<h2 class="anchored" data-anchor-id="the-operator">2 · The operator</h2>
+<p>Read the equation as a rule: the pressure’s rate of change, twice over in time, is <span class="math inline">c^2</span> times its curvature along the tube. So the operator is the string’s, <span class="math inline">A = -c^2\,d^2/dx^2</span>, now acting on pressure shapes, and the equation reads <span class="math inline">p_{tt} = -A\,p</span>. What differs between a flute and a clarinet is only which shapes the operator may act on: the ends.</p>
+<p><strong>The ends.</strong> At an open end the air in the tube meets the room, so the pressure there is room pressure: <span class="math inline">p = 0</span>. This is approximate: the air just outside moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end, an amount called the <em>end correction</em>. At the clarinet’s reed the opening is nearly shut, so the air there cannot move back and forth. Air that never moves has no acceleration, so by step 2 the pressure has no slope there: <span class="math inline">p_x = 0</span>. The air piles up and thins out against the closed end, and the pressure swings most there. The first condition is the string’s Dirichlet condition; the second, a condition on the slope, is called a <em>Neumann condition</em>.</p>
+<div class="result">
+<p><strong>The tube’s operator.</strong> <span class="math display">
+\begin{gathered}
+p_{tt} = -A\,p, \qquad A = -c^2\,\frac{d^2}{dx^2}, \\
+c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
+\end{gathered}
+</span> acting on pressure shapes along a tube of length <span class="math inline">L</span>. Flute, open at both ends: <span class="math inline">p(0) = p(L) = 0</span>. Clarinet, closed at the reed (<span class="math inline">x = 0</span>) and open at the bell: <span class="math inline">p_x(0) = 0</span> and <span class="math inline">p(L) = 0</span>. In words: the same rule as the string, with different ends.</p>
 </div>
-<p><strong>Half a wave or a quarter.</strong> The flute’s lowest mode has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet’s lowest mode swings most at the reed and has room pressure at the open end: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end. Real flutes and clarinets differ a little in length, the clarinet’s mouthpiece and bell change its effective length, and the open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.</p>
+</section>
+<section id="its-spectrum" class="level2">
+<h2 class="anchored" data-anchor-id="its-spectrum">3 · Its spectrum</h2>
+<p>A <a href="../../posts/instruments-as-operators/glossary.html#mode">mode</a> is a pressure shape <span class="math inline">X(x)</span> that the operator only rescales, <span class="math inline">A X = \lambda X</span>; it swings at the frequency <span class="math inline">f = \sqrt\lambda/2\pi</span>, and the list of all the eigenvalues is the <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>. The ends decide which shapes are allowed.</p>
+<p><strong>1. Which shapes does the operator only rescale?</strong> Writing <span class="math inline">\lambda = c^2k^2</span>, the mode equation <span class="math inline">-c^2X'' = \lambda X</span> becomes <span class="math inline">X'' = -k^2X</span>, solved by the waves <span class="math display">
+X = a\cos kx + b\sin kx, \qquad f = \frac{\sqrt\lambda}{2\pi} = \frac{ck}{2\pi} .
+</span></p>
+<p><strong>2. The flute: room pressure at both ends.</strong> <span class="math inline">X(0) = 0</span> forces <span class="math inline">a = 0</span>, and <span class="math inline">X(L) = 0</span> needs <span class="math inline">\sin kL = 0</span>, so <span class="math inline">kL = n\pi</span>: one half wave, two half waves, and so on. The eigenvalues are <span class="math inline">\lambda_n = (n\pi c/L)^2</span> and the frequencies <span class="math inline">f_n = n\,c/2L</span>.</p>
+<p><strong>3. The clarinet: no pressure slope at the reed, room pressure at the bell.</strong> <span class="math inline">X'(0) = bk = 0</span> at the reed forces <span class="math inline">b = 0</span>, leaving <span class="math inline">X = \cos kx</span>, and <span class="math inline">X(L) = 0</span> at the open end needs <span class="math inline">\cos kL = 0</span>, so <span class="math inline">kL = (2n - 1)\pi/2</span>: one quarter wave, three quarter waves, and so on. The eigenvalues are <span class="math inline">\lambda_n = \big((2n-1)\pi c/2L\big)^2</span> and the frequencies <span class="math inline">f_n = (2n-1)\,c/4L</span>.</p>
+<div class="result">
+<p><strong>The two spectra.</strong></p>
+<p><em>Flute</em>, open at both ends: modes <span class="math inline">\sin(n\pi x/L)</span>, eigenvalues <span class="math inline">(n\pi c/L)^2</span>, frequencies <span class="math inline">f_n = n\,c/2L</span>, that is 1, 2, 3, 4, … times the lowest.</p>
+<p><em>Clarinet</em>, closed at the reed and open at the bell: modes <span class="math inline">\cos\big((2n-1)\pi x/2L\big)</span>, eigenvalues <span class="math inline">\big((2n-1)\pi c/2L\big)^2</span>, frequencies <span class="math inline">f_n = (2n-1)\,c/4L</span>, that is 1, 3, 5, 7, … times the lowest.</p>
+<p>The lowest frequencies are <span class="math inline">c/2L</span> and <span class="math inline">c/4L</span>: a ratio of exactly 2 for the same ideal tube.</p>
+</div>
 <div class="derive">
 <details>
 <summary>
-<span class="label">Precisely</span>The two end conditions and the two spectra <span class="needs">uses derivatives</span>
-</summary>
-<p><strong>The operator.</strong> Let <span class="math inline">p(x, t)</span> be the air pressure in the tube minus room pressure. The fold above shows that it obeys the wave equation again, <span class="math display">
-p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
-</span> where <span class="math inline">\rho</span> is the density of air and <span class="math inline">K</span> its <a href="../../posts/instruments-as-operators/glossary.html#bulk-modulus">bulk modulus</a>, its resistance to being squeezed (this <span class="math inline">K</span> has nothing to do with the bead matrix of page 2). The constant <span class="math inline">c</span> is the speed of sound, about 343 m/s at 20 °C. So the operator is again <span class="math inline">-c^2\,d^2/dx^2</span>, now acting on pressure shapes along the tube.</p>
-<p><strong>Boundary conditions.</strong> At an open end the air in the tube meets the room, so the pressure there is room pressure: <span class="math inline">p = 0</span>. This is approximate: the air just outside moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end, an amount called the <em>end correction</em>. At the clarinet’s reed the opening is nearly shut, so the air there cannot move back and forth. Air that never moves has no acceleration, so the net push on it is zero; that push is set by how fast the pressure changes along the tube, <span class="math inline">p_x</span>, so <span class="math inline">p_x = 0</span> there (step 2 of the fold above, with <span class="math inline">\xi</span> the air’s displacement along the tube). The first of these is the string’s Dirichlet condition. The second, a condition on the slope, is called a <em>Neumann condition</em>.</p>
-<p><strong>Spectrum.</strong> A mode is a pressure shape <span class="math inline">X(x)</span> with <span class="math inline">-X'' = k^2 X</span>, so <span class="math inline">X = a\cos kx + b\sin kx</span>, and its frequency is <span class="math inline">f = ck/2\pi</span>. For the clarinet, <span class="math inline">X'(0) = bk = 0</span> at the reed forces <span class="math inline">b = 0</span>, leaving <span class="math inline">X = \cos kx</span>, and <span class="math inline">X(L) = 0</span> at the open end needs <span class="math inline">\cos kL = 0</span>, so <span class="math inline">kL = (2n - 1)\pi/2</span> and <span class="math inline">f_n = (2n-1)c/4L</span>. For the flute, open at both ends, the conditions are the string’s, and give <span class="math inline">\sin(n\pi x/L)</span>. So</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: left;">ends</th>
-<th style="text-align: left;">eigenfunctions</th>
-<th style="text-align: left;">frequencies</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">flute</td>
-<td style="text-align: left;">open, open</td>
-<td style="text-align: left;"><span class="math inline">\sin(n\pi x/L)</span></td>
-<td style="text-align: left;"><span class="math inline">f_n = n\,\dfrac{c}{2L}</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">clarinet</td>
-<td style="text-align: left;">closed, open</td>
-<td style="text-align: left;"><span class="math inline">\cos\big((2n-1)\pi x/2L\big)</span></td>
-<td style="text-align: left;"><span class="math inline">f_n = (2n-1)\,\dfrac{c}{4L}</span></td>
-</tr>
-</tbody>
-</table>
-<p>The lowest frequencies are <span class="math inline">c/2L</span> and <span class="math inline">c/4L</span>: a ratio of exactly 2 for the same ideal tube. A real clarinet’s bore is not exactly cylindrical, and its holes and bell matter; they refine these numbers, not the picture.</p>
-</details>
-</div>
-<p><strong>Only odd multiples.</strong> The flute’s higher modes fit 2, 3, 4, … half waves into the tube, so its modes sit at every whole-number multiple of its lowest. The clarinet’s must keep the pressure swinging most at the reed and at room level at the open end, and that fits 1, 3, 5, … quarter waves, with nothing in between: only odd multiples. So when a clarinetist presses the register key, the tube jumps to 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). A flutist overblows by blowing faster, and the flute’s next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.</p>
-<div class="derive">
-<details>
-<summary>
-<span class="label">Proof</span>Why only odd multiples: the closed tube is a quarter of a loop <span class="needs">uses the circle’s eigenfunctions (page 3)</span>
+<span class="label">Proof</span>Another way to see the odd multiples: the closed tube is a quarter of a loop <span class="needs">uses the circle’s eigenfunctions (page 3)</span>
 </summary>
 <p>Use the reflections from the <a href="../../posts/instruments-as-operators/violin.html">string page</a>. Take a pressure shape <span class="math inline">p</span> on <span class="math inline">[0, L]</span> with <span class="math inline">p_x(0) = 0</span> and <span class="math inline">p(L) = 0</span>.</p>
 <ol type="1">
@@ -300,9 +287,26 @@ p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
 <li>Reflect that <em>oddly</em> across <span class="math inline">x = L</span>, <span class="math inline">p(2L - x) = -p(x)</span>, and repeat. The result is a shape on a loop of circumference <span class="math inline">4L</span>.</li>
 <li>On that loop the eigenfunctions are <span class="math inline">\cos(k\pi x/2L)</span> and <span class="math inline">\sin(k\pi x/2L)</span>. Step 1 keeps only cosines. Step 2 needs <span class="math inline">\cos\big(k\pi(2L - x)/2L\big) = (-1)^k\cos(k\pi x/2L)</span> to equal <span class="math inline">-\cos(k\pi x/2L)</span>, which keeps only odd <span class="math inline">k</span>.</li>
 </ol>
-<p>So the clarinet’s modes are the odd harmonics of a loop four tube-lengths long, which is where both the factor 4 and the odd numbers come from.</p>
+<p>So the clarinet’s modes are the odd multiples of a loop four tube-lengths long, which is where both the factor 4 and the odd numbers come from.</p>
 </details>
 </div>
+</section>
+<section id="on-the-spectrum-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="on-the-spectrum-diagram">4 · On the spectrum diagram</h2>
+<p>The stems below, like those under the demo at the top, show the frequencies in the blown sound, on a ruler whose gray lines are whole-number multiples of the note being played. The note itself is the frequency of the sounding mode from the result box: for the lowest notes, <span class="math inline">f_1 = c/4L</span> on the clarinet and <span class="math inline">c/2L</span> on the flute, with <span class="math inline">L</span> the tube up to the first open hole. The flute’s stems sit on every line. The clarinet’s sit on the lines too, but the strong ones are at 1, 3, 5, 7, …, the tube’s modes from the box above; in the low register (the lowest notes) the even ones are faint. The heights are how strong each frequency is in the sound.</p>
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="cS4a" viewbox="0 0 320 96" style="max-width:520px" aria-label="The flute's blown sound: every whole-number multiple"></svg>
+  <svg class="spec" id="cS4b" viewbox="0 0 320 96" style="max-width:520px" aria-label="The clarinet's blown sound: strong odd multiples, faint even ones"></svg>
+  <p class="cap">The blown sounds, as multiples of the note being played: the flute (top) has every whole-number multiple; the clarinet (bottom) has strong odd multiples and faint even ones.</p>
+</div>
+</div>
+</section>
+<section id="what-we-hear" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-hear">5 · What we hear</h2>
+<p><strong>Almost an octave deeper.</strong> The flute’s lowest mode, <span class="math inline">\sin(\pi x/L)</span>, has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet’s, <span class="math inline">\cos(\pi x/2L)</span>, swings most at the reed and has room pressure at the open end: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end. Real flutes and clarinets differ a little in length, the clarinet’s mouthpiece and bell change its effective length, and the open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.</p>
+<p>A blown tube does not ring and fade like a plucked string: the reed or the air jet keeps feeding it, and the air settles into one motion that repeats, at a frequency close to the tube’s sounding mode from stage 3. The demo’s sound is made that way: a repeating wave at that mode’s frequency, with the strong odd multiples and faint even ones described below.</p>
+<p><strong>Overblowing: an octave or a twelfth.</strong> The flute’s spectrum has every whole-number multiple of its lowest frequency; the clarinet’s has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). (The demo keeps the low-register tone color when the register key is on.) A flutist overblows by blowing harder, and the flute’s next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.</p>
 <div class="derive">
 <details>
 <summary>
@@ -315,7 +319,7 @@ p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>On the pitch ruler, both tubes play notes: their sound repeats, so its frequencies sit on the lines. The ends decide which lines are strong and where the ruler starts. The string’s operator also governs the air pressure in a tube, and changing the condition at one end, from “pressure equals the room’s” to “the air cannot move”, halves the lowest frequency and keeps only its odd multiples as modes: 1, 3, 5, … times the speed of sound divided by four tube lengths.</p>
+<p>Newton’s law on a slab of air, together with air’s resistance to being squeezed, gave the wave equation for the pressure. Read as a rule, it is the string’s operator, <span class="math inline">A = -c^2\,d^2/dx^2</span>, acting on pressure; only the ends differ. With room pressure at both ends, the flute’s spectrum gives frequencies <span class="math inline">n\,c/2L</span>: every whole-number multiple. With the air held still at the reed, the clarinet’s gives <span class="math inline">(2n-1)\,c/4L</span>: half the lowest frequency and only odd multiples. On the diagram both blown sounds sit on the lines, because they repeat; what we hear is the octave between them, and the twelfth a clarinet jumps when overblown.</p>
 <div class="family">
 <p><strong>Same operator, other ends.</strong> Stopped organ pipes and pan pipes are closed at one end like the clarinet and share its odd-multiples spectrum. Open organ pipes share the flute’s. Oboes and saxophones have cone-shaped tubes instead of cylinders, a different operator, which this series does not cover.</p>
 </div>
@@ -430,6 +434,18 @@ p_{tt} = c^2 p_{xx}, \qquad c^2 = \frac{K}{\rho} \approx (343\ \text{m/s})^2,
   }
   C.onTheme(update);
   update(); requestAnimationFrame(draw);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function draw() {
+    C.stems(document.getElementById("cS4a"), M.clarinet.partials({ flute: true }), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+    C.stems(document.getElementById("cS4b"), M.clarinet.partials(), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
 })();
 </script>
 
