@@ -11,7 +11,7 @@ aliases: [foundations.html]
 ---
 
 ::: {.series-nav .slim}
-[← 2 Beads on a ring](ring.qmd) · [Series](index.qmd) · [Map](map.qmd) · [4 String →](violin.qmd)
+[← 2 Beads](ring.qmd) · [Series](index.qmd) · [Map](map.qmd) · [4 String →](violin.qmd)
 :::
 
 ::: {.pageinfo}

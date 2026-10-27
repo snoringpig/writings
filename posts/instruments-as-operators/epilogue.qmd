@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 9 Shape](shape.qmd) · [Series](index.qmd) · [Map](map.qmd)
+[← 9 Drum shape](shape.qmd) · [Series](index.qmd) · [Map](map.qmd)
 :::
 
 ::: {.pageinfo}

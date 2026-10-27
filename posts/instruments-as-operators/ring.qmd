@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 1 Oscillator](oscillator.qmd) · [Series](index.qmd) · [Map](map.qmd) · [3 The circle →](circle.qmd)
+[← 1 Spring](oscillator.qmd) · [Series](index.qmd) · [Map](map.qmd) · [3 Loop →](circle.qmd)
 :::
 
 ::: {.pageinfo}

@@ -10,7 +10,7 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 ---
 
 ::: {.series-nav .slim}
-[← 8 Drum](drum.qmd) · [Series](index.qmd) · [Map](map.qmd) · [10 Epilogue →](epilogue.qmd)
+[← 8 Drum](drum.qmd) · [Series](index.qmd) · [Map](map.qmd) · [10 Scales →](epilogue.qmd)
 :::
 
 ::: {.pageinfo}

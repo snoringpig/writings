@@ -26,25 +26,36 @@ Pluck a string and you get a note you could hum. Strike a drum and you get a thu
       <svg class="spec" id="rulerDrum" viewBox="0 0 320 96" aria-label="The frequencies in a struck drum's sound, as multiples of the lowest: they fall between the whole-number lines"></svg>
     </div>
   </div>
-  <p class="cap">Each blue stem is one frequency in the sound, drawn as a multiple of the lowest, and its height is how loud it is. The gray lines mark 1×, 2×, 3×, …: call this the <em>pitch ruler</em>.</p>
+  <p class="cap">Each blue stem is one frequency in the sound, drawn as a multiple of the lowest; its height is how strongly it starts, for an idealized pluck and strike, and faint stems are barely there. (The string is plucked a fifth of the way along, which leaves its 5th mode silent.) The gray lines mark whole-number multiples, 1×, 2×, 3×, …: call this the <em>pitch ruler</em>.</p>
 </div>
 </div>
 ```
 
 ## The answer in three steps
 
-**1. Everything that vibrates has a few favourite shapes.** A string can swing as one arc, as two halves moving in opposite directions, as three thirds, and so on. Each of these shapes, called a [mode](glossary.qmd#mode), swings at its own frequency.
+**1. Everything that vibrates has a set of favorite shapes.** A string can swing as one arc, as two halves moving in opposite directions, as three thirds, and so on. Each of these shapes, called a [mode](glossary.qmd#mode), swings at its own frequency.
 
 ```{=html}
 <svg class="fig" viewBox="0 0 320 112" role="img" aria-label="The first three modes of a string: one arc, two halves, three thirds, at 1, 2 and 3 times the lowest frequency"><path class="dash" d="M 40 22 L 280 22"/><path class="acc" d="M 40 22 C 126.4 7.7 193.6 7.7 280.0 22"/><path class="acc" opacity="0.35" d="M 40 22 C 126.4 36.3 193.6 36.3 280.0 22"/><circle cx="40" cy="22" r="2.5" class="fillacc"/><circle cx="280" cy="22" r="2.5" class="fillacc"/><text x="290" y="26">1×</text><path class="dash" d="M 40 56 L 280 56"/><path class="acc" d="M 40 56 C 83.2 41.7 116.8 41.7 160.0 56 C 203.2 70.3 236.8 70.3 280.0 56"/><path class="acc" opacity="0.35" d="M 40 56 C 83.2 70.3 116.8 70.3 160.0 56 C 203.2 41.7 236.8 41.7 280.0 56"/><circle cx="40" cy="56" r="2.5" class="fillacc"/><circle cx="280" cy="56" r="2.5" class="fillacc"/><text x="290" y="60">2×</text><path class="dash" d="M 40 90 L 280 90"/><path class="acc" d="M 40 90 C 68.8 75.7 91.2 75.7 120.0 90 C 148.8 104.3 171.2 104.3 200.0 90 C 228.8 75.7 251.2 75.7 280.0 90"/><path class="acc" opacity="0.35" d="M 40 90 C 68.8 104.3 91.2 104.3 120.0 90 C 148.8 75.7 171.2 75.7 200.0 90 C 228.8 104.3 251.2 104.3 280.0 90"/><circle cx="40" cy="90" r="2.5" class="fillacc"/><circle cx="280" cy="90" r="2.5" class="fillacc"/><text x="290" y="94">3×</text></svg>
 ```
 
-**2. A pluck sets all of them going at once.** What you hear is a chord of the modes' frequencies: the stems on the ruler above.
+**2. A pluck sets many of them going at once.** What you hear is a chord of the modes' frequencies: the lowest, called the [fundamental](glossary.qmd#fundamental), and the [overtones](glossary.qmd#partial) above it. They are the stems on the ruler above.
 
-**3. Whether that chord sounds like one note depends on how the frequencies line up.** If they sit at whole-number multiples, 1×, 2×, 3×, …, the sound repeats itself many times a second, and the ear hears one [pitch](glossary.qmd#pitch). A string's modes do exactly that. A drum's land at 1×, 1.59×, 2.14×, 2.30×, …, between the lines, so its sound never repeats, and you hear a thud.
+**3. Whether that chord sounds like one note depends on how the frequencies line up.** If they sit at whole-number multiples of one frequency, the sound repeats itself, many times a second, and the ear hears one [pitch](glossary.qmd#pitch), at that frequency. A string's modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead's land at 1×, 1.59×, 2.14×, 2.30×, …; a few fall near a line by chance, but no single frequency has them all as whole-number multiples, so the sound never repeats. And a drum's sound dies away quickly, so you hear a short thud rather than a ringing clang.
 
 ::: {.northstar}
-**The idea behind the whole series.** Shape and material decide an instrument's modes and their frequencies. On the pitch ruler: on the lines, a note; off the lines, a clang or a thud. Mathematically, Newton's law turns each instrument into an [operator], and its frequencies are the operator's [spectrum](glossary.qmd#spectrum). Each page finds one instrument's spectrum and puts it on the ruler.
+**The idea behind the whole series.** How an instrument is built, stretched and held decides its modes and their frequencies. If the frequencies you hear all sit at whole-number multiples of one frequency, you hear a note; if no frequency fits them all, you hear a clang or a thud. Each page puts one instrument on the pitch ruler to see which.
+:::
+
+**The mathematics, in one sentence.** Newton's law turns each instrument into an [operator], a rule that takes a shape of the instrument and gives back the force pulling it back toward rest, and the frequencies come from that operator's [spectrum](glossary.qmd#spectrum).
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The two ideas, stated exactly <span class="needs">uses derivatives</span></summary>
+
+1. **An instrument's frequencies come from the spectrum of an operator.** Write the instrument's motion as $u_{tt} = -Au$, where $u$ is its shape, $u_{tt}$ its [acceleration](glossary.qmd#partial-derivative), and $A$ the operator: minus the restoring force per unit mass, acting on the shapes allowed by how the instrument is held. The shapes $A$ only rescales are the [modes](glossary.qmd#mode); the rescaling factors are its [eigenvalues](glossary.qmd#eigenvalue), and their list is the spectrum. Each frequency is the square root of an eigenvalue, divided by $2\pi$. The simplest case is a loop of string, where $A = -c^2\,d^2/d\theta^2$ and writing a shape in its modes is the [Fourier series](glossary.qmd#fourier-series) (page 3).
+2. **A clear pitch means the frequencies you hear sit at, or very near, whole-number multiples of one frequency in the pitch range,** from a few dozen to a few thousand hertz. That frequency need not be present itself (page 0). Then the sound repeats, or nearly repeats, and the repetition rate is the pitch. What you hear can differ from the spectrum in two ways: some frequencies die almost at once, leaving the rest (the kalimba, page 6), and a steady bow or breath can lock the motion into exact repetition near one of the operator's frequencies, even when the operator's overtones are off the lines (the harmonica, page 6b).
+
+</details>
 :::
 
 [operator]: glossary.qmd#operator
@@ -55,25 +66,25 @@ Pluck a string and you get a note you could hum. Strike a drum and you get a thu
 <div class="ins">
 <ol class="journey">
   <li class="part">The idea</li>
-  <li><a href="note.html"><span class="n">0</span><span class="t">What makes a sound a note?</span></a><span class="hint">Take away a note's own frequency and you still hear it.</span><span class="controls"><button data-g="note">▶ The note</button><button data-g="nofund">▶ Without it</button></span></li>
-  <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">One mass on a spring.</span></li>
-  <li><a href="ring.html"><span class="n">2</span><span class="t">How do you untangle a plucked ring of beads?</span></a><span class="hint">A few regular motions, all at once.</span></li>
-  <li><a href="circle.html"><span class="n">3</span><span class="t">Why are a loop's frequencies exactly 1, 2, 3, …?</span></a><span class="hint">The smallest spectrum, and Fourier series.</span></li>
+  <li><a href="note.html"><span class="n">0</span><span class="t">What makes a sound a note?</span></a><span class="hint">Take away a note's lowest frequency and you still hear the same note.</span><span class="controls"><button data-g="note">▶ The note</button><button data-g="nofund">▶ Without it</button></span></li>
+  <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">As a plucked note fades, its pitch doesn't sag. The reason is the simplest vibrating thing there is.</span></li>
+  <li><a href="ring.html"><span class="n">2</span><span class="t">How can a tangled wobble be a few simple motions?</span></a><span class="hint">Pluck one bead on a ring of beads: the mess turns out to be a chord.</span></li>
+  <li><a href="circle.html"><span class="n">3</span><span class="t">Why does a loop of string land exactly on the lines?</span></a><span class="hint">The cleanest case of all, and where the lines on the ruler come from.</span></li>
   <li class="part">Instruments</li>
-  <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">The violin and the string's ends.</span></li>
-  <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Same length, one closed end.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
-  <li><a href="kalimba.html"><span class="n">6</span><span class="t">Why does a kalimba sound clean?</span></a><span class="hint">Its overtones are off the lines.</span><span class="controls"><button data-g="kal">▶ Kalimba tine</button></span></li>
-  <li><a href="harmonica.html"><span class="n">6b</span><span class="t">Where did the harmonica reed's overtones go?</span></a><span class="hint">The same bar as the kalimba; blowing forces a note anyway.</span><span class="controls"><button data-g="kal">▶ Plucked</button><button data-g="harm">▶ Blown</button></span></li>
-  <li><a href="piano.html"><span class="n">7</span><span class="t">Why do piano tuners stretch octaves?</span></a><span class="hint">An exactly 2 : 1 octave wobbles (notes simplified).</span><span class="controls"><button data-g="oct">▶ Exactly 2 : 1</button><button data-g="str">▶ Stretched</button></span></li>
-  <li><a href="drum.html"><span class="n">8</span><span class="t">Why does a drum thud?</span></a><span class="hint">Two dimensions, and Chladni's sand.</span></li>
+  <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">Touch a violin string at its middle and the note leaps up.</span></li>
+  <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Same length; one end closed.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
+  <li><a href="kalimba.html"><span class="n">6</span><span class="t">Why does a kalimba sound clean?</span></a><span class="hint">Its overtones are off the lines, and yet it sounds clean.</span><span class="controls"><button data-g="kal">▶ Kalimba tine</button></span></li>
+  <li><a href="harmonica.html"><span class="n">6b</span><span class="t">Where did the harmonica reed's overtones go?</span></a><span class="hint">Pluck the reed and its overtones are off the lines; blow it and they line up.</span><span class="controls"><button data-g="kal">▶ Plucked</button><button data-g="harm">▶ Blown</button></span></li>
+  <li><a href="piano.html"><span class="n">7</span><span class="t">Why do piano tuners stretch octaves?</span></a><span class="hint">An octave tuned to exactly double the frequency wobbles. (Demo notes simplified, stiffness exaggerated.)</span><span class="controls"><button data-g="oct">▶ Exactly 2 : 1</button><button data-g="str">▶ Stretched</button></span></li>
+  <li><a href="drum.html"><span class="n">8</span><span class="t">Why does a drum thud?</span></a><span class="hint">Sprinkle sand on a vibrating sheet and it draws the modes.</span></li>
   <li class="part">Beyond</li>
-  <li><a href="shape.html"><span class="n">9</span><span class="t">Can you hear the shape of a drum?</span></a><span class="hint">Two different drums, every mode equally loud.</span><span class="controls"><button data-g="gA">▶ Drum A</button><button data-g="gB">▶ Drum B</button></span></li>
-  <li><a href="epilogue.html"><span class="n">10</span><span class="t">Did instruments shape our scales?</span></a><span class="hint">Why some note pairs sound smooth.</span></li>
+  <li><a href="shape.html"><span class="n">9</span><span class="t">Can you hear the shape of a drum?</span></a><span class="hint">Two differently shaped drums with exactly the same frequencies. (Played with every mode equally loud.)</span><span class="controls"><button data-g="gA">▶ Drum A</button><button data-g="gB">▶ Drum B</button></span></li>
+  <li><a href="epilogue.html"><span class="n">10</span><span class="t">Did instruments shape our scales?</span></a><span class="hint">Why some pairs of notes sound smooth together, and whether instruments decided which.</span></li>
 </ol>
 </div>
 ```
 
-Short on time? Pages 0, 3, 4 and 8 carry the main idea. The [map](map.qmd) has reading paths by depth, a table of every page's operator and spectrum, and the instrument families. Blue words link to the [glossary](glossary.qmd).
+Short on time? Pages 0, 4 and 8, the note, the string and the drum, carry the main idea; page 3 adds the mathematics behind it. The [map](map.qmd) has every instrument's sound side by side, reading paths by depth, and the reference tables. Blue words link to the [glossary](glossary.qmd).
 
 ::: {.made}
 *How this was made.* The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.

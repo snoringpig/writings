@@ -122,3 +122,5 @@ svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
 .ins ol.journey button { font-size: 0.85rem; min-height: 2rem; padding: 0.25rem 0.6rem; }
 @media (max-width: 640px) { .ins ol.journey li { grid-template-columns: 1fr; } .ins ol.journey .controls { grid-column: 1; grid-row: auto; justify-content: flex-start; padding-left: 2.2rem; } }
 .series-nav.slim { font-size: 0.86rem; display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; }
+
+.needs { display: inline-block; max-width: 100%; }

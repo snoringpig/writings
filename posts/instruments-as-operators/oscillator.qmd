@@ -10,7 +10,7 @@ resources: [core.js, ins.css]
 ---
 
 ::: {.series-nav .slim}
-[← 0 Note](note.qmd) · [Series](index.qmd) · [Map](map.qmd) · [2 Beads on a ring →](ring.qmd)
+[← 0 Note](note.qmd) · [Series](index.qmd) · [Map](map.qmd) · [2 Beads →](ring.qmd)
 :::
 
 ::: {.pageinfo}
