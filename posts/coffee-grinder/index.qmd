@@ -110,7 +110,7 @@ $$
 g = n\, s_1 \sin\theta .
 $$
 
-Every click adds the same amount of gap: the relation is linear. Only the slope, $s_1\sin\theta$, depends on the grinder. With $\theta = 19^\circ$, 60 clicks gives a gap of about 650 µm.
+Every click adds the same amount of gap: the relation is linear. Only the slope, $s_1\sin\theta$, depends on the grinder. With $\theta = 19^\circ$ (a placeholder: KINGrinder does not publish θ; see the fold below), 60 clicks gives a gap of about 650 µm.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span> Why the gap grows by s·sin θ<span class="needs">uses: right-angle trigonometry</span></summary>
@@ -141,17 +141,18 @@ The histogram never shows a single bar. Two peaks appear.
 - **The main peak** is made of the pieces broken down until they fit through the exit gap, and its position follows the gap. The model centres it on the gap, so about half of it is bigger than the gap. That is a modelling choice: real pieces are not spheres, and a long one can slip through endwise.
 - **The fines peak** is made of particles under about 100 µm. It sits at 25–50 µm whatever the setting, because fines are fragments of single cells, and the cells of a roasted bean are 25–50 µm across ([Mo et al. 2023](https://www.nature.com/articles/s41598-023-42380-y)).
 
-Fines matter far beyond their share, for two reasons.
-
-- **They give up their flavor almost at once.** A fragment smaller than a cell is a piece of a broken cell, so nothing holds its contents in, and water simply washes them out. Bigger particles have to be extracted by *diffusion*, molecules spreading out through the particle by random motion, which is slow ([Gagné, *Dynamics of Coffee Extraction*](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)).
-- **They choke the flow.** How easily water passes through a bed of grounds is weighted heavily toward the smallest particles. If 20% of the grounds' volume is 40 µm fines instead of 300 µm grounds, the standard packed-bed model says the flow at a given pressure drops to about a fifth (fold below). This is why grinders that make more fines have to be set coarser for espresso ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution)).
-
 ::: {.derive}
 <details><summary><span class="label">Method</span> How much of the grind is fines, in the model<span class="needs">uses: nothing new</span></summary>
 
 Mo et al. measured a commercial espresso powder by laser diffraction and found 29% of its volume below 100 µm. The model pins the fines share at 29% when the main peak is at 250 µm and lowers it in proportion to 1/gap for coarser settings, keeping it between 5% and 45%. The reasoning is that smaller pieces mean more broken surface per gram, and so more fines. This is a plausible picture, not a measurement. Mo et al.'s coarser powders point the same way: as the volume-mean size grew from 308 to 342, 372 and 673 µm, the fines share fell from 29% to 27.5%, 20.3% and 9.7%. A 1/size rule would predict 13% for the coarsest powder, so it gets the direction right, not the numbers.
 </details>
 :::
+
+Fines matter far beyond their share, for two reasons.
+
+- **They give up their flavor almost at once.** A fragment smaller than a cell is a piece of a broken cell, so nothing holds its contents in, and water simply washes them out. Bigger particles have to be extracted by *diffusion*, molecules spreading out through the particle by random motion, which is slow ([Gagné, *Dynamics of Coffee Extraction*](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)).
+- **They choke the flow.** How easily water passes through a bed of grounds is weighted heavily toward the smallest particles. If 20% of the grounds' volume is 40 µm fines instead of 300 µm grounds, the standard packed-bed model says the flow at a given pressure drops to about a fifth (fold below). This is why grinders that make more fines have to be set coarser for espresso ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution)).
+
 
 ::: {.derive}
 <details><summary><span class="label">Method</span> Why the smallest particles control the flow<span class="needs">uses: the Kozeny–Carman equation</span></summary>
@@ -184,7 +185,7 @@ $$
 
 where $d$ is the particle size, $T$ the contact time, and $\propto$ means "proportional to." Ten times the contact time calls for grounds $\sqrt{10} \approx 3.2$ times bigger.
 
-The rule fixes ratios, so it needs one anchor. Anchor it at espresso: 25 s with grounds of about 250 µm, a typical espresso median ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution) gives 200–300 µm). Then it predicts the other three methods.
+The rule fixes ratios, so it needs one anchor. Anchor it at espresso: 25 s with a main peak of about 250 µm ([Kaffeemacher](https://kaffeemacher.de/en/blogs/kaffeewissen/coffee-particle-distribution) puts espresso medians at 200–300 µm). Then it predicts the other three methods.
 
 | Method | Contact time | Predicted size $250\ \mu\text{m}\sqrt{T/25\ \text{s}}$ | Usual range (Honest Coffee Guide) |
 |---|---|---|---|
@@ -213,7 +214,7 @@ Drag across the chart, or use the slider, to pick a particle size. The chart fol
 
 The last column is what you taste when you dial in, by the usual rule of thumb. If the water leaves before the flavor is out, the cup is sour and thin; grind finer and the diffusion clock speeds up. If the water stays on, it keeps pulling out the slow-extracting compounds, which include the bitter and astringent ones ([Gagné](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)); grind coarser.
 
-The big pieces at the coarse end of a grind, sometimes called *boulders*, keep their cores longest. In an experiment cited by Gagné, water reached only about 100 µm into a particle, about five layers of his ~20 µm cells, or two to four of Mo et al.'s 25–50 µm cells ([Gagné, *Extracting Shells of Coffee*](https://coffeeadastra.com/2019/01/17/extracting-shells-of-coffee/)). That does not contradict the $d^2$ rule. In pure diffusion the depth reached grows like $\sqrt{Dt}$, so 100 µm is how far the water got in that experiment's time, not a wall.
+The big pieces at the coarse end of a grind, sometimes called *boulders*, keep their cores longest. In a Barista Hustle experiment discussed by Gagné, even a very long immersion never let coarse grounds catch up with fine ones. Gagné reads this as water reaching only about 100 µm into a particle, about five layers of his ~20 µm cells, or two to four of Mo et al.'s 25–50 µm cells ([Gagné, *Extracting Shells of Coffee*](https://coffeeadastra.com/2019/01/17/extracting-shells-of-coffee/)). Pure diffusion would let that depth keep growing like $\sqrt{Dt}$. A depth that stops growing is one place where real coffee departs from the $d^2$ rule (end of the fold below).
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span> Why diffusion time grows like size squared<span class="needs">uses: partial derivatives</span></summary>
@@ -230,20 +231,20 @@ F(t) = 1 - \frac{6}{\pi^2}\sum_{n=1}^{\infty} \frac{1}{n^2}\, e^{-n^2\pi^2 D t /
 $$
 Time enters only through $Dt/R^2$, which is the scaling again. For example, $F = 0.77$ at $Dt/R^2 = 0.1$, and $F = 0.92$ at $0.2$ ([numbers.py](numbers.py)).
 
-Real coffee departs from this model in known ways. Broken cells at the surface wash out at once (the fines effect), so small particles get a head start that does not scale. Cells and pores are not uniform. In immersion the outside liquid fills up with coffee and stops being a perfect sink. Temperature and stirring differ between methods. Gagné's model builds in deeper layers of cells that extract more slowly than the surface; it leaves out erosion and stirring, he notes it is untested against data, and the extraction speed it gives is not a simple power law of particle size ([Gagné](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)). So $d^2$ is the backbone of the story, not all of it.
+Real coffee departs from this model in known ways. Broken cells at the surface wash out at once (the fines effect), so small particles get a head start that does not scale. Cells and pores are not uniform. In immersion the outside liquid fills up with coffee and stops being a perfect sink. Temperature and stirring differ between methods. And the Barista Hustle experiment suggests water stops at a depth of about 100 µm. Gagné's model builds in deeper layers of cells that extract more slowly than the surface; it leaves out erosion and stirring, he notes it is untested against data, and the extraction speed it gives is not a simple power law of particle size ([Gagné](https://coffeeadastra.com/2019/01/29/the-dynamics-of-coffee-extraction/)). So $d^2$ is the backbone of the story, not all of it.
 </details>
 :::
 
 **Flow adds a second set of limits.** In *percolation* methods (espresso, moka, pour-over), water flows through a bed of grounds, so the grind also sets how fast water gets through. The bed's *permeability*, how easily water passes through it, grows like $d^2$ (fold in the previous section).
 
 - **Espresso.** A bed fine enough to extract in 25 s resists flow strongly, so a pump pushes at 9 bar. One *bar* is about the pressure of the atmosphere, and 9 bar is about 1800 times the push of 5 cm of water standing in a pour-over cone ([numbers.py](numbers.py)).
-- **Moka pot.** Steam and heated air in the lower chamber push at about 1–2 bar ([Wikipedia, *Moka pot*](https://en.wikipedia.org/wiki/Moka_pot), citing Navarini et al. 2009), between a ninth and a quarter of espresso's push. That is one reason moka grinds sit coarser.
+- **Moka pot.** Steam and heated air in the lower chamber push at about 1–2 bar ([Wikipedia, *Moka pot*](https://en.wikipedia.org/wiki/Moka_pot), citing Navarini et al. 2009), between a ninth and about a quarter of espresso's push. That is one reason moka grinds sit coarser.
 - **Pour-over.** Gravity alone pushes. A finer grind both extracts faster *and* slows the *drawdown*, the time the water takes to drain through, which lengthens the contact time. Both effects push the same way, which is why pour-over is touchy about grind.
 - **French press.** This is *immersion*: the coffee steeps, and nothing has to flow through the bed. The limit comes when you press: particles small enough to pass the metal mesh end up in the cup as grit ([Seattle Coffee Gear](https://www.seattlecoffeegear.com/pages/product-resources/bodum-brazil-french-press-8-cup-product-guide)). That is a reason to grind coarser than the diffusion clock asks; its 775 µm sits near the bottom of the French press range.
 
 ## Back to the dial
 
-Start from a chart, then let taste steer. The preset buttons above sit inside Honest Coffee Guide's P0 click ranges, which for pour-over is 39–86 clicks ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/)). Brew, taste, and move a few clicks at a time: sour and thin means fewer clicks, bitter and harsh means more. With θ = 19°, each click moves the main peak by about 11 µm, under 2% of a pour-over grind, so a few clicks is a gentle step.
+Start from a chart, then let taste steer. The preset buttons above sit inside Honest Coffee Guide's P0 click ranges, which for the V60 is 38–65 clicks ([Honest Coffee Guide, P0](https://honestcoffeeguide.com/kingrinder-p0-grind-settings/)). Brew, taste, and move a few clicks at a time: sour and thin means fewer clicks, bitter and harsh means more. With θ = 19°, each click moves the main peak by about 11 µm, under 2% of a pour-over grind, so a few clicks is a gentle step.
 
 ## What we found
 
@@ -268,7 +269,7 @@ Wikipedia, [Espresso](https://en.wikipedia.org/wiki/Espresso) (INEI parameters: 
 
 Coava Coffee, [V60 brew guide](https://coavacoffee.com/brew-methods/v60) (3:00–3:30). Seattle Coffee Gear, [Bodum Brazil French press guide](https://www.seattlecoffeegear.com/pages/product-resources/bodum-brazil-french-press-8-cup-product-guide) (4 min steep; fines pass the mesh).
 
-P. C. Carman, "Fluid flow through granular beds", *Transactions of the Institution of Chemical Engineers* 15, 150–166 (1937) (the constant 5, and 180 for spheres). Wikipedia, [Darcy's law](https://en.wikipedia.org/wiki/Darcy%27s_law), [Kozeny–Carman equation](https://en.wikipedia.org/wiki/Kozeny%E2%80%93Carman_equation), [Sauter mean diameter](https://en.wikipedia.org/wiki/Sauter_mean_diameter), [Laplace operator](https://en.wikipedia.org/wiki/Laplace_operator), [Burr mill](https://en.wikipedia.org/wiki/Burr_mill).
+J. Kozeny, "Über kapillare Leitung des Wassers im Boden", *Sitzungsberichte der Akademie der Wissenschaften in Wien* 136(2a), 271–306 (1927). P. C. Carman, "Fluid flow through granular beds", *Transactions of the Institution of Chemical Engineers* 15, 150–166 (1937), reprinted in *Chemical Engineering Research and Design* 75, S32–S48 (1997), [doi:10.1016/S0263-8762(97)80003-2](https://doi.org/10.1016/S0263-8762(97)80003-2) (the constant 5, and 180 for spheres). Wikipedia, [Darcy's law](https://en.wikipedia.org/wiki/Darcy%27s_law), [Kozeny–Carman equation](https://en.wikipedia.org/wiki/Kozeny%E2%80%93Carman_equation), [Sauter mean diameter](https://en.wikipedia.org/wiki/Sauter_mean_diameter), [Laplace operator](https://en.wikipedia.org/wiki/Laplace_operator), [Burr mill](https://en.wikipedia.org/wiki/Burr_mill).
 
 J. Crank, *The Mathematics of Diffusion*, 2nd ed., Oxford University Press (1975), ch. 6 (diffusion in a sphere).
 
