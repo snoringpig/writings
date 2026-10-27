@@ -54,7 +54,7 @@ Tap a tine. Then tick the box that keeps the overtones ringing, and tap it again
 
 ## On the pitch ruler
 
-Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how hard that mode [pushes sideways](glossary.qmd#moment) on the bridge just after a pluck, in a simple model where the tine is clamped right at the bridge; that push is what the instrument's body turns into sound. Tap a stem to see the shape of that mode.
+Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how hard that mode [pushes sideways](glossary.qmd#moment) on the bridge just after a pluck; that push is what the instrument's body turns into sound. Tap a stem to see the shape of that mode.
 
 ```{=html}
 <div class="ins">
@@ -69,7 +69,7 @@ Here are one tine's frequencies: 1×, then 6.27×, far from the gray whole-numbe
 
 ## How it works
 
-**A tine resists bending.** A string is held straight by tension. A tine is under no tension at all: it springs back because steel resists being bent. That one change, bending instead of stretching, is behind both of the tine's surprises below, through one fact: stretch a shape to twice the length, and a string pulls it back 4 times more weakly, but a tine pushes it back 16 times more weakly. (In the equation of motion, four derivatives where the string had two; the fold shows why.)
+**A tine resists bending.** A string is held straight by tension. A tine is under no tension at all: it springs back because steel resists being bent. That one change, bending instead of stretching, is behind both of the tine's surprises below, through one fact: squeeze a shape into half the length, and a string pulls it back 4 times harder, but a tine pushes it back 16 times harder. (In the equation of motion, four derivatives where the string had two; the fold shows why.)
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>The tine's equation: four derivatives instead of two <span class="needs">uses partial derivatives and integrals over an area</span></summary>
@@ -146,7 +146,7 @@ We neglect the slice's resistance to being spun, its rotational inertia, which i
 </details>
 :::
 
-**Half the length, two octaves up.** A string half as long sounds an octave higher. A tine half as long sounds two octaves higher. Halving the length makes the push-back on each shape 16 times stronger, where a string's gets 4 times stronger, and frequency goes as the square root of the push-back (page 1): $\sqrt{16} = 4$ times the frequency, two octaves, against the string's $\sqrt{4} = 2$, one octave. So a tine's frequency goes as one over its length squared. That is why the low tines in the demo are not twice as long as the high ones an octave up. Kalimba makers tune a tine by sliding it over the bridge to change its free length, and this makes a small slide go a long way.
+**Half the length, two octaves up.** A string half as long sounds an octave higher. A tine half as long sounds two octaves higher: its push-back grows 16 times instead of 4, and frequency goes as the square root of the push-back (page 1), so it rises 4 times instead of 2. A tine's frequency goes as one over its length squared. That is why the low tines in the demo are not twice as long as the high ones an octave up. Kalimba makers tune a tine by sliding it over the bridge to change its free length, and this makes a small slide go a long way.
 
 **Overtones off the lines.** The same fact spreads the overtones out. Higher modes bend in shorter humps, and for a tine, shorter humps push back much harder, so the frequencies grow like the square of the mode number instead of the number itself. Where exactly they land depends on how the tine is held. Pinned at both ends, they would be 1, 4, 9, 16: whole numbers. Clamped at one end and free at the other, as a tine is, they are 1, 6.27, 17.55, …: off the whole numbers.
 
@@ -190,14 +190,14 @@ Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found o
 1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still in a bent shape $u_0$, so the bar's restoring force balances the push.
 2. *Split it into modes.* Write $u_0 = \sum_n c_n X_n$, with each mode scaled so that $\int_0^L X_n^2\,dx = L$. Inside the tine nothing pushes, so $EI\,u_0'''' = 0$ there; the push enters only at the tip, as the shear force there. Now compute $\int_0^L EI\,u_0\,X_n''''\,dx$ in two ways. First, $EI\,X_n'''' = \rho S\,\omega_n^2X_n$ (the mode equation), and the modes are perpendicular, so only the $c_n$ term survives: the integral is $\rho S L\,\omega_n^2\,c_n$. Second, integrate by parts four times to move the derivatives onto $u_0$, as in the fold above. Inside, $EI\,u_0'''' = 0$; at the clamp both $u_0$ and $X_n$ vanish with their slopes; at the tip $X_n'' = X_n''' = 0$ and $u_0'' = 0$. The one term left is the tip's shear force times $X_n(L)$, which is $F\,X_n(L)$. So $\rho S L\,\omega_n^2\,c_n = F\,X_n(L)$. This is page 1's spring again: mode $n$ is a spring of stiffness proportional to $\omega_n^2$, pushed with a force proportional to its value at the tip, and it gives way by force over stiffness.
 3. *Tip values.* Taking $a = -1$ and $b = \sigma_n$ in the fold above gives the standard form $X_n = \cosh\beta_nx - \cos\beta_nx - \sigma_n(\sinh\beta_nx - \sin\beta_nx)$, with $\sigma_n = (\sinh\beta_nL - \sin\beta_nL)/(\cosh\beta_nL + \cos\beta_nL)$, about $0.734$ and $1.018$ for the first two modes. Written this way, each mode already has $\int_0^L X_n^2\,dx = L$, and its tip value is $\pm2$ for every $n$ (a known property of clamped–free modes, easily confirmed numerically). So $c_n \propto 1/\omega_n^2$, and $c_2/c_1 = 1/6.27^2 \approx 2.5\%$.
-4. *Forces.* The bending moment at the clamp is $EI\,u_{xx}$ there, and the shear force $EI\,u_{xxx}$ there (up to sign). From the standard form, $X_n''(0) = 2\beta_n^2$ and $X_n'''(0) = -2\sigma_n\beta_n^3$. Multiplying by $c_n \propto 1/\omega_n^2 \propto 1/\beta_n^4$, the second mode's moment at the clamp is $(\beta_1/\beta_2)^2 = (1.875/4.694)^2 \approx 16\%$ of the first's, and its shear force $(\sigma_2/\sigma_1)(\beta_1/\beta_2) \approx 1.39 \times 0.40 \approx 55\%$.
+4. *Forces.* In this model the tine is clamped right at the bridge, so the forces at the clamp are the forces on the bridge. The bending moment at the clamp is $EI\,u_{xx}$ there, and the shear force $EI\,u_{xxx}$ there (up to sign). From the standard form, $X_n''(0) = 2\beta_n^2$ and $X_n'''(0) = -2\sigma_n\beta_n^3$. Multiplying by $c_n \propto 1/\omega_n^2 \propto 1/\beta_n^4$, the second mode's moment at the clamp is $(\beta_1/\beta_2)^2 = (1.875/4.694)^2 \approx 16\%$ of the first's, and its shear force $(\sigma_2/\sigma_1)(\beta_1/\beta_2) \approx 1.39 \times 0.40 \approx 55\%$.
 
 </details>
 :::
 
 ## What we found
 
-On the pitch ruler, a kalimba tine's frequencies are off the lines, so by the series' rule it should clang. It doesn't, because the off-line overtones die almost at once and leave one frequency ringing. Along the way, the tine's equation taught two things: bending, with four derivatives where a string has two, makes the frequencies grow like the square of the mode number, and the way the ends are held decides whether they land on whole numbers.
+On the pitch ruler, a kalimba tine's frequencies are off the lines, so by the series' rule it should clang. It doesn't, because the off-line overtones die almost at once and leave one frequency ringing. Along the way, the tine taught two things: because shorter humps push back so much harder, its frequencies grow like the square of the mode number, and the way the ends are held decides whether they land on whole numbers.
 
 ::: {.family}
 **Same math elsewhere.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other.

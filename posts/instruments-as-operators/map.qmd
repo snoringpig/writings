@@ -15,13 +15,13 @@ resources: [core.js, ins.css]
 
 ## All the sounds side by side
 
-Play down the column and listen. The violin, clarinet and harmonica hold a steady note, every stem on a line. The kalimba's stems are off the lines, but its click fades almost at once and leaves a clean note. The piano's sit a little sharp of the lines. The drum's are off the lines and die fast: a thud. Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each frequency starts. For the bowed and blown three, the stems are the frequencies in the sound, which the steady bow or breath keeps exactly on the lines ([page 6b](harmonica.qmd) shows how).
+Play down the column and listen. The violin, clarinet and harmonica hold a steady note, every stem on a line. The kalimba's stems are off the lines, but its click fades almost at once and leaves a clean note. The piano's sit a little sharp of the lines. The drum's are off the lines and die fast: a thud.
 
 ```{=html}
 <div class="ins">
 <div class="strip">
   <div><span class="nm">Violin</span><svg class="mini" data-mini="violin" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="violin">—</span><button class="primary" data-play="violin">Play</button></div>
-  <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">1.00, 3.00, 5.00, 7.00; evens faint</span><button class="primary" data-play="clarinet">Play</button></div>
+  <div><span class="nm">Clarinet</span><svg class="mini" data-mini="clarinet" viewBox="0 0 200 58"></svg><span class="readout">1.00, 3.00, 5.00, 7.00 (even ones weak)</span><button class="primary" data-play="clarinet">Play</button></div>
   <div><span class="nm">Kalimba</span><svg class="mini" data-mini="kalimba" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="kalimba">—</span><button class="primary" data-play="kalimba">Play</button></div>
   <div><span class="nm">Harmonica</span><svg class="mini" data-mini="harmonica" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="harmonica">—</span><button class="primary" data-play="harmonica">Play</button></div>
   <div><span class="nm">Piano</span><svg class="mini" data-mini="piano" viewBox="0 0 200 58"></svg><span class="readout" data-ratios="piano">—</span><button class="primary" data-play="piano">Play</button></div>
@@ -29,6 +29,9 @@ Play down the column and listen. The violin, clarinet and harmonica hold a stead
 </div>
 </div>
 ```
+
+Gray lines are whole-number multiples of the lowest frequency; stem height is how strongly each frequency starts. For the bowed and blown three, the stems are the frequencies in the sound, which the steady bow or breath keeps exactly on the lines ([page 6b](harmonica.qmd) explains why a steady repetition does this).
+
 
 
 
