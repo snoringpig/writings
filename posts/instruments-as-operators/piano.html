@@ -197,8 +197,10 @@ window.Quarto = {
 <div class="ins">
 <div class="panel">
     <div class="controls"><button id="o21">C4 + C5, exactly 2 : 1</button><button id="ost" class="primary">C4 + C5, stretched</button></div>
+    <div class="slider"><label for="oMult">Stiffness ×</label><input type="range" id="oMult" min="1" max="12" step="0.5" value="6"><output id="oMulto">6.0</output></div>
+    <label class="check"><input type="checkbox" id="oAll"> Play every partial</label>
     <div class="readout" id="oRead"></div>
-    <p class="cap">Listen for the slow wobble in the 2 : 1 version. Raising the stiffness on the keyboard below speeds it up.</p>
+    <p class="cap">At first each note keeps only its lowest partials (C4: 1 to 3, C5: 1 and 2), so the one beat a tuner listens for stands out: the exactly 2 : 1 octave wobbles at the rate shown, and the stretched one is steady. The stiffness starts at about 6 times a real middle C wire's so that the wobble is quick enough to hear; at 1 it is a slow swell every few seconds. Tick "Play every partial" to hear whole notes: then the stretched octave wobbles too, from the lower note's 4th partial against the upper note's 2nd, the compromise described below.</p>
   </div>
 </div>
 <p>Then play the whole piano with the mouse or your computer keys. Release a key and its felt <a href="../../posts/instruments-as-operators/glossary.html#damper">damper</a> drops back onto the string and stops it.</p>
@@ -514,24 +516,39 @@ f_n = n f_0\sqrt{1 + Bn^2}, \qquad B = \frac{\pi^2 EI}{T L^2},
   }, true);
 
   var ms = document.getElementById("mult"), mo = document.getElementById("multo");
-  ms.addEventListener("input", function () { mult = parseFloat(ms.value); mo.textContent = mult.toFixed(1); pspec(); octRead(); });
+  ms.addEventListener("input", function () { mult = parseFloat(ms.value); mo.textContent = mult.toFixed(1); pspec(); });
   function pspec() {
     var p = partsFor(last);
     C.stems(document.getElementById("pSpec"), p, { W: 320, H: 120, rmax: 16, fs: 8, sw: 2, labelEvery: 2 });
     var r10 = p[9] ? p[9].ratio : null;
     document.getElementById("pPart").innerHTML = C.noteName(C.mtof(last)).name + " · partial 2 at <b>" + (1200 * Math.log2(p[1].ratio / 2)).toFixed(1) + "¢</b> sharp" + (r10 ? " · partial 10 at <b>" + (1200 * Math.log2(r10 / 10)).toFixed(0) + "¢</b> sharp" : "");
   }
-  function r2(k) { var B = C.models.piano.B(k, mult); return 2 * Math.sqrt((1 + 4 * B) / (1 + B)); }
+  // The octave demo has its own stiffness, so the beat can be made quick enough to hear without changing the keyboard.
+  var om = 6, oAll = false;
+  function rn(n, B) { return n * Math.sqrt((1 + B * n * n) / (1 + B)); }
+  function oB(k) { return C.models.piano.B(k, om); }
+  function r2(k) { return rn(2, oB(k)); }
   function octRead() {
-    var f = C.mtof(60), beat = f * (r2(60) - 2);
-    document.getElementById("oRead").innerHTML = "2 : 1 octave beats at <b>" + beat.toFixed(2) + " Hz</b> · stretched octave is <b>" + (1200 * Math.log2(r2(60) / 2)).toFixed(1) + "¢</b> wide";
+    var f = C.mtof(60), B4 = oB(60), B5 = oB(72), f5s = f * r2(60);
+    var txt = "exactly 2 : 1: C4's 2nd partial beats against C5 at <b>" + (f * (r2(60) - 2)).toFixed(2) + " Hz</b> · stretched: no beat there, octave <b>" + (1200 * Math.log2(r2(60) / 2)).toFixed(1) + "¢</b> wide";
+    if (oAll) txt += " · C4's 4th partial against C5's 2nd: <b>" + Math.abs(f * rn(4, B4) - 2 * f * rn(2, B5)).toFixed(2) + " Hz</b> exact, <b>" + Math.abs(f * rn(4, B4) - f5s * rn(2, B5)).toFixed(2) + " Hz</b> stretched";
+    document.getElementById("oRead").innerHTML = txt;
   }
+  // The lowest partials only, with fixed strengths, so the 2 : 1 pair dominates.
+  function lowest(f1, B, amps, tau) { return amps.map(function (a, i) { return { f: f1 * rn(i + 1, B), amp: a, tau: tau }; }); }
   function octave(stretch) {
-    var f = C.mtof(60), f5 = stretch ? f * r2(60) : 2 * f;
-    var a = C.toHz(partsFor(60, f), f), b = C.toHz(partsFor(72, f5), f5);
-    b.forEach(function (p) { p.amp *= 0.8; });
+    var f = C.mtof(60), f5 = stretch ? f * r2(60) : 2 * f, a, b;
+    if (oAll) {
+      a = C.toHz(partsFor(60, f, om), f); b = C.toHz(partsFor(72, f5, om), f5);
+      b.forEach(function (p) { p.amp *= 0.8; });
+    } else {
+      a = lowest(f, oB(60), [1, 0.7, 0.3], 2.6); b = lowest(f5, oB(72), [0.7, 0.25], 2.0);
+    }
     C.play(C.render(a.concat(b), 4.5), 0.8);
   }
+  var oms = document.getElementById("oMult"), omo = document.getElementById("oMulto");
+  oms.addEventListener("input", function () { om = parseFloat(oms.value); omo.textContent = om.toFixed(1); octRead(); });
+  document.getElementById("oAll").addEventListener("change", function (e) { oAll = e.target.checked; octRead(); });
   document.getElementById("o21").addEventListener("click", function () { octave(false); });
   document.getElementById("ost").addEventListener("click", function () { octave(true); });
   C.onTheme(pspec);
