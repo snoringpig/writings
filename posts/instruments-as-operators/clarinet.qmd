@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd). Maths: up to mixed partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd). Math: up to mixed partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -175,7 +175,7 @@ The stems below, like those under the demo at the top, show the frequencies in t
 
 A blown tube does not ring and fade like a plucked string: the reed or the air jet keeps feeding it, and the air settles into one motion that repeats, at a frequency close to the tube's sounding mode from stage 3. The demo's sound is made that way: a repeating wave at that mode's frequency, with the strong odd multiples and faint even ones described below.
 
-**Overblowing: an octave or a twelfth.** The flute's spectrum has every whole-number multiple of its lowest frequency; the clarinet's has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). (The demo keeps the low-register tone colour when the register key is on.) A flutist overblows by blowing harder, and the flute's next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
+**Overblowing: an octave or a twelfth.** The flute's spectrum has every whole-number multiple of its lowest frequency; the clarinet's has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). (The demo keeps the low-register tone color when the register key is on.) A flutist overblows by blowing harder, and the flute's next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>How the register key picks out the 3× mode</summary>

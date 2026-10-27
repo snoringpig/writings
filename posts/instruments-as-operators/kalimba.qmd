@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd). Maths: up to cosh, sinh and a 2×2 determinant (explained). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd). Math: up to cosh, sinh and a 2×2 determinant (explained). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -227,7 +227,7 @@ Chapman measured the tines of one kalimba, a Hugh Tracey pentatonic, and found o
 </details>
 :::
 
-A plucked tine moves as the sum of its modes, $u = \sum_n a_n X_n(x)\cos(2\pi f_n t + \phi_n)$, each mode fading at its own rate. The demo's sound is made exactly this way: it adds up the first five modes at the frequencies of stage 3, each starting with its shear-force strength from the fold above (55% for the second mode), as in stage 4. The fundamental fades over a couple of seconds and the overtones within a small fraction of that; those fading rates are an illustrative choice matching Chapman's measurements, not computed. Tick the box and every mode fades as slowly as the fundamental.
+A plucked tine moves as the sum of its modes, $u = \sum_n a_n X_n(x)\cos(2\pi f_n t + \phi_n)$, each mode fading at its own rate. The demo's sound is made exactly this way: it adds up the first five modes at the frequencies of stage 3, each starting with its shear-force strength from the fold above (55% for the second mode), as in stage 4. The fundamental fades over a couple of seconds and the overtones within a small fraction of that; those fading rates are an illustrative choice consistent with Chapman's observation, not computed. Tick the box and every mode fades as slowly as the fundamental.
 
 **Overtones off the lines.** Higher modes bend in shorter humps, and for a tine shorter humps push back much harder, so the frequencies grow like the square of the mode number instead of the number itself. Where exactly they land is set by the four end conditions: pinned ends would give the whole numbers 1, 4, 9, 16, but a tine is clamped at one end and free at the other, and its spectrum is 1, 6.27, 17.55, …, off the lines.
 

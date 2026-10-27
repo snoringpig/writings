@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 1, the spring](oscillator.qmd). Maths: up to matrices (explained). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 1, the spring](oscillator.qmd). Math: up to matrices (explained). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}

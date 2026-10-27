@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Start here. Maths: cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.
+Start here. Math: cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -48,7 +48,7 @@ Play the note, then the note without its 220 Hz part, and watch the wave.
 
 ## The pitch ruler
 
-The stems under the wave are the note's frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the *pitch ruler*, and every page of this series puts an instrument on it. A note's frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the [fundamental](glossary.qmd#fundamental). Hearing the pitch without it is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
+The stems under the wave are the note's frequencies, drawn as multiples of 220 Hz: 1×, 2×, 3×, …. Those whole-number multiples are the lines of the *pitch ruler*, and every page of this series puts an instrument on it: stems on the pitch ruler, one per mode, make the spectrum diagram that stage 4 of every instrument page draws. A note's frequencies sit on the lines. Take away the 1× stem and the rest still sit on lines of the same ruler, so the pitch is still 220 Hz. The component at the repetition rate itself is called the [fundamental](glossary.qmd#fundamental). Hearing the pitch without it is called the [missing fundamental](https://en.wikipedia.org/wiki/Missing_fundamental) effect, and it is why a deep voice keeps its pitch over an ordinary telephone line, which cannot carry sounds below about 300 Hz.
 
 Open "Mix your own" and try the presets. The stems' heights change, and so does the sound's color, its [timbre](glossary.qmd#timbre), but the pitch stays put as long as the base frequency does. Keep only 2×, 4×, 6× and 8×, and the sound repeats twice as often: the base becomes 440 Hz, and the pitch jumps up an [octave](glossary.qmd#octave).
 

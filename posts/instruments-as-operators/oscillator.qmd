@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd). Maths: up to second derivatives. About 2 minutes for the summary; about 15 with the mathematics.
+Builds on [page 0, the note](note.qmd). Math: up to second derivatives. About 2 minutes for the summary; about 15 with the mathematics.
 :::
 
 ::: {.puzzle}

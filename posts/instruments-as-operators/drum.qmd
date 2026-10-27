@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd) and the loop of [page 3](circle.qmd). Maths: up to Bessel functions (described). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd) and the loop of [page 3](circle.qmd). Math: up to Bessel functions (described). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -198,7 +198,7 @@ These are the frequencies in your last strike, as multiples of the lowest: each 
 
 **Off the lines and fading fast: a thud.** The frequencies of stage 3 don't sit at whole-number multiples of any base frequency we hear as pitch, so the sound doesn't repeat at any such rate; and a real head gives its energy to the air quickly, so it fades fast. Together, a thud.
 
-A struck head moves as the sum of its modes, $u = \sum a_{m,n} X_{m,n} e^{-t/\tau_{m,n}} \cos(2\pi f_{m,n} t + \phi_{m,n})$, each fading at its own rate $\tau_{m,n}$ (damping, added to the model), so its sound is a sum of tones at the frequencies of stage 3; the drum demo at the top synthesizes it exactly this way.
+A struck head moves as the sum of its modes, $u = \sum a_{m,n} X_{m,n} e^{-t/\tau_{m,n}} \cos(2\pi f_{m,n} t + \phi_{m,n})$, each with its own fading time $\tau_{m,n}$ (damping, added to the model), so its sound is a sum of tones at the frequencies of stage 3; the drum demo at the top synthesizes it exactly this way.
 
 **Why the frequencies miss the lines.** The frequencies are the zeros of the Bessel functions, scaled. For the modes with no spokes, the zeros of $J_0$ come at nearly even steps, about $\pi$ apart, but the first one is short, about $0.77\pi$ rather than $\pi$, so the later zeros are not multiples of the first: the frequencies go 1 : 2.30 : 3.60. Each number of spokes gives its own sequence, shifted by a different amount, and the sequences interleave at unrelated places. Merged, they give the drum's list 1×, 1.59×, 2.14×, 2.30×, 2.65×, 2.92×, …, scattered between the lines. One more pattern: every mode with spokes comes in a pair, the same pattern turned, with exactly the same frequency. That is the round drum's symmetry, heard in its spectrum.
 

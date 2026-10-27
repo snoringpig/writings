@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [pages 1](oscillator.qmd), [2](ring.qmd) and [3](circle.qmd), but stands on its own. Maths: up to integration by parts. About 3 minutes for the flowchart and the idea in brief; about 30 with the mathematics.
+Builds on [pages 1](oscillator.qmd), [2](ring.qmd) and [3](circle.qmd), but stands on its own. Math: up to integration by parts. About 3 minutes for the flowchart and the idea in brief; about 30 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -39,7 +39,7 @@ Pluck a string, blow into a tube, tap a steel tine, strike a drum. Four differen
 ```
 
 ::: {.gist}
-**The idea in brief: the operator decides where the stems stand; how you pluck or strike decides how tall they are.** Physics gives the operator: Newton's law, applied to one small piece of the instrument, always comes out as $u_{tt} = -A\,u$, where the [operator](glossary.qmd#operator) $A$ turns a shape of the instrument into minus the acceleration it causes. Mathematics gives the frequencies: a shape that $A$ only rescales, $AX = \lambda X$, swings at $f = \sqrt{\lambda}/2\pi$, and every motion is a sum of such shapes, so the list of eigenvalues, the [spectrum](glossary.qmd#spectrum), fixes the frequencies. (A steady bow or breath can do more: it can lock the sound onto exact whole-number multiples, pages 4 and 6b.) The last section runs the recipe on every instrument in the series.
+**The idea in brief: the operator decides where the stems stand; how you pluck or strike decides how tall they are.** Physics gives the operator: Newton's law, applied to one small piece of the instrument, always comes out as $u_{tt} = -A\,u$, where the [operator](glossary.qmd#operator) $A$ turns a shape of the instrument into minus the acceleration it causes. Mathematics gives the frequencies: a shape that $A$ only rescales, $AX = \lambda X$, swings at $f = \sqrt{\lambda}/2\pi$, and every motion is a sum of such shapes, so the list of eigenvalues, the [spectrum](glossary.qmd#spectrum), fixes the frequencies. (A steady bow or breath can do more: it can lock the sound onto exact whole-number multiples, pages 4, 5 and 6b.) The last section runs the recipe on every instrument in the series.
 :::
 
 ## 1 · What an operator is
@@ -171,7 +171,7 @@ The spectrum gives the frequencies. Three more things decide what reaches your e
 $$
 p(t) \approx \sum_n c_n\, e^{-t/\tau_n}\cos(2\pi f_n t + \phi_n),
 $$
-with the frequencies $f_n$ from the spectrum and amounts and fading times $c_n$, $\tau_n$ from the playing, the losses and the way the instrument passes its motion to the air. That passing on is [linear](glossary.qmd#linear) too (a violin's body, for instance), so it changes the heights of the stems, never their positions (page 4). Every plucked or struck sound in this series' demos is made exactly this way: a sum of sine waves at the frequencies from the spectrum, each fading at its own rate. The bowed and blown sounds (pages 4, 5 and 6b) are made differently: a wave repeating at the playing frequency, so their frequencies are its whole-number multiples. The frequencies come from the operator; the amounts and fading times are modelling choices, rough values chosen to illustrate.
+with the frequencies $f_n$ from the spectrum and amounts and fading times $c_n$, $\tau_n$ from the playing, the losses and the way the instrument passes its motion to the air. That passing on is [linear](glossary.qmd#linear) too (a violin's body, for instance), so it changes the heights of the stems, never their positions (page 4). Every plucked or struck sound in this series' demos is made exactly this way: a sum of sine waves at the frequencies from the spectrum, each fading at its own rate. The bowed and blown sounds (pages 4, 5 and 6b) are made differently: a wave repeating at the playing frequency, so their frequencies are its whole-number multiples (apart from the violin's gentle vibrato and the chromatic harmonica's breath noise). The frequencies come from the operator; the amounts and fading times are modelling choices, rough values chosen to illustrate.
 
 **Then the ear.** If the frequencies you hear sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, you hear a note (page 0).
 
@@ -205,7 +205,7 @@ Each card runs one instrument through the same five stages as its own page, in c
 2. *The operator*: $A$ multiplies by $k/m$; there is nothing to hold.
 3. *Its spectrum*: one eigenvalue, $\lambda = k/m$, so one frequency, $f = \sqrt{k/m}\,/2\pi$.
 4. *On the diagram*: a single stem.
-5. *What you hear*: a pure tone, at the same pitch however far you pull the mass.
+5. *What you hear*: a pure tone, at the same pitch however far you pull the mass, as long as the pull stays proportional to the stretch.
 
 [Every step on page 1 →](oscillator.qmd)
 :::

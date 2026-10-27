@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd), for partials, and [page 6, the kalimba](kalimba.qmd), for bars. Maths: up to cosh, sinh and a determinant (as on page 6). About 4 minutes for the summary; about 20 with the mathematics.
+Builds on [page 0, the note](note.qmd), for partials, and [page 6, the kalimba](kalimba.qmd), for bars. Math: up to cosh, sinh and a determinant (as on page 6). About 4 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -50,7 +50,9 @@ Listen first: pick a sound, then slide the interval between two notes of that so
 4. *On the diagram*, here the roughness curve computed from those spectra: a string's smooth intervals are simple whole-number ratios such as 3 : 2 and 2 : 1; a bar's smooth intervals move, and the exact octave is no longer one of them.
 5. *What we hear*: the octave that is smooth on a string is not the smoothest interval on a bar.
 
-The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on. [Skip to what we hear](#what-we-hear) if you only want the answer.
+[Skip to what we hear](#what-we-hear) if you only want the answer.
+
+The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on.
 :::
 
 ## On the roughness curve
@@ -120,7 +122,7 @@ An instrument's spectrum does not only decide whether it has a pitch. It decides
 [← 9 · Drum shape](shape.qmd) · [Back to the series](index.qmd) · [Map](map.qmd)
 
 ::: {.refs}
-**References.**
+**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba).
 W. A. Sethares, "Adaptive tunings for musical scales", *Journal of the Acoustical Society of America* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
 W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, Springer ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from chapter 1, p. 6, of the [book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
 R. Plomp and W. J. M. Levelt, "Tonal consonance and critical bandwidth", *Journal of the Acoustical Society of America* 38 (1965), 548–560, as cited by Sethares.

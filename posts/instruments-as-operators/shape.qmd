@@ -14,7 +14,7 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 :::
 
 ::: {.pageinfo}
-Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Maths: up to the Laplacian (page 8). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Math: up to the Laplacian (page 8). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -54,9 +54,9 @@ Listen first: play each drum with every mode equally loud. Then click a drum to 
 4. *On the diagram*: the two drums above have their stems in exactly the same places, off the lines.
 5. *What we hear*: played with every mode equally loud, the two drums sound identical; struck at a point, they sound different, because their mode shapes differ.
 
-So the answer to Kac is no: different shapes can share every frequency. But the spectrum still knows a lot: the drum's area and, for a smooth or straight-sided rim, the length of its rim, enough to recognize a round drum.
-
 [Skip to what we hear](#what-we-hear) if you only want the answer.
+
+So the answer to Kac is no: different shapes can share every frequency. But the spectrum still knows a lot: the drum's area and, for a smooth or straight-sided rim, the length of its rim, enough to recognize a round drum.
 :::
 
 ## 1 · Newton's law: the equation of motion

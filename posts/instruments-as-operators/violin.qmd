@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd); page 3 is not needed. Maths: up to partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 0, the note](note.qmd); page 3 is not needed. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -197,7 +197,7 @@ The *sine series* of a string shape, $u = \sum_n b_n\sin(n\pi x/L)$, is therefor
 
 ## 4 · On the spectrum diagram
 
-The stems below, like those under the demo at the top, are the frequencies in the result box, drawn as multiples of the lowest: stem $n$ sits at $f_n/f_1 = n$, exactly on line $n$, in this ideal model. Each stem's height is how far that mode still swings a quarter of a second after the pluck; the pluck decides how strongly each mode starts, and the finger decides how fast each one dies (stage 5). Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the stems shrink slowly as they go up, and at the middle they shrink fast, with every second stem missing even without a finger.
+The stems below are the frequencies in the result box, drawn as multiples of the lowest: stem $n$ sits at $f_n/f_1 = n$, exactly on line $n$, in this ideal model. Below, each stem's height is how far that mode swings just after the pluck; under the demo at the top, how far it still swings a quarter of a second later; the pluck decides how strongly each mode starts, and the finger decides how fast each one dies (stage 5). Touch at the middle and the odd stems die almost at once; what is left sits on every second line, the lines of a note twice as high. Touch at a third and only every third stem survives. Move the pluck point too: near the bridge the stems shrink slowly as they go up, and at the middle they shrink fast, with every second stem missing even without a finger.
 
 ```{=html}
 <div class="ins">
