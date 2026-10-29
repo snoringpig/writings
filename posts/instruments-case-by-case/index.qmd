@@ -8,7 +8,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-resources: [core.js, ins.css, orchestra.js, fonts/*.woff2]
+resources: [core.js, ins.css, orchestra.js, fonts/*.woff2, mountain-king.mp4, mountain-king.jpg]
 ---
 
 ::: {.series-nav .slim}
@@ -16,7 +16,7 @@ resources: [core.js, ins.css, orchestra.js, fonts/*.woff2]
 :::
 
 ::: {.pageinfo}
-Builds on [post 1, What you hear](../what-you-hear/index.qmd). Posts [2](../where-the-equations-come-from/index.qmd) and [3](../when-an-equation-has-a-spectrum/index.qmd) derive the equations and spectra these pages use, but every page here can be read after post 1 alone. Mathematics on this page: none in the main text; the recipe cards' formulas, in folds, are derived on the instrument pages. About 10 minutes for this page, with the orchestra; 16 to 18 for each instrument page, more with the folds.
+Builds on [post 1, What you hear](../what-you-hear/index.qmd). Posts [2](../where-the-equations-come-from/index.qmd) and [3](../when-an-equation-has-a-spectrum/index.qmd) derive the equations and spectra these pages use, but every page here can be read after post 1 alone. Mathematics on this page: none in the main text; the recipe cards' formulas, in folds, are derived on the instrument pages. About 10 minutes for this page, with the orchestra; 16 to 18 for each instrument page, more with the folds. Written with [Claude](#how-this-was-made), Anthropic's AI model.
 :::
 
 **The question.** For a particular instrument, what decides how it sounds: where its partials can sit, how it is played, or how its sound fades?
@@ -70,6 +70,25 @@ Musicologists sort instruments into five classes by what makes the sound, the [H
 ```
 
 Listen for the three deciders. The theremin's circuit has a single mode, so it sounds one pure tone. The piano's partials sit a little sharp of the lines, set by its spectrum. The clarinet holds one repeating cycle, its strong partials picked by the tube's modes. The glockenspiel's overtones sit off the lines but, as played here, fade fast, so the fading leaves a clean note. And the two drums share one skin: on the bass drum its modes fall off the lines and it booms; on the kettledrum the air around the head, the strike point and the fading leave one set of modes near the lines, and it plays a note ([the drum page](drum.qmd#one-drumhead-two-drums)).
+
+```{=html}
+<div class="derive"><details><summary><span class="label">Video</span>Watch it as a video (2 min 23 s): the performance, then where each instrument's stems come from</summary>
+<video id="mkVideo" controls preload="none" playsinline poster="mountain-king.jpg" style="width:100%;height:auto;aspect-ratio:16/9;background:#0d1016;border-radius:6px;margin-top:0.6rem"><source src="mountain-king.mp4" type="video/mp4"></video>
+<p class="cap">A recording of the player above, followed by one card per class. Chapters:
+<a href="#orchestra" data-t="0">0:00 performance</a> · <a href="#orchestra" data-t="62">1:02 where the stems come from</a> · <a href="#orchestra" data-t="79">1:19 electrophone</a> · <a href="#orchestra" data-t="89.6">1:30 chordophone</a> · <a href="#orchestra" data-t="100.1">1:40 aerophone</a> · <a href="#orchestra" data-t="110.6">1:51 idiophone</a> · <a href="#orchestra" data-t="121.1">2:01 membranophones</a>.
+Simplified: no breath, bow or stick noise; the glockenspiel's overtone fading times are illustrative; a real theremin is not a pure sine.</p>
+<p><b>The cards, as text.</b> <i>Where the stems come from.</i> Musicologists sort instruments into five classes by what makes the sound (Hornbostel and Sachs, 1914; electrophones added later). One recipe turns each into its stems. (1) For small motions, Newton's law on a small piece of the instrument takes the form u<sub>tt</sub> = −Au: u is the instrument's shape, and the operator A turns a shape into minus the acceleration it causes. (2) A shape that the operator only stretches, AX = λX, swings at one frequency, f = √λ / 2π. (3) Left to ring, every motion is a sum of such shapes, so the list of the λ's, the spectrum of the operator, decides where the stems stand.</p>
+<p><i>Electrophone, sine theremin.</i> Kirchhoff's law on a coil and a capacitor; operator A = 1/LC, a single number, like a mass on a spring; spectrum f = 1/(2π√(LC)). One stem: a pure tone. A real theremin runs two such circuits at radio frequencies, the hand changing C of one, and you hear the difference of their frequencies, with a few overtones.</p>
+<p><i>Chordophone, piano.</i> Newton's law on a short piece of stiff steel wire; operator A = −c² d²/dx² + κ² d⁴/dx⁴, ends pinned; spectrum f<sub>n</sub> = n f<sub>0</sub> √(1 + Bn²). Just above the lines, more so as n grows: a note, slightly stretched.</p>
+<p><i>Aerophone, clarinet.</i> Newton's law on a thin slice of the air in the tube; operator A = −c² d²/dx² on pressure, closed at the reed and open at the far end; the tube's spectrum f<sub>n</sub> = (2n − 1) c / 4L. Blown, the air repeats one cycle, so the partials sit exactly on the lines; the tube's odd modes make the odd ones strong and the even ones weak: a hollow note.</p>
+<p><i>Idiophone, glockenspiel.</i> Newton's law on a thin slice of a steel bar; operator A = κ² d⁴/dx⁴, both ends free; spectrum from cos βL cosh βL = 1, ratios 1 : 2.76 : 5.40. Off the lines, but the overtones die fast: a bright, clean note.</p>
+<p><i>Membranophones, bass drum and timpani.</i> Newton's law on a small patch of the drumhead; operator A = −c²Δ, rim held still; spectrum from J<sub>m</sub>(ka) = 0, ratios 1 : 1.59 : 2.14 : 2.30 …; the timpani's spectrum is measured, not derived. Bass drum: struck off centre, mostly round modes, off the lines and fading fast: a boom with no clear pitch. Timpani: the same skin; the air it drags along pulls its spoke modes near 2 : 3 : 4 : 5, the stroke favours them and the round modes fade fast: a note.</p>
+<p><i>Every sound in this video was built from pure tones at these spectra. No recordings, no samples.</i> Code, mathematics and video drafted with Claude, an AI model made by Anthropic.</p>
+</details></div>
+<script>
+document.querySelectorAll("a[data-t]").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); var v = document.getElementById("mkVideo"); v.currentTime = +a.getAttribute("data-t"); v.play(); }); });
+</script>
+```
 
 ## The instruments, one page each {#pages}
 
@@ -377,3 +396,7 @@ Start with the string: [why does a light touch make it jump an octave?](violin.q
 })();
 </script>
 ```
+
+::: {.made #how-this-was-made}
+*How this was made.* I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.
+:::

@@ -17,7 +17,7 @@ aliases: [/posts/instruments-as-operators/epilogue.html]
 :::
 
 ::: {.pageinfo}
-Builds on [post 1](../what-you-hear/index.qmd), for partials, and on [the bar](../where-the-equations-come-from/index.qmd#bar) (post 2) and [the kalimba page](../instruments-case-by-case/kalimba.qmd) (post 4), for bars. Math: up to cosh, sinh and a determinant (as on the kalimba page). About 4 minutes for the summary; about 20 with the mathematics. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph).
+Builds on [post 1](../what-you-hear/index.qmd), for partials, and on [the bar](../where-the-equations-come-from/index.qmd#bar) (post 2) and [the kalimba page](../instruments-case-by-case/kalimba.qmd) (post 4), for bars. Math: up to cosh, sinh and a determinant (as on the kalimba page). About 4 minutes for the summary; about 20 with the mathematics. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written with [Claude](#how-this-was-made), Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -210,3 +210,7 @@ The free bar's modes: Wikipedia, [Euler–Bernoulli beam theory](https://en.wiki
 })();
 </script>
 ```
+
+::: {.made #how-this-was-made}
+*How this was made.* I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.
+:::

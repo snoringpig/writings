@@ -84,3 +84,6 @@
 .ap-touchonly { display: none; }
 @media (hover: none) and (pointer: coarse) { .ap-touchonly { display: inline; } }
 @media (hover: none) and (pointer: coarse) { .ap-kbonly { display: none; } }
+
+.made { font-size: 0.85rem; color: var(--muted, #6b7280); margin: 1.5rem 0; }
+.made p { margin: 0; }

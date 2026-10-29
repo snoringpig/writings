@@ -10,7 +10,7 @@
     { id: "electro", name: "Electrophone", inst: "Sine theremin", plain: "an electric circuit", law: "Kirchhoff’s law on", piece: "a coil and a capacitor",
       op: "A = \\frac{1}{LC}", held: "a single number, like a mass on a spring",
       spec: "f = \\frac{1}{2\\pi \\sqrt{LC}}", specNote: "",
-      verdict: "One stem: a pure tone. A real theremin mixes two such circuits, the hand changing C, and its circuitry adds a few overtones.",
+      verdict: "One stem: a pure tone. A real theremin runs two such circuits at radio frequencies, the hand changing C of one, and you hear the difference of their frequencies, with a few overtones.",
       hue: [120, 230, 170], pan: 0.25, page: "oscillator", where: "The circuit and the spring: post 2" },
     { id: "chord", name: "Chordophone", inst: "Piano", plain: "a stiff string", law: "Newton’s law on", piece: "a short piece of stiff steel wire",
       op: "A = -c^2 \\frac{d^2}{dx^2} + \\kappa^2 \\frac{d^4}{dx^4}", held: "ends pinned",
@@ -19,7 +19,7 @@
     { id: "aero", name: "Aerophone", inst: "Clarinet", plain: "a column of air", law: "Newton’s law on", piece: "a thin slice of the air in the tube",
       op: "A = -c^2 \\frac{d^2}{dx^2}", held: "on pressure; closed at the reed, open at the far end",
       spec: "f_n = (2n - 1) \\frac{c}{4L}", specNote: "",
-      verdict: "On the odd lines; the even ones are weak: a hollow note.", hue: [120, 200, 255], pan: -0.45, page: "clarinet", where: "Derived in post 2; the clarinet: post 4" },
+      verdict: "Blown, the air repeats one cycle, so the partials sit exactly on the lines; the tube’s odd modes make the odd ones strong and the even ones weak: a hollow note.", hue: [120, 200, 255], pan: -0.45, page: "clarinet", where: "Derived in post 2; the clarinet: post 4" },
     { id: "idio", name: "Idiophone", inst: "Glockenspiel", plain: "a steel bar", law: "Newton’s law on", piece: "a thin slice of a steel bar",
       op: "A = \\kappa^2 \\frac{d^4}{dx^4}", held: "both ends free",
       spec: "\\cos \\beta L \\; \\cosh \\beta L = 1", specNote: "ratios 1 : 2.76 : 5.40",
@@ -27,7 +27,7 @@
     { id: "membrane", name: "Membranophones", inst: "Bass drum and timpani", plain: "a stretched skin", law: "Newton’s law on", piece: "a small patch of the drumhead",
       op: "A = -c^2 \\Delta", held: "rim held still",
       spec: "J_m(ka) = 0", specNote: "ratios 1 : 1.59 : 2.14 : 2.30 …",
-      verdict: "Bass drum: struck slightly off centre, mostly round modes, off the lines and fading fast: a boom with no clear pitch. Timpani: the same skin, but the air it drags along pulls its spoke modes near 2 : 3 : 4 : 5: a note.",
+      verdict: "Bass drum: struck off centre, mostly round modes, off the lines and fading fast: a boom with no clear pitch. Timpani: the same skin; the air it drags along pulls its spoke modes near 2 : 3 : 4 : 5, the stroke favours them and the round modes fade fast: a note.",
       hue: [255, 134, 102], pan: 0, page: "drum", where: "Derived in post 2; the two drums: post 4" }
   ];
   O.famIndex = {}; O.FAM.forEach(function (f, i) { O.famIndex[f.id] = i; });
@@ -514,7 +514,7 @@
       wrap(g, "Musicologists sort instruments into five classes by what makes the sound (Hornbostel and Sachs, 1914; electrophones added later). One recipe turns each into its stems.", X0, 228, 1640, 44, 32, rgba(MUT, fade(u, 0.8)));
       var a1 = fade(u, 3.2), a2 = fade(u, 7.2), a3 = fade(u, 11.2);
       text(g, "1", X0, 396, 34, rgba(LINK, a1), { font: SANS, weight: 700 });
-      text(g, "Newton’s law on a small piece of the instrument always takes this form:", XF, 396, 34, rgba(INK, a1));
+      text(g, "For small motions, Newton’s law on a small piece of the instrument takes this form:", XF, 396, 34, rgba(INK, a1));
       O.tex(g, "u_{tt} = -A u", XF + 40, 462, 44, rgba(INK, a1));
       text(g, "u is the instrument’s shape; A, the operator, turns a shape into minus the acceleration it causes.", XF + 330, 462, 28, rgba(MUT, a1), { italic: true });
       text(g, "2", X0, 570, 34, rgba(LINK, a2), { font: SANS, weight: 700 });
@@ -523,7 +523,7 @@
       text(g, "swings at", XF + 40 + w1 + 40, 650, 30, rgba(MUT, a2), { italic: true });
       O.tex(g, "f = \\frac{\\sqrt{\\lambda}}{2\\pi}", XF + 40 + w1 + 190, 650, 44, rgba(INK, a2));
       text(g, "3", X0, 776, 34, rgba(LINK, a3), { font: SANS, weight: 700 });
-      wrap(g, "Every motion is a sum of such shapes, so the list of the λ’s, the spectrum of the operator, decides where the stems stand.", XF, 776, 1540, 46, 34, rgba(INK, a3));
+      wrap(g, "Left to ring, every motion is a sum of such shapes, so the list of the λ’s, the spectrum of the operator, decides where the stems stand.", XF, 776, 1540, 46, 34, rgba(INK, a3));
       O.FAM.forEach(function (f, i) { text(g, f.name, X0 + i * 336, 960, 32, rgba(f.hue, fade(u, 13.5 + 0.3 * i, 0.5)), { weight: 700 }); });
       text(g, "each has its own operator", X0, 1010, 26, rgba(MUT, fade(u, 15)), { italic: true });
     } else if (seg.kind === "fam") {
@@ -552,17 +552,18 @@
         text(g, "timpani: measured, not derived; the lines are multiples of a base an octave below its note", VX, 812, 24, rgba(MUT, a0), { italic: true });
         ruler(g, LX, 824, W - 2 * LX, 132, f.id, sounding(tl.notes, f.id, t, "timpani"), 10, false);
       } else ruler(g, LX, 618, W - 2 * LX, 300, f.id, sounding(tl.notes, f.id, t), 10, true);
-      var yv = f.id === "membrane" ? 1000 : 982;
+      var yv = f.id === "membrane" ? 990 : 982;
       al = fade(t1, 5.4); lab("5", "What you hear", yv, al);
       wrap(g, f.verdict, VX, yv, 1220, 36, f.id === "membrane" ? 26 : 30, rgba(INK, al));
     } else {
       var b1 = fade(t, seg.t0, 0.8), b2 = fade(t, seg.t0 + 1.5, 0.8);
-      wrap(g, "Every sound in this video was computed from these spectra. No recordings, no samples.", 140, 330, 1640, 76, 58, rgba(INK, b1), { weight: 700 });
-      text(g, "Each spectrum comes from its operator, except the timpani’s, which is measured.", 140, 500, 32, rgba(MUT, b1), { italic: true });
-      text(g, "The Shape of a Sound: the mathematics of musical sound, one instrument at a time", 140, 600, 34, rgba(MUT, b2));
-      text(g, "snoringpig.github.io/writings", 140, 660, 34, rgba(LINK, b2), { font: SANS });
+      wrap(g, "Every sound in this video was built from pure tones at these spectra. No recordings, no samples.", 140, 330, 1640, 76, 58, rgba(INK, b1), { weight: 700 });
+      text(g, "Each spectrum comes from its operator, except the timpani’s, which is measured; the blown clarinet repeats one cycle.", 140, 500, 32, rgba(MUT, b1), { italic: true });
+      text(g, "The Shape of a Sound: the mathematics of musical sound", 140, 600, 34, rgba(MUT, b2));
+      text(g, "snoringpig.github.io/writings/posts/instruments-as-operators", 140, 660, 34, rgba(LINK, b2), { font: SANS });
       text(g, "Music: Edvard Grieg, In the Hall of the Mountain King (1875), public domain. Arrangement and synthesis made for this video.", 140, 900, 24, rgba(MUT, b2), { italic: true });
       text(g, "Classes: E. M. von Hornbostel and C. Sachs (1914); D. J. Benson, Music: A Mathematical Offering, chapter 3.", 140, 940, 24, rgba(MUT, b2), { italic: true });
+      text(g, "Code, mathematics and video drafted with Claude, an AI model made by Anthropic.", 140, 980, 24, rgba(MUT, b2), { italic: true });
     }
     g.restore();
   };
