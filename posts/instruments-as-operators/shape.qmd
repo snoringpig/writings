@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css, gww.py, gww_modes.py]
 ---
 
@@ -14,7 +14,7 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 :::
 
 ::: {.pageinfo}
-Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Math: up to the Laplacian (page 8). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Math: up to the Laplacian (page 8). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -44,6 +44,10 @@ Listen first: play each drum with every mode equally loud. Then click a drum to 
 </div>
 </div>
 ```
+
+::: {.newidea}
+**In one sentence.** All of a drum's frequencies tell you its area and, for a reasonable rim, its perimeter, but not always its shape: two different drums can have exactly the same frequencies.
+:::
 
 ::: {.gist}
 **The recipe on this page, in brief.** Every earlier page ran the recipe forwards, from an instrument to its sound. This page runs it backwards.
@@ -201,7 +205,7 @@ In the figure, $R = 5.3$: there are 17 dots, and the formula gives 16.8. The str
 :::
 
 ::: {.derive}
-<details><summary><span class="label">Proof sketch</span>Hearing the perimeter of any drum: a smoother count <span class="needs">uses the heat equation and the reflection trick of page 4</span></summary>
+<details><summary><span class="label">Proof sketch</span>Hearing the perimeter of a drum with a smooth or straight-sided rim: a smoother count <span class="needs">uses the heat equation and the reflection trick of page 4</span></summary>
 
 $N(\Lambda)$ jumps by one at every eigenvalue, and those jumps can bunch up, which is what Ivrii's condition controls. A smoother count avoids them. For $t > 0$ let
 $$
@@ -259,7 +263,7 @@ The scripts are [gww.py](gww.py) for the eigenvalues and [gww_modes.py](gww_mode
 
 ## What we found
 
-Run forwards, the recipe gives the drum's sound: Newton's law on a patch of head gives $u_{tt} = c^2\Delta u$; the operator is $A = -c^2\Delta$ with the rim held still; its spectrum is the list of eigenvalues $\lambda_n = c^2k_n^2$, with $-\Delta X_n = k_n^2X_n$, and the frequencies are $f_n = \sqrt{\lambda_n}/2\pi$. Run backwards, it asks what the spectrum says about the drum. Counting the spectrum with Weyl's law recovers the drum's area and, for smooth or straight-sided rims, the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every eigenvalue, and so every frequency, though struck at a point they still sound different. On the spectrum diagram, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. The study of such questions, what a spectrum says about the shape behind it, is called *spectral geometry*.
+A drum's spectrum, the eigenvalues of $A = -c^2\Delta$ with the rim held still, tells you its area through Weyl's law and, for a smooth or straight-sided rim, the length of its rim, which is enough to recognize a round drum. It does not always tell you the shape: Gordon, Webb and Wolpert's two drums share every frequency, though struck at a point they sound different. The study of what a spectrum says about the shape behind it is called *spectral geometry*; the last page asks what a spectrum says about music.
 
 ## The next puzzle
 
@@ -272,10 +276,12 @@ One question is left, and it goes beyond mathematics: did the instruments people
 Å. Pleijel, "A study of certain Green's functions with applications in the theory of vibrating membranes", *Arkiv för Matematik* 2 (1954), 553–569.
 M. Kac, "Can one hear the shape of a drum?", *American Mathematical Monthly* 73 (1966), part II, 1–23 ([MAA](https://www.maa.org/programs/maa-awards/writing-awards/can-one-hear-the-shape-of-a-drum)).
 C. Gordon, D. Webb and S. Wolpert, "One cannot hear the shape of a drum", *Bulletin of the AMS* 27 (1992), 134–138 ([AMS](https://www.ams.org/bull/1992-27-01/S0273-0979-1992-00289-6/), [arXiv](https://arxiv.org/abs/math/9207215)).
-T. A. Driscoll, "Eigenmodes of isospectral drums", *SIAM Review* 39 (1997) ([DOI](https://doi.org/10.1137/S0036144595285069), [PDF](https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf)), Table 3.1.
+T. A. Driscoll, "Eigenmodes of isospectral drums", *SIAM Review* 39 (1997), 1–17 ([DOI](https://doi.org/10.1137/S0036144595285069), [PDF](https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf)), Table 3.1.
 C. Moler, "Can one hear the shape of a drum?", Cleve's Corner, MathWorks, August 2012: [part 1, eigenvalues](https://blogs.mathworks.com/cleve/2012/08/06/can-one-hear-the-shape-of-a-drum-part-1-eigenvalues/), [part 2, eigenfunctions](https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/), [part 3, transplantation](https://blogs.mathworks.com/cleve/2012/08/20/can-one-hear-the-shape-of-a-drum-part-3-transplantation/).
 S. J. Chapman, "Drums that sound the same", *American Mathematical Monthly* 102 (1995), 124–138.
 P. Buser, J. Conway, P. Doyle and K.-D. Semmler, "Some planar isospectral domains", *International Mathematics Research Notices* 1994, 391–400 ([arXiv](https://arxiv.org/abs/1005.1839)).
+T. Sunada, "Riemannian coverings and isospectral manifolds", *Annals of Mathematics* 121 (1985), 169–186.
+P. Bérard, "Transplantation et isospectralité I", *Mathematische Annalen* 292 (1992), 547–559.
 J. Milnor, "Eigenvalues of the Laplace operator on certain manifolds", *PNAS* 51 (1964), 542.
 H. P. McKean and I. M. Singer, "Curvature and the eigenvalues of the Laplacian", *Journal of Differential Geometry* 1 (1967), 43–69 ([Project Euclid](https://projecteuclid.org/download/pdf_1/euclid.jdg/1214427880)).
 M. van den Berg and S. Srisatkunarajah, "Heat equation for a region in R² with a polygonal boundary", *Journal of the London Mathematical Society* 37 (1988), 119–127.

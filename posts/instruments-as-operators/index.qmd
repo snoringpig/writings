@@ -2,13 +2,13 @@
 title: "The Shape of a Sound"
 subtitle: "The mathematics of musical sound, one instrument at a time"
 date: 2026-10-25
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 categories: [math, music]
 format:
   html:
     html-math-method: katex
     css: ins.css
-resources: [core.js, ins.css]
+resources: [core.js, ins.css, orchestra.js, fonts/*.woff2]
 ---
 
 Pluck a string and you get a note you could hum. Strike a drum and you get a thud. Both are a stretched piece of material, set shaking. So why do they sound so different?
@@ -26,7 +26,7 @@ Pluck a string and you get a note you could hum. Strike a drum and you get a thu
       <svg class="spec" id="rulerDrum" viewBox="0 0 320 96" aria-label="The frequencies in a struck drum's sound, as multiples of the lowest: they fall between the whole-number lines"></svg>
     </div>
   </div>
-  <p class="cap">Call this the <em>pitch ruler</em>; with one stem per mode, it is the spectrum diagram that stage 4 of every instrument page draws. Its gray lines mark whole-number multiples, 1×, 2×, 3×, …, of one base frequency, here the lowest. Each blue stem is one frequency in the sound; taller means it starts stronger, for an idealized pluck and strike. (The string is plucked a fifth of the way along, so 5× is missing.)</p>
+  <p class="cap">Call this the <em>pitch ruler</em>; with one stem per mode, it is the spectrum diagram that stage 4 of every instrument page draws. Its gray lines mark whole-number multiples, 1×, 2×, 3×, …, of one base frequency, here the lowest. Each blue stem is one frequency in the sound; taller means it starts stronger, for an idealized pluck and strike. (The string is plucked a fifth of the way along, so 5× is missing; the drum is struck about a third of the way out from its center.)</p>
 </div>
 </div>
 ```
@@ -39,58 +39,68 @@ Pluck a string and you get a note you could hum. Strike a drum and you get a thu
 <svg class="fig" viewBox="0 0 320 112" role="img" aria-label="The first three modes of a string: one arc, two halves, three thirds, at 1, 2 and 3 times the lowest frequency"><path class="dash" d="M 40 22 L 280 22"/><path class="acc" d="M 40 22 C 126.4 7.7 193.6 7.7 280.0 22"/><path class="acc" opacity="0.35" d="M 40 22 C 126.4 36.3 193.6 36.3 280.0 22"/><circle cx="40" cy="22" r="2.5" class="fillacc"/><circle cx="280" cy="22" r="2.5" class="fillacc"/><text x="290" y="26">1×</text><path class="dash" d="M 40 56 L 280 56"/><path class="acc" d="M 40 56 C 83.2 41.7 116.8 41.7 160.0 56 C 203.2 70.3 236.8 70.3 280.0 56"/><path class="acc" opacity="0.35" d="M 40 56 C 83.2 70.3 116.8 70.3 160.0 56 C 203.2 41.7 236.8 41.7 280.0 56"/><circle cx="40" cy="56" r="2.5" class="fillacc"/><circle cx="280" cy="56" r="2.5" class="fillacc"/><text x="290" y="60">2×</text><path class="dash" d="M 40 90 L 280 90"/><path class="acc" d="M 40 90 C 68.8 75.7 91.2 75.7 120.0 90 C 148.8 104.3 171.2 104.3 200.0 90 C 228.8 75.7 251.2 75.7 280.0 90"/><path class="acc" opacity="0.35" d="M 40 90 C 68.8 104.3 91.2 104.3 120.0 90 C 148.8 75.7 171.2 75.7 200.0 90 C 228.8 104.3 251.2 104.3 280.0 90"/><circle cx="40" cy="90" r="2.5" class="fillacc"/><circle cx="280" cy="90" r="2.5" class="fillacc"/><text x="290" y="94">3×</text></svg>
 ```
 
-**2. A pluck sets many of them going at once.** What you hear is a chord of the modes' frequencies: the lowest, called the [fundamental](glossary.qmd#fundamental), and the [overtones](glossary.qmd#partial) above it. They are the stems on the ruler above.
+**2. A pluck sets many of them going at once.** What you hear is a mix of the modes' frequencies: the lowest, called the [fundamental](glossary.qmd#fundamental), and the [overtones](glossary.qmd#partial) above it. They are the stems on the ruler above.
 
-**3. Whether that chord sounds like one note depends on how the frequencies line up.** If they sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, the sound repeats itself many times a second, and the ear hears that repetition rate as the [pitch](glossary.qmd#pitch). A string's modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead's land at 1×, 1.59×, 2.14×, 2.30×, …: a few fall near a line by chance, but no frequency we hear as pitch fits them all. The sound doesn't repeat at any rate we hear as pitch, and it dies fast: a thud.
+**3. Whether that mix sounds like one note depends on how the frequencies line up.** If they are all, or very nearly, whole-number multiples of one frequency in the range we hear as pitch, the sound repeats itself at the largest such frequency, many times a second, and the ear hears that repetition rate as the [pitch](glossary.qmd#pitch). A string's modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead's land at 1×, 1.59×, 2.14×, 2.30×, …: a few fall near a line by chance, but no frequency we hear as pitch fits them all. The sound doesn't repeat at any rate we hear as pitch, and it dies fast: a thud. Drums with a clear note, such as the timpani (kettledrums), are built so that one set of their modes lands near the lines and the rest are weak or fade fast (page 8).
 
 ::: {.northstar}
-**The idea behind the whole series.** Newton's law turns each instrument into an [operator], and the operator's [spectrum](glossary.qmd#spectrum) gives its frequencies: how the instrument is built, stretched and held decides them. Put the frequencies you hear on the pitch ruler: **on the lines, a note; off the lines, a clang or a thud.** More exactly, you hear a note when they all sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch. Each instrument page puts its instrument on the ruler to see which.
+**The idea behind the whole series.** Apply Newton's law to a small piece of an instrument and you get a rule for how its shape is pulled back toward rest: its [operator]. The shapes that rule only scales up or down are the modes; each swings at its own frequency, and left to ring, the instrument moves as a mix of them. The operator's [spectrum](glossary.qmd#spectrum) fixes those frequencies, so it decides what the instrument can sound like: **on the lines, a note; off the lines, a clang or a thud.**
 :::
 
 [Skip to the journey ↓](#the-journey)
 
-## The mathematics: one recipe, every instrument
+## One instrument from each class
 
-Behind every page is the same recipe, and it is the mathematical heart of the series: Newton's law gives each instrument an operator, and the operator's spectrum gives its frequencies. The page [The spectrum of an operator](spectrum.qmd) lays the idea out in full and runs it on every instrument; here are its two steps.
+Musicologists sort instruments into five classes by what makes the sound ([Hornbostel–Sachs](glossary.qmd#hornbostel-sachs)): strings, air, solid bodies, stretched skins and electric circuits. Here is one of each, playing Grieg.
 
-**1. Derive the instrument's operator from first principles.** Take one small piece of the instrument (a bit of string, a slab of air, a slice of steel, a patch of drumhead) and apply Newton's law: mass times acceleration equals the force on it. The force comes from the material: tension, air pressure, or the stiffness of bent steel. Worked out, the force on the piece turns out to depend only on the shape of the instrument around it, through a fixed rule. Dividing by the mass gives an equation of the same form for every instrument,
-$$
-u_{tt} = -A\,u ,
-$$
-where $u$ is the instrument's shape (how far each point is from rest; for a tube, the air pressure), $u_{tt}$ is its [acceleration](glossary.qmd#partial-derivative), and $A$ is the [operator]: the rule that takes a shape and returns minus the restoring force per unit mass. How the instrument is held (ends tied, clamped, open, free) decides which shapes $A$ may act on, and is part of the operator.
+```{=html}
+<div class="ins">
+<div class="panel" id="orch">
+<style>
+@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Sans"; src: url("fonts/lmsans10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Sans"; src: url("fonts/lmsans10-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Math"; src: url("fonts/lmmath.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+#orch canvas { aspect-ratio: 16 / 9; height: auto; background: #0d1016; border-radius: 6px; }
+#orch canvas:fullscreen { width: 100vw; height: 100vh; object-fit: contain; border-radius: 0; }
+#orch .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; font-family: var(--f-ui); font-size: 0.9rem; color: var(--muted); }
+#orch .chip { padding: 0.25rem 0.6rem; min-height: 2rem; display: inline-flex; gap: 0.4rem; align-items: center; }
+#orch .chip .dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25); }
+#orch .chip[aria-pressed="false"] { color: var(--muted); }
+#orch .chip[aria-pressed="false"] .dot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--c); }
+#orch #oTime { font-family: var(--f-mono); font-size: 0.86rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+</style>
+  <canvas id="oStage" role="img" aria-label="A piano roll of the score above six lanes, one per instrument. Each lane names the instrument's class and what vibrates, sketches it moving, and shows the frequencies in its current note on a pitch ruler."></canvas>
+  <div class="controls">
+    <button type="button" class="primary" id="oPlay">▶ Play (1 min)</button>
+    <button type="button" id="oFull">▶ With the mathematics (2½ min)</button>
+    <button type="button" id="oStop">Stop</button>
+    <button type="button" id="oFs">Full screen</button>
+    <span id="oTime" aria-live="polite">Ready</span>
+  </div>
+  <div class="chips" id="oFams"><span>Tap an instrument to mute it:</span></div>
+  <p class="cap">Grieg's <cite>In the Hall of the Mountain King</cite> (1875) on a sine theremin (electrophone), a piano (chordophone), a clarinet (aerophone), a glockenspiel (idiophone), and two membranophones, a bass drum and a kettledrum (timpani). There are no recordings: every note is built from pure tones. The struck and plucked notes fade, at frequencies computed from each instrument's operator (the bass drum's from page 8's ideal drumhead), except the kettledrum's, which are measured, because page 8's simple model gets only halfway to them. The clarinet holds a steady tone with the tube's odd multiples strong and the even ones faint, and the theremin a single steady pure tone. Each lane shows the frequencies on the pitch ruler. The arrangement is ours, after the transcription at <a href="https://flutetunes.com/tunes.php?id=91">flutetunes.com</a>. On a small screen, use Full screen with the phone turned sideways.</p>
+</div>
+</div>
+```
 
-**2. Find its spectrum.** A [mode](glossary.qmd#mode) is a shape that the operator only rescales,
-$$
-A\,X = \lambda\,X ,
-$$
-for some number $\lambda$, an [eigenvalue](glossary.qmd#eigenvalue). Every operator here has $\lambda \ge 0$ (where $\lambda = 0$ occurs, it is the whole instrument drifting, which makes no sound). For $\lambda > 0$ such a shape swings in place as $X\cos(\sqrt{\lambda}\,t + \phi)$, so it sounds at the frequency
-$$
-f = \frac{\sqrt{\lambda}}{2\pi} .
-$$
-The list of all the eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). So the frequencies an instrument rings at on its own, once struck or plucked, are fixed by its operator; how you strike or pluck it only decides how strongly each one sounds. A steady bow or breath can do more: it can lock the sound onto exact whole-number multiples (pages 4, 5 and 6b).
+The two drums show the series' answer in miniature. An ideal drumhead's frequencies are off the lines, so the bass drum booms without a clear pitch; a kettledrum is built so that one set of its modes lands near the lines and the others fade fast, so it plays a note ([page 8](drum.qmd#one-drumhead-two-drums)).
 
-Each instrument page carries out both steps in full, from Newton's law to the frequencies:
+## The mathematics in one example
 
-| Page | Newton's law on | Operator $A$ | Held | Frequencies |
-|:--|:--|:--|:--|:--|
-| [1 · Spring](oscillator.qmd) | one mass | multiply by $k/m$ | — | one: $\sqrt{k/m}/2\pi$ |
-| [2 · Beads](ring.qmd) | each bead | a matrix | in a ring | $\propto \sin(\pi k/N)$ |
-| [3 · Loop](circle.qmd) | a bit of string | $-c^2\,d^2/d\theta^2$ | in a loop | $\propto n$, exactly |
-| [4 · String](violin.qmd) | a bit of string | $-c^2\,d^2/dx^2$ | both ends tied | $\propto n$ |
-| [5 · Clarinet](clarinet.qmd) | a slab of air | $-c^2\,d^2/dx^2$, on pressure | one end closed | $\propto 2n-1$ |
-| [6 · Kalimba](kalimba.qmd) | a slice of steel | $\kappa^2\,d^4/dx^4$ | clamped, free tip | $1 : 6.27 : 17.55$ |
-| [7 · Piano](piano.qmd) | a bit of stiff wire | $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$ | ends pinned | $n\sqrt{1+Bn^2}$, slightly sharp |
-| [8 · Drum](drum.qmd) | a patch of drumhead | $-c^2\,\Delta$ | rim fixed | $1 : 1.59 : 2.14 : 2.30$ |
+The smallest instrument with more than one mode is two beads on a tight string, with both ends tied. Pull one bead aside and let go, and both beads wobble in a tangled way that never quite repeats. But two ways of starting them are special. Lift both beads together, and they swing together forever, at one frequency. Lift one up and push the other down, and they swing in opposite directions forever, at √3 ≈ 1.73 times that frequency: now the stretch of string between the beads pulls too, so the restoring pull is three times as strong, and a frequency goes as the square root of the pull (page 1).
 
-Here $n = 1, 2, 3, \dots$ counts the modes, $N$ is the number of beads, $\Delta$ is the two-dimensional version of $d^2/dx^2$ (page 8), and $\propto$ means "proportional to". The constants $c$, $\kappa$ and $B$ come from tension, density and stiffness; each page derives them. The [map](map.qmd) has the full comparison.
+```{=html}
+<svg class="fig" viewBox="0 0 320 112" role="img" aria-label="The two modes of two beads on a string with tied ends. Left: both beads move together, at the lower frequency. Right: they move in opposite directions, at about 1.73 times that frequency."><path class="dash" d="M 10 50 L 150 50"/><path class="acc" d="M 10 50 L 56.7 28 L 103.3 28 L 150 50"/><path class="acc" opacity="0.35" d="M 10 50 L 56.7 72 L 103.3 72 L 150 50"/><circle cx="56.7" cy="28" r="5" class="fillacc"/><circle cx="103.3" cy="28" r="5" class="fillacc"/><circle cx="56.7" cy="72" r="5" class="fillacc" opacity="0.35"/><circle cx="103.3" cy="72" r="5" class="fillacc" opacity="0.35"/><circle cx="10" cy="50" r="2.5" class="fillacc"/><circle cx="150" cy="50" r="2.5" class="fillacc"/><text x="80" y="102" text-anchor="middle">together: 1×</text><path class="dash" d="M 170 50 L 310 50"/><path class="acc" d="M 170 50 L 216.7 28 L 263.3 72 L 310 50"/><path class="acc" opacity="0.35" d="M 170 50 L 216.7 72 L 263.3 28 L 310 50"/><circle cx="216.7" cy="28" r="5" class="fillacc"/><circle cx="263.3" cy="72" r="5" class="fillacc"/><circle cx="216.7" cy="72" r="5" class="fillacc" opacity="0.35"/><circle cx="263.3" cy="28" r="5" class="fillacc" opacity="0.35"/><circle cx="170" cy="50" r="2.5" class="fillacc"/><circle cx="310" cy="50" r="2.5" class="fillacc"/><text x="240" y="102" text-anchor="middle">opposite: 1.73×</text></svg>
+```
 
-::: {.derive}
-<details><summary><span class="label">Precisely</span>What counts as a note <span class="needs">uses no extra mathematics</span></summary>
+These two shapes are the beads' modes, and every motion of the two beads, the tangled one included, is a mix of them, each part swinging at its own frequency. The rule that turns the beads' heights into the pulls on them is their operator; a mode is a shape that the rule only scales; the numbers that fix the modes' frequencies form its spectrum. A string, a column of air, a steel bar and a drumhead are the same story with more and more small pieces, each pulled back by its own rule. [Page 2](ring.qmd) works the two beads out in full, and [the spectrum of an operator](spectrum.qmd) proves that every free motion is a mix of modes and says where that stops being exact: when a bow or a breath keeps driving the motion, when the swings are large, or when friction mixes the modes.
 
-A clear pitch means the frequencies you hear sit at, or very near, whole-number multiples of one frequency in the pitch range, from a few dozen to a few thousand hertz. That frequency need not be present itself (page 0). Then the sound repeats, or nearly repeats, and the repetition rate is the pitch. What you hear can differ from the spectrum in two ways: some frequencies die almost at once, leaving the rest (the kalimba, page 6), and a steady bow or breath can lock the motion into exact repetition near one of the operator's frequencies, even when the operator's overtones are off the lines (the harmonica, page 6b).
+## Did instrument makers know?
 
-</details>
-:::
+Not in these terms. Instruments came first, shaped over centuries by trial and ear; the mathematics came later and explained them, from Mersenne's laws of vibrating strings (1636) and d'Alembert's wave equation (1747) to Rayleigh's *The Theory of Sound* (1877). Designing an instrument by computing its spectrum is recent: a carillon bell with a major third in its overtones, where traditional bells have a minor third, was designed by computer at the Eindhoven University of Technology for the Eijsbouts bell foundry; the [map](map.qmd#did-instrument-makers-know) tells the longer story.
 
 [operator]: glossary.qmd#operator
 
@@ -100,28 +110,32 @@ A clear pitch means the frequencies you hear sit at, or very near, whole-number 
 <div class="ins">
 <ol class="journey">
   <li class="part">The idea</li>
-  <li><a href="note.html"><span class="n">0</span><span class="t">What makes a sound a note?</span></a><span class="hint">Take away a note's lowest frequency and you still hear the same note.</span><span class="controls"><button data-g="note">▶ The note</button><button data-g="nofund">▶ Without it</button></span></li>
-  <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">As a plucked note fades, its pitch barely sags. The reason is the simplest vibrating thing there is.</span></li>
-  <li><a href="ring.html"><span class="n">2</span><span class="t">How can a tangled wobble be a few simple motions?</span></a><span class="hint">Pluck one bead on a ring of beads: the mess turns out to be a chord.</span></li>
-  <li><a href="circle.html"><span class="n">3</span><span class="t">Why does a loop of string land exactly on the lines?</span></a><span class="hint">The cleanest case of all, and where the lines on the ruler come from.</span></li>
-  <li><a href="spectrum.html"><span class="n">★</span><span class="t">The spectrum of an operator</span></a><span class="hint">The recipe behind every page, from Newton's law to the sound, run on every instrument.</span></li>
+  <li><a href="note.html"><span class="n">0</span><span class="t">What makes a sound a note?</span></a><span class="hint">When a sound's frequencies are all, or very nearly, whole-number multiples of one frequency, the sound repeats, or nearly repeats, at the largest such frequency, and if that rate is in the range we hear as pitch, the ear hears it as the pitch, even when that frequency itself is missing.</span><span class="controls"><button data-g="note">▶ The note</button><button data-g="nofund">▶ Without it</button></span></li>
+  <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">A mass on a spring vibrates at one frequency, √(k/m)/2π (k its stiffness, m its mass), and the size of the swing doesn't enter (for small swings), which is why a fading note keeps its pitch.</span></li>
+  <li><a href="ring.html"><span class="n">2</span><span class="t">How can a tangled wobble be a few simple motions?</span></a><span class="hint">With many masses the operator is a table of numbers (a matrix); the shapes it only rescales (its eigenvectors) swing as independent springs, and any motion is a mix of them.</span></li>
+  <li><a href="circle.html"><span class="n">3</span><span class="t">Why does a loop of string land exactly on the lines?</span></a><span class="hint">A loop of string vibrates at exactly 1, 2, 3, … times its lowest frequency, because each wave around it has a whole number of crests and all waves travel at the same speed.</span></li>
+  <li><a href="spectrum.html"><span class="n">★</span><span class="t">The spectrum of an operator</span></a><span class="hint">Left to ring, an object vibrates as a mix of its modes; the operator fixes their frequencies, and playing sets only how strongly each sounds.</span></li>
   <li class="part">Instruments</li>
-  <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">Touch a violin string at its middle and the note leaps up.</span></li>
-  <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Same length; one end closed.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
-  <li><a href="kalimba.html"><span class="n">6</span><span class="t">Why does a kalimba sound clean?</span></a><span class="hint">Its overtones are off the lines, and yet it sounds clean.</span><span class="controls"><button data-g="kal">▶ Kalimba tine</button></span></li>
-  <li><a href="harmonica.html"><span class="n">6b</span><span class="t">Where did the harmonica reed's overtones go?</span></a><span class="hint">Pluck the reed and its overtones are off the lines; blow it and the sound's overtones land exactly on the lines.</span><span class="controls"><button data-g="kal">▶ Plucked</button><button data-g="harm">▶ Blown</button></span></li>
-  <li><a href="piano.html"><span class="n">7</span><span class="t">Why do piano tuners stretch octaves?</span></a><span class="hint">An octave tuned to exactly double the frequency wobbles.</span><span class="controls"><button data-g="oct">▶ Exactly 2 : 1</button><button data-g="str">▶ Stretched</button></span></li>
-  <li><a href="drum.html"><span class="n">8</span><span class="t">Why does a drum thud?</span></a><span class="hint">Sprinkle sand on a vibrating sheet and it draws where each mode stays still.</span></li>
-  <li class="part">Beyond</li>
-  <li><a href="shape.html"><span class="n">9</span><span class="t">Can you hear the shape of a drum?</span></a><span class="hint">Two differently shaped drums with exactly the same frequencies.</span><span class="controls"><button data-g="gA">▶ Drum A</button><button data-g="gB">▶ Drum B</button></span></li>
-  <li><a href="epilogue.html"><span class="n">10</span><span class="t">Did instruments shape our scales?</span></a><span class="hint">Why some pairs of notes sound smooth together, and whether instruments decided which.</span></li>
+  <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">A light touch at the middle drains every mode that moves under the finger and leaves the even modes, which stand still there: a note an octave up.</span></li>
+  <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Air in a tube obeys the string's equation with different ends: a tube closed at one end has only odd multiples of its lowest frequency, so a clarinet sounds almost an octave below a flute of the same length and overblows an octave and a fifth higher.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
+  <li><a href="kalimba.html"><span class="n">6</span><span class="t">Why does a kalimba sound clean?</span></a><span class="hint">A bar clamped at one end has overtones off whole-number multiples (6.27×, 17.55×), yet a kalimba sounds clean because those overtones die within a fraction of a second (observed, not derived).</span><span class="controls"><button data-g="kal">▶ Kalimba tine</button></span></li>
+  <li><a href="harmonica.html"><span class="n">6b</span><span class="t">Where did the harmonica reed's overtones go?</span></a><span class="hint">Blown, the reed swings just below its own lowest frequency and chops the air into identical puffs, so the steady sound has only whole-number multiples and the reed's off-line overtones are absent from it.</span><span class="controls"><button data-g="kal">▶ Plucked</button><button data-g="harm">▶ Blown</button></span></li>
+  <li><a href="piano.html"><span class="n">7</span><span class="t">Why do piano tuners stretch octaves?</span></a><span class="hint">A piano wire's stiffness puts each overtone slightly above its whole-number multiple, so tuners stretch octaves to reduce the beating, a slow wobble in loudness, most at the ends of the keyboard.</span><span class="controls"><button data-g="oct">▶ Exactly 2 : 1</button><button data-g="str">▶ Stretched</button></span></li>
+  <li><a href="drum.html"><span class="n">8</span><span class="t">Why does a drum thud?</span></a><span class="hint">An ideal drumhead's frequencies (1, 1.59, 2.14, … times the lowest) fit no pitch, so a plain drum thuds; on a kettledrum, the air the head pushes pulls one set of modes near 2 : 3 : 4 : 5, a note.</span></li>
+  <li class="part">Beyond: two questions the recipe raises</li>
+  <li><a href="shape.html"><span class="n">9</span><span class="t">Can you hear the shape of a drum?</span></a><span class="hint">All of a drum's frequencies tell you its area and, for a reasonable rim, its perimeter, but not always its shape: two different drums can have exactly the same frequencies.</span><span class="controls"><button data-g="gA">▶ Drum A</button><button data-g="gB">▶ Drum B</button></span></li>
+  <li><a href="epilogue.html"><span class="n">10</span><span class="t">Did instruments shape our scales?</span></a><span class="hint">Two notes sound smooth together when their overtones line up, so instruments with different overtones can favour different scales, as Sethares argues (after Plomp and Levelt).</span></li>
 </ol>
 </div>
 ```
 
 The demo sounds in this list are simplified: the piano pair exaggerates the string's stiffness, and the two drums play every mode equally loud.
 
-Short on time? Start with [the spectrum of an operator](spectrum.qmd), the idea in one page. Or read each page's puzzle and the short summary box under its demo: about half an hour for the whole series. Or pages 0, 4 and 8, the note, the string and the drum, carry the main idea, and 4 and 8 derive their operators and spectra in full; page 3 shows the recipe in its simplest form. The [map](map.qmd) has every instrument's sound side by side, reading paths by depth, and the reference tables. Blue words link to the [glossary](glossary.qmd).
+Short on time? The answers in the list above are the series in brief, and each page repeats its answer in a box above a five-step summary. Pages 0, 4 and 8, the note, the string and the drum, carry the main idea; [the spectrum of an operator](spectrum.qmd) gives the mathematics in one page. The [map](map.qmd) has every instrument's sound side by side, reading paths by depth, the recipe run on every instrument, the instrument classes and the history. Blue words link to the [glossary](glossary.qmd).
+
+::: {.refs}
+**References.** The classes: E. M. von Hornbostel and C. Sachs, 1914, with electrophones added by Sachs in 1940; full references on the [map](map.qmd#operator-families-and-instrument-classes). The history: full sources on the [map](map.qmd#did-instrument-makers-know); in brief, Wikipedia, [Mersenne's laws](https://en.wikipedia.org/wiki/Mersenne%27s_laws), [Wave equation](https://en.wikipedia.org/wiki/Wave_equation) and [Bell](https://en.wikipedia.org/wiki/Bell) (the major-third bell), and MacTutor, [Lord Rayleigh](https://mathshistory.st-andrews.ac.uk/Biographies/Rayleigh/). Grieg: Wikipedia, [In the Hall of the Mountain King](https://en.wikipedia.org/wiki/In_the_Hall_of_the_Mountain_King). The two drums: sources on [page 8](drum.qmd).
+:::
 
 ::: {.made}
 *How this was made.* The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.
@@ -173,6 +187,74 @@ Short on time? Start with [the spectrum of an operator](spectrum.qmd), the idea 
   });
   C.onTheme(drawRulers);
   drawRulers();
+})();
+</script>
+```
+
+```{=html}
+<script src="orchestra.js"></script>
+<script>
+// The orchestra: one instrument from each Hornbostel–Sachs class, drawn and played by orchestra.js.
+(function () {
+  "use strict";
+  var O = window.Orchestra; if (!O) return;
+  var fams = document.getElementById("oFams"), mute = {};
+  O.FAM.forEach(function (f) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "true");
+    b.style.setProperty("--c", "rgb(" + f.hue.join(",") + ")"); b.innerHTML = '<span class="dot"></span>' + f.inst;
+    b.addEventListener("click", function () { mute[f.id] = !mute[f.id]; b.setAttribute("aria-pressed", mute[f.id] ? "false" : "true"); applyMute(f.id); if (!ctx) drawRest(); });
+    fams.appendChild(b);
+  });
+  var cv = document.getElementById("oStage"), g = cv.getContext("2d"), timeEl = document.getElementById("oTime");
+  var tlPerf = O.timeline(false), tlFull = O.timeline(true), cur = tlPerf, ctx = null, t0 = 0, raf = 0, fg = null;
+  tlPerf.mute = mute; tlFull.mute = mute;
+  var REST = O.beatToSec(8 * 16 + 4.15);
+  function fit() {
+    var full = document.fullscreenElement === cv, dpr = Math.min(2, window.devicePixelRatio || 1);
+    var w = full ? Math.min(window.innerWidth, window.innerHeight * 16 / 9) : cv.getBoundingClientRect().width;
+    w = Math.max(320, Math.round(w * dpr)); cv.width = w; cv.height = Math.round(w * 9 / 16);
+  }
+  function drawRest() { O.drawAt(g, REST, cv.width, cv.height, tlPerf); }
+  function mmss(x) { x = Math.max(0, Math.round(x)); return Math.floor(x / 60) + ":" + ("0" + x % 60).slice(-2); }
+  function applyMute(id) { if (fg && ctx) fg[id].gain.setTargetAtTime(mute[id] ? 0 : 1, ctx.currentTime, 0.03); }
+  function frame() {
+    if (!ctx) return;
+    var t = ctx.currentTime - t0;
+    if (t > cur.dur) { stop(); return; }
+    O.drawAt(g, Math.max(0, t), cv.width, cv.height, cur);
+    timeEl.textContent = mmss(t) + " / " + mmss(cur.dur);
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() {
+    cancelAnimationFrame(raf);
+    if (ctx) { try { ctx.close(); } catch (e) {} }
+    ctx = null; fg = null; timeEl.textContent = "Ready"; drawRest();
+  }
+  function play(full) {
+    stop(); cur = full ? tlFull : tlPerf;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) { timeEl.textContent = "This browser cannot play Web Audio."; return; }
+    ctx = new AC(); if (ctx.resume) ctx.resume();
+    var my = ctx; timeEl.textContent = "Computing the sounds…";
+    setTimeout(function () {
+      if (ctx !== my) return;
+      var cache = O.prepare(ctx, cur.notes);
+      t0 = ctx.currentTime + 0.2;
+      fg = O.schedule(ctx, cur.notes, t0, { cache: cache, mute: mute });
+      raf = requestAnimationFrame(frame);
+    }, 30);
+  }
+  document.getElementById("oPlay").addEventListener("click", function () { play(false); });
+  document.getElementById("oFull").addEventListener("click", function () { play(true); });
+  document.getElementById("oStop").addEventListener("click", stop);
+  var fsb = document.getElementById("oFs");
+  if (!cv.requestFullscreen) fsb.hidden = true;
+  fsb.addEventListener("click", function () { if (cv.requestFullscreen) cv.requestFullscreen().catch(function () {}); });
+  document.addEventListener("fullscreenchange", function () { fit(); if (!ctx) drawRest(); });
+  window.addEventListener("resize", function () { fit(); if (!ctx) drawRest(); });
+  fit(); drawRest();
+  var faces = ['700 48px "LM Roman"', 'italic 24px "LM Roman"', '24px "LM Roman"', '24px "LM Sans"', '24px "LM Math"'];
+  if (document.fonts && document.fonts.load) Promise.all(faces.map(function (f) { return document.fonts.load(f, "A−κ♯"); })).then(function () { if (!ctx) drawRest(); }, function () {});
 })();
 </script>
 ```

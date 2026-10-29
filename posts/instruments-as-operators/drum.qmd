@@ -14,12 +14,14 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd) and the loop of [page 3](circle.qmd). Math: up to Bessel functions (described). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd) and the loop of [page 3](circle.qmd). Math: up to Bessel functions (described). About 3 minutes for the summary; about 35 with the mathematics.
 :::
 
 ::: {.puzzle}
 A drumhead is a sheet pulled tight: a string with a second dimension. Pluck a string and you get a note you could hum. Strike a drum and you get a thud. What changes when the string becomes a sheet?
 :::
+
+The short answer: an ideal, uniform head has its frequencies off the lines, so it thuds; drums with a clear note, such as the timpani (kettledrums), are built so that one set of modes lands near the lines and the rest are weak or fade fast ([stage 5](#one-drumhead-two-drums)).
 
 Listen first: tap the head anywhere, then tap dead center and compare.
 
@@ -46,6 +48,10 @@ svg.patch { display: block; width: 100%; max-width: 420px; height: auto; margin:
 </div>
 ```
 
+::: {.newidea}
+**In one sentence.** An ideal drumhead's frequencies (1, 1.59, 2.14, … times the lowest) fit no pitch, so a plain drum thuds; on a kettledrum, the air the head pushes pulls one set of modes near 2 : 3 : 4 : 5, a note.
+:::
+
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
@@ -53,7 +59,7 @@ svg.patch { display: block; width: 100%; max-width: 420px; height: auto; margin:
 2. *The operator* is the two-dimensional version of the string's, $-c^2\Delta$, with the rim held still.
 3. *Its spectrum*, for a round drum, comes from the zeros of Bessel functions: frequencies at 1×, 1.59×, 2.14×, 2.30×, … the lowest.
 4. *On the diagram*: those stems fall between the whole-number lines; no base frequency in the range we hear as pitch puts them all on or near lines.
-5. *What we hear*: a sound that doesn't repeat at any rate we hear as pitch, and fades fast: a thud. Where you strike changes how loud each mode is, never where it sits.
+5. *What we hear*: a sound that doesn't repeat at any rate we hear as pitch, and fades fast: a thud. Where you strike changes how loud each mode is, never where it sits. A kettledrum's surroundings move one set of modes near the lines: a note.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
@@ -216,7 +222,7 @@ A struck head moves as the sum of its modes, $u = \sum a_{m,n} X_{m,n} e^{-t/\ta
 </div>
 ```
 
-Napoleon offered a prize for explaining the patterns. Sophie Germain won it in 1816, the first woman to receive the Paris Academy's grand prize in mathematics, with a theory that still had errors; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. Finding the still lines and finding the frequencies are one problem: on a drumhead, the one on this page; on a plate, the same problem with the plate's own operator.
+Napoleon offered a prize for explaining the patterns. Sophie Germain won it in 1816, the first woman to receive the Paris Academy's grand prize in mathematics, with a theory that was still incomplete; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. Finding the still lines and finding the frequencies are one problem: on a drumhead, the one on this page; on a plate, the same problem with the plate's own operator.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Where the sand collects <span class="needs">uses polar coordinates</span></summary>
@@ -226,24 +232,98 @@ The mode $J_m(kr)\cos m\theta$ with $k = j_{m,n}/a$ is zero where $\cos m\theta 
 </details>
 :::
 
-**Where you strike.** A sharp strike starts each mode in proportion to how far that mode moves at the point struck. Every mode with spokes stays still at the center, so a strike at dead center sounds only the round modes, those with no spokes; a strike on one of a mode's still lines leaves that mode silent. Timpanists strike between halfway and three-quarters of the way out from the center, near the still lines of several modes, which keeps those modes quiet (HyperPhysics).
+**Where you strike.** A sharp strike starts each mode in proportion to how far that mode moves at the point struck. Every mode with spokes stays still at the center, so a strike at dead center sounds only the round modes, those with no spokes; a strike on one of a mode's still lines leaves that mode silent. The two drums below use this.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>How strongly a strike excites each mode, in this model <span class="needs">uses integrals over an area</span></summary>
 
-Number the modes $X_1, X_2, \dots$ in order of frequency. A sharp strike, a brief push at a point $p$, gives mode $i$ a starting speed in proportion to $X_i(p)$, the mode's height at the point struck, the same rule as the piano's hammer on page 7. We model what you hear as the speed of the head at a listening point $q$, which picks up mode $i$ in proportion to $X_i(q)$. Dividing by $\iint X_i^2\,dA$, the integral of the mode's square over the head, removes the arbitrary size of each shape. So mode $i$ sounds with weight $X_i(p)\,X_i(q)\big/\iint X_i^2\,dA$. (A real drum radiates sound from its whole head, and some modes radiate better than others; this model ignores that.) For the timpani strike point: for the first four modes with one still circle inside, that circle lies between 0.44 and 0.65 of the radius. The lowest mode, which dies away fast and is not musically useful, is excited less there than by a strike at the center.
+Number the modes $X_1, X_2, \dots$ in order of frequency. A sharp strike, a brief push at a point $p$, gives mode $i$ a starting speed in proportion to $X_i(p)$, the mode's height at the point struck, the same rule as the piano's hammer on page 7. We model what you hear as the speed of the head at a listening point $q$, which picks up mode $i$ in proportion to $X_i(q)$. Dividing by $\iint X_i^2\,dA$, the integral of the mode's square over the head, removes the arbitrary size of each shape. So mode $i$ sounds with weight $X_i(p)\,X_i(q)\big/\iint X_i^2\,dA$. (A real drum radiates sound from its whole head, and some modes radiate better than others; this model ignores that.)
 
 </details>
 :::
 
-**The exception: timpani.** A timpani does have a pitch. Its kettle and the air it encloses shift the head's modes enough to matter: measured, the modes with one, two, three and four lines through the center, and no still circle inside, sit close to 2, 3, 4 and 5 times a common base frequency (HyperPhysics; Fletcher and Rossing). The note is normally heard at the first of these, the "2", with the next two a [fifth](glossary.qmd#octave) and an octave above it (Vienna's Institute of Musical Acoustics); the missing base, an octave lower, may be heard instead (HyperPhysics). Pulled near the lines, the drum gives a note.
+[]{#one-drumhead-two-drums}**One drumhead, two drums.** A bass drum and a kettledrum, one of the timpani, both start from this operator, yet one booms and the other plays a note. Three things separate them, where the head is struck, what surrounds it, and which modes fade first; step through them below. On the kettledrum, the air the head must push pulls the *spoke modes*, those with one or more lines through the center and no still circle inside the rim, close to 2, 3, 4 and 5 times a common base (HyperPhysics; Fletcher and Rossing), and the strike point and the fast fading of the round modes leave mostly those. Players and acousticians name the note at the lowest of them, the (1,1) mode, the drum's "principal tone" (Vienna's Institute of Musical Acoustics); the next sit a [fifth](glossary.qmd#octave), an octave and a major tenth (an octave plus a major third, ratio 5 : 2) above it. That is not quite what page 0's rule predicts: frequencies near 2, 3, 4 and 5 times a base nearly repeat at the base's rate, an octave below the (1,1), and HyperPhysics notes that the missing-fundamental effect might then give the drum that lower pitch. Which octave the ear names when a sound fits two pitches an octave apart is a question about hearing rather than about the drumhead, and this series doesn't settle it.
+
+```{=html}
+<div class="ins">
+<div class="panel" id="td">
+<style>
+#td .tdcap { background: var(--paper); border-radius: 8px; padding: 0.7rem 0.9rem; min-height: 8.8rem; }
+#td .tdcap b { display: block; font-family: var(--f-ui); font-weight: 500; margin-bottom: 0.25rem; }
+#td .tdcap p { margin: 0; font-size: 0.97rem; }
+#td .key { display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; font-family: var(--f-ui); font-size: 0.86rem; color: var(--muted); }
+#td .key span::before { content: ""; display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 2px; margin-right: 0.35rem; vertical-align: -0.05rem; background: var(--c); }
+#td .drum { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 0.5rem 0.9rem; align-items: center; border-top: 1px solid var(--rule); padding-top: 0.6rem; }
+#td .drum .hd { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.8rem; font-family: var(--f-ui); }
+#td .drum .hd .v { color: var(--muted); font-size: 0.86rem; font-family: var(--f-mono); }
+#td .drum .hd button:first-of-type { margin-left: auto; }
+#td canvas.head { aspect-ratio: 1; }
+#td canvas.sp { aspect-ratio: 4.2; min-height: 7.5rem; }
+#td canvas.gal { aspect-ratio: 7.2; }
+@media (max-width: 34rem) { #td .drum { grid-template-columns: 4.5rem minmax(0, 1fr); } #td canvas.sp { aspect-ratio: 2.6; } #td canvas.gal { aspect-ratio: 2.4; } }
+</style>
+  <div class="controls" role="group" aria-label="Steps">
+    <button type="button" data-td="1">1 · Same head</button>
+    <button type="button" data-td="2">2 · Where you strike</button>
+    <button type="button" data-td="3">3 · The air adds mass</button>
+    <button type="button" data-td="4">4 · What surrounds each head</button>
+    <button type="button" data-td="5">5 · What fades</button>
+  </div>
+  <div class="tdcap" aria-live="polite"><b id="tdT"></b><p id="tdX"></p></div>
+  <canvas class="gal" id="tdGal" role="img" aria-label="Pictures of the drumhead's first ten modes, seen from above. Dark and light regions move in opposite directions; the lines between them stay still. The ring colour gives the kind of mode."></canvas>
+  <p class="cap">Each picture is one mode seen from above, labelled (m, n): m still lines through the center, n still circles counting the rim. Dark and light patches move in opposite directions. The ring gives its kind:</p>
+  <div class="key">
+    <span style="--c: var(--pos)">round modes: no line through the center (m = 0)</span>
+    <span style="--c: var(--neg)">spoke modes: lines through the center, no circle inside the rim (n = 1)</span>
+    <span style="--c: var(--metal)">others</span>
+  </div>
+  <div class="drum">
+    <div class="hd">Bass drum <span class="v" id="tdVb"></span><button type="button" id="tdPb">▶ Play</button><button type="button" id="tdMuf" aria-pressed="false" title="Muffle the head with a leg or a towel: every mode fades fast, for a short note">Muffle</button></div>
+    <canvas class="head" id="tdHb" role="img" aria-label="The bass drum's head seen from above, with the point where it is struck."></canvas>
+    <canvas class="sp" id="tdSb" role="img" aria-label="The bass drum's spectrum diagram."></canvas>
+  </div>
+  <div class="drum">
+    <div class="hd">Timpani <span class="v" id="tdVt"></span><button type="button" id="tdPt">▶ Play</button><button type="button" id="tdM" aria-pressed="false" title="Play the spoke modes at the measured pattern 2, 3, 4, 5 times the base instead of this toy model's values">Measured ratios</button></div>
+    <canvas class="head" id="tdHt" role="img" aria-label="The timpani's head seen from above, with the point where it is struck."></canvas>
+    <canvas class="sp" id="tdSt" role="img" aria-label="The timpani's spectrum diagram."></canvas>
+  </div>
+  <details class="more">
+    <summary>Try other values</summary>
+    <div class="slider"><label for="tdR">Timpani strike point, fraction of the radius</label><input type="range" id="tdR" min="0" max="0.95" step="0.01" value="0.62"><output id="tdRo"></output></div>
+    <div class="slider"><label for="tdMu">Air's added mass, 2ρa/σ</label><input type="range" id="tdMu" min="0" max="8" step="0.05" value="3.03"><output id="tdMuo"></output></div>
+    <div class="slider"><label for="tdK">Kettle stiffness (raises the lowest round mode's λ by this fraction)</label><input type="range" id="tdK" min="0" max="2" step="0.05" value="1"><output id="tdKo"></output></div>
+  </details>
+  <p class="cap">Each stem is one mode: its position is its frequency as a multiple of a base an octave below the (1,1) mode, so the (1,1) sits at 2×, and its height is how strongly the strike starts it; dashed stems are modes that have faded. Stems on the dashed whole-number lines make a note. Each drum plays at its own size: the bass drum's lowest mode near 50 Hz, the timpani's (1,1) at 131 Hz (C3). Measured ratios puts the kettledrum's spoke modes on 2, 3, 4, 5 and 6 times the base, the pattern a kettledrum measured by Benade sits close to (about 1.50, 2.00, 2.49 and 2.98 times its lowest mode, as tabulated by HyperPhysics), which this toy model gets only halfway to. A toy model; the fold below gives its numbers and what it misses.</p>
+</div>
+</div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The toy model, the kettle, and other drums <span class="needs">uses integrals over an area</span></summary>
+
+*Where each drum is struck.* A concert bass drum is played slightly off center; center playing, punchier and with less sustain, is kept for rhythmic passages (Graham 2017; Aleo, Interlochen 2023). There the spoke modes move little, so among the lowest modes the round ones dominate. Players muffle the head with a leg or a towel when the music calls for short notes, and let it ring for long ones (Aleo, Interlochen 2023); the step-through's Muffle button does the first. Timpanists strike between halfway and three-quarters of the way out (HyperPhysics), roughly a third of the way in from the rim (Graham 2017). With the weight $|X(p)|\big/\big(\iint X^2\,dA\big)^{1/2}$ for a strike at $p$, on a head of radius 1, the lowest round mode (0,1) has 1.09 at the center, 0.73 at halfway and 0.37 at three-quarters, while the spoke modes (1,1) to (4,1) have between 0.74 and 1.19 anywhere from halfway to three-quarters: lower than the spoke modes' across the whole range. Nearer halfway the stick also sits close to the inner still circles of the modes (0,2), (1,2), (2,2) and (3,2), which lie between 0.44 and 0.65 of the radius, which quiets those too. The clear note also relies on the remaining modes being weaker or fading faster, which this page takes from measurements (Fletcher and Rossing, chapter 18) rather than deriving.
+
+*The air's mass.* Treat the air on both sides of the head as not squeezable, and each mode, locally, as a ripple of wavenumber $k = j_{m,n}/a$, whose crests are about $\pi/k$ apart. The air such a ripple sets moving reaches about $1/k$ from the head on each side, which adds a mass of about $2\rho/k$ per unit area ($\rho \approx 1.2$ kg/m³ for air) to the head's own $\sigma$:
+$$
+\omega^2 = \frac{T k^2}{\sigma + 2\rho/k}, \qquad f \propto \frac{k}{\sqrt{\sigma + 2\rho/k}} ,
+$$
+so coarse shapes, with small $k$, slow down most. This is the hub's [added mass](glossary.qmd#added-mass): it can only lower frequencies. A typical Mylar kettledrum head has $\sigma \approx 0.26$ kg/m², on drums of radius 0.32 to 0.355 m (Packer 1993); with $a = 0.33$ m, $2\rho a/\sigma \approx 3.0$. The spoke modes (1,1) to (4,1) move from 1 : 1.34 : 1.67 : 1.98 to 1 : 1.42 : 1.83 : 2.24, halfway to 1.5 : 2 : 2.5. The rest of the shift comes from a full calculation of the air inside and around a finite head (Christian, Davis, Tubis, Anderson, Mills and Rossing 1984), not from the kettle's air spring, its uniform pressure.
+
+*The kettle.* The nearly sealed kettle (it has a small vent) acts as a spring on the volume the head sweeps, $V = \iint u\,dA$, adding $\tfrac12\eta V^2$ to the stored energy for some constant $\eta > 0$. The operator gains the term $(\eta/\sigma)\,\mathbf 1\langle\mathbf 1, \cdot\rangle$, where $\mathbf 1$ is the constant shape and $\sigma$ the head's mass per unit area: a term of rank one. Every mode with $m \ge 1$ has $\iint X\,dA = 0$, because $\int_0^{2\pi}\cos m\theta\,d\theta = 0$, so $\big(A + (\eta/\sigma)\,\mathbf 1\langle\mathbf 1, \cdot\rangle\big)X = AX$, and in this model it keeps its frequency exactly. Only the round modes are raised, and since the new term couples them to each other, their shapes change too; the explorable treats each on its own. The hub's [principle](spectrum.qmd#how-the-instrument-is-held-is-part-of-the-operator) says the same in general: added stiffness never lowers a frequency.
+
+*The bass drum's second head.* A bass drum has a head on each end of its shell, coupled through the air inside, which splits its two lowest modes, (0,1) and (1,1); the two heads' lowest modes are commonly tuned about a fourth apart (HyperPhysics). Not modelled here.
+
+*Other drums.* Toms are tuned to rough pitches, and a snare drum's crack comes from the wires, the snares, stretched across its lower head. The tabla and the mridangam reach near-whole-number overtones a different way: a patch of paste loads the center of the head, which makes the head's density non-uniform, outside this page's model (Raman and Kumar 1920; Raman 1934).
+
+</details>
+:::
 
 ## What we found
 
-Newton's law on a small patch of the head (stage 1) gave the drum's operator, $A = -c^2\,\Delta$, with the rim held still (stage 2). For a round head its spectrum is set by the zeros of Bessel functions (stage 3), $f_{m,n} = c\,j_{m,n}/2\pi a$. Within each family, one for each number of spokes, the zeros are nearly evenly spaced but the first step is short, and the families interleave, so the frequencies land at 1×, 1.59×, 2.14×, 2.30×, …: off the lines of the spectrum diagram (stage 4). The sound doesn't repeat at any rate we hear as pitch, and it fades fast: a thud (stage 5). The round symmetry shows up as pairs of modes with exactly the same frequency. Change what surrounds the head, as a timpani's kettle does, and the frequencies can be pulled back near the lines.
+An ideal uniform drumhead, $A = -c^2\Delta$ with the rim held still, has its frequencies at the zeros of Bessel functions, 1×, 1.59×, 2.14×, 2.30×, … the lowest: off the lines of the spectrum diagram, so a plain drum thuds. A kettledrum is the same head in different surroundings: the air it pushes pulls its spoke modes near 2 : 3 : 4 : 5, the strike point and the fast-fading round modes leave mostly those, and you hear a note. The next page turns the question around.
 
 ::: {.family}
-**Same operator, different constants, as a first model.** Toms, snares and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it, and the air in and around a drum changes the operator a little.
+**One operator family, as a first model.** Toms, snares, bass drums and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it, and the air in and around a drum changes the operator a little, or, for the timpani, enough to matter.
 :::
 
 ## The next puzzle
@@ -255,7 +335,7 @@ Short on time? This is the last page of the short path through the series, pages
 [← 7 · Piano](piano.qmd) · [Next: 9 · Drum shape →](shape.qmd)
 
 ::: {.refs}
-**References.** [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), HyperPhysics, Georgia State University. [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), Institute of Musical Acoustics (Wiener Klangstil), University of Music and Performing Arts Vienna. The Chladni and Germain history: [The 'extraordinary talent and superior genius' of Sophie Germain](https://www.irishtimes.com/news/science/the-extraordinary-talent-and-superior-genius-of-sophie-germain-1.4130947), *The Irish Times*. Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane), [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums).
+**References.** [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), HyperPhysics, Georgia State University. [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), Institute of Musical Acoustics (Wiener Klangstil), University of Music and Performing Arts Vienna. The Chladni and Germain history: P. Lynch, ["The 'extraordinary talent and superior genius' of Sophie Germain"](https://www.irishtimes.com/news/science/the-extraordinary-talent-and-superior-genius-of-sophie-germain-1.4130947), *The Irish Times*, January 2020 ([also on That's Maths](https://thatsmaths.com/2020/01/16/the-extraordinary-talent-and-superior-genius-of-sophie-germain/)). G. Kirchhoff, "Über das Gleichgewicht und die Bewegung einer elastischen Scheibe", *Journal für die reine und angewandte Mathematik* 40 (1850), 51–88. Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane), [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums). The timpani's air loading: R. S. Christian, R. E. Davis, A. Tubis, C. A. Anderson, R. I. Mills and T. D. Rossing, "Effects of air loading on timpani membrane vibrations", *Journal of the Acoustical Society of America* 76 (1984), 1336–1345. [The Bass Drum](https://hyperphysics.gsu.edu/hbase/Music/bdrum.html), HyperPhysics. Where the drums are played, and muffling the bass drum: ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023; A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017. The measured kettledrum: A. H. Benade, *Fundamentals of Musical Acoustics*, Oxford University Press, 1976, chapter 9, pp. 143–144, as tabulated by HyperPhysics. Typical head values: T. A. Packer, [*Acoustics of the Orchestral Kettledrum*](https://etheses.durham.ac.uk/id/eprint/5633/), master's thesis, University of Durham, 1993, appendix B. Indian drums: C. V. Raman and S. Kumar, "Musical drums with harmonic overtones", *Nature* 104 (1920), 500; C. V. Raman, "The Indian musical drums", *Proceedings of the Indian Academy of Sciences* A 1 (1934), 179–188.
 :::
 
 ```{=html}
@@ -398,6 +478,156 @@ Short on time? This is the last page of the short path through the series, pages
     C.play(b, 0.6);
   });
   build(); sprinkle(); requestAnimationFrame(draw);
+})();
+</script>
+```
+
+```{=html}
+<script>
+// One drumhead, two drums: a five-step toy model (bass drum above, timpani below).
+(function () {
+  "use strict";
+  var C = window.Core;
+  var J11 = C.DR.filter(function (d) { return d.m === 1 && d.n === 1; })[0].j, J01 = C.DR[0].j;
+  var MODES = C.DR.filter(function (d) { return d.j / J11 <= 3.6; });
+  function kind(d) { return d.m === 0 ? "round" : d.n === 1 ? "spoke" : "other"; }
+  var COL = { round: "--pos", spoke: "--neg", other: "--metal" };
+  var STEPS = {
+    1: ["Same head, same operator", "Both drums start as this page's operator on a disk with the rim held still. On this ideal head the frequencies fall off the dashed lines, and the two diagrams are identical. Two kinds of mode will matter: the round modes, with no line through the center, and the spoke modes, with lines through the center and no still circle inside the rim."],
+    2: ["Where you strike decides which modes start", "A sharp strike starts each mode in proportion to how far that mode moves at the point struck. A bass drum is struck slightly off center, where the spoke modes barely move, so its lowest modes are mostly round ones. A kettledrum is struck between halfway and three-quarters of the way out, where the lowest round mode starts more weakly than the spoke modes."],
+    3: ["The air adds mass, most to coarse shapes", "Air on both sides of the head moves with it. A ripple of wavenumber k drags along a layer of air about 1/k thick, so a coarse mode carries more extra mass and slows down more: f ∝ k / √(σ + 2ρ/k). This happens to both drums. It stretches the spoke modes toward the dashed lines; in this toy model it gets about halfway, and a full calculation of the air gets the rest."],
+    4: ["What surrounds each head", "A kettledrum's bowl is nearly sealed, so its air resists only shapes that change the volume it encloses. A mode with lines through the center pushes up as much as it pulls down, sweeps no net volume, and keeps its frequency exactly; only the round modes are raised. A bass drum has no kettle: its second head, coupled through the air in the shell, splits its lowest modes instead (not modelled here)."],
+    5: ["What fades", "A round mode pumps air like a piston and radiates its energy away within a fraction of a second. On the bass drum, a strike near the center starts mostly round modes among the lowest ones. How long the rest rings is the player's choice: a leg or a towel on the head muffles every mode under it, for short, dry notes (press Muffle); lift it and the drum rings on. The leftover stems that land near a line are chance near-misses of this toy model, not a set of modes pulled onto the lines, and a real bass drum's second head, coupled through the air in its shell, splits its lowest modes, which the model leaves out. The result is a boom with no clear pitch, as intended. On the kettledrum the spoke modes ring on, near 2 : 3 : 4 : 5 times a base an octave below the (1,1): a note. Real timpani sit closer to the lines than this toy model; press Measured ratios to see and hear them."]
+  };
+  var step = 1, rT = 0.62, MU = 3.03, KK = 1, RB = 0.15, MUFFLE = false;
+  var drums = {
+    bass: { kettle: false, spec: document.getElementById("tdSb"), head: document.getElementById("tdHb"), verdict: document.getElementById("tdVb"), disp: null },
+    timp: { kettle: true, spec: document.getElementById("tdSt"), head: document.getElementById("tdHt"), verdict: document.getElementById("tdVt"), disp: null }
+  };
+  function rOf(D) { return D === drums.timp ? rT : RB; }
+  // frequency of mode d with air loading mu and kettle kk (relative units)
+  function omega(d, mu, kk) { var lam = d.j * d.j + (d.m === 0 ? kk * Math.pow(J01, 4) / (d.j * d.j) : 0); return Math.sqrt(lam / (1 + mu / d.j)); }
+  function excite(d, r) { return Math.abs(C.J(d.m, d.j * r)) / Math.sqrt(d.norm); }
+  function target(D) {
+    var mu = step >= 3 ? MU : 0, kk = step >= 4 && D.kettle ? KK : 0, r = rOf(D);
+    var w11 = omega({ m: 1, j: J11 }, mu, 0), hs = MODES.map(function (d) { return step >= 2 ? excite(d, r) : 1; }), hm = Math.max.apply(null, hs);
+    // step 5: round modes radiate away; Muffle (bass drum only) damps every mode under the player's leg or towel, at any step
+    return MODES.map(function (d, i) {
+      var x = 2 * omega(d, mu, kk) / w11;
+      if (D === drums.timp && MEASURED && d.n === 1 && d.m >= 1) x = d.m + 1; // the measured pattern, not this model
+      return { x: x, h: hs[i] / hm, gone: (step >= 5 && d.m === 0) || (D === drums.bass && MUFFLE), d: d };
+    });
+  }
+  var XMIN = 0.8, XMAX = 7;
+  function drawSpec(D) {
+    var cv = D.spec, dpr = C.fit(cv), g = cv.getContext("2d"), W = cv.width / dpr, H = cv.height / dpr;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    var L = 8, R = W - 8, base = H - 22, top = 10;
+    function X(x) { return L + (R - L) * (x - XMIN) / (XMAX - XMIN); }
+    g.font = "12px IBM Plex Mono, ui-monospace, monospace"; g.textAlign = "center"; g.fillStyle = C.rgb("--muted");
+    [1, 2, 3, 4, 5, 6].forEach(function (x) { g.strokeStyle = C.rgb("--grid"); g.setLineDash([4, 4]); g.lineWidth = 1; g.beginPath(); g.moveTo(X(x), top); g.lineTo(X(x), base); g.stroke(); g.setLineDash([]); g.fillText(x + "×", X(x), base + 16); });
+    g.strokeStyle = C.rgb("--muted"); g.beginPath(); g.moveTo(L, base); g.lineTo(R, base); g.stroke();
+    D.disp.forEach(function (p) {
+      if (p.x < XMIN || p.x > XMAX || p.h < 0.01) return;
+      var hh = (base - top) * p.h;
+      g.strokeStyle = C.rgb(COL[kind(p.d)]); g.lineWidth = W < 420 ? 3 : 4; g.lineCap = "round";
+      if (p.gone > 0.5) { g.lineWidth = 1.5; g.setLineDash([3, 3]); }
+      g.beginPath(); g.moveTo(X(p.x), base); g.lineTo(X(p.x), base - hh); g.stroke(); g.setLineDash([]);
+    });
+  }
+  function drawHead(D) {
+    var cv = D.head, dpr = C.fit(cv), g = cv.getContext("2d"), W = cv.width / dpr, H = cv.height / dpr;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    var cx = W / 2, cy = H / 2, R = Math.min(W, H) / 2 - 6, r = rOf(D);
+    g.fillStyle = C.rgb("--paper"); g.strokeStyle = C.rgb("--muted"); g.lineWidth = 2; g.beginPath(); g.arc(cx, cy, R, 0, 2 * Math.PI); g.fill(); g.stroke();
+    if (D.kettle) { g.setLineDash([3, 3]); g.beginPath(); g.arc(cx, cy, R * 0.9, 0, 2 * Math.PI); g.stroke(); g.setLineDash([]); }
+    if (step >= 2) {
+      g.fillStyle = C.rgb("--accent"); g.beginPath(); g.arc(cx + r * R, cy, 5, 0, 2 * Math.PI); g.fill();
+      g.font = "11px IBM Plex Sans Condensed, system-ui, sans-serif"; g.fillStyle = C.rgb("--muted"); if (r < 0.4) { g.textAlign = "center"; g.fillText("strike", cx + r * R, cy - 9); } else { g.textAlign = "right"; g.fillText("strike", cx + r * R - 8, cy + 4); }
+    }
+  }
+  var GAL = MODES.slice(0, 10);
+  function drawGallery() {
+    var cv = document.getElementById("tdGal"), dpr = C.fit(cv), g = cv.getContext("2d"), W = cv.width / dpr, H = cv.height / dpr;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    var n = W < 420 ? 5 : 10, rows = W < 420 ? 2 : 1, cw = W / n, rh = H / rows, R = Math.max(4, Math.min(cw, rh - 18) / 2 - 3), S = 2 * Math.ceil(R);
+    var pr = C.col["--ink"], nr = C.col["--metal"];
+    GAL.forEach(function (d, i) {
+      var cx = (i % n) * cw + cw / 2, cy = Math.floor(i / n) * rh + R + 3, N = Math.round(S * dpr), img = g.createImageData(N, N);
+      for (var py = 0; py < N; py++) for (var px = 0; px < N; px++) {
+        var x = (px + 0.5) / N * 2 - 1, y = (py + 0.5) / N * 2 - 1, rr = Math.sqrt(x * x + y * y), o = 4 * (py * N + px);
+        if (rr > 1) { img.data[o + 3] = 0; continue; }
+        var v = C.J(d.m, d.j * rr) * Math.cos(d.m * Math.atan2(y, x)), c = v >= 0 ? pr : nr, a = Math.min(1, Math.abs(v) * 2.6);
+        img.data[o] = c[0]; img.data[o + 1] = c[1]; img.data[o + 2] = c[2]; img.data[o + 3] = Math.round(40 + 215 * a);
+      }
+      var off = document.createElement("canvas"); off.width = N; off.height = N; off.getContext("2d").putImageData(img, 0, 0);
+      g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.drawImage(off, Math.round((cx - S / 2) * dpr), Math.round((cy - S / 2) * dpr)); g.restore();
+      g.strokeStyle = C.rgb(COL[kind(d)]); g.lineWidth = 2.5; g.beginPath(); g.arc(cx, cy, R + 1.5, 0, 2 * Math.PI); g.stroke();
+      g.font = "12px IBM Plex Mono, ui-monospace, monospace"; g.fillStyle = C.rgb("--muted"); g.textAlign = "center"; g.fillText("(" + d.m + "," + d.n + ")", cx, cy + R + 15);
+    });
+  }
+  function verdict(D) {
+    if (step < 2) return "";
+    var live = D.disp.filter(function (p) { return p.h > 0.15 && !(p.gone > 0.5) && p.x <= XMAX; }).sort(function (a, b) { return b.h - a.h; }).slice(0, 5).sort(function (a, b) { return a.x - b.x; });
+    if (!live.length) return D === drums.bass && MUFFLE ? "muffled: a short note" : "everything fades fast";
+    return "tallest stems at " + live.map(function (p) { return p.x.toFixed(2) + "×"; }).join(" · ");
+  }
+  var anim = 0;
+  function render() {
+    var done = true;
+    ["bass", "timp"].forEach(function (k) {
+      var D = drums[k], T = target(D);
+      if (!D.disp) D.disp = T.map(function (p) { return { x: p.x, h: p.h, gone: p.gone ? 1 : 0, d: p.d }; });
+      D.disp.forEach(function (p, i) {
+        var q = T[i], gx = q.x - p.x, gh = q.h - p.h, gg = (q.gone ? 1 : 0) - p.gone;
+        p.x += 0.18 * gx; p.h += 0.18 * gh; p.gone += 0.18 * gg;
+        if (Math.abs(gx) > 1e-3 || Math.abs(gh) > 1e-3 || Math.abs(gg) > 1e-3) done = false; else { p.x = q.x; p.h = q.h; p.gone = q.gone ? 1 : 0; }
+      });
+      drawSpec(D); drawHead(D); D.verdict.textContent = verdict(D);
+    });
+    anim = done ? 0 : requestAnimationFrame(render);
+  }
+  function kick() { if (!anim) anim = requestAnimationFrame(render); }
+  var btns = document.querySelectorAll("#td [data-td]");
+  function setStep(s) {
+    step = s;
+    Array.prototype.forEach.call(btns, function (b) { b.setAttribute("aria-pressed", +b.getAttribute("data-td") === s ? "true" : "false"); });
+    document.getElementById("tdT").textContent = s + " · " + STEPS[s][0];
+    document.getElementById("tdX").textContent = STEPS[s][1];
+    if (C.reduce) { drums.bass.disp = null; drums.timp.disp = null; }
+    kick();
+  }
+  Array.prototype.forEach.call(btns, function (b) { b.addEventListener("click", function () { setStep(+b.getAttribute("data-td")); }); });
+  // Sound: each drum at its own size. The bass drum's lowest round mode sits near 50 Hz; the timpani's (1,1) is set to 130.8 Hz (C3).
+  // From step 5 the round modes die within a fraction of a second, as they radiate their energy away.
+  var MEASURED = false;
+  function parts(k) {
+    var D = drums[k], T = target(D), mu = step >= 3 ? MU : 0;
+    var ref = k === "bass" ? 50 / (2 * omega(C.DR[0], mu, 0) / omega({ m: 1, j: J11 }, mu, 0)) : 130.8 / 2;
+    return T.map(function (p) {
+      var x = p.x;
+      return { f: ref * x, amp: p.h * (step >= 2 ? 1 : 0.5), tau: p.gone ? (k === "bass" ? 0.25 : 0.07) : 1.6 / (1 + 0.03 * x * x) };
+    });
+  }
+  function play(k) { C.play(C.render(parts(k), 3.5), 0.8); }
+  document.getElementById("tdPb").addEventListener("click", function () { play("bass"); });
+  document.getElementById("tdPt").addEventListener("click", function () { play("timp"); });
+  var mf = document.getElementById("tdMuf");
+  mf.addEventListener("click", function () { MUFFLE = !MUFFLE; mf.setAttribute("aria-pressed", MUFFLE ? "true" : "false"); kick(); play("bass"); });
+  var mb = document.getElementById("tdM");
+  mb.addEventListener("click", function () { MEASURED = !MEASURED; mb.setAttribute("aria-pressed", MEASURED ? "true" : "false"); kick(); if (MEASURED) play("timp"); });
+  function bind(id, fmt, set) {
+    var el = document.getElementById(id), o = document.getElementById(id + "o");
+    function upd() { set(+el.value); o.textContent = fmt(+el.value); kick(); }
+    el.addEventListener("input", upd); o.textContent = fmt(+el.value);
+  }
+  bind("tdR", function (v) { return v.toFixed(2); }, function (v) { rT = v; });
+  bind("tdMu", function (v) { return v.toFixed(2); }, function (v) { MU = v; });
+  bind("tdK", function (v) { return v.toFixed(2); }, function (v) { KK = v; });
+  window.addEventListener("resize", function () { drawGallery(); kick(); });
+  C.onTheme(function () { drawGallery(); kick(); });
+  setStep(1); drawGallery();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { drawGallery(); kick(); });
 })();
 </script>
 ```

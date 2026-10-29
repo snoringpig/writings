@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css]
 ---
 
@@ -62,6 +62,9 @@ Technical words in the series link here, usually the first time they appear on a
 [Beats]{#beats}
 : When two pure tones of nearly equal frequency sound together, their sum swells and fades in loudness at a rate equal to the difference of their frequencies. Tuners listen for beats; fast beats are heard as roughness. [Wikipedia](https://en.wikipedia.org/wiki/Beat_(acoustics))
 
+[Heterodyning]{#heterodyning}
+: Mixing two signals of frequencies $f_1$ and $f_2$ in a nonlinear circuit, one whose output is not just their sum, to produce new frequencies, among them their difference $f_1 - f_2$. A mixer that multiplies the two signals does it, since $\sin(2\pi f_1 t)\,\sin(2\pi f_2 t) = \tfrac12\cos(2\pi(f_1 - f_2)t) - \tfrac12\cos(2\pi(f_1 + f_2)t)$, and a filter then keeps the difference. Two radio oscillators at 300,440 Hz and 300,000 Hz give an audible tone at 440 Hz; this is how a theremin makes its sound. [Beats](#beats) are different: two tones simply added contain no tone at the difference frequency, only a swell and fade in loudness at that rate. [Wikipedia: Heterodyne](https://en.wikipedia.org/wiki/Heterodyne), [Theremin](https://en.wikipedia.org/wiki/Theremin), and the [map](map.qmd#where-the-classes-and-the-mathematics-part-ways)
+
 [Consonance, roughness]{#consonance}
 : Consonance is how smooth or stable two notes sound together. Roughness is one ingredient of it: the harsh quality of fast beats between partials that are close but not equal. [Wikipedia](https://en.wikipedia.org/wiki/Consonance_and_dissonance), and the [epilogue](epilogue.qmd)
 
@@ -94,6 +97,14 @@ Technical words in the series link here, usually the first time they appear on a
 [Practice pedal, mute]{#practice-pedal}
 : The middle pedal on many uprights. It lowers a strip of felt between the hammers and the strings, making the sound much quieter and duller. [Wikipedia: Piano pedals](https://en.wikipedia.org/wiki/Piano_pedals)
 
+## Grouping instruments
+
+[Hornbostel–Sachs classification]{#hornbostel-sachs}
+: The usual scheme for sorting musical instruments, published by Erich von Hornbostel and Curt Sachs in 1914. It groups instruments by what makes the sound: idiophones, where the body of the instrument itself vibrates (glockenspiel, kalimba); membranophones, a stretched skin (drums); chordophones, strings (violin, piano); aerophones, air (flute, clarinet, harmonica); and electrophones, electric circuits (theremin), a fifth group added later. These five top-level groups are usually called classes, and each is divided further by decimal codes: the piano is 314.122, a board zither with a resonator box. [Wikipedia](https://en.wikipedia.org/wiki/Hornbostel%E2%80%93Sachs), and the [map](map.qmd#operator-families-and-instrument-classes)
+
+[Operator family]{#operator-family}
+: This series' name for a group of instruments whose operators are the same up to constants and how they are held: the same rule, with different numbers in it and possibly different ends. The violin string and the air in a flute or a clarinet form one, with the rule $-c^2\,d^2/dx^2$; the kalimba tine, the harmonica reed and the glockenspiel bar form another, with the rule $\kappa^2\,d^4/dx^4$. One calculation covers a whole operator family, but the frequency ratios can still differ between its members, because the ends are part of each operator: the clamped tine sounds $1 : 6.27 : 17.55$, the free glockenspiel bar $1 : 2.76 : 5.40$. An operator family is not a Hornbostel–Sachs class. See the [map](map.qmd#operator-families-and-instrument-classes).
+
 ## Vibration
 
 [Partial derivative, $u_t$, $u_{xx}$]{#partial-derivative}
@@ -114,8 +125,8 @@ Technical words in the series link here, usually the first time they appear on a
 [Superposition]{#superposition}
 : Adding solutions of a linear equation to get another solution. The free motion of an instrument, once nothing is driving it, is a superposition, a sum, of its modes. [Wikipedia](https://en.wikipedia.org/wiki/Superposition_principle)
 
-[Mode, normal mode]{#mode}
-: A motion of an object, with no friction and nothing driving it, in which every part swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small free vibration is a sum of modes. [Wikipedia](https://en.wikipedia.org/wiki/Normal_mode)
+[Mode, normal mode]{#mode} []{#normal-mode}
+: A motion of an object, with no friction and nothing driving it, in which every part swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small, [linearized](#linear) free vibration of a stable object of finite size without friction is a sum of modes. The amounts of the modes in a motion are its *normal coordinates*, the coordinates in which the object splits into independent springs, one per mode. For two beads on a tied string they are the sum and the difference of the two heights ([page 2](ring.qmd)). [Wikipedia](https://en.wikipedia.org/wiki/Normal_mode)
 
 [Standing wave]{#standing-wave}
 : A wave whose shape stays in place, such as a mode of a string. It can be seen as two equal waves traveling in opposite directions. [Wikipedia](https://en.wikipedia.org/wiki/Standing_wave)
@@ -135,11 +146,17 @@ Technical words in the series link here, usually the first time they appear on a
 [Damping]{#damping}
 : Friction that drains energy from a vibration, so that it dies away. A term $b\,u_t$ in the equation, proportional to velocity, is the simplest model. [Wikipedia](https://en.wikipedia.org/wiki/Damping)
 
-[Self-sustained oscillation, limit cycle]{#self-sustained}
-: An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle; under some conditions it does not, as in the unsteady, warbling *wolf note* of some cellos. This needs a mechanism that is not linear, such as the bow's grip and slip or a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Self-oscillation)
+[Self-sustained oscillation, limit cycle]{#self-sustained} []{#limit-cycle}
+: An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle: a repeating motion that the oscillator settles into from any start near it, and in simple models such as the [van der Pol oscillator](https://en.wikipedia.org/wiki/Van_der_Pol_oscillator) from any start except complete rest. Under some conditions it does not settle, as in the unsteady, warbling *wolf note* of some cellos. This needs a mechanism that is not linear, such as the bow's grip and slip or a reed opening and closing. [Wikipedia](https://en.wikipedia.org/wiki/Self-oscillation)
 
 [Coupling]{#coupling}
 : Two vibrating parts are coupled when the motion of one pushes on the other, as when piano strings share a bridge. Coupled parts trade energy, and their modes mix. [Wikipedia](https://en.wikipedia.org/wiki/Coupling_(physics))
+
+[Parametric resonance]{#parametric-resonance}
+: Growth of a vibration when a property of the system, such as its stiffness or its effective length, is changed back and forth periodically, most strongly at about twice its natural frequency. A child pumping a swing by standing and squatting at the right points of each swing does this. The simplest model is $x'' = -(1 + \varepsilon\cos 2t)\,x$: a spring of frequency 1 whose stiffness wobbles at frequency 2, and for small $\varepsilon$ its swings grow. Such a system has no fixed modes. [Wikipedia: Parametric oscillator](https://en.wikipedia.org/wiki/Parametric_oscillator)
+
+[Added mass]{#added-mass}
+: The extra inertia of a vibrating surface because it must push the surrounding air or water along with it. It acts like extra mass on the surface and so lowers its frequencies. On [page 8](drum.qmd) the air on both sides of a timpani head adds the most mass to the head's coarsest shapes, and lowers their frequencies the most. [Wikipedia](https://en.wikipedia.org/wiki/Added_mass)
 
 [Helmholtz motion]{#helmholtz-motion}
 : The way a bowed string moves. The string sticks to the bow, slips back, and sticks again; seen from the side, a single sharp corner races back and forth along the string, one round trip per period. [J. Wolfe, UNSW: The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html)
@@ -185,6 +202,12 @@ Technical words in the series link here, usually the first time they appear on a
 [Perpendicular, orthogonal]{#orthogonal}
 : Two vectors are perpendicular, or orthogonal, when their dot product, the sum of the products of matching entries, is zero. For functions the dot product is replaced by the [inner product](#inner-product). [Wikipedia](https://en.wikipedia.org/wiki/Orthogonality_(mathematics))
 
+[Basis]{#basis}
+: A set of directions from which every vector can be built, in exactly one way, by adding multiples of them. In the plane, $(1, 1)/\sqrt2$ and $(1, -1)/\sqrt2$ form a basis: any $(x_1, x_2)$ is $\frac{x_1 + x_2}{\sqrt2}$ times the first plus $\frac{x_1 - x_2}{\sqrt2}$ times the second, as adding the two entries checks. The modes of a vibrating object play the same role for its shapes. [Wikipedia](https://en.wikipedia.org/wiki/Basis_(linear_algebra))
+
+[Orthonormal]{#orthonormal}
+: A set of vectors is orthonormal when each is [perpendicular](#orthogonal) to the others and has length 1. The basis $(1, 1)/\sqrt2$, $(1, -1)/\sqrt2$ is orthonormal: the dot product is $(1 - 1)/2 = 0$, and each length is $\sqrt{(1 + 1)/2} = 1$. In an orthonormal basis $X_1, X_2, \dots$, the amount of $X_i$ in a vector $x$ is just the dot product $X_i \cdot x$. [Wikipedia](https://en.wikipedia.org/wiki/Orthonormality)
+
 [Symmetric matrix]{#symmetric-matrix}
 : A square matrix of real numbers equal to its own mirror image across the diagonal: the entry in row $i$, column $j$ equals the entry in row $j$, column $i$. The spectral theorem says its eigenvalues are real and it has a full set of perpendicular eigenvectors. [Wikipedia](https://en.wikipedia.org/wiki/Spectral_theorem)
 
@@ -225,7 +248,7 @@ Technical words in the series link here, usually the first time they appear on a
 : The operator $\Delta u = u_{xx} + u_{yy}$ in the plane. At each point it is proportional to how far $u$ sits below the average of its values on a small circle around the point. A drumhead's operator is $-c^2\Delta$. [Wikipedia](https://en.wikipedia.org/wiki/Laplace_operator)
 
 [Separation of variables]{#separation-of-variables}
-: Looking for solutions that are a product of a function of one variable and a function of another, such as $u(x, t) = X(x)\,q(t)$. It splits one equation in several variables into simpler equations in one variable each. [Wikipedia](https://en.wikipedia.org/wiki/Separation_of_variables)
+: Looking for solutions that are a product of a function of one variable and a function of another. Here that means motions that are a fixed shape times a function of time, $u(x, t) = X(x)\,q(t)$: the shape keeps its form and only its size $q(t)$ changes. Putting $u = Xq$ into $u_{tt} = -Au$ gives $q''\,X = -q\,AX$, so a nonzero motion of this form exists exactly when $AX = \lambda X$ for some number $\lambda$, that is, when the shape is an [eigenvector](#eigenvector) of $A$, and then $q'' = -\lambda q$, a spring. In general the method splits one equation in several variables into simpler equations in one variable each. [Wikipedia](https://en.wikipedia.org/wiki/Separation_of_variables)
 
 [Bessel function]{#bessel}
 : The functions $J_m(r)$ that describe how the modes of a round drum vary from the center to the rim, as sines do along a string. $J_0$ starts at 1 and swings like a slowly fading cosine, crossing zero at $r \approx 2.405,\ 5.520,\ 8.654, \dots$; for $m \ge 1$, $J_m$ starts at 0. Their zeros, which are not whole-number multiples of the first one, set the drum's frequencies. [Wikipedia](https://en.wikipedia.org/wiki/Bessel_function), and [page 8](drum.qmd)
@@ -234,7 +257,10 @@ Technical words in the series link here, usually the first time they appear on a
 : The total flow out through the boundary of a region equals the sum, over the region, of how much flow is created at each point. It turns forces along the edge of a patch of drumhead into an integral over the patch. [Wikipedia](https://en.wikipedia.org/wiki/Divergence_theorem)
 
 [Rayleigh quotient]{#rayleigh-quotient}
-: The ratio of a shape's stored energy to its mass-weighted size, for example $R(f) = \int EI\,(f'')^2\,dx \big/ \int \rho S\,f^2\,dx$ for a bar; for a shape that meets all the boundary conditions it equals $\langle Af, f\rangle/\langle f, f\rangle$. Its smallest value, over all nonzero shapes $f$ that obey the conditions at clamped or fixed ends, is the lowest eigenvalue, reached at the lowest mode; in this energy form, conditions at free ends need not be imposed. It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. [Wikipedia](https://en.wikipedia.org/wiki/Rayleigh_quotient)
+: The stored energy of a shape divided by its kinetic weight, the mass-weighted size $\int(\text{mass per length})\,f^2\,dx$; at a mode it equals that mode's eigenvalue $\lambda$. For example, $R(f) = \int T\,(f')^2\,dx \big/ \int \mu\,f^2\,dx$ for a string and $R(f) = \int EI\,(f'')^2\,dx \big/ \int \rho S\,f^2\,dx$ for a bar; for a shape that meets all the boundary conditions it equals $\langle Af, f\rangle/\langle f, f\rangle$. Its smallest value, over all nonzero shapes $f$ that obey the conditions at clamped or fixed ends, is the lowest eigenvalue, reached at the lowest mode; in this energy form, conditions at free ends need not be imposed. The higher eigenvalues come from the [min–max principle](#min-max). It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. [Wikipedia](https://en.wikipedia.org/wiki/Rayleigh_quotient)
+
+[Min–max principle]{#min-max}
+: Also called the Courant–Fischer theorem. List an operator's eigenvalues in order, $\lambda_1 \le \lambda_2 \le \cdots$. Then $\lambda_n$ is the least possible value, over all $n$-dimensional families of allowed shapes (all combinations of $n$ independent shapes), of the largest [Rayleigh quotient](#rayleigh-quotient) in the family. For $n = 1$ a family is the multiples of one shape, so $\lambda_1$ is the smallest quotient of any shape. Adding stiffness never lowers any shape's quotient, so it never lowers any eigenvalue; adding mass never raises any quotient, so it never raises any eigenvalue; and holding the object more firmly, which leaves fewer allowed shapes, never lowers one either. [Wikipedia](https://en.wikipedia.org/wiki/Min-max_theorem), and [The spectrum of an operator](spectrum.qmd)
 
 ## Shape and spectrum
 

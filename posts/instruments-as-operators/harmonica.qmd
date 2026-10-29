@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css]
 ---
 
@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). Math: up to Fourier series (page 3). About 3 minutes for the summary; about 15 with the mathematics.
+Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). Math: up to Fourier series (page 3). About 3 minutes for the summary; about 20 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -48,6 +48,10 @@ Listen first: pluck the reed, then blow it, and compare the stems with the gray 
 ```
 
 
+::: {.newidea}
+**In one sentence.** Blown, the reed swings just below its own lowest frequency and chops the air into identical puffs, so the steady sound has only whole-number multiples and the reed's off-line overtones are absent from it.
+:::
+
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
@@ -55,7 +59,7 @@ Listen first: pluck the reed, then blow it, and compare the stems with the gray 
 2. *The operator* is $\kappa^2$ times the fourth derivative, $\kappa^2\,d^4/dx^4$, on a reed riveted at one end and free at the other.
 3. *Its spectrum* is the tine's: frequencies in the ratios $1 : 6.27 : 17.55$ and so on, off the whole numbers.
 4. *On the diagram*: plucked, the overtones sit off the lines; blown, every stem sits on a line.
-5. *What we hear*: plucked, the spectrum; blown, the reed chops the air into puffs that repeat exactly, and a repeating sound has frequencies only at whole-number multiples, so the reed's own overtones never appear.
+5. *What we hear*: plucked, the spectrum; blown, the reed swings just below its lowest frequency and chops the air into puffs that repeat exactly, and a repeating sound has frequencies only at whole-number multiples, so the reed's own overtones are absent from the steady sound.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
@@ -120,11 +124,11 @@ Plucked, the stems (below, and in the demo at the top) are the spectrum just com
 
 ## 5 · What we hear {#what-we-hear}
 
-**Blown, the reed's own overtones never reach the sound.** Blowing turns the reed into a valve that chops the air into puffs, and the puffs repeat exactly; a sound that repeats has frequencies only at whole-number multiples of its rate, so 6.27× and 17.55× have nowhere to appear. The steps below show why; first, what a pluck gives.
+**Blown, the reed's own overtones are absent from the steady sound.** Blowing turns the reed into a valve that chops the air into puffs, and the puffs repeat exactly; a sound that repeats has frequencies only at whole-number multiples of its rate, so 6.27× and 17.55× have nowhere to appear. The steps below show why; first, what a pluck gives.
 
 **Plucked: you hear the spectrum.** A plucked reed rings at its own frequencies, the result box of stage 3: the reed moves as $\sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, so the sound is a sum of tones at the frequencies $f_n$, each fading at its own rate (damping, added to the model). The overtones at 6.27 and 17.55 times the fundamental are off the lines and die fast, just like a kalimba tine's. The demo's plucked sound is synthesized exactly this way.
 
-**Blown: the reed becomes a valve.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. The sound comes mainly from the chopped airflow; the acoustics writer Colin Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency $f_p$ slightly below its first mode's, so the puffs of air repeat at that rate too. Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here (fold below). Granting that it does, the rest is mathematics:
+**Blown: the reed becomes a valve.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. The sound comes mainly from the chopped airflow; the acoustics writer Colin Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency $f_p$ slightly below its first mode's frequency, so the puffs of air repeat at that rate too. That the playing frequency sits below the reed's own is observed in studies of blown reeds, not derived here: the physicist James Cottingham, reviewing that work, reports that "the sounding frequency of the blown reed is somewhat below the natural vibrating frequency of the reed tongue", for the kind of reed that sounds in ordinary blowing and drawing on a harmonica. Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here (fold below). Granting that it does, the rest is mathematics:
 
 1. *The airflow repeats.* Let $q(t)$ be the airflow through the slot. In the steady oscillation it repeats every $P = 1/f_p$ seconds: $q(t + P) = q(t)$.
 2. *A repeating function is a Fourier series.* By the [circle page](circle.qmd), a function of period $P$ is a sum of $\cos(2\pi nt/P)$ and $\sin(2\pi nt/P)$ for $n = 0, 1, 2, \dots$, so it contains only the frequencies $n f_p$.
@@ -197,10 +201,10 @@ The demo uses the full quotient with the original mode shape, which is accurate 
 
 ## What we found
 
-Newton's law on a slice of brass (stage 1) gave the reed the kalimba tine's operator (stage 2), $\kappa^2\,d^4/dx^4$, riveted at one end and free at the other, and the same spectrum (stage 3), $1 : 6.27 : 17.55$, off the whole-number lines (stage 4). Plucked, that spectrum is what you hear, and the overtones die fast. Blown, the reed chops the air into puffs that repeat, and a repeating sound has frequencies only on the lines, so you hear a clean note. The operator decides the frequencies an object vibrates at on its own; a steady drive can lock it into others, and decides what you hear.
+A harmonica reed has the kalimba tine's operator, $\kappa^2\,d^4/dx^4$ clamped at one end, and its spectrum, $1 : 6.27 : 17.55$; plucked, that is what you hear. Blown, the reed swings just below its lowest frequency and chops the air into identical puffs, and a sound that repeats has frequencies only at whole-number multiples, so the steady note has nothing at 6.27× or 17.55×: the drive decides where a blown note's overtones sit. The next page returns to the string and adds the bar's stiffness to it.
 
 ::: {.family}
-**Same operator as the kalimba.** Accordion, concertina and harmonium reeds are [free reeds](glossary.qmd#free-reed) too: they swing freely through a slot, unlike a clarinet's reed, which beats against the mouthpiece. All of them are cantilevers like the kalimba's tine: same operator, same ends, smaller and thinner, usually of brass in harmonicas and harmoniums and of steel in accordions and concertinas. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.
+**The kalimba's operator family.** Accordion, concertina and harmonium reeds are [free reeds](glossary.qmd#free-reed) too: they swing freely through a slot, unlike a clarinet's reed, which beats against the mouthpiece. All of them are cantilevers like the kalimba's tine, with the same operator and the same ends, so the series puts them in the kalimba's [operator family](glossary.qmd#operator-family). They are smaller and thinner, usually of brass in harmonicas and harmoniums and of steel in accordions and concertinas. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.
 :::
 
 ## The next puzzle
@@ -210,7 +214,7 @@ Piano tuners deliberately tune octaves a little wider than 2 : 1. Why would exac
 [← 6 · Kalimba](kalimba.qmd) · [Next: 7 · Piano →](piano.qmd)
 
 ::: {.refs}
-**References.** C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023. J. Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), *Physics Today* 64(3), 2011. Wikipedia, [Free reed aerophone](https://en.wikipedia.org/wiki/Free_reed_aerophone) and [Rayleigh quotient](https://en.wikipedia.org/wiki/Rayleigh_quotient).
+**References.** C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023. J. Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), *Physics Today* 64(3), 2011, 44–48, for the playing frequency below the reed's natural frequency (p. 45). Wikipedia, [Free reed aerophone](https://en.wikipedia.org/wiki/Free_reed_aerophone) and [Rayleigh quotient](https://en.wikipedia.org/wiki/Rayleigh_quotient).
 :::
 
 ```{=html}

@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css]
 ---
 
@@ -41,6 +41,10 @@ Listen first: pick a sound, then slide the interval between two notes of that so
 </div>
 ```
 
+::: {.newidea}
+**In one sentence.** Two notes sound smooth together when their overtones line up, so instruments with different overtones can favour different scales, as Sethares argues (after Plomp and Levelt).
+:::
+
 ::: {.gist}
 **The recipe on this page, in brief.** Two notes sound rough when their [partials](glossary.qmd#partial) sit close together but not on top of each other, so they [beat](glossary.qmd#beats); the roughness of two notes is computed from their spectra. So the recipe now runs one step further, from the spectrum to which intervals sound smooth.
 
@@ -52,7 +56,7 @@ Listen first: pick a sound, then slide the interval between two notes of that so
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 
-The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on.
+The engineer and musician William Sethares, building on Plomp and Levelt's listening experiments, argues that this is one reason scales fit the instruments they are played on.
 :::
 
 ## On the roughness curve
@@ -111,20 +115,22 @@ In words: the same bar as the kalimba's, but with both ends free its overtones s
 
 ## What the spectrum does not decide {#not-decide}
 
+**Sethares's hypothesis.** The roughness curve of this page is what Sethares calls a *dissonance curve*. That an instrument's spectrum favours the scales whose steps sit at the dips of its dissonance curve is his hypothesis, built on Plomp and Levelt's experiments on how dissonant pairs of pure tones sound; the mathematics on this page computes the dips, and does not by itself show that musicians chose their scales by them.
+
 **The gamelan.** Sethares measured the spectra of gamelan metallophones, instruments of tuned metal bars, and reports that "the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans". The demo's bars are idealized, not measured gamelan bars, so it shows the mechanism, not his result; real gamelan bars are shaped by their makers, and tunings vary from one gamelan to another.
 
 **Roughness is not the whole story.** The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for [consonant](glossary.qmd#consonance) chords followed *harmonicity*, whether the frequencies fit one [harmonic series](glossary.qmd#harmonic-series), more than it followed beating, and grew with musical training. In 2016 McDermott and colleagues found that the Tsimane', a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.
 
 ## What we found
 
-An instrument's spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it, because the roughness of two notes, $D(\alpha)$, is computed from their partials. A string's operator, $-c^2\,d^2/dx^2$ with both ends tied, has its spectrum at whole-number multiples, so its smooth intervals are the simple ratios of Western harmony. The free bar's operator, $\kappa^2\,d^4/dx^4$ with both ends free, has its spectrum at 1, 2.756, 5.404, …, so its smooth intervals move, and the exact octave is not one of them. That much is a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world's music is an open, argued question.
+Two notes sound smooth together when their partials coincide or sit far apart, so the dips of the roughness curve, computed from an instrument's spectrum, sit at simple whole-number ratios for a string and move for a free bar, which loses the exact octave. Sethares argues, after Plomp and Levelt, that this is one reason instruments and their scales fit each other; how much it shaped the world's music is an open question, since what a culture finds beautiful is also learned. The [map](map.qmd) puts every instrument's operator and spectrum side by side.
 
 [← 9 · Drum shape](shape.qmd) · [Back to the series](index.qmd) · [Map](map.qmd)
 
 ::: {.refs}
 **References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba).
 W. A. Sethares, "Adaptive tunings for musical scales", *Journal of the Acoustical Society of America* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
-W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, Springer ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from chapter 1, p. 6, of the [book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
+W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, 2nd ed., Springer, 2005 ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from chapter 1, p. 6, of the [book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
 R. Plomp and W. J. M. Levelt, "Tonal consonance and critical bandwidth", *Journal of the Acoustical Society of America* 38 (1965), 548–560, as cited by Sethares.
 J. H. McDermott, A. J. Lehr and A. J. Oxenham, "Individual differences reveal the basis of consonance", *Current Biology* 20 (2010), 1035–1041 ([summary](https://www.sciencedaily.com/releases/2010/05/100520131431.htm)).
 J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, "Indifference to dissonance in native Amazonians reveals cultural variation in music perception", *Nature* 535 (2016), 547–550 ([summary](https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713)).
