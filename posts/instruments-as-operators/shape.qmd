@@ -276,10 +276,12 @@ One question is left, and it goes beyond mathematics: did the instruments people
 Å. Pleijel, "A study of certain Green's functions with applications in the theory of vibrating membranes", *Arkiv för Matematik* 2 (1954), 553–569.
 M. Kac, "Can one hear the shape of a drum?", *American Mathematical Monthly* 73 (1966), part II, 1–23 ([MAA](https://www.maa.org/programs/maa-awards/writing-awards/can-one-hear-the-shape-of-a-drum)).
 C. Gordon, D. Webb and S. Wolpert, "One cannot hear the shape of a drum", *Bulletin of the AMS* 27 (1992), 134–138 ([AMS](https://www.ams.org/bull/1992-27-01/S0273-0979-1992-00289-6/), [arXiv](https://arxiv.org/abs/math/9207215)).
-T. A. Driscoll, "Eigenmodes of isospectral drums", *SIAM Review* 39 (1997) ([DOI](https://doi.org/10.1137/S0036144595285069), [PDF](https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf)), Table 3.1.
+T. A. Driscoll, "Eigenmodes of isospectral drums", *SIAM Review* 39 (1997), 1–17 ([DOI](https://doi.org/10.1137/S0036144595285069), [PDF](https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf)), Table 3.1.
 C. Moler, "Can one hear the shape of a drum?", Cleve's Corner, MathWorks, August 2012: [part 1, eigenvalues](https://blogs.mathworks.com/cleve/2012/08/06/can-one-hear-the-shape-of-a-drum-part-1-eigenvalues/), [part 2, eigenfunctions](https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/), [part 3, transplantation](https://blogs.mathworks.com/cleve/2012/08/20/can-one-hear-the-shape-of-a-drum-part-3-transplantation/).
 S. J. Chapman, "Drums that sound the same", *American Mathematical Monthly* 102 (1995), 124–138.
 P. Buser, J. Conway, P. Doyle and K.-D. Semmler, "Some planar isospectral domains", *International Mathematics Research Notices* 1994, 391–400 ([arXiv](https://arxiv.org/abs/1005.1839)).
+T. Sunada, "Riemannian coverings and isospectral manifolds", *Annals of Mathematics* 121 (1985), 169–186.
+P. Bérard, "Transplantation et isospectralité I", *Mathematische Annalen* 292 (1992), 547–559.
 J. Milnor, "Eigenvalues of the Laplace operator on certain manifolds", *PNAS* 51 (1964), 542.
 H. P. McKean and I. M. Singer, "Curvature and the eigenvalues of the Laplacian", *Journal of Differential Geometry* 1 (1967), 43–69 ([Project Euclid](https://projecteuclid.org/download/pdf_1/euclid.jdg/1214427880)).
 M. van den Berg and S. Srisatkunarajah, "Heat equation for a region in R² with a polygonal boundary", *Journal of the London Mathematical Society* 37 (1988), 119–127.

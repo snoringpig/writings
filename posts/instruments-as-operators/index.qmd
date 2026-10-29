@@ -133,6 +133,10 @@ The demo sounds in this list are simplified: the piano pair exaggerates the stri
 
 Short on time? The answers in the list above are the series in brief, and each page repeats its answer in a box above a five-step summary. Pages 0, 4 and 8, the note, the string and the drum, carry the main idea; [the spectrum of an operator](spectrum.qmd) gives the mathematics in one page. The [map](map.qmd) has every instrument's sound side by side, reading paths by depth, the recipe run on every instrument, the instrument classes and the history. Blue words link to the [glossary](glossary.qmd).
 
+::: {.refs}
+**References.** The classes: E. M. von Hornbostel and C. Sachs, 1914, with electrophones added by Sachs in 1940; full references on the [map](map.qmd#operator-families-and-instrument-classes). The history: full sources on the [map](map.qmd#did-instrument-makers-know); in brief, Wikipedia, [Mersenne's laws](https://en.wikipedia.org/wiki/Mersenne%27s_laws), [Wave equation](https://en.wikipedia.org/wiki/Wave_equation) and [Bell](https://en.wikipedia.org/wiki/Bell) (the major-third bell), and MacTutor, [Lord Rayleigh](https://mathshistory.st-andrews.ac.uk/Biographies/Rayleigh/). Grieg: Wikipedia, [In the Hall of the Mountain King](https://en.wikipedia.org/wiki/In_the_Hall_of_the_Mountain_King). The two drums: sources on [page 8](drum.qmd).
+:::
+
 ::: {.made}
 *How this was made.* The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.
 :::

@@ -253,7 +253,7 @@ A harmonica reed is the same kind of bar, with the same off-line overtones. Blow
 [← 5 · Clarinet](clarinet.qmd) · [Next: 6b · Harmonica →](harmonica.qmd)
 
 ::: {.refs}
-**References.** D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustical Society of America, 2008. Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory) and [Cantilever](https://en.wikipedia.org/wiki/Cantilever), and [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity) for a bell's spectrum. Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2 (bars).
+**References.** D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustics'08 Paris, paper 5aMUf1, Acoustical Society of America, 2008. Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory) and [Cantilever](https://en.wikipedia.org/wiki/Cantilever), and [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity) for a bell's spectrum. Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2 (bars).
 :::
 
 ```{=html}

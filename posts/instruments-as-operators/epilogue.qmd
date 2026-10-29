@@ -129,8 +129,8 @@ Two notes sound smooth together when their partials coincide or sit far apart, s
 
 ::: {.refs}
 **References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba).
-W. A. Sethares, "Adaptive tunings for musical scales", *Journal of the Acoustical Society of America* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
-W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, Springer ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from chapter 1, p. 6, of the [book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
+W. A. Sethares, "Adaptive tunings for musical scales", *Journal of the Acoustical Society of America* 96 (1994), 10–18 ([PDF](https://minds.wisc.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
+W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, 2nd ed., Springer, 2005 ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from chapter 1, p. 6, of the [book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
 R. Plomp and W. J. M. Levelt, "Tonal consonance and critical bandwidth", *Journal of the Acoustical Society of America* 38 (1965), 548–560, as cited by Sethares.
 J. H. McDermott, A. J. Lehr and A. J. Oxenham, "Individual differences reveal the basis of consonance", *Current Biology* 20 (2010), 1035–1041 ([summary](https://www.sciencedaily.com/releases/2010/05/100520131431.htm)).
 J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, "Indifference to dissonance in native Amazonians reveals cultural variation in music perception", *Nature* 535 (2016), 547–550 ([summary](https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713)).
