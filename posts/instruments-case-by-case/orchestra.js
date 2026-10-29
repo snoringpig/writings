@@ -5,30 +5,30 @@
   var C = window.Core, M = C.models, O = window.Orchestra = {};
 
   // ---------- the five classes (Benson, Music: A Mathematical Offering, ch. 3, after Hornbostel and Sachs) ----------
-  // Order: the blog's. The electrophone's operator is a single number, the spring of page 1, so it goes first.
+  // Order: the blog's. The electrophone's operator is a single number, like a mass on a spring, so it goes first.
   O.FAM = [
     { id: "electro", name: "Electrophone", inst: "Sine theremin", plain: "an electric circuit", law: "Kirchhoff’s law on", piece: "a coil and a capacitor",
-      op: "A = \\frac{1}{LC}", held: "a single number, like the spring of page 1",
+      op: "A = \\frac{1}{LC}", held: "a single number, like a mass on a spring",
       spec: "f = \\frac{1}{2\\pi \\sqrt{LC}}", specNote: "",
       verdict: "One stem: a pure tone. A real theremin mixes two such circuits, the hand changing C, and its circuitry adds a few overtones.",
-      hue: [120, 230, 170], pan: 0.25, page: "oscillator", where: "Same mathematics as page 1, the spring" },
+      hue: [120, 230, 170], pan: 0.25, page: "oscillator", where: "The circuit and the spring: post 2" },
     { id: "chord", name: "Chordophone", inst: "Piano", plain: "a stiff string", law: "Newton’s law on", piece: "a short piece of stiff steel wire",
       op: "A = -c^2 \\frac{d^2}{dx^2} + \\kappa^2 \\frac{d^4}{dx^4}", held: "ends pinned",
       spec: "f_n = n f_0 \\sqrt{1 + B n^2}", specNote: "",
-      verdict: "Just above the lines, more so as n grows: a note, slightly stretched.", hue: [233, 196, 106], pan: -0.2, page: "piano", where: "Derived in full on page 7, the piano" },
+      verdict: "Just above the lines, more so as n grows: a note, slightly stretched.", hue: [233, 196, 106], pan: -0.2, page: "piano", where: "Derived in post 2; the piano: post 4" },
     { id: "aero", name: "Aerophone", inst: "Clarinet", plain: "a column of air", law: "Newton’s law on", piece: "a thin slice of the air in the tube",
       op: "A = -c^2 \\frac{d^2}{dx^2}", held: "on pressure; closed at the reed, open at the far end",
       spec: "f_n = (2n - 1) \\frac{c}{4L}", specNote: "",
-      verdict: "On the odd lines; the even ones are weak: a hollow note.", hue: [120, 200, 255], pan: -0.45, page: "clarinet", where: "Derived in full on page 5, the clarinet" },
+      verdict: "On the odd lines; the even ones are weak: a hollow note.", hue: [120, 200, 255], pan: -0.45, page: "clarinet", where: "Derived in post 2; the clarinet: post 4" },
     { id: "idio", name: "Idiophone", inst: "Glockenspiel", plain: "a steel bar", law: "Newton’s law on", piece: "a thin slice of a steel bar",
       op: "A = \\kappa^2 \\frac{d^4}{dx^4}", held: "both ends free",
       spec: "\\cos \\beta L \\; \\cosh \\beta L = 1", specNote: "ratios 1 : 2.76 : 5.40",
-      verdict: "Off the lines, but the overtones die fast: a bright, clean note.", hue: [190, 160, 255], pan: 0.45, page: "epilogue", where: "Derived in full on page 10; the operator first appears on page 6, the kalimba" },
+      verdict: "Off the lines, but the overtones die fast: a bright, clean note.", hue: [190, 160, 255], pan: 0.45, page: "epilogue", where: "The bar: post 2; both ends free: the scales post" },
     { id: "membrane", name: "Membranophones", inst: "Bass drum and timpani", plain: "a stretched skin", law: "Newton’s law on", piece: "a small patch of the drumhead",
       op: "A = -c^2 \\Delta", held: "rim held still",
       spec: "J_m(ka) = 0", specNote: "ratios 1 : 1.59 : 2.14 : 2.30 …",
       verdict: "Bass drum: struck slightly off centre, mostly round modes, off the lines and fading fast: a boom with no clear pitch. Timpani: the same skin, but the air it drags along pulls its spoke modes near 2 : 3 : 4 : 5: a note.",
-      hue: [255, 134, 102], pan: 0, page: "drum", where: "Derived in full on page 8, the drum" }
+      hue: [255, 134, 102], pan: 0, page: "drum", where: "Derived in post 2; the two drums: post 4" }
   ];
   O.famIndex = {}; O.FAM.forEach(function (f, i) { O.famIndex[f.id] = i; });
   // the lanes of the performance view: one per instrument, so the two drums show their different spectra

@@ -1,0 +1,520 @@
+---
+title: "Why does a light touch make a string jump an octave?"
+subtitle: "The Shape of a Sound · 4"
+date: 2026-10-29T12:00:00
+draft: false
+categories: [math, music, the-shape-of-a-sound]
+description: "The violin string, plucked and bowed: its modes sit on the whole-number lines, the pluck sets how strongly each starts, and a light touch damps every mode that moves under the finger."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+aliases: [/posts/instruments-as-operators/violin.html]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← The orchestra](index.qmd) · [Clarinet →](clarinet.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+A page of [post 4, Instruments, case by case](index.qmd). Builds on [post 1, What you hear](../what-you-hear/index.qmd); the string's equation is derived in [post 2](../where-the-equations-come-from/index.qmd#string). Math: the sine function, derivatives, and one sum. About 18 minutes. New to the series? [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph).
+:::
+
+::: {.puzzle}
+Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an [octave](../instruments-as-operators/glossary.qmd#octave). Touch it a third of the way along and it jumps to three times the frequency. How can a feather-light finger, which does not even shorten the string, change the note so much?
+:::
+
+Listen first: pluck the string, then pick a point to touch and pluck again. String players call these touched notes [harmonics](../instruments-as-operators/glossary.qmd#string-harmonics).
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="tCanvas" style="height:170px" aria-label="A string, the point where it is plucked, and the finger touching it lightly"></canvas>
+  <div class="controls" role="group" aria-label="Where the finger touches">
+    <span class="cap" style="margin-right:0.25rem">Touch lightly at</span>
+    <button data-touch="0" aria-pressed="true">no touch</button><button data-touch="0.5">1/2</button><button data-touch="0.3333333">1/3</button><button data-touch="0.25">1/4</button><button data-touch="0.2">1/5</button>
+  </div>
+  <div class="slider"><label for="tP">Pluck point, from the bridge</label><input type="range" id="tP" min="0.04" max="0.5" step="0.01" value="0.16"><output id="tPo"></output></div>
+  <div class="controls"><button id="tPluck" class="primary">Pluck</button></div>
+  <svg class="spec" id="tSpec" viewBox="0 0 320 96" style="max-width:520px" aria-label="Strength of each mode a quarter second after the pluck"></svg>
+  <div class="readout" id="tRead"></div>
+  <p class="cap">Left end: the <a href="../instruments-as-operators/glossary.html#bridge">nut</a>, near the tuning pegs; right end: the bridge. The motion is slowed for the eye. Stems: how far each mode still swings a quarter of a second after the pluck. The fading rates are an illustrative choice, not measured.</p>
+</div>
+</div>
+```
+
+::: {.newidea}
+**In one sentence.** A light touch at the middle of a string moves none of its frequencies: it damps every mode that moves under the finger, and the modes left ringing, the even ones, which stand still there, are the partials of a note an octave up.
+:::
+
+[Skip to what we hear](#what-we-hear) if you only want the answer.
+
+## The operator, in one line {#operator}
+
+Let the string run along $x$ from the [nut](../instruments-as-operators/glossary.qmd#bridge), at $x = 0$, to the bridge, at $x = L$, with tension $T$ and mass $\mu$ per unit length, and write $u(x, t)$ for its height above the straight line. Newton's law on a short piece of string gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation), $u_{tt} = c^2u_{xx}$ with $c^2 = T/\mu$ ([post 2](../where-the-equations-come-from/index.qmd#string) derives it). Subscripts are [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative): $u_{tt}$ is the acceleration of a point and $u_{xx}$ the string's curvature there, how sharply it bends. Read as a rule that takes the string's shape and returns minus its acceleration, the equation defines the string's [operator](../instruments-as-operators/glossary.qmd#operator) $A$: $u_{tt} = -Au$.
+
+::: {.result}
+**The string's operator.**
+$$
+u_{tt} = -A\,u, \qquad A = -c^2\,\frac{d^2}{dx^2}, \qquad c^2 = \frac{T}{\mu},
+$$
+acting on shapes $X$ on $[0, L]$ with $X(0) = X(L) = 0$. In words: $A$ takes a shape and returns minus $c^2$ times its curvature, and only shapes held still at both ends are allowed.
+:::
+
+The tied ends, a [boundary condition](../instruments-as-operators/glossary.qmd#boundary-condition), are part of the operator: they decide which shapes are allowed, and so which frequencies the string has. The model assumes small slopes, a perfectly flexible string, no air and no friction.
+
+## Its spectrum {#spectrum}
+
+A [mode](../instruments-as-operators/glossary.qmd#mode) is a shape $X$ that the operator only rescales: $AX = \lambda X$. The shape $X$ is an [eigenfunction](../instruments-as-operators/glossary.qmd#eigenfunction), and the number $\lambda$ its [eigenvalue](../instruments-as-operators/glossary.qmd#eigenvalue). Released in that shape, the string keeps it and swings at the angular frequency $\omega = \sqrt\lambda$, that is, at $f = \sqrt\lambda/2\pi$ in hertz. The list of all eigenvalues is the [spectrum](../instruments-as-operators/glossary.qmd#spectrum). Solving $-c^2X'' = \lambda X$ with $X(0) = X(L) = 0$ (fold below) gives the string's spectrum.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The computation, step by step <span class="needs">uses derivatives</span></summary>
+
+**1. Which shapes does the operator only rescale?** $AX = \lambda X$ says $-c^2X'' = \lambda X$. Write $\lambda = c^2k^2$ with $k > 0$; then $X'' = -k^2X$, a shape whose curvature is minus $k^2$ times itself. Its solutions are the waves $X = a\cos kx + b\sin kx$. (Zero and negative $\lambda$ give no shape that stays still at both ends; see the fold below.)
+
+**2. Hold the nut still.** $X(0) = 0$ forces $a = 0$, so $X = b\sin kx$.
+
+**3. Hold the bridge still.** $X(L) = 0$ then needs $\sin kL = 0$, so $kL$ is a whole multiple of $\pi$: $k = n\pi/L$ for $n = 1, 2, 3, \dots$ The shape $\sin(n\pi x/L)$ has $n$ arches.
+
+**4. Turn the eigenvalues into frequencies.** The eigenvalues are $\lambda_n = c^2k_n^2 = (n\pi c/L)^2$, so
+$$
+f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{n\,c}{2L} = \frac{n}{2L}\sqrt{\frac{T}{\mu}} = n\,f_1 .
+$$
+
+</details>
+:::
+
+::: {.result}
+**The string's spectrum.** Eigenfunctions: $\sin(n\pi x/L)$, the shapes with $n = 1, 2, 3, \dots$ arches. Eigenvalues: $\lambda_n = (n\pi c/L)^2$. Frequencies: $f_n = n f_1$, with
+$$
+f_1 = \frac{1}{2L}\sqrt{\frac{T}{\mu}},
+$$
+exactly 1, 2, 3, … times the lowest. The lowest rises with the tension and falls with the length and the mass per length.
+:::
+
+In plain words: a shape with *n* arches is *n* times shorter than the one-arch shape; a shorter shape bends more sharply, and the string pulls back in proportion to how sharply it bends, so it is pulled back *n*² times harder and swings *n* times faster. Every shape the string can take is a sum of these arch shapes, so every free motion of the string is a sum of its modes; [post 3](../when-an-equation-has-a-spectrum/index.qmd#levels) shows why, and when such a sum is guaranteed.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>No other eigenvalues <span class="needs">uses integration by parts</span></summary>
+
+Write the eigenvalue as $\lambda = c^2 k^2$ for some number $k^2$, so that $-X'' = k^2 X$. Multiply by $X$ and integrate from $0$ to $L$. Integrating by parts, the boundary term $-X X'$ vanishes at both ends because $X = 0$ there:
+$$
+k^2\int_0^L X^2\,dx = \int_0^L (X')^2\,dx .
+$$
+So a zero or negative $\lambda$ would need $\int (X')^2\,dx \le 0$, which only the constant shapes satisfy, and the only constant that vanishes at the ends is $X = 0$. Each eigenvalue $(n\pi c/L)^2$ has [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity) 1: the boundary condition at the nut removed the cosine.
+
+</details>
+:::
+
+On the spectrum diagram, the pitch ruler of post 1 with one stem per mode, stem $n$ sits at $f_n/f_1 = n$, exactly on line $n$. Below, each stem's height is how far that mode swings just after a pluck; under the demo at the top, how far it still swings a quarter of a second later.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="vS4" viewBox="0 0 320 96" style="max-width:520px" aria-label="The open string's modes after a pluck 0.16 of the way from the bridge, at 1, 2, 3, ... times the lowest frequency"></svg>
+  <p class="cap">The open string, plucked 0.16 of its length from the bridge: mode n at n times the lowest frequency, exactly on line n, drawn as far as it swings just after the pluck.</p>
+</div>
+</div>
+```
+
+## Plucked: a ringing string {#ringing}
+
+A plucked string rings: left to itself, it moves as the sum of its modes, each swinging at its own frequency and fading at its own rate,
+$$
+u(x, t) = \sum_{n} a_n\,e^{-t/\tau_n}\sin\frac{n\pi x}{L}\,\cos(2\pi f_n t + \phi_n).
+$$
+What reaches your ear is the string's push on the bridge, passed on by the wooden body, which keeps every $f_n$ and $\tau_n$, changes the amounts and adds its own ringing ([post 3](../when-an-equation-has-a-spectrum/index.qmd#back-to-hearing)).
+
+**Frequencies: on the lines.** They are the spectrum, $f_n = n f_1$, so apart from the slow fading the sum repeats every $1/f_1$ seconds, and is heard at that rate ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)). The demo uses $f_1 = 196$ Hz.
+
+**Amounts: where you pluck sets the brightness.** A pluck starts each shape according to how much of it is in the plucked triangle, and for the same height a shape with more arches has steeper ends, so it pushes the bridge harder. Pluck near the bridge, and the first several shapes push the bridge about equally hard (fold below): the sound is bright. Pluck at the middle, and every shape with an even number of arches is missing, since those stand still where you pulled, and the rest push the bridge less and less, the more arches they have: a mellow, hollow sound. Move the pluck slider in the demo and watch the stems.
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>How much of each shape a pluck starts <span class="needs">uses integration by parts</span></summary>
+
+Every shape of the string is a sum $\sum_n b_n\sin(n\pi x/L)$ of its modes, its *sine series*, and $b_n$ says how much of mode $n$ the shape contains. A string pulled aside a distance $d$ at a point $x_p$ from one end, and let go, starts as a triangle. With $x_p$ measured from the nut, where $x = 0$, its sine coefficients are
+$$
+b_n = \frac{2dL^2}{\pi^2 x_p(L - x_p)}\cdot\frac{\sin(n\pi x_p/L)}{n^2}.
+$$
+Measuring $x_p$ from the bridge instead only flips the sign of every second $b_n$, since $\sin(n\pi(L - x_p)/L) = \pm\sin(n\pi x_p/L)$, and signs do not change how loud a mode is; from here on $x_p$ is the distance from the bridge. What reaches your ear is driven by the force on the bridge, which is proportional to the string's slope there and so to $n\,b_n$ for mode $n$. Near the bridge, $x_p$ small, $\sin(n\pi x_p/L) \approx n\pi x_p/L$ for the first several modes, so $n b_n$ hardly falls off at all: the high modes are strong and the sound is bright. At the middle, $\sin(n\pi/2)$ is zero for every even $n$, and the rest have $n b_n$ falling like $1/n$: a mellower, hollow sound.
+
+**Where the formula comes from.** Take $L = 1$ and write $q = x_p$. The starting shape is $u_0(x) = dx/q$ for $0 \le x \le q$ and $u_0(x) = d(1 - x)/(1 - q)$ for $q \le x \le 1$. Its sine coefficients are $b_n = 2\int_0^1 u_0(x)\sin(n\pi x)\,dx$, because the sines are perpendicular: $\int_0^1 \sin(m\pi x)\sin(n\pi x)\,dx = 0$ for $m \ne n$. Integrate by parts twice on each straight piece. Since $u_0$ vanishes at both ends and $u_0'' = 0$ on each piece, the only term left comes from the jump in slope at the corner, from $d/q$ just left of it to $-d/(1-q)$ just right of it: $b_n = \frac{2}{n^2\pi^2}\big(\tfrac{d}{q} + \tfrac{d}{1-q}\big)\sin(n\pi q) = \frac{2d\sin(n\pi q)}{n^2\pi^2 q(1-q)}$. The $1/n^2$ comes from that single corner.
+
+</details>
+:::
+
+**Fading, and the player's damping.** Left alone, every mode fades, losing energy to friction in the string, to the air and, through the bridge, to the body; those fading times are measured, not derived here, and the demo's are illustrative. The player can also cut modes short with a finger, and a finger that damps some modes and spares others answers the puzzle ([what we hear](#what-we-hear)).
+
+**Pressing down makes a new end.** Pressing a finger firmly onto the fingerboard ties the string down there, so it changes the operator itself: only the piece between the finger and the [bridge](../instruments-as-operators/glossary.qmd#bridge) sounds, and by the formula for $f_1$ a shorter string sounds higher, in inverse proportion to its length. Two-thirds of the length sounds a fifth up, half the length an octave up, and the [semitone](../instruments-as-operators/glossary.qmd#semitone) positions bunch together toward the bridge. Play a whole violin: press and hold a string to bow it, slide sideways to finger it, or switch to plucking.
+
+
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="fiddle" style="height:260px" tabindex="0" aria-label="Violin fingerboard. Press and hold on a string to bow it; slide sideways to change the finger position."></canvas>
+  <div class="controls" style="padding:0.5rem 0.25rem 0">
+    <button id="mBow" aria-pressed="true">Bow (hold)</button><button id="mPizz" aria-pressed="false">Pizzicato, plucked (tap)</button>
+    <label class="check"><input type="checkbox" id="body" checked> Wooden body</label>
+    <span class="readout" id="vRead" style="flex-basis:100%">Press and hold a string. Slide left and right to finger it.</span>
+  </div>
+  <svg class="spec" id="playSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the note being played, as heard through the body"></svg>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge: the nut; right edge: the bridge. Ticks: where the finger goes for each semitone (fold below). Stems: the partials you hear; switching the body off or on changes their heights, never their positions.</p>
+</section>
+</div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Where the finger goes for each semitone <span class="needs">uses powers</span></summary>
+
+An [open string](../instruments-as-operators/glossary.qmd#open-string) is one not pressed down by a finger. With the finger at distance $s$ from the nut, the vibrating length shrinks to $L - s$, so the pitch rises by the factor $L/(L - s)$. In [equal temperament](../instruments-as-operators/glossary.qmd#equal-temperament) the twelve semitones of an octave are equal ratios of frequency, so each is $2^{1/12}$, and $k$ semitones are $2^{k/12}$. Solving $L/(L - s) = 2^{k/12}$ gives $s_k = (1 - 2^{-k/12})L$: the semitone positions bunch together toward the bridge. These are the ticks on the violin's fingerboard above.
+
+</details>
+:::
+
+## Bowed: a sustained string {#sustained}
+
+A bowed string does not ring and fade. The bow keeps feeding it, and its motion settles into one repeating cycle, [Helmholtz motion](../instruments-as-operators/glossary.qmd#helmholtz-motion), at the string's lowest frequency $f_1$; a motion that repeats exactly has its partials exactly on the lines (folds below).
+
+::: {.derive}
+<details><summary><span class="label">Details</span>How the bow locks the note</summary>
+
+**Playing frequency.** A bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per cycle. By 1860 Hermann von Helmholtz had watched this through a *vibration microscope*: the string forms two straight pieces joined by one sharp corner, which races between the bridge and the finger and back, [Helmholtz motion](../instruments-as-operators/glossary.qmd#helmholtz-motion). The corner runs at the wave speed $c$, so the round trip $2L$ takes $2L/c$ seconds: the cycle repeats at $c/2L = f_1$, the string's lowest frequency.
+
+**Waveform.** A motion that repeats exactly has its partials exactly on the lines, at $n f_1$; for Helmholtz motion the push on the bridge in partial $n$ falls off like $1/n$ (fold below). Even on a real, slightly stiff string, whose own modes run a little sharp of the lines ([the piano page](piano.qmd)), the bowed motion is "nearly exactly periodic", so bowing reduces the string's inharmonicity (Wolfe). The locking comes from the bow's friction, which is not [linear](../instruments-as-operators/glossary.qmd#linear); [post 3](../when-an-equation-has-a-spectrum/index.qmd#counterexamples) places it among the [self-sustained oscillations](../instruments-as-operators/glossary.qmd#self-sustained), and this page does not derive it. (The demo's bowed voice adds a gentle vibrato, as players do, which wobbles the lines slightly.)
+
+</details>
+:::
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <canvas id="helm" style="height:180px" aria-label="Slow-motion string shape"></canvas>
+    <div class="controls"><button id="hBow" aria-pressed="true">Bowed</button><button id="hPluck" aria-pressed="false">Plucked at 1/4</button></div>
+    <svg class="spec" id="vSpec" viewBox="0 0 320 110" style="max-width:520px" aria-label="Partials of the bridge force"></svg>
+    <p class="cap">Slowed about 500 times. The faint lens-shaped outline is the path the corner traces. Stems: the partials of the push on the bridge.</p>
+  </div>
+</div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Helmholtz motion as a sum of modes <span class="needs">uses the plucked-string formula above</span></summary>
+
+A vibration microscope's lens rides on a vibrating tuning fork, so that a bright speck on the string traces a pattern revealing its motion. Helmholtz reported what he saw in 1860 and in his 1863 book. The expansion of Helmholtz motion in the string's eigenfunctions is, for some overall size $a$,
+$$
+u(x,t) = \sum_{n\ge1} \frac{a}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(2\pi n f_1 t).
+$$
+Where this comes from: at each moment the string is two straight pieces, like a plucked string, with the corner at some point $x_c$. Helmholtz showed that the corner's height is proportional to $x_c(L - x_c)$, so it traces two arcs of a parabola, the lens in the demo, and that the corner moves at the wave speed $c = 2Lf_1$. Put that height in place of $d$ in the pluck formula above: the factor $x_c(L - x_c)$ cancels and $b_n \propto \sin(n\pi x_c/L)/n^2$. With $x_c = 2Lf_1t$ this is $\sin(2\pi nf_1t)/n^2$; on the way back the corner runs along the lower arc, and the same formula covers it: for $x_c$ between $L$ and $2L$, $\sin(n\pi x_c/L)$ describes a corner at $2L - x_c$ with negative height. The motion repeats exactly every $1/f_1$ seconds, so its partials sit exactly on $nf_1$. The force on the bridge is proportional to the string's slope there, and the slope of $\sin(n\pi x/L)$ carries an extra factor $n\pi/L$, so partial $n$ pushes the bridge with strength proportional to $1/n$.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The player's control: bow speed, position and force</summary>
+
+**The player's control.** The bowing sets loudness and tone. Bowing faster gives a larger swing and a louder note; at the same speed, bowing closer to the bridge also gives a larger swing; bowing with more force, usually closer to the bridge, gives a sharper corner, more high harmonics and a brighter tone; and only a certain range of bow force keeps Helmholtz motion going at all (Wolfe, "Bows and strings"). The note lasts as long as the bow keeps moving.
+
+</details>
+:::
+
+## What we hear {#what-we-hear}
+
+**A light touch keeps only the shapes that are still under the finger.** The finger is a [damper](../instruments-as-operators/glossary.qmd#damper): a soft, lossy contact that takes energy from whatever moves under it. It does not hold the string still there, as a new end would. Where a shape has a still point, a [node](../instruments-as-operators/glossary.qmd#node), the finger has nothing to grab, and that shape rings on; every other shape moves under the finger and loses its energy to it within a moment. The shape $\sin(n\pi x/L)$ is still at the middle exactly when $n$ is even: 2, 4, 6, … arches, at 2, 4, 6, … times the open string's frequency. Those are whole-number multiples of $2f_1$, so the survivors repeat twice as often, and you hear a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a [fifth](../instruments-as-operators/glossary.qmd#octave) up (a factor 2 times a factor 3/2). No frequency moved; the finger changed only which modes keep ringing.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Which modes survive a light touch <span class="needs">uses the sine function</span></summary>
+
+Let the finger touch the string at the distance $s$ from the [nut](../instruments-as-operators/glossary.qmd#bridge), and write $X_n(x) = \sin(n\pi x/L)$ for the shape of mode $n$. In the model, the finger drains mode $n$ at a rate proportional to $X_n(s)^2$, how much that mode moves under it, the rule the [piano page](piano.qmd) uses for felt dampers; the demo adds 45 per second times $X_n(s)^2$ to each mode's own fading rate. The modes that survive are the ones with a node right under the finger: $\sin(n\pi s/L) = 0$, which means $ns/L$ is a whole number. At $s = L/2$ these are the even $n$, at $2f_1, 4f_1, 6f_1, \dots$: a note with fundamental $2f_1$. At $s = L/3$ they are $n = 3, 6, 9, \dots$, with fundamental $3f_1$: an octave (a factor 2) and a fifth (a factor 3/2) up, since $2 \times 3/2 = 3$.
+
+</details>
+:::
+
+### The four aspects {#four-aspects}
+
+The [four aspects](../what-you-hear/index.qmd#four-aspects) of the string's sound, for both ways of playing it:
+
+::: {.aspects}
+
+| Aspect | Plucked | Bowed |
+|:--|:--|:--|
+| [Pitch](../instruments-as-operators/glossary.qmd#pitch) | $f_1$, set by the stopped length and the tension | the same $f_1$, the bowed cycle's rate |
+| Loudness | how far the string is pulled aside | bow speed and how near the bridge it plays |
+| [Timbre](../instruments-as-operators/glossary.qmd#timbre) | the pluck point; the body's fixed resonances | bow force and position; the body's fixed resonances |
+| Duration | the modes' fading, or a damping finger | as long as the bow moves |
+
+: The violin string's four aspects. {.striped}
+
+:::
+
+```{=html}
+<style>
+/* The four-aspects tables are prose: let them wrap on narrow screens instead of scrolling sideways. */
+@media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
+</style>
+```
+
+**The body changes the amounts, never the frequencies.** The string rocks the bridge, the bridge shakes the wooden body, and the body moves the air. Each step is linear: shaken at one frequency, it responds at that same frequency, louder or quieter. So the body changes each partial's height but never its frequency, and its resonances, fixed whatever note is played, are part of the violin's timbre (Wolfe gives its main air resonance near 300 Hz). Toggle the wooden body on the violin above: the stems change height and stay where they are.
+
+## What we found
+
+Tied at both ends, the string's operator $A = -c^2\,d^2/dx^2$ has its modes at exactly $n f_1$, so every partial sits on a line. Plucked, the pluck point sets the amounts, and a light touch, a damper, spares only the modes with a node under the finger: at the middle the even ones, an octave up. Bowed, the string runs one repeating cycle at $f_1$, and the bow sets its loudness and brightness.
+
+## Next
+
+The next page keeps the operator and changes the ends, for the air in a tube: [why is a clarinet almost an octave deeper than a flute?](clarinet.qmd)
+
+::: {.refs}
+**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 2 (strings, including the wave equation for a string) and chapter 10 (bowed strings). J. Wolfe, [Bows and strings](https://newt.phys.unsw.edu.au/jw/Bows.html) (the bowed motion "nearly exactly periodic"; bow speed, bow position and bow force) and [Violin acoustics: an introduction](https://www.phys.unsw.edu.au/jw/violintro.html), UNSW. H. Helmholtz, "On the motion of the strings of a violin", *Proceedings of the Philosophical Society of Glasgow* 5 (1860–64), 17–21, read 19 December 1860 ([archive.org](https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5)). H. von Helmholtz, *On the Sensations of Tone*, 1863 (English translation by A. J. Ellis, 1875). The four body resonances in the demo are rough illustrative values, not measured from a particular violin: Wolfe gives the air resonance at about 300 Hz and notes that the bridge passes vibration to the body well from about 1 to 4 kHz.
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  var OPEN = [{ n: "G3", f: 196.0 }, { n: "D4", f: 293.66 }, { n: "A4", f: 440.0 }, { n: "E5", f: 659.26 }];
+  var SMAX = 0.75, mode = "bow";
+  var cv = document.getElementById("fiddle"), ctx = cv.getContext("2d");
+  var active = null; // {si, s, t0}
+  var ringing = []; // pizz visuals {si, s, t0}
+
+  // ---------- audio voices ----------
+  var wave = null, voice = null;
+  function periodic(a) {
+    if (wave) return wave;
+    var N = 40, re = new Float32Array(N + 1), im = new Float32Array(N + 1);
+    for (var n = 1; n <= N; n++) im[n] = 1 / n;
+    wave = a.createPeriodicWave(re, im, { disableNormalization: false }); return wave;
+  }
+  function startBow(f) {
+    var a = C.ac(), t = a.currentTime, osc = a.createOscillator(), lfo = a.createOscillator(), lg = a.createGain(), g = a.createGain(), lp = a.createBiquadFilter();
+    osc.setPeriodicWave(periodic(a)); osc.frequency.value = f;
+    lfo.frequency.value = 5.6; lg.gain.value = 0; lfo.connect(lg); lg.connect(osc.frequency);
+    lp.type = "lowpass"; lp.frequency.value = 6000;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.32, t + 0.09);
+    lg.gain.setTargetAtTime(f * 0.005, t + 0.4, 0.25);
+    osc.connect(lp);
+    if (bodyOn) { var bc = C.bodyChain(a); lp.connect(bc.input); bc.output.connect(g); } else lp.connect(g);
+    g.connect(C.out); osc.start(); lfo.start();
+    voice = { osc: osc, lfo: lfo, lg: lg, g: g };
+  }
+  function moveBow(f) { if (!voice) return; var t = C.ac().currentTime; voice.osc.frequency.setTargetAtTime(f, t, 0.012); voice.lg.gain.setTargetAtTime(f * 0.005, t, 0.2); }
+  function stopBow() {
+    if (!voice) return; var a = C.ac(), t = a.currentTime;
+    voice.g.gain.cancelScheduledValues(t); voice.g.gain.setTargetAtTime(0, t, 0.07);
+    voice.osc.stop(t + 0.6); voice.lfo.stop(t + 0.6); voice = null;
+  }
+  function pizz(f) {
+    var parts = C.toHz(C.models.violin.partials({ pluck: 0.27 }), f), a = C.ac();
+    var src = a.createBufferSource(), g = a.createGain(); src.buffer = C.render(parts, 1.6); g.gain.value = 0.9;
+    if (bodyOn) { var bc = C.bodyChain(a); src.connect(bc.input); bc.output.connect(g); } else src.connect(g);
+    g.connect(C.out); src.start();
+  }
+  var bodyOn = true;
+  document.getElementById("body").addEventListener("change", function (e) { bodyOn = e.target.checked; if (lastF) playSpec(lastF); });
+  var lastF = 0;
+  function playSpec(f) {
+    lastF = f;
+    var p = (mode === "bow" ? C.models.violin.partials() : C.models.violin.partials({ pluck: 0.27 })).slice(0, 20)
+      .map(function (q) { return { ratio: q.ratio, amp: q.amp * (bodyOn ? C.bodyGain(q.ratio * f) : 1) }; });
+    C.stems(document.getElementById("playSpec"), p, { W: 320, H: 90, rmax: 20, fs: 8, sw: 2, labelEvery: 4 });
+  }
+
+  // ---------- geometry ----------
+  function geom() {
+    var d = C.fit(cv), W = cv.width, H = cv.height, xn = 34 * d, xb = W - 18 * d;
+    var lanes = OPEN.map(function (_, i) { return H * (0.2 + 0.2 * i); });
+    return { d: d, W: W, H: H, xn: xn, xb: xb, lanes: lanes };
+  }
+  function freqOf(si, s) { return OPEN[si].f / (1 - s); }
+  function locate(e) {
+    var r = cv.getBoundingClientRect(), g = geom(), px = (e.clientX - r.left) * g.d, py = (e.clientY - r.top) * g.d;
+    var si = 0, bd = 1e9; g.lanes.forEach(function (y, i) { if (Math.abs(y - py) < bd) { bd = Math.abs(y - py); si = i; } });
+    var s = Math.max(0, Math.min(SMAX, (px - g.xn) / (g.xb - g.xn)));
+    return { si: si, s: s };
+  }
+  function readout(si, s) {
+    var f = freqOf(si, s), nn = C.noteName(f);
+    playSpec(f);
+    document.getElementById("vRead").innerHTML = OPEN[si].n + " string · finger " + Math.round(100 * s) + "% of the way to the bridge · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? ", " + Math.abs(nn.cents) + " cents " + (nn.cents > 0 ? "sharp" : "flat") : "");
+  }
+  cv.addEventListener("pointerdown", function (e) {
+    var p = locate(e); cv.setPointerCapture(e.pointerId); readout(p.si, p.s);
+    if (mode === "bow") { active = { si: p.si, s: p.s, t0: performance.now() }; startBow(freqOf(p.si, p.s)); }
+    else { ringing.push({ si: p.si, s: p.s, t0: performance.now() }); pizz(freqOf(p.si, p.s)); }
+  });
+  cv.addEventListener("pointermove", function (e) {
+    if (!active) return; var p = locate(e); active.s = p.s; moveBow(freqOf(active.si, p.s)); readout(active.si, p.s);
+  });
+  function end() { if (active) { active = null; stopBow(); } }
+  cv.addEventListener("pointerup", end); cv.addEventListener("pointercancel", end);
+
+  function drawFiddle(now) {
+    var g = geom(), d = g.d; ctx.clearRect(0, 0, g.W, g.H);
+    ctx.fillStyle = C.rgb("--wood", 0.35); ctx.fillRect(g.xn, g.lanes[0] - 22 * d, (g.xb - g.xn) * 0.78, g.lanes[3] - g.lanes[0] + 44 * d);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(g.xn - 4 * d, g.lanes[0] - 26 * d, 4 * d, g.lanes[3] - g.lanes[0] + 52 * d);
+    ctx.fillRect(g.xb, g.lanes[0] - 26 * d, 3 * d, g.lanes[3] - g.lanes[0] + 52 * d);
+    ctx.font = (13 * d) + "px 'IBM Plex Mono', monospace"; ctx.textBaseline = "middle"; ctx.textAlign = "right";
+    for (var k = 1; k <= 24; k++) {
+      var s = 1 - Math.pow(2, -k / 12); if (s > SMAX) break;
+      var x = g.xn + s * (g.xb - g.xn), dot = [3, 5, 7, 12, 15, 17, 19, 24].indexOf(k) >= 0;
+      ctx.fillStyle = C.rgb("--muted", dot ? 0.9 : 0.45);
+      g.lanes.forEach(function (y) { ctx.fillRect(x - 0.75 * d, y - 9 * d, 1.5 * d, 18 * d); });
+      if (k === 12) { ctx.textAlign = "center"; ctx.fillText("octave", x, g.lanes[3] + 30 * d); ctx.textAlign = "right"; }
+    }
+    ringing = ringing.filter(function (r) { return now - r.t0 < 1400; });
+    OPEN.forEach(function (o, i) {
+      var y = g.lanes[i], w = (2.6 - 0.45 * i) * d;
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText(o.n, g.xn - 10 * d, y);
+      var vib = null;
+      if (active && active.si === i) vib = { s: active.s, a: 7 * d, decay: 1 };
+      ringing.forEach(function (r) { if (r.si === i) vib = { s: r.s, a: 8 * d, decay: Math.exp(-(now - r.t0) / 350) }; });
+      ctx.strokeStyle = C.rgb("--metal"); ctx.lineWidth = w;
+      if (!vib) { ctx.beginPath(); ctx.moveTo(g.xn, y); ctx.lineTo(g.xb, y); ctx.stroke(); return; }
+      var xf = g.xn + vib.s * (g.xb - g.xn);
+      ctx.beginPath(); ctx.moveTo(g.xn, y); ctx.lineTo(xf, y); ctx.stroke();
+      ctx.strokeStyle = C.rgb("--accent", 0.25); ctx.lineWidth = 2 * vib.a * vib.decay;
+      ctx.beginPath(); ctx.moveTo(xf, y);
+      for (var q = 1; q <= 60; q++) { var xi = q / 60; ctx.lineTo(xf + xi * (g.xb - xf), y); }
+      ctx.stroke();
+      ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = w;
+      var ph = Math.sin(now / 9);
+      ctx.beginPath(); ctx.moveTo(xf, y);
+      for (var q = 1; q <= 60; q++) { var xi = q / 60; ctx.lineTo(xf + xi * (g.xb - xf), y - vib.a * vib.decay * ph * Math.sin(Math.PI * xi)); }
+      ctx.stroke();
+      ctx.fillStyle = C.rgb("--ink"); ctx.beginPath(); ctx.arc(xf, y, 6 * d, 0, 2 * Math.PI); ctx.fill();
+    });
+  }
+
+  // ---------- Helmholtz motion ----------
+  var hv = document.getElementById("helm"), hctx = hv.getContext("2d"), hmode = "bow";
+  function shapeAt(xi, t) {
+    var s = 0;
+    for (var n = 1; n <= 40; n++) {
+      if (hmode === "bow") s += Math.sin(n * Math.PI * xi) * Math.sin(n * t) / (n * n);
+      else s += Math.sin(n * Math.PI * 0.25) * Math.sin(n * Math.PI * xi) * Math.cos(n * t) / (n * n);
+    }
+    return s;
+  }
+  var env = null;
+  function computeEnv() {
+    var v = [], mx = 0;
+    for (var i = 0; i <= 80; i++) { var m = 0; for (var k = 0; k < 96; k++) m = Math.max(m, Math.abs(shapeAt(i / 80, 2 * Math.PI * k / 96))); v.push(m); mx = Math.max(mx, m); }
+    env = { mode: hmode, v: v, max: mx || 1 };
+  }
+  function drawHelm(now) {
+    var d = C.fit(hv), W = hv.width, H = hv.height, x0 = 14 * d, x1 = W - 14 * d, mid = H / 2, A = H * 0.38;
+    hctx.clearRect(0, 0, W, H);
+    if (!env || env.mode !== hmode) computeEnv();
+    var nrm = env.max;
+    hctx.strokeStyle = C.rgb("--grid"); hctx.lineWidth = 1.5 * d; hctx.beginPath();
+    for (var i = 0; i <= 80; i++) { var y = mid - A * env.v[i] / nrm, x = x0 + (i / 80) * (x1 - x0); if (i) hctx.lineTo(x, y); else hctx.moveTo(x, y); }
+    for (var i = 80; i >= 0; i--) hctx.lineTo(x0 + (i / 80) * (x1 - x0), mid + A * env.v[i] / nrm);
+    hctx.closePath(); hctx.stroke();
+    hctx.fillStyle = C.rgb("--ink"); hctx.fillRect(x0 - 3 * d, mid - 16 * d, 3 * d, 32 * d); hctx.fillRect(x1, mid - 16 * d, 3 * d, 32 * d);
+    var t = C.reduce ? 1.1 : (now / 1000) * 2 * Math.PI * 0.45;
+    hctx.strokeStyle = C.rgb("--accent"); hctx.lineWidth = 2.5 * d; hctx.beginPath();
+    for (var i = 0; i <= 200; i++) { var xi = i / 200, y = mid - A * shapeAt(xi, t) / nrm; if (i) hctx.lineTo(x0 + xi * (x1 - x0), y); else hctx.moveTo(x0, y); }
+    hctx.stroke();
+  }
+  function vspec() {
+    var p = hmode === "bow" ? C.models.violin.partials() : C.models.violin.partials({ pluck: 0.25 });
+    C.stems(document.getElementById("vSpec"), p, { W: 320, H: 110, rmax: 12, fs: 9, sw: 2.5, noOff: true });
+  }
+  function setH(m) { hmode = m; document.getElementById("hBow").setAttribute("aria-pressed", m === "bow"); document.getElementById("hPluck").setAttribute("aria-pressed", m !== "bow"); vspec(); }
+  document.getElementById("hBow").addEventListener("click", function () { setH("bow"); });
+  document.getElementById("hPluck").addEventListener("click", function () { setH("pluck"); });
+  function setM(m) { mode = m; document.getElementById("mBow").setAttribute("aria-pressed", m === "bow"); document.getElementById("mPizz").setAttribute("aria-pressed", m !== "bow"); }
+  document.getElementById("mBow").addEventListener("click", function () { setM("bow"); });
+  document.getElementById("mPizz").addEventListener("click", function () { setM("pizz"); });
+
+  C.onTheme(function () { vspec(); playSpec(lastF || 196); });
+  vspec(); playSpec(196);
+  function loop(now) { drawFiddle(now); drawHelm(now); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, F1 = 196, NM = 24, G = 45, touch = 0, pluckP = 0.16, t0 = -1e9, amps = [], gam = [];
+  var cv = document.getElementById("tCanvas"), ctx = cv.getContext("2d");
+  function setup() {
+    amps = []; gam = [];
+    for (var n = 1; n <= NM; n++) {
+      amps.push(Math.sin(n * Math.PI * pluckP) / (n * n));
+      var g = 0.6 + 0.02 * n * n, x = touch ? Math.sin(n * Math.PI * touch) : 0;
+      gam.push(g + G * x * x);
+    }
+  }
+  function survivors() { if (!touch) return null; var out = []; for (var n = 1; n <= 12; n++) if (Math.abs(Math.sin(n * Math.PI * touch)) < 1e-6) out.push(n); return out; }
+  var NAMES = { 2: "an octave up", 3: "an octave and a fifth up", 4: "two octaves up", 5: "two octaves and a major third up" };
+  function read() {
+    document.getElementById("tPo").textContent = pluckP.toFixed(2) + " of the length";
+    var sv = survivors(), txt;
+    if (!sv) txt = "open string: every mode sounds, lowest " + F1 + " Hz";
+    else txt = "only modes with a still point under the finger survive: modes " + sv.slice(0, 4).join(", ") + ", … · you hear <b>" + (sv[0] * F1) + " Hz</b>, " + NAMES[sv[0]];
+    document.getElementById("tRead").innerHTML = txt + " · plucked " + (pluckP < 0.12 ? "near the bridge: bright" : pluckP > 0.4 ? "near the middle: mellow, even modes weak" : "between bridge and middle");
+    var parts = amps.map(function (a, i) { return { ratio: i + 1, amp: Math.abs(a) * Math.exp(-gam[i] * 0.25) }; });
+    C.stems(document.getElementById("tSpec"), parts, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3 });
+  }
+  function pluck() {
+    setup(); read(); t0 = performance.now();
+    C.play(C.render(amps.map(function (a, i) { return { f: F1 * (i + 1), amp: a * (i + 1), tau: 1 / gam[i] }; }), 3), 0.8); // heard through the bridge force, n times the displacement amplitude
+  }
+  function draw(now) {
+    var d = C.fit(cv), W = cv.width, H = cv.height, L = 18 * d, R = W - 18 * d, y0 = H * 0.5, A = H * 0.32, t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(L - 4 * d, y0 - 22 * d, 4 * d, 44 * d); ctx.fillRect(R, y0 - 22 * d, 4 * d, 44 * d);
+    var norm = 0; amps.forEach(function (a) { norm += Math.abs(a); }); norm = norm || 1;
+    ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = 2 * d; ctx.beginPath();
+    for (var i = 0; i <= 300; i++) {
+      var x = i / 300, u = 0;
+      if (t >= 0 && t < 6) for (var n = 1; n <= NM; n++) u += amps[n - 1] * Math.exp(-gam[n - 1] * t) * Math.sin(n * Math.PI * x) * Math.cos(2 * Math.PI * n * 0.9 * t);
+      var px = L + (R - L) * x, py = y0 - A * u / norm * 2.2; if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+    }
+    ctx.stroke();
+    var pxp = L + (R - L) * (1 - pluckP);
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace"; ctx.fillText("pluck", pxp - 14 * d, H - 6 * d);
+    ctx.beginPath(); ctx.moveTo(pxp, H - 18 * d); ctx.lineTo(pxp, H - 26 * d); ctx.strokeStyle = C.rgb("--muted"); ctx.lineWidth = d; ctx.stroke();
+    if (touch) {
+      var fx = L + (R - L) * touch;
+      ctx.fillStyle = C.rgb("--pos"); ctx.beginPath(); ctx.ellipse(fx, y0 - 16 * d, 7 * d, 11 * d, 0, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText("finger", fx - 18 * d, 14 * d);
+    }
+    requestAnimationFrame(draw);
+  }
+  document.querySelectorAll("[data-touch]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      touch = parseFloat(b.getAttribute("data-touch"));
+      document.querySelectorAll("[data-touch]").forEach(function (c) { c.setAttribute("aria-pressed", c === b); });
+      pluck();
+    });
+  });
+  var ps = document.getElementById("tP"); ps.addEventListener("input", function () { pluckP = parseFloat(ps.value); setup(); read(); });
+  document.getElementById("tPluck").addEventListener("click", pluck);
+  C.onTheme(read);
+  setup(); read(); requestAnimationFrame(draw);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  function draw() {
+    var p = []; for (var n = 1; n <= 12; n++) p.push({ ratio: n, amp: Math.abs(Math.sin(n * Math.PI * 0.16)) / (n * n) });
+    C.stems(document.getElementById("vS4"), p, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
+})();
+</script>
+```

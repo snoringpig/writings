@@ -1,20 +1,24 @@
 ---
 title: "Where did the harmonica reed's overtones go?"
-subtitle: "6b · The harmonica"
+subtitle: "The Shape of a Sound · 4"
+date: 2026-10-29T12:00:00
+draft: false
+categories: [math, music, the-shape-of-a-sound]
+description: "The harmonica reed: plucked, it rings with the kalimba tine's off-line overtones; blown, it runs one repeating cycle, so every partial lands on a whole-number line."
 format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-29
 resources: [core.js, ins.css]
+aliases: [/posts/instruments-as-operators/harmonica.html]
 ---
 
 ::: {.series-nav .slim}
-[← 6 Kalimba](kalimba.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [7 Piano →](piano.qmd)
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← Kalimba](kalimba.qmd) · [Piano →](piano.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 6, the kalimba](kalimba.qmd), and [page 0, the note](note.qmd). Math: up to Fourier series (page 3). About 3 minutes for the summary; about 20 with the mathematics.
+A page of [post 4, Instruments, case by case](index.qmd). Builds on [post 1, What you hear](../what-you-hear/index.qmd) (the [kalimba page](kalimba.qmd) treats the same bar, plucked); the bar's equation is derived in [post 2](../where-the-equations-come-from/index.qmd#bar). Math: derivatives, and the fact that a repeating signal has only whole-number multiples (post 1). About 18 minutes. New to the series? [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph).
 :::
 
 ::: {.puzzle}
@@ -47,58 +51,35 @@ Listen first: pluck the reed, then blow it, and compare the stems with the gray 
 </div>
 ```
 
-
 ::: {.newidea}
-**In one sentence.** Blown, the reed swings just below its own lowest frequency and chops the air into identical puffs, so the steady sound has only whole-number multiples and the reed's off-line overtones are absent from it.
+**In one sentence.** Blown, the reed swings in one repeating cycle just below its own lowest frequency and chops the air into identical puffs, so the steady sound has partials only at whole-number multiples, and the reed's off-line overtones are absent from it.
 :::
-
-::: {.gist}
-**The recipe on this instrument, in brief.**
-
-1. *Newton's law* on a thin slice of brass gives the same bending equation as the kalimba tine (page 6).
-2. *The operator* is $\kappa^2$ times the fourth derivative, $\kappa^2\,d^4/dx^4$, on a reed riveted at one end and free at the other.
-3. *Its spectrum* is the tine's: frequencies in the ratios $1 : 6.27 : 17.55$ and so on, off the whole numbers.
-4. *On the diagram*: plucked, the overtones sit off the lines; blown, every stem sits on a line.
-5. *What we hear*: plucked, the spectrum; blown, the reed swings just below its lowest frequency and chops the air into puffs that repeat exactly, and a repeating sound has frequencies only at whole-number multiples, so the reed's own overtones are absent from the steady sound.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
-:::
 
-## 1 · Newton's law: the equation of motion
+## The operator, in one line {#operator}
 
-*Mathematics used: partial derivatives, as on page 6, plus Fourier series (page 3).*
-
-A reed is a thin brass bar, riveted at one end over a slot and free at the other: the same kind of bar as a kalimba tine. So Newton's law on one thin slice of it goes exactly as on the [kalimba page](kalimba.qmd), which derives each step with figures. In short, with $u(x, t)$ the reed's sideways displacement at distance $x$ from the rivet, $\rho$ the density of brass and $S$ the area of the reed's cross-section:
-
-**1. Bending stretches the outside and squeezes the inside.** The turning effects of those stretched and squeezed fibers add up to the bending moment $M = EI\,u_{xx}$, where $E$ is brass's [Young's modulus](glossary.qmd#youngs-modulus) and $I$ the [second moment of area](glossary.qmd#second-moment) of the cross-section.
-
-**2. A change in bending along the reed means a sideways force.** The turning effects on a thin slice balance, so the sideways force across each cut is $V = -M_x = -EI\,u_{xxx}$.
-
-**3. Newton's law on the slice.** The difference of the sideways forces on the slice's two faces accelerates its mass $\rho S\,dx$:
-$$
-\rho S\,u_{tt} = V_x = -EI\,u_{xxxx} .
-$$
-
-**What we assumed.** As on the kalimba page: small motions, a uniform bar clamped at exactly one point, no rotational inertia or shear deformation of the slices. Also no damping and no air around the reed: in the model every mode rings forever. Real reeds are not exactly uniform, so their overtones differ somewhat from the ideal values below.
-
-## 2 · The operator
-
-Dividing by the mass per unit length $\rho S$ puts the equation in the series' form $u_{tt} = -A\,u$. The ends complete the operator: at the rivet the reed can neither move nor tilt, $u = u_x = 0$; at the free tip nothing bends or pushes it, $u_{xx} = u_{xxx} = 0$.
+A reed is a thin brass bar, riveted at one end over a slot and free at the other: the same kind of bar as a kalimba tine, so it has the same equation, derived in [post 2](../where-the-equations-come-from/index.qmd#bar). With $u(x, t)$ the reed's sideways displacement at distance $x$ from the rivet, the beam equation $u_{tt} = -\kappa^2u_{xxxx}$, in which the brass's resistance to bending pulls each point back by the fourth derivative of the shape, reads $u_{tt} = -Au$, and the ends complete the [operator](../instruments-as-operators/glossary.qmd#operator): at the rivet the reed can neither move nor tilt, $u = u_x = 0$; at the free tip nothing bends or pushes it, $u_{xx} = u_{xxx} = 0$.
 
 ::: {.result}
 **The reed's operator** is the tine's:
 $$
-\begin{gathered}
-u_{tt} = -A\,u, \qquad A = \kappa^2\,\frac{d^4}{dx^4}, \\
-\kappa^2 = \frac{EI}{\rho S} = \frac{E h^2}{12\rho},
-\end{gathered}
+u_{tt} = -A\,u, \qquad A = \kappa^2\,\frac{d^4}{dx^4}, \qquad \kappa^2 = \frac{EI}{\rho S} = \frac{E h^2}{12\rho},
 $$
-with $u = u_x = 0$ at the rivet and $u_{xx} = u_{xxx} = 0$ at the tip. The last form of $\kappa^2$ is for a rectangular reed of width $w$ and thickness $h$, where $I = wh^3/12$ and $S = wh$. In words: the force per unit mass pulling each point back is the fourth derivative of the shape, times a constant set by the brass and the thickness.
+with $u = u_x = 0$ at the rivet and $u_{xx} = u_{xxx} = 0$ at the tip. Here $E$ is brass's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus), $\rho$ its density, $S$ the area of the reed's cross-section and $I$ its [second moment of area](../instruments-as-operators/glossary.qmd#second-moment); the last form of $\kappa^2$ is for a rectangular reed of width $w$ and thickness $h$, where $I = wh^3/12$ and $S = wh$. In words: the force per unit mass pulling each point back is the fourth derivative of the shape, times a constant set by the brass and the thickness.
 :::
 
-## 3 · Its spectrum
+::: {.derive}
+<details><summary><span class="label">Details</span>What the model leaves out</summary>
 
-A [mode](glossary.qmd#mode) is a shape the operator only rescales, $AX = \lambda X$; it swings at the angular frequency $\sqrt\lambda$, so its frequency is $f = \sqrt\lambda/2\pi$, and the list of eigenvalues is the [spectrum](glossary.qmd#spectrum). The operator and the end conditions are the tine's, so the spectrum is too. The kalimba page writes $\lambda = \kappa^2\beta^4$, solves the four end conditions, and finds a mode exactly when $\cos\beta L\,\cosh\beta L = -1$, with roots $\beta L = 1.8751,\ 4.6941,\ 7.8548, \dots$; the angular frequencies are $\sqrt\lambda = \kappa\beta^2$.
+The model assumes small motions, a uniform bar clamped at exactly one point, no damping and no air around the reed. Real reeds are not exactly uniform, so their overtones differ somewhat from the ideal values below.
+
+</details>
+:::
+
+## Its spectrum {#spectrum}
+
+A [mode](../instruments-as-operators/glossary.qmd#mode) is a shape the operator only rescales, $AX = \lambda X$; its frequency is $f = \sqrt\lambda/2\pi$, and the list of [eigenvalues](../instruments-as-operators/glossary.qmd#eigenvalue) is the [spectrum](../instruments-as-operators/glossary.qmd#spectrum). The operator and the end conditions are the tine's, so the spectrum is too: the [kalimba page](kalimba.qmd#spectrum) writes $\lambda = \kappa^2\beta^4$ and finds a mode exactly when $\cos\beta L\,\cosh\beta L = -1$, with roots $\beta L = 1.8751,\ 4.6941,\ 7.8548, \dots$
 
 ::: {.result}
 **The reed's spectrum.** Eigenvalues $\lambda_n = \kappa^2\beta_n^4$, frequencies $f_n = \kappa\beta_n^2/2\pi$, in the ratios $1 : 6.27 : 17.55 : \cdots$, off the whole-number lines, with the lowest
@@ -108,9 +89,7 @@ $$
 The width $w$ cancels: it decides how much air the reed moves, not its pitch. Low reeds are long, high reeds are short.
 :::
 
-## 4 · On the spectrum diagram
-
-Plucked, the stems (below, and in the demo at the top) are the spectrum just computed: $1\times$, then the overtones at $6.27\times$ and $17.55\times$, off the gray lines, dying almost at once, as on the kalimba. Blown, the stems sit at $1\times, 2\times, 3\times, 4\times, \dots$, every one on a line, and none at $6.27\times$. Each stem's height is how strong that frequency is in the sound. Same reed, same operator; only the way it is played differs. Stage 5 explains the blown stems.
+On the spectrum diagram, the pitch ruler of post 1, the plucked reed's stems (top, and in the demo above) are this spectrum: $1\times$, then $6.27\times$, off the gray lines. The blown reed's stems (bottom) sit at $1\times, 2\times, 3\times, 4\times, \dots$, every one on a line, and none at $6.27\times$. Each stem's height is how strong that frequency is in the sound. Same reed, same operator; only the way it is played differs.
 
 ```{=html}
 <div class="ins">
@@ -122,33 +101,33 @@ Plucked, the stems (below, and in the demo at the top) are the spectrum just com
 </div>
 ```
 
-## 5 · What we hear {#what-we-hear}
+## Plucked: a ringing reed {#ringing}
 
-**Blown, the reed's own overtones are absent from the steady sound.** Blowing turns the reed into a valve that chops the air into puffs, and the puffs repeat exactly; a sound that repeats has frequencies only at whole-number multiples of its rate, so 6.27× and 17.55× have nowhere to appear. The steps below show why; first, what a pluck gives.
+A plucked reed rings like a kalimba tine. It moves as $\sum_n a_n e^{-t/\tau_n} X_n \cos(2\pi f_n t + \phi_n)$, so its sound is a sum of partials at the spectrum's frequencies $f_n$, each fading at its own rate. The overtones at 6.27 and 17.55 times the fundamental are off the lines and die fast, as on the kalimba; the demo's plucked sound is made exactly this way, with illustrative fading times.
 
-**Plucked: you hear the spectrum.** A plucked reed rings at its own frequencies, the result box of stage 3: the reed moves as $\sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, so the sound is a sum of tones at the frequencies $f_n$, each fading at its own rate (damping, added to the model). The overtones at 6.27 and 17.55 times the fundamental are off the lines and die fast, just like a kalimba tine's. The demo's plucked sound is synthesized exactly this way.
+## Blown: a sustained reed {#sustained}
 
-**Blown: the reed becomes a valve.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. The sound comes mainly from the chopped airflow; the acoustics writer Colin Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency $f_p$ slightly below its first mode's frequency, so the puffs of air repeat at that rate too. That the playing frequency sits below the reed's own is observed in studies of blown reeds, not derived here: the physicist James Cottingham, reviewing that work, reports that "the sounding frequency of the blown reed is somewhat below the natural vibrating frequency of the reed tongue", for the kind of reed that sounds in ordinary blowing and drawing on a harmonica. Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here (fold below). Granting that it does, the rest is mathematics:
+**Playing frequency: just below the reed's own.** Blow, and the reed swings through its slot, opening and closing the air path hundreds of times a second. It becomes a valve, and the sound comes mainly from the chopped airflow: the acoustics writer Colin Pykett notes that very little comes from the reed's own motion. A steadily blown reed settles into a motion that repeats itself exactly, at a playing frequency $f_p$ slightly below its first mode's frequency, so the puffs of air repeat at that rate too. That the playing frequency sits below the reed's own is observed in studies of blown reeds, not derived here: the physicist James Cottingham, reviewing that work, reports that "the sounding frequency of the blown reed is somewhat below the natural vibrating frequency of the reed tongue", for the kind of reed that sounds in ordinary blowing and drawing on a harmonica. So the reed's first mode sets the pitch, and changing the reed retunes the note.
+
+**Waveform: whole-number multiples.** Why the reed locks into one repeating motion is observed, and reproduced by computer models of reeds, but not derived here (fold below). Granting that it does, the rest is mathematics:
 
 1. *The airflow repeats.* Let $q(t)$ be the airflow through the slot. In the steady oscillation it repeats every $P = 1/f_p$ seconds: $q(t + P) = q(t)$.
-2. *A repeating function is a Fourier series.* By the [circle page](circle.qmd), a function of period $P$ is a sum of $\cos(2\pi nt/P)$ and $\sin(2\pi nt/P)$ for $n = 0, 1, 2, \dots$, so it contains only the frequencies $n f_p$.
-3. *So the note lands on the lines.* The blown sound has frequencies only at whole-number multiples of the playing frequency, with strong odd and even multiples (Pykett). How strong each one is depends on the shape of a single puff: short, sharp puffs give strong high partials.
+2. *A repeating signal has only whole-number multiples.* Any reasonable function of period $P$ is a sum of $\cos(2\pi nt/P)$ and $\sin(2\pi nt/P)$ for $n = 0, 1, 2, \dots$, its [Fourier series](../instruments-as-operators/glossary.qmd#fourier-series), so it contains only the frequencies $n f_p$ ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat) proves the matching statement for a finite sum of partials).
+3. *So the note lands on the lines.* The blown sound has frequencies only at whole-number multiples of the playing frequency, with both odd and even multiples strongly represented (Pykett). How strong each one is depends on the shape of a single puff: short, sharp puffs give strong high partials.
 
 The argument uses only that the motion repeats, not which modes make it up. That is why the reed's own overtone frequencies, 6.27 and 17.55 times $f_1$, do not appear in a steadily blown note: that is where they went.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Why the reed locks into one repeating motion, and how the demo makes its sound</summary>
 
-A steady oscillation kept going by a steady push, like this one, is called a [self-sustained oscillation](glossary.qmd#self-sustained), and the repeating cycle it settles into a *limit cycle*; the bowed string and the clarinet reed are others. That the blown reed settles into one is observed, and reproduced by nonlinear models of reeds; it is not derived here. A plausible picture, not a derivation: the airflow feeds energy mainly into the first mode, the other modes are not kept going at their own frequencies, and in the repeating cycle they move only as they are pushed, at whole-number multiples of $f_p$.
+A steady oscillation kept going by a steady push, like this one, is called a [self-sustained oscillation](../instruments-as-operators/glossary.qmd#self-sustained), and the repeating cycle it settles into a [limit cycle](../instruments-as-operators/glossary.qmd#limit-cycle); the bowed string and the clarinet reed are others, and [post 3](../when-an-equation-has-a-spectrum/index.qmd#counterexamples) gives the smallest example. That the blown reed settles into one is observed, and reproduced by nonlinear models of reeds; it is not derived here. A plausible picture, not a derivation: the airflow feeds energy mainly into the first mode, the other modes are not kept going at their own frequencies, and in the repeating cycle they move only as they are pushed, at whole-number multiples of $f_p$.
 
 The demos' blown sounds are models. The "Blow the C5 reed" and filing demos play one puff shape, chosen so that the open part of each cycle is short, repeated at the playing frequency: its whole-number multiples weaker overall as they go up. The chromatic harmonica further down passes the same puff train through two broad peaks, a stand-in for resonances of the player's mouth and the instrument, and adds a little band-passed breath noise. The peaks were set by ear, not measured, so the timbre is approximate. The pitch and the whole-number spacing are not approximations.
 
 </details>
 :::
 
-The same mechanism drives the bowed string and the clarinet: a steady push, from the bow or the breath, turned into a sound that repeats. On those instruments the string's or tube's own frequencies already sit nearly on the lines, so the push and the instrument agree, and locking is easy. A free reed's own overtones are far off the lines, which lets you hear that the way it is driven, not the reed's own frequencies, decides where a blown note's overtones sit.
-
-**Tuning a reed with a file.** Reed makers tune by scraping metal off, and where they scrape decides the direction. The first mode bends most near the rivet and moves most near the tip. Thin the reed near the rivet and you remove stiffness where it counts: the pitch drops. Thin it near the tip and you remove mass where it counts: the pitch rises. It is the spring of [page 1](oscillator.qmd) again, where frequency grows with stiffness and falls with mass. Try it below.
+**Tuning a reed with a file.** Since the reed's first mode sets the pitch, reed makers tune by scraping metal off, and where they scrape decides the direction. The first mode bends most near the rivet and moves most near the tip. Thin the reed near the rivet and you remove stiffness where it counts: the pitch drops. Thin it near the tip and you remove mass where it counts: the pitch rises. It is the mass on a spring of [post 2](../where-the-equations-come-from/index.qmd#spring) again, whose frequency grows with stiffness and falls with mass. Try it below.
 
 ```{=html}
 <div class="ins">
@@ -164,14 +143,14 @@ The same mechanism drives the bowed string and the clarinet: a steady push, from
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>Why filing moves the pitch: stiffness against mass <span class="needs">uses integration by parts and a first-order approximation</span></summary>
 
-The [Rayleigh quotient](glossary.qmd#rayleigh-quotient) explains the direction. For the first mode,
+The [Rayleigh quotient](../instruments-as-operators/glossary.qmd#rayleigh-quotient) explains the direction. For the first mode,
 $$
 \omega_1^2 = \min_{u} \frac{\int_0^L EI\,(u'')^2\,dx}{\int_0^L \rho S\,u^2\,dx},
 $$
-the minimum taken over shapes, not identically zero, that satisfy the conditions at the rivet; the minimizing shape is the first mode itself. This is $\omega^2 = k/m$ from page 1 again: stiffness on top, weighted by where the reed bends, and mass at the bottom, weighted by where it moves. The first mode bends most near the rivet and moves most near the tip. Thinning the reed near the rivet removes stiffness where it counts and lowers the pitch; thinning it near the tip removes mass where it counts and raises it. The steps below make this quantitative.
+the minimum taken over shapes, not identically zero, that satisfy the conditions at the rivet; the minimizing shape is the first mode itself. This is $\omega^2 = k/m$ for a mass on a spring again: stiffness on top, weighted by where the reed bends, and mass at the bottom, weighted by where it moves. The steps below make this quantitative.
 
-1. *The quotient.* Multiply $\rho S\,\omega^2X = (EI\,X'')''$ by $X$ and integrate by parts twice; the boundary terms vanish at the rivet and at the free tip, as on the kalimba page. This gives $\omega^2 = \int EI(X'')^2 / \int \rho S X^2$ for every mode.
-2. *Small change.* File the reed so that its thickness changes by $\delta h(x) < 0$. Then $I \propto h^3$ changes by $\delta(EI) = 3EI\,\delta h/h$, and $S \propto h$ changes by $\delta(\rho S) = \rho S\,\delta h/h$, to [first order](glossary.qmd#first-order), that is, ignoring terms in $(\delta h)^2$.
+1. *The quotient.* Multiply $\rho S\,\omega^2X = (EI\,X'')''$ by $X$ and integrate by parts twice; the boundary terms vanish at the rivet and at the free tip. This gives $\omega^2 = \int EI(X'')^2 / \int \rho S X^2$ for every mode.
+2. *Small change.* File the reed so that its thickness changes by $\delta h(x) < 0$. Then $I \propto h^3$ changes by $\delta(EI) = 3EI\,\delta h/h$, and $S \propto h$ changes by $\delta(\rho S) = \rho S\,\delta h/h$, to [first order](../instruments-as-operators/glossary.qmd#first-order), that is, ignoring terms in $(\delta h)^2$.
 3. *First order.* Because the first mode minimizes the quotient, changing the shape slightly changes the quotient only by an amount proportional to the square of the change. So to first order one may keep the old mode shape $X$ and change only the coefficients:
 $$
 \delta(\omega^2) = \frac{\int \frac{\delta h}{h}\,\big(3EI\,(X'')^2 - \omega^2\rho S\,X^2\big)\,dx}{\int \rho S\,X^2\,dx}.
@@ -183,7 +162,15 @@ The demo uses the full quotient with the original mode shape, which is accurate 
 </details>
 :::
 
-**The chromatic slide.** A chromatic harmonica has two sets of reed chambers, the second tuned a [semitone](glossary.qmd#semitone) higher. Each hole has a blow reed, sounded by breathing out, and a [draw](glossary.qmd#draw) reed, sounded by breathing in, in each set. Pushing the slide moves a perforated bar that closes one set and opens the other, so every note rises a semitone. In *solo tuning*, the usual layout for a chromatic harmonica, each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw. Here is a whole one to play.
+::: {.derive}
+<details><summary><span class="label">Details</span>The player's control: breath, speech and bending</summary>
+
+**The player's control.** The player's breath sets how hard the air flows: the reed's frequency hardly varies with the wind pressure, which changes its loudness, and the shape of each puff changes with the pressure too, and so does the tone (Pykett). A free reed is slow to start, because it loses little energy per cycle (Pykett), and the note lasts as long as the breath. Skilled players can bend some notes on a diatonic harmonica downward, by coupling the reeds to the resonances of their own mouth and throat (Cottingham): a case where the player does move the pitch.
+
+</details>
+:::
+
+**The chromatic slide.** A chromatic harmonica has two sets of reed chambers, the second tuned a [semitone](../instruments-as-operators/glossary.qmd#semitone) higher. Each hole has a blow reed, sounded by breathing out, and a [draw](../instruments-as-operators/glossary.qmd#draw) reed, sounded by breathing in, in each set. Pushing the slide moves a perforated bar that closes one set and opens the other, so every note rises a semitone. In *solo tuning*, the usual layout for a chromatic harmonica, each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw. Here is a whole one to play.
 
 ```{=html}
 <div class="ins">
@@ -199,22 +186,44 @@ The demo uses the full quotient with the original mode shape, which is accurate 
 </div>
 ```
 
-## What we found
+## What we hear {#what-we-hear}
 
-A harmonica reed has the kalimba tine's operator, $\kappa^2\,d^4/dx^4$ clamped at one end, and its spectrum, $1 : 6.27 : 17.55$; plucked, that is what you hear. Blown, the reed swings just below its lowest frequency and chops the air into identical puffs, and a sound that repeats has frequencies only at whole-number multiples, so the steady note has nothing at 6.27× or 17.55×: the drive decides where a blown note's overtones sit. The next page returns to the string and adds the bar's stiffness to it.
+**Blown, the reed's own overtones are absent from the steady sound.** Blowing turns the reed into a valve that chops the air into puffs, and the puffs repeat exactly; a sound that repeats has frequencies only at whole-number multiples of its rate, so 6.27× and 17.55× have nowhere to appear. Plucked, the same reed rings with its own spectrum, and you hear the off-line overtones until they die. Same operator, same spectrum: the periodic motion of a steady drive decides where a blown note's partials sit.
 
-::: {.family}
-**The kalimba's operator family.** Accordion, concertina and harmonium reeds are [free reeds](glossary.qmd#free-reed) too: they swing freely through a slot, unlike a clarinet's reed, which beats against the mouthpiece. All of them are cantilevers like the kalimba's tine, with the same operator and the same ends, so the series puts them in the kalimba's [operator family](glossary.qmd#operator-family). They are smaller and thinner, usually of brass in harmonicas and harmoniums and of steel in accordions and concertinas. What separates a harmonica from a kalimba is the excitation, steady airflow instead of one pluck.
+The same mechanism drives the bowed string and the clarinet, whose own frequencies already sit on or near the lines, so there the resonator's modes shape which partials are strong. A free reed's own overtones are far off the lines, which lets you hear that the drive, not the reed's own frequencies, decides where a blown note's partials sit.
+
+### The four aspects {#four-aspects}
+
+::: {.aspects}
+
+| Aspect | Plucked | Blown |
+|:--|:--|:--|
+| [Pitch](../instruments-as-operators/glossary.qmd#pitch) | the fundamental $f_1$ | the playing frequency, just below $f_1$; bent down on some notes by the player's mouth |
+| Loudness | how hard the reed is plucked | the wind pressure |
+| [Timbre](../instruments-as-operators/glossary.qmd#timbre) | off-line overtones at the start, then the fundamental | strong odd and even partials, set by the shape of each puff, which changes with the pressure |
+| Duration | the fundamental's fading | as long as the breath, after a slow start |
+
+: The harmonica reed's [four aspects](../what-you-hear/index.qmd#four-aspects), for the two ways of playing it. {.striped}
+
 :::
 
-## The next puzzle
+```{=html}
+<style>
+/* The four-aspects tables are prose: let them wrap on narrow screens instead of scrolling sideways. */
+@media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
+</style>
+```
 
-Piano tuners deliberately tune octaves a little wider than 2 : 1. Why would exact sound wrong?
+## What we found
 
-[← 6 · Kalimba](kalimba.qmd) · [Next: 7 · Piano →](piano.qmd)
+A harmonica reed has the kalimba tine's operator and spectrum, $1 : 6.27 : 17.55$; plucked, that is what you hear. Blown, it swings just below its lowest frequency and chops the air into identical puffs, and a sound that repeats has frequencies only at whole-number multiples, so the steady note has nothing at 6.27× or 17.55×. Periodicity wins: the drive decides where a blown note's partials sit, and the reed's lowest mode its pitch.
+
+## Next
+
+The next page returns to the string and adds the bar's stiffness to it: [why do piano tuners stretch octaves?](piano.qmd)
 
 ::: {.refs}
-**References.** C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023. J. Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), *Physics Today* 64(3), 2011, 44–48, for the playing frequency below the reed's natural frequency (p. 45). Wikipedia, [Free reed aerophone](https://en.wikipedia.org/wiki/Free_reed_aerophone) and [Rayleigh quotient](https://en.wikipedia.org/wiki/Rayleigh_quotient).
+**References.** C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023 (sound from the puffs, not the reed's motion; odd and even harmonics; frequency nearly independent of wind pressure, which changes loudness and pulse shape; slow speech). J. Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), *Physics Today* 64(3), 2011, 44–48, for the playing frequency below the reed's natural frequency (p. 45) and pitch bending through the player's vocal tract. Wikipedia, [Free reed aerophone](https://en.wikipedia.org/wiki/Free_reed_aerophone) and [Rayleigh quotient](https://en.wikipedia.org/wiki/Rayleigh_quotient).
 :::
 
 ```{=html}
