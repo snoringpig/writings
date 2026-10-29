@@ -1,0 +1,86 @@
+/* A Piano: styles for the 88-key upright and its graphs. Colour tokens are read by core.js from :root. */
+:root {
+  --paper: #ffffff; --panel: #f2f3f0; --ink: #1c2230; --muted: #586070; --rule: #d2d6ce;
+  --accent: #2e4bb0; --pos: #c9572f; --neg: #2b67b3; --grid: #c2c7bd; --wood: #b58a5a; --metal: #8e96a3;
+  --stage-top: #f4f5f7; --stage-bot: #e3e6eb; --label-bg: rgba(255, 255, 255, 0.9); --label-ink: #1c2230;
+  --f-display: "Spectral", Georgia, "Times New Roman", serif;
+  --f-ui: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+/* Dark colours only on the standalone page (the blog theme is light). */
+@media (prefers-color-scheme: dark) {
+  :root.ap-dark-ok:not([data-theme="light"]) {
+    --paper: #12151b; --panel: #1b1f28; --ink: #e5e7eb; --muted: #9aa2b0; --rule: #2b303b; --accent: #93a8ff; --pos: #ff8d63; --neg: #6aa6ff; --grid: #343a46;
+    --stage-top: #262b35; --stage-bot: #171a21; --label-bg: rgba(20, 23, 30, 0.88); --label-ink: #e5e7eb; color-scheme: dark;
+  }
+}
+:root.ap-dark-ok[data-theme="dark"] {
+  --paper: #12151b; --panel: #1b1f28; --ink: #e5e7eb; --muted: #9aa2b0; --rule: #2b303b; --accent: #93a8ff; --pos: #ff8d63; --neg: #6aa6ff; --grid: #343a46;
+  --stage-top: #262b35; --stage-bot: #171a21; --label-bg: rgba(20, 23, 30, 0.88); --label-ink: #e5e7eb; color-scheme: dark;
+}
+
+.apiano { font-family: var(--f-ui); color: var(--ink); background: var(--panel); border-radius: 12px; padding: 0.6rem; display: grid; gap: 0.6rem; min-width: 0; margin: 1rem 0 1.5rem; line-height: 1.45; }
+.apiano * { box-sizing: border-box; }
+.apiano button { font-family: var(--f-ui); font-size: 0.92rem; line-height: 1.2; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 0.35rem 0.7rem; min-height: 2.25rem; cursor: pointer; margin: 0; }
+.apiano button:hover { border-color: var(--muted); }
+.apiano button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.apiano button:focus-visible, .apiano canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* the 3D stage */
+.ap-stage { position: relative; border-radius: 8px; overflow: hidden; background: linear-gradient(var(--stage-top), var(--stage-bot)); }
+.ap-stage canvas { display: block; width: 100%; height: clamp(300px, 58vh, 580px); cursor: grab; touch-action: pan-y; }
+.ap-stage canvas.on-key { cursor: pointer; }
+@media (max-width: 640px) { .ap-stage canvas { height: clamp(280px, 96vw, 470px); } }
+.ap-tools { position: absolute; top: 8px; right: 8px; left: 8px; display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; pointer-events: none; }
+.ap-tools button { pointer-events: auto; min-height: 2rem; padding: 0.15rem 0.6rem; font-size: 0.84rem; background: var(--label-bg); }
+.ap-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.ap-labels span { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 12px; line-height: 1; padding: 3px 5px; border-radius: 4px; background: var(--label-bg); color: var(--label-ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18); will-change: transform; }
+.ap-labels span::before { content: ""; position: absolute; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: var(--accent); }
+.ap-labels span.r::before { left: -9px; }
+.ap-labels span.l::before { right: -9px; }
+.ap-labels span.b::before { left: 50%; top: -7px; margin: 0 0 0 -2.5px; }
+.ap-hint { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); max-width: calc(100% - 20px); background: rgba(28, 34, 48, 0.86); color: #fff; font-size: 0.84rem; padding: 0.3rem 0.65rem; border-radius: 6px; pointer-events: none; transition: opacity 0.25s; text-align: center; }
+.ap-hint[hidden] { display: block !important; opacity: 0; }
+.ap-fallback { padding: 1.5rem 1rem; text-align: center; color: var(--muted); font-size: 0.95rem; }
+
+/* the flat keyboard */
+.ap-kbbar { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; }
+.ap-kbbar .readout { font-family: var(--f-mono); font-size: 0.84rem; color: var(--muted); font-variant-numeric: tabular-nums; text-align: center; flex: 1 1 12rem; min-height: 1.3em; }
+.ap-kbbar .readout b { color: var(--ink); font-weight: 500; }
+.ap-kbdwrap { overflow-x: auto; overflow-y: hidden; border-radius: 6px; scrollbar-width: thin; background: var(--rule); }
+.ap-kbd { position: relative; height: 112px; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.apiano .ap-kbd button { position: absolute; top: 0; padding: 0; min-height: 0; border-radius: 0 0 4px 4px; font-family: var(--f-mono); font-size: 9px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+.apiano .ap-kbd .w { height: 100%; background: #fbfbf8; border: 1px solid #c9cdc4; color: #6a707c; padding-bottom: 4px; }
+.apiano .ap-kbd .b { height: 62%; background: #1d2230; border: 1px solid #1d2230; color: #c8ccd6; z-index: 2; padding-bottom: 3px; }
+.apiano .ap-kbd .w.win { background: #eef1fb; }
+.apiano .ap-kbd .b.win { background: #2c3a6a; }
+.apiano .ap-kbd .on { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+.apiano .ap-kbd .nd { box-shadow: inset 0 3px 0 #d9a441; }
+
+/* the pedals */
+.ap-pedals { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.apiano .ap-pedals button { min-width: 7.2rem; border-radius: 6px 6px 16px 16px; }
+.apiano .ap-pedals button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.ap-pedals small { display: block; font-size: 0.74rem; opacity: 0.8; }
+@media (max-width: 480px) { .apiano .ap-pedals button { min-width: 0; flex: 1 1 0; max-width: 9rem; padding: 0.35rem 0.3rem; font-size: 0.86rem; } .ap-wide { display: none; } .ap-kbbar .readout { flex-basis: 8rem; font-size: 0.78rem; } }
+
+/* what each part does, and the live note */
+.ap-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem 0.5rem; font-size: 0.86rem; }
+@media (max-width: 480px) { .ap-chips { font-size: 0.78rem; } }
+.ap-chips span { border: 1px solid var(--rule); border-radius: 4px; padding: 0.05rem 0.4rem; background: var(--paper); transition: background 0.15s, opacity 0.2s; }
+.ap-chips span.on { background: rgba(201, 87, 47, 0.2); }
+.ap-chips span.mod { box-shadow: inset 0 0 0 1.5px rgba(46, 75, 176, 0.6); }
+.ap-chips span.off { opacity: 0.35; text-decoration: line-through; }
+.ap-note { text-align: center; font-family: var(--f-display); font-size: 0.98rem; min-height: 2.9em; max-width: 46rem; margin: 0 auto; padding: 0 0.25rem; }
+
+/* the graph of u and the mode bars */
+.ap-graphs { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 0.6rem; }
+@media (max-width: 700px) { .ap-graphs { grid-template-columns: minmax(0, 1fr); } }
+.ap-graph { background: var(--paper); border-radius: 8px; padding: 0.35rem 0.4rem 0.45rem; min-width: 0; }
+.ap-graph canvas { display: block; width: 100%; height: 196px; touch-action: pan-y; }
+.ap-graph .cap { font-size: 0.82rem; color: var(--muted); margin: 0.2rem 0.15rem 0; line-height: 1.4; }
+.ap-tip { font-size: 0.84rem; color: var(--muted); text-align: center; margin: -0.2rem 0 0; }
+.ap-tip b { color: var(--ink); font-weight: 500; }
+.ap-touchonly { display: none; }
+@media (hover: none) and (pointer: coarse) { .ap-touchonly { display: inline; } }
+@media (hover: none) and (pointer: coarse) { .ap-kbonly { display: none; } }
