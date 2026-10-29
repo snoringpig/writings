@@ -1,9 +1,9 @@
 ---
-title: "The Shape of a Sound: a series"
+title: "The Shape of a Sound"
 subtitle: "The mathematics of musical sound, in four posts and two more beyond"
 date: 2026-10-25
 date-modified: 2026-10-29
-categories: [math, music, the-shape-of-a-sound]
+categories: [math, music]
 description: "Why a piano note has a pitch and a drum's thud doesn't, where the equations of instruments come from, and when an equation of motion is a list of notes: a series in four posts, with two more beyond."
 format:
   html:
