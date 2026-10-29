@@ -1,0 +1,379 @@
+---
+title: "Instruments, case by case"
+subtitle: "The Shape of a Sound · 4"
+date: 2026-10-29T12:00:00
+categories: [math, music, the-shape-of-a-sound]
+description: "Six instruments, one page each: which of the spectrum, the playing and the fading decides how each one sounds, and how a bow or a breath changes the story."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css, orchestra.js, fonts/*.woff2]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 3 · When an equation has a spectrum](../when-an-equation-has-a-spectrum/index.qmd) · [Violin →](violin.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [post 1, What you hear](../what-you-hear/index.qmd). Posts [2](../where-the-equations-come-from/index.qmd) and [3](../when-an-equation-has-a-spectrum/index.qmd) derive the equations and spectra these pages use, but every page here can be read after post 1 alone. Mathematics on this page: none in the main text; the recipe cards' formulas, in folds, are derived on the instrument pages. About 10 minutes for this page, with the orchestra; 16 to 18 for each instrument page, more with the folds.
+:::
+
+**The question.** For a particular instrument, what decides how it sounds: where its partials can sit, how it is played, or how its sound fades?
+
+[The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph)
+
+::: {.newidea}
+**In one sentence.** An instrument's sound is set by its spectrum (where partials can sit), by the playing (which modes start, and how strongly) and by the fading; for bowed and blown instruments, by a periodic motion shaped by the resonator's spectrum. Each page shows which of these decides that instrument.
+:::
+
+## Three things that decide a sound {#three-things}
+
+Each page asks which of three things decides how an instrument sounds: its [spectrum](../instruments-as-operators/glossary.qmd#spectrum), the frequencies its [operator](../instruments-as-operators/glossary.qmd#operator) allows, which says where partials can sit; the playing, which says which [modes](../instruments-as-operators/glossary.qmd#mode) start and how strongly; and the fading, which includes the player's damping; a bowed or blown instrument instead runs one repeating cycle, whose partials sit on whole-number multiples and are shaped by its resonator's modes ([the series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph)).
+
+
+## The orchestra {#orchestra}
+
+Musicologists sort instruments into five classes by what makes the sound, the [Hornbostel–Sachs](../instruments-as-operators/glossary.qmd#hornbostel-sachs) classes: strings, air, solid bodies, stretched skins and electric circuits. Here is one of each, playing Grieg.
+
+```{=html}
+<div class="ins">
+<div class="panel" id="orch">
+<style>
+@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Sans"; src: url("fonts/lmsans10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Sans"; src: url("fonts/lmsans10-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "LM Math"; src: url("fonts/lmmath.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+#orch canvas { aspect-ratio: 16 / 9; height: auto; background: #0d1016; border-radius: 6px; }
+#orch canvas:fullscreen { width: 100vw; height: 100vh; object-fit: contain; border-radius: 0; }
+#orch .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; font-family: var(--f-ui); font-size: 0.9rem; color: var(--muted); }
+#orch .chip { padding: 0.25rem 0.6rem; min-height: 2rem; display: inline-flex; gap: 0.4rem; align-items: center; }
+#orch .chip .dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25); }
+#orch .chip[aria-pressed="false"] { color: var(--muted); }
+#orch .chip[aria-pressed="false"] .dot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--c); }
+#orch #oTime { font-family: var(--f-mono); font-size: 0.86rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+</style>
+  <canvas id="oStage" role="img" aria-label="A piano roll of the score above six lanes, one per instrument. Each lane names the instrument's class and what vibrates, sketches it moving, and shows the frequencies in its current note on a pitch ruler."></canvas>
+  <div class="controls">
+    <button type="button" class="primary" id="oPlay">▶ Play (1 min)</button>
+    <button type="button" id="oFull">▶ With the mathematics (2½ min)</button>
+    <button type="button" id="oStop">Stop</button>
+    <button type="button" id="oFs">Full screen</button>
+    <span id="oTime" aria-live="polite">Ready</span>
+  </div>
+  <div class="chips" id="oFams"><span>Tap an instrument to mute it:</span></div>
+  <p class="cap">Grieg's <cite>In the Hall of the Mountain King</cite> (1875) on a sine theremin (electrophone), a piano (chordophone), a clarinet (aerophone), a glockenspiel (idiophone), and two membranophones, a bass drum and a kettledrum (timpani). There are no recordings: every note is built from pure tones. The struck notes fade, at frequencies computed from each instrument's operator (the bass drum's from the ideal drumhead of the drum page), except the kettledrum's, which are measured, because the drum page's simple model gets only halfway to them; the fading times are illustrative. The clarinet holds a steady tone with the tube's odd multiples strong and the even ones faint, and the theremin a single steady pure tone. Each lane shows its current note's frequencies on the pitch ruler of post 1, whose gray lines are whole-number multiples of one frequency. The arrangement is ours, after the transcription at <a href="https://flutetunes.com/tunes.php?id=91">flutetunes.com</a>. On a small screen, use Full screen with the phone turned sideways.</p>
+</div>
+</div>
+```
+
+Listen for the three deciders. The theremin's circuit has a single mode, so it sounds one pure tone. The piano's partials sit a little sharp of the lines, set by its spectrum. The clarinet holds one repeating cycle, its strong partials picked by the tube's modes. The glockenspiel's overtones sit off the lines but, as played here, fade fast, so the fading leaves a clean note. And the two drums share one skin: on the bass drum its modes fall off the lines and it booms; on the kettledrum the air around the head, the strike point and the fading leave one set of modes near the lines, and it plays a note ([the drum page](drum.qmd#one-drumhead-two-drums)).
+
+## The instruments, one page each {#pages}
+
+Each page opens with its puzzle and a demo, then answers in one sentence:
+
+```{=html}
+<div class="ins">
+<ol class="journey">
+  <li><a href="violin.html"><span class="n">4a</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">A light touch at the middle of a string moves none of its frequencies: it damps every mode that moves under the finger, and the modes left ringing, the even ones, which stand still there, are the partials of a note an octave up.</span><span class="controls"><button data-g="string">▶ String</button></span></li>
+  <li><a href="clarinet.html"><span class="n">4b</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">A tube closed at one end has its modes only at odd multiples of its lowest frequency, which is half that of an open tube of the same length, so a clarinet sounds almost an octave below a flute of the same length and overblows an octave and a fifth higher; blown, its tone is one repeating cycle with strong odd partials and weak even ones.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
+  <li><a href="kalimba.html"><span class="n">4c</span><span class="t">Why does a kalimba sound clean?</span></a><span class="hint">A tine's overtones sit off the whole-number multiples of its fundamental (6.27×, 17.55×), yet a kalimba sounds clean because those overtones die within a fraction of a second (observed, not derived) and the fundamental rings on alone.</span><span class="controls"><button data-g="kal">▶ Kalimba tine</button></span></li>
+  <li><a href="harmonica.html"><span class="n">4d</span><span class="t">Where did the harmonica reed's overtones go?</span></a><span class="hint">Blown, the reed swings in one repeating cycle just below its own lowest frequency and chops the air into identical puffs, so the steady sound has partials only at whole-number multiples, and the reed's off-line overtones are absent from it.</span><span class="controls"><button data-g="kal">▶ Plucked</button><button data-g="harm">▶ Blown</button></span></li>
+  <li><a href="piano.html"><span class="n">4e</span><span class="t">Why do piano tuners stretch octaves?</span></a><span class="hint">A piano wire's stiffness puts each overtone slightly above its whole-number multiple, so tuners stretch octaves to reduce the beating, a slow wobble in loudness, most at the ends of the keyboard.</span><span class="controls"><button data-g="oct">▶ Exactly 2 : 1</button><button data-g="str">▶ Stretched</button></span></li>
+  <li><a href="drum.html"><span class="n">4f</span><span class="t">Why does a drum thud?</span></a><span class="hint">An ideal drumhead's frequencies (1, 1.59, 2.14, … times the lowest) fit no pitch, so a plain drum thuds; a kettledrum plays a note because the air the head pushes moves one set of modes near 2 : 3 : 4 : 5, the strike point favours them, and the other modes fade fast.</span><span class="controls"><button data-g="drum">▶ Drum</button></span></li>
+</ol>
+</div>
+```
+
+The sounds in this list are simplified: the octave pair exaggerates the string's stiffness, and the clarinet-like and flute-like tones are plain sums of whole-number multiples. Each page has the full demo.
+
+## The recipe on every instrument {#recipe-cards}
+
+Each card runs one instrument through the chain the series follows: *Newton's law* on a small piece gives the equation of motion ([post 2](../where-the-equations-come-from/index.qmd)); *the operator* is its rule, together with how the object is held; *its spectrum* is the list of frequencies that rule allows ([post 3](../when-an-equation-has-a-spectrum/index.qmd)); *on the diagram* draws them as stems on the pitch ruler, one stem per mode, called the spectrum diagram; and *what you hear* says which of the three deciders matters. The stems show the spectrum as multiples of the lowest frequency; the button plays a sound made from it.
+
+```{=html}
+<style>
+.recipe { background: var(--panel); border-radius: 10px; padding: 0.75rem 1rem 0.65rem; margin: 0.9rem 0; }
+.recipe > p { margin: 0 0 0.4rem; }
+.recipe ol { margin: 0.45rem 0 0.4rem; padding-left: 1.3rem; }
+.recipe > p:last-child { margin: 0; font-size: 0.92rem; }
+.recipe li { margin: 0.12rem 0; }
+.recipe .rdemo { display: flex; align-items: center; gap: 0.6rem 0.9rem; flex-wrap: wrap; margin: 0.35rem 0 0.1rem; }
+.recipe .rdemo svg.mini { width: 230px; max-width: 100%; flex: 0 1 230px; }
+.recipe .rdemo .tag { font-family: var(--f-ui); font-size: 0.8rem; color: var(--muted); }
+</style>
+```
+
+::: {.recipe}
+**A violin string**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-rmini="string" viewBox="0 0 200 58" aria-label="Plucked a fifth of the way along: stems on every line except 5"></svg><button data-rplay="string">▶ Play</button><span class="tag">plucked a fifth of the way along</span></div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Newton's law, the operator and its spectrum</summary>
+
+1. *Newton's law* on a short piece of string under tension $T$, where for small slopes the upward part of each end's pull is tension times slope: $u_{tt} = c^2\,u_{xx}$, with $c^2 = T/\mu$.
+2. *The operator*: $A = -c^2\,d^2/dx^2$, with both ends tied, $u(0) = u(L) = 0$.
+3. *Its spectrum*: $X = \sin kx$ with $\sin kL = 0$, so $k = n\pi/L$, $\lambda_n = (n\pi c/L)^2$ and $f_n = \frac{n}{2L}\sqrt{T/\mu}$.
+
+</details>
+:::
+4. *On the diagram*: every stem on a line; plucked a fifth of the way along, the 5th is missing.
+5. *What you hear*: a clear note at $f_1$. The pluck point sets the brightness; a light touch at the middle damps the modes that move there and leaves the even ones, a note an octave up: the fading decides.
+
+[The violin page →](violin.qmd) · [the operator in post 2](../where-the-equations-come-from/index.qmd#string)
+:::
+
+::: {.recipe}
+**A flute and a clarinet**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-rmini="flute" viewBox="0 0 200 58" aria-label="Flute tube: stems at 1, 2, 3, ... times"></svg><button data-rplay="flute">▶ Flute</button><svg class="mini" data-rmini="clarinet" viewBox="0 0 200 58" aria-label="Clarinet tube: stems at 1, 3, 5, ... times"></svg><button data-rplay="clarinet">▶ Clarinet</button><span class="tag">the tubes’ modes; blown, the clarinet’s sound also has faint even multiples</span></div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Newton's law, the operator and its spectrum</summary>
+
+1. *Newton's law* on a thin slab of air, pushed by a pressure difference, $\rho\,\xi_{tt} = -p_x$, with squeezed air pushing back, $p = -K\xi_x$, gives $p_{tt} = c^2\,p_{xx}$, with $c^2 = K/\rho$, for the pressure $p$.
+2. *The operator*: $A = -c^2\,d^2/dx^2$, on pressure shapes. Flute, open at both ends: $p(0) = p(L) = 0$. Clarinet, closed at the reed: $p_x(0) = 0$, $p(L) = 0$.
+3. *Its spectrum*: flute, $\sin kL = 0$, so $f_n = nc/2L$; clarinet, $\cos kL = 0$, so $f_n = (2n-1)c/4L$.
+
+</details>
+:::
+4. *On the diagram*: the flute's stems on every line; the clarinet's only at odd multiples of its lowest frequency, $1 : 3 : 5 : \cdots$.
+5. *What you hear*: blown, one repeating cycle, so partials on every line; the clarinet's note is almost an octave lower for the same length, with strong odd partials picked by the tube's modes.
+
+[The clarinet page →](clarinet.qmd) · [the operator in post 2](../where-the-equations-come-from/index.qmd#tube)
+:::
+
+::: {.recipe}
+**A kalimba tine**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-rmini="kalimba" viewBox="0 0 200 58" aria-label="Stems at 1, 6.27 and 17.55 times, off the lines"></svg><button data-rplay="kalimba">▶ Play</button><span class="tag">the overtones fade almost at once</span></div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Newton's law, the operator and its spectrum</summary>
+
+1. *Newton's law* on a thin slice of steel, where bending stretches one side and squeezes the other, giving a bending moment $M = EI\,u_{xx}$ and a shear force $V = -M_x$: $\rho S\,u_{tt} = -EI\,u_{xxxx}$.
+2. *The operator*: $A = \kappa^2\,d^4/dx^4$, with $\kappa^2 = EI/\rho S$; clamped at the bridge ($u = u_x = 0$), free at the tip ($u_{xx} = u_{xxx} = 0$).
+3. *Its spectrum*: $\cos\beta L\,\cosh\beta L = -1$, with $\lambda = \kappa^2\beta^4$, so $f_n = \kappa\beta_n^2/2\pi$ with $\beta_nL = 1.875, 4.694, 7.855, \dots$.
+
+</details>
+:::
+4. *On the diagram*: stems at 1, 6.27 and 17.55 times the lowest, off the lines.
+5. *What you hear*: a brief click, then a clean note: the overtones die within a fraction of a second (observed, not derived), so the fading decides.
+
+[The kalimba page →](kalimba.qmd) · [the operator in post 2](../where-the-equations-come-from/index.qmd#bar)
+:::
+
+::: {.recipe}
+**A harmonica reed**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-rmini="reed" viewBox="0 0 200 58" aria-label="Plucked reed: stems at 1, 6.27 and 17.55 times"></svg><button data-rplay="reed">▶ Plucked</button><button data-rplay="blown">▶ Blown</button><span class="tag">same reed, two ways of playing</span></div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Newton's law, the operator and its spectrum</summary>
+
+1. *Newton's law*: the kalimba tine's, for a small brass bar riveted at one end.
+2. *The operator*: the tine's, with $\kappa^2 = Eh^2/12\rho$ for thickness $h$.
+3. *Its spectrum*: the same ratios, $1 : 6.27 : 17.55$, with $f_1 = \frac{(1.8751)^2}{2\pi}\,\frac{h}{L^2}\sqrt{\frac{E}{12\rho}}$.
+
+</details>
+:::
+4. *On the diagram*: plucked, off the lines like the tine; blown, every stem on a line.
+5. *What you hear*: plucked, this spectrum; blown, the reed chops the airflow into puffs that repeat exactly, and the sound sits at whole-number multiples of the puff rate: the periodic motion decides.
+
+[The harmonica page →](harmonica.qmd) · [the operator in post 2](../where-the-equations-come-from/index.qmd#bar)
+:::
+
+::: {.recipe}
+**A piano wire**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-rmini="piano" viewBox="0 0 200 58" aria-label="Stems slightly sharp of 1, 2, 3, ... times"></svg><button data-rplay="piano">▶ Play</button><span class="tag">stiffness exaggerated (B = 0.0012)</span></div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Newton's law, the operator and its spectrum</summary>
+
+1. *Newton's law* on a short piece of stiff wire, where tension pulls it straight and the steel resists bending, the two forces adding: $u_{tt} = c^2\,u_{xx} - \kappa^2\,u_{xxxx}$, with $c^2 = T/\mu$, $\kappa^2 = EI/\mu$.
+2. *The operator*: $A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$, with the ends pinned, $u = u_{xx} = 0$.
+3. *Its spectrum*: $X = \sin kx$ with $\sin kL = 0$ and $\lambda = c^2k^2 + \kappa^2k^4$, so $f_n = n f_0\sqrt{1 + Bn^2}$, with $f_0 = c/2L$ and $B = \pi^2 EI/TL^2$.
+
+</details>
+:::
+4. *On the diagram*: each stem a little sharp of its line, more so the higher it is.
+5. *What you hear*: still a clear note, but an octave tuned to exactly 2 : 1 [beats](../instruments-as-operators/glossary.qmd#beats), so tuners stretch octaves to reduce the beating: the spectrum decides.
+
+[The piano page →](piano.qmd) · [the operator in post 2](../where-the-equations-come-from/index.qmd#stiff-string)
+:::
+
+::: {.recipe}
+**A drum**
+
+```{=html}
+<div class="ins rdemo"><svg class="mini" data-rmini="drum" viewBox="0 0 200 58" aria-label="Many stems scattered between the lines"></svg><button data-rplay="drum">▶ Play</button><span class="tag">struck about a third of the way out</span></div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Newton's law, the operator and its spectrum</summary>
+
+1. *Newton's law* on a small patch of drumhead, where tension $T$ pulls all around the patch's edge and the [divergence theorem](../instruments-as-operators/glossary.qmd#divergence-theorem) turns the total pull into $T\,\Delta u$ per unit area: $\sigma\,u_{tt} = T\,\Delta u$, with $\Delta u = u_{xx} + u_{yy}$, the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian).
+2. *The operator*: $A = -c^2\,\Delta$, with $c^2 = T/\sigma$, and the rim held fixed, $u = 0$.
+3. *Its spectrum*: for a round drum of radius $a$, $J_m(ka) = 0$ ([Bessel functions](../instruments-as-operators/glossary.qmd#bessel)), with $\lambda = c^2k^2$, so $f_{m,n} = c\,j_{m,n}/2\pi a$.
+
+</details>
+:::
+4. *On the diagram*: stems at 1, 1.59, 2.14, 2.30, 2.65, 2.92, … times the lowest, scattered between the lines.
+5. *What you hear*: a sound that doesn't repeat at any rate we hear as pitch, and that fades fast: a thud. A kettledrum gets its note from all three deciders at once.
+
+[The drum page →](drum.qmd) · [the operator in post 2](../where-the-equations-come-from/index.qmd#drumhead)
+:::
+
+The orchestra's other two voices have no page here: the theremin's circuit is the single-number operator $1/LC$ of [post 2](../where-the-equations-come-from/index.qmd#circuit), and the glockenspiel's bar, free at both ends, is worked out in [Did instruments shape our scales?](../instruments-and-scales/index.qmd).
+
+## What we found
+
+Played side by side, the instruments split by which of the three deciders answers their puzzle. The spectrum decides the piano's stretched octaves and the drum's thud; the fading decides the kalimba's clean note and the violin's touched harmonics; on the kettledrum all three work together; and on the bowed string, the clarinet and the blown harmonica a periodic motion, shaped by the resonator's modes, puts every partial on a line.
+
+## Next
+
+Start with the string: [why does a light touch make it jump an octave?](violin.qmd)
+
+::: {.refs}
+**References.** The classes: E. M. von Hornbostel and C. Sachs, "Systematik der Musikinstrumente: Ein Versuch", *Zeitschrift für Ethnologie* 46 (1914), 553–590 ([archive.org](https://archive.org/details/zeitschriftfre46berluoft)), with electrophones added by C. Sachs, *The History of Musical Instruments*, Norton, 1940, pp. 447–467; more on the classes, and where they and the mathematics part ways, on the [series index](../instruments-as-operators/index.qmd#operator-families-and-instrument-classes). Grieg: Wikipedia, [In the Hall of the Mountain King](https://en.wikipedia.org/wiki/In_the_Hall_of_the_Mountain_King). Every instrument's sources are on its page.
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
+  // ---- the list of pages: one short sound per puzzle ----
+  function harmonics(f, n, odd) { var out = []; for (var k = 1; k <= n; k++) { if (odd && k % 2 === 0) continue; out.push({ f: f * k, amp: 1 / k, tau: 10 }); } return out; }
+  // Octave puzzle: simplified stiff-string notes, only the lowest partials, so the tuner's 2 : 1 beat (C4's 2nd partial against C5) stands out.
+  var BS = 0.0024, LOW = 261.63, P2 = Math.sqrt((1 + 4 * BS) / (1 + BS));
+  function stiffNote(f1, amps) { return amps.map(function (a, i) { var n = i + 1; return { f: f1 * n * Math.sqrt((1 + BS * n * n) / (1 + BS)), amp: a, tau: 3 }; }); }
+  var G = {
+    string: function () { return C.render(C.toHz(M.violin.partials({ pluck: 0.2 }), 196), 2.6); },
+    drum: function () { return C.render(C.toHz(M.drum.partials({ r: 0.35 }), 140), 2.4); },
+    flute: function () { return fadeOut(C.render(harmonics(343 / 1.2, 8), 1.6), 0.3); },
+    clar: function () { return fadeOut(C.render(harmonics(343 / 2.4, 15, true), 1.6), 0.3); },
+    kal: function () { return C.render(C.toHz(M.kalimba.partials(), 523.25), 2.4); },
+    harm: function () { return fadeOut(C.render(C.toHz(M.harmonica.partials(), 523.25), 1.6), 0.3); },
+    oct: function () { return C.render(stiffNote(LOW, [1, 0.7, 0.3]).concat(stiffNote(2 * LOW, [0.7, 0.25])), 4); },
+    str: function () { return C.render(stiffNote(LOW, [1, 0.7, 0.3]).concat(stiffNote(2 * LOW * P2, [0.7, 0.25])), 4); }
+  };
+  document.querySelectorAll("[data-g]").forEach(function (b) {
+    b.addEventListener("click", function () { C.play(G[b.getAttribute("data-g")](), 0.75); });
+  });
+  // ---- the recipe cards: what each card's stems show (the spectrum) and what its button plays (the sound made from it) ----
+  function range(n0, n1, step, amp) { var out = []; for (var n = n0; n <= n1; n += step) out.push({ ratio: n, amp: amp(n), tau: 2 }); return out; }
+  var CARD = {
+    string:   { stems: function () { return M.violin.partials({ pluck: 0.2 }); }, sound: function () { return M.violin.partials({ pluck: 0.2 }); }, f: 196, dur: 2.6, rmax: 8 },
+    flute:    { stems: function () { return range(1, 8, 1, function (n) { return 1 / n; }); }, sound: function () { return M.clarinet.partials({ flute: true }); }, f: 293.66, dur: 1.8, sustained: true, rmax: 8 },
+    clarinet: { stems: function () { return range(1, 8, 2, function (n) { return 1 / n; }); }, sound: function () { return M.clarinet.partials(); }, f: 146.83, dur: 1.8, sustained: true, rmax: 8 },
+    kalimba:  { stems: function () { return M.kalimba.partials(); }, sound: function () { return M.kalimba.partials(); }, f: 440, dur: 2.6, rmax: 18, every: 3 },
+    reed:     { stems: function () { return M.harmonica.partials({ plucked: true }); }, sound: function () { return M.harmonica.partials({ plucked: true }); }, f: 523.25, dur: 2.0, rmax: 18, every: 3 },
+    blown:    { sound: function () { return M.harmonica.partials(); }, f: 523.25, dur: 1.8, sustained: true },
+    piano:    { stems: function () { return M.piano.partials({ B: 0.0012 }); }, sound: function () { return M.piano.partials({ B: 0.0012 }); }, f: 261.63, dur: 3.2, rmax: 8 },
+    drum:     { stems: function () { return M.drum.partials({ r: 0.35 }); }, sound: function () { return M.drum.partials({ r: 0.35 }); }, f: 140, dur: 2.4, rmax: 8 }
+  };
+  function draw() {
+    document.querySelectorAll("svg[data-rmini]").forEach(function (svg) {
+      var d = CARD[svg.getAttribute("data-rmini")];
+      C.stems(svg, d.stems(), { W: 200, H: 58, rmax: d.rmax, fs: 9, sw: 2, labelEvery: d.every || 2, noOff: true });
+    });
+  }
+  document.querySelectorAll("[data-rplay]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var d = CARD[b.getAttribute("data-rplay")];
+      var buf = C.render(C.toHz(d.sound(), d.f), d.dur);
+      if (d.sustained) fadeOut(buf, 0.4);
+      C.play(buf, 0.8);
+    });
+  });
+  C.onTheme(draw);
+  draw();
+})();
+</script>
+```
+
+```{=html}
+<script src="orchestra.js"></script>
+<script>
+// The orchestra: one instrument from each Hornbostel–Sachs class, drawn and played by orchestra.js.
+(function () {
+  "use strict";
+  var O = window.Orchestra; if (!O) return;
+  var fams = document.getElementById("oFams"), mute = {};
+  O.FAM.forEach(function (f) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "true");
+    b.style.setProperty("--c", "rgb(" + f.hue.join(",") + ")"); b.innerHTML = '<span class="dot"></span>' + f.inst;
+    b.addEventListener("click", function () { mute[f.id] = !mute[f.id]; b.setAttribute("aria-pressed", mute[f.id] ? "false" : "true"); applyMute(f.id); if (!ctx) drawRest(); });
+    fams.appendChild(b);
+  });
+  var cv = document.getElementById("oStage"), g = cv.getContext("2d"), timeEl = document.getElementById("oTime");
+  var tlPerf = O.timeline(false), tlFull = O.timeline(true), cur = tlPerf, ctx = null, t0 = 0, raf = 0, fg = null;
+  tlPerf.mute = mute; tlFull.mute = mute;
+  var REST = O.beatToSec(8 * 16 + 4.15);
+  function fit() {
+    var full = document.fullscreenElement === cv, dpr = Math.min(2, window.devicePixelRatio || 1);
+    var w = full ? Math.min(window.innerWidth, window.innerHeight * 16 / 9) : cv.getBoundingClientRect().width;
+    w = Math.max(320, Math.round(w * dpr)); cv.width = w; cv.height = Math.round(w * 9 / 16);
+  }
+  function drawRest() { O.drawAt(g, REST, cv.width, cv.height, tlPerf); }
+  function mmss(x) { x = Math.max(0, Math.round(x)); return Math.floor(x / 60) + ":" + ("0" + x % 60).slice(-2); }
+  function applyMute(id) { if (fg && ctx) fg[id].gain.setTargetAtTime(mute[id] ? 0 : 1, ctx.currentTime, 0.03); }
+  function frame() {
+    if (!ctx) return;
+    var t = ctx.currentTime - t0;
+    if (t > cur.dur) { stop(); return; }
+    O.drawAt(g, Math.max(0, t), cv.width, cv.height, cur);
+    timeEl.textContent = mmss(t) + " / " + mmss(cur.dur);
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() {
+    cancelAnimationFrame(raf);
+    if (ctx) { try { ctx.close(); } catch (e) {} }
+    ctx = null; fg = null; timeEl.textContent = "Ready"; drawRest();
+  }
+  function play(full) {
+    stop(); cur = full ? tlFull : tlPerf;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) { timeEl.textContent = "This browser cannot play Web Audio."; return; }
+    ctx = new AC(); if (ctx.resume) ctx.resume();
+    var my = ctx; timeEl.textContent = "Computing the sounds…";
+    setTimeout(function () {
+      if (ctx !== my) return;
+      var cache = O.prepare(ctx, cur.notes);
+      t0 = ctx.currentTime + 0.2;
+      fg = O.schedule(ctx, cur.notes, t0, { cache: cache, mute: mute });
+      raf = requestAnimationFrame(frame);
+    }, 30);
+  }
+  document.getElementById("oPlay").addEventListener("click", function () { play(false); });
+  document.getElementById("oFull").addEventListener("click", function () { play(true); });
+  document.getElementById("oStop").addEventListener("click", stop);
+  var fsb = document.getElementById("oFs");
+  if (!cv.requestFullscreen) fsb.hidden = true;
+  fsb.addEventListener("click", function () { if (cv.requestFullscreen) cv.requestFullscreen().catch(function () {}); });
+  document.addEventListener("fullscreenchange", function () { fit(); if (!ctx) drawRest(); });
+  window.addEventListener("resize", function () { fit(); if (!ctx) drawRest(); });
+  fit(); drawRest();
+  var faces = ['700 48px "LM Roman"', 'italic 24px "LM Roman"', '24px "LM Roman"', '24px "LM Sans"', '24px "LM Math"'];
+  if (document.fonts && document.fonts.load) Promise.all(faces.map(function (f) { return document.fonts.load(f, "A−κ♯"); })).then(function () { if (!ctx) drawRest(); }, function () {});
+})();
+</script>
+```

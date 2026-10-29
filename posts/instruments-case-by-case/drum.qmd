@@ -1,27 +1,29 @@
 ---
 title: "Why does a drum thud?"
-subtitle: "8 · The drum"
+subtitle: "The Shape of a Sound · 4"
+date: 2026-10-29T12:00:00
+draft: false
+categories: [math, music, the-shape-of-a-sound]
+description: "The drum: an ideal drumhead's frequencies fall between the whole-number lines, so a plain drum thuds; a kettledrum gets its note from its surroundings, the strike point and the fading together."
 format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
 resources: [core.js, ins.css]
+aliases: [/posts/instruments-as-operators/drum.html]
 ---
 
 ::: {.series-nav .slim}
-[← 7 Piano](piano.qmd) · [The Shape of a Sound](index.qmd) · [Spectrum of an operator](spectrum.qmd) · [Map](map.qmd) · [9 Drum shape →](shape.qmd)
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← Piano](piano.qmd) · [Beyond · Can you hear the shape of a drum? →](../hear-the-shape-of-a-drum/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd) and the loop of [page 3](circle.qmd). Math: up to Bessel functions (described). About 3 minutes for the summary; about 35 with the mathematics.
+A page of [post 4, Instruments, case by case](index.qmd). Builds on [post 1, What you hear](../what-you-hear/index.qmd); the drumhead's equation is derived in [post 2](../where-the-equations-come-from/index.qmd#drumhead). Math: derivatives, polar coordinates (quoted) and Bessel functions (described, computed numerically). About 18 minutes. New to the series? [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph).
 :::
 
 ::: {.puzzle}
-A drumhead is a sheet pulled tight: a string with a second dimension. Pluck a string and you get a note you could hum. Strike a drum and you get a thud. What changes when the string becomes a sheet?
+A drumhead is a sheet pulled tight: a string with a second dimension. Pluck a string and you get a note you could hum. Strike a drum and you get a thud. What changes when the string becomes a sheet? And why do some drums, the timpani (kettledrums), play a note after all?
 :::
-
-The short answer: an ideal, uniform head has its frequencies off the lines, so it thuds; drums with a clear note, such as the timpani (kettledrums), are built so that one set of modes lands near the lines and the rest are weak or fade fast ([stage 5](#one-drumhead-two-drums)).
 
 Listen first: tap the head anywhere, then tap dead center and compare.
 
@@ -49,104 +51,74 @@ svg.patch { display: block; width: 100%; max-width: 420px; height: auto; margin:
 ```
 
 ::: {.newidea}
-**In one sentence.** An ideal drumhead's frequencies (1, 1.59, 2.14, … times the lowest) fit no pitch, so a plain drum thuds; on a kettledrum, the air the head pushes pulls one set of modes near 2 : 3 : 4 : 5, a note.
+**In one sentence.** An ideal drumhead's frequencies (1, 1.59, 2.14, … times the lowest) fit no pitch, so a plain drum thuds; a kettledrum plays a note because the air the head pushes moves one set of modes near 2 : 3 : 4 : 5, the strike point favours them, and the other modes fade fast.
 :::
-
-::: {.gist}
-**The recipe on this instrument, in brief.**
-
-1. *Newton's law* on a small patch of the head: tension pulls each point toward the average height of the points around it.
-2. *The operator* is the two-dimensional version of the string's, $-c^2\Delta$, with the rim held still.
-3. *Its spectrum*, for a round drum, comes from the zeros of Bessel functions: frequencies at 1×, 1.59×, 2.14×, 2.30×, … the lowest.
-4. *On the diagram*: those stems fall between the whole-number lines; no base frequency in the range we hear as pitch puts them all on or near lines.
-5. *What we hear*: a sound that doesn't repeat at any rate we hear as pitch, and fades fast: a thud. Where you strike changes how loud each mode is, never where it sits. A kettledrum's surroundings move one set of modes near the lines: a note.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
-:::
 
-## 1 · Newton's law: the equation of motion
+## The operator, in one line {#operator}
 
-*Mathematics used: partial derivatives, integrals over an area, the divergence theorem and polar coordinates (quoted), and Bessel functions (described, computed numerically).*
-
-Here is where the drum's frequencies come from. Apply Newton's law, mass times acceleration equals force, to one small patch of the drumhead. The steps are the string's, with one more dimension.
-
-**1. One small patch.** Let $u(x, y, t)$ be the height of the head above its rest position at the point $(x, y)$ at time $t$; subscripts are [partial derivatives](glossary.qmd#partial-derivative). The head has mass $\sigma$ per unit area, and its tension $T$ is a force per unit length of any cut through it. Take any small patch $D$ of the head. Its mass is the sum of $\sigma\,dA$ over its tiny area pieces $dA$; the double integral $\iint_D$ below means exactly that, adding up over all the small pieces $dA$ of $D$. So Newton's law for its up-and-down motion reads
+Let $u(x, y, t)$ be the height of the head above its rest position at the point $(x, y)$ at time $t$. The head has mass $\sigma$ per unit area, and its tension $T$ is a force per unit length of any cut through it. Newton's law on a small patch of the head, with the tension pulling all around the patch's edge, gives
 $$
-\iint_D \sigma\,u_{tt}\,dA = \text{net force on the patch}.
+\sigma\,u_{tt} = T\,\Delta u, \qquad \Delta u = u_{xx} + u_{yy},
 $$
+where $\Delta u$, the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian), adds the second derivatives in the two directions across the sheet ([post 2](../where-the-equations-come-from/index.qmd#drumhead) derives it). In words: on a string, tension pulls each point toward the average height of its two neighbors; on a sheet it pulls each point toward the average height of all the points around it, and $\Delta u$ measures how far a point sits below that average.
 
-**2. The pull across its edge.** Along each short piece $ds$ of the patch's edge, the sheet outside pulls with force $T\,ds$, along the surface and outward. If the head makes a small angle $\theta$ with the horizontal there, the upward part of that pull is $T\sin\theta\,ds$; for a small angle $\sin\theta \approx \tan\theta$ (both are about $\theta$ in radians), and $\tan\theta$ is the slope. So the upward part is $T\,\partial_n u\,ds$, where $\partial_n u$ is the slope of the head in the outward direction across the edge. This is the string's step, with the slope taken across the edge.
-
-```{=html}
-<div class="ins">
-<div class="panel">
-    <svg class="patch" viewBox="0 0 320 200" role="img" aria-label="A patch of the drumhead with tension pulling outward along its edge">
-      <ellipse class="sheet" cx="160" cy="105" rx="90" ry="45"/>
-      <line class="pull" x1="250" y1="105" x2="296" y2="88"/><path class="ph" d="M 290 82 L 302 86 L 293 95 Z"/>
-      <line class="pull" x1="70" y1="105" x2="26" y2="118"/><path class="ph" d="M 32 124 L 20 120 L 29 111 Z"/>
-      <line class="pull" x1="160" y1="60" x2="168" y2="18"/><path class="ph" d="M 162 22 L 169 10 L 174 23 Z"/>
-      <line class="pull" x1="160" y1="150" x2="150" y2="190"/><path class="ph" d="M 145 184 L 149 196 L 157 186 Z"/>
-      <line class="n" x1="250" y1="105" x2="300" y2="105"/>
-      <text x="138" y="110">patch D</text><text x="256" y="128">T ds</text>
-    </svg>
-    <p class="cap">Tension pulls outward all around the edge. Where the sheet bulges, the pulls tilt and their vertical parts add up to a net force, which step 3 below works out.</p>
-  </div>
-</div>
-```
-
-**3. Add the pulls around the edge.** The symbol $\oint_{\partial D}$ means adding up all the way around the edge $\partial D$ of the patch. Adding up the pulls around the edge turns into adding up one quantity over the inside of the patch. That is the [divergence theorem](glossary.qmd#divergence-theorem), quoted here, applied to the slope vector $(u_x, u_y)$: its outward part across the edge is $\partial_n u$, and its divergence is $u_{xx} + u_{yy}$. So
-$$
-T\oint_{\partial D} \partial_n u\,ds = T\iint_D \Delta u\,dA .
-$$
-The quantity $\Delta u = u_{xx} + u_{yy}$, the [Laplacian](glossary.qmd#laplacian), adds the second derivatives in the two directions across the sheet. In one dimension a patch is a segment, its edge is its two endpoints, and this step is the fundamental theorem of calculus, $u_x(b) - u_x(a) = \int_a^b u_{xx}\,dx$: the string's force again.
-
-**4. Newton's law, at every point.** Steps 1 to 3 give $\iint_D \sigma\,u_{tt}\,dA = T\iint_D \Delta u\,dA$. This holds for every patch, however small, so the two integrands are equal at every point:
-$$
-\sigma\,u_{tt} = T\,\Delta u .
-$$
-In words: on a string, tension pulls each point toward the average height of its two neighbors; on a sheet it pulls each point toward the average height of all the points around it, and $\Delta u$ measures how far a point sits below that average.
-
-**What we assumed.** Small slopes; a tension that is the same everywhere and does not change as the head moves; no bending stiffness; no air; and no damping and no sound radiation, so the model's modes never fade, while a real head loses its energy to the air quickly. The air matters for real drums, as the timpani paragraph in stage 5 says.
-
-## 2 · The operator
-
-Dividing by the mass per unit area $\sigma$ puts the equation in the series' form $u_{tt} = -A\,u$: the force per unit mass is a fixed rule applied to the head's shape, and that rule is the drum's [operator](glossary.qmd#operator). The rim completes it: the rim is clamped, so $u = 0$ there. This is the drum's [boundary condition](glossary.qmd#boundary-condition).
+The rim completes the [operator](../instruments-as-operators/glossary.qmd#operator): it is clamped, so $u = 0$ there.
 
 ::: {.result}
 **The drum's operator.**
 $$
-u_{tt} = -A\,u, \qquad A = -c^2\,\Delta,
+u_{tt} = -A\,u, \qquad A = -c^2\,\Delta, \qquad c^2 = \frac{T}{\sigma},
 $$
-with $c^2 = T/\sigma$, acting on shapes of the head that are zero on the rim. In words: tension pulls each point toward the average of its surroundings, and the rim holds still.
+acting on shapes of the head that are zero on the rim. In words: tension pulls each point toward the average of its surroundings, and the rim holds still.
 :::
 
-## 3 · Its spectrum
+::: {.derive}
+<details><summary><span class="label">Details</span>What the model leaves out</summary>
 
-A [mode](glossary.qmd#mode) is a shape $X$ that the operator only rescales: $A X = \lambda X$, with the number $\lambda$ called its [eigenvalue](glossary.qmd#eigenvalue) (an eigenvalue of $A$, constant included). Released in that shape, the head keeps it and swings as $X\cos\omega t$, with $\omega = \sqrt{\lambda}$, at the frequency $f = \sqrt{\lambda}/2\pi$. The list of all the eigenvalues is the operator's [spectrum](glossary.qmd#spectrum). Writing $\lambda = c^2k^2$, the mode condition is
-$$
--\Delta X = k^2 X
-$$
-inside the drum, with $X = 0$ on the rim and $\omega = ck$. For a round drum of radius $a$, it can be solved by splitting it into a problem around the center and a problem outward from it, a [separation of variables](glossary.qmd#separation-of-variables).
+The model assumes small slopes, a uniform tension that does not change as the head moves, no bending stiffness, no air, and no damping or radiation, so its modes never fade; a real head loses its energy to the air quickly, and the air matters, as the two drums further down show.
 
-**1. A round drum calls for distance and angle.** Measure position by the distance $r$ from the center and the angle $\theta$. In these coordinates the Laplacian reads
+</details>
+:::
+
+## Its spectrum {#spectrum}
+
+A [mode](../instruments-as-operators/glossary.qmd#mode) is a shape $X$ that the operator only rescales: $A X = \lambda X$, with the number $\lambda$ called its [eigenvalue](../instruments-as-operators/glossary.qmd#eigenvalue). Released in that shape, the head keeps it and swings at the frequency $f = \sqrt{\lambda}/2\pi$. The list of all the eigenvalues is the operator's [spectrum](../instruments-as-operators/glossary.qmd#spectrum). Writing $\lambda = c^2k^2$, the mode condition is $-\Delta X = k^2 X$ inside the drum, with $X = 0$ on the rim. For a round drum of radius $a$, it can be solved by splitting it into a problem around the center and a problem outward from it, a [separation of variables](../instruments-as-operators/glossary.qmd#separation-of-variables).
+
+For a round drum of radius $a$, write the shape as a function of the distance $r$ from the center times a function of the angle $\theta$ (first fold below). Going around the center, the shape must come back to itself after a turn, which allows only $\cos m\theta$ and $\sin m\theta$ with $m$ a whole number: $m$ straight still lines through the center, like spokes. Outward from the center, the shape is a [Bessel function](../instruments-as-operators/glossary.qmd#bessel) $J_m(kr)$, which plays the part the sine plays on a string: it wiggles like a cosine whose swings slowly shrink (second fold, and the figure).
+
+::: {.derive}
+<details><summary><span class="label">Step-by-step derivation</span>Separating the mode equation in polar coordinates <span class="needs">uses the chain rule</span></summary>
+
+*Distance and angle.* In the coordinates $r$ and $\theta$ the Laplacian reads
 $$
 \Delta X = X_{rr} + \frac1r X_r + \frac{1}{r^2}X_{\theta\theta}.
 $$
-This is a standard change of variables, quoted here; it follows from the chain rule ([Laplace operator in polar coordinates](https://en.wikipedia.org/wiki/Laplace_operator#Two_dimensions)). The $X_r/r$ term is there because circles around the center grow longer as $r$ grows.
+This is a standard change of variables, quoted here; it follows from the chain rule ([Laplace operator in polar coordinates](https://en.wikipedia.org/wiki/Laplace_operator#Two_dimensions)).
 
-**2. Split the shape into an around part and an outward part.** Try a shape that is a function of $r$ times a function of $\theta$, $X = R(r)\,\Theta(\theta)$. Substituting into $-\Delta X = k^2X$ and multiplying by $r^2/(R\Theta)$ gives
+*The split.* Substituting $X = R(r)\,\Theta(\theta)$ into $-\Delta X = k^2X$ and multiplying by $r^2/(R\Theta)$ gives
 $$
 \frac{r^2R'' + rR' + k^2r^2R}{R} = -\frac{\Theta''}{\Theta}.
 $$
-The left side depends only on $r$, the right only on $\theta$. Change $\theta$ alone: the left side can't change, so neither can the right. So both equal one constant.
+The left side depends only on $r$, the right only on $\theta$. Change $\theta$ alone: the left side can't change, so neither can the right. So both equal one constant. The around part and the outward part are solved in the next fold.
 
-**3. Around the center: the loop of page 3.** Going once around the drum must bring $\Theta$ back to itself, so $-\Theta'' = m^2\Theta$ with $\Theta$ repeating every turn. This is exactly the loop's eigenvalue problem from the [circle page](circle.qmd): $m$ is a whole number and $\Theta = \cos m\theta$ or $\sin m\theta$. A mode with $m \ge 1$ has $m$ straight still lines through the center, like spokes.
+</details>
+:::
 
-**4. Outward from the center: Bessel's equation.** What remains for $R$ is
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Around the center a loop, outward Bessel's equation <span class="needs">uses derivatives</span></summary>
+
+**2. Around the center: a loop.** Going once around the drum must bring $\Theta$ back to itself, so $-\Theta'' = m^2\Theta$ with $\Theta$ repeating every turn: the eigenvalue problem of a loop of string ([post 3](../when-an-equation-has-a-spectrum/index.qmd#smallest-examples)). So $m$ is a whole number and $\Theta = \cos m\theta$ or $\sin m\theta$. A mode with $m \ge 1$ has $m$ straight still lines through the center, like spokes.
+
+**3. Outward from the center: Bessel's equation.** What remains for $R$ is
 $$
 r^2R'' + rR' + (k^2r^2 - m^2)R = 0,
 $$
-*Bessel's equation*. It depends on $r$ only through $kr$, so its solutions are functions of $kr$. Of its two essentially different solutions, one, the [Bessel function](glossary.qmd#bessel) $J_m(kr)$, is finite at the center; the other becomes infinite there, which would take infinite energy, so it is not a free mode. $J_m$ plays the part the sine played on a string: it wiggles like a cosine or sine whose swings slowly shrink.
+*Bessel's equation*. It depends on $r$ only through $kr$, so its solutions are functions of $kr$. Of its two essentially different solutions, one, the [Bessel function](../instruments-as-operators/glossary.qmd#bessel) $J_m(kr)$, is finite at the center; the other becomes infinite there, which would take infinite energy, so it is not a free mode. $J_m$ plays the part the sine played on a string: it wiggles like a cosine or sine whose swings slowly shrink.
+
+</details>
+:::
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 170" role="img" aria-label="Graphs of the Bessel functions J0 and J1: wiggles like a cosine and a sine whose swings shrink, crossing zero at points that are not whole-number multiples of the first">
@@ -166,29 +138,27 @@ $$
 </svg>
 ```
 
-**5. The rim picks out the frequencies.** The rim condition $R(a) = 0$ says $J_m(ka) = 0$: $ka$ must be a zero of $J_m$. Writing $j_{m,n}$ for the $n$-th positive zero, $k = j_{m,n}/a$. The zeros have no closed form and are computed numerically; those of $J_0$ are 2.405, 5.520, 8.654, …, in the ratios 1 : 2.30 : 3.60.
+**The rim picks out the frequencies.** The rim condition $R(a) = 0$ says $J_m(ka) = 0$: $ka$ must be a zero of $J_m$. Writing $j_{m,n}$ for the $n$-th positive zero, $k = j_{m,n}/a$. The zeros have no closed form and are computed numerically; those of $J_0$ are 2.405, 5.520, 8.654, …, in the ratios 1 : 2.30 : 3.60.
 
 ::: {.result}
-**The round drum's spectrum.** Modes $J_m(j_{m,n}\,r/a)\cos m\theta$ and $J_m(j_{m,n}\,r/a)\sin m\theta$, for $m = 0, 1, 2, \dots$ and $n = 1, 2, 3, \dots$, with frequencies
+**The round drum's spectrum.** Modes $J_m(j_{m,n}\,r/a)\cos m\theta$ and $J_m(j_{m,n}\,r/a)\sin m\theta$, for $m = 0, 1, 2, \dots$ and $n = 1, 2, 3, \dots$, with eigenvalues $\lambda_{m,n} = c^2 j_{m,n}^2/a^2$ and frequencies
 $$
 f_{m,n} = \frac{c\,j_{m,n}}{2\pi a}.
 $$
-In order, relative to the lowest: 1, 1.593, 2.136, 2.295, 2.653, 2.917, … Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, the same pattern turned. The eigenvalues of $A$ are $\lambda_{m,n} = c^2 j_{m,n}^2/a^2$.
+In order, relative to the lowest: 1, 1.593, 2.136, 2.295, 2.653, 2.917, … Each frequency with $m \ge 1$ belongs to two modes, the cosine and the sine, the same pattern turned.
 :::
 
-These are all the modes: expanding any mode in a Fourier series in $\theta$ (page 3) reduces $-\Delta X = k^2X$, term by term, to Bessel's equation for each $m$.
-
 ::: {.derive}
-<details><summary><span class="label">Details</span>Why the pairs are exact, and how the zeros are spaced</summary>
+<details><summary><span class="label">Details</span>Why these are all the modes, why the pairs are exact, and how the zeros are spaced</summary>
 
-Each frequency with $m \ge 1$ belongs to exactly two modes because Bessel functions of different whole-number orders never share a positive zero; this was conjectured by Bourget and proved by Carl Ludwig Siegel in 1929. This page computes the zeros numerically. For large $n$ they approach $j_{m,n} \approx (n + \tfrac m2 - \tfrac14)\pi$: evenly spaced for one fixed $m$, but shifted by an amount that depends on $m$. The round head's symmetry shows up as a [multiplicity](glossary.qmd#multiplicity) of 2.
+These are all the modes: expanding any mode in a Fourier series in $\theta$ reduces $-\Delta X = k^2X$, term by term, to Bessel's equation for each $m$.
+
+Each frequency with $m \ge 1$ belongs to exactly two modes because Bessel functions of different whole-number orders never share a positive zero; this was conjectured by Bourget and proved by Carl Ludwig Siegel in 1929. This page computes the zeros numerically. For large $n$ they approach $j_{m,n} \approx (n + \tfrac m2 - \tfrac14)\pi$: evenly spaced for one fixed $m$, but shifted by an amount that depends on $m$. The round head's symmetry shows up as a [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity) of 2.
 
 </details>
 :::
 
-## 4 · On the spectrum diagram
-
-These are the frequencies in your last strike, as multiples of the lowest: each stem is one $j_{m,n}/j_{0,1}$ from the result box of stage 3. After 1×, the next few, 1.59×, 2.14× and 2.30×, sit between the lines. Higher up the stems crowd together, so some land near a line by chance, such as 2.92× and 4.06×; but no base frequency in the range we hear as pitch puts them all on or near lines. Each stem's height is how strongly that mode sounds at the listening ring for the strike you made: strike somewhere else and the heights change, never the positions. Tap a stem to see that mode on the drumhead and hear it alone.
+On the spectrum diagram, the pitch ruler of post 1 with one stem per mode, each stem is one $j_{m,n}/j_{0,1}$ from your last strike. After 1×, the next few sit between the lines. Higher up the stems crowd together, so some land near a line by chance, such as 2.92× and 4.06×; but no base frequency in the range we hear as pitch puts them all on or near lines. Each stem's height is how strongly that mode sounds at the listening ring for the strike you made: strike somewhere else and the heights change, never the positions. Tap a stem to see that mode on the drumhead and hear it alone.
 
 ```{=html}
 <div class="ins">
@@ -200,15 +170,31 @@ These are the frequencies in your last strike, as multiples of the lowest: each 
 </div>
 ```
 
-## 5 · What we hear {#what-we-hear}
+## Struck: a ringing drumhead {#ringing}
 
-**Off the lines and fading fast: a thud.** The frequencies of stage 3 don't sit at whole-number multiples of any base frequency we hear as pitch, so the sound doesn't repeat at any such rate; and a real head gives its energy to the air quickly, so it fades fast. Together, a thud.
+A struck head rings: it moves as the sum of its modes, $u = \sum a_{m,n} X_{m,n}\,e^{-t/\tau_{m,n}} \cos(2\pi f_{m,n} t + \phi_{m,n})$, each with its own fading time $\tau_{m,n}$, so its sound is a sum of partials at the frequencies of the spectrum. The demo at the top is made this way, with illustrative fading times.
 
-A struck head moves as the sum of its modes, $u = \sum a_{m,n} X_{m,n} e^{-t/\tau_{m,n}} \cos(2\pi f_{m,n} t + \phi_{m,n})$, each with its own fading time $\tau_{m,n}$ (damping, added to the model), so its sound is a sum of tones at the frequencies of stage 3; the drum demo at the top synthesizes it exactly this way.
+**Frequencies: between the lines.** They are the zeros of the Bessel functions, scaled: 1×, 1.59×, 2.14×, 2.30×, 2.65×, 2.92×, …, scattered between the lines (fold below).
 
-**Why the frequencies miss the lines.** The frequencies are the zeros of the Bessel functions, scaled. For the modes with no spokes, the zeros of $J_0$ come at nearly even steps, about $\pi$ apart, but the first one is short, about $0.77\pi$ rather than $\pi$, so the later zeros are not multiples of the first: the frequencies go 1 : 2.30 : 3.60. Each number of spokes gives its own sequence, shifted by a different amount, and the sequences interleave at unrelated places. Merged, they give the drum's list 1×, 1.59×, 2.14×, 2.30×, 2.65×, 2.92×, …, scattered between the lines. One more pattern: every mode with spokes comes in a pair, the same pattern turned, with exactly the same frequency. That is the round drum's symmetry, heard in its spectrum.
+::: {.derive}
+<details><summary><span class="label">Details</span>Why the zeros miss the lines</summary>
 
-**The sand draws the still lines.** In 1808 Ernst Chladni showed the French Institute in Paris, the body that then held the Academy of Sciences, a trick: sprinkle sand on a metal plate, draw a violin bow along its edge, and the sand leaps into a pattern, a different one for each note. The sand is jostled wherever the plate moves and comes to rest where it doesn't, so each pattern is one mode's still lines. Here is the same trick on a drumhead: pick a frequency and watch where the sand goes.
+The frequencies are the zeros of the Bessel functions, scaled. For the modes with no spokes, the zeros of $J_0$ come at nearly even steps, about $\pi$ apart, but the first one is short, about $0.77\pi$ rather than $\pi$, so the later zeros are not multiples of the first: the frequencies go 1 : 2.30 : 3.60. Each number of spokes gives its own sequence, shifted by a different amount, and the sequences interleave at unrelated places. Merged, they give the drum's list 1×, 1.59×, 2.14×, 2.30×, 2.65×, 2.92×, …, scattered between the lines.
+
+</details>
+:::
+
+**Amounts: where you strike.** A sharp strike starts each mode in proportion to how far that mode moves at the point struck. Every mode with spokes stays still at the center, so a strike at dead center sounds only the round modes, those with no spokes; a strike on one of a mode's still lines leaves that mode silent.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>How strongly a strike excites each mode, in this model <span class="needs">uses integrals over an area</span></summary>
+
+Number the modes $X_1, X_2, \dots$ in order of frequency. A sharp strike, a brief push at a point $p$, gives mode $i$ a starting speed in proportion to $X_i(p)$, the mode's height at the point struck, the same rule as the piano's hammer. We model what you hear as the speed of the head at a listening point $q$, which picks up mode $i$ in proportion to $X_i(q)$. Dividing by $\iint X_i^2\,dA$, the integral of the mode's square over the head, removes the arbitrary size of each shape. So mode $i$ sounds with weight $X_i(p)\,X_i(q)\big/\iint X_i^2\,dA$. (A real drum radiates sound from its whole head, and some modes radiate better than others; this model ignores that.)
+
+</details>
+:::
+
+A mode's still lines can be seen with sand. Sprinkle it on a vibrating sheet, and it is jostled wherever the sheet moves and comes to rest where it doesn't, so each pattern is one mode's still lines, the places where a strike would leave that mode silent. Ernst Chladni showed this on metal plates in the 1780s; here is the same trick on a drumhead: pick a frequency and watch where the sand goes.
 
 ```{=html}
 <div class="ins">
@@ -222,27 +208,21 @@ A struck head moves as the sum of its modes, $u = \sum a_{m,n} X_{m,n} e^{-t/\ta
 </div>
 ```
 
-Napoleon offered a prize for explaining the patterns. Sophie Germain won it in 1816, the first woman to receive the Paris Academy's grand prize in mathematics, with a theory that was still incomplete; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. Finding the still lines and finding the frequencies are one problem: on a drumhead, the one on this page; on a plate, the same problem with the plate's own operator.
-
 ::: {.derive}
-<details><summary><span class="label">Precisely</span>Where the sand collects <span class="needs">uses polar coordinates</span></summary>
+<details><summary><span class="label">Precisely</span>Where the sand collects, and the history <span class="needs">uses polar coordinates</span></summary>
 
 The mode $J_m(kr)\cos m\theta$ with $k = j_{m,n}/a$ is zero where $\cos m\theta = 0$, at $2m$ angles, which pair up into $m$ lines through the center, and along the circles where $J_m(kr) = 0$ inside the rim, $n - 1$ of them for the $n$-th zero. Those are exactly the lines where the sand collects.
 
-</details>
-:::
-
-**Where you strike.** A sharp strike starts each mode in proportion to how far that mode moves at the point struck. Every mode with spokes stays still at the center, so a strike at dead center sounds only the round modes, those with no spokes; a strike on one of a mode's still lines leaves that mode silent. The two drums below use this.
-
-::: {.derive}
-<details><summary><span class="label">Details</span>How strongly a strike excites each mode, in this model <span class="needs">uses integrals over an area</span></summary>
-
-Number the modes $X_1, X_2, \dots$ in order of frequency. A sharp strike, a brief push at a point $p$, gives mode $i$ a starting speed in proportion to $X_i(p)$, the mode's height at the point struck, the same rule as the piano's hammer on page 7. We model what you hear as the speed of the head at a listening point $q$, which picks up mode $i$ in proportion to $X_i(q)$. Dividing by $\iint X_i^2\,dA$, the integral of the mode's square over the head, removes the arbitrary size of each shape. So mode $i$ sounds with weight $X_i(p)\,X_i(q)\big/\iint X_i^2\,dA$. (A real drum radiates sound from its whole head, and some modes radiate better than others; this model ignores that.)
+In 1808 Chladni showed the French Institute in Paris, the body that then held the Academy of Sciences, his sand patterns on plates bowed along their edges. Napoleon offered a prize for explaining them. Sophie Germain won it in 1816, the first woman to receive the Paris Academy's grand prize in mathematics, with a theory that was still incomplete; Gustav Kirchhoff gave the full theory of vibrating plates, with the correct edge conditions, in 1850. Finding the still lines and finding the frequencies are one problem: on a drumhead, the one on this page; on a plate, the same problem with the plate's own operator.
 
 </details>
 :::
 
-[]{#one-drumhead-two-drums}**One drumhead, two drums.** A bass drum and a kettledrum, one of the timpani, both start from this operator, yet one booms and the other plays a note. Three things separate them, where the head is struck, what surrounds it, and which modes fade first; step through them below. On the kettledrum, the air the head must push pulls the *spoke modes*, those with one or more lines through the center and no still circle inside the rim, close to 2, 3, 4 and 5 times a common base (HyperPhysics; Fletcher and Rossing), and the strike point and the fast fading of the round modes leave mostly those. Players and acousticians name the note at the lowest of them, the (1,1) mode, the drum's "principal tone" (Vienna's Institute of Musical Acoustics); the next sit a [fifth](glossary.qmd#octave), an octave and a major tenth (an octave plus a major third, ratio 5 : 2) above it. That is not quite what page 0's rule predicts: frequencies near 2, 3, 4 and 5 times a base nearly repeat at the base's rate, an octave below the (1,1), and HyperPhysics notes that the missing-fundamental effect might then give the drum that lower pitch. Which octave the ear names when a sound fits two pitches an octave apart is a question about hearing rather than about the drumhead, and this series doesn't settle it.
+**Fading, and muffling.** A real head gives its energy to the air quickly, so the sound fades fast; the round modes, which pump air like a piston, go first. How long a bass drum rings is also the player's choice: players muffle the head with a leg or a towel when the music calls for short notes, and let it ring for long ones (Aleo, Interlochen 2023).
+
+## One drumhead, two drums {#one-drumhead-two-drums}
+
+A bass drum and a kettledrum (one of the timpani) share this operator, yet one booms and the other plays a note. Step through the three things that separate them: where the head is struck, what surrounds it, and which modes fade first. On the kettledrum, the air the head must push pulls the *spoke modes*, those with one or more lines through the center and no still circle inside the rim, close to 2, 3, 4 and 5 times a common base (HyperPhysics; Fletcher and Rossing), and the strike point and the fast fading of the round modes leave mostly those.
 
 ```{=html}
 <div class="ins">
@@ -307,9 +287,9 @@ Number the modes $X_1, X_2, \dots$ in order of frequency. A sharp strike, a brie
 $$
 \omega^2 = \frac{T k^2}{\sigma + 2\rho/k}, \qquad f \propto \frac{k}{\sqrt{\sigma + 2\rho/k}} ,
 $$
-so coarse shapes, with small $k$, slow down most. This is the hub's [added mass](glossary.qmd#added-mass): it can only lower frequencies. A typical Mylar kettledrum head has $\sigma \approx 0.26$ kg/m², on drums of radius 0.32 to 0.355 m (Packer 1993); with $a = 0.33$ m, $2\rho a/\sigma \approx 3.0$. The spoke modes (1,1) to (4,1) move from 1 : 1.34 : 1.67 : 1.98 to 1 : 1.42 : 1.83 : 2.24, halfway to 1.5 : 2 : 2.5. The rest of the shift comes from a full calculation of the air inside and around a finite head (Christian, Davis, Tubis, Anderson, Mills and Rossing 1984), not from the kettle's air spring, its uniform pressure.
+so coarse shapes, with small $k$, slow down most. This is [added mass](../instruments-as-operators/glossary.qmd#added-mass): it can only lower frequencies. A typical Mylar kettledrum head has $\sigma \approx 0.26$ kg/m², on the two drums Packer studied, radii 0.32 and 0.355 m (Packer 1993, appendix B); with $a = 0.33$ m, $2\rho a/\sigma \approx 3.0$. The spoke modes (1,1) to (4,1) move from 1 : 1.34 : 1.67 : 1.98 to 1 : 1.42 : 1.83 : 2.24, halfway to 1.5 : 2 : 2.5. The rest of the shift comes from a full calculation of the air inside and around a finite head (Christian, Davis, Tubis, Anderson, Mills and Rossing 1984), not from the kettle's air spring, its uniform pressure.
 
-*The kettle.* The nearly sealed kettle (it has a small vent) acts as a spring on the volume the head sweeps, $V = \iint u\,dA$, adding $\tfrac12\eta V^2$ to the stored energy for some constant $\eta > 0$. The operator gains the term $(\eta/\sigma)\,\mathbf 1\langle\mathbf 1, \cdot\rangle$, where $\mathbf 1$ is the constant shape and $\sigma$ the head's mass per unit area: a term of rank one. Every mode with $m \ge 1$ has $\iint X\,dA = 0$, because $\int_0^{2\pi}\cos m\theta\,d\theta = 0$, so $\big(A + (\eta/\sigma)\,\mathbf 1\langle\mathbf 1, \cdot\rangle\big)X = AX$, and in this model it keeps its frequency exactly. Only the round modes are raised, and since the new term couples them to each other, their shapes change too; the explorable treats each on its own. The hub's [principle](spectrum.qmd#how-the-instrument-is-held-is-part-of-the-operator) says the same in general: added stiffness never lowers a frequency.
+*The kettle.* The nearly sealed kettle (it has a small vent) acts as a spring on the volume the head sweeps, $V = \iint u\,dA$, adding $\tfrac12\eta V^2$ to the stored energy for some constant $\eta > 0$. The operator gains the term $(\eta/\sigma)\,\mathbf 1\langle\mathbf 1, \cdot\rangle$, where $\mathbf 1$ is the constant shape and $\sigma$ the head's mass per unit area: a term of rank one. Every mode with $m \ge 1$ has $\iint X\,dA = 0$, because $\int_0^{2\pi}\cos m\theta\,d\theta = 0$, so $\big(A + (\eta/\sigma)\,\mathbf 1\langle\mathbf 1, \cdot\rangle\big)X = AX$, and in this model it keeps its frequency exactly. Only the round modes are raised, and since the new term couples them to each other, their shapes change too; the explorable treats each on its own. In general, added stiffness never lowers a frequency and added mass never raises one, by the [min–max principle](../instruments-as-operators/glossary.qmd#min-max).
 
 *The bass drum's second head.* A bass drum has a head on each end of its shell, coupled through the air inside, which splits its two lowest modes, (0,1) and (1,1); the two heads' lowest modes are commonly tuned about a fourth apart (HyperPhysics). Not modelled here.
 
@@ -318,24 +298,52 @@ so coarse shapes, with small $k$, slow down most. This is the hub's [added mass]
 </details>
 :::
 
-## What we found
+## What we hear {#what-we-hear}
 
-An ideal uniform drumhead, $A = -c^2\Delta$ with the rim held still, has its frequencies at the zeros of Bessel functions, 1×, 1.59×, 2.14×, 2.30×, … the lowest: off the lines of the spectrum diagram, so a plain drum thuds. A kettledrum is the same head in different surroundings: the air it pushes pulls its spoke modes near 2 : 3 : 4 : 5, the strike point and the fast-fading round modes leave mostly those, and you hear a note. The next page turns the question around.
+**Off the lines and fading fast: a thud.** An ideal head's frequencies don't sit at whole-number multiples of any base frequency we hear as pitch, so its sound doesn't repeat at any such rate; and a real head gives its energy to the air quickly, so it fades fast. Together, a thud: the spectrum decides; where you strike changes only how loud each mode is.
 
-::: {.family}
-**One operator family, as a first model.** Toms, snares, bass drums and timpani share this operator on a disk. They differ in tension, size and the mass of the head, and in what surrounds it, and the air in and around a drum changes the operator a little, or, for the timpani, enough to matter.
+**A kettledrum's note.** On a kettledrum all three deciders point the same way. The air the head drags along moves the spoke modes near 2 : 3 : 4 : 5 times a base (the spectrum); the stick, between halfway and three-quarters of the way out, starts the lowest round mode more weakly than the spoke modes (the playing); and the round modes radiate their energy away within a fraction of a second (the fading). What is left nearly repeats: a note. Players and acousticians name it at the lowest of those modes, the (1,1) mode, the drum's "principal tone" (Vienna's Institute of Musical Acoustics).
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Which octave the ear names</summary>
+
+The modes above the (1,1) sit a [fifth](../instruments-as-operators/glossary.qmd#octave), an octave and a major tenth (ratio 5 : 2) above it. The pitch rule of post 1 would put the pitch an octave lower, at the base, and HyperPhysics notes that the missing-fundamental effect might give the drum that lower pitch; which octave the ear names is one of the [exceptions](../what-you-hear/index.qmd#exceptions) post 1 lists, and this series doesn't settle it.
+
+</details>
 :::
 
-## The next puzzle
+### The four aspects {#four-aspects}
 
-Turn the question around: if you could hear every frequency a drum makes, could you work out its shape?
+::: {.aspects}
 
-Short on time? This is the last page of the short path through the series, pages 0, 4 and 8. [Page 9](shape.qmd) takes it up, if you want more.
+| Aspect | Bass drum | Kettledrum |
+|:--|:--|:--|
+| [Pitch](../instruments-as-operators/glossary.qmd#pitch) | no clear pitch: the modes sit off the lines | a note, named at the (1,1) mode; the head's tension tunes it |
+| Loudness | how hard the head is struck | how hard the head is struck |
+| [Timbre](../instruments-as-operators/glossary.qmd#timbre) | mostly round modes, from a strike near the center: a boom | spoke modes near 2 : 3 : 4 : 5, left by the strike point and the fading |
+| Duration | fast fading, or shorter still when muffled | the spoke modes ring on after the round ones die |
 
-[← 7 · Piano](piano.qmd) · [Next: 9 · Drum shape →](shape.qmd)
+: The two drums' [four aspects](../what-you-hear/index.qmd#four-aspects). {.striped}
+
+:::
+
+```{=html}
+<style>
+/* The four-aspects tables are prose: let them wrap on narrow screens instead of scrolling sideways. */
+@media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
+</style>
+```
+
+## What we found
+
+An ideal drumhead, $A = -c^2\Delta$ with the rim held still, has its frequencies at the zeros of Bessel functions, off the lines, so a plain drum thuds: the spectrum decides. A kettledrum is the same head in different surroundings, where the spectrum, the playing and the fading work together: the air pulls its spoke modes near 2 : 3 : 4 : 5, and the strike point and the fast-fading round modes leave mostly those, a note.
+
+## Next
+
+Turn the question around: if you could hear every frequency a drum makes, could you work out its shape? [Can you hear the shape of a drum?](../hear-the-shape-of-a-drum/index.qmd)
 
 ::: {.refs}
-**References.** [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), HyperPhysics, Georgia State University. [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), Institute of Musical Acoustics (Wiener Klangstil), University of Music and Performing Arts Vienna. The Chladni and Germain history: P. Lynch, ["The 'extraordinary talent and superior genius' of Sophie Germain"](https://www.irishtimes.com/news/science/the-extraordinary-talent-and-superior-genius-of-sophie-germain-1.4130947), *The Irish Times*, January 2020 ([also on That's Maths](https://thatsmaths.com/2020/01/16/the-extraordinary-talent-and-superior-genius-of-sophie-germain/)). G. Kirchhoff, "Über das Gleichgewicht und die Bewegung einer elastischen Scheibe", *Journal für die reine und angewandte Mathematik* 40 (1850), 51–88. Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane), [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums). The timpani's air loading: R. S. Christian, R. E. Davis, A. Tubis, C. A. Anderson, R. I. Mills and T. D. Rossing, "Effects of air loading on timpani membrane vibrations", *Journal of the Acoustical Society of America* 76 (1984), 1336–1345. [The Bass Drum](https://hyperphysics.gsu.edu/hbase/Music/bdrum.html), HyperPhysics. Where the drums are played, and muffling the bass drum: ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023; A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017. The measured kettledrum: A. H. Benade, *Fundamentals of Musical Acoustics*, Oxford University Press, 1976, chapter 9, pp. 143–144, as tabulated by HyperPhysics. Typical head values: T. A. Packer, [*Acoustics of the Orchestral Kettledrum*](https://etheses.durham.ac.uk/id/eprint/5633/), master's thesis, University of Durham, 1993, appendix B. Indian drums: C. V. Raman and S. Kumar, "Musical drums with harmonic overtones", *Nature* 104 (1920), 500; C. V. Raman, "The Indian musical drums", *Proceedings of the Indian Academy of Sciences* A 1 (1934), 179–188.
+**References.** [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), HyperPhysics, Georgia State University. [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), Institute of Musical Acoustics (Wiener Klangstil), University of Music and Performing Arts Vienna. The Chladni and Germain history: P. Lynch, ["The 'extraordinary talent and superior genius' of Sophie Germain"](https://www.irishtimes.com/news/science/the-extraordinary-talent-and-superior-genius-of-sophie-germain-1.4130947), *The Irish Times*, January 2020 ([also on That's Maths](https://thatsmaths.com/2020/01/16/the-extraordinary-talent-and-superior-genius-of-sophie-germain/)); Wikipedia, [Ernst Chladni](https://en.wikipedia.org/wiki/Ernst_Chladni). G. Kirchhoff, "Über das Gleichgewicht und die Bewegung einer elastischen Scheibe", *Journal für die reine und angewandte Mathematik* 40 (1850), 51–88. Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane) and [Bessel function](https://en.wikipedia.org/wiki/Bessel_function). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapter 3 (membranes) and chapter 18 (drums). The timpani's air loading: R. S. Christian, R. E. Davis, A. Tubis, C. A. Anderson, R. I. Mills and T. D. Rossing, "Effects of air loading on timpani membrane vibrations", *Journal of the Acoustical Society of America* 76 (1984), 1336–1345. [The Bass Drum](https://hyperphysics.gsu.edu/hbase/Music/bdrum.html), HyperPhysics. Where the drums are played, and muffling the bass drum: ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023; A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017. The measured kettledrum: A. H. Benade, *Fundamentals of Musical Acoustics*, Oxford University Press, 1976, chapter 9, pp. 143–144, as tabulated by HyperPhysics. Typical head values: T. A. Packer, [*Acoustics of the Orchestral Kettledrum*](https://etheses.durham.ac.uk/id/eprint/5633/), master's thesis, University of Durham, 1993, appendix B. Indian drums: C. V. Raman and S. Kumar, "Musical drums with harmonic overtones", *Nature* 104 (1920), 500; C. V. Raman, "The Indian musical drums", *Proceedings of the Indian Academy of Sciences* A 1 (1934), 179–188.
 :::
 
 ```{=html}

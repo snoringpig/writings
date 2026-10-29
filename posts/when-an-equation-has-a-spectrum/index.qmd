@@ -1,0 +1,734 @@
+---
+title: "When an equation has a spectrum"
+subtitle: "The Shape of a Sound · 3"
+date: 2026-10-29T13:00:00
+categories: [math, music, the-shape-of-a-sound]
+description: "When the motion an equation describes is a sum of modes with frequencies read off a spectrum: the criterion, the three levels at which it holds, the theory behind it, the smallest examples where it fails, and what reaches the ear."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+aliases: [/posts/instruments-as-operators/spectrum.html, /posts/instruments-as-operators/ring.html, /posts/instruments-as-operators/circle.html]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 2 · Where the equations come from](../where-the-equations-come-from/index.qmd) · [4 · Instruments, case by case →](../instruments-case-by-case/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [post 2](../where-the-equations-come-from/index.qmd), but recaps what it uses and stands on its own. Mathematics: matrices, eigenvalues, derivatives and complex numbers, each explained; section 5 and the folds use linear algebra and analysis. About 43 minutes, of which section 5 takes about 5 and can be skipped.
+:::
+
+**The question.** When is the motion a differential equation describes a sum of modes, with frequencies read off the spectrum of an operator; what theory lies behind that; and how does it connect back to what we hear?
+
+[The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph)
+
+::: {.newidea}
+**In one sentence.** When $A$ is symmetric, stores energy whenever the object is displaced, and the object is finite, every free motion is a sum of modes (apart from rigid drifts), at the frequencies $\sqrt{\lambda}/2\pi$.
+
+Precisely: for a linear equation $U' = BU$ that doesn't change in time, the solutions are exactly the combinations of modes $e^{st}W$ when, and only when, $B$ has a basis of eigenvectors; for the free vibration of a stable, frictionless object of finite size, $u'' = -Au$ with $A$ self-adjoint, positive and with compact resolvent, this always holds, at the frequencies $\sqrt{\lambda}/2\pi$ for the eigenvalues $\lambda$ of $A$ (any rigid drifts, $\lambda = 0$, are split off first).
+:::
+
+## 0 · Recap: the equation of motion {#recap}
+
+Post 2 derives the equations of motion; this post needs their form and a few cases.
+
+**The operator.** For an object held in a given way, the [operator](../instruments-as-operators/glossary.qmd#operator) $A$ is the linear map, defined on the shapes that the holding allows, that sends a shape to minus the acceleration that shape causes. It does not depend on time. [Linear](../instruments-as-operators/glossary.qmd#linear) means $A(au + bv) = a\,Au + b\,Av$ for shapes $u$, $v$ and numbers $a$, $b$. Newton's law for small motions reads
+$$
+u'' = -A\,u ,
+$$
+with $u(t)$ the shape at time $t$ and primes time derivatives. Convention: $A$ includes its constants, $\lambda$ is an eigenvalue of $A$, $f = \sqrt{\lambda}/2\pi$.
+
+**One mass on a spring** ([post 2](../where-the-equations-come-from/index.qmd#spring)). Hooke's law gives $m\,x'' = -k\,x$, so $A$ is the number $k/m$.
+
+**Two beads on a string** ([post 2](../where-the-equations-come-from/index.qmd#beads)). Two beads of mass $m$ sit on a string of tension $T$, spaced $h$ apart and $h$ from the tied ends, at heights $x_1$ and $x_2$.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 120" role="img" aria-label="Left: two beads on a string tied down at both ends. Right: the same two beads closed into a ring, so each bead is joined to the other on both sides.">
+  <path class="dash" d="M 20 70 L 200 70"/>
+  <rect x="14" y="58" width="6" height="24" class="fillacc" opacity="0.5"/><rect x="200" y="58" width="6" height="24" class="fillacc" opacity="0.5"/>
+  <path class="ink" d="M 20 70 L 80 45 L 140 85 L 203 70"/>
+  <circle cx="80" cy="45" r="6" class="fillacc"/><circle cx="140" cy="85" r="6" class="fillacc"/>
+  <text x="70" y="30">x₁</text><text x="132" y="108">x₂</text><text x="60" y="114">ends tied</text>
+  <circle cx="320" cy="68" r="38" class="ink" fill="none"/>
+  <circle cx="282" cy="68" r="6" class="fillacc"/><circle cx="358" cy="68" r="6" class="fillacc"/>
+  <text x="252" y="72">1</text><text x="370" y="72">2</text><text x="276" y="120">closed into a ring</text>
+</svg>
+```
+
+For small slopes, each stretch of string pulls the two beads at its ends toward each other with vertical force $T/h$ times their difference in height, a tied end counting as a bead at height 0. Newton's law for each bead, with the heights in one column $x = (x_1, x_2)$, becomes
+$$
+\begin{gathered}
+m\,x_1'' = \frac{T}{h}\,(-2x_1 + x_2), \qquad m\,x_2'' = \frac{T}{h}\,(x_1 - 2x_2), \\
+\text{that is}\qquad x'' = -A\,x, \qquad A = \frac{T}{mh}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} .
+\end{gathered}
+$$
+
+**Continuous objects** ([post 2's table](../where-the-equations-come-from/index.qmd#operator-table)), used in section 5:
+
+| Object | Operator $A$ | Allowed shapes |
+|:--|:--|:--|
+| string, tension $T$, mass $\mu$ per length | $-c^2\,\frac{d^2}{dx^2}$, $c^2 = T/\mu$ | $u = 0$ at tied ends |
+| air in a tube, on pressure $p$ | $-c^2\,\frac{d^2}{dx^2}$, $c$ the speed of sound | $p = 0$ at an open end, $p' = 0$ at a closed one |
+| bar | $\kappa^2\,\frac{d^4}{dx^4}$ | clamped end $u = u' = 0$; free end $u'' = u''' = 0$ |
+| drumhead | $-c^2\Delta$ | $u = 0$ on the rim |
+
+: The operators of post 2. Primes here are derivatives in position; $\Delta = \partial_x^2 + \partial_y^2$ is the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian). {.striped}
+
+## 1 · The smallest examples {#smallest-examples}
+
+**The spring: one mode.** In $x'' = -\lambda x$ with $\lambda = k/m$, try $x = a\cos(\omega t + \varphi)$. Two derivatives give $-\omega^2x$, which matches when $\omega^2 = \lambda$: the mass swings at $f = \sqrt{\lambda}/2\pi$, whatever the amplitude $a$ and phase $\varphi$, which the start fixes. One eigenvalue, one mode, one frequency.
+
+**Two beads: two modes.** Add and subtract the bead equations. The sum $S = x_1 + x_2$ and the difference $D = x_1 - x_2$ obey
+$$
+S'' = -\frac{T}{mh}\,S, \qquad D'' = -\frac{3T}{mh}\,D :
+$$
+two independent springs, the second three times as stiff because in $D$ the tilted middle stretch pulls too. In matrix language, $(1, 1)$ and $(1, -1)$ are [eigenvectors](../instruments-as-operators/glossary.qmd#eigenvector) of $A$, columns that $A$ only rescales, with [eigenvalues](../instruments-as-operators/glossary.qmd#eigenvalue) $T/mh$ and $3T/mh$: in the ratio $1 : 3$, so the frequencies are in the ratio $1 : \sqrt 3 \approx 1 : 1.73$. Since $x_1 = (S + D)/2$ and $x_2 = (S - D)/2$, every motion is an $S$-swing plus a $D$-swing.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <div class="r2wrap" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0.75rem;align-items:center">
+    <canvas id="r2Canvas" style="height:170px" aria-label="Two beads on a string, moving: tied at both ends, or closed into a ring"></canvas>
+    <canvas id="r2Plane" style="height:170px" aria-label="The plane of the two heights, with the tilted S and D directions and the path of the motion"></canvas>
+  </div>
+  <div class="controls" role="group" aria-label="Start the two beads">
+    <button type="button" id="r2S" aria-pressed="false">Together, S</button>
+    <button type="button" id="r2D" aria-pressed="false">Opposite, D</button>
+    <button type="button" id="r2M" aria-pressed="true">A mix</button>
+    <label class="check"><input type="checkbox" id="r2Ring"> close into a ring</label>
+    <button type="button" id="r2Play" class="primary">Hear this motion</button>
+  </div>
+  <p class="cap">Slowed down. Tied ends: S swings at 1×, D at 1.73× (√3). Closed into a ring: nothing pulls S back; started at rest, it just stays shifted (a constant displacement), and D swings at 2×. On the right, the plane of the two heights (x₁ across, x₂ up): the path of a mix is a tangle, while S and D each run straight along their own tilted line. The model has no friction; the sound, with S at 196 Hz, fades only so that it stops.</p>
+</div>
+</div>
+```
+
+**The two-bead ring: a drift.** Join the string's ends to each other and each bead has the other as its neighbor on both sides: $A_{\text{ring}} = \frac{T}{mh}\left(\begin{smallmatrix} 2 & -2 \\ -2 & 2 \end{smallmatrix}\right)$, a different operator for the same beads. Now $A_{\text{ring}}(1, 1) = 0$: both beads move up together and nothing pulls back. Started moving, it drifts away silently, $x = (1, 1)(a + bt)$. The other eigenvalue is $4T/mh$.
+
+**The loop of string: exactly on the whole numbers.** Join a continuous string into a loop, and measure position by the angle $\theta$, in units where the circumference is $2\pi$. Post 2's string equation becomes
+$$
+u_{tt} = -A\,u, \qquad A = -c^2\,\frac{d^2}{d\theta^2}, \qquad c^2 = \frac{T}{\mu},
+$$
+on shapes that close up after one turn, $X(\theta + 2\pi) = X(\theta)$; subscripts are [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative). A mode's shape satisfies $AX = \lambda X$, that is, $X'' = -(\lambda/c^2)\,X$ (primes in $\theta$). For $\lambda = c^2k^2 > 0$ (here $k$ is a wavenumber, not the spring's stiffness), $X = a\cos k\theta + b\sin k\theta$, which closes up exactly when $k$ is a whole number $n$. For $\lambda = 0$, $X = a + b\theta$ closes up only if $b = 0$: the whole loop lifted, no sound. No $\lambda$ is negative (fold). So mode $n$, with eigenfunctions $\cos n\theta$ and $\sin n\theta$, sounds at
+$$
+f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{nc}{2\pi} = n\,f_1 ,
+$$
+exactly a whole-number multiple of the lowest, for two reasons. Each wave has a whole number of crests, because it must close up. And every wave travels at the same speed: $u = g(\theta - ct)$ solves the equation for every shape $g$, since $u_{tt}$ and $c^2u_{\theta\theta}$ both equal $c^2g''$. Mode $n$ is two such waves running in opposite directions, $\cos n\theta\cos nct = \tfrac12\cos n(\theta - ct) + \tfrac12\cos n(\theta + ct)$, whose $n$ crests pass a fixed point $n$ times while one crest goes around. On beads short waves are slower, on a stiff piano wire faster; both leave the whole numbers.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="cRing" style="height:220px" aria-label="Beads on a ring swinging in their lowest mode"></canvas>
+  <div class="slider"><label for="cN">Beads</label><input type="range" id="cN" min="0" max="16" step="1" value="3"><output id="cNo"></output></div>
+  <svg class="spec" id="cSpec" viewBox="0 0 320 100" style="max-width:520px" aria-label="Frequencies of the first modes relative to the lowest"></svg>
+  <div class="readout" id="cRead"></div>
+  <div class="controls"><button id="cPlay" class="primary">Hear the first modes together</button></div>
+  <p class="cap">A ring of beads with the loop's size, tension and total mass, the mass shared among more and more beads. Stems: the first ten frequencies, as multiples of the lowest; the slider's last position is the continuous loop, where every stem sits on its line. Higher modes are drawn and played quieter, so they are not shrill; the lowest plays at 196 Hz.</p>
+</div>
+</div>
+```
+
+**Every shape is a sum of these waves**, its [Fourier series](../instruments-as-operators/glossary.qmd#fourier-series) $f(\theta) = \frac{a_0}{2} + \sum_{n\ge1}(a_n\cos n\theta + b_n\sin n\theta)$ (the amounts, and in what sense, in the fold). Released from rest, each wave swings at its own frequency, $u(\theta, t) = \frac{a_0}{2} + \sum_n (a_n\cos n\theta + b_n\sin n\theta)\cos(nct)$, so the motion repeats every $2\pi/c$, and so does its sound ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)).
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>No negative eigenvalues, and in what sense every shape is a sum of waves <span class="needs">uses complex numbers and analysis</span></summary>
+
+*No negative eigenvalue.* If $X'' = qX$ with $q > 0$ on the loop, multiply by $X$ and integrate over one turn. [Integration by parts](https://en.wikipedia.org/wiki/Integration_by_parts), with no boundary terms on a closed loop, gives $\int X''X\,d\theta = -\int (X')^2\,d\theta \le 0$, while $q\int X^2\,d\theta \ge 0$. Both are then zero, so $X = 0$.
+
+*The amounts.* For a shape $f$ of the loop,
+$$
+\begin{gathered}
+f(\theta) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos n\theta + b_n\sin n\theta\big), \\
+a_n = \frac{1}{\pi}\int_0^{2\pi} f\cos n\theta\,d\theta, \qquad b_n = \frac{1}{\pi}\int_0^{2\pi} f\sin n\theta\,d\theta .
+\end{gathered}
+$$
+The amounts come from perpendicularity: $\int_0^{2\pi}\cos n\theta\cos m\theta\,d\theta = 0$ for $n \ne m$, likewise for sines and for a sine against a cosine, so multiplying by $\cos m\theta$ and integrating leaves $\pi a_m$. Whether every shape, a plucked corner included, is such a sum was argued over from the 1740s by d'Alembert, Euler and Daniel Bernoulli and settled much later.
+
+*The series.* With [Euler's formula](../instruments-as-operators/glossary.qmd#euler-formula) $e^{in\theta} = \cos n\theta + i\sin n\theta$, the series reads $f = \sum_{n\in\mathbb Z} c_n e^{in\theta}$ with $c_n = \frac{1}{2\pi}\int_0^{2\pi} f e^{-in\theta}\,d\theta$, so $c_{\pm n} = (a_n \mp i b_n)/2$ for $n \ge 1$ and $c_0 = a_0/2$. The functions $e^{in\theta}/\sqrt{2\pi}$ form an [orthonormal](../instruments-as-operators/glossary.qmd#orthonormal) [basis](../instruments-as-operators/glossary.qmd#basis) of [$L^2(S^1)$](../instruments-as-operators/glossary.qmd#l2), the functions on the circle with $\int_0^{2\pi}|f|^2\,d\theta$ finite, for the [inner product](../instruments-as-operators/glossary.qmd#inner-product) $\langle f, g\rangle = \int_0^{2\pi} f\bar g\,d\theta$: for every $f$ in $L^2(S^1)$,
+$$
+\Big\| f - \sum_{|n|\le M} c_n e^{in\theta}\Big\| \to 0 \quad (M \to \infty), \qquad \frac{1}{2\pi}\int_0^{2\pi}|f|^2\,d\theta = \sum_n |c_n|^2 ,
+$$
+the second identity being [Parseval's](https://en.wikipedia.org/wiki/Parseval%27s_theorem). Perpendicularity is the easy half. Completeness, that no nonzero $f$ is perpendicular to every $e^{in\theta}$, is the real content: trigonometric sums approximate every continuous periodic function uniformly ([Fejér's theorem](https://en.wikipedia.org/wiki/Fej%C3%A9r%27s_theorem)), and continuous functions are dense in $L^2$ (Stein and Shakarchi, chapters 2 and 3).
+
+*At single points.* Some continuous functions have Fourier series that diverge at a point, and Carleson proved in 1966 that the series of every $L^2$ function converges at almost every point. For shapes that are continuous and made of straight pieces it converges at every point (Dirichlet, 1829); the plucked triangle's coefficients shrink like $1/n^2$, which is why a few terms already look right in the demo below.
+
+</details>
+:::
+
+Build a plucked shape out of waves, then let it go:
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
+  <div class="slider"><label for="cM" style="min-width:12rem">Waves used, up to</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
+  <div class="controls"><button id="cGo" aria-pressed="false">Let go</button><button id="cHear" class="primary">Hear the loop, at the plucked point</button></div>
+  <div class="readout" id="cShapeRead"></div>
+  <p class="cap">The loop is cut open and laid flat; its two edges are the same point. Dashed: the exact motion (once let go, the bump splits into two half-height copies that travel apart). Solid: the sum of the waves so far, each swinging at its own frequency. The sound adds those waves at the plucked point, the lowest at 196 Hz, faded only so that it stops.</p>
+</div>
+</div>
+```
+
+## 2 · Why an equation that doesn't change in time has modes {#why-modes}
+
+Why do such combinations exist? Three steps, for the two beads first.
+
+**1. The derivative of a solution is again a solution.** Differentiate $x'' = -Ax$ once in time. Because $A$ doesn't change with time, $(x')'' = -A\,x'$: the velocity obeys the same equation. In pictures: a solution shifted in time, $x(t + h)$, is a solution; by linearity so is $(x(t + h) - x(t))/h$, which becomes $x'$ as $h \to 0$. Both ingredients matter: if $A$ changed with time, differentiating would add $-A'x$, and the derivative of a nonlinear force on $x$ is not the force on $x'$.
+
+**2. Look for a solution whose derivative is a multiple of itself**, $x' = s\,x$ for one number $s$. Then $(e^{-st}x)' = 0$, so $x(t) = e^{st}X$ for a fixed column $X$.
+
+**3. Substitute.** For $x = e^{st}X$, the equation $x'' = -Ax$ reads $s^2e^{st}X = -e^{st}AX$, so
+$$
+A\,X = -s^2\,X :
+$$
+$X$ is an eigenvector of $A$ with eigenvalue $\lambda = -s^2$. For the beads $\lambda > 0$, so $s = \pm i\sqrt{\lambda}$ is imaginary, and by [Euler's formula](../instruments-as-operators/glossary.qmd#euler-formula), $e^{i\omega t} = \cos\omega t + i\sin\omega t$, the real part of $e^{i\omega t}X$ is $\cos(\omega t)\,X$: the shape $X$ swinging at [angular frequency](../instruments-as-operators/glossary.qmd#angular-frequency) $\omega = \sqrt{\lambda}$. Two eigenvectors and two signs give four modes, as many as the numbers it takes to start two beads.
+
+**Every such equation, in one form.** Collect the shape and its velocity into one state $U = (u, u')$. Then $u'' = -Au$ becomes
+$$
+U' = B\,U, \qquad B = \begin{pmatrix} 0 & I \\ -A & 0 \end{pmatrix},
+$$
+with $I$ the identity (friction adds a term to the second row, section 4). Call $B$ the equation's *generator*: it turns the state into its rate of change. The same steps apply: $U'$ is a solution whenever $U$ is, and $U = e^{st}W$ is one exactly when $BW = sW$.
+
+::: {.result}
+**Definition 1 (mode).** For a linear system $U' = BU$ with $B$ constant: a nonzero solution $U(t) = e^{st}W$, i.e. $BW = sW$. If $s$ is not real, its frequency is $|\operatorname{Im} s|/2\pi$ and it fades at rate $-\operatorname{Re} s$; real motions are real parts, pairing $s$ with its complex conjugate.
+:::
+
+When $\operatorname{Re} s < 0$, the mode shrinks by the factor $e$ in its fading time $\tau = -1/\operatorname{Re} s$. The swing of step 3 has its own, older name.
+
+::: {.result}
+**Definition 2 (normal mode).** For $u'' = -Au$: a real solution $u(t) = \cos(\omega t + \varphi)\,X$ with $X \ne 0$ and $\omega > 0$. It exists if and only if $AX = \omega^2X$.
+:::
+
+**How the two definitions meet.** Write $u'' = -Au$ as $U' = BU$ with $U = (u, u')$ and $B$ as above. A normal mode with $\omega > 0$ is the real part of the pair of Definition-1 modes $s = \pm i\omega$, $W = (X, \pm i\omega X)$. At $\omega = 0$ the pair collapses into a [Jordan block](https://en.wikipedia.org/wiki/Jordan_normal_form), the smallest way for a matrix to lack eigenvectors ($B$ sends $(0, X)$ to $(X, 0)$ and that to zero): the rigid drift $X(a + bt)$, $b \ne 0$, is a solution but not a mode (a constant displacement $X$ is an $s = 0$ mode). In finite dimensions $B$ is diagonalizable, that is, has a basis of eigenvectors, exactly when $A$ is diagonalizable and invertible.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Normal modes, drifts, and when $B$ has a basis of eigenvectors <span class="needs">uses linear algebra</span></summary>
+
+*Definition 2's condition.* For $u = \cos(\omega t + \varphi)X$, $u'' = -\omega^2\cos(\omega t + \varphi)X$ and $-Au = -\cos(\omega t + \varphi)AX$. These agree for all $t$ if and only if $AX = \omega^2X$: if they agree, take a $t$ with $\cos(\omega t + \varphi) \ne 0$ and divide; the converse is the computation itself.
+
+*Eigenvectors of $B$.* Let $W = (X, Y)$. Then $BW = sW$ says $Y = sX$ and $-AX = sY$, that is, $W = (X, sX)$ with $AX = -s^2X$ and $X \neq 0$. So each eigenvalue $\lambda$ of $A$ gives the eigenvalues $s$ of $B$ with $s^2 = -\lambda$: two of them, $\pm\sqrt{-\lambda}$, when $\lambda \neq 0$ (for $\lambda = \omega^2 > 0$, $s = \pm i\omega$), and only $s = 0$ when $\lambda = 0$. The eigenvectors of $B$ for $s$ are the $(X, sX)$ with $X$ in $A$'s eigenspace for $\lambda = -s^2$.
+
+*The real part of the pair.* With $W_\pm = (X, \pm i\omega X)$, $\tfrac12\big(e^{i\varphi}e^{i\omega t}W_+ + e^{-i\varphi}e^{-i\omega t}W_-\big) = \big(\cos(\omega t + \varphi)X,\ -\omega\sin(\omega t + \varphi)X\big)$, which equals $\operatorname{Re}\big(e^{i(\omega t + \varphi)}W_+\big)$ and is the state $(u, u')$ of the normal mode.
+
+*The drift.* If $AX = 0$ with $X \ne 0$, then $B(X, 0) = (0, 0)$ and $B(0, X) = (X, 0)$. The solution starting at $(aX, bX)$ is $(X(a + bt), bX)$, as differentiating checks. The only eigenvectors of $B$ in the span of $(X, 0)$ and $(0, X)$ are the multiples of $(X, 0)$, so for $b \neq 0$ this solution is not a combination of modes.
+
+*Counting.* Work over the complex numbers, with $A$ of size $n$, and let $g_\lambda$ be the dimension of $A$'s eigenspace for $\lambda$. By the second paragraph, and since eigenvectors for different eigenvalues are independent, $B$, of size $2n$, has exactly $2\sum_{\lambda\ne0} g_\lambda + g_0$ independent eigenvectors. Since $\sum_\lambda g_\lambda \le n$, with equality exactly when $A$ is diagonalizable, this is at most $2(n - g_0) + g_0 = 2n - g_0$, and it equals $2n$ exactly when $g_0 = 0$ ($A$ invertible) and $\sum_\lambda g_\lambda = n$ ($A$ diagonalizable).
+
+</details>
+:::
+
+**How much this guarantees.** In finite dimensions, at least one mode: $BW = sW$ has a solution $W \ne 0$ exactly when the polynomial $\det(B - s)$ (the [determinant](../instruments-as-operators/glossary.qmd#determinant), a polynomial in $s$ whose roots are the eigenvalues) vanishes, and every polynomial has a complex root. One mode is not a basis: $x'' = 0$ has only one (section 6). In infinite dimensions there may be none: on an infinite string the solutions $e^{\pm ikx}$ of $-c^2X'' = \lambda X$ have infinite energy, so none is an allowed shape.
+
+## 3 · The criterion {#criterion}
+
+When are the modes enough for every motion? In words (precise statement and proof in the fold):
+
+::: {.result}
+**The criterion.** The solutions of an equation are exactly all combinations of a fixed set of modes, with any amounts, when and only when the equation is linear, unchanging in time, and its generator has a full set of eigenvectors.
+:::
+
+**Checked on the two beads.** Their $A$ has the eigenvectors $(1, 1)$ and $(1, -1)$ with the positive eigenvalues $\lambda_1 = T/mh$ and $\lambda_2 = 3T/mh$, so it is diagonalizable and invertible, and $B$ has the full set of four eigenvectors $(X, \pm i\omega X)$, for $s = \pm i\omega_1$, $\pm i\omega_2$. So the solutions are exactly the combinations of these four modes with any amounts; in real form,
+$$
+x(t) = \begin{pmatrix}1\\1\end{pmatrix}\big(a_1\cos\omega_1 t + b_1\sin\omega_1 t\big) + \begin{pmatrix}1\\-1\end{pmatrix}\big(a_2\cos\omega_2 t + b_2\sin\omega_2 t\big), \qquad \omega_k = \sqrt{\lambda_k},
+$$
+with any four real numbers, which the starting heights and velocities fix. On the two-bead ring the criterion fails: $A_{\text{ring}}$ has the eigenvalue $0$, so $B$ has only three independent eigenvectors, and the drift $(1, 1)(a + bt)$, $b \neq 0$, is a solution no combination of modes produces. Split it off, as the takeaway does, and the rest passes.
+
+::: {.result}
+**Definition 3 (modal system).** One whose modes form a basis of its states: every state is uniquely a (convergent) combination of mode vectors. (Infinite dimensions: a [Riesz basis](../instruments-as-operators/glossary.qmd#riesz-basis) of the energy space, not merely a complete set.)
+:::
+
+The two tied beads are modal; the two-bead ring is not. Section 5 explains the Riesz basis.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>The criterion as an equality of sets <span class="needs">uses linear algebra</span></summary>
+
+**Statement.** Let $F: \mathbb{C}^n \to \mathbb{C}^n$, and call a differentiable $U: \mathbb{R} \to \mathbb{C}^n$ a solution of $U' = F(U)$ if $U'(t) = F(U(t))$ for every $t$. Let $W_1, \dots, W_n$ be a basis of $\mathbb{C}^n$, let $s_1, \dots, s_n$ be complex numbers, and let $W$ be the matrix with columns $W_k$. Then the solutions of $U' = F(U)$ are exactly all combinations
+$$
+U(t) = \sum_{k=1}^n c_k\,e^{s_k t}\,W_k ,
+$$
+with every coefficient vector $c = (c_1, \dots, c_n) \in \mathbb{C}^n$ allowed, if and only if $F(U) = BU$ for every $U$, with $B = W\operatorname{diag}(s)\,W^{-1}$.
+
+**Proof of "if".** Suppose $F(U) = BU$ with $B = W\operatorname{diag}(s)W^{-1}$. Then $BW = W\operatorname{diag}(s)$, which says $BW_k = s_kW_k$ for each $k$. For any $c$, the function $U(t) = \sum_k c_ke^{s_kt}W_k$ has $U'(t) = \sum_k c_ks_ke^{s_kt}W_k = \sum_k c_ke^{s_kt}BW_k = BU(t)$, so it is a solution. Conversely, let $U$ be any solution, and set $c = W^{-1}U(0)$ and $V(t) = \sum_k c_ke^{s_kt}W_k$, a solution with $V(0) = U(0)$. The difference $Z = W^{-1}(U - V)$ satisfies $Z' = W^{-1}B(U - V) = \operatorname{diag}(s)Z$, so each entry obeys $z_k' = s_kz_k$; then $(e^{-s_kt}z_k)' = 0$, so $z_k(t) = e^{s_kt}z_k(0) = 0$. Hence $U = V$.
+
+**Proof of "only if".** Suppose the solutions are exactly the combinations, every $c$ allowed. Take any vector $Y \in \mathbb{C}^n$ and choose $c = W^{-1}Y$, which is allowed. The solution $U(t) = \sum_kc_ke^{s_kt}W_k$ has $U(0) = Wc = Y$ and $U'(0) = \sum_kc_ks_kW_k = W\operatorname{diag}(s)\,c = W\operatorname{diag}(s)W^{-1}Y$. Because $U$ is a solution, $U'(0) = F(U(0)) = F(Y)$. So $F(Y) = W\operatorname{diag}(s)W^{-1}Y$ for every $Y$: the equation at time 0, applied to solutions starting at every state, forces $F$ to be this linear map.
+
+**Remarks.** (1) The same argument at any time $t_0$ in place of $0$ shows that even an equation allowed to change in time, $U' = F(t, U)$, whose solutions are exactly these combinations must have $F(t, U) = BU$ for every $t$: linearity and time-invariance both follow, as the criterion in words says. (2) For a real equation, such as $u'' = -Au$ with $A$ real, the real solutions are those whose coefficients pair each mode with its complex conjugate, $c_k$ with $\bar c_k$. (3) For continuous objects the same holds with a Riesz basis of the energy space in place of a basis, and square-summable coefficients (section 5).
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Why "with any amounts" matters <span class="needs">uses derivatives</span></summary>
+
+Exponentials with fixed exponents alone do not force an equation to be linear. On the half-line $U > -\tfrac14$, take
+$$
+U' = 2U - \frac{\sqrt{1 + 4U} - 1}{2} ,
+$$
+whose right side is smooth there. Every solution is
+$$
+U(t) = c\,e^{t} + c^2\,e^{2t}
+$$
+for one real number $c$, for as long as it stays in $U > -\tfrac14$: for $c \ge 0$ that is all $t$, and for $c < 0$ the solution reaches the edge $U = -\tfrac14$ when $c\,e^t = -\tfrac12$.
+
+*Proof.* Put $w = (\sqrt{1 + 4U} - 1)/2$, which maps $U > -\tfrac14$ one-to-one onto $w > -\tfrac12$, with inverse $U = w^2 + w$. In terms of $w$ the equation reads $(2w + 1)\,w' = 2(w^2 + w) - w = w\,(2w + 1)$. Since $2w + 1 > 0$, this is $w' = w$, so $w = c\,e^t$, and $U = w^2 + w = c\,e^t + c^2e^{2t}$, valid while $c\,e^t > -\tfrac12$.
+
+Every solution is built from the same two exponentials, $e^t$ and $e^{2t}$, yet the equation is not linear: the coefficients are tied, the second always the square of the first, and the sum of two solutions, $(c + d)e^t + (c^2 + d^2)e^{2t}$, is not a solution unless $cd = 0$. In the criterion, "every coefficient vector allowed" rules this out.
+
+</details>
+:::
+
+## 4 · Three levels, from the familiar to the general {#levels}
+
+Three nested classes of equations, each with its exact condition: level 1 gives pure tones, level 2 adds fading, level 3 adds shapes whose parts lag behind one another.
+
+### Level 1 · Free vibration without friction
+
+The equation is $u'' = -Au$ with $A$ [self-adjoint](../instruments-as-operators/glossary.qmd#self-adjoint) and positive: pure tones at $\sqrt{\lambda}/2\pi$, energy conserved. For beads, self-adjoint means [symmetric](../instruments-as-operators/glossary.qmd#symmetric-matrix), entry $(i, j)$ equal to entry $(j, i)$, and positive, $A > 0$, means $x\cdot Ax > 0$ for every $x \ne 0$.
+
+::: {.result}
+**Result (level 1, any number of beads).** Let $A$ be a real symmetric $n\times n$ matrix with $A > 0$.
+
+1. $A$ has eigenvectors $X_1, \dots, X_n$ forming an orthonormal basis (perpendicular, each of length 1), with eigenvalues $\lambda_1, \dots, \lambda_n > 0$.
+2. Every solution of $x'' = -Ax$ is
+$$
+x(t) = \sum_{i=1}^n X_i\Big(a_i\cos\omega_i t + \frac{b_i}{\omega_i}\sin\omega_i t\Big), \qquad \omega_i = \sqrt{\lambda_i},
+$$
+with $a_i = X_i\cdot x(0)$ and $b_i = X_i\cdot x'(0)$: mode $i$ sounds at $f_i = \sqrt{\lambda_i}/2\pi$.
+3. The energy $E = \tfrac12\,x'\cdot x' + \tfrac12\,x\cdot Ax$ is the same at every moment.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Level 1 for any number of beads, and where symmetry comes from <span class="needs">uses linear algebra</span></summary>
+
+Part 1 is the [spectral theorem for symmetric matrices](https://en.wikipedia.org/wiki/Spectral_theorem); $\lambda_i = X_i\cdot AX_i > 0$ because $A > 0$.
+
+For part 2, write $x(t) = \sum_j c_j(t)X_j$ with $c_j = X_j\cdot x$, the amount of $X_j$ in $x$. Take the dot product of $x'' = -Ax$ with $X_i$. On the left, $X_i\cdot x'' = c_i''$. On the right, $X_i\cdot Ax = (AX_i)\cdot x$, because both sides equal $\sum_{j,k}(X_i)_jA_{jk}x_k$ once $A_{jk} = A_{kj}$; so $X_i\cdot Ax = \lambda_iX_i\cdot x = \lambda_ic_i$. Hence $c_i'' = -\lambda_ic_i$ for each $i$ separately: $n$ independent springs. Each has exactly one solution with $c_i(0) = a_i$ and $c_i'(0) = b_i$, namely $a_i\cos\omega_it + (b_i/\omega_i)\sin\omega_it$ (uniqueness as in the criterion's proof).
+
+For part 3, $E' = x'\cdot x'' + \tfrac12(x'\cdot Ax + x\cdot Ax') = x'\cdot(x'' + Ax) = 0$, using $x\cdot Ax' = x'\cdot Ax$ for symmetric $A$.
+
+*Drifts.* If $A$ is symmetric with $A \ge 0$ and has the eigenvalue $0$, its eigenvectors for $0$ (the drifts) are perpendicular to the others, and $A$ maps the perpendicular complement of the drifts to itself and is positive there. The motion splits accordingly: along each drift $X$, $c'' = 0$, so $c = a + bt$; on the rest, the result above.
+
+*Symmetry from energy.* Near rest the stored energy is $V(x) \approx \tfrac12\,x\cdot Kx$, where the stiffness matrix $K$ is the matrix of second derivatives of $V$, symmetric because mixed partial derivatives don't depend on the order of differentiation. The restoring force is $-\nabla V \approx -Kx$, keeping the first-order term; that is where linearity comes from. A stable rest means $x\cdot Kx > 0$ except along rigid drifts.
+
+*Unequal masses.* Newton's law reads $Mx'' = -Kx$ with $M$ the diagonal matrix of masses, and $A = M^{-1}K$ is symmetric in the mass-weighted dot product $\sum_i m_ix_iy_i$; equivalently $v = M^{1/2}x$ obeys $v'' = -M^{-1/2}KM^{-1/2}v$ with a symmetric matrix.
+
+</details>
+:::
+
+**Why the instruments qualify.** Symmetry: a stretch of string feels only the difference of its two beads' heights, so bead $j$ pulls bead $i$ as hard as $i$ pulls $j$. Positivity: displacing a held object stores energy. A shape storing none is a rigid drift, $\lambda = 0$, moving as $X(a + bt)$; it is split off. For strings, tubes, bars and drums, with $\langle f, g\rangle = \int f\,g$, integration by parts gives symmetry and positivity (fold); that every shape is a sum of modes needs finiteness (section 5).
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Symmetry and energy for strings, bars and drums <span class="needs">uses integration by parts</span></summary>
+
+For the string with tied ends, integrate by parts once:
+$$
+\langle Af, g\rangle = -c^2\int_0^L f''\,g\,dx = -c^2\big[f'\,g\big]_0^L + c^2\int_0^L f'\,g'\,dx = c^2\int_0^L f'\,g'\,dx ,
+$$
+since $g(0) = g(L) = 0$. The last expression does not change when $f$ and $g$ swap, so $\langle Af, g\rangle = \langle f, Ag\rangle$, and with $g = f$ it is $c^2\int (f')^2 \ge 0$, zero only for a constant shape, which a tied end forbids. The bracket also vanishes on a loop and at a closed tube end, where $f' = 0$. For a bar, integrating by parts twice gives $\kappa^2\int f''g''\,dx$, every boundary term killed by clamped, pinned or free ends; for a drumhead, the two-dimensional version gives $c^2\iint\nabla f\cdot\nabla g\,dA$, the rim term killed by the fixed rim.
+
+Two consequences follow as for matrices. Modes with different eigenvalues are perpendicular: if $AX = \lambda X$ and $AY = \mu Y$, then $\lambda\langle X, Y\rangle = \langle AX, Y\rangle = \langle X, AY\rangle = \mu\langle X, Y\rangle$. And energy is conserved: with $E = \tfrac12\langle u_t, u_t\rangle + \tfrac12\langle Au, u\rangle$, symmetry gives $E' = \langle u_t, u_{tt} + Au\rangle = 0$; times the mass per unit length, the two terms are the kinetic energy and the energy stored in the stretched string, $\tfrac12T\int u_x^2\,dx$.
+
+</details>
+:::
+
+### Level 2 · Friction that the same shapes split
+
+The equation is
+$$
+u'' + C\,u' + A\,u = 0 ,
+$$
+with the friction $C$ symmetric and commuting with $A$: $AC = CA$, that is, applying $C$ then $A$ gives the same as $A$ then $C$. For example $C = \alpha + \beta A$ (numbers $\alpha$, $\beta$; $\alpha$ stands for $\alpha I$). In general, for unequal masses, $Mu'' + Cu' + Ku = 0$, the condition is $CM^{-1}K = KM^{-1}C$ (Caughey and O'Kelly 1965). The standing shapes stay real, and each fades.
+
+::: {.result}
+**Result (level 2).** Let $A$ and $C$ be real symmetric $n\times n$ matrices with $AC = CA$.
+
+1. There is an orthonormal basis $X_1, \dots, X_n$ of shared eigenvectors: $AX_k = \lambda_kX_k$ and $CX_k = \gamma_kX_k$.
+2. Every solution of $u'' + Cu' + Au = 0$ is $u(t) = \sum_k q_k(t)X_k$, where each amount obeys its own equation, $q_k'' + \gamma_kq_k' + \lambda_kq_k = 0$.
+3. The system is modal exactly when, for every shared eigenvector (with values $\lambda$ for $A$ and $\gamma$ for $C$), $s^2 + \gamma s + \lambda = 0$ has distinct roots.
+
+For light friction, $\gamma_k^2 < 4\lambda_k$, mode $k$ is the real shape $X_k$ swinging at $f_k = \sqrt{\lambda_k - \gamma_k^2/4}\,/2\pi$ and fading with the time $\tau_k = 2/\gamma_k$.
+:::
+
+[Critical damping](../instruments-as-operators/glossary.qmd#critical-damping) of one mode, $\gamma^2 = 4\lambda$, breaks it: the roots coincide, and that mode moves as $(a + bt)e^{-\gamma t/2}$, which no combination of modes produces (section 6).
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Level 2 <span class="needs">uses linear algebra</span></summary>
+
+*Part 1.* Each eigenspace $E_\lambda$ of $A$ is mapped to itself by $C$: if $AX = \lambda X$ then $A(CX) = CAX = \lambda\,CX$. On $E_\lambda$, $C$ is symmetric, so $E_\lambda$ has an orthonormal basis of eigenvectors of $C$. Together over all $\lambda$ these give part 1, since the eigenspaces of $A$ are perpendicular and fill out $\mathbb{R}^n$.
+
+*Part 2.* Take the dot product of the equation with $X_k$ and use symmetry as in level 1: $X_k\cdot Cu' = \gamma_kq_k'$ and $X_k\cdot Au = \lambda_kq_k$, with $q_k = X_k\cdot u$.
+
+*Part 3.* In the state $U = (u, u')$ the generator is $B = \left(\begin{smallmatrix} 0 & I \\ -A & -C\end{smallmatrix}\right)$. In the basis $(X_1, 0), (0, X_1), \dots, (X_n, 0), (0, X_n)$ it splits into $2\times2$ blocks $B_k = \left(\begin{smallmatrix} 0 & 1 \\ -\lambda_k & -\gamma_k\end{smallmatrix}\right)$, with characteristic polynomial $s^2 + \gamma_ks + \lambda_k$. A $2\times2$ matrix with two distinct eigenvalues has two independent eigenvectors. If the eigenvalue $s_0$ is repeated, $B_k - s_0$ is not zero (its top right entry is 1), so it has rank 1 and $B_k$ has only one eigenvector: a Jordan block. $B$ has a basis of eigenvectors exactly when every block does.
+
+*Light friction.* For $\gamma_k^2 < 4\lambda_k$ the roots are $s = -\gamma_k/2 \pm i\sqrt{\lambda_k - \gamma_k^2/4}$, and the real solutions are $q_k = e^{-\gamma_kt/2}\big(a\cos\tilde\omega_kt + b\sin\tilde\omega_kt\big)$ with $\tilde\omega_k = \sqrt{\lambda_k - \gamma_k^2/4}$.
+
+*Why $C$ must be symmetric.* Friction that turns motion into heat comes from a dissipation function $\tfrac12\,u'\cdot Cu'$, as Rayleigh introduced it, and is symmetric. An antisymmetric velocity term, such as a spinning object's gyroscopic force, does no work and can commute with $A$ (for $A = \omega^2I$ it commutes with everything), yet its modes are rotating motions with complex shapes such as $(1, \pm i)$, not real standing shapes.
+
+</details>
+:::
+
+**Two piano strings in tune.** A piano note has two or three strings tuned alike on one bridge. Keep one mode per string, one number $q_j$ each; in tune, $A = \omega_0^2I$ on the pair. The bridge, driven by both strings at once, gives each a friction in proportion to its motion: $C = r\left(\begin{smallmatrix}1 & 1\\1 & 1\end{smallmatrix}\right)$, symmetric (the strings' own losses aside). A multiple of the identity commutes with every matrix: level 2. The shared eigenvectors are $(1, 1)$, swinging together, with $\gamma = 2r$: both push the yielding bridge, and the mode fades at the rate $\gamma/2 = r$; and $(1, -1)$, swinging oppositely, with $\gamma = 0$: their pushes cancel. An even hammer starts only $(1, 1)$; an unequal strike starts both, so each string's motion decays in two stages, fast then slow, in real modes, exactly in or out of step. This is the first half of Weinreich's (1977) explanation: in this exact model the slow mode does not push the bridge at all, so it would hardly be heard; he showed that the strings' slight mistuning, together with the hammer's small irregularities, governs the aftersound, which is level 3.
+
+### Level 3 · The general case
+
+The equation is any $U' = BU$. With a basis of eigenvectors it is modal, its modes in general *complex*: the entries of $W$ have different phases, so parts of the shape peak at different moments.
+
+**The same two strings, mistuned.** With $A = \operatorname{diag}(\omega_1^2, \omega_2^2)$, $\omega_1 \ne \omega_2$, $A$ no longer commutes with $C$. For a mistuning $\delta = \omega_1 - \omega_2$ about as large as $r$ the modes are strongly complex: in each the strings swing out of step by an angle other than $0^\circ$ or $180^\circ$, and both modes push the bridge, so the slow one is heard: the aftersound (numbers in the fold).
+
+**Radiation lands here too.** Sound carried into unbounded air is a loss that depends on the shape and frequency, and the problem is no longer self-adjoint.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The two strings, in tune and mistuned, in numbers <span class="needs">uses complex numbers</span></summary>
+
+This is a toy model: each string reduced to one mode, the bridge to the friction $C = r\left(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\right)$, and the strings' own losses left out. For light friction and small mistuning, write $u = \operatorname{Re}\big(a(t)\,e^{i\bar\omega t}\big)$ with $\bar\omega = (\omega_1 + \omega_2)/2$ and a slowly changing complex column $a$. Keeping first-order terms in $r$ and $\delta$, the equation becomes
+$$
+a' = M a, \qquad M = \begin{pmatrix} i\delta/2 - r/2 & -r/2 \\ -r/2 & -i\delta/2 - r/2\end{pmatrix} ,
+$$
+with eigenvalues $-\tfrac r2 \pm \tfrac12\sqrt{r^2 - \delta^2}$.
+
+- *In tune*, $\delta = 0$: eigenvalues $0$ and $-r$, eigenvectors $(1, -1)$ and $(1, 1)$, real.
+- *Mistuned by less than $r$* (at $\delta = 0.6\,r$: the strings swing equally far in each mode, $37^\circ$ apart in the nearly-together mode, fading at $0.9\,r$, and $143^\circ$ apart in the nearly-opposite one, fading at $0.1\,r$): both modes at one frequency, fading at the different rates $\tfrac r2 \mp \tfrac12\sqrt{r^2 - \delta^2}$. The eigenvector ratio $a_2/a_1 = (i\delta/2 \mp \tfrac12\sqrt{r^2 - \delta^2})\cdot 2/r$ has modulus 1 and a phase other than $0$ and $180^\circ$. For $\delta = 0.6\,r$: rates $0.1\,r$ and $0.9\,r$, ratios $-0.8 + 0.6i$ and $0.8 + 0.6i$, phases $143^\circ$ and $37^\circ$.
+- *Mistuned by exactly $r$*: the two eigenvalues coincide at $-r/2$ with the single eigenvector $(1, i)$, a Jordan block.
+- *Mistuned by more than $r$*: the frequencies split by $\sqrt{\delta^2 - r^2}$ and both modes fade at the rate $r/2$: the strings beat.
+
+A numerical check of the full equations $u'' + Cu' + Au = 0$, with $r$ at 2% of $\omega_0$ and $\delta = 0.6\,r$, gives the same phases to within $0.01^\circ$.
+
+</details>
+:::
+
+## 5 · The deeper theory {#deeper-theory}
+
+*This section needs linear algebra and analysis. [Skip to section 6](#counterexamples) if you prefer; sections 6 and 7 can be read without it.*
+
+**Self-adjoint $A \ge 0$: the spectral theorem.** On a [Hilbert space](../instruments-as-operators/glossary.qmd#l2) of shapes (with an [inner product](../instruments-as-operators/glossary.qmd#inner-product), and limits), von Neumann's spectral theorem (1930, 1932) represents $A$ as multiplication by $\lambda$ on its spectral parts, which defines $\varphi(A)$: multiply the part at $\lambda$ by $\varphi(\lambda)$. This always expresses the solution through $A$'s spectrum,
+$$
+u(t) = \cos\!\big(t\sqrt{A}\big)\,f + \frac{\sin\!\big(t\sqrt{A}\big)}{\sqrt{A}}\,g ,
+$$
+for starting shape $f$ and velocity $g$, reading $\sin(t\sqrt A)/\sqrt A$ as $t$ on drifts. For a matrix, $\cos(t\sqrt A)f = \sum_i\cos(t\sqrt{\lambda_i})\,(X_i\cdot f)\,X_i$: level 1's formula. The [spectrum](../instruments-as-operators/glossary.qmd#spectrum) is the set of numbers $z$ for which $A - z$ has no bounded inverse; for self-adjoint $A \ge 0$ it lies in $[0, \infty)$.
+
+**A list of notes exactly when the resolvent is compact.** The *resolvent* $(A - z)^{-1}$ solves $Au - zu = f$ for $u$. An operator is *compact* if it maps bounded sets to sets with compact closure; on a Hilbert space, equivalently, it is a limit in norm of operators with finite-dimensional range. For self-adjoint $A \ge 0$, $(A + 1)^{-1}$ is compact exactly when the spectrum is a discrete list, eigenvalues $\lambda_1 \le \lambda_2 \le \cdots \to \infty$ of finite [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity), with eigenvectors forming an orthonormal basis (fold). Then the formula is a sum over modes, a list of notes, and with $A > 0$ the modes of $B$ form an orthonormal basis of the energy space, the states $(u, u')$ of finite energy. In finite dimensions every operator is compact; for continuous objects, this is what "the object is finite" means.
+
+**Which objects have it.** Strings and tubes, by Sturm–Liouville theory; bars, by the same theorem through a compact [Green's operator](../instruments-as-operators/glossary.qmd#green); drums on a bounded region with a reasonable edge, by Rellich's theorem (fold). Courant and Hilbert (volume 1, chapters V and VI) treat all of these. Which shapes share a list of notes: [Can you hear the shape of a drum?](../hear-the-shape-of-a-drum/index.qmd)
+
+**The infinite string: spectral, but no list of notes.** On the whole line $A = -c^2\,d^2/dx^2$ is self-adjoint and $\ge 0$ with spectrum $[0, \infty)$ and no eigenvectors; the resolvent is not compact. The formula still holds, the sum over modes becoming the Fourier transform,
+$$
+u(x, t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\Big(\hat f(k)\cos(ckt) + \hat g(k)\,\frac{\sin(ckt)}{ck}\Big)e^{ikx}\,dk ,
+$$
+a continuous spread of frequencies.
+
+**Without symmetry** (friction, radiation), for losses that only remove energy, the motion still exists and is unique (a [semigroup](../instruments-as-operators/glossary.qmd#semigroup)), but the eigenvectors may fail to form a basis, and whether they form a Riesz basis has to be proved case by case (Gohberg and Krein). For a string with friction varying along it they do (Cox and Zuazua), and decaying modes can still make the motion grow for a while (Trefethen and Embree). Details in the fold.
+
+**Nonlinear or time-dependent equations** have no spectrum in this sense: by the criterion, their solutions are not all the combinations of a fixed set of modes.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Which objects have a compact resolvent, and solutions in the energy sense <span class="needs">uses functional analysis</span></summary>
+
+- *Strings and tubes*: [Sturm–Liouville theory](https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory). On a finite interval, $-(pu')' + qu = \lambda\rho u$ with $p, \rho > 0$ and a condition at each end has simple eigenvalues $\lambda_1 < \lambda_2 < \cdots \to \infty$ and eigenfunctions forming an orthogonal basis.
+- *Bars*: the same theorem through a compact [Green's operator](../instruments-as-operators/glossary.qmd#green). The fourth-order bar is not a classical Sturm–Liouville problem, but $(A + 1)^{-1}$ is $f \mapsto \int G(x, y)f(y)\,dy$ with a kernel $G$, the Green's function, continuous on the square $[0, L]^2$, which makes it compact.
+- *Drums*: Rellich's theorem, on a bounded region with a reasonable edge: any set of shapes whose energies $\iint(|\nabla u|^2 + u^2)$ are bounded by one number has compact closure in $L^2$, so the resolvent is compact. For a head fixed at its rim any bounded region will do; with a free edge, very irregular regions can fail.
+
+**Solutions in the energy sense.** For a start of finite energy the formula gives the one motion of finite energy, which conserves it. A plucked string's kink has no second derivative, so the plucked string solves $u_{tt} = -Au$ in this sense, not point by point.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>A list of notes exactly when the resolvent is compact <span class="needs">uses functional analysis</span></summary>
+
+Let $A \ge 0$ be self-adjoint on an infinite-dimensional Hilbert space $H$. Claim: $R = (A + 1)^{-1}$ is compact if and only if $H$ has an orthonormal basis of eigenvectors $X_k$ of $A$ whose eigenvalues $\lambda_k$ have finite multiplicity and tend to $\infty$.
+
+*If $R$ is compact.* $R$ is bounded, with $\|R\| \le 1$ because $\langle(A + 1)u, u\rangle \ge \|u\|^2$; it is self-adjoint; and it is one-to-one, having the inverse $A + 1$. The spectral theorem for compact self-adjoint operators gives an orthonormal basis of the closure of its range, which is $H$ because $R$ is self-adjoint and one-to-one, made of eigenvectors $RX_k = \mu_kX_k$ with $\mu_k \to 0$, each nonzero $\mu_k$ of finite multiplicity, and no $\mu_k = 0$. Applying $A + 1$ gives $X_k = \mu_k(A + 1)X_k$, so $AX_k = \lambda_kX_k$ with $\lambda_k = 1/\mu_k - 1 \to \infty$.
+
+*If such a basis exists.* List the $\lambda_k$ in increasing order. Then $Rf = \sum_k(1 + \lambda_k)^{-1}\langle f, X_k\rangle X_k$. Its truncations $R_N$, summing over $k \le N$, have finite-dimensional range, and $\|R - R_N\| = \sup_{k > N}(1 + \lambda_k)^{-1} \to 0$. A limit in norm of such operators is compact.
+
+*The energy space.* Measure the energy of a state by $\|(u, v)\|_E^2 = \langle Au, u\rangle + \langle v, v\rangle$. For $A > 0$ with such a basis, the states $W_{k,\pm} = (X_k, \pm i\omega_kX_k)/\sqrt{2\lambda_k}$, $\omega_k = \sqrt{\lambda_k}$, have $\|W_{k,\pm}\|_E^2 = (\lambda_k + \omega_k^2)/2\lambda_k = 1$, are mutually perpendicular (for the pair, $\lambda_k + (i\omega_k)\overline{(-i\omega_k)} = \lambda_k - \omega_k^2 = 0$), and span the energy space; so they form an orthonormal basis of it, and the system is modal in the sense of Definition 3.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Without symmetry: semigroups, Riesz bases and growth before decay <span class="needs">uses functional analysis</span></summary>
+
+*Semigroups.* For a damped string or drum, energy can only decrease, $\operatorname{Re}\langle BU, U\rangle_E \le 0$ in the energy inner product, and $B$ generates a contraction semigroup $e^{tB}$: bounded operators with $e^{(t + t')B} = e^{tB}e^{t'B}$, $e^{0B} = I$, continuous in $t$, sending the starting state to the state at time $t$, provided also that $1 - B$ is onto (together: $B$ is maximally dissipative; the Lumer–Phillips theorem). This gives existence and uniqueness without any modes.
+
+*Riesz bases.* In finite dimensions the only way to lack a basis of eigenvectors is a Jordan block. In infinite dimensions the eigenvectors can be complete (no state is perpendicular to all of them) and still not be a basis, or be a basis in which expansions are unstable. The property that makes mode expansions behave like orthonormal ones is a *Riesz basis*: the image of an orthonormal basis under a bounded operator with a bounded inverse; equivalently, every state is uniquely $U = \sum_kc_kW_k$ with $m\sum_k|c_k|^2 \le \|U\|^2 \le M\sum_k|c_k|^2$ for fixed $0 < m \le M$. Gohberg and Krein (1969) is the classical account of when the eigenvectors of a non-self-adjoint operator are complete or form a basis. For the string $u_{tt} + 2a(x)\,u_t = u_{xx}$ on a finite interval, ends tied, with a friction coefficient $a$ of bounded variation, Cox and Zuazua (1994) proved that the eigenvectors form a Riesz basis of the energy space, and that the energy decays at exactly the rate set by the slowest-fading mode.
+
+*Growth before decay.* Even with a basis of decaying modes, a non-normal $B$, one that does not commute with its adjoint, so that its eigenvectors are not perpendicular, can make the size of the state grow for a while. The smallest example: $B = \left(\begin{smallmatrix} -1 & 10 \\ 0 & -2\end{smallmatrix}\right)$ has modes fading at the rates 1 and 2, with the nearly parallel eigenvectors $(1, 0)$ and $(-10, 1)$. Starting from $U(0) = (0, 1) = 10\,(1, 0) + (-10, 1)$, a near cancellation of two large modes,
+$$
+U(t) = \big(10\,(e^{-t} - e^{-2t}),\ e^{-2t}\big),
+$$
+which reaches size about 2.5 near $t = 0.7$ before it decays: the two modes fade at different rates and stop cancelling. Pseudospectra, the sets of $z$ where $\|(B - z)^{-1}\|$ is large, measure this (Trefethen and Embree 2005).
+
+*Radiation.* For an object radiating into unbounded air, the slowly fading "modes" are resonances: complex frequencies at which the resolvent, continued past the real axis, has poles. Expansions in them hold only in restricted senses.
+
+</details>
+:::
+
+## 6 · Counterexamples, smallest first {#counterexamples}
+
+**1. A drift: $x'' = 0$.** The generator $B = \left(\begin{smallmatrix}0 & 1\\0 & 0\end{smallmatrix}\right)$ has only the eigenvalue $0$ and only the eigenvectors along $(1, 0)$, so $x = a + bt$ with $b \ne 0$ is not a combination of modes: a Jordan block. *You hear* nothing. In instruments: the two-bead ring, a free bar or drum sliding as a whole; split off.
+
+**2. Critical damping: $u'' + 2u' + u = 0$.** The roots of $s^2 + 2s + 1 = (s + 1)^2$ coincide, $B = \left(\begin{smallmatrix}0 & 1\\-1 & -2\end{smallmatrix}\right)$ has the single eigenvector $(1, -1)$, and the solutions are $(a + bt)\,e^{-t}$: the same Jordan block, moved by friction. *You hear* no ring: released, the mass creeps back to rest without swinging.
+
+**3. A property that changes in time.** In Mathieu's equation $x'' = -(1 + \varepsilon\cos 2t)\,x$ the stiffness wobbles, and differentiating a solution adds the term $2\varepsilon\sin(2t)\,x$: no modes $e^{st}W$. By [Floquet's theorem](../instruments-as-operators/glossary.qmd#floquet) the solutions are combinations of $e^{\mu t}p(t)$ with $p$ periodic, and for every small $\varepsilon \neq 0$ one exponent has a positive real part, about $\varepsilon/4$: [parametric resonance](../instruments-as-operators/glossary.qmd#parametric-resonance), as when a child pumps a swing. A slow change is gentler: a talking drum's player squeezes its cords while it rings, and when the tension changes slowly compared with one swing, each mode keeps its shape and its frequency follows the tension, to a good approximation. *You hear* the pitch glide with the squeeze, even within one stroke.
+
+**4. A force not proportional to the displacement.** The wide pendulum, $x'' = -\sin x$, is nonlinear and *softening*: wider swings are slower. Strings and drumheads stiffen instead, so a loud stroke starts sharp and its pitch drops as it fades. *You hear* pitch that moves with loudness: a hard guitar pluck's twang, a gong's glide; and a tamtam's shimmer builds up as energy moves into higher modes (fold).
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Softening, stiffening, and what you hear <span class="needs">uses no extra mathematics</span></summary>
+
+The pendulum swung wide, $x'' = -\sin x$, is nonlinear ($\sin 2x \neq 2\sin x$, so twice a solution is not one) and *softening*: its force grows less than in proportion, so wider swings are slower; out to $90^\circ$ a swing takes 18% longer than a small one. Strings and drumheads go the other way: a wide swing stretches them and raises the average tension, so a loud stroke starts sharp and its pitch drops as it fades. *You hear* a hard guitar pluck's twang; the slight pitch drop of a loud kettledrum stroke; a gong's pitch glide, up for some gongs and down for others, depending on the shell's curvature and thickness; and a tamtam's or cymbal's shimmer building up after the strike, as the nonlinearity passes energy from low modes into high ones. In a modal system each mode's amount evolves on its own, so energy cannot flow between modes.
+
+</details>
+:::
+
+**5. Rayleigh's self-sustained oscillator.** In Rayleigh's equation (1883),
+$$
+x'' - \varepsilon\,\big(x' - \tfrac13 x'^3\big) + x = 0 ,
+$$
+the middle term feeds energy in when the motion is slow and takes it out when it is fast. Every motion except rest settles into one repeating cycle, a [limit cycle](../instruments-as-operators/glossary.qmd#limit-cycle), of amplitude about 2 and angular frequency $1 - \varepsilon^2/16 + \cdots$, near the linear value 1. It has no modes; being periodic, its partials sit at exact whole-number multiples. *You hear* the steady tone of a bowed string, a reed or a player's lips, exactly harmonic for as long as the player keeps going; and a harmonica's bent notes, where the player's mouth, with the hole's other reed, pulls the playing frequency.
+
+**6. The infinite string.** On the whole line, $u_{tt} = c^2u_{xx}$ is linear, unchanging in time, symmetric and positive, with no allowed eigenvectors: spectral (section 5), no list of notes. *You hear* a click: a pluck splits into two half-height bumps that run apart, and each point falls still once they have passed.
+
+| Counterexample | What fails | What you hear |
+|:--|:--|:--|
+| 1 drift | a full set of eigenvectors | nothing |
+| 2 critical damping | the same, with friction | no ring |
+| 3 pumped swing; talking drum | unchanging in time | growth; a gliding pitch |
+| 4 wide pendulum; loud strings, heads, gongs | linearity | pitch moving with loudness; shimmer |
+| 5 Rayleigh's oscillator | linearity, with energy fed in | a steady, exactly harmonic tone |
+| 6 infinite string | finite size | a click |
+
+: The counterexamples, smallest first. {.striped}
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The counterexamples in equations <span class="needs">uses differential equations</span></summary>
+
+*Stability.* An unstable rest, $x'' = +x$ ($A = -1$), is modal, with the real exponents $s = \pm1$, but one mode runs away exponentially: the takeaway's "stable" is $A \ge 0$, and after any drifts ($\lambda = 0$) are split off, $A > 0$.
+
+*The pumped swing.* For $x'' + (1 + \varepsilon\cos 2t)x = 0$ the map from the state at time $0$ to the state at time $\pi$ is a fixed matrix $P$ (the coefficient has period $\pi$). Floquet's theorem (1883) writes every solution, when $P$ has two distinct eigenvalues as here, as a combination of $e^{\mu t}p(t)$ with $p$ of period $\pi$ and $e^{\mu\pi}$ an eigenvalue of $P$ ($\mu$ may be complex). A numerical computation of $P$ gives the growth rate $\operatorname{Re}\mu = 0.0125, 0.0250, 0.0499$ for $\varepsilon = 0.05, 0.1, 0.2$: about $\varepsilon/4$.
+
+*The slow change.* For $x'' + \omega(t)^2x = 0$ with $\omega$ changing slowly compared with one swing, $x \approx (a/\sqrt{\omega(t)})\cos\big(\int_0^t\omega\,dt' + \varphi\big)$: the frequency follows $\omega(t)$, and the energy divided by the frequency stays nearly constant (an adiabatic invariant).
+
+*The wide pendulum.* The period of $x'' = -\sin x$ with amplitude $x_0$ is $4K(\sin^2(x_0/2))$, where $K(m) = \int_0^{\pi/2}(1 - m\sin^2\phi)^{-1/2}\,d\phi$, against $2\pi$ for small swings; at $x_0 = 90^\circ$ the ratio is $1.180$.
+
+*Rayleigh's oscillator.* A numerical run of $x'' - \varepsilon(x' - x'^3/3) + x = 0$ settles to angular frequency $0.99938$, $0.9944$, $0.9847$ for $\varepsilon = 0.1, 0.3, 0.5$, against $1 - \varepsilon^2/16 = 0.99938$, $0.99438$, $0.98438$, with amplitude about 2. By contrast, a linear system driven by a periodic force is solved by its modes, and without friction the response at an exact resonance grows in proportion to time.
+
+*Spinning objects.* Gyroscopic forces $Gu'$ with $G$ antisymmetric do no work and need no friction, yet the equation is not of the form $Mu'' = -Ku$: the classical theory of small oscillations covers "natural" mechanical systems, whose energy is kinetic plus stored, without such terms.
+
+*The surrounding air.* Treated as not squeezable near a drumhead, the air adds a fixed, symmetric, positive [added mass](../instruments-as-operators/glossary.qmd#added-mass), a generalized eigenvalue problem $AX = \omega^2(1 + M_{\text{air}}/\sigma)X$ inside level 1 once lengths are measured with the masses as weights, $\langle x, (\sigma + M_{\text{air}})y\rangle$, as in the unequal-masses fold. Exactly, the added mass depends on the frequency and is complex, because sound radiates away into unbounded air, and the modes become resonances that fade at the rate the head radiates energy.
+
+*No edges.* On the whole line, $-c^2\,d^2/dx^2$ has the continuous spectrum $[0, \infty)$ and no eigenfunctions with finite $\int|X|^2$. With $u_t(x, 0) = 0$, d'Alembert's solution $u(x, t) = \tfrac12\big(f(x - ct) + f(x + ct)\big)$ shows the two half-height bumps; once both have passed a point, the string there is at rest.
+
+</details>
+:::
+
+## 7 · Back to what you hear {#back-to-hearing}
+
+The motion is not yet the sound. Between the object and your ear sit the instrument's body (a violin's box, a piano's soundboard), the air and the room, and each is a linear filter that doesn't change in time; for a room this holds very well at the pressures of music, as long as nothing in it moves (Masovic). Such a filter keeps every $f_k$ and $\tau_k$, changes the amounts $a_k$ and phases $\varphi_k$, and adds its own ringing: the body's resonances, and the room's reverberation, which goes on after the instrument's modes have faded and is how a room lengthens what you hear. The reason is section 2's again: a filter that is the same at every moment sends $e^{st}$ to a multiple of $e^{st}$, plus terms at its own exponents (fold). So the instrument's part of the sound is
+$$
+p(t) = \sum_k a_k\,e^{-t/\tau_k}\cos(2\pi f_kt + \varphi_k) ,
+$$
+one term per mode, $s = -1/\tau_k \pm 2\pi i f_k$. The equation of motion (the operator, together with friction and radiation) fixes the $f_k$ and $\tau_k$; the playing, the radiation and where you listen fix the $a_k$. The series derives the $f_k$; the $\tau_k$ are mostly measured, and it says so where it uses them.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>A filter keeps every exponent and adds its own <span class="needs">uses integrals</span></summary>
+
+A linear filter that is the same at every moment, at rest before the input $v$ starts at $t = 0$, has output $p(t) = \int_0^t h(t - t')\,v(t')\,dt'$, where $h$ is its response to a sudden tap. Take a body with finitely many decaying resonances, $h(t) = \sum_jb_je^{r_jt}$ with $\operatorname{Re} r_j < 0$, and the input $v(t) = e^{st}$ with $s$ different from every $r_j$. Then
+$$
+p(t) = \sum_j b_je^{r_jt}\int_0^te^{(s - r_j)t'}\,dt' = H(s)\,e^{st} - \sum_j\frac{b_j}{s - r_j}\,e^{r_jt}, \qquad H(s) = \sum_j\frac{b_j}{s - r_j} .
+$$
+The input's exponent $s$, and with it its frequency and fading time, comes out unchanged, multiplied by the number $H(s)$: its size scaled by $|H(s)|$ and its phase shifted by the angle of $H(s)$. The other terms are the filter's own ringing, at its own exponents $r_j$. By linearity a sum of modes passes term by term, and a real input, the sum of a mode and its conjugate, gives a real output. A propagation delay $d$ multiplies $e^{st}$ by $e^{-sd}$, again the same exponent.
+
+</details>
+:::
+
+**The four aspects of sound, from the three lists.** [Post 1](../what-you-hear/index.qmd#four-aspects) defines pitch, loudness, timbre and duration as things we hear. What each is heard from, through the ear's own weighting, is a fact about hearing, from psychoacoustics, not mathematics:
+
+| Aspect | Heard from | Set by |
+|:--|:--|:--|
+| Pitch | mainly where the $f_k$ sit: for a single tone whose prominent partials lie near a harmonic series in the pitch range, that series' base | the equation of motion |
+| Loudness | the sizes $a_k$, weighted by frequency (equal-loudness contours); about twice as loud per 10 dB | the playing, the radiation, where you listen |
+| Timbre | all three lists, $f_k$, $a_k$ and $\tau_k$, especially early on, plus noise that is not a mode | all of these |
+| Duration | the fading times $\tau_k$, and when the player stops or damps the note | friction and radiation, and the player |
+
+: The four aspects (Moore 2012; ISO 226; Stevens 1957). {.striped}
+
+Bowed and blown instruments are different: their motion is a single repeating cycle, so its partials sit at exact whole-number multiples; the resonator's modes shape which partials are strong, and the player sets loudness and duration.
+
+**The four routes to a clear pitch, now explained.** [Post 1](../what-you-hear/index.qmd#four-routes) lists four ways to partials at or very near whole-number multiples of one frequency. Each is a statement about these lists.
+
+1. *By nature: strings and air columns.* On an interval with tied or open ends, $-c^2\,d^2/dx^2$ gives $f_n = nc/2L$, for section 1's two reasons; a tube closed at one end, like a clarinet's, gives the odd multiples $(2n - 1)c/4L$.
+2. *By design.* Added stiffness never lowers an eigenvalue and added mass never raises one (the [min–max principle](../instruments-as-operators/glossary.qmd#min-max)), so makers reshape the operator until the modes that matter land near the lines: a kettledrum's air loading, a marimba bar's undercut, the tabla's loaded patch, a bell's profile (most principal partials on a harmonic series; the tierce, a minor third above the prime, is not on the series).
+3. *By suppression.* A short $\tau_k$, like a kalimba tine's fast-dying off-line overtone, or a small $a_k$ and short $\tau_k$ together, like a kettledrum's off-line round modes, which the usual playing spot starts more weakly than the spoke modes ([drum page](../instruments-case-by-case/drum.qmd#one-drumhead-two-drums)) and which radiate their energy away fast (Fletcher and Rossing, chapter 18; Packer 1993).
+4. *By a periodic drive: bow and breath.* Section 6's Rayleigh oscillator: a limit cycle, exactly periodic and so exactly harmonic.
+
+## What we found
+
+An equation's solutions are exactly all the combinations of its modes, with any amounts, when it is linear, unchanging in time, and its generator has a basis of eigenvectors. The free vibration of a stable, frictionless, finite object always passes, at $\sqrt{\lambda}/2\pi$; friction that the same shapes split keeps it, short of critical damping; general friction and radiation give complex modes, whose basis has to be proved. Each failure has a smallest example, and most can be heard.
+
+## Next
+
+Post 4 runs this on each instrument: which modes start, how they fade, and, for bowed and blown instruments, the periodic motion their resonators shape. [4 · Instruments, case by case →](../instruments-case-by-case/index.qmd)
+
+::: {.refs}
+**References.** *Mathematics.* T. K. Caughey and M. E. J. O'Kelly, "Classical normal modes in damped linear dynamic systems", *Journal of Applied Mechanics* 32 (1965), 583–588. S. Cox and E. Zuazua, "The rate at which energy decays in a damped string", *Communications in Partial Differential Equations* 19 (1994), 213–243 ([DOI](https://doi.org/10.1080/03605309408821015)). I. C. Gohberg and M. G. Krein, *Introduction to the Theory of Linear Nonselfadjoint Operators*, Translations of Mathematical Monographs 18, American Mathematical Society, 1969. L. N. Trefethen and M. Embree, *Spectra and Pseudospectra: The Behavior of Nonnormal Matrices and Operators*, Princeton University Press, 2005. F. Rellich, ["Ein Satz über mittlere Konvergenz"](https://eudml.org/doc/59297), *Nachrichten von der Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse* (1930), 30–35. R. Courant and D. Hilbert, *Methods of Mathematical Physics*, vol. 1, Interscience, 1953, chapters V and VI. J. von Neumann, "Allgemeine Eigenwerttheorie Hermitescher Funktionaloperatoren", *Mathematische Annalen* 102 (1930), 49–131, and *Mathematische Grundlagen der Quantenmechanik*, Springer, 1932. G. Floquet, ["Sur les équations différentielles linéaires à coefficients périodiques"](https://www.numdam.org/item/ASENS_1883_2_12__47_0), *Annales scientifiques de l'École Normale Supérieure*, 2e série, 12 (1883), 47–88. E. M. Stein and R. Shakarchi, *Fourier Analysis: An Introduction*, Princeton University Press, 2003, chapters 1–3. Lord Rayleigh, "On maintained vibrations", *Philosophical Magazine*, series 5, 15 (1883), 229–235. J. O. Smith, [Daniel Bernoulli's modal decomposition](https://ccrma.stanford.edu/~jos/sasp/Daniel_Bernoulli_s_Modal_Decomposition.html), CCRMA, Stanford, for the 18th-century debate. Wikipedia, [Spectral theorem](https://en.wikipedia.org/wiki/Spectral_theorem), [Jordan normal form](https://en.wikipedia.org/wiki/Jordan_normal_form), [Sturm–Liouville theory](https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory), [Rellich–Kondrachov theorem](https://en.wikipedia.org/wiki/Rellich%E2%80%93Kondrachov_theorem), [Fourier series](https://en.wikipedia.org/wiki/Fourier_series), [Normal mode](https://en.wikipedia.org/wiki/Normal_mode), [Mathieu function](https://en.wikipedia.org/wiki/Mathieu_function), [Limit cycle](https://en.wikipedia.org/wiki/Limit_cycle) and [Pendulum (mechanics)](https://en.wikipedia.org/wiki/Pendulum_(mechanics)).
+
+*Instruments.* G. Weinreich, "Coupled piano strings", *Journal of the Acoustical Society of America* 62 (1977), 1474–1484, and [The coupled motion of piano strings](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990, especially [Two or more strings](https://www.speech.kth.se/music/5_lectures/weinreic/strings.html). N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapters 5 (nonlinear systems), 18 (drums), 19 (mallet percussion) and 20 (cymbals and gongs), for the kettledrum's pitch drop and strike point and the marimba's undercut. J. O. Smith III, [Tension modulation](https://ccrma.stanford.edu/~jos/pasp/Tension_Modulation.html), in *Physical Audio Signal Processing*. F. Avanzini, R. Marogna and B. Bank, "Efficient synthesis of tension modulation in strings and membranes based on energy estimation", *Journal of the Acoustical Society of America* 131 (2012), 897–906. N. H. Fletcher, "Nonlinear frequency shifts in quasispherical-cap shells: Pitch glide in Chinese gongs", *Journal of the Acoustical Society of America* 78 (1985), 2069–2073. K. A. Legge and N. H. Fletcher, ["Nonlinearity, chaos, and the sound of shallow gongs"](https://www.phys.unsw.edu.au/music/people/publications/Leggeetal1989.pdf), *Journal of the Acoustical Society of America* 86 (1989), 2439–2442. Wikipedia, [Talking drum](https://en.wikipedia.org/wiki/Talking_drum) and [Strike tone](https://en.wikipedia.org/wiki/Strike_tone) (a bell's partials). H. T. Bahnson, J. F. Antaki and Q. C. Beery, ["Acoustical and physical dynamics of the diatonic harmonica"](https://www.cs.bu.edu/fac/snyder/TablatureWeb/Bahnson%20JASA%201998.pdf), *Journal of the Acoustical Society of America* 103 (1998), 2134–2144. R. S. Christian, R. E. Davis, A. Tubis, C. A. Anderson, R. I. Mills and T. D. Rossing, "Effects of air loading on timpani membrane vibrations", *Journal of the Acoustical Society of America* 76 (1984), 1336–1345. T. A. Packer, [*Acoustics of the Orchestral Kettledrum*](https://etheses.durham.ac.uk/id/eprint/5633/), master's thesis, University of Durham, 1993. C. V. Raman, "The Indian musical drums", *Proceedings of the Indian Academy of Sciences* A 1 (1934), 179–188. D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustics'08 Paris, 2008.
+
+*Hearing and rooms.* B. C. J. Moore, *An Introduction to the Psychology of Hearing*, 6th ed., Emerald, Bingley, 2012 (reissued by Brill, Leiden, 2013), chapters 4, 6 and 8 for loudness, pitch and timbre. ISO 226:2023, *Acoustics — Normal equal-loudness-level contours*. S. S. Stevens, "On the psychophysical law", *Psychological Review* 64 (1957), 153–181, and Wikipedia, [Sone](https://en.wikipedia.org/wiki/Sone), for "twice as loud per 10 dB". D. Masovic, [*Room Acoustics*](https://arxiv.org/abs/2111.01900), lecture notes, TU Berlin, 2021, for the room as a linear filter that doesn't change in time. Wikipedia, [Reverberation](https://en.wikipedia.org/wiki/Reverberation).
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  // Two beads: S = x1 + x2 and D = x1 - x2 swing as independent springs. Tied ends: lambda = 1, 3 (in units of T/mh);
+  // ring: lambda = 0 (a constant displacement here, since it starts at rest), 4. The picture runs slowed down.
+  var C = Core, cv = document.getElementById("r2Canvas"), pl = document.getElementById("r2Plane");
+  if (!cv || !pl) return;
+  var g = cv.getContext("2d"), h = pl.getContext("2d"), aS = 0.55, aD = 0.45, ring = false, t0 = performance.now(), trail = [], which = "M";
+  var BASE = 0.4; // visual swings per second for lambda = 1
+  function lam() { return ring ? [0, 4] : [1, 3]; }
+  function setStart(k) {
+    which = k; aS = k === "D" ? 0 : (k === "S" ? 0.8 : 0.55); aD = k === "S" ? 0 : (k === "D" ? 0.8 : 0.45);
+    ["S", "D", "M"].forEach(function (q) { document.getElementById("r2" + q).setAttribute("aria-pressed", q === k ? "true" : "false"); });
+    t0 = performance.now(); trail = [];
+  }
+  function heights(t) {
+    var L = lam(), wS = 2 * Math.PI * BASE * Math.sqrt(L[0]), wD = 2 * Math.PI * BASE * Math.sqrt(L[1]);
+    var S = aS * Math.cos(wS * t), D = aD * Math.cos(wD * t + (which === "M" ? 0.3 : 0));
+    return [(S + D) / 2, (S - D) / 2];
+  }
+  function draw(now) {
+    var t = (now - t0) / 1000, x = heights(t);
+    var d = C.fit(cv), W = cv.width, H = cv.height, A = H * 0.38;
+    g.clearRect(0, 0, W, H); g.lineWidth = 2 * d;
+    if (!ring) {
+      var x0 = W * 0.06, x3 = W * 0.94, xa = W * 0.36, xb = W * 0.64, y0 = H / 2;
+      g.strokeStyle = C.rgb("--grid"); g.setLineDash([4 * d, 4 * d]); g.beginPath(); g.moveTo(x0, y0); g.lineTo(x3, y0); g.stroke(); g.setLineDash([]);
+      g.fillStyle = C.rgb("--muted"); g.fillRect(x0 - 4 * d, y0 - 14 * d, 4 * d, 28 * d); g.fillRect(x3, y0 - 14 * d, 4 * d, 28 * d);
+      var ya = y0 - A * x[0], yb = y0 - A * x[1];
+      g.strokeStyle = C.rgb("--ink"); g.beginPath(); g.moveTo(x0, y0); g.lineTo(xa, ya); g.lineTo(xb, yb); g.lineTo(x3, y0); g.stroke();
+      g.fillStyle = C.rgb("--accent"); [[xa, ya], [xb, yb]].forEach(function (p) { g.beginPath(); g.arc(p[0], p[1], 7 * d, 0, 2 * Math.PI); g.fill(); });
+    } else {
+      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.3;
+      g.strokeStyle = C.rgb("--grid"); g.beginPath(); g.arc(cx, cy, R, 0, 2 * Math.PI); g.stroke();
+      var r1 = R + A * 0.5 * x[0], r2 = R + A * 0.5 * x[1];
+      g.strokeStyle = C.rgb("--ink"); g.beginPath(); g.ellipse(cx + (r2 - r1) / 2, cy, (r1 + r2) / 2, R, 0, 0, 2 * Math.PI); g.stroke();
+      g.fillStyle = C.rgb("--accent"); [[cx - r1, cy], [cx + r2, cy]].forEach(function (p) { g.beginPath(); g.arc(p[0], p[1], 7 * d, 0, 2 * Math.PI); g.fill(); });
+    }
+    // the plane of the two heights
+    var e = C.fit(pl), P = pl.width, Q = pl.height, m = Math.min(P, Q), ox = P / 2, oy = Q / 2, sc = m * 0.42;
+    h.clearRect(0, 0, P, Q); h.lineWidth = 1 * e;
+    h.strokeStyle = C.rgb("--grid"); h.beginPath(); h.moveTo(ox - sc, oy); h.lineTo(ox + sc, oy); h.moveTo(ox, oy - sc); h.lineTo(ox, oy + sc); h.stroke();
+    h.strokeStyle = C.rgb("--accent"); h.lineWidth = 1.5 * e; h.beginPath(); h.moveTo(ox - sc * 0.8, oy + sc * 0.8); h.lineTo(ox + sc * 0.8, oy - sc * 0.8); h.moveTo(ox - sc * 0.8, oy - sc * 0.8); h.lineTo(ox + sc * 0.8, oy + sc * 0.8); h.stroke();
+    h.fillStyle = C.rgb("--muted"); h.font = (11 * e) + "px " + getComputedStyle(document.body).fontFamily;
+    h.fillText("x₁", ox + sc - 12 * e, oy - 5 * e); h.fillText("x₂", ox + 5 * e, oy - sc + 10 * e); h.fillText("S", ox + sc * 0.82, oy - sc * 0.82); h.fillText("D", ox + sc * 0.82, oy + sc * 0.9);
+    trail.push([x[0], x[1]]); if (trail.length > 420) trail.shift();
+    h.strokeStyle = C.rgb("--ink"); h.globalAlpha = 0.6; h.lineWidth = 1.5 * e; h.beginPath();
+    trail.forEach(function (p, i) { var X = ox + sc * p[0] * 1.6, Y = oy - sc * p[1] * 1.6; if (i) h.lineTo(X, Y); else h.moveTo(X, Y); }); h.stroke(); h.globalAlpha = 1;
+    h.fillStyle = C.rgb("--accent"); h.beginPath(); h.arc(ox + sc * x[0] * 1.6, oy - sc * x[1] * 1.6, 4 * e, 0, 2 * Math.PI); h.fill();
+    requestAnimationFrame(draw);
+  }
+  ["S", "D", "M"].forEach(function (k) { document.getElementById("r2" + k).addEventListener("click", function () { setStart(k); }); });
+  document.getElementById("r2Ring").addEventListener("change", function (ev) { ring = ev.target.checked; t0 = performance.now(); trail = []; });
+  document.getElementById("r2Play").addEventListener("click", function () {
+    // S at 196 Hz for lambda = 1; a constant displacement (lambda = 0) makes no sound
+    var L = lam(), parts = [];
+    if (L[0] > 0 && aS > 0) parts.push({ f: 196 * Math.sqrt(L[0]), amp: aS, tau: 0.9 });
+    if (aD > 0) parts.push({ f: 196 * Math.sqrt(L[1]), amp: aD, tau: 0.9 });
+    if (!parts.length) parts = [{ f: 1, amp: 0, tau: 1 }];
+    C.play(C.render(parts, 2.2), 0.7);
+  });
+  requestAnimationFrame(draw);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  // ---------- beads to loop ----------
+  var NL = [3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 48, 64, 100, 200, 1000, Infinity], N = 6, t0 = performance.now();
+  var rc = document.getElementById("cRing"), rx = rc.getContext("2d");
+  function ratio(k) { return isFinite(N) ? Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N) : k; }
+  function kmax() { return isFinite(N) ? Math.min(10, Math.floor(N / 2)) : 10; }
+  function specA() {
+    var parts = []; for (var k = 1; k <= kmax(); k++) parts.push({ ratio: ratio(k), amp: 1 / k });
+    C.stems(document.getElementById("cSpec"), parts, { W: 320, H: 100, rmax: 10, fs: 8, sw: 3 });
+    var k5 = Math.min(5, kmax()), r = ratio(k5);
+    document.getElementById("cNo").textContent = isFinite(N) ? N : "∞";
+    document.getElementById("cRead").innerHTML = isFinite(N)
+      ? N + " beads: mode " + k5 + " sounds at <b>" + r.toFixed(2) + "×</b> the lowest, not " + k5 + "×"
+      : "A continuous loop: every mode sounds at <b>exactly</b> a whole-number multiple of the lowest";
+  }
+  function drawRing(now) {
+    var d = C.fit(rc), W = rc.width, H = rc.height, cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.34, t = (now - t0) / 1000, s = 0.22 * Math.cos(2 * Math.PI * 0.5 * t);
+    rx.clearRect(0, 0, W, H);
+    rx.strokeStyle = C.rgb("--grid"); rx.lineWidth = d; rx.beginPath(); rx.arc(cx, cy, R, 0, 2 * Math.PI); rx.stroke();
+    var n = isFinite(N) ? N : 240;
+    rx.strokeStyle = C.rgb(isFinite(N) ? "--muted" : "--accent"); rx.lineWidth = (isFinite(N) ? 1.5 : 3) * d; rx.beginPath();
+    for (var j = 0; j <= n; j++) { var th = 2 * Math.PI * j / n - Math.PI / 2, r = R * (1 + s * Math.cos(2 * Math.PI * j / n)), x = cx + r * Math.cos(th), y = cy + r * Math.sin(th); if (j) rx.lineTo(x, y); else rx.moveTo(x, y); }
+    rx.stroke();
+    if (isFinite(N)) {
+      var rad = Math.max(1.5, Math.min(6, 60 / N)) * d;
+      for (var j = 0; j < N; j++) { var th = 2 * Math.PI * j / N - Math.PI / 2, r = R * (1 + s * Math.cos(2 * Math.PI * j / N)); rx.fillStyle = C.rgb("--accent"); rx.beginPath(); rx.arc(cx + r * Math.cos(th), cy + r * Math.sin(th), rad, 0, 2 * Math.PI); rx.fill(); }
+    }
+  }
+  var ns = document.getElementById("cN");
+  ns.addEventListener("input", function () { N = NL[parseInt(ns.value, 10)]; specA(); });
+  N = NL[parseInt(ns.value, 10)];
+  document.getElementById("cPlay").addEventListener("click", function () {
+    // no friction in the model; the sound is faded out only so that it stops
+    var parts = []; for (var k = 1; k <= kmax(); k++) parts.push({ f: 196 * ratio(k), amp: 1 / k, tau: 0.9 });
+    C.play(C.render(parts, 2.4), 0.7);
+  });
+
+  // ---------- one pluck, many eigenfunctions ----------
+  var sc = document.getElementById("cShape"), sx = sc.getContext("2d"), M = 3, w = 0.7, going = false, tg = 0, last = null, OMEGA = 2 * Math.PI / 4;
+  function tri(s) { s = ((s % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI); var z = Math.abs(s - Math.PI); return Math.max(0, 1 - z / w); }
+  function an(n) { return n === 0 ? w / (2 * Math.PI) : (n % 2 ? -1 : 1) * 2 * (1 - Math.cos(n * w)) / (Math.PI * n * n * w); }
+  function partial(th, t) { var s = an(0); for (var n = 1; n <= M; n++) s += an(n) * Math.cos(n * th) * Math.cos(n * OMEGA * t); return s; }
+  function exact(th, t) { return 0.5 * (tri(th - OMEGA * t) + tri(th + OMEGA * t)); }
+  function readB() {
+    document.getElementById("cMo").textContent = M;
+    var e = 0; for (var i = 0; i <= 400; i++) { var th = 2 * Math.PI * i / 400; e = Math.max(e, Math.abs(partial(th, 0) - exact(th, 0))); }
+    document.getElementById("cShapeRead").innerHTML = "Waves with up to " + M + " crests: the sum misses the plucked shape by at most <b>" + e.toFixed(2) + "</b>, on a peak 1 high";
+  }
+  function drawShape(now) {
+    var d = C.fit(sc), W = sc.width, H = sc.height, L = 12 * d, R = W - 12 * d, base = H * 0.78, amp = H * 0.6;
+    if (going && last != null) tg += (now - last) / 1000; last = now;
+    function X(th) { return L + (R - L) * th / (2 * Math.PI); }
+    sx.clearRect(0, 0, W, H);
+    sx.strokeStyle = C.rgb("--grid"); sx.lineWidth = d; sx.beginPath(); sx.moveTo(L, base); sx.lineTo(R, base); sx.stroke();
+    [L, R].forEach(function (x) { sx.beginPath(); sx.moveTo(x, base - amp - 6 * d); sx.lineTo(x, base + 8 * d); sx.stroke(); });
+    sx.setLineDash([5 * d, 4 * d]); sx.strokeStyle = C.rgb("--muted"); sx.lineWidth = 1.5 * d; sx.beginPath();
+    for (var i = 0; i <= 600; i++) { var th = 2 * Math.PI * i / 600, y = base - amp * exact(th, tg); if (i) sx.lineTo(X(th), y); else sx.moveTo(X(th), y); }
+    sx.stroke(); sx.setLineDash([]);
+    sx.strokeStyle = C.rgb("--accent"); sx.lineWidth = 2.5 * d; sx.beginPath();
+    for (var i = 0; i <= 600; i++) { var th = 2 * Math.PI * i / 600, y = base - amp * partial(th, tg); if (i) sx.lineTo(X(th), y); else sx.moveTo(X(th), y); }
+    sx.stroke();
+    sx.fillStyle = C.rgb("--muted"); sx.font = (11 * d) + "px 'IBM Plex Mono', monospace";
+    sx.fillText("start", L, H - 4 * d); var tw = sx.measureText("one turn later (same point)").width; sx.fillText("one turn later (same point)", R - tw, H - 4 * d);
+  }
+  var ms = document.getElementById("cM");
+  ms.addEventListener("input", function () { M = parseInt(ms.value, 10); readB(); });
+  var go = document.getElementById("cGo");
+  go.addEventListener("click", function () {
+    going = !going; go.setAttribute("aria-pressed", going); go.textContent = going ? "Pause" : (tg > 0 ? "Continue" : "Let go");
+  });
+  document.getElementById("cHear").addEventListener("click", function () {
+    // the motion at the pluck point theta = pi: a_n cos(n pi) = 2(1 - cos nw)/(pi n^2 w), all positive
+    var parts = []; for (var n = 1; n <= Math.max(1, M); n++) parts.push({ f: 196 * n, amp: an(n) * (n % 2 ? -1 : 1), tau: 0.9 });
+    C.play(C.render(parts, 2.4), 0.7);
+  });
+
+  function frame(now) { drawRing(now); drawShape(now); requestAnimationFrame(frame); }
+  C.onTheme(function () { specA(); });
+  specA(); readB(); requestAnimationFrame(frame);
+})();
+</script>
+```

@@ -1,0 +1,575 @@
+---
+title: "Where the equations come from"
+subtitle: "The Shape of a Sound · 2"
+date: 2026-10-29T14:00:00
+categories: [math, music, the-shape-of-a-sound]
+description: "Newton's law on a small piece, with a law of the material, gives every instrument's equation of motion, uₜₜ = −Au: eight short derivations, from a spring to a drumhead and a circuit, and what friction, radiation and the player add."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css]
+aliases: [/posts/instruments-as-operators/oscillator.html]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 1 · What you hear](../what-you-hear/index.qmd) · [3 · When an equation has a spectrum →](../when-an-equation-has-a-spectrum/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [post 1](../what-you-hear/index.qmd) for the words *partial* and *mode*; the mathematics needs nothing earlier. Mathematics: derivatives, partial derivatives and matrices, each explained where it first appears; the folds use integration by parts. About 45 minutes with every derivation; about 5 for the summary and the table.
+:::
+
+This post answers one question: where does the equation of motion of a vibrating object come from, and what decides its operator?
+
+[The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph)
+
+::: {.newidea}
+**In one sentence.** For small motions, Newton's law on a small piece (Kirchhoff's law for a circuit), together with a law of the material, gives $u_{tt} = -Au$: $A$ comes from the material, is defined on the shapes allowed by how the object is held, and friction, radiation and driving add terms of their own.
+:::
+
+**Operator $A$.** For an object held in a given way: the [linear](../instruments-as-operators/glossary.qmd#linear) map, defined on the shapes that the holding allows, that sends a shape to minus the acceleration that shape causes. It does not depend on time.
+
+A *shape* is whatever records the object's state at one moment: a number, a list of heights, a curve $u(x)$, the pressure along a tube, a capacitor's charge. Its acceleration is its second derivative in time, $u_{tt}$ (or $\ddot x$ for one number), so the equation of motion reads $u_{tt} = -Au$, with the constants, such as a tension, inside $A$.
+
+Each equation comes from the same four steps: Newton's law, mass times acceleration equals force, applied to one small piece of the object; a law of the material, which gives that force for a given shape; the *linearization*, which keeps only the part of the force proportional to the shape, for small motions, and so makes the map linear; and the holding (tied, clamped, open or free), which says which shapes $A$ may act on. A circuit runs the same steps with Kirchhoff's law in place of Newton's. Friction, radiation and the player come back as extra terms in [section 9](#what-gets-added). [Post 3](../when-an-equation-has-a-spectrum/index.qmd) asks when the solutions of $u_{tt} = -Au$ are sums of modes, each eigenvalue $\lambda$ of $A$ giving a frequency $\sqrt\lambda/2\pi$.
+
+## All the operators {#operator-table}
+
+| Object | Newton's law on…, with the law of… | Operator $A$ | on shapes with |
+|:--|:--|:--|:--|
+| [mass on a spring](#spring) | the mass; Hooke's law | $k/m$ | any displacement $x$ |
+| [two beads on a string](#beads) | each bead; tension | $\frac{T}{mh}\begin{pmatrix}2&-1\\-1&2\end{pmatrix}$ | any heights $(x_1, x_2)$; ends tied |
+| [string](#string) | a short piece; tension | $-c^2\dfrac{d^2}{dx^2}$, $c^2 = \dfrac{T}{\mu}$ | $u = 0$ at both ends |
+| [air in a tube](#tube) | a thin slab; air's bulk modulus | $-c^2\dfrac{d^2}{dx^2}$, $c^2 = \dfrac{K}{\rho}$, on pressure | $p = 0$ at an open end; $p_x = 0$ at a closed end |
+| [bar](#bar) | a thin slice; Hooke's law in bending | $\kappa^2\dfrac{d^4}{dx^4}$, $\kappa^2 = \dfrac{EI}{\rho S}$ | clamped: $u = u_x = 0$; free: $u_{xx} = u_{xxx} = 0$ |
+| [stiff string](#stiff-string) | a short piece; tension and bending | $-c^2\dfrac{d^2}{dx^2}$ $+\,\kappa^2\dfrac{d^4}{dx^4}$ | pinned: $u = u_{xx} = 0$ at both ends |
+| [drumhead](#drumhead) | a small patch; tension | $-c^2\Delta$, $c^2 = \dfrac{T}{\sigma}$ | $u = 0$ on the rim of the disk |
+| [coil and capacitor](#circuit) | Kirchhoff's voltage law; the laws of a coil and a capacitor | $\dfrac{1}{LC}$ | any charge $q$ |
+
+: The operators of this series. Each section below defines the symbols in its row and derives the row. {.striped}
+
+The table is the post's result; readers who want only that can go on to [post 3](../when-an-equation-has-a-spectrum/index.qmd).
+
+## 1 · A mass on a spring {#spring}
+
+*Mathematics used: second derivatives.*
+
+**Newton's law.** A mass $m$ hangs on a spring; let $x$ be its distance from rest, the position where the spring's pull balances gravity. Newton's law says $m\ddot x = F$, with $\ddot x$ the acceleration, the second derivative of $x$ in time, and $F$ the force on the mass.
+
+**The law of the material.** The spring pulls back in proportion to the stretch: twice as far, twice the pull. This is [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law), $F = -kx$, with $k$ the spring's stiffness and the minus sign pointing back toward rest. It is itself a law for small stretches: pulled far enough, a real spring's pull stops being proportional to the stretch ([anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity)).
+
+**The operator.** Together, $m\ddot x = -kx$, and dividing by the mass,
+$$
+\ddot x = -\frac{k}{m}\,x .
+$$
+The shape is one number, $x$, and the operator multiplies it by $k/m$; a single mass has no ends to hold. The model leaves out the spring's own mass and any friction.
+
+::: {.result}
+**Operator:** $A = k/m$, on shapes with any displacement $x$ (one number; nothing is held).
+:::
+
+**A pendulum shows the linearization at work.** A bob of mass $m$ on a light rod of length $L$ swings at angle $\theta$, in radians, from the vertical. Along its circular path, gravity's pull $mg$ has the part $mg\sin\theta$, back toward the bottom; the rod takes up the rest. The bob moves along the circle by $L\theta$, so Newton's law along the path is $mL\ddot\theta = -mg\sin\theta$, that is,
+$$
+\ddot\theta = -\frac{g}{L}\,\sin\theta .
+$$
+This equation is not linear: $\sin 2\theta \ne 2\sin\theta$, so twice a motion is not a motion. For a small angle $\sin\theta \approx \theta$, with an error of about $\theta^3/6$, half a percent of $\sin\theta$ at 10°. Keeping only that part,
+$$
+\ddot\theta = -\frac{g}{L}\,\theta ,
+$$
+the spring's equation with $A = g/L$. Its solutions $a\cos(\omega t + \phi)$, $\omega = \sqrt{g/L}$, take the same time per swing whatever the amplitude $a$ ([post 3](../when-an-equation-has-a-spectrum/index.qmd) shows there are no others).
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 182" role="img" aria-label="Left: a pendulum of length L at angle theta from the vertical; gravity m g pulls the bob down, and its part along the path, m g sin theta, pulls the bob back toward the bottom. Right: the time per swing of the true pendulum divided by the small-swing time, against the release angle: close to 1 up to about 30 degrees, 1.18 at 90 degrees, and growing without bound toward 180 degrees, while the linearized equation gives 1 at every angle.">
+  <path class="ink" d="M 50 22 L 110 22"/>
+  <path class="dash" d="M 80 22 L 80 142"/>
+  <path class="ink" d="M 80 22 L 140.2 108"/>
+  <path class="dash" d="M 80 52 A 30 30 0 0 0 97.2 46.6"/>
+  <circle cx="140.2" cy="108" r="7" class="fillacc"/>
+  <path class="neg" d="M 140.2 115 L 140.2 152"/><path class="fillneg" d="M 135.2 150 L 140.2 160 L 145.2 150 Z"/>
+  <path class="pos" d="M 134.5 112 L 119.5 122.5"/><path class="fillpos" d="M 121.4 126.6 L 114.5 126 L 116.6 119.6 Z"/>
+  <text x="84" y="72">θ</text><text x="116" y="60">L</text>
+  <text x="148" y="158">m g</text><text x="30" y="132">m g sin θ</text>
+  <path class="ink" d="M 200 150 L 400 150 M 200 150 L 200 26"/>
+  <path class="dash" d="M 400 150 L 400 26"/>
+  <path class="ink" d="M 196 70 L 200 70 M 300 150 L 300 154"/>
+  <text x="186" y="154">1</text><text x="186" y="74">2</text>
+  <text x="194" y="168">0°</text><text x="290" y="168">90°</text><text x="380" y="168">180°</text>
+  <text x="250" y="180">release angle</text>
+  <text x="206" y="16">period ÷ small-swing period</text>
+  <path class="acc" d="M 200.0 150.0 L 205.6 150.0 L 211.1 149.8 L 216.7 149.7 L 222.2 149.4 L 227.8 149.0 L 233.3 148.6 L 238.9 148.1 L 244.4 147.5 L 250.0 146.8 L 255.6 146.0 L 261.1 145.1 L 266.7 144.1 L 272.2 143.0 L 277.8 141.8 L 283.3 140.5 L 288.9 139.0 L 294.4 137.4 L 300.0 135.6 L 305.6 133.6 L 311.1 131.4 L 316.7 129.0 L 322.2 126.4 L 327.8 123.4 L 333.3 120.2 L 338.9 116.5 L 344.4 112.4 L 350.0 107.8 L 355.6 102.4 L 361.1 96.3 L 366.7 89.0 L 372.2 80.3 L 377.8 69.4 L 383.3 55.2 L 388.9 34.9"/>
+  <circle cx="300" cy="135.6" r="3" class="fillacc"/>
+  <text x="222" y="124">1.18 at 90°</text><text x="326" y="145">linear: 1</text>
+</svg>
+```
+
+**What is lost for big swings.** The true pendulum takes longer for wider swings, more and more as the release angle nears 180° (the fold gives the numbers), and two of its motions do not sum to a third. Every equation in this post is linear, by the small-motion step (for the circuit, by ideal parts), so twice a motion is again a motion, swinging just as fast: the frequencies do not depend on the size of the motion. [Post 3](../when-an-equation-has-a-spectrum/index.qmd#counterexamples) shows what is heard when this step fails.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The period of a wide swing <span class="needs">uses energy conservation and an integral</span></summary>
+
+The true pendulum takes 1.7% longer per swing at 30°, 7% at 60° and 18% at 90°, and the time grows without bound as the release angle nears 180°, where the bob would balance upside down. Here is where these numbers come from. Released from rest at angle $\theta_0$, the pendulum conserves energy: $\tfrac12 L^2\dot\theta^2 - gL\cos\theta = -gL\cos\theta_0$ per unit mass, so $\dot\theta = \sqrt{(2g/L)(\cos\theta - \cos\theta_0)}$. A quarter swing, from $\theta_0$ down to 0, takes $\int_0^{\theta_0} d\theta/\dot\theta$. Substitute $\sin(\theta/2) = k\sin\varphi$ with $k = \sin(\theta_0/2)$. Then $\cos\theta - \cos\theta_0 = 2k^2\cos^2\varphi$, by $\cos\theta = 1 - 2\sin^2(\theta/2)$, and $d\theta = 2k\cos\varphi\,d\varphi/\sqrt{1 - k^2\sin^2\varphi}$, by differentiating the substitution, so the period is
+$$
+T = 4\sqrt{\frac{L}{g}}\int_0^{\pi/2}\frac{d\varphi}{\sqrt{1 - k^2\sin^2\varphi}} .
+$$
+The integral is the complete elliptic integral $K(k)$, and Gauss's formula $K(k) = \pi/\big(2\,\mathrm{AGM}(1, \sqrt{1 - k^2})\big)$, with AGM the arithmetic–geometric mean, gives $T/T_0 = 1/\mathrm{AGM}\big(1, \cos(\theta_0/2)\big)$, where $T_0 = 2\pi\sqrt{L/g}$ is the small-swing period. This formula gives the numbers above and the curve in the figure; for small $\theta_0$ it is $1 + \theta_0^2/16 + \cdots$. The period grows without bound as $\theta_0 \to \pi$, because $\cos(\theta_0/2) \to 0$ ([Wikipedia](https://en.wikipedia.org/wiki/Pendulum_(mechanics))).
+
+</details>
+:::
+
+## 2 · Beads on a string {#beads}
+
+*Mathematics used: the small-angle approximation, and a matrix times a list of numbers (explained).*
+
+**Newton's law on one bead.** Thread beads of mass $m$ on a light string of tension $T$, spaced $h$ apart, and let $u_j$ be the height of bead $j$ above the straight line. Bead $j$'s mass times its acceleration, $m\ddot u_j$, equals the upward force on it from the string on its two sides.
+
+**The law of the material.** A light, perfectly flexible string pulls only along itself, with the same tension $T$ all along.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 160" role="img" aria-label="A bead pulled by the string toward its two neighbors">
+  <path class="dash" d="M 20 120 L 400 120"/>
+  <path class="ink" d="M 60 110 L 210 60 L 360 100"/>
+  <circle cx="60" cy="110" r="6" class="fillacc"/><circle cx="210" cy="60" r="7" class="fillacc"/><circle cx="360" cy="100" r="6" class="fillacc"/>
+  <path class="pos" d="M 210 60 L 150 80"/><path class="pos" d="M 210 60 L 270 76"/>
+  <path class="neg" d="M 210 60 L 210 110"/>
+  <text x="40" y="140">bead j−1</text><text x="190" y="40">bead j</text><text x="340" y="140">bead j+1</text>
+  <text x="120" y="76">T</text><text x="280" y="70">T</text><text x="218" y="100">net pull</text>
+</svg>
+```
+
+**Small motions.** The stretch of string from bead $j$ to bead $j + 1$ has slope $(u_{j+1} - u_j)/h$ and pulls bead $j$ along itself with force $T$. If it makes a small angle $\theta$ with the horizontal, the upward part of the pull is $T\sin\theta \approx T\tan\theta$ (both $\sin\theta$ and $\tan\theta$ are about $\theta$ in radians), and $\tan\theta$ is the slope: the upward part is $\frac{T}{h}(u_{j+1} - u_j)$. The stretch on the other side gives $\frac{T}{h}(u_{j-1} - u_j)$. Adding the two,
+$$
+m\,\ddot u_j = \frac{T}{h}\,\big(u_{j+1} - 2u_j + u_{j-1}\big).
+$$
+A bead above the average of its neighbors is pulled down. Small slopes also keep the string's length, and so its tension, very nearly unchanged.
+
+**Two beads, ends tied.** Take two beads at heights $x_1$ and $x_2$, with both ends of the string tied down. Each tied end counts as a neighbor held at height 0, so
+$$
+m\,\ddot x_1 = \frac{T}{h}\,(-2x_1 + x_2), \qquad m\,\ddot x_2 = \frac{T}{h}\,(x_1 - 2x_2) .
+$$
+Each bead's acceleration depends on where the other bead is. Collect the two heights into one column $x = (x_1, x_2)$, and the two equations become one, $\ddot x = -Ax$, with
+$$
+A = \frac{T}{mh}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} .
+$$
+Here $Ax$ is a [matrix times a column](../instruments-as-operators/glossary.qmd#matrix-vector): its first entry, row $(2, -1)$ times the column, is $\frac{T}{mh}(2x_1 - x_2)$. The matrix reads the same across as down, because the string between the beads feels only the difference of their heights: raising bead 2 by one unit pulls bead 1 as hard as raising bead 1 pulls bead 2. Such a matrix is [symmetric](../instruments-as-operators/glossary.qmd#symmetric-matrix); [post 3](../when-an-equation-has-a-spectrum/index.qmd) shows why that matters.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 126" role="img" aria-label="Left: two beads on a string tied down at both ends. Right: the same two beads closed into a ring, so each bead is joined to the other on both sides.">
+  <path class="dash" d="M 20 70 L 200 70"/>
+  <rect x="14" y="58" width="6" height="24" class="fillacc" opacity="0.5"/><rect x="200" y="58" width="6" height="24" class="fillacc" opacity="0.5"/>
+  <path class="ink" d="M 20 70 L 80 45 L 140 85 L 203 70"/>
+  <circle cx="80" cy="45" r="6" class="fillacc"/><circle cx="140" cy="85" r="6" class="fillacc"/>
+  <text x="70" y="30">x₁</text><text x="132" y="108">x₂</text><text x="60" y="114">ends tied</text>
+  <circle cx="320" cy="68" r="38" class="ink" fill="none"/>
+  <circle cx="282" cy="68" r="6" class="fillacc"/><circle cx="358" cy="68" r="6" class="fillacc"/>
+  <text x="252" y="72">1</text><text x="370" y="72">2</text><text x="276" y="120">closed into a ring</text>
+</svg>
+```
+
+**How the beads are held is part of $A$.** Join the string's two ends to each other instead, closing the beads into a ring. Both of bead 1's neighbors are then bead 2, so $m\ddot x_1 = \frac{2T}{h}(x_2 - x_1)$, likewise for bead 2, and
+$$
+A_{\text{ring}} = \frac{T}{mh}\begin{pmatrix} 2 & -2 \\ -2 & 2 \end{pmatrix} :
+$$
+the same beads, held another way, give another operator.
+
+::: {.result}
+**Operator:** $A = \frac{T}{mh}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$, on shapes with any heights $(x_1, x_2)$; the tied ends are built in, as neighbors held at height 0. For $N$ beads, $A = \frac{T}{mh}K$ with the $N \times N$ matrix $K$ of the fold below.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Any number of beads <span class="needs">uses matrices</span></summary>
+
+With $N$ beads and both ends tied, $u_0 = u_{N+1} = 0$, the $N$ bead equations become one, $\ddot u = -Au$ with $A = \frac{T}{mh}K$, where $K$ has 2 down its diagonal and $-1$ just beside it:
+$$
+K = \begin{pmatrix} 2 & -1 & & \\ -1 & 2 & \ddots & \\ & \ddots & \ddots & -1\\ & & -1 & 2 \end{pmatrix} .
+$$
+Row $j$ of $K$ times $u$ is $2u_j - u_{j-1} - u_{j+1}$: the bead equation, for every bead at once. The tied ends are built into the first and last rows, as neighbors held at height 0. On a ring of three or more beads, $K$ also has $-1$ in its two corners, where bead $N$ meets bead 1. Like the two-bead matrix, $K$ is symmetric.
+
+</details>
+:::
+
+## 3 · A string {#string}
+
+*Mathematics used: partial derivatives (explained) and the small-angle approximation.*
+
+**Newton's law on a short piece.** Let the string run from $x = 0$ to $x = L$, with tension $T$ and mass $\mu$ per unit length, and let $u(x, t)$ be its height at position $x$ and time $t$. Subscripts are [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative): $u_x$ is the slope, the rate of change in $x$ with $t$ held fixed, and $u_{tt}$ is the acceleration, two derivatives in $t$ with $x$ held fixed. The piece between $x$ and $x + dx$ has mass $\mu\,dx$, so Newton's law reads $\mu\,dx\,u_{tt} = F$, with $F$ the net upward force on the piece.
+
+**The law of the material.** A perfectly flexible string resists only stretching. The only force on the piece is the tension $T$, pulling along the string at each of its two ends.
+
+```{=html}
+<svg class="fig" viewBox="0 48 420 104" role="img" aria-label="A short piece of string between x and x plus dx on a hump; the tension pulls along the string at each end, and both pulls tilt downward, so the net force pulls the hump back down">
+  <path class="dash" d="M 60 110 Q 210 30 360 100"/>
+  <path class="acc" d="M 120 84 Q 210 54 300 78"/>
+  <circle cx="120" cy="84" r="4" class="fillacc"/><circle cx="300" cy="78" r="4" class="fillacc"/>
+  <path class="neg" d="M 120 84 L 66 102"/><path class="neg" d="M 75.9 103.2 L 66 102 L 73.3 95.1"/>
+  <path class="neg" d="M 300 78 L 356 93"/><path class="neg" d="M 348.3 86.6 L 356 93 L 346.2 94.8"/>
+  <text x="44" y="122">T</text><text x="364" y="110">T</text>
+  <text x="112" y="70">x</text><text x="282" y="64">x + dx</text>
+  <text x="104" y="142">upward part of each pull ≈ T × slope</text>
+</svg>
+```
+
+**Small slopes.** As for the beads, the upward part of a pull $T$ along the string is $T\sin\theta \approx T\tan\theta$, the tension times the slope. At the right end of the piece it is $T\,u_x(x + dx)$; at the left end the pull points the other way, $-T\,u_x(x)$. The net upward force is
+$$
+T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx ,
+$$
+where $u_{xx}$, the rate at which the slope changes, is the string's curvature. On a hump $u_{xx} < 0$, and the force pulls the piece down. Newton's law, divided by $\mu\,dx$, becomes
+$$
+u_{tt} = c^2\,u_{xx}, \qquad c^2 = \frac{T}{\mu} ,
+$$
+the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation); $c$ is the speed at which a bump runs along the string. As for the beads, small slopes also keep the tension at $T$.
+
+**The operator and its ends.** Take the shape, find its curvature at every point and multiply by $-c^2$: that is $A = -c^2\,d^2/dx^2$, and the equation reads $u_{tt} = -Au$. At the nut and the bridge the string cannot move, so $u(0, t) = u(L, t) = 0$ at every moment, and $A$ acts only on shapes that are zero at both ends. A restriction of this kind is a [boundary condition](../instruments-as-operators/glossary.qmd#boundary-condition); one that fixes the value at the edge is a [Dirichlet condition](../instruments-as-operators/glossary.qmd#dirichlet). The model leaves out stiffness ([section 6](#stiff-string)), the air and friction.
+
+::: {.result}
+**Operator:** $A = -c^2\,\dfrac{d^2}{dx^2}$, with $c^2 = T/\mu$, on shapes with $u(0) = u(L) = 0$ (both ends tied). In words: minus $c^2$ times the curvature.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The same equation from many beads <span class="needs">uses limits</span></summary>
+
+Put $N$ beads on the string, spaced $h = L/(N + 1)$ apart, each carrying the mass of its stretch of string, $m = \mu h$. Section 2's bead equation, divided by $m$, reads
+$$
+\ddot u_j = \frac{T}{\mu}\cdot\frac{u_{j+1} - 2u_j + u_{j-1}}{h^2} .
+$$
+For a smooth shape sampled at the beads, $u_j = u(jh)$, the fraction tends to $u_{xx}$ as $h \to 0$. By Taylor's theorem, $u(x \pm h) = u(x) \pm h\,u_x + \tfrac12 h^2 u_{xx} \pm \tfrac16 h^3 u_{xxx} + O(h^4)$; adding the two cancels the odd terms, so the fraction equals $u_{xx}(x) + O(h^2)$. So the beads' matrix $\frac{T}{mh}K$ becomes $-c^2\,d^2/dx^2$, and the tied ends $u_0 = u_{N+1} = 0$ become $u(0) = u(L) = 0$.
+
+</details>
+:::
+
+## 4 · Air in a tube {#tube}
+
+*Mathematics used: partial derivatives, including mixed ones.*
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 130" role="img" aria-label="A slab of air in a tube, pushed by pressure on both faces">
+  <path class="ink" d="M 20 30 L 400 30 M 20 100 L 400 100"/>
+  <rect x="170" y="31" width="80" height="68" class="bar" opacity="0.5"/>
+  <path class="pos" d="M 120 65 L 168 65"/><path class="fillpos" d="M 168 59 L 180 65 L 168 71 Z"/>
+  <path class="neg" d="M 300 65 L 252 65"/><path class="fillneg" d="M 252 59 L 240 65 L 252 71 Z"/>
+  <text x="96" y="58">p(x)</text><text x="300" y="58">p(x+dx)</text>
+  <text x="180" y="118">slab, mass ρS dx</text>
+</svg>
+```
+
+**Newton's law on a slab.** Let $\xi(x, t)$ be how far the air that normally sits at position $x$ has moved along the tube, and $p(x, t)$ the pressure there minus room pressure. The tube has cross-section area $S$ and the air has density $\rho$, so the slab between $x$ and $x + dx$ has mass $\rho S\,dx$. The force on it along the tube is the pressure difference between its faces, $S\,[p(x) - p(x + dx)] \approx -S\,p_x\,dx$. Newton's law, divided by $S\,dx$, is
+$$
+\rho\,\xi_{tt} = -p_x .
+$$
+
+**The law of the material.** Squeezed air pushes back. The slab's faces move by $\xi(x)$ and $\xi(x + dx)$, so its length changes by about $\xi_x\,dx$: it is stretched by the fraction $\xi_x$, and its pressure drops in proportion,
+$$
+p = -K\,\xi_x ,
+$$
+where $K$ is air's [bulk modulus](../instruments-as-operators/glossary.qmd#bulk-modulus), its resistance to being squeezed. A sound wave squeezes the air too fast for heat to flow, which makes $K$ about 1.4 times atmospheric pressure.
+
+**Small motions.** "In proportion" is the linearization: it holds while the pressure changes are small compared with atmospheric pressure. (The tube is also taken narrow, so the pressure is the same across it, and frictionless.) Putting the material law into Newton's law gives $\rho\,\xi_{tt} = K\,\xi_{xx}$, that is,
+$$
+\xi_{tt} = c^2\,\xi_{xx}, \qquad c^2 = \frac{K}{\rho} ,
+$$
+the string's wave equation, with $c$ now the speed of sound, about 343 m/s in air at 20 °C. The pressure obeys the same equation: differentiate both sides in $x$ and multiply by $-K$. Since $p = -K\xi_x$, the right side becomes $c^2p_{xx}$, and the left side $-K\xi_{ttx} = (-K\xi_x)_{tt} = p_{tt}$, because for a smooth motion the order of differentiation does not matter. So
+$$
+p_{tt} = c^2\,p_{xx} .
+$$
+
+**The operator and its ends.** The operator is the string's, $A = -c^2\,d^2/dx^2$, acting on pressure shapes: $p_{tt} = -Ap$. Only the ends differ. At an open end the air meets the room, so the pressure there is room pressure, $p = 0$, approximately (fold below). At a closed end, such as a clarinet's nearly shut reed, the air cannot move, so it has no acceleration, and by Newton's law there is no pressure slope: $p_x = 0$. A condition on the slope is a *Neumann condition* ([glossary](../instruments-as-operators/glossary.qmd#dirichlet)).
+
+::: {.result}
+**Operator:** $A = -c^2\,\dfrac{d^2}{dx^2}$, with $c^2 = K/\rho$, acting on pressure, on shapes with $p = 0$ at an open end and $p_x = 0$ at a closed end. A flute is open at both ends; a clarinet is closed at the reed and open at the bell.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The open end, more exactly</summary>
+
+The condition $p = 0$ at an open end is approximate: the air just outside the tube moves with the air inside, so the tube acts as if it were slightly longer, by about 0.6 of its radius at each open end. This extra length is the *end correction* (Wolfe).
+
+</details>
+:::
+
+## 5 · A bar {#bar}
+
+*Mathematics used: partial derivatives, and an integral over a cross-section.*
+
+A kalimba's steel tine is under no tension at all: it springs back because steel resists being bent. Let $u(x, t)$ be the bar's height at distance $x$ along it; for small slopes its curvature, how sharply it bends, is $u_{xx}$.
+
+**The law of the material.** Bend the bar, and fibers on the outside of the curve stretch while fibers on the inside compress; a middle line, the *neutral axis*, keeps its length.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 150" role="img" aria-label="A bent section of bar: fibers on the outside stretch, fibers on the inside compress, the middle keeps its length">
+  <path class="bar" d="M 50 60 Q 210 10 370 60 L 370 100 Q 210 50 50 100 Z"/>
+  <path class="dash" d="M 50 80 Q 210 30 370 80"/>
+  <path class="pos" d="M 150 40 L 120 47"/><path class="pos" d="M 270 40 L 300 47"/>
+  <path class="neg" d="M 140 78 L 165 72"/><path class="neg" d="M 280 78 L 255 72"/>
+  <text x="168" y="22">stretched (y &gt; 0)</text><text x="160" y="118">compressed (y &lt; 0)</text>
+  <text x="268" y="138">neutral axis, y = 0</text>
+</svg>
+```
+
+A fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$: where $u_{xx} < 0$ the bar bends down, and its top side is on the outside of the curve. By Hooke's law the fiber carries the force per unit area $-E\,y\,u_{xx}$, where $E$ is the steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus). Summed over the cross-section these forces cancel, which is what puts the neutral axis through the cross-section's centroid, its middle, but their turning effects add up, to the [bending moment](../instruments-as-operators/glossary.qmd#moment)
+$$
+M = -\int y\,(-E\,y\,u_{xx})\,dA = EI\,u_{xx}, \qquad I = \int y^2\,dA ,
+$$
+with both integrals over the cross-section. The [second moment of area](../instruments-as-operators/glossary.qmd#second-moment) $I$ says how the cross-section's shape resists bending; for a round wire of diameter $d$ it is $\pi d^4/64$.
+
+**Newton's law on a thin slice.** A moment turns a slice but cannot lift it. Each face of the slice also carries a sideways force, the *shear force* $V$: upward on the right face, downward on the left.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 170" role="img" aria-label="A thin slice with bending moments, clockwise on the left face and counterclockwise on the right face, and shear forces, down on the left face and up on the right face">
+  <path class="dash" d="M 30 85 L 390 85"/>
+  <rect class="bar" x="150" y="65" width="120" height="40" rx="2"/>
+  <path class="pos" d="M 136 55 A 32 32 0 0 0 136 115"/><path class="fillpos" d="M 143 55 L 132 49 L 132 61 Z"/>
+  <path class="pos" d="M 284 55 A 32 32 0 0 1 284 115"/><path class="fillpos" d="M 277 55 L 288 49 L 288 61 Z"/>
+  <path class="neg" d="M 150 85 L 150 140"/><path class="fillneg" d="M 144 136 L 156 136 L 150 148 Z"/>
+  <path class="neg" d="M 270 85 L 270 30"/><path class="fillneg" d="M 264 34 L 276 34 L 270 22 Z"/>
+  <text x="96" y="90">M</text><text x="306" y="90">M + dM</text>
+  <text x="158" y="152">V</text><text x="278" y="30">V + dV</text><text x="198" y="128">dx</text>
+</svg>
+```
+
+For a thin bar the slice's resistance to being spun, its rotational inertia, is negligible, so the turning effects on it balance. About the left face, the shear on the right face times the lever arm $dx$ cancels the change in moment, $V\,dx + dM = 0$, so $V = -M_x = -EI\,u_{xxx}$. The shear forces on the two faces differ by $V_x\,dx$, which accelerates the slice's mass $\rho S\,dx$ ($\rho$ the density, $S$ the cross-section's area):
+$$
+\rho S\,u_{tt} = V_x = -EI\,u_{xxxx} .
+$$
+This is the [Euler–Bernoulli beam](../instruments-as-operators/glossary.qmd#beam) equation, $u_{tt} = -\kappa^2 u_{xxxx}$ with $\kappa^2 = EI/\rho S$: four derivatives, two from bending and two from balancing the forces along the bar.
+
+**Small motions.** The linearization is small slopes, so that the curvature is $u_{xx}$, with Hooke's law in every fiber; the bar is taken uniform and thin (fold).
+
+**The operator and its ends.** The operator is $A = \kappa^2\,d^4/dx^4$, and $u_{tt} = -Au$. A fourth-order operator needs two conditions at each end. A *clamped* end, such as the tine's base, can neither move nor tilt: $u = u_x = 0$. A *free* end, such as its tip, carries no moment and no shear force: $u_{xx} = u_{xxx} = 0$. A *pinned* end is held in place but free to pivot, so it carries no moment: $u = u_{xx} = 0$. A bar clamped at one end and free at the other is a [cantilever](../instruments-as-operators/glossary.qmd#cantilever).
+
+::: {.result}
+**Operator:** $A = \kappa^2\,\dfrac{d^4}{dx^4}$, with $\kappa^2 = EI/\rho S$, on shapes with two conditions at each end: clamped, $u = u_x = 0$; free, $u_{xx} = u_{xxx} = 0$; pinned, $u = u_{xx} = 0$. A kalimba tine is clamped at its base and free at its tip; a glockenspiel bar is free at both ends.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>What the bar model leaves out</summary>
+
+The model ignores the slices' rotational inertia and their shear deformation. Rayleigh's correction for the first and Timoshenko's for the second add terms that matter only for thick bars and high modes (Wikipedia, Euler–Bernoulli beam theory).
+
+</details>
+:::
+
+## 6 · A stiff string {#stiff-string}
+
+*Mathematics used: partial derivatives.*
+
+A piano wire is a string and a bar at once.
+
+**Newton's law on a short piece, with both laws of the material.** On the piece between $x$ and $x + dx$, of mass $\mu\,dx$, tension gives the string's force $T\,u_{xx}\,dx$ ([section 3](#string)), and bending gives the bar's, $-EI\,u_{xxxx}\,dx$ ([section 5](#bar)), with $I = \pi d^4/64$ for a round wire of diameter $d$. Newton's law takes the total force, so the two simply add:
+$$
+\mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx}, \qquad\text{that is}\qquad u_{tt} = c^2\,u_{xx} - \kappa^2\,u_{xxxx} ,
+$$
+with $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$, the bar's constant again, since a plain wire's mass per length is $\mu = \rho S$.
+
+**Small motions.** The linearization is again small slopes, which also keep the tension unchanged as the wire flexes. The wire is taken uniform and of plain steel (fold).
+
+**The operator and its ends.** The bridge at one end and a metal bearing point at the other hold the wire in place, $u = 0$. If they let it pivot freely they exert no bending moment, so $u_{xx} = 0$ as well: *pinned* ends.
+
+::: {.result}
+**Operator:** $A = -c^2\,\dfrac{d^2}{dx^2} + \kappa^2\,\dfrac{d^4}{dx^4}$, with $c^2 = T/\mu$ and $\kappa^2 = EI/\mu$, on shapes with $u = u_{xx} = 0$ at both ends (pinned). The operators of the string and the bar add. [Post 4's piano](../instruments-case-by-case/piano.qmd) hears what the added term does.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>What the piano-wire model leaves out</summary>
+
+A piano's bass strings are wound with copper, which adds mass but little stiffness, so they are not plain wires. Real piano strings are also held a little more firmly than pinned at the bridge and the bearing point, which shifts the numbers slightly but not the picture (Fletcher and Rossing, chapter 12).
+
+</details>
+:::
+
+## 7 · A drumhead {#drumhead}
+
+*Mathematics used: partial derivatives, integrals over an area, and the divergence theorem (quoted).*
+
+**Newton's law on a small patch.** Let $u(x, y, t)$ be the head's height above rest at the point $(x, y)$ at time $t$, and $\sigma$ its mass per unit area. A small patch $D$ has mass $\iint_D \sigma\,dA$, the sum of $\sigma\,dA$ over its tiny pieces of area $dA$, so Newton's law for its up-and-down motion reads
+$$
+\iint_D \sigma\,u_{tt}\,dA = \text{the net upward force on the patch} .
+$$
+
+**The law of the material.** A drumhead is a *membrane*: a sheet with no stiffness of its own, stretched with the same tension $T$ in every direction. Across each short piece $ds$ of the patch's edge, the sheet outside pulls with the force $T\,ds$, along the surface and outward, so $T$ is a force per unit length of cut.
+
+```{=html}
+<svg class="fig" viewBox="0 0 320 200" style="max-width:340px" role="img" aria-label="A patch of the drumhead with tension pulling outward along its edge">
+  <ellipse class="bar" cx="160" cy="105" rx="90" ry="45"/>
+  <path class="acc" d="M 250 105 L 294 89"/><path class="fillacc" d="M 290 82 L 302 86 L 293 95 Z"/>
+  <path class="acc" d="M 70 105 L 30 117"/><path class="fillacc" d="M 32 124 L 20 120 L 29 111 Z"/>
+  <path class="acc" d="M 160 60 L 167 22"/><path class="fillacc" d="M 162 22 L 169 10 L 174 23 Z"/>
+  <path class="acc" d="M 160 150 L 151 186"/><path class="fillacc" d="M 145 184 L 149 196 L 157 186 Z"/>
+  <path class="dash" d="M 250 105 L 300 105"/>
+  <text x="128" y="110">patch D</text><text x="256" y="128">T ds</text>
+</svg>
+```
+
+**Small slopes.** Where the sheet bulges, the pulls tilt. As on the string, the upward part of each is $T$ times the slope, here the slope $\partial_n u$ outward across the edge: $T\,\partial_n u\,ds$. Adding these around the edge $\partial D$ turns into adding one quantity over the inside of the patch, by the [divergence theorem](../instruments-as-operators/glossary.qmd#divergence-theorem) applied to the slope vector $(u_x, u_y)$:
+$$
+T\oint_{\partial D}\partial_n u\,ds = T\iint_D \Delta u\,dA, \qquad \Delta u = u_{xx} + u_{yy} .
+$$
+The quantity $\Delta u$ is the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian). Newton's law holds for every patch, however small, so the integrands agree at every point: $\sigma\,u_{tt} = T\,\Delta u$. Tension pulls each point toward the average height around it; $\Delta u$ measures how far the point sits below that average.
+
+**The operator and its rim.** The operator is $A = -c^2\Delta$ with $c^2 = T/\sigma$, and $u_{tt} = -Au$. The rim is clamped to the drum's shell, so $u = 0$ there; on a round drum of radius $a$ the rim is the circle $r = a$, at distance $a$ from the center. The model leaves out damping and the air on both sides of the head, which matters for real drums ([post 4](../instruments-case-by-case/drum.qmd)).
+
+::: {.result}
+**Operator:** $A = -c^2\Delta$, with $c^2 = T/\sigma$, on shapes with $u = 0$ on the rim, the circle $r = a$ around the disk of the head.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The same step in one dimension, and the Laplacian on a round drum <span class="needs">uses polar coordinates</span></summary>
+
+In one dimension a patch is a segment, its edge is its two endpoints, and the divergence-theorem step is $u_x(b) - u_x(a) = \int_a^b u_{xx}\,dx$, the fundamental theorem of calculus: the string's step of section 3.
+
+In the distance $r$ from the center and the angle $\theta$, the chain rule gives $\Delta u = u_{rr} + u_r/r + u_{\theta\theta}/r^2$ ([Wikipedia](https://en.wikipedia.org/wiki/Laplace_operator#Two_dimensions)). The term $u_r/r$ is there because circles around the center grow longer as $r$ grows. Post 4's drum page solves the mode equation in these coordinates.
+
+</details>
+:::
+
+## 8 · A coil and a capacitor {#circuit}
+
+*Mathematics used: second derivatives.*
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 150" role="img" aria-label="A loop made of a coil on the left and a capacitor on the right; the capacitor's top plate holds charge plus q and its bottom plate minus q, and the current I flows around the loop">
+  <path class="ink" d="M 80 30 L 80 45 A 6 6 0 0 0 80 57 A 6 6 0 0 0 80 69 A 6 6 0 0 0 80 81 A 6 6 0 0 0 80 93 A 6 6 0 0 0 80 105 L 80 120 L 270 120 L 270 82"/>
+  <path class="ink" d="M 270 68 L 270 30 L 80 30"/>
+  <path class="ink" d="M 252 82 L 288 82 M 252 68 L 288 68" style="stroke-width:3"/>
+  <path class="pos" d="M 146 30 L 202 30"/><path class="fillpos" d="M 200 25 L 210 30 L 200 35 Z"/>
+  <text x="8" y="79">coil, L</text><text x="296" y="79">capacitor, C</text>
+  <text x="292" y="62">+q</text><text x="292" y="98">−q</text>
+  <text x="120" y="20">current I = dq/dt</text>
+  <text x="56" y="144">L dI/dt + q/C = 0 around the loop</text>
+</svg>
+```
+
+**Kirchhoff's law on the loop.** Join a coil to a capacitor in a loop, an [LC circuit](https://en.wikipedia.org/wiki/LC_circuit). Let $q(t)$ be the charge on the capacitor's top plate and $I = \dot q$ the current flowing onto it. [Kirchhoff's voltage law](https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws), which balances voltages as Newton's law balances forces, says that the voltages around a closed loop add to zero.
+
+**The laws of the parts.** A capacitor's *capacitance* $C$ is the charge it holds per volt, so the charge $q$ puts the voltage $q/C$ across it. A coil opposes changes in its current; its *inductance* $L$ is the voltage per unit rate of change of current, so its voltage is $L\,\dot I$. For ideal parts, with $L$ and $C$ fixed, both laws are linear, and no small-motion step is needed. Around the loop, $L\,\dot I + q/C = 0$, that is, $L\,\ddot q + q/C = 0$, and
+$$
+\ddot q = -\frac{1}{LC}\,q .
+$$
+The coil plays the mass, resisting a change of current as a mass resists a change of velocity, and $1/C$ plays the spring's stiffness.
+
+::: {.result}
+**Operator:** $A = \dfrac{1}{LC}$, on shapes with any charge $q$ (one number; nothing is held). It is the spring of [section 1](#spring) again.
+:::
+
+A theremin's pitch comes from two such oscillators at radio frequencies: the player's hand changes the capacitance of one, and the tone you hear is the difference of their frequencies, made by a nonlinear mixer ([heterodyning](../instruments-as-operators/glossary.qmd#heterodyning)).
+
+## 9 · What gets added {#what-gets-added}
+
+The equation $u_{tt} = -Au$ describes an object left to itself that loses nothing. Losses, the player's start and a steady drive each add a term.
+
+**Losses.** Energy leaves a vibrating object in three ways. *Internal friction*: no material is perfectly springy, so some of the work of bending it turns into heat. *The supports*: a bridge rocks with the strings and passes their vibration to the body, which is how the body sounds, and a damper's felt soaks energy up. *Radiation*: the sound wave carries energy away, which is how we hear the instrument at all. The simplest model of a loss is a force against the velocity:
+$$
+u_{tt} + C\,u_t + A\,u = 0 ,
+$$
+with $C$ the friction, or [damping](../instruments-as-operators/glossary.qmd#damping). For the spring $C$ is a number, $\gamma$, and for light friction the swing fades like $e^{-\gamma t/2}$: its fading time is $\tau = 2/\gamma$, as in post 3. Real losses grow with frequency, and radiation adds a term of another kind (fold below). [Post 3](../when-an-equation-has-a-spectrum/index.qmd#levels) shows which losses keep the modes intact and which mix them. In this series the loss terms come mostly from measurement.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Losses that grow with frequency, and radiation</summary>
+
+High partials fade faster than low ones. A standard piano-string model adds a second loss term for this, with three time derivatives, and its two coefficients are empirical, lumping together the air, the steel and the soundboard (Chaigne and Askenfelt). Radiation is a term of another kind. The air is a second system that the object pushes on and that never gives the energy back, so in place of a fixed $C$ it adds an [added mass](../instruments-as-operators/glossary.qmd#added-mass) and a loss, both depending on frequency (Fletcher and Rossing, chapter 7).
+
+</details>
+:::
+
+**The start.** A pluck adds no term at all. The player pulls the string into a shape and lets go, so the pluck is the starting data: a shape $u(x, 0)$, a triangle with its corner at the plucking point, and a velocity $u_t(x, 0) = 0$. A strike adds a brief force. A piano hammer pushes on the string only while its felt is squashed against it, so the equation gains a term on the right,
+$$
+u_{tt} + C\,u_t + A\,u = \frac{f(x, t)}{\mu} ,
+$$
+with $f$ the hammer's force per unit length, nonzero only near the hammer and only during the contact. The felt is a spring between hammer and string that stiffens as it is squashed: its force grows like a power of the squeeze $\delta$, $F = K_H\,\delta^p$, with measured values of $p$ from about 1.5 to 4, depending on the hammer and the test (Russell; the same law is the hammer in Chaigne and Askenfelt's model). This stiffening is why a loud note is brighter ([post 1](../what-you-hear/index.qmd#dynamics-and-timbre)): a harder blow is in contact for a shorter time, and a shorter push starts the higher modes more strongly (Russell; fold below).
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Why a harder blow is shorter, and why shorter is brighter <span class="needs">uses energy conservation and integrals</span></summary>
+
+*A linear felt would change nothing but loudness.* If the felt were a linear spring, $p = 1$, hammer and string together would be one linear system, and a blow twice as fast would make exactly twice the motion: louder, with the same tone color. Because the felt stiffens, a harder blow squashes it into its stiffer range, and the contact is shorter, as the next paragraph computes.
+
+*Contact time.* Treat the string as rigid during the brief contact, a rough approximation, since the string does give way. A hammer of mass $m$ arriving at speed $v$ then squashes its felt by $\delta(t)$ with $m\ddot\delta = -K_H\delta^p$, so energy is conserved: $\tfrac12 m\dot\delta^2 + K_H\delta^{p+1}/(p + 1) = \tfrac12 mv^2$. The deepest squeeze is $\delta_{\max} = \big((p + 1)mv^2/2K_H\big)^{1/(p+1)}$. Writing $\delta = \delta_{\max}s$, the energy equation gives $\dot\delta = v\sqrt{1 - s^{p+1}}$, so the time to squeeze the felt and let it spring back is
+$$
+\tau = \frac{2\,\delta_{\max}}{v}\int_0^1 \frac{ds}{\sqrt{1 - s^{p+1}}} ,
+$$
+where the integral is a number that depends only on $p$. Since $\delta_{\max} \propto v^{2/(p+1)}$, the contact time goes as $\tau \propto v^{-(p-1)/(p+1)}$. For $p = 1$ the integral is $\pi/2$ and $\tau = \pi\sqrt{m/K_H}$, the same for every blow. For $p = 2.5$, $\tau \propto v^{-3/7}$: a blow twice as fast is in contact about 26% shorter.
+
+*Brightness.* Mode $n$ of the string, with angular frequency $\omega_n$, is pushed in proportion to its own height at the hammer, and its amount $q_n$ obeys $\ddot q_n + \omega_n^2 q_n = (\text{that height})\times F(t)/(\text{the mode's mass})$, as post 3 shows by splitting the motion into modes. Starting from rest, after the contact it swings with amplitude proportional to $\frac{1}{\omega_n}\sqrt{\alpha_n^2 + \beta_n^2}$, where $\alpha_n$ and $\beta_n$ are the integrals of $F(t)\cos\omega_n t$ and $F(t)\sin\omega_n t$ over the contact (solve the equation by variation of constants). For a half-sine push, $F = F_0\sin(\pi t/\tau)$ for $0 \le t \le \tau$, the two integrals combine to
+$$
+\sqrt{\alpha_n^2 + \beta_n^2} = \frac{2F_0\tau}{\pi}\cdot\frac{|\cos(\omega_n\tau/2)|}{|1 - (\omega_n\tau/\pi)^2|} ,
+$$
+which falls off like $(\pi/\omega_n\tau)^2$ once $\omega_n\tau$ is well above $\pi$: the push lasts through several of the mode's swings, and what it gives on one half of a swing it takes back on the other. So a shorter push starts modes up to a higher frequency.
+
+</details>
+:::
+
+**A steady drive.** A bow or a breath feeds energy in for as long as the note lasts, through a force that depends on the motion itself, nonlinearly (the fold below says how). So the equation gains a term on the right that is a nonlinear function of the motion at the bow or the reed. A force of this kind makes small motions grow until the nonlinearity caps them, and the motion settles into one repeating cycle, a [self-sustained oscillation](../instruments-as-operators/glossary.qmd#self-sustained) (Rayleigh, 1883; McIntyre, Schumacher and Woodhouse, 1983). A motion that repeats exactly has its partials at exact whole-number multiples of its repetition rate ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)). Post 3's [counterexamples](../when-an-equation-has-a-spectrum/index.qmd#counterexamples) include the simplest such equation; post 4's [violin](../instruments-case-by-case/violin.qmd) and [clarinet](../instruments-case-by-case/clarinet.qmd) are played this way.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>How a bow and a reed push</summary>
+
+The bow's friction depends on how fast the string slides past the hair: the string sticks to the hair and is carried along, then slips back, again and again. A clarinet's reed is a valve, opened and closed by the pressure in the mouthpiece, that sets how much air flows in (Fletcher and Rossing, chapters 10, 13 and 15).
+
+</details>
+:::
+
+Put together, the equation of a played instrument is
+$$
+u_{tt} + C\,u_t + A\,u = \text{the player's force and the air's push, per unit mass.}
+$$
+Here $A$ comes from the material and the holding, $C$ from the losses, and the right side from the player: nothing for a pluck, a brief push for a hammer, a nonlinear force for a bow or a reed.
+
+## How the object is held: boundary conditions {#boundary-conditions}
+
+How an object is held enters its operator through the allowed shapes, and changes it as much as the material does (section 2's ring). The first fold lists every way of holding in this series, apart from the ring, which has no ends.
+
+The conditions come in two kinds. An *imposed* condition is one the holder forces on the shapes, as a tied end forces $u = 0$. A *natural* condition is forced on no shape; it holds because no force can act where nothing holds the object, as at a free tip. The second fold shows where natural conditions come from, and why both kinds matter in [post 3](../when-an-equation-has-a-spectrum/index.qmd#deeper-theory).
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The supports used in this series</summary>
+
+| Support | What it forbids | Condition | Where |
+|:--|:--|:--|:--|
+| tied end | moving | $u = 0$ | violin string |
+| pinned end | moving, and any bending moment | $u = 0,\ u_{xx} = 0$ | piano wire |
+| [clamp](../instruments-as-operators/glossary.qmd#cantilever) | moving and tilting | $u = 0,\ u_x = 0$ | kalimba tine, harmonica reed at the rivet |
+| free tip | nothing: no bending moment and no shear force act there | $u_{xx} = 0,\ u_{xxx} = 0$ | kalimba tine, harmonica reed at the tip |
+| open end of a tube | pressure different from the room's | $p = 0$ | flute, clarinet bell |
+| nearly closed end of a tube | air moving | $p_x = 0$ | clarinet at the reed |
+| rim of a drum | moving | $u = 0$ on the rim | drumhead |
+
+: Boundary conditions in this series. {.striped}
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Imposed and natural conditions <span class="needs">uses integration by parts</span></summary>
+
+A string bent into the shape $u$ stores the energy $E = \tfrac12 T\int_0^L u_x^2\,dx$. Change the shape by a small amount $\delta u$. The energy changes by $T\int_0^L u_x\,\delta u_x\,dx$, and integrating by parts,
+$$
+\delta E = -T\int_0^L u_{xx}\,\delta u\,dx + \big[T\,u_x\,\delta u\big]_0^L .
+$$
+The force on the string is minus the rate at which its energy changes (the principle of virtual work). So the integral gives the force $T\,u_{xx}$ per unit length at every inside point, as in section 3, and the bracket is the string's pull at its two ends.
+
+*Imposed.* At a tied end the shape may not move, $\delta u = 0$, so the bracket vanishes there whatever $u_x$ is: the holder supplies whatever force it takes. The condition $u = 0$ is a restriction on the allowed shapes.
+
+*Natural.* Suppose instead the end is tied to a massless ring that slides without friction on a vertical rod. Now $\delta u$ at the end is unrestricted, and a massless ring can carry no net force, so the bracket must vanish for every $\delta u$: $T\,u_x = 0$ there. Nobody restricted the shapes to $u_x = 0$; it holds because nothing holds the end.
+
+*The bar.* With $E = \tfrac12 EI\int_0^L u_{xx}^2\,dx$, integrating by parts twice gives
+$$
+\delta E = EI\int_0^L u_{xxxx}\,\delta u\,dx + \big[EI\,u_{xx}\,\delta u_x - EI\,u_{xxx}\,\delta u\big]_0^L .
+$$
+At a clamp, $\delta u = \delta u_x = 0$: both conditions are imposed. At a free end, $\delta u$ and $\delta u_x$ are both unrestricted, so both brackets must vanish, $u_{xx} = u_{xxx} = 0$: both are natural. At a pinned end, $u = 0$ is imposed and $\delta u_x$ is free, so $u_{xx} = 0$ is natural: half of each.
+
+*The tube.* Which kind a condition is depends on the variable. In the displacement $\xi$, the closed end's $\xi = 0$ is imposed and the open end's $\xi_x = 0$ (which is $p = 0$) is natural; written in the pressure, as in section 4, the open end's $p = 0$ is imposed and the closed end's $p_x = 0$ is natural.
+
+*Why both kinds matter.* Post 3 rests on the symmetry $\langle Af, g\rangle = \langle f, Ag\rangle$, where $\langle f, g\rangle = \int f g\,dx$. Integrating by parts to prove it leaves brackets of exactly the kind above, such as $\big[c^2 f_x\,g\big]_0^L$ for the string, with $f$ the shape that $A$ acts on and $g$ any allowed shape. Every support in the first fold's table makes them vanish: an imposed condition makes the factor $g$ zero at the end, and a natural one makes the factor $f_x$ zero. A support that does work, such as a bridge that yields and absorbs energy, leaves its bracket in place: it is a loss, one of those of [section 9](#what-gets-added). Natural boundary conditions are treated in Courant and Hilbert, volume 1, chapter IV.
+
+</details>
+:::
+
+## What we found
+
+For every object here, Newton's law on a small piece (Kirchhoff's for the circuit), a law of the material and the small-motion step give $u_{tt} = -Au$. The material sets the rule: a number, a matrix, a second or fourth derivative, their sum, or a Laplacian. The holding sets the shapes it acts on; friction, radiation and the player add terms of their own.
+
+## Next
+
+[Post 3](../when-an-equation-has-a-spectrum/index.qmd) starts from $u_{tt} = -Au$ and asks when its solutions are exactly the sums of modes, at the frequencies $\sqrt\lambda/2\pi$.
+
+::: {.refs}
+**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998: chapters 1 (simple systems), 2 (strings and bars), 3 (membranes), 7 (sound radiation), 8 (pipes), 10 (bowed strings), 12 (the piano), 13 (reed and lip vibrations) and 15 (woodwind reed instruments). Wikipedia, [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law), [Simple harmonic motion](https://en.wikipedia.org/wiki/Simple_harmonic_motion), [Anharmonicity](https://en.wikipedia.org/wiki/Anharmonicity), [Pendulum (mechanics)](https://en.wikipedia.org/wiki/Pendulum_(mechanics)) (the exact period, through the elliptic integral and the arithmetic–geometric mean; the numbers in section 1 are computed from it), [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory), [Cantilever](https://en.wikipedia.org/wiki/Cantilever), [Laplace operator](https://en.wikipedia.org/wiki/Laplace_operator#Two_dimensions) (in polar coordinates), [LC circuit](https://en.wikipedia.org/wiki/LC_circuit), [Kirchhoff's circuit laws](https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws) and [Theremin](https://en.wikipedia.org/wiki/Theremin) (its two radio-frequency oscillators, the hand as one plate of a capacitor, and the mixer). J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html) and [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW (open and closed ends, the end correction). A. Chaigne and A. Askenfelt, ["Numerical simulations of piano strings. I. A physical model for a struck string using finite difference methods"](https://web.phys.ntnu.no/~stovneng/TFY4160_2007/oving8/numerical_simulations_of_pianostrings_I.pdf), *Journal of the Acoustical Society of America* 95 (1994), 1112–1118 (the two loss terms and the hammer's power law). D. A. Russell, [The piano hammer as a nonlinear spring](https://www.acs.psu.edu/drussell/piano/nonlinearhammer.html), 1997 (measured exponents; shorter contact and brighter tone for harder blows). Lord Rayleigh, "On maintained vibrations", *Philosophical Magazine*, series 5, 15 (1883), 229–235. M. E. McIntyre, R. T. Schumacher and J. Woodhouse, ["On the oscillations of musical instruments"](https://www.damtp.cam.ac.uk/user/mem2/papers/MUS-ACOUST/), *Journal of the Acoustical Society of America* 74 (1983), 1325–1345. R. Courant and D. Hilbert, *Methods of Mathematical Physics*, vol. 1, Interscience, 1953, chapter IV (natural boundary conditions).
+:::
