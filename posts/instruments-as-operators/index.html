@@ -163,11 +163,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">The Shape of a Sound</h1>
-<p class="subtitle lead">The mathematics of musical sound: a series</p>
+<p class="subtitle lead">The mathematics of musical sound, in four posts and two more beyond</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">music</div>
-    <div class="quarto-category">the-shape-of-a-sound</div>
   </div>
   </div>
 
@@ -212,14 +211,6 @@ window.Quarto = {
 <li>Where do the differential equations of instruments come from?</li>
 <li>When is the solution of a differential equation a sum over the spectrum of an operator, what is the deeper theory, and how does it connect back to 1 and 2?</li>
 </ol>
-<section id="the-series-in-one-paragraph" class="level2">
-<h2 class="anchored" data-anchor-id="the-series-in-one-paragraph">The series in one paragraph</h2>
-<p>A vibrating object of finite size whose motion is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a> and unchanging in time moves, left to itself, as a sum of <a href="../../posts/instruments-as-operators/glossary.html#mode">modes</a>, apart from the special cases <a href="../../posts/when-an-equation-has-a-spectrum/index.html#counterexamples">post 3 lists</a>: shapes that each oscillate at their own frequency <span class="math inline">f_k</span> and fade with their own time <span class="math inline">\tau_k</span>. The body, the air and the room pass that motion on to a listener in a way that is also linear and unchanging in time: this keeps every <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>, changes the amounts, and adds the filter’s own ringing (the body’s resonances, the room’s reverberation). So the instrument’s part of the sound is <span class="math display">
-p(t) = \sum_k a_k\, e^{-t/\tau_k} \cos(2\pi f_k t + \varphi_k).
-</span> The equation of motion (the operator, together with friction and radiation) fixes the <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>; the playing, the radiation and where you listen fix the <span class="math inline">a_k</span>. The four aspects are heard from these lists, through the ear’s own weighting: pitch mainly from where the <span class="math inline">f_k</span> sit; loudness from the sizes, weighted by frequency; timbre from all three lists, especially early on, plus noise that is not a mode; duration from the fading and from when the player stops or damps the note. Bowed and blown instruments are different: their motion is a single repeating cycle, so its <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a> sit at exact whole-number multiples; the resonator’s modes shape which partials are strong, and the player sets loudness and duration.</p>
-<p>The series derives the <span class="math inline">f_k</span>; the <span class="math inline">\tau_k</span> are mostly measured, and it says so where it uses them.</p>
-<p>Here <span class="math inline">p(t)</span> is the air pressure at the listener; <span class="math inline">a_k</span> is how strongly the <span class="math inline">k</span>-th partial sounds, <span class="math inline">\varphi_k</span> where in its cycle it starts, and <span class="math inline">e^{-t/\tau_k}</span> says that it shrinks by a factor of <span class="math inline">e \approx 2.7</span> every <span class="math inline">\tau_k</span> seconds.</p>
-</section>
 <section id="the-posts" class="level2">
 <h2 class="anchored" data-anchor-id="the-posts">The posts</h2>
 <ol type="1">
@@ -229,6 +220,14 @@ p(t) = \sum_k a_k\, e^{-t/\tau_k} \cos(2\pi f_k t + \varphi_k).
 <li><a href="../../posts/instruments-case-by-case/index.html"><strong>Instruments, case by case</strong></a> puts the answers to work on one instrument per page, starting from an orchestra: violin, clarinet, kalimba, harmonica, piano, bass drum and kettledrum.</li>
 </ol>
 <p>Two further posts take up questions the answers raise: <a href="../../posts/hear-the-shape-of-a-drum/index.html"><em>Can you hear the shape of a drum?</em></a> and <a href="../../posts/instruments-and-scales/index.html"><em>Did instruments shape our scales?</em></a>. <a href="../../posts/a-piano/index.html"><em>A Piano</em></a> is a playable upright with all 88 keys and its three pedals. Technical words link to the <a href="../../posts/instruments-as-operators/glossary.html">glossary</a>.</p>
+</section>
+<section id="the-series-in-one-paragraph" class="level2">
+<h2 class="anchored" data-anchor-id="the-series-in-one-paragraph">The series in one paragraph</h2>
+<p>A vibrating object of finite size whose motion is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a> and unchanging in time moves, left to itself, as a sum of <a href="../../posts/instruments-as-operators/glossary.html#mode">modes</a>, apart from the special cases <a href="../../posts/when-an-equation-has-a-spectrum/index.html#counterexamples">post 3 lists</a>: shapes that each oscillate at their own frequency <span class="math inline">f_k</span> and fade with their own time <span class="math inline">\tau_k</span>. The body, the air and the room pass that motion on to a listener in a way that is also linear and unchanging in time: this keeps every <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>, changes the amounts, and adds the filter’s own ringing (the body’s resonances, the room’s reverberation). So the instrument’s part of the sound is <span class="math display">
+p(t) = \sum_k a_k\, e^{-t/\tau_k} \cos(2\pi f_k t + \varphi_k).
+</span> The equation of motion (the operator, together with friction and radiation) fixes the <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>; the playing, the radiation and where you listen fix the <span class="math inline">a_k</span>. The four aspects are heard from these lists, through the ear’s own weighting: pitch mainly from where the <span class="math inline">f_k</span> sit; loudness from the sizes, weighted by frequency; timbre from all three lists, especially early on, plus noise that is not a mode; duration from the fading and from when the player stops or damps the note. Bowed and blown instruments are different: their motion is a single repeating cycle, so its <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a> sit at exact whole-number multiples; the resonator’s modes shape which partials are strong, and the player sets loudness and duration.</p>
+<p>The series derives the <span class="math inline">f_k</span>; the <span class="math inline">\tau_k</span> are mostly measured, and it says so where it uses them.</p>
+<p>Here <span class="math inline">p(t)</span> is the air pressure at the listener; <span class="math inline">a_k</span> is how strongly the <span class="math inline">k</span>-th partial sounds, <span class="math inline">\varphi_k</span> where in its cycle it starts, and <span class="math inline">e^{-t/\tau_k}</span> says that it shrinks by a factor of <span class="math inline">e \approx 2.7</span> every <span class="math inline">\tau_k</span> seconds.</p>
 </section>
 <section id="reading-paths" class="level2">
 <h2 class="anchored" data-anchor-id="reading-paths">Reading paths</h2>
