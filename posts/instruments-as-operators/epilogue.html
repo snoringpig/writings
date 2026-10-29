@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2026</p>
+      <p class="date-modified">October 29, 2026</p>
     </div>
   </div>
     
@@ -209,6 +209,9 @@ window.Quarto = {
   <p class="cap">Solid: roughness of two notes of the chosen sound against the ratio between them, lower note at 262 Hz; faint: the other sound. Dots: the dips. Each curve is scaled to its own peak, so compare where the dips are, not the heights.</p>
 </div>
 </div>
+<div class="newidea">
+<p><strong>In one sentence.</strong> Two notes sound smooth together when their overtones line up, so instruments with different overtones can favour different scales, as Sethares argues (after Plomp and Levelt).</p>
+</div>
 <div class="gist">
 <p><strong>The recipe on this page, in brief.</strong> Two notes sound rough when their <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a> sit close together but not on top of each other, so they <a href="../../posts/instruments-as-operators/glossary.html#beats">beat</a>; the roughness of two notes is computed from their spectra. So the recipe now runs one step further, from the spectrum to which intervals sound smooth.</p>
 <ol type="1">
@@ -219,7 +222,7 @@ window.Quarto = {
 <li><em>What we hear</em>: the octave that is smooth on a string is not the smoothest interval on a bar.</li>
 </ol>
 <p><a href="#what-we-hear">Skip to what we hear</a> if you only want the answer.</p>
-<p>The engineer and musician William Sethares argues that this is one reason scales fit the instruments they are played on.</p>
+<p>The engineer and musician William Sethares, building on Plomp and Levelt’s listening experiments, argues that this is one reason scales fit the instruments they are played on.</p>
 </div>
 <section id="on-the-roughness-curve" class="level2">
 <h2 class="anchored" data-anchor-id="on-the-roughness-curve">On the roughness curve</h2>
@@ -262,15 +265,16 @@ D(\alpha) = \sum_{\text{pairs } i &lt; j} a_i a_j\; \delta\big(\min(f_i, f_j),\ 
 </section>
 <section id="not-decide" class="level2">
 <h2 class="anchored" data-anchor-id="not-decide">What the spectrum does not decide</h2>
+<p><strong>Sethares’s hypothesis.</strong> The roughness curve of this page is what Sethares calls a <em>dissonance curve</em>. That an instrument’s spectrum favours the scales whose steps sit at the dips of its dissonance curve is his hypothesis, built on Plomp and Levelt’s experiments on how dissonant pairs of pure tones sound; the mathematics on this page computes the dips, and does not by itself show that musicians chose their scales by them.</p>
 <p><strong>The gamelan.</strong> Sethares measured the spectra of gamelan metallophones, instruments of tuned metal bars, and reports that “the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans”. The demo’s bars are idealized, not measured gamelan bars, so it shows the mechanism, not his result; real gamelan bars are shaped by their makers, and tunings vary from one gamelan to another.</p>
 <p><strong>Roughness is not the whole story.</strong> The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for <a href="../../posts/instruments-as-operators/glossary.html#consonance">consonant</a> chords followed <em>harmonicity</em>, whether the frequencies fit one <a href="../../posts/instruments-as-operators/glossary.html#harmonic-series">harmonic series</a>, more than it followed beating, and grew with musical training. In 2016 McDermott and colleagues found that the Tsimane’, a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.</p>
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>An instrument’s spectrum does not only decide whether it has a pitch. It decides which pairs of notes sound smooth together on it, because the roughness of two notes, <span class="math inline">D(\alpha)</span>, is computed from their partials. A string’s operator, <span class="math inline">-c^2\,d^2/dx^2</span> with both ends tied, has its spectrum at whole-number multiples, so its smooth intervals are the simple ratios of Western harmony. The free bar’s operator, <span class="math inline">\kappa^2\,d^4/dx^4</span> with both ends free, has its spectrum at 1, 2.756, 5.404, …, so its smooth intervals move, and the exact octave is not one of them. That much is a fact about sound and the ear. What a culture finds beautiful is also learned. Sethares argues that instruments and the scales played on them tend to fit each other in the way the demo shows; how much that shaped the world’s music is an open, argued question.</p>
+<p>Two notes sound smooth together when their partials coincide or sit far apart, so the dips of the roughness curve, computed from an instrument’s spectrum, sit at simple whole-number ratios for a string and move for a free bar, which loses the exact octave. Sethares argues, after Plomp and Levelt, that this is one reason instruments and their scales fit each other; how much it shaped the world’s music is an open question, since what a culture finds beautiful is also learned. The <a href="../../posts/instruments-as-operators/map.html">map</a> puts every instrument’s operator and spectrum side by side.</p>
 <p><a href="../../posts/instruments-as-operators/shape.html">← 9 · Drum shape</a> · <a href="../../posts/instruments-as-operators/index.html">Back to the series</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a></p>
 <div class="refs">
-<p><strong>References.</strong> N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba). W. A. Sethares, “Adaptive tunings for musical scales”, <em>Journal of the Acoustical Society of America</em> 96 (1994), 10–18 (<a href="https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1">PDF</a>), for the roughness formula. W. A. Sethares, <em>Tuning, Timbre, Spectrum, Scale</em>, Springer (<a href="https://sethares.engr.wisc.edu/ttss.html">book site</a>; quotation from chapter 1, p.&nbsp;6, of the <a href="https://sethares.engr.wisc.edu/paperspdf/ttss.pdf">book PDF</a>). R. Plomp and W. J. M. Levelt, “Tonal consonance and critical bandwidth”, <em>Journal of the Acoustical Society of America</em> 38 (1965), 548–560, as cited by Sethares. J. H. McDermott, A. J. Lehr and A. J. Oxenham, “Individual differences reveal the basis of consonance”, <em>Current Biology</em> 20 (2010), 1035–1041 (<a href="https://www.sciencedaily.com/releases/2010/05/100520131431.htm">summary</a>). J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, “Indifference to dissonance in native Amazonians reveals cultural variation in music perception”, <em>Nature</em> 535 (2016), 547–550 (<a href="https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713">summary</a>). The free bar’s modes: Wikipedia, <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Euler–Bernoulli beam theory</a>.</p>
+<p><strong>References.</strong> N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba). W. A. Sethares, “Adaptive tunings for musical scales”, <em>Journal of the Acoustical Society of America</em> 96 (1994), 10–18 (<a href="https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1">PDF</a>), for the roughness formula. W. A. Sethares, <em>Tuning, Timbre, Spectrum, Scale</em>, 2nd ed., Springer, 2005 (<a href="https://sethares.engr.wisc.edu/ttss.html">book site</a>; quotation from chapter 1, p.&nbsp;6, of the <a href="https://sethares.engr.wisc.edu/paperspdf/ttss.pdf">book PDF</a>). R. Plomp and W. J. M. Levelt, “Tonal consonance and critical bandwidth”, <em>Journal of the Acoustical Society of America</em> 38 (1965), 548–560, as cited by Sethares. J. H. McDermott, A. J. Lehr and A. J. Oxenham, “Individual differences reveal the basis of consonance”, <em>Current Biology</em> 20 (2010), 1035–1041 (<a href="https://www.sciencedaily.com/releases/2010/05/100520131431.htm">summary</a>). J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, “Indifference to dissonance in native Amazonians reveals cultural variation in music perception”, <em>Nature</em> 535 (2016), 547–550 (<a href="https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713">summary</a>). The free bar’s modes: Wikipedia, <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Euler–Bernoulli beam theory</a>.</p>
 </div>
 <script src="core.js"></script>
 <script>

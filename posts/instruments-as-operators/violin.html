@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2026</p>
+      <p class="date-modified">October 29, 2026</p>
     </div>
   </div>
     
@@ -188,7 +188,7 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/circle.html">← 3 Loop</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/clarinet.html">5 Clarinet →</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/instruments-as-operators/note.html">page 0, the note</a>; page 3 is not needed. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/note.html">page 0, the note</a>; page 3 is not needed. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 30 with the mathematics.</p>
 </div>
 <div class="puzzle">
 <p>Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave</a>. Touch it a third of the way along and it jumps to three times the frequency. How can a feather-light finger, which does not even shorten the string, change the note so much?</p>
@@ -208,6 +208,9 @@ window.Quarto = {
   <p class="cap">Left end: the <a href="glossary.html#bridge">nut</a>, near the tuning pegs; right end: the bridge. The motion is slowed for the eye. Stems: how far each mode still swings a quarter of a second after the pluck.</p>
 </div>
 </div>
+<div class="newidea">
+<p><strong>In one sentence.</strong> A light touch at the middle drains every mode that moves under the finger and leaves the even modes, which stand still there: a note an octave up.</p>
+</div>
 <div class="gist">
 <p><strong>The recipe on this instrument, in brief.</strong></p>
 <ol type="1">
@@ -215,7 +218,7 @@ window.Quarto = {
 <li><em>The operator</em> is minus <span class="math inline">c^2</span> times the second derivative, <span class="math inline">A = -c^2\,d^2/dx^2</span>, acting on shapes held still at both ends.</li>
 <li><em>Its spectrum</em>: mode <span class="math inline">n</span> has <span class="math inline">n</span> arches, eigenvalue <span class="math inline">\lambda_n = (n\pi c/L)^2</span> and frequency <span class="math inline">f_n = n f_1</span>, a whole-number multiple of the lowest.</li>
 <li><em>On the diagram</em>: the stems sit exactly on the whole-number lines.</li>
-<li><em>What we hear</em>: a clear note at the lowest frequency; a light touch at the middle drains every mode that moves under the finger and leaves the even ones, a note an octave up.</li>
+<li><em>What we hear</em>: a clear note at the lowest frequency; a light touch at the middle acts as a damper: it drains the modes that move under the finger and leaves the even ones, which stand still there, a note an octave up.</li>
 </ol>
 <p><a href="#what-we-hear">Skip to what we hear</a> if you only want the answer.</p>
 </div>
@@ -385,7 +388,7 @@ k^2\int_0^L X^2\,dx = \int_0^L (X')^2\,dx .
 </section>
 <section id="what-we-hear" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-hear">5 · What we hear</h2>
-<p><strong>A light touch keeps only the shapes that are still under the finger.</strong> Where a shape has a still point, a <a href="../../posts/instruments-as-operators/glossary.html#node">node</a>, the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. The shape <span class="math inline">\sin(n\pi x/L)</span> is still at the middle exactly when <span class="math inline">n</span> is even: 2, 4, 6, … arches, at 2, 4, 6, … times the open string’s frequency. The survivors repeat twice as often, so you hear a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a <a href="../../posts/instruments-as-operators/glossary.html#octave">fifth</a> up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the <a href="../../posts/instruments-as-operators/piano.html">piano page</a> derives for felt dampers.)</p>
+<p><strong>A light touch keeps only the shapes that are still under the finger.</strong> The finger is a damper: a soft, lossy contact that takes energy from whatever moves under it. It does not hold the string still there, as a new end would (pressing down does that; see below). Where a shape has a still point, a <a href="../../posts/instruments-as-operators/glossary.html#node">node</a>, the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. The shape <span class="math inline">\sin(n\pi x/L)</span> is still at the middle exactly when <span class="math inline">n</span> is even: 2, 4, 6, … arches, at 2, 4, 6, … times the open string’s frequency. The survivors repeat twice as often, so you hear a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a <a href="../../posts/instruments-as-operators/glossary.html#octave">fifth</a> up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the <a href="../../posts/instruments-as-operators/piano.html">piano page</a> derives for felt dampers.)</p>
 <div class="derive">
 <details>
 <summary>
@@ -453,9 +456,9 @@ u(x,t) = \sum_{n\ge1} \frac{a}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(2\pi n f_1 t).
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>Newton’s law on a short piece of string gave the wave equation, <span class="math inline">u_{tt} = c^2u_{xx}</span>. Read as a rule, with the ends tied, it is the operator <span class="math inline">A = -c^2\,d^2/dx^2</span> on shapes that vanish at both ends. Its spectrum is <span class="math inline">\lambda_n = (n\pi c/L)^2</span>, with eigenfunctions the arch shapes <span class="math inline">\sin(n\pi x/L)</span>, so the frequencies are exactly <span class="math inline">n f_1</span>, with <span class="math inline">f_1 = \frac{1}{2L}\sqrt{T/\mu}</span>: on the diagram, every stem on a line, and what we hear is a clear note. A light touch drains every mode that moves under the finger, so only the eigenfunctions already still there survive: at the middle, the even ones, a note an octave up. And the operator lesson: the rule for what the ends may do, a <a href="../../posts/instruments-as-operators/glossary.html#boundary-condition">boundary condition</a>, is part of the operator. It decides which shapes are allowed, and so which frequencies.</p>
+<p>Tied at both ends, the string’s operator <span class="math inline">A = -c^2\,d^2/dx^2</span> has the arch shapes <span class="math inline">\sin(n\pi x/L)</span> as its modes, at exactly <span class="math inline">n f_1</span> with <span class="math inline">f_1 = \frac{1}{2L}\sqrt{T/\mu}</span>: the <a href="../../posts/instruments-as-operators/glossary.html#boundary-condition">boundary condition</a> is part of the operator and decides the frequencies. A light touch is a damper: it drains the modes that move under the finger and leaves the ones with a node there, at the middle the even ones, an octave up. The next page keeps the operator and changes the ends, for the air in a tube.</p>
 <div class="family">
-<p><strong>Same operator, different constants.</strong> Guitar, cello and harp strings obey the same equation with the same tied ends. They differ in length, tension and mass per length, which set the lowest frequency, and in how they are played: plucked (guitar, harp) or bowed (violin, cello).</p>
+<p><strong>The string’s operator family.</strong> Guitar, cello and harp strings obey the same equation with the same tied ends, so the series puts them in one <a href="../../posts/instruments-as-operators/glossary.html#operator-family">operator family</a> with the violin string: the same operator up to its constants. They differ in length, tension and mass per length, which set the lowest frequency, and in how they are played: plucked (guitar, harp) or bowed (violin, cello).</p>
 </div>
 </section>
 <section id="the-next-puzzle" class="level2">

@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2026</p>
+      <p class="date-modified">October 29, 2026</p>
     </div>
   </div>
     
@@ -188,7 +188,7 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/harmonica.html">← 6b Harmonica</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/drum.html">8 Drum →</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>, and <a href="../../posts/instruments-as-operators/kalimba.html">page 6, the kalimba</a>. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 25 with the mathematics and the playable piano.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>, and <a href="../../posts/instruments-as-operators/kalimba.html">page 6, the kalimba</a>. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 30 with the mathematics and the playable piano.</p>
 </div>
 <div class="puzzle">
 <p>Piano tuners don’t tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with <a href="../../posts/instruments-as-operators/glossary.html#equal-temperament">equal temperament</a>, the tuning in which all twelve semitones are the same ratio. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?</p>
@@ -238,6 +238,9 @@ window.Quarto = {
     <p class="cap">Until you tick "Play every partial", each note plays only its lowest partials (C4: 1 to 3, C5: 1 and 2), so the one beat a tuner listens for stands out and the stretched octave is steady. Stiffness starts at 6 times a real middle C wire's, so the wobble is quick enough to hear; at 1 it is a slow swell every few seconds.</p>
   </div>
 </div>
+<div class="newidea">
+<p><strong>In one sentence.</strong> A piano wire’s stiffness puts each overtone slightly above its whole-number multiple, so tuners stretch octaves to reduce the beating, a slow wobble in loudness, most at the ends of the keyboard.</p>
+</div>
 <div class="gist">
 <p><strong>The recipe on this instrument, in brief.</strong></p>
 <ol type="1">
@@ -245,7 +248,7 @@ window.Quarto = {
 <li><em>The operator</em> is the string’s plus the bar’s, <span class="math inline">-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span>, with pinned ends.</li>
 <li><em>Its spectrum</em>: the frequencies are <span class="math inline">f_n = n f_0\sqrt{1 + Bn^2}</span>, with <span class="math inline">B</span> a small stiffness constant that pushes them a little sharp.</li>
 <li><em>On the diagram</em>: every <a href="../../posts/instruments-as-operators/glossary.html#partial">partial</a>, each single frequency in the sound, sits a little sharp of its line, more so the higher it goes.</li>
-<li><em>What we hear</em>: one clear note, but the second partial sits a little above twice the fundamental, so an octave tuned to exactly 2 : 1 beats against it; tuners stretch the octave until the beat stops.</li>
+<li><em>What we hear</em>: one clear note, but the second partial sits a little above twice the fundamental, so an octave tuned to exactly 2 : 1 beats against it; tuners stretch octaves to reduce the beating, most at the ends of the keyboard.</li>
 </ol>
 <p><a href="#what-we-hear">Skip to what we hear</a> if you only want the answer.</p>
 </div>
@@ -326,7 +329,8 @@ f_n = n f_0\sqrt{1 + Bn^2},
 <h2 class="anchored" data-anchor-id="what-we-hear">5 · What we hear</h2>
 <p><strong>Why exact octaves beat.</strong> A tuner sets an octave by ear, listening for <a href="../../posts/instruments-as-operators/glossary.html#beats">beats</a> between the lower note’s second partial and the upper note’s fundamental. Two nearly equal frequencies played together beat at a rate equal to their difference. The spectrum says where the lower note’s second partial sits: <span class="math display">
 \frac{f_2}{f_1} = 2\sqrt{\frac{1 + 4B}{1 + B}} \approx 2\Big(1 + \frac{3B}{2}\Big),
-</span> using <span class="math inline">\sqrt{1+x} \approx 1 + x/2</span> (square it: <span class="math inline">(1 + x/2)^2 = 1 + x + x^2/4</span>, and <span class="math inline">x^2/4</span> is tiny) and <span class="math inline">1/\sqrt{1+x} \approx 1 - x/2</span> for small <span class="math inline">x</span>. So the second partial is more than twice the fundamental, by a factor of about <span class="math inline">1 + 3B/2</span>. An upper note tuned to exactly twice the fundamental sits just below it, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note’s fourth partial against the upper note’s second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise; tick “Play every partial” in the demo at the top to hear it, as the stretched octave then wobbles too. Repeated across the keyboard, this is <em>stretch tuning</em>: compared with <a href="../../posts/instruments-as-operators/glossary.html#equal-temperament">equal temperament</a>, the top of a piano ends up sharp and the bottom flat. On a stiff string, “exactly 2 : 1” lines up the wrong pair of frequencies.</p>
+</span> using <span class="math inline">\sqrt{1+x} \approx 1 + x/2</span> (square it: <span class="math inline">(1 + x/2)^2 = 1 + x + x^2/4</span>, and <span class="math inline">x^2/4</span> is tiny) and <span class="math inline">1/\sqrt{1+x} \approx 1 - x/2</span> for small <span class="math inline">x</span>. So the second partial is more than twice the fundamental, by a factor of about <span class="math inline">1 + 3B/2</span>. An upper note tuned to exactly twice the fundamental sits just below it, and the two beat. Raising the upper note slows this beat and makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note’s fourth partial against the upper note’s second, and the upper note’s own partials run sharp too, so stiffness makes it impossible to silence all of the beats at once. So the tuner can only reduce the beating: real tuning is a compromise. Tick “Play every partial” in the demo at the top to hear it: the stretched octave then wobbles too. On a stiff string, “exactly 2 : 1” lines up the wrong pair of frequencies.</p>
+<p><strong>The stretch is largest at the ends of the keyboard.</strong> Repeated octave by octave across the keyboard, this is <em>stretch tuning</em>: compared with <a href="../../posts/instruments-as-operators/glossary.html#equal-temperament">equal temperament</a>, the top of a piano ends up sharp and the bottom flat. Two things make the stretch grow toward the ends. The small widenings add up, octave by octave, away from the middle; and the most inharmonic strings are at the two ends: the short treble strings, and the bass strings, which the size of the piano keeps short for their pitch. O. L. Railsback measured this stretch on pianos tuned by ear in the 1930s; the plot of how far each note sits from equal temperament is called the <em>Railsback curve</em>: close to equal temperament in the middle of the keyboard, flat in the bass, sharp in the treble.</p>
 <p>A struck wire moves as the sum of its modes, <span class="math inline">u = \sum_n a_n X_n \cos(2\pi f_n t + \phi_n)</span>, so its sound is a sum of tones at the frequencies <span class="math inline">f_n</span> of stage 3, each fading at its own rate (damping, added to the model); the demos on this page synthesize it exactly this way. Because the low partials sit so close to the lines, the ear hears one clear note.</p>
 <p><strong>Hammer, dampers and pedals: none of them moves a frequency.</strong> The frequencies belong to the operator, set by the wire’s tension and stiffness. The hammer decides how much of each mode starts, and the felt dampers decide how fast each mode dies. Every control a pianist touches does one of these two things; only the tuner’s wrench, which changes the tension, changes the operator and moves the frequencies. You can try them all on the whole piano further down.</p>
 <div class="derive">
@@ -405,9 +409,9 @@ f_n = n f_0\sqrt{1 + Bn^2},
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>Newton’s law on a short piece of wire (stage 1) gave its operator (stage 2), <span class="math inline">A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span>: the string’s operator plus the bar’s. Operators add, and with pinned ends so do their eigenvalues, so the spectrum is <span class="math inline">f_n = n f_0\sqrt{1 + Bn^2}</span> (stage 3). That puts every partial a little sharp of the lines of the spectrum diagram (stage 4), more so the higher it goes: close enough that you hear one clear note, far enough that an exact octave beats, which is why tuners stretch (stage 5). The hammer, the dampers and the pedals act on how the modes start and die, not on the operator, so none of them moves a frequency by more than a hair.</p>
+<p>A piano wire is a string and a bar at once, <span class="math inline">A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span>, and with pinned ends its spectrum, <span class="math inline">f_n = n f_0\sqrt{1 + Bn^2}</span>, puts each partial slightly above its whole-number multiple, more so the higher it goes. So an exact 2 : 1 octave beats, and tuners stretch octaves to reduce the beating, most at the ends of the keyboard; the hammer, the dampers and the pedals change how the modes start and die, not where they sit. The next page turns the line into a sheet: the drum.</p>
 <div class="family">
-<p><strong>Every real string is a little stiff.</strong> Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.</p>
+<p><strong>The stiff string’s operator family.</strong> Every real string is a little stiff, so a more exact model puts guitar and harp strings in this <a href="../../posts/instruments-as-operators/glossary.html#operator-family">operator family</a> too, with a smaller stiffness constant <span class="math inline">B</span>. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.</p>
 </div>
 </section>
 <section id="play-the-whole-piano" class="level2">
@@ -484,7 +488,7 @@ f_n = n f_0\sqrt{1 + Bn^2},
 <p>Every instrument so far has been a line: a string, a tube, a bar. What changes when it becomes a sheet, and why does a drum thud?</p>
 <p><a href="../../posts/instruments-as-operators/harmonica.html">← 6b · Harmonica</a> · <a href="../../posts/instruments-as-operators/drum.html">Next: 8 · Drum →</a></p>
 <div class="refs">
-<p><strong>References.</strong> Wikipedia, <a href="https://en.wikipedia.org/wiki/Inharmonicity">Inharmonicity</a>, <a href="https://en.wikipedia.org/wiki/Piano_pedals">Piano pedals</a>, <a href="https://en.wikipedia.org/wiki/Sustain_pedal">Sustain pedal</a> and <a href="https://en.wikipedia.org/wiki/Soft_pedal">Soft pedal</a>. G. Weinreich, <a href="https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html">The coupled motion of piano strings</a>, in <em>Five Lectures on the Acoustics of the Piano</em>, Royal Swedish Academy of Music, 1990. Sykes Pianos, <a href="https://sykespianos.co.uk/post/2018/12/21/over-damped-vs-under-damped-upright-pianos">Over-damped vs under-damped upright pianos</a>, 2018. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 12. The string dimensions used for <span class="math inline">B</span> are rough illustrative values.</p>
+<p><strong>References.</strong> Wikipedia, <a href="https://en.wikipedia.org/wiki/Inharmonicity">Inharmonicity</a>, <a href="https://en.wikipedia.org/wiki/Piano_pedals">Piano pedals</a>, <a href="https://en.wikipedia.org/wiki/Sustain_pedal">Sustain pedal</a> and <a href="https://en.wikipedia.org/wiki/Soft_pedal">Soft pedal</a>. G. Weinreich, <a href="https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html">The coupled motion of piano strings</a>, in <em>Five Lectures on the Acoustics of the Piano</em>, Royal Swedish Academy of Music, 1990. Sykes Pianos, <a href="https://sykespianos.co.uk/post/2018/12/21/over-damped-vs-under-damped-upright-pianos">Over-damped vs under-damped upright pianos</a>, 2018. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 12. O. L. Railsback, “Scale temperament as applied to piano tuning”, <em>Journal of the Acoustical Society of America</em> 9 (1938), 274 (<a href="https://doi.org/10.1121/1.1902056">DOI</a>), and Wikipedia, <a href="https://en.wikipedia.org/wiki/Piano_acoustics">Piano acoustics</a>, for the Railsback curve and why the stretch grows toward both ends. The string dimensions used for <span class="math inline">B</span> are rough illustrative values.</p>
 </div>
 <script src="core.js"></script>
 <script>

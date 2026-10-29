@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -188,7 +188,7 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/oscillator.html">1 Spring →</a></p>
 </div>
 <div class="pageinfo">
-<p>Start here. Math: cosines and fractions. About 2 minutes for the summary; about 12 with the mathematics.</p>
+<p>Start here. Math: cosines and fractions. About 2 minutes for the summary; about 15 with the mathematics.</p>
 </div>
 <div class="puzzle">
 <p>Below is a note at 220 <a href="../../posts/instruments-as-operators/glossary.html#hertz">hertz</a>, vibrations per second. Take away its 220 Hz part completely and play it again: you still hear the same note. If a note’s pitch is not one of its frequencies, what is it?</p>
@@ -210,8 +210,11 @@ window.Quarto = {
   <p class="cap">The wave over three repetitions; gray ticks mark each repetition, every 1/220 of a second. Stems (the vertical lines): how strong each component is, at 1, 2, 3, … times 220 Hz.</p>
 </div>
 </div>
+<div class="newidea">
+<p><strong>In one sentence.</strong> When a sound’s frequencies are all, or very nearly, whole-number multiples of one frequency, the sound repeats, or nearly repeats, at the largest such frequency, and if that rate is in the range we hear as pitch, the ear hears it as the pitch, even when that frequency itself is missing.</p>
+</div>
 <div class="gist">
-<p><strong>The gist.</strong> A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave’s shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time. This page is the last step of the series’ recipe, what we hear; every later page starts from Newton’s law, computes an instrument’s frequencies as the spectrum of an operator, and checks whether they sit on these whole-number lines.</p>
+<p><strong>The gist.</strong> A note is a sound that repeats, and its pitch is how many times a second it repeats. Taking away the 220 Hz part changes the wave’s shape, but it still repeats every 1/220 of a second, so you hear the same pitch. The parts that are left, at 440, 660, 880, … Hz, each fit a whole number of cycles into that time. This page is the last step of the series’ recipe, what we hear; every later page starts from Newton’s law, computes an instrument’s frequencies, and checks whether they sit at whole-number multiples of one frequency.</p>
 </div>
 <section id="the-pitch-ruler" class="level2">
 <h2 class="anchored" data-anchor-id="the-pitch-ruler">The pitch ruler</h2>
@@ -247,7 +250,7 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n) .
 </div>
 </div>
 <p>Not every instrument is exact. Frequencies very near whole-number multiples still sound like one note: a piano’s are slightly off, as page 7 shows, and it still plays notes. So the rule this series tests every instrument against reads: frequencies at, or very near, whole-number multiples of one frequency in the range we hear as pitch make a note.</p>
-<p><strong>Where the frequencies come from.</strong> This page took the frequencies as given. Every later page computes them. Newton’s law, applied to a small piece of the instrument, gives a rule that turns the instrument’s shape into the force pulling it back: the instrument’s <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>. Writing the motion as <span class="math inline">u_{tt} = -A\,u</span>, where <span class="math inline">u</span> is the instrument’s shape (how far each point is from rest), <span class="math inline">u_{tt}</span> its acceleration and <span class="math inline">A</span> the operator, each special number <span class="math inline">\lambda</span> of <span class="math inline">A</span>, an <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalue</a>, gives one frequency, <span class="math inline">f = \sqrt{\lambda}/2\pi</span>. The list of eigenvalues is the operator’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a>. Whether the spectrum lands on the lines of the pitch ruler is the first test of whether the instrument plays a note; pages 6 and 6b show what the spectrum alone does not decide. The <a href="../../posts/instruments-as-operators/spectrum.html">spectrum of an operator</a> page sets out this recipe, from Newton’s law to what we hear, and runs it on every instrument.</p>
+<p><strong>Where the frequencies come from.</strong> This page took the frequencies as given. Every later page computes them. Newton’s law, applied to a small piece of the instrument, gives a rule that turns the instrument’s shape into the force pulling it back, the instrument’s <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>, and the operator’s special numbers, its <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a>, give the frequencies. Page 1 sets this up with the simplest example, one mass on a spring, and page 2 shows why the eigenvalues are the whole story. Whether the frequencies land on the lines of the pitch ruler is the first test of whether the instrument plays a note; pages 6 and 6b show what the frequencies alone do not decide.</p>
 <div class="derive">
 <details>
 <summary>
@@ -262,7 +265,7 @@ p(t) = \sum_{n \ge 0} b_n \cos(2\pi n f t + \phi_n) .
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>A note is a sound that repeats, and its pitch is how often it repeats. So a note’s frequencies sit on the lines of one pitch ruler, whole-number multiples of one base frequency, and that base frequency need not be present itself. Every later page derives an instrument’s operator from Newton’s law, computes its spectrum, and puts the frequencies on this ruler: on the lines, a note; off the lines, a clang or a thud.</p>
+<p>Frequencies at whole-number multiples of one frequency add up to a sound that repeats at that rate, and the ear hears the rate as the pitch, even when that frequency is missing. Every later page computes an instrument’s frequencies and puts them on the pitch ruler: on or very near the lines, a note; off them, a clang or a thud. Page 1 starts with the simplest thing that vibrates.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>

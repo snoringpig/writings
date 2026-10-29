@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2026</p>
+      <p class="date-modified">October 29, 2026</p>
     </div>
   </div>
     
@@ -251,6 +251,10 @@ Musical intervals, named by frequency ratio. An octave is a ratio of 2. A fifth 
 <dd>
 When two pure tones of nearly equal frequency sound together, their sum swells and fades in loudness at a rate equal to the difference of their frequencies. Tuners listen for beats; fast beats are heard as roughness. <a href="https://en.wikipedia.org/wiki/Beat_(acoustics)">Wikipedia</a>
 </dd>
+<dt><span id="heterodyning">Heterodyning</span></dt>
+<dd>
+Mixing two signals of frequencies <span class="math inline">f_1</span> and <span class="math inline">f_2</span> in a nonlinear circuit, one whose output is not just their sum, to produce new frequencies, among them their difference <span class="math inline">f_1 - f_2</span>. A mixer that multiplies the two signals does it, since <span class="math inline">\sin(2\pi f_1 t)\,\sin(2\pi f_2 t) = \tfrac12\cos(2\pi(f_1 - f_2)t) - \tfrac12\cos(2\pi(f_1 + f_2)t)</span>, and a filter then keeps the difference. Two radio oscillators at 300,440 Hz and 300,000 Hz give an audible tone at 440 Hz; this is how a theremin makes its sound. <a href="#beats">Beats</a> are different: two tones simply added contain no tone at the difference frequency, only a swell and fade in loudness at that rate. <a href="https://en.wikipedia.org/wiki/Heterodyne">Wikipedia: Heterodyne</a>, <a href="https://en.wikipedia.org/wiki/Theremin">Theremin</a>, and the <a href="../../posts/instruments-as-operators/map.html#where-the-classes-and-the-mathematics-part-ways">map</a>
+</dd>
 <dt><span id="consonance">Consonance, roughness</span></dt>
 <dd>
 Consonance is how smooth or stable two notes sound together. Roughness is one ingredient of it: the harsh quality of fast beats between partials that are close but not equal. <a href="https://en.wikipedia.org/wiki/Consonance_and_dissonance">Wikipedia</a>, and the <a href="../../posts/instruments-as-operators/epilogue.html">epilogue</a>
@@ -298,6 +302,19 @@ The middle pedal on many uprights. It lowers a strip of felt between the hammers
 </dd>
 </dl>
 </section>
+<section id="grouping-instruments" class="level2">
+<h2 class="anchored" data-anchor-id="grouping-instruments">Grouping instruments</h2>
+<dl>
+<dt><span id="hornbostel-sachs">Hornbostel–Sachs classification</span></dt>
+<dd>
+The usual scheme for sorting musical instruments, published by Erich von Hornbostel and Curt Sachs in 1914. It groups instruments by what makes the sound: idiophones, where the body of the instrument itself vibrates (glockenspiel, kalimba); membranophones, a stretched skin (drums); chordophones, strings (violin, piano); aerophones, air (flute, clarinet, harmonica); and electrophones, electric circuits (theremin), a fifth group added later. These five top-level groups are usually called classes, and each is divided further by decimal codes: the piano is 314.122, a board zither with a resonator box. <a href="https://en.wikipedia.org/wiki/Hornbostel%E2%80%93Sachs">Wikipedia</a>, and the <a href="../../posts/instruments-as-operators/map.html#operator-families-and-instrument-classes">map</a>
+</dd>
+<dt><span id="operator-family">Operator family</span></dt>
+<dd>
+This series’ name for a group of instruments whose operators are the same up to constants and how they are held: the same rule, with different numbers in it and possibly different ends. The violin string and the air in a flute or a clarinet form one, with the rule <span class="math inline">-c^2\,d^2/dx^2</span>; the kalimba tine, the harmonica reed and the glockenspiel bar form another, with the rule <span class="math inline">\kappa^2\,d^4/dx^4</span>. One calculation covers a whole operator family, but the frequency ratios can still differ between its members, because the ends are part of each operator: the clamped tine sounds <span class="math inline">1 : 6.27 : 17.55</span>, the free glockenspiel bar <span class="math inline">1 : 2.76 : 5.40</span>. An operator family is not a Hornbostel–Sachs class. See the <a href="../../posts/instruments-as-operators/map.html#operator-families-and-instrument-classes">map</a>.
+</dd>
+</dl>
+</section>
 <section id="vibration" class="level2">
 <h2 class="anchored" data-anchor-id="vibration">Vibration</h2>
 <dl>
@@ -325,9 +342,9 @@ An equation with no outside force is linear if sums and multiples of solutions a
 <dd>
 Adding solutions of a linear equation to get another solution. The free motion of an instrument, once nothing is driving it, is a superposition, a sum, of its modes. <a href="https://en.wikipedia.org/wiki/Superposition_principle">Wikipedia</a>
 </dd>
-<dt><span id="mode">Mode, normal mode</span></dt>
+<dt><span id="mode">Mode, normal mode</span> <span id="normal-mode"></span></dt>
 <dd>
-A motion of an object, with no friction and nothing driving it, in which every part swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small free vibration is a sum of modes. <a href="https://en.wikipedia.org/wiki/Normal_mode">Wikipedia</a>
+A motion of an object, with no friction and nothing driving it, in which every part swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small, <a href="#linear">linearized</a> free vibration of a stable object of finite size without friction is a sum of modes. The amounts of the modes in a motion are its <em>normal coordinates</em>, the coordinates in which the object splits into independent springs, one per mode. For two beads on a tied string they are the sum and the difference of the two heights (<a href="../../posts/instruments-as-operators/ring.html">page 2</a>). <a href="https://en.wikipedia.org/wiki/Normal_mode">Wikipedia</a>
 </dd>
 <dt><span id="standing-wave">Standing wave</span></dt>
 <dd>
@@ -353,13 +370,21 @@ Two kinds of boundary condition. A Dirichlet condition fixes the value at the ed
 <dd>
 Friction that drains energy from a vibration, so that it dies away. A term <span class="math inline">b\,u_t</span> in the equation, proportional to velocity, is the simplest model. <a href="https://en.wikipedia.org/wiki/Damping">Wikipedia</a>
 </dd>
-<dt><span id="self-sustained">Self-sustained oscillation, limit cycle</span></dt>
+<dt><span id="self-sustained">Self-sustained oscillation, limit cycle</span> <span id="limit-cycle"></span></dt>
 <dd>
-An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle; under some conditions it does not, as in the unsteady, warbling <em>wolf note</em> of some cellos. This needs a mechanism that is not linear, such as the bow’s grip and slip or a reed opening and closing. <a href="https://en.wikipedia.org/wiki/Self-oscillation">Wikipedia</a>
+An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle: a repeating motion that the oscillator settles into from any start near it, and in simple models such as the <a href="https://en.wikipedia.org/wiki/Van_der_Pol_oscillator">van der Pol oscillator</a> from any start except complete rest. Under some conditions it does not settle, as in the unsteady, warbling <em>wolf note</em> of some cellos. This needs a mechanism that is not linear, such as the bow’s grip and slip or a reed opening and closing. <a href="https://en.wikipedia.org/wiki/Self-oscillation">Wikipedia</a>
 </dd>
 <dt><span id="coupling">Coupling</span></dt>
 <dd>
 Two vibrating parts are coupled when the motion of one pushes on the other, as when piano strings share a bridge. Coupled parts trade energy, and their modes mix. <a href="https://en.wikipedia.org/wiki/Coupling_(physics)">Wikipedia</a>
+</dd>
+<dt><span id="parametric-resonance">Parametric resonance</span></dt>
+<dd>
+Growth of a vibration when a property of the system, such as its stiffness or its effective length, is changed back and forth periodically, most strongly at about twice its natural frequency. A child pumping a swing by standing and squatting at the right points of each swing does this. The simplest model is <span class="math inline">x'' = -(1 + \varepsilon\cos 2t)\,x</span>: a spring of frequency 1 whose stiffness wobbles at frequency 2, and for small <span class="math inline">\varepsilon</span> its swings grow. Such a system has no fixed modes. <a href="https://en.wikipedia.org/wiki/Parametric_oscillator">Wikipedia: Parametric oscillator</a>
+</dd>
+<dt><span id="added-mass">Added mass</span></dt>
+<dd>
+The extra inertia of a vibrating surface because it must push the surrounding air or water along with it. It acts like extra mass on the surface and so lowers its frequencies. On <a href="../../posts/instruments-as-operators/drum.html">page 8</a> the air on both sides of a timpani head adds the most mass to the head’s coarsest shapes, and lowers their frequencies the most. <a href="https://en.wikipedia.org/wiki/Added_mass">Wikipedia</a>
 </dd>
 <dt><span id="helmholtz-motion">Helmholtz motion</span></dt>
 <dd>
@@ -422,6 +447,14 @@ The number of independent eigenvectors that share one eigenvalue. Vectors are <e
 <dd>
 Two vectors are perpendicular, or orthogonal, when their dot product, the sum of the products of matching entries, is zero. For functions the dot product is replaced by the <a href="#inner-product">inner product</a>. <a href="https://en.wikipedia.org/wiki/Orthogonality_(mathematics)">Wikipedia</a>
 </dd>
+<dt><span id="basis">Basis</span></dt>
+<dd>
+A set of directions from which every vector can be built, in exactly one way, by adding multiples of them. In the plane, <span class="math inline">(1, 1)/\sqrt2</span> and <span class="math inline">(1, -1)/\sqrt2</span> form a basis: any <span class="math inline">(x_1, x_2)</span> is <span class="math inline">\frac{x_1 + x_2}{\sqrt2}</span> times the first plus <span class="math inline">\frac{x_1 - x_2}{\sqrt2}</span> times the second, as adding the two entries checks. The modes of a vibrating object play the same role for its shapes. <a href="https://en.wikipedia.org/wiki/Basis_(linear_algebra)">Wikipedia</a>
+</dd>
+<dt><span id="orthonormal">Orthonormal</span></dt>
+<dd>
+A set of vectors is orthonormal when each is <a href="#orthogonal">perpendicular</a> to the others and has length 1. The basis <span class="math inline">(1, 1)/\sqrt2</span>, <span class="math inline">(1, -1)/\sqrt2</span> is orthonormal: the dot product is <span class="math inline">(1 - 1)/2 = 0</span>, and each length is <span class="math inline">\sqrt{(1 + 1)/2} = 1</span>. In an orthonormal basis <span class="math inline">X_1, X_2, \dots</span>, the amount of <span class="math inline">X_i</span> in a vector <span class="math inline">x</span> is just the dot product <span class="math inline">X_i \cdot x</span>. <a href="https://en.wikipedia.org/wiki/Orthonormality">Wikipedia</a>
+</dd>
 <dt><span id="symmetric-matrix">Symmetric matrix</span></dt>
 <dd>
 A square matrix of real numbers equal to its own mirror image across the diagonal: the entry in row <span class="math inline">i</span>, column <span class="math inline">j</span> equals the entry in row <span class="math inline">j</span>, column <span class="math inline">i</span>. The spectral theorem says its eigenvalues are real and it has a full set of perpendicular eigenvectors. <a href="https://en.wikipedia.org/wiki/Spectral_theorem">Wikipedia</a>
@@ -476,7 +509,7 @@ The operator <span class="math inline">\Delta u = u_{xx} + u_{yy}</span> in the 
 </dd>
 <dt><span id="separation-of-variables">Separation of variables</span></dt>
 <dd>
-Looking for solutions that are a product of a function of one variable and a function of another, such as <span class="math inline">u(x, t) = X(x)\,q(t)</span>. It splits one equation in several variables into simpler equations in one variable each. <a href="https://en.wikipedia.org/wiki/Separation_of_variables">Wikipedia</a>
+Looking for solutions that are a product of a function of one variable and a function of another. Here that means motions that are a fixed shape times a function of time, <span class="math inline">u(x, t) = X(x)\,q(t)</span>: the shape keeps its form and only its size <span class="math inline">q(t)</span> changes. Putting <span class="math inline">u = Xq</span> into <span class="math inline">u_{tt} = -Au</span> gives <span class="math inline">q''\,X = -q\,AX</span>, so a nonzero motion of this form exists exactly when <span class="math inline">AX = \lambda X</span> for some number <span class="math inline">\lambda</span>, that is, when the shape is an <a href="#eigenvector">eigenvector</a> of <span class="math inline">A</span>, and then <span class="math inline">q'' = -\lambda q</span>, a spring. In general the method splits one equation in several variables into simpler equations in one variable each. <a href="https://en.wikipedia.org/wiki/Separation_of_variables">Wikipedia</a>
 </dd>
 <dt><span id="bessel">Bessel function</span></dt>
 <dd>
@@ -488,7 +521,11 @@ The total flow out through the boundary of a region equals the sum, over the reg
 </dd>
 <dt><span id="rayleigh-quotient">Rayleigh quotient</span></dt>
 <dd>
-The ratio of a shape’s stored energy to its mass-weighted size, for example <span class="math inline">R(f) = \int EI\,(f'')^2\,dx \big/ \int \rho S\,f^2\,dx</span> for a bar; for a shape that meets all the boundary conditions it equals <span class="math inline">\langle Af, f\rangle/\langle f, f\rangle</span>. Its smallest value, over all nonzero shapes <span class="math inline">f</span> that obey the conditions at clamped or fixed ends, is the lowest eigenvalue, reached at the lowest mode; in this energy form, conditions at free ends need not be imposed. It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. <a href="https://en.wikipedia.org/wiki/Rayleigh_quotient">Wikipedia</a>
+The stored energy of a shape divided by its kinetic weight, the mass-weighted size <span class="math inline">\int(\text{mass per length})\,f^2\,dx</span>; at a mode it equals that mode’s eigenvalue <span class="math inline">\lambda</span>. For example, <span class="math inline">R(f) = \int T\,(f')^2\,dx \big/ \int \mu\,f^2\,dx</span> for a string and <span class="math inline">R(f) = \int EI\,(f'')^2\,dx \big/ \int \rho S\,f^2\,dx</span> for a bar; for a shape that meets all the boundary conditions it equals <span class="math inline">\langle Af, f\rangle/\langle f, f\rangle</span>. Its smallest value, over all nonzero shapes <span class="math inline">f</span> that obey the conditions at clamped or fixed ends, is the lowest eigenvalue, reached at the lowest mode; in this energy form, conditions at free ends need not be imposed. The higher eigenvalues come from the <a href="#min-max">min–max principle</a>. It explains why removing metal near the base of a reed or tine lowers its pitch and removing it near the tip raises it. <a href="https://en.wikipedia.org/wiki/Rayleigh_quotient">Wikipedia</a>
+</dd>
+<dt><span id="min-max">Min–max principle</span></dt>
+<dd>
+Also called the Courant–Fischer theorem. List an operator’s eigenvalues in order, <span class="math inline">\lambda_1 \le \lambda_2 \le \cdots</span>. Then <span class="math inline">\lambda_n</span> is the least possible value, over all <span class="math inline">n</span>-dimensional families of allowed shapes (all combinations of <span class="math inline">n</span> independent shapes), of the largest <a href="#rayleigh-quotient">Rayleigh quotient</a> in the family. For <span class="math inline">n = 1</span> a family is the multiples of one shape, so <span class="math inline">\lambda_1</span> is the smallest quotient of any shape. Adding stiffness never lowers any shape’s quotient, so it never lowers any eigenvalue; adding mass never raises any quotient, so it never raises any eigenvalue; and holding the object more firmly, which leaves fewer allowed shapes, never lowers one either. <a href="https://en.wikipedia.org/wiki/Min-max_theorem">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a>
 </dd>
 </dl>
 </section>

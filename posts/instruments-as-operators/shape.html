@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2026</p>
+      <p class="date-modified">October 29, 2026</p>
     </div>
   </div>
     
@@ -188,7 +188,7 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/drum.html">← 8 Drum</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/epilogue.html">10 Scales →</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/instruments-as-operators/drum.html">page 8, the drum</a>, and runs the recipe of <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a> backwards. Math: up to the Laplacian (page 8). About 3 minutes for the summary; about 20 with the mathematics.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/drum.html">page 8, the drum</a>, and runs the recipe of <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a> backwards. Math: up to the Laplacian (page 8). About 3 minutes for the summary; about 25 with the mathematics.</p>
 </div>
 <div class="puzzle">
 <p>In 1966 the mathematician Mark Kac asked: if you could hear every frequency a drum makes, perfectly, could you work out the drum’s shape? The two drums below have different shapes. Listen to them.</p>
@@ -212,6 +212,9 @@ window.Quarto = {
   <div class="readout" id="gRead"></div>
   <p class="cap">Color shows the selected mode: one color where the drumhead is up, the other where it is down. Both drums show the mode with the same frequency, in different shapes. Click a drum to strike it there; the stems then show how strongly each of the first 12 modes starts, heard at the struck point. The lowest frequency is set to 150 Hz.</p>
 </div>
+</div>
+<div class="newidea">
+<p><strong>In one sentence.</strong> All of a drum’s frequencies tell you its area and, for a reasonable rim, its perimeter, but not always its shape: two different drums can have exactly the same frequencies.</p>
 </div>
 <div class="gist">
 <p><strong>The recipe on this page, in brief.</strong> Every earlier page ran the recipe forwards, from an instrument to its sound. This page runs it backwards.</p>
@@ -333,7 +336,7 @@ N(\Lambda) \approx \frac{\pi R^2}{4} - R = \frac{s^2}{4\pi}\Lambda - \frac{4s}{4
 <div class="derive">
 <details>
 <summary>
-<span class="label">Proof sketch</span>Hearing the perimeter of any drum: a smoother count <span class="needs">uses the heat equation and the reflection trick of page 4</span>
+<span class="label">Proof sketch</span>Hearing the perimeter of a drum with a smooth or straight-sided rim: a smoother count <span class="needs">uses the heat equation and the reflection trick of page 4</span>
 </summary>
 <p><span class="math inline">N(\Lambda)</span> jumps by one at every eigenvalue, and those jumps can bunch up, which is what Ivrii’s condition controls. A smoother count avoids them. For <span class="math inline">t &gt; 0</span> let <span class="math display">
 Z(t) = \sum_n e^{-k_n^2 t}.
@@ -376,14 +379,14 @@ P^2 \ge 4\pi\,|\Omega|,
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>Run forwards, the recipe gives the drum’s sound: Newton’s law on a patch of head gives <span class="math inline">u_{tt} = c^2\Delta u</span>; the operator is <span class="math inline">A = -c^2\Delta</span> with the rim held still; its spectrum is the list of eigenvalues <span class="math inline">\lambda_n = c^2k_n^2</span>, with <span class="math inline">-\Delta X_n = k_n^2X_n</span>, and the frequencies are <span class="math inline">f_n = \sqrt{\lambda_n}/2\pi</span>. Run backwards, it asks what the spectrum says about the drum. Counting the spectrum with Weyl’s law recovers the drum’s area and, for smooth or straight-sided rims, the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every eigenvalue, and so every frequency, though struck at a point they still sound different. On the spectrum diagram, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. The study of such questions, what a spectrum says about the shape behind it, is called <em>spectral geometry</em>.</p>
+<p>A drum’s spectrum, the eigenvalues of <span class="math inline">A = -c^2\Delta</span> with the rim held still, tells you its area through Weyl’s law and, for a smooth or straight-sided rim, the length of its rim, which is enough to recognize a round drum. It does not always tell you the shape: Gordon, Webb and Wolpert’s two drums share every frequency, though struck at a point they sound different. The study of what a spectrum says about the shape behind it is called <em>spectral geometry</em>; the last page asks what a spectrum says about music.</p>
 </section>
 <section id="the-next-puzzle" class="level2">
 <h2 class="anchored" data-anchor-id="the-next-puzzle">The next puzzle</h2>
 <p>One question is left, and it goes beyond mathematics: did the instruments people built shape the music they made?</p>
 <p><a href="../../posts/instruments-as-operators/drum.html">← 8 · Drum</a> · <a href="../../posts/instruments-as-operators/epilogue.html">Next: 10 · Scales →</a></p>
 <div class="refs">
-<p><strong>References.</strong> Å. Pleijel, “A study of certain Green’s functions with applications in the theory of vibrating membranes”, <em>Arkiv för Matematik</em> 2 (1954), 553–569. M. Kac, “Can one hear the shape of a drum?”, <em>American Mathematical Monthly</em> 73 (1966), part II, 1–23 (<a href="https://www.maa.org/programs/maa-awards/writing-awards/can-one-hear-the-shape-of-a-drum">MAA</a>). C. Gordon, D. Webb and S. Wolpert, “One cannot hear the shape of a drum”, <em>Bulletin of the AMS</em> 27 (1992), 134–138 (<a href="https://www.ams.org/bull/1992-27-01/S0273-0979-1992-00289-6/">AMS</a>, <a href="https://arxiv.org/abs/math/9207215">arXiv</a>). T. A. Driscoll, “Eigenmodes of isospectral drums”, <em>SIAM Review</em> 39 (1997) (<a href="https://doi.org/10.1137/S0036144595285069">DOI</a>, <a href="https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf">PDF</a>), Table 3.1. C. Moler, “Can one hear the shape of a drum?”, Cleve’s Corner, MathWorks, August 2012: <a href="https://blogs.mathworks.com/cleve/2012/08/06/can-one-hear-the-shape-of-a-drum-part-1-eigenvalues/">part 1, eigenvalues</a>, <a href="https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/">part 2, eigenfunctions</a>, <a href="https://blogs.mathworks.com/cleve/2012/08/20/can-one-hear-the-shape-of-a-drum-part-3-transplantation/">part 3, transplantation</a>. S. J. Chapman, “Drums that sound the same”, <em>American Mathematical Monthly</em> 102 (1995), 124–138. P. Buser, J. Conway, P. Doyle and K.-D. Semmler, “Some planar isospectral domains”, <em>International Mathematics Research Notices</em> 1994, 391–400 (<a href="https://arxiv.org/abs/1005.1839">arXiv</a>). J. Milnor, “Eigenvalues of the Laplace operator on certain manifolds”, <em>PNAS</em> 51 (1964), 542. H. P. McKean and I. M. Singer, “Curvature and the eigenvalues of the Laplacian”, <em>Journal of Differential Geometry</em> 1 (1967), 43–69 (<a href="https://projecteuclid.org/download/pdf_1/euclid.jdg/1214427880">Project Euclid</a>). M. van den Berg and S. Srisatkunarajah, “Heat equation for a region in R² with a polygonal boundary”, <em>Journal of the London Mathematical Society</em> 37 (1988), 119–127. Wikipedia, <a href="https://en.wikipedia.org/wiki/Weyl_law">Weyl law</a> (Weyl 1911, Ivrii 1980) and <a href="https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum">Hearing the shape of a drum</a>.</p>
+<p><strong>References.</strong> Å. Pleijel, “A study of certain Green’s functions with applications in the theory of vibrating membranes”, <em>Arkiv för Matematik</em> 2 (1954), 553–569. M. Kac, “Can one hear the shape of a drum?”, <em>American Mathematical Monthly</em> 73 (1966), part II, 1–23 (<a href="https://www.maa.org/programs/maa-awards/writing-awards/can-one-hear-the-shape-of-a-drum">MAA</a>). C. Gordon, D. Webb and S. Wolpert, “One cannot hear the shape of a drum”, <em>Bulletin of the AMS</em> 27 (1992), 134–138 (<a href="https://www.ams.org/bull/1992-27-01/S0273-0979-1992-00289-6/">AMS</a>, <a href="https://arxiv.org/abs/math/9207215">arXiv</a>). T. A. Driscoll, “Eigenmodes of isospectral drums”, <em>SIAM Review</em> 39 (1997), 1–17 (<a href="https://doi.org/10.1137/S0036144595285069">DOI</a>, <a href="https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf">PDF</a>), Table 3.1. C. Moler, “Can one hear the shape of a drum?”, Cleve’s Corner, MathWorks, August 2012: <a href="https://blogs.mathworks.com/cleve/2012/08/06/can-one-hear-the-shape-of-a-drum-part-1-eigenvalues/">part 1, eigenvalues</a>, <a href="https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/">part 2, eigenfunctions</a>, <a href="https://blogs.mathworks.com/cleve/2012/08/20/can-one-hear-the-shape-of-a-drum-part-3-transplantation/">part 3, transplantation</a>. S. J. Chapman, “Drums that sound the same”, <em>American Mathematical Monthly</em> 102 (1995), 124–138. P. Buser, J. Conway, P. Doyle and K.-D. Semmler, “Some planar isospectral domains”, <em>International Mathematics Research Notices</em> 1994, 391–400 (<a href="https://arxiv.org/abs/1005.1839">arXiv</a>). T. Sunada, “Riemannian coverings and isospectral manifolds”, <em>Annals of Mathematics</em> 121 (1985), 169–186. P. Bérard, “Transplantation et isospectralité I”, <em>Mathematische Annalen</em> 292 (1992), 547–559. J. Milnor, “Eigenvalues of the Laplace operator on certain manifolds”, <em>PNAS</em> 51 (1964), 542. H. P. McKean and I. M. Singer, “Curvature and the eigenvalues of the Laplacian”, <em>Journal of Differential Geometry</em> 1 (1967), 43–69 (<a href="https://projecteuclid.org/download/pdf_1/euclid.jdg/1214427880">Project Euclid</a>). M. van den Berg and S. Srisatkunarajah, “Heat equation for a region in R² with a polygonal boundary”, <em>Journal of the London Mathematical Society</em> 37 (1988), 119–127. Wikipedia, <a href="https://en.wikipedia.org/wiki/Weyl_law">Weyl law</a> (Weyl 1911, Ivrii 1980) and <a href="https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum">Hearing the shape of a drum</a>.</p>
 </div>
 <script src="core.js"></script>
 <script>

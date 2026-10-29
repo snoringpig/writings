@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2026</p>
+      <p class="date-modified">October 29, 2026</p>
     </div>
   </div>
     
@@ -188,10 +188,10 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/clarinet.html">← 5 Clarinet</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/harmonica.html">6b Harmonica →</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>. Math: up to cosh, sinh and a 2×2 determinant (explained). About 3 minutes for the summary; about 25 with the mathematics.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>. Math: up to cosh, sinh and a 2×2 determinant (explained). About 3 minutes for the summary; about 30 with the mathematics.</p>
 </div>
 <div class="puzzle">
-<p>A kalimba tine’s first <a href="../../posts/instruments-as-operators/glossary.html#partial">overtone</a> sits at about 6.3 times its <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>, nowhere near a whole number. Overtones off the whole numbers are what make a bell clang. So why does a kalimba sound like a clean note?</p>
+<p>A kalimba tine is a steel bar clamped at one end. Its first <a href="../../posts/instruments-as-operators/glossary.html#partial">overtone</a> sits at about 6.3 times its <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>, off the whole numbers, and overtones off the whole numbers are what make a bell clang. So why does a kalimba sound like a clean note?</p>
 </div>
 <p>Listen first: tap a tine. Then tick the box that keeps the overtones ringing, and tap it again.</p>
 <style>
@@ -213,14 +213,17 @@ window.Quarto = {
   <p class="cap" style="padding:0.4rem 0.25rem 0">The tines are drawn to scale: a tine half as long sounds two octaves higher, as this page explains.</p>
 </section>
 </div>
+<div class="newidea">
+<p><strong>In one sentence.</strong> A bar clamped at one end has overtones off whole-number multiples (6.27×, 17.55×), yet a kalimba sounds clean because those overtones die within a fraction of a second (observed, not derived).</p>
+</div>
 <div class="gist">
 <p><strong>The recipe on this instrument, in brief.</strong></p>
 <ol type="1">
 <li><em>Newton’s law</em> on a thin slice of bent steel gives the beam equation <span class="math inline">u_{tt} = -\kappa^2 u_{xxxx}</span>, with four derivatives where a string had two.</li>
 <li><em>The operator</em> is <span class="math inline">\kappa^2</span> times the fourth derivative, <span class="math inline">A = \kappa^2\,d^4/dx^4</span>, on a tine clamped at one end and free at the other.</li>
-<li><em>Its spectrum</em>: the end conditions allow a mode only when <span class="math inline">\cos\beta L\cosh\beta L = -1</span>, which puts the frequencies in the ratios <span class="math inline">1 : 6.27 : 17.55 : 34.39</span>, far from whole numbers.</li>
-<li><em>On the diagram</em>: the overtones sit far off the whole-number lines.</li>
-<li><em>What we hear</em>: a click of off-line overtones at the start, which die within a fraction of a second, and then the fundamental alone: a clean note.</li>
+<li><em>Its spectrum</em>: the end conditions allow a mode only when <span class="math inline">\cos\beta L\cosh\beta L = -1</span>, which puts the frequencies in the ratios <span class="math inline">1 : 6.27 : 17.55 : 34.39</span>, off the whole numbers.</li>
+<li><em>On the diagram</em>: the overtones sit off the whole-number lines.</li>
+<li><em>What we hear</em>: a click of off-line overtones at the start, which die within a fraction of a second (observed on real kalimbas, not derived here), and then the fundamental alone: a clean note.</li>
 </ol>
 <p><a href="#what-we-hear">Skip to what we hear</a> if you only want the answer.</p>
 </div>
@@ -322,7 +325,7 @@ f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{\kappa\,\beta_n^2}{2\pi} = \frac{\ka
 </section>
 <section id="on-the-spectrum-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="on-the-spectrum-diagram">4 · On the spectrum diagram</h2>
-<p>Here are one tine’s frequencies from the result box, as multiples of the lowest: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem’s height is how hard that mode <a href="../../posts/instruments-as-operators/glossary.html#moment">pushes sideways</a> on the bridge just after a pluck, one of the two loads a tine puts on the bridge (the fold in stage 5 has both). Tap a stem to see the shape of that mode.</p>
+<p>Here are one tine’s frequencies from the result box, as multiples of the lowest: 1×, then 6.27×, off the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem’s height is how hard that mode <a href="../../posts/instruments-as-operators/glossary.html#moment">pushes sideways</a> on the bridge just after a pluck, one of the two loads a tine puts on the bridge (the fold in stage 5 has both). Tap a stem to see the shape of that mode.</p>
 <div class="ins">
 <div class="panel">
     <h3 class="anchored">Modes of one tine · tap a stem</h3>
@@ -334,7 +337,7 @@ f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{\kappa\,\beta_n^2}{2\pi} = \frac{\ka
 </section>
 <section id="what-we-hear" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-hear">5 · What we hear</h2>
-<p><strong>Why the note still sounds clean.</strong> You might guess the overtone is too quiet to hear. It isn’t. In how far the tine swings, the overtone is tiny; but the body hears the push on the bridge, not the swing, and in that push the overtone starts strong (fold below). That strong start is the click at the beginning of each note. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on, and the fundamental left on its own is a clean note. Why it dies so fast is not computed here; the page takes it from measurement. The acoustician D. M. F. Chapman found exactly this pattern on a real kalimba: one dominant overtone, at 5.9 to 6.8 times the fundamental, gone soon after the attack. With the box ticked, the off-line overtones keep ringing, and the same tine clangs like a bell.</p>
+<p><strong>Why the note still sounds clean.</strong> You might guess the overtone is too quiet to hear. It isn’t. In how far the tine swings, the overtone is tiny; but the body hears the push on the bridge, not the swing, and in that push the overtone starts strong (fold below). That strong start is the click at the beginning of each note. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on, and the fundamental left on its own is a clean note. That fast decay is observed, not derived: the model of stages 1 to 3 has no damping, and the page takes the decay from measurement. The acoustician D. M. F. Chapman found exactly this pattern on a real kalimba: one dominant overtone, at 5.9 to 6.8 times the fundamental, which dies away so fast that it is heard only at the instant the note starts. With the box ticked, the off-line overtones keep ringing, and the same tine clangs like a bell.</p>
 <div class="derive">
 <details>
 <summary>
@@ -355,9 +358,9 @@ f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{\kappa\,\beta_n^2}{2\pi} = \frac{\ka
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>Newton’s law on a thin slice of bent steel gave the beam equation, <span class="math inline">u_{tt} = -\kappa^2 u_{xxxx}</span>. Read as a rule, with the tine clamped at one end and free at the other, it is the operator <span class="math inline">A = \kappa^2\,d^4/dx^4</span>. Its spectrum, from <span class="math inline">\cos\beta L\cosh\beta L = -1</span>, puts the frequencies at <span class="math inline">1 : 6.27 : 17.55 : 34.39</span>, growing like the square of the mode number: on the diagram, the overtones sit far off the whole-number lines, and by the series’ rule the tine should clang. What we hear is clean, because the off-line overtones die almost at once and leave the fundamental ringing alone. The operator taught two things on the way: four derivatives make the frequencies spread apart like the squares, and the way the ends are held decides whether they land on whole numbers.</p>
+<p>A tine is a bar clamped at one end, with the operator <span class="math inline">A = \kappa^2\,d^4/dx^4</span>, and its spectrum, from <span class="math inline">\cos\beta L\cosh\beta L = -1</span>, puts the overtones at 6.27 and 17.55 times the lowest, off the whole-number multiples: four derivatives spread the frequencies like the squares, and the clamped and free ends keep them off the whole numbers. A kalimba still sounds clean because those overtones die within a fraction of a second, which is observed on real kalimbas, not derived here. The next page blows the same kind of bar instead of plucking it.</p>
 <div class="family">
-<p><strong>Same math elsewhere.</strong> Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other.</p>
+<p><strong>The tine’s operator family.</strong> Harmonica reeds and the teeth of a music box’s steel comb are also bars clamped at one end and free at the other: the same operator with the same ends, so the series puts them in the kalimba’s <a href="../../posts/instruments-as-operators/glossary.html#operator-family">operator family</a>.</p>
 </div>
 </section>
 <section id="the-next-puzzle" class="level2">
@@ -365,7 +368,7 @@ f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{\kappa\,\beta_n^2}{2\pi} = \frac{\ka
 <p>A harmonica reed is the same kind of bar, with the same off-line overtones. Blown, though, its notes land exactly on the lines. Where did the overtones go?</p>
 <p><a href="../../posts/instruments-as-operators/clarinet.html">← 5 · Clarinet</a> · <a href="../../posts/instruments-as-operators/harmonica.html">Next: 6b · Harmonica →</a></p>
 <div class="refs">
-<p><strong>References.</strong> D. M. F. Chapman, <a href="https://acoustics.org/pressroom/httpdocs/155th/chapman.htm">The sound of the African thumb piano (kalimba)</a>, Acoustical Society of America, 2008. Wikipedia, <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Euler–Bernoulli beam theory</a> and <a href="https://en.wikipedia.org/wiki/Cantilever">Cantilever</a>, and <a href="https://en.wikipedia.org/wiki/Inharmonicity">Inharmonicity</a> for a bell’s spectrum. Kalimba Magic, <a href="https://www.kalimbamagic.com/?p=49">on tuning tines</a>. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 2 (bars).</p>
+<p><strong>References.</strong> D. M. F. Chapman, <a href="https://acoustics.org/pressroom/httpdocs/155th/chapman.htm">The sound of the African thumb piano (kalimba)</a>, Acoustics’08 Paris, paper 5aMUf1, Acoustical Society of America, 2008. Wikipedia, <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Euler–Bernoulli beam theory</a> and <a href="https://en.wikipedia.org/wiki/Cantilever">Cantilever</a>, and <a href="https://en.wikipedia.org/wiki/Inharmonicity">Inharmonicity</a> for a bell’s spectrum. Kalimba Magic, <a href="https://www.kalimbamagic.com/?p=49">on tuning tines</a>. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 2 (bars).</p>
 </div>
 <script src="core.js"></script>
 <script>

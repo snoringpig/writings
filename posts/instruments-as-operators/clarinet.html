@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-55617497126496852ff9f5a59253c640.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -173,7 +173,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2026</p>
+      <p class="date-modified">October 29, 2026</p>
     </div>
   </div>
     
@@ -188,12 +188,12 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/violin.html">← 4 String</a> · <a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/kalimba.html">6 Kalimba →</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>. Math: up to mixed partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.</p>
+<p>Builds on <a href="../../posts/instruments-as-operators/violin.html">page 4, the violin string</a>. Math: up to mixed partial derivatives (explained). About 3 minutes for the summary; about 25 with the mathematics.</p>
 </div>
 <div class="puzzle">
 <p>A clarinet and a flute are about the same length. Yet the clarinet’s lowest note is almost an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave</a> below the flute’s. And when players <a href="../../posts/instruments-as-operators/glossary.html#overblow">overblow</a>, making the tube jump to its next mode, the flute jumps up an octave while the clarinet jumps an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave and a fifth</a>. The same equation governs the air in both tubes. What is different?</p>
 </div>
-<p>Listen first: hold the blow button on the clarinet, then switch the same tube to a flute and blow again. The register key (on the flute it stands in for blowing harder) makes either tube jump to its next mode.</p>
+<p>Listen first: hold the blow button on the clarinet, then switch the same tube to a flute and blow again. The register key (on the flute it stands in for a faster, narrower airstream) makes either tube jump to its next mode.</p>
 <style>
 #blow { min-width: 9rem; min-height: 3rem; font-size: 1.05rem; touch-action: none; user-select: none; -webkit-user-select: none; }
 #blow.on { background: var(--accent); color: var(--paper); border-color: var(--accent); }
@@ -211,6 +211,9 @@ window.Quarto = {
   <svg class="spec" id="cSpec" viewbox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the sound"></svg>
   <p class="cap" style="padding:0.4rem 0.25rem 0">Shading: how much the pressure swings, dark where it swings most, pale where it stays at room pressure. The first open hole acts, roughly, as the end of the tube.</p>
 </section>
+</div>
+<div class="newidea">
+<p><strong>In one sentence.</strong> Air in a tube obeys the string’s equation with different ends: a tube closed at one end has only odd multiples of its lowest frequency, so a clarinet sounds almost an octave below a flute of the same length and overblows an octave and a fifth higher.</p>
 </div>
 <div class="gist">
 <p><strong>The recipe on this instrument, in brief.</strong></p>
@@ -306,7 +309,7 @@ X = a\cos kx + b\sin kx, \qquad f = \frac{\sqrt\lambda}{2\pi} = \frac{ck}{2\pi} 
 <h2 class="anchored" data-anchor-id="what-we-hear">5 · What we hear</h2>
 <p><strong>Almost an octave deeper.</strong> The flute’s lowest mode, <span class="math inline">\sin(\pi x/L)</span>, has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet’s, <span class="math inline">\cos(\pi x/2L)</span>, swings most at the reed and has room pressure at the open end: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end. Real flutes and clarinets differ a little in length, the clarinet’s mouthpiece and bell change its effective length, and the open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.</p>
 <p>A blown tube does not ring and fade like a plucked string: the reed or the air jet keeps feeding it, and the air settles into one motion that repeats, at a frequency close to the tube’s sounding mode from stage 3. The demo’s sound is made that way: a repeating wave at that mode’s frequency, with the strong odd multiples and faint even ones described below.</p>
-<p><strong>Overblowing: an octave or a twelfth.</strong> The flute’s spectrum has every whole-number multiple of its lowest frequency; the clarinet’s has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). (The demo keeps the low-register tone color when the register key is on.) A flutist overblows by blowing harder, and the flute’s next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.</p>
+<p><strong>Overblowing: an octave or a twelfth.</strong> The flute’s spectrum has every whole-number multiple of its lowest frequency; the clarinet’s has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency, an octave and a fifth, called a twelfth (a fifth is the ratio 3/2). (The demo keeps the low-register tone color when the register key is on.) A flutist overblows with a faster, narrower airstream, and the flute’s next mode is 2 times its lowest, an octave. That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart.</p>
 <div class="derive">
 <details>
 <summary>
@@ -319,9 +322,9 @@ X = a\cos kx + b\sin kx, \qquad f = \frac{\sqrt\lambda}{2\pi} = \frac{ck}{2\pi} 
 </section>
 <section id="what-we-found" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
-<p>Newton’s law on a slab of air, together with air’s resistance to being squeezed, gave the wave equation for the pressure. Read as a rule, it is the string’s operator, <span class="math inline">A = -c^2\,d^2/dx^2</span>, acting on pressure; only the ends differ. With room pressure at both ends, the flute’s spectrum gives frequencies <span class="math inline">n\,c/2L</span>: every whole-number multiple. With the air held still at the reed, the clarinet’s gives <span class="math inline">(2n-1)\,c/4L</span>: half the lowest frequency and only odd multiples. On the diagram both blown sounds sit on the lines, because they repeat; what we hear is the octave between them, and the twelfth a clarinet jumps when overblown.</p>
+<p>Air in a tube obeys the string’s wave equation, so its operator is the string’s, <span class="math inline">A = -c^2\,d^2/dx^2</span>, and only the ends differ. Open at both ends, the flute’s modes sit at every whole-number multiple of <span class="math inline">c/2L</span>; closed at the reed, the clarinet’s sit at the odd multiples of <span class="math inline">c/4L</span>, so it sounds almost an octave lower and overblows to three times its lowest frequency, an octave and a fifth. The next page changes the rule itself: a steel tine that resists bending instead of being stretched.</p>
 <div class="family">
-<p><strong>Same operator, other ends.</strong> Stopped organ pipes and pan pipes are closed at one end like the clarinet and share its odd-multiples spectrum. Open organ pipes share the flute’s. Oboes and saxophones have cone-shaped tubes instead of cylinders, a different operator, which this series does not cover.</p>
+<p><strong>Operator families.</strong> Stopped organ pipes and pan pipes are closed at one end like the clarinet: the same operator with the same ends, so the series puts them in the clarinet’s <a href="../../posts/instruments-as-operators/glossary.html#operator-family">operator family</a>, and they share its odd-multiples spectrum. Open organ pipes are in the flute’s. Oboes and saxophones have cone-shaped tubes instead of cylinders, a different operator, which this series does not cover.</p>
 </div>
 </section>
 <section id="the-next-puzzle" class="level2">

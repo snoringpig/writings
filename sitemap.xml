@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://snoringpig.github.io/writings/about.html</loc>
-    <lastmod>2026-10-27T14:12:41.152Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/sampling/index.html</loc>
-    <lastmod>2026-10-27T14:12:41.243Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/violin.html</loc>
-    <lastmod>2026-10-27T14:12:41.243Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/note.html</loc>
-    <lastmod>2026-10-27T14:12:41.242Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/kalimba.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/glossary.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/circle.html</loc>
-    <lastmod>2026-10-27T14:12:41.240Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/drum.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/epilogue.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/harmonica.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
     <loc>https://snoringpig.github.io/writings/index.html</loc>
-    <lastmod>2026-10-27T14:12:41.155Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/oscillator.html</loc>
-    <lastmod>2026-10-27T14:12:41.242Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/piano.html</loc>
-    <lastmod>2026-10-27T14:12:41.242Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/index.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/clarinet.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/map.html</loc>
-    <lastmod>2026-10-27T14:12:41.241Z</lastmod>
-  </url>
-  <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/ring.html</loc>
-    <lastmod>2026-10-27T14:12:41.242Z</lastmod>
+    <lastmod>2026-10-29T14:21:57.913Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/shape.html</loc>
-    <lastmod>2026-10-27T14:12:41.243Z</lastmod>
+    <lastmod>2026-10-29T14:21:57.982Z</lastmod>
   </url>
   <url>
-    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/spectrum.html</loc>
-    <lastmod>2026-10-27T14:12:41.243Z</lastmod>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/index.html</loc>
+    <lastmod>2026-10-29T14:21:57.980Z</lastmod>
   </url>
   <url>
-    <loc>https://snoringpig.github.io/writings/posts/break-for/index.html</loc>
-    <lastmod>2026-10-27T14:12:41.239Z</lastmod>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/ring.html</loc>
+    <lastmod>2026-10-29T14:21:57.981Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/note.html</loc>
+    <lastmod>2026-10-29T14:21:57.981Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/kalimba.html</loc>
+    <lastmod>2026-10-29T14:21:57.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/drum.html</loc>
+    <lastmod>2026-10-29T14:21:57.979Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/piano.html</loc>
+    <lastmod>2026-10-29T14:21:57.981Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/violin.html</loc>
+    <lastmod>2026-10-29T14:21:57.982Z</lastmod>
   </url>
   <url>
     <loc>https://snoringpig.github.io/writings/posts/bicycle-wheel/index.html</loc>
-    <lastmod>2026-10-27T14:12:41.239Z</lastmod>
+    <lastmod>2026-10-29T14:21:57.979Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/break-for/index.html</loc>
+    <lastmod>2026-10-29T14:21:57.979Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/sampling/index.html</loc>
+    <lastmod>2026-10-29T14:21:57.982Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/circle.html</loc>
+    <lastmod>2026-10-29T14:21:57.979Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/glossary.html</loc>
+    <lastmod>2026-10-29T14:21:57.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/epilogue.html</loc>
+    <lastmod>2026-10-29T14:21:57.979Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/map.html</loc>
+    <lastmod>2026-10-29T14:21:57.981Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/clarinet.html</loc>
+    <lastmod>2026-10-29T14:21:57.979Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/harmonica.html</loc>
+    <lastmod>2026-10-29T14:21:57.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/spectrum.html</loc>
+    <lastmod>2026-10-29T14:21:57.982Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/posts/instruments-as-operators/oscillator.html</loc>
+    <lastmod>2026-10-29T14:21:57.981Z</lastmod>
+  </url>
+  <url>
+    <loc>https://snoringpig.github.io/writings/about.html</loc>
+    <lastmod>2026-10-29T14:21:57.911Z</lastmod>
   </url>
 </urlset>
