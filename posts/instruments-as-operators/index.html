@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-10-25">
+<meta name="description" content="Why a piano note has a pitch and a drum’s thud doesn’t, where the equations of instruments come from, and when an equation of motion is a list of notes: a series in four posts, with two more beyond.">
 
 <title>The Shape of a Sound – No Man’s Land</title>
 <style>
@@ -75,6 +76,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 <link rel="stylesheet" href="ins.css">
@@ -119,13 +163,19 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">The Shape of a Sound</h1>
-<p class="subtitle lead">The mathematics of musical sound, one instrument at a time</p>
+<p class="subtitle lead">The mathematics of musical sound: a series</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">music</div>
+    <div class="quarto-category">the-shape-of-a-sound</div>
   </div>
   </div>
 
+<div>
+  <div class="description">
+    Why a piano note has a pitch and a drum’s thud doesn’t, where the equations of instruments come from, and when an equation of motion is a list of notes: a series in four posts, with two more beyond.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -152,220 +202,186 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Pluck a string and you get a note you could hum. Strike a drum and you get a thud. Both are a stretched piece of material, set shaking. So why do they sound so different?</p>
-<div class="ins">
-<div class="panel">
-  <div class="duo">
-    <div>
-      <div class="controls"><button class="primary" data-hook="string">▶ Pluck a string</button></div>
-      <svg class="spec" id="rulerString" viewbox="0 0 320 96" aria-label="The frequencies in a plucked string's sound, as multiples of the lowest: they sit on the whole-number lines"></svg>
-    </div>
-    <div>
-      <div class="controls"><button class="primary" data-hook="drum">▶ Strike a drum</button></div>
-      <svg class="spec" id="rulerDrum" viewbox="0 0 320 96" aria-label="The frequencies in a struck drum's sound, as multiples of the lowest: they fall between the whole-number lines"></svg>
-    </div>
-  </div>
-  <p class="cap">Call this the <em>pitch ruler</em>; with one stem per mode, it is the spectrum diagram that stage 4 of every instrument page draws. Its gray lines mark whole-number multiples, 1×, 2×, 3×, …, of one base frequency, here the lowest. Each blue stem is one frequency in the sound; taller means it starts stronger, for an idealized pluck and strike. (The string is plucked a fifth of the way along, so 5× is missing; the drum is struck about a third of the way out from its center.)</p>
+<div class="series-nav slim">
+<p><a href="../../posts/what-you-hear/index.html">1 · What you hear →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
 </div>
-</div>
-<section id="the-answer-in-three-steps" class="level2">
-<h2 class="anchored" data-anchor-id="the-answer-in-three-steps">The answer in three steps</h2>
-<p><strong>1. Everything that vibrates has a set of favorite shapes.</strong> A string can swing as one arc, as two halves moving in opposite directions, as three thirds, and so on. Each of these shapes, called a <a href="../../posts/instruments-as-operators/glossary.html#mode">mode</a>, swings at its own frequency.</p>
-<svg class="fig" viewbox="0 0 320 112" role="img" aria-label="The first three modes of a string: one arc, two halves, three thirds, at 1, 2 and 3 times the lowest frequency"><path class="dash" d="M 40 22 L 280 22"></path><path class="acc" d="M 40 22 C 126.4 7.7 193.6 7.7 280.0 22"></path><path class="acc" opacity="0.35" d="M 40 22 C 126.4 36.3 193.6 36.3 280.0 22"></path><circle cx="40" cy="22" r="2.5" class="fillacc"></circle><circle cx="280" cy="22" r="2.5" class="fillacc"></circle><text x="290" y="26">1×</text><path class="dash" d="M 40 56 L 280 56"></path><path class="acc" d="M 40 56 C 83.2 41.7 116.8 41.7 160.0 56 C 203.2 70.3 236.8 70.3 280.0 56"></path><path class="acc" opacity="0.35" d="M 40 56 C 83.2 70.3 116.8 70.3 160.0 56 C 203.2 41.7 236.8 41.7 280.0 56"></path><circle cx="40" cy="56" r="2.5" class="fillacc"></circle><circle cx="280" cy="56" r="2.5" class="fillacc"></circle><text x="290" y="60">2×</text><path class="dash" d="M 40 90 L 280 90"></path><path class="acc" d="M 40 90 C 68.8 75.7 91.2 75.7 120.0 90 C 148.8 104.3 171.2 104.3 200.0 90 C 228.8 75.7 251.2 75.7 280.0 90"></path><path class="acc" opacity="0.35" d="M 40 90 C 68.8 104.3 91.2 104.3 120.0 90 C 148.8 75.7 171.2 75.7 200.0 90 C 228.8 104.3 251.2 104.3 280.0 90"></path><circle cx="40" cy="90" r="2.5" class="fillacc"></circle><circle cx="280" cy="90" r="2.5" class="fillacc"></circle><text x="290" y="94">3×</text></svg>
-<p><strong>2. A pluck sets many of them going at once.</strong> What you hear is a mix of the modes’ frequencies: the lowest, called the <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>, and the <a href="../../posts/instruments-as-operators/glossary.html#partial">overtones</a> above it. They are the stems on the ruler above.</p>
-<p><strong>3. Whether that mix sounds like one note depends on how the frequencies line up.</strong> If they are all, or very nearly, whole-number multiples of one frequency in the range we hear as pitch, the sound repeats itself at the largest such frequency, many times a second, and the ear hears that repetition rate as the <a href="../../posts/instruments-as-operators/glossary.html#pitch">pitch</a>. A string’s modes do exactly that: 1×, 2×, 3×, …. An ideal drumhead’s land at 1×, 1.59×, 2.14×, 2.30×, …: a few fall near a line by chance, but no frequency we hear as pitch fits them all. The sound doesn’t repeat at any rate we hear as pitch, and it dies fast: a thud. Drums with a clear note, such as the timpani (kettledrums), are built so that one set of their modes lands near the lines and the rest are weak or fade fast (page 8).</p>
-<div class="northstar">
-<p><strong>The idea behind the whole series.</strong> Apply Newton’s law to a small piece of an instrument and you get a rule for how its shape is pulled back toward rest: its <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>. The shapes that rule only scales up or down are the modes; each swings at its own frequency, and left to ring, the instrument moves as a mix of them. The operator’s <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> fixes those frequencies, so it decides what the instrument can sound like: <strong>on the lines, a note; off the lines, a clang or a thud.</strong></p>
-</div>
-<p><a href="#the-journey">Skip to the journey ↓</a></p>
+<p>A piano note has a pitch you could hum; a drum’s thud has none. Both are a stretched, struck piece of material. This series explains the difference with one piece of mathematics, the <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> of an <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a>, and it is organised around four questions:</p>
+<ol type="1">
+<li>How do we explain what we hear, for example a drum (no clear pitch) against a piano (a clear pitch)?</li>
+<li>How do we explain the four aspects of a sound: pitch, loudness, timbre and duration?</li>
+<li>Where do the differential equations of instruments come from?</li>
+<li>When is the solution of a differential equation a sum over the spectrum of an operator, what is the deeper theory, and how does it connect back to 1 and 2?</li>
+</ol>
+<section id="the-series-in-one-paragraph" class="level2">
+<h2 class="anchored" data-anchor-id="the-series-in-one-paragraph">The series in one paragraph</h2>
+<p>A vibrating object of finite size whose motion is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a> and unchanging in time moves, left to itself, as a sum of <a href="../../posts/instruments-as-operators/glossary.html#mode">modes</a>, apart from the special cases <a href="../../posts/when-an-equation-has-a-spectrum/index.html#counterexamples">post 3 lists</a>: shapes that each oscillate at their own frequency <span class="math inline">f_k</span> and fade with their own time <span class="math inline">\tau_k</span>. The body, the air and the room pass that motion on to a listener in a way that is also linear and unchanging in time: this keeps every <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>, changes the amounts, and adds the filter’s own ringing (the body’s resonances, the room’s reverberation). So the instrument’s part of the sound is <span class="math display">
+p(t) = \sum_k a_k\, e^{-t/\tau_k} \cos(2\pi f_k t + \varphi_k).
+</span> The equation of motion (the operator, together with friction and radiation) fixes the <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>; the playing, the radiation and where you listen fix the <span class="math inline">a_k</span>. The four aspects are heard from these lists, through the ear’s own weighting: pitch mainly from where the <span class="math inline">f_k</span> sit; loudness from the sizes, weighted by frequency; timbre from all three lists, especially early on, plus noise that is not a mode; duration from the fading and from when the player stops or damps the note. Bowed and blown instruments are different: their motion is a single repeating cycle, so its <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a> sit at exact whole-number multiples; the resonator’s modes shape which partials are strong, and the player sets loudness and duration.</p>
+<p>The series derives the <span class="math inline">f_k</span>; the <span class="math inline">\tau_k</span> are mostly measured, and it says so where it uses them.</p>
+<p>Here <span class="math inline">p(t)</span> is the air pressure at the listener; <span class="math inline">a_k</span> is how strongly the <span class="math inline">k</span>-th partial sounds, <span class="math inline">\varphi_k</span> where in its cycle it starts, and <span class="math inline">e^{-t/\tau_k}</span> says that it shrinks by a factor of <span class="math inline">e \approx 2.7</span> every <span class="math inline">\tau_k</span> seconds.</p>
 </section>
-<section id="one-instrument-from-each-class" class="level2">
-<h2 class="anchored" data-anchor-id="one-instrument-from-each-class">One instrument from each class</h2>
-<p>Musicologists sort instruments into five classes by what makes the sound (<a href="../../posts/instruments-as-operators/glossary.html#hornbostel-sachs">Hornbostel–Sachs</a>): strings, air, solid bodies, stretched skins and electric circuits. Here is one of each, playing Grieg.</p>
-<div class="ins">
-<div class="panel" id="orch">
-<style>
-@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: "LM Roman"; src: url("fonts/lmroman10-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "LM Sans"; src: url("fonts/lmsans10-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "LM Sans"; src: url("fonts/lmsans10-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "LM Math"; src: url("fonts/lmmath.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-#orch canvas { aspect-ratio: 16 / 9; height: auto; background: #0d1016; border-radius: 6px; }
-#orch canvas:fullscreen { width: 100vw; height: 100vh; object-fit: contain; border-radius: 0; }
-#orch .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; font-family: var(--f-ui); font-size: 0.9rem; color: var(--muted); }
-#orch .chip { padding: 0.25rem 0.6rem; min-height: 2rem; display: inline-flex; gap: 0.4rem; align-items: center; }
-#orch .chip .dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25); }
-#orch .chip[aria-pressed="false"] { color: var(--muted); }
-#orch .chip[aria-pressed="false"] .dot { background: transparent; box-shadow: inset 0 0 0 1.5px var(--c); }
-#orch #oTime { font-family: var(--f-mono); font-size: 0.86rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-</style>
-  <canvas id="oStage" role="img" aria-label="A piano roll of the score above six lanes, one per instrument. Each lane names the instrument's class and what vibrates, sketches it moving, and shows the frequencies in its current note on a pitch ruler."></canvas>
-  <div class="controls">
-    <button type="button" class="primary" id="oPlay">▶ Play (1 min)</button>
-    <button type="button" id="oFull">▶ With the mathematics (2½ min)</button>
-    <button type="button" id="oStop">Stop</button>
-    <button type="button" id="oFs">Full screen</button>
-    <span id="oTime" aria-live="polite">Ready</span>
-  </div>
-  <div class="chips" id="oFams"><span>Tap an instrument to mute it:</span></div>
-  <p class="cap">Grieg's <cite>In the Hall of the Mountain King</cite> (1875) on a sine theremin (electrophone), a piano (chordophone), a clarinet (aerophone), a glockenspiel (idiophone), and two membranophones, a bass drum and a kettledrum (timpani). There are no recordings: every note is built from pure tones. The struck and plucked notes fade, at frequencies computed from each instrument's operator (the bass drum's from page 8's ideal drumhead), except the kettledrum's, which are measured, because page 8's simple model gets only halfway to them. The clarinet holds a steady tone with the tube's odd multiples strong and the even ones faint, and the theremin a single steady pure tone. Each lane shows the frequencies on the pitch ruler. The arrangement is ours, after the transcription at <a href="https://flutetunes.com/tunes.php?id=91">flutetunes.com</a>. On a small screen, use Full screen with the phone turned sideways.</p>
-</div>
-</div>
-<p>The two drums show the series’ answer in miniature. An ideal drumhead’s frequencies are off the lines, so the bass drum booms without a clear pitch; a kettledrum is built so that one set of its modes lands near the lines and the others fade fast, so it plays a note (<a href="../../posts/instruments-as-operators/drum.html#one-drumhead-two-drums">page 8</a>).</p>
+<section id="the-posts" class="level2">
+<h2 class="anchored" data-anchor-id="the-posts">The posts</h2>
+<ol type="1">
+<li><a href="../../posts/what-you-hear/index.html"><strong>What you hear</strong></a> answers questions 1 and 2, with sounds and no differential equations. A clear pitch means the partials sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, so the sound nearly repeats at that rate; a piano’s partials very nearly do this and a drum’s don’t.</li>
+<li><a href="../../posts/where-the-equations-come-from/index.html"><strong>Where the equations come from</strong></a> answers question 3. For small motions, Newton’s law on a small piece, together with a law of the material, gives <span class="math inline">u_{tt} = -Au</span>, with an operator <span class="math inline">A</span> for each object: spring, beads, string, air column, bar, stiff string, drumhead, and a coil with a capacitor.</li>
+<li><a href="../../posts/when-an-equation-has-a-spectrum/index.html"><strong>When an equation has a spectrum</strong></a> answers question 4, the mathematical answer. The solutions of <span class="math inline">U' = BU</span> are exactly the combinations of modes when <span class="math inline">B</span> has a basis of <a href="../../posts/instruments-as-operators/glossary.html#eigenvector">eigenvectors</a>; for a stable, frictionless object of finite size this always holds (once any rigid drift is split off), and the post shows where it fails.</li>
+<li><a href="../../posts/instruments-case-by-case/index.html"><strong>Instruments, case by case</strong></a> puts the answers to work on one instrument per page, starting from an orchestra: violin, clarinet, kalimba, harmonica, piano, bass drum and kettledrum.</li>
+</ol>
+<p>Two further posts take up questions the answers raise: <a href="../../posts/hear-the-shape-of-a-drum/index.html"><em>Can you hear the shape of a drum?</em></a> and <a href="../../posts/instruments-and-scales/index.html"><em>Did instruments shape our scales?</em></a>. <a href="../../posts/a-piano/index.html"><em>A Piano</em></a> is a playable upright with all 88 keys and its three pedals. Technical words link to the <a href="../../posts/instruments-as-operators/glossary.html">glossary</a>.</p>
 </section>
-<section id="the-mathematics-in-one-example" class="level2">
-<h2 class="anchored" data-anchor-id="the-mathematics-in-one-example">The mathematics in one example</h2>
-<p>The smallest instrument with more than one mode is two beads on a tight string, with both ends tied. Pull one bead aside and let go, and both beads wobble in a tangled way that never quite repeats. But two ways of starting them are special. Lift both beads together, and they swing together forever, at one frequency. Lift one up and push the other down, and they swing in opposite directions forever, at √3 ≈ 1.73 times that frequency: now the stretch of string between the beads pulls too, so the restoring pull is three times as strong, and a frequency goes as the square root of the pull (page 1).</p>
-<svg class="fig" viewbox="0 0 320 112" role="img" aria-label="The two modes of two beads on a string with tied ends. Left: both beads move together, at the lower frequency. Right: they move in opposite directions, at about 1.73 times that frequency."><path class="dash" d="M 10 50 L 150 50"></path><path class="acc" d="M 10 50 L 56.7 28 L 103.3 28 L 150 50"></path><path class="acc" opacity="0.35" d="M 10 50 L 56.7 72 L 103.3 72 L 150 50"></path><circle cx="56.7" cy="28" r="5" class="fillacc"></circle><circle cx="103.3" cy="28" r="5" class="fillacc"></circle><circle cx="56.7" cy="72" r="5" class="fillacc" opacity="0.35"></circle><circle cx="103.3" cy="72" r="5" class="fillacc" opacity="0.35"></circle><circle cx="10" cy="50" r="2.5" class="fillacc"></circle><circle cx="150" cy="50" r="2.5" class="fillacc"></circle><text x="80" y="102" text-anchor="middle">together: 1×</text><path class="dash" d="M 170 50 L 310 50"></path><path class="acc" d="M 170 50 L 216.7 28 L 263.3 72 L 310 50"></path><path class="acc" opacity="0.35" d="M 170 50 L 216.7 72 L 263.3 28 L 310 50"></path><circle cx="216.7" cy="28" r="5" class="fillacc"></circle><circle cx="263.3" cy="72" r="5" class="fillacc"></circle><circle cx="216.7" cy="72" r="5" class="fillacc" opacity="0.35"></circle><circle cx="263.3" cy="28" r="5" class="fillacc" opacity="0.35"></circle><circle cx="170" cy="50" r="2.5" class="fillacc"></circle><circle cx="310" cy="50" r="2.5" class="fillacc"></circle><text x="240" y="102" text-anchor="middle">opposite: 1.73×</text></svg>
-<p>These two shapes are the beads’ modes, and every motion of the two beads, the tangled one included, is a mix of them, each part swinging at its own frequency. The rule that turns the beads’ heights into the pulls on them is their operator; a mode is a shape that the rule only scales; the numbers that fix the modes’ frequencies form its spectrum. A string, a column of air, a steel bar and a drumhead are the same story with more and more small pieces, each pulled back by its own rule. <a href="../../posts/instruments-as-operators/ring.html">Page 2</a> works the two beads out in full, and <a href="../../posts/instruments-as-operators/spectrum.html">the spectrum of an operator</a> proves that every free motion is a mix of modes and says where that stops being exact: when a bow or a breath keeps driving the motion, when the swings are large, or when friction mixes the modes.</p>
+<section id="reading-paths" class="level2">
+<h2 class="anchored" data-anchor-id="reading-paths">Reading paths</h2>
+<ul>
+<li><strong>In order</strong>, 1 → 2 → 3 → 4: each post uses the one before it.</li>
+<li><strong>A listener’s path</strong>, 1 → 4: every page of post 4 can be read after post 1 alone, and links to the derivation and the mathematics for its instrument.</li>
+<li><strong>A mathematician’s path</strong>, post 3 alone: it recaps what it uses from posts 1 and 2 and links to the derivations.</li>
+</ul>
+</section>
+<section id="operator-families-and-instrument-classes" class="level2">
+<h2 class="anchored" data-anchor-id="operator-families-and-instrument-classes">Operator families and instrument classes</h2>
+<p>The <a href="../../posts/instruments-as-operators/glossary.html#hornbostel-sachs">Hornbostel–Sachs classification</a>, the scheme most used by those who study instruments, sorts them into five <em>classes</em> by what makes the sound. This series groups them by <a href="../../posts/instruments-as-operators/glossary.html#operator-family">operator family</a>: instruments whose operators agree up to constants and how they are held, so that one calculation covers them all.</p>
+<table class="table-striped caption-top table">
+<caption>Hornbostel–Sachs class, instrument, operator family, and the posts that derive the operator (2) and hear the instrument (4).</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Hornbostel–Sachs class</th>
+<th style="text-align: left;">Instrument</th>
+<th style="text-align: left;">Operator family: the rule, and how it is held</th>
+<th style="text-align: left;">Derived · heard</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">chordophone, 321.322</td>
+<td style="text-align: left;">violin, guitar</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,d^2/dx^2</span> on the string; ends tied</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#string">2</a> · <a href="../../posts/instruments-case-by-case/violin.html">4</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">chordophone, 322</td>
+<td style="text-align: left;">harp</td>
+<td style="text-align: left;">the same</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#string">2</a> · <a href="../../posts/instruments-case-by-case/violin.html">4</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">chordophone, 314.122</td>
+<td style="text-align: left;">piano</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span>; ends pinned</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#stiff-string">2</a> · <a href="../../posts/instruments-case-by-case/piano.html">4</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">aerophone, 421.121.12</td>
+<td style="text-align: left;">flute</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,d^2/dx^2</span> on the air’s pressure; both ends open</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#tube">2</a> · <a href="../../posts/instruments-case-by-case/clarinet.html">4</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">aerophone, 422.211.2</td>
+<td style="text-align: left;">clarinet</td>
+<td style="text-align: left;">the same; closed at the reed</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#tube">2</a> · <a href="../../posts/instruments-case-by-case/clarinet.html">4</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">aerophone, 412.132</td>
+<td style="text-align: left;">harmonica</td>
+<td style="text-align: left;"><span class="math inline">\kappa^2\,d^4/dx^4</span> on the reed; clamped and free</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#bar">2</a> · <a href="../../posts/instruments-case-by-case/harmonica.html">4</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">idiophone, 122.1</td>
+<td style="text-align: left;">kalimba</td>
+<td style="text-align: left;"><span class="math inline">\kappa^2\,d^4/dx^4</span>; clamped and free</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#bar">2</a> · <a href="../../posts/instruments-case-by-case/kalimba.html">4</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">idiophone, 111.222</td>
+<td style="text-align: left;">glockenspiel</td>
+<td style="text-align: left;"><span class="math inline">\kappa^2\,d^4/dx^4</span>; both ends free</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#bar">2</a> · <a href="../../posts/instruments-and-scales/index.html">scales</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">membranophone, 211.11</td>
+<td style="text-align: left;">timpani</td>
+<td style="text-align: left;"><span class="math inline">-c^2\Delta</span> on a disk; rim fixed, air and kettle around it</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#drumhead">2</a> · <a href="../../posts/instruments-case-by-case/drum.html">4</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">membranophone, 211.212.1</td>
+<td style="text-align: left;">bass drum</td>
+<td style="text-align: left;"><span class="math inline">-c^2\Delta</span> on a disk; rim fixed, a second head</td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#drumhead">2</a> · <a href="../../posts/instruments-case-by-case/drum.html">4</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">electrophone, 531.1</td>
+<td style="text-align: left;">theremin</td>
+<td style="text-align: left;">the number <span class="math inline">1/LC</span></td>
+<td style="text-align: left;"><a href="../../posts/where-the-equations-come-from/index.html#circuit">2</a></td>
+</tr>
+</tbody>
+</table>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>The decimal codes, and when electrophones were added
+</summary>
+<p>The numbers are the scheme’s decimal codes, read from the left. Among the chordophones (3), 321.322 are necked box lutes, such as the violin (bowed, 321.322-71) and the guitar; 322 are harps; 314.122 are board zithers with a resonator box, where the piano sits, as 314.122-4-8, sounded by hammers from a keyboard. Among the aerophones (4), 421.121.12 are open side-blown flutes with fingerholes; 422.211.2 are clarinets with a cylindrical bore and fingerholes; 412.132 are sets of free reeds, inside the interruptive free aerophones (412), where “the air-stream is interrupted periodically”. Among the idiophones (1), 122.1 are plucked idiophones in the form of a comb, with laced-on lamellae (thin tongues), and 111.222 are sets of struck percussion plaques. Among the membranophones (2), 211.11 are single kettle drums and 211.212.1 single cylindrical drums with two heads. Number 531.1 places the theremin in 53, Sachs’s group of radioelectric instruments, those that make their sound with electrically driven oscillators.</p>
+<p>Hornbostel and Sachs published the scheme in 1914 with four classes; electrophones came later. Francis Galpin gave them a class of their own in his own scheme (1937), and Sachs added them to Hornbostel–Sachs as a fifth class, with the groups 51 to 53, in <em>The History of Musical Instruments</em> (1940). Anthony Baines and Klaus Wachsmann’s English translation (1961) keeps the four classes of 1914 (Lee 2020).</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>What varies inside one operator family
+</summary>
+<p>Inside one operator family the rule stays and the rest varies:</p>
+<ul>
+<li><strong>Strings and air columns</strong>, <span class="math inline">-c^2\,d^2/dx^2</span>. What moves, the string’s height or the air’s pressure; the constants that set the lowest frequency, such as length, tension and mass per length; the ends, which are part of the operator: tied, open at both ends (flute) or closed at one (clarinet, pan pipes); and the playing: plucked (guitar, harp), bowed (violin) or blown.</li>
+<li><strong>Bending bars</strong>, <span class="math inline">\kappa^2\,d^4/dx^4</span>. Steel tine, brass reed or metal bar; the ends, one clamped or both free, which change the frequency ratios; and the playing: plucked, struck or blown, which decides whether you hear the bar’s own overtones or the whole-number multiples of a steady airflow.</li>
+<li><strong>Stiff strings</strong>, <span class="math inline">-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span>. The stiffness, whose effect is largest at the two ends of a piano’s keyboard (<a href="../../posts/instruments-case-by-case/piano.html">the piano page</a>).</li>
+<li><strong>Membranes</strong>, <span class="math inline">-c^2\Delta</span>. Tension and size, and what surrounds the head, which matters for timpani.</li>
+<li><strong>A single number</strong>, such as <span class="math inline">k/m</span> for a mass on a spring or <span class="math inline">1/LC</span> for a coil and a capacitor. Nothing varies but the number.</li>
+</ul>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>Where the classes and the mathematics part ways
+</summary>
+<p>Hornbostel–Sachs asks what makes the sound; the operator asks what oscillates and by what rule. Mostly the answers line up. Where they part, the difference is instructive.</p>
+<ul>
+<li><strong>The piano</strong> is a chordophone, a board zither whose strings are struck by hammers, but its operator adds the bar’s fourth derivative to the string’s, <span class="math inline">-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4</span>: its steel wire is stiff enough to bend like a bar (<a href="../../posts/instruments-case-by-case/piano.html">the piano page</a>).</li>
+<li><strong>The harmonica</strong> is an aerophone, classed by its interrupted airstream, though its reed is a clamped bar like the kalimba’s tine. That agrees with <a href="../../posts/instruments-case-by-case/harmonica.html">the harmonica page</a>: the steady sound has only whole-number multiples of the puff rate, set by the chopped airflow, and the reed’s own off-line overtones are absent from it.</li>
+<li><strong>The glockenspiel and the kalimba</strong> are idiophones in different groups, struck and plucked, and in one operator family. They share the rule <span class="math inline">\kappa^2\,d^4/dx^4</span>, but their ends differ, both free for the glockenspiel bar and one clamped for the tine, so their operators differ, and so do their frequency ratios, <span class="math inline">1 : 2.76 : 5.40</span> against <span class="math inline">1 : 6.27 : 17.55</span>.</li>
+<li><strong>A violin string and a flute’s air column</strong> are in different classes, yet their operators agree up to constants, so they are in one operator family: both are <span class="math inline">-c^2\,d^2/dx^2</span> with the value held at zero at both ends, the string’s height at its tied ends and the air’s extra pressure at the flute’s open ends (<a href="../../posts/where-the-equations-come-from/index.html#tube">post 2</a>).</li>
+<li><strong>An electric guitar</strong> is a chordophone with a pickup: its strings make the sound, and the electronics only pick it up and amplify it.</li>
+<li><strong>A theremin</strong> is an electrophone: its oscillators are coil-and-capacitor circuits, whose operator is the single number <span class="math inline">1/LC</span>; <a href="../../posts/where-the-equations-come-from/index.html#circuit">post 2</a> derives it and explains how the player’s hand sets the pitch.</li>
+</ul>
+</details>
+</div>
 </section>
 <section id="did-instrument-makers-know" class="level2">
 <h2 class="anchored" data-anchor-id="did-instrument-makers-know">Did instrument makers know?</h2>
-<p>Not in these terms. Instruments came first, shaped over centuries by trial and ear; the mathematics came later and explained them, from Mersenne’s laws of vibrating strings (1636) and d’Alembert’s wave equation (1747) to Rayleigh’s <em>The Theory of Sound</em> (1877). Designing an instrument by computing its spectrum is recent: a carillon bell with a major third in its overtones, where traditional bells have a minor third, was designed by computer at the Eindhoven University of Technology for the Eijsbouts bell foundry; the <a href="../../posts/instruments-as-operators/map.html#did-instrument-makers-know">map</a> tells the longer story.</p>
-</section>
-<section id="the-journey" class="level2">
-<h2 class="anchored" data-anchor-id="the-journey">The journey</h2>
-<div class="ins">
-<ol class="journey">
-  <li class="part">The idea</li>
-  <li><a href="note.html"><span class="n">0</span><span class="t">What makes a sound a note?</span></a><span class="hint">When a sound's frequencies are all, or very nearly, whole-number multiples of one frequency, the sound repeats, or nearly repeats, at the largest such frequency, and if that rate is in the range we hear as pitch, the ear hears it as the pitch, even when that frequency itself is missing.</span><span class="controls"><button data-g="note">▶ The note</button><button data-g="nofund">▶ Without it</button></span></li>
-  <li><a href="oscillator.html"><span class="n">1</span><span class="t">Why does a fading note stay in tune?</span></a><span class="hint">A mass on a spring vibrates at one frequency, √(k/m)/2π (k its stiffness, m its mass), and the size of the swing doesn't enter (for small swings), which is why a fading note keeps its pitch.</span></li>
-  <li><a href="ring.html"><span class="n">2</span><span class="t">How can a tangled wobble be a few simple motions?</span></a><span class="hint">With many masses the operator is a table of numbers (a matrix); the shapes it only rescales (its eigenvectors) swing as independent springs, and any motion is a mix of them.</span></li>
-  <li><a href="circle.html"><span class="n">3</span><span class="t">Why does a loop of string land exactly on the lines?</span></a><span class="hint">A loop of string vibrates at exactly 1, 2, 3, … times its lowest frequency, because each wave around it has a whole number of crests and all waves travel at the same speed.</span></li>
-  <li><a href="spectrum.html"><span class="n">★</span><span class="t">The spectrum of an operator</span></a><span class="hint">Left to ring, an object vibrates as a mix of its modes; the operator fixes their frequencies, and playing sets only how strongly each sounds.</span></li>
-  <li class="part">Instruments</li>
-  <li><a href="violin.html"><span class="n">4</span><span class="t">Why does a light touch make a string jump an octave?</span></a><span class="hint">A light touch at the middle drains every mode that moves under the finger and leaves the even modes, which stand still there: a note an octave up.</span></li>
-  <li><a href="clarinet.html"><span class="n">5</span><span class="t">Why is a clarinet almost an octave deeper than a flute?</span></a><span class="hint">Air in a tube obeys the string's equation with different ends: a tube closed at one end has only odd multiples of its lowest frequency, so a clarinet sounds almost an octave below a flute of the same length and overblows an octave and a fifth higher.</span><span class="controls"><button data-g="flute">▶ Flute-like</button><button data-g="clar">▶ Clarinet-like</button></span></li>
-  <li><a href="kalimba.html"><span class="n">6</span><span class="t">Why does a kalimba sound clean?</span></a><span class="hint">A bar clamped at one end has overtones off whole-number multiples (6.27×, 17.55×), yet a kalimba sounds clean because those overtones die within a fraction of a second (observed, not derived).</span><span class="controls"><button data-g="kal">▶ Kalimba tine</button></span></li>
-  <li><a href="harmonica.html"><span class="n">6b</span><span class="t">Where did the harmonica reed's overtones go?</span></a><span class="hint">Blown, the reed swings just below its own lowest frequency and chops the air into identical puffs, so the steady sound has only whole-number multiples and the reed's off-line overtones are absent from it.</span><span class="controls"><button data-g="kal">▶ Plucked</button><button data-g="harm">▶ Blown</button></span></li>
-  <li><a href="piano.html"><span class="n">7</span><span class="t">Why do piano tuners stretch octaves?</span></a><span class="hint">A piano wire's stiffness puts each overtone slightly above its whole-number multiple, so tuners stretch octaves to reduce the beating, a slow wobble in loudness, most at the ends of the keyboard.</span><span class="controls"><button data-g="oct">▶ Exactly 2 : 1</button><button data-g="str">▶ Stretched</button></span></li>
-  <li><a href="drum.html"><span class="n">8</span><span class="t">Why does a drum thud?</span></a><span class="hint">An ideal drumhead's frequencies (1, 1.59, 2.14, … times the lowest) fit no pitch, so a plain drum thuds; on a kettledrum, the air the head pushes pulls one set of modes near 2 : 3 : 4 : 5, a note.</span></li>
-  <li class="part">Beyond: two questions the recipe raises</li>
-  <li><a href="shape.html"><span class="n">9</span><span class="t">Can you hear the shape of a drum?</span></a><span class="hint">All of a drum's frequencies tell you its area and, for a reasonable rim, its perimeter, but not always its shape: two different drums can have exactly the same frequencies.</span><span class="controls"><button data-g="gA">▶ Drum A</button><button data-g="gB">▶ Drum B</button></span></li>
-  <li><a href="epilogue.html"><span class="n">10</span><span class="t">Did instruments shape our scales?</span></a><span class="hint">Two notes sound smooth together when their overtones line up, so instruments with different overtones can favour different scales, as Sethares argues (after Plomp and Levelt).</span></li>
-</ol>
+<p>Mostly not. The mathematics in this series explained instruments after they were built: makers found what works by trying and listening, and the theory came later, often much later. Bell founders tuned each bell’s partials by ear and lathe for the Zutphen carillon of 1644; experimenters found the laws of strings (Mersenne, 1636) and the still points of a vibrating string (Noble and Pigot, 1670s; Sauveur, 1701). The wave equation (d’Alembert, 1747), modes and their superposition (Daniel Bernoulli, Euler, Fourier) and the spectral theory behind this series (Sturm and Liouville, Rayleigh, Hilbert, Weyl) followed. Designing an instrument by computing its spectrum before it is made is recent: computed marimba bar profiles appear around 1990, and a bell with a major third was designed by finite-element computation in the 1980s.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>The longer story, with sources
+</summary>
+<p><strong>Instruments came first.</strong> How Antonio Stradivari made his violins is not documented, so saying that he worked by trial and ear is an inference. Bells show trial and ear at work more plainly. The blind Utrecht carillonneur Jacob van Eyck picked out the separate <a href="../../posts/instruments-as-operators/glossary.html#partial">partials</a> of a bell by whistling at them, and held that a bell must be tuned after casting by changing its shape. In 1644 the city of Zutphen ordered a carillon from the founders Pieter and François Hemony, with van Eyck as its adviser. The brothers cast the bells slightly too thick, turned each on a lathe and shaved metal from the inside until its five principal partials were in tune. The Zutphen carillon is counted as the first tuned carillon.</p>
+<p><strong>Laws from experiment.</strong> The Pythagorean tradition tied consonant intervals to simple ratios of string lengths: half the length sounds an octave higher. In the late 1580s Vincenzo Galilei, Galileo’s father, hung weights on strings and found that tension works differently: an octave needs four times the weight and a fifth <span class="math inline">9 : 4</span>, so the frequency goes with the square root of the tension. Marin Mersenne’s <em>Harmonie universelle</em> (1636) stated the laws of a string together: its frequency is inversely proportional to its length, proportional to the square root of its tension and inversely proportional to the square root of its mass per length, as in <span class="math inline">f_1 = \frac{1}{2L}\sqrt{T/\mu}</span> on <a href="../../posts/where-the-equations-come-from/index.html#string">post 2</a>. In Oxford in the mid-1670s William Noble and Thomas Pigot found that a string can vibrate in parts with still points between them: small pieces of paper hung on the string stayed at rest at some points and trembled at others. John Wallis reported the discovery in the <em>Philosophical Transactions</em> in 1677. In 1701 Joseph Sauveur explained such motions to the Paris Academy: a string can vibrate at higher frequencies, which he called harmonics, separated by still points, which he called <a href="../../posts/instruments-as-operators/glossary.html#node">nodes</a>. Both words are still in use.</p>
+<p><strong>The mathematics, after the fact.</strong> Brook Taylor (1713) worked out from mechanics the shape and the period of a string’s simplest vibration. Jean le Rond d’Alembert (1747) wrote down the <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a> and solved it as two waves running in opposite directions. Daniel Bernoulli (1753) stated that the general motion of a vibrating system is a <a href="../../posts/instruments-as-operators/glossary.html#superposition">superposition</a> of its modes; Euler, d’Alembert and Lagrange did not accept that sums of sines could match an arbitrary starting shape. Leonhard Euler worked out the vibrations of a drumhead (published 1766), and the functions now named after Bessel appear there for every whole-number order; the simplest, <span class="math inline">J_0</span>, had already turned up in Daniel Bernoulli’s hanging chain in the 1730s. Ernst Chladni (1787) made the <a href="../../posts/instruments-as-operators/glossary.html#node">nodal lines</a> of vibrating plates visible with sand. Joseph Fourier, in a memoir of 1807 and a book of 1822, argued that any function can be written as a sum of sines and cosines, and used such sums to solve the equation of heat flow. Charles Sturm and Joseph Liouville (1836–37) developed expansions of this kind for a whole class of second-order equations, the eigenvalue problems now named after them. Karl Weierstrass (1858) corrected a conclusion of Lagrange, repeated by Laplace and others: they had held that two equal frequencies would make a small oscillation grow with time, and Weierstrass showed that for small oscillations about a stable rest they do not. Lord Rayleigh’s <em>The Theory of Sound</em> (1877) gathered the subject into one treatise. David Hilbert’s work on integral equations in the 1900s introduced the name <em>spectral theory</em>, and Hermann Weyl (1911) proved that the frequencies of a drum determine its area (<a href="../../posts/hear-the-shape-of-a-drum/index.html"><em>Can you hear the shape of a drum?</em></a>).</p>
+<p><strong>Computed design is recent.</strong> A marimba bar is thinned by an arch cut under its middle. The arch lowers the lowest frequency more than the overtones, and so moves the first overtone from 2.76 times the lowest, the uniform bar of <a href="../../posts/instruments-and-scales/index.html"><em>Did instruments shape our scales?</em></a>, up to a whole-number multiple, usually 4. Makers such as J. C. Deagan’s company in Chicago, building marimbas from the early 1900s, and later Clair Omar Musser’s, tuned each bar by grinding the arch and checking the result, by ear and with pitch-measuring devices as they appeared, such as Deagan’s own “Deagan-o-meter” (1915) and the strobe tuner (1936). The shape of the arch was found by trial. Bar profiles computed in advance, before any wood or metal is cut, appear in the acoustics literature around 1990 (Orduña-Bustamante, 1991). Bells followed the same path. A traditional tuned bell has a minor third among its main partials. In the 1980s engineers at the Eindhoven University of Technology designed a bell with a major third instead, by finite-element computation and structural optimization, and the Eijsbouts bell foundry cast it.</p>
+</details>
 </div>
-<p>The demo sounds in this list are simplified: the piano pair exaggerates the string’s stiffness, and the two drums play every mode equally loud.</p>
-<p>Short on time? The answers in the list above are the series in brief, and each page repeats its answer in a box above a five-step summary. Pages 0, 4 and 8, the note, the string and the drum, carry the main idea; <a href="../../posts/instruments-as-operators/spectrum.html">the spectrum of an operator</a> gives the mathematics in one page. The <a href="../../posts/instruments-as-operators/map.html">map</a> has every instrument’s sound side by side, reading paths by depth, the recipe run on every instrument, the instrument classes and the history. Blue words link to the <a href="../../posts/instruments-as-operators/glossary.html">glossary</a>.</p>
 <div class="refs">
-<p><strong>References.</strong> The classes: E. M. von Hornbostel and C. Sachs, 1914, with electrophones added by Sachs in 1940; full references on the <a href="../../posts/instruments-as-operators/map.html#operator-families-and-instrument-classes">map</a>. The history: full sources on the <a href="../../posts/instruments-as-operators/map.html#did-instrument-makers-know">map</a>; in brief, Wikipedia, <a href="https://en.wikipedia.org/wiki/Mersenne%27s_laws">Mersenne’s laws</a>, <a href="https://en.wikipedia.org/wiki/Wave_equation">Wave equation</a> and <a href="https://en.wikipedia.org/wiki/Bell">Bell</a> (the major-third bell), and MacTutor, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Rayleigh/">Lord Rayleigh</a>. Grieg: Wikipedia, <a href="https://en.wikipedia.org/wiki/In_the_Hall_of_the_Mountain_King">In the Hall of the Mountain King</a>. The two drums: sources on <a href="../../posts/instruments-as-operators/drum.html">page 8</a>.</p>
+<p><strong>References: classes and electrophones.</strong> E. M. von Hornbostel and C. Sachs, “Systematik der Musikinstrumente: Ein Versuch”, <em>Zeitschrift für Ethnologie</em> 46 (1914), 553–590 (<a href="https://archive.org/details/zeitschriftfre46berluoft">archive.org</a>); English translation by A. Baines and K. P. Wachsmann, “Classification of musical instruments”, <em>The Galpin Society Journal</em> 14 (1961), 3–29 (<a href="https://doi.org/10.2307/842168">doi:10.2307/842168</a>). C. Sachs, <em>The History of Musical Instruments</em>, Norton, New York, 1940, pp.&nbsp;447–467 (electrophones). F. W. Galpin, <em>A Textbook of European Musical Instruments</em>, 1937, pp.&nbsp;27–36 (electrophones). D. Lee, <a href="https://openaccess.city.ac.uk/22554/">“Hornbostel-Sachs classification of musical instruments”</a>, <em>Knowledge Organization</em> 47 (2020), 72–91 (the electrophones’ history, and their absence from the 1961 translation). J. Montagu, <a href="https://www.jeremymontagu.co.uk/Hornbostel-Sachs%20Reconsidered.pdf">“It’s time to look at Hornbostel-Sachs again”</a>, ESEM seminar paper, Warsaw, 2008. D. J. Benson, <em>Music: A Mathematical Offering</em>, Cambridge University Press, 2006, section 3.1 (<a href="https://homepages.abdn.ac.uk/d.j.benson/pages/html/music.pdf">PDF</a>). Wikipedia, <a href="https://en.wikipedia.org/wiki/Hornbostel%E2%80%93Sachs">Hornbostel–Sachs</a> (the codes quoted above and Sachs’s 1940 electrophones), <a href="https://en.wikipedia.org/wiki/Electronic_musical_instrument">Electronic musical instrument</a>, and the infoboxes of <a href="https://en.wikipedia.org/wiki/Violin">Violin</a>, <a href="https://en.wikipedia.org/wiki/Guitar">Guitar</a>, <a href="https://en.wikipedia.org/wiki/Harp">Harp</a>, <a href="https://en.wikipedia.org/wiki/Piano">Piano</a>, <a href="https://en.wikipedia.org/wiki/Western_concert_flute">Western concert flute</a>, <a href="https://en.wikipedia.org/wiki/Clarinet">Clarinet</a>, <a href="https://en.wikipedia.org/wiki/Harmonica">Harmonica</a>, <a href="https://en.wikipedia.org/wiki/Mbira">Mbira</a> (kalimba), <a href="https://en.wikipedia.org/wiki/Glockenspiel">Glockenspiel</a>, <a href="https://en.wikipedia.org/wiki/Timpani">Timpani</a>, <a href="https://en.wikipedia.org/wiki/Bass_drum">Bass drum</a>, <a href="https://en.wikipedia.org/wiki/Electric_guitar">Electric guitar</a> and <a href="https://en.wikipedia.org/wiki/Theremin">Theremin</a> (also for its two radio-frequency oscillators, the hand as one plate of a capacitor, and the mixer). Wikipedia, <a href="https://en.wikipedia.org/wiki/LC_circuit">LC circuit</a> (Kirchhoff’s law and <span class="math inline">\omega = 1/\sqrt{LC}</span>), <a href="https://en.wikipedia.org/wiki/Relaxation_oscillator">Relaxation oscillator</a>, <a href="https://en.wikipedia.org/wiki/Voltage-controlled_oscillator">Voltage-controlled oscillator</a> and <a href="https://en.wikipedia.org/wiki/Hammond_organ">Hammond organ</a>.</p>
+<p><strong>References: history.</strong> Bells: Wikipedia, <a href="https://en.wikipedia.org/wiki/Jacob_van_Eyck">Jacob van Eyck</a> (drawing on L. Rombouts, <em>Singing Bronze: A History of Carillon Music</em>, Leuven University Press, 2014, and B. Swager, <em>A History of the Carillon</em>, DMus thesis, Indiana University, 1993) and <a href="https://en.wikipedia.org/wiki/Zutphen">Zutphen</a>. Stradivari: Wikipedia, <a href="https://en.wikipedia.org/wiki/Stradivarius">Stradivarius</a>. Galilei: “July 2, 1591: Death of Vincenzo Galilei”, <a href="https://www.aps.org/apsnews/2015/07/death-vincenzo-galilei"><em>APS News</em>, July 2015</a>, following S. Drake’s dating of the experiments to 1588; W. B. Ashworth Jr., <a href="https://www.lindahall.org/about/news/scientist-of-the-day/vincenzo-galilei/">“Vincenzo Galilei”</a>, Scientist of the Day, Linda Hall Library, 2 July 2024 (1588; weights 4 : 1 for an octave and 9 : 4 for a fifth). Mersenne: Wikipedia, <a href="https://en.wikipedia.org/wiki/Mersenne%27s_laws">Mersenne’s laws</a>. Noble and Pigot: J. Wallis, “Dr.&nbsp;Wallis’s Letter to the Publisher, Concerning a New Musical Discovery; Written from Oxford, March 14. 1676/7”, <em>Philosophical Transactions</em> 12 (1677) (<a href="https://www.jstor.org/stable/101761">JSTOR</a>); Wikipedia, <a href="https://en.wikipedia.org/wiki/Thomas_Pigot">Thomas Pigot</a>. Sauveur: S. Dostrovsky, <a href="https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/sauveur-joseph">“Sauveur, Joseph”</a>, <em>Complete Dictionary of Scientific Biography</em>. Taylor, d’Alembert, Euler’s drum: R. C. Archibald, “Mathematicians and music”, <em>American Mathematical Monthly</em> 31 (1924), 1–25, <a href="https://mathshistory.st-andrews.ac.uk/Extras/Archibald_music_3/">part 3 on MacTutor</a>; MacTutor, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Taylor/">Brook Taylor</a>; Wikipedia, <a href="https://en.wikipedia.org/wiki/Wave_equation">Wave equation</a> (d’Alembert 1747); L. Euler, “De motu vibratorio tympanorum”, <em>Novi Commentarii academiae scientiarum Petropolitanae</em> 10 (1766), 243–260 (<a href="https://scholarlycommons.pacific.edu/euler-works/302/">Euler Archive, E302</a>). Bessel functions in Euler’s paper and Bernoulli’s <span class="math inline">J_0</span>: R. C. Archibald, <a href="https://mathshistory.st-andrews.ac.uk/Extras/Archibald_music_3/">“Mathematicians and music”</a>, <em>American Mathematical Monthly</em> 31 (1924), via MacTutor, Wikipedia, <a href="https://en.wikipedia.org/wiki/Bessel_function">Bessel function</a> (history), and D. D. Nolte, <a href="https://galileo-unbound.blog/2020/10/18/the-ups-and-downs-of-the-compound-double-pendulum/">“The ups and downs of the compound double pendulum”</a>, Galileo Unbound, 2020 (Bernoulli’s hanging chain). Bernoulli: Wikipedia, <a href="https://en.wikipedia.org/wiki/Daniel_Bernoulli">Daniel Bernoulli</a>, quoting L. Brillouin, <em>Wave Propagation in Periodic Structures</em>, 1946, for the 1753 statement. Chladni: Wikipedia, <a href="https://en.wikipedia.org/wiki/Ernst_Chladni">Ernst Chladni</a>. Fourier: MacTutor, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Fourier/">Joseph Fourier</a>; Wikipedia, <a href="https://en.wikipedia.org/wiki/Fourier_series">Fourier series</a>. Sturm and Liouville: MacTutor, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Sturm/">Charles Sturm</a>. Weierstrass: K. Weierstrass, “Über ein die homogenen Functionen zweiten Grades betreffendes Theorem, nebst Anwendung desselben auf die Theorie der kleinen Schwingungen”, <em>Monatsberichte der Akademie der Wissenschaften zu Berlin</em> (1858), 207–220; F. Brechenmacher, “L’identité algébrique d’une pratique portée par la discussion sur l’équation à l’aide de laquelle on détermine les inégalités séculaires des planètes (1766–1874)”, <a href="https://arxiv.org/abs/0704.2931">arXiv:0704.2931</a>, which quotes Lagrange (1766) and Weierstrass’s correction. Rayleigh: MacTutor, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Rayleigh/">Lord Rayleigh</a>. Hilbert and Weyl: MacTutor, <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Hilbert/">David Hilbert</a>; Wikipedia, <a href="https://en.wikipedia.org/wiki/Spectral_theory">Spectral theory</a> and <a href="https://en.wikipedia.org/wiki/Weyl_law">Weyl law</a>. Marimbas: N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 19 (undercut bars); Percussive Arts Society, <a href="https://pas.org/john-calhoun-deagan">Hall of Fame: John Calhoun Deagan</a> (the Deagan-o-meter); “Chicago shop plays key role in keeping world’s ensembles in tune”, <a href="https://news.wttw.com/2016/11/14/chicago-shop-plays-key-role-keeping-world-s-ensembles-tune">WTTW News, 2016</a> (Deagan’s marimbas from the early 1900s; tuning by sanding the arch); Wikipedia, <a href="https://en.wikipedia.org/wiki/Clair_Omar_Musser">Clair Omar Musser</a> and <a href="https://en.wikipedia.org/wiki/Electronic_tuner">Electronic tuner</a> (the first strobe tuner, Conn, 1936); F. Orduña-Bustamante, “Nonuniform beams with harmonically related overtones for use in percussion instruments”, <em>Journal of the Acoustical Society of America</em> 90 (1991), 2935–2941 (<a href="https://doi.org/10.1121/1.401768">doi:10.1121/1.401768</a>). The major-third bell: A. Schoofs, F. van Asperen, P. Maas and A. Lehr, “Computation of bell profiles using structural optimization”, <em>Music Perception</em> 4 (1987), 245–254 (<a href="https://doi.org/10.2307/40285368">doi:10.2307/40285368</a>); Wikipedia, <a href="https://en.wikipedia.org/wiki/Bell">Bell</a> (section “Major third bell”).</p>
 </div>
 <div class="made">
 <p><em>How this was made.</em> The derivations, the prose and the code for every demo were drafted by Claude, an AI model made by Anthropic, in conversation with me. This is a first version and has not yet been checked line by line.</p>
 </div>
-<script src="core.js"></script>
-<script>
-(function () {
-  "use strict";
-  var C = Core, M = C.models;
-  function fadeOut(buf, sec) { var d = buf.getChannelData(0), n = Math.floor(sec * buf.sampleRate); for (var i = 0; i < n; i++) d[d.length - 1 - i] *= i / n; return buf; }
-  // ---- the opening pair: a plucked string and a struck drum, on the pitch ruler ----
-  var HOOK = {
-    string: { parts: function () { return M.violin.partials({ pluck: 0.2 }); }, f: 196, dur: 2.6, svg: "rulerString" },
-    drum: { parts: function () { return M.drum.partials({ r: 0.35 }); }, f: 140, dur: 2.4, svg: "rulerDrum" }
-  };
-  function drawRulers() {
-    Object.keys(HOOK).forEach(function (k) {
-      C.stems(document.getElementById(HOOK[k].svg), HOOK[k].parts(), { W: 320, H: 96, rmax: 6, fs: 9, sw: 2.5, noOff: true });
-    });
-  }
-  document.querySelectorAll("[data-hook]").forEach(function (b) {
-    b.addEventListener("click", function () { var h = HOOK[b.getAttribute("data-hook")]; C.play(C.render(C.toHz(h.parts(), h.f), h.dur), 0.75); });
-  });
-  // ---- the six puzzles ----
-  function harmonics(f, n, odd, skip1) { var out = []; for (var k = 1; k <= n; k++) { if (odd && k % 2 === 0) continue; if (skip1 && k === 1) continue; out.push({ f: f * k, amp: 1 / k, tau: 10 }); } return out; }
-  // Octave puzzle: simplified stiff-string notes, only the lowest partials, so the tuner's 2 : 1 beat (C4's 2nd partial against C5) stands out.
-  var BS = 0.0024, LOW = 261.63, P2 = Math.sqrt((1 + 4 * BS) / (1 + BS));
-  function stiffNote(f1, amps) { return amps.map(function (a, i) { var n = i + 1; return { f: f1 * n * Math.sqrt((1 + BS * n * n) / (1 + BS)), amp: a, tau: 3 }; }); }
-  var GWW = [2.53794399980, 3.65550971352, 5.17555935622, 6.53755744376, 7.24807786256, 9.20929499840, 10.5969856913, 11.5413953956, 12.3370055014, 13.0536540557, 14.3138624643, 15.8713026200];
-  function gww() { return GWW.map(function (v, k) { return { f: 150 * Math.sqrt(v / GWW[0]), amp: 1, tau: 1.4 / (1 + 0.12 * k) }; }); }
-  var G = {
-    string: function () { return C.render(C.toHz(M.violin.partials({ pluck: 0.2 }), 196), 2.6); },
-    drum: function () { return C.render(C.toHz(M.drum.partials({ r: 0.35 }), 140), 2.4); },
-    note: function () { return fadeOut(C.render(harmonics(220, 8), 1.6), 0.3); },
-    nofund: function () { return fadeOut(C.render(harmonics(220, 8, false, true), 1.6), 0.3); },
-    flute: function () { return fadeOut(C.render(harmonics(343 / 1.2, 8), 1.6), 0.3); },
-    clar: function () { return fadeOut(C.render(harmonics(343 / 2.4, 15, true), 1.6), 0.3); },
-    kal: function () { return C.render(C.toHz(M.kalimba.partials(), 523.25), 2.4); },
-    harm: function () { return fadeOut(C.render(C.toHz(M.harmonica.partials(), 523.25), 1.6), 0.3); },
-    oct: function () { return C.render(stiffNote(LOW, [1, 0.7, 0.3]).concat(stiffNote(2 * LOW, [0.7, 0.25])), 4); },
-    str: function () { return C.render(stiffNote(LOW, [1, 0.7, 0.3]).concat(stiffNote(2 * LOW * P2, [0.7, 0.25])), 4); },
-    gA: function () { return C.render(gww(), 2.4); },
-    gB: function () { return C.render(gww(), 2.4); }
-  };
-  document.querySelectorAll("[data-g]").forEach(function (b) {
-    b.addEventListener("click", function () { C.play(G[b.getAttribute("data-g")](), 0.75); });
-  });
-  C.onTheme(drawRulers);
-  drawRulers();
-})();
-</script>
-<script src="orchestra.js"></script>
-<script>
-// The orchestra: one instrument from each Hornbostel–Sachs class, drawn and played by orchestra.js.
-(function () {
-  "use strict";
-  var O = window.Orchestra; if (!O) return;
-  var fams = document.getElementById("oFams"), mute = {};
-  O.FAM.forEach(function (f) {
-    var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "true");
-    b.style.setProperty("--c", "rgb(" + f.hue.join(",") + ")"); b.innerHTML = '<span class="dot"></span>' + f.inst;
-    b.addEventListener("click", function () { mute[f.id] = !mute[f.id]; b.setAttribute("aria-pressed", mute[f.id] ? "false" : "true"); applyMute(f.id); if (!ctx) drawRest(); });
-    fams.appendChild(b);
-  });
-  var cv = document.getElementById("oStage"), g = cv.getContext("2d"), timeEl = document.getElementById("oTime");
-  var tlPerf = O.timeline(false), tlFull = O.timeline(true), cur = tlPerf, ctx = null, t0 = 0, raf = 0, fg = null;
-  tlPerf.mute = mute; tlFull.mute = mute;
-  var REST = O.beatToSec(8 * 16 + 4.15);
-  function fit() {
-    var full = document.fullscreenElement === cv, dpr = Math.min(2, window.devicePixelRatio || 1);
-    var w = full ? Math.min(window.innerWidth, window.innerHeight * 16 / 9) : cv.getBoundingClientRect().width;
-    w = Math.max(320, Math.round(w * dpr)); cv.width = w; cv.height = Math.round(w * 9 / 16);
-  }
-  function drawRest() { O.drawAt(g, REST, cv.width, cv.height, tlPerf); }
-  function mmss(x) { x = Math.max(0, Math.round(x)); return Math.floor(x / 60) + ":" + ("0" + x % 60).slice(-2); }
-  function applyMute(id) { if (fg && ctx) fg[id].gain.setTargetAtTime(mute[id] ? 0 : 1, ctx.currentTime, 0.03); }
-  function frame() {
-    if (!ctx) return;
-    var t = ctx.currentTime - t0;
-    if (t > cur.dur) { stop(); return; }
-    O.drawAt(g, Math.max(0, t), cv.width, cv.height, cur);
-    timeEl.textContent = mmss(t) + " / " + mmss(cur.dur);
-    raf = requestAnimationFrame(frame);
-  }
-  function stop() {
-    cancelAnimationFrame(raf);
-    if (ctx) { try { ctx.close(); } catch (e) {} }
-    ctx = null; fg = null; timeEl.textContent = "Ready"; drawRest();
-  }
-  function play(full) {
-    stop(); cur = full ? tlFull : tlPerf;
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) { timeEl.textContent = "This browser cannot play Web Audio."; return; }
-    ctx = new AC(); if (ctx.resume) ctx.resume();
-    var my = ctx; timeEl.textContent = "Computing the sounds…";
-    setTimeout(function () {
-      if (ctx !== my) return;
-      var cache = O.prepare(ctx, cur.notes);
-      t0 = ctx.currentTime + 0.2;
-      fg = O.schedule(ctx, cur.notes, t0, { cache: cache, mute: mute });
-      raf = requestAnimationFrame(frame);
-    }, 30);
-  }
-  document.getElementById("oPlay").addEventListener("click", function () { play(false); });
-  document.getElementById("oFull").addEventListener("click", function () { play(true); });
-  document.getElementById("oStop").addEventListener("click", stop);
-  var fsb = document.getElementById("oFs");
-  if (!cv.requestFullscreen) fsb.hidden = true;
-  fsb.addEventListener("click", function () { if (cv.requestFullscreen) cv.requestFullscreen().catch(function () {}); });
-  document.addEventListener("fullscreenchange", function () { fit(); if (!ctx) drawRest(); });
-  window.addEventListener("resize", function () { fit(); if (!ctx) drawRest(); });
-  fit(); drawRest();
-  var faces = ['700 48px "LM Roman"', 'italic 24px "LM Roman"', '24px "LM Roman"', '24px "LM Sans"', '24px "LM Math"'];
-  if (document.fonts && document.fonts.load) Promise.all(faces.map(function (f) { return document.fonts.load(f, "A−κ♯"); })).then(function () { if (!ctx) drawRest(); }, function () {});
-})();
-</script>
 
 
 </section>

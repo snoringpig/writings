@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-29">
+<meta name="description" content="A playable 3D upright piano with its front panels removed: every key, hammer, damper and string, the three pedals, and a live graph of the struck string’s shape and modes.">
+
+<title>A Piano – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="apiano.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Piano</h1>
+<p class="subtitle lead">All 88 keys of an upright, opened up, with the string you strike drawn as it moves.</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">music</div>
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">piano</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A playable 3D upright piano with its front panels removed: every key, hammer, damper and string, the three pedals, and a live graph of the struck string’s shape and modes.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is an upright piano with its front panels and lid off: 88 keys, three pedals, 229 strings (as modelled here), and the action, the levers that link each key to its hammer and damper. It follows a Yamaha U1, 152 × 122 × 61 cm [<a href="#ref-1">1</a>], with standard key widths [<a href="#ref-14">14</a>, <a href="#ref-15">15</a>]. Strike a key and the graphs show its string moving and each mode’s strength; the sound is computed live from a stiff-string model.</p>
+<div class="column-page">
+<div class="apiano" id="apiano">
+  <div class="ap-stage" id="apStage">
+    <canvas id="apCanvas" tabindex="0" aria-label="An upright piano with its front panels removed: 88 keys, hammers, dampers, strings, iron plate, soundboard and three pedals. Click a key to play it; drag to turn the view."></canvas>
+    <div class="ap-labels" id="apLabels" aria-hidden="true"></div>
+    <div class="ap-tools"><button type="button" id="apFollow" aria-pressed="false">Follow key</button><button type="button" id="apLabelsBtn" aria-pressed="true">Labels</button><button type="button" id="apReset">Reset view</button></div>
+    <div class="ap-hint" id="apHint" hidden=""></div>
+  </div>
+  <p class="ap-tip">Drag to turn the piano<span class="ap-touchonly"> with two fingers</span>; <b>Follow key</b>, or a double-click<span class="ap-touchonly"> (double-tap)</span> on a key, brings you close to its hammer.</p>
+  <div class="ap-kbbar">
+    <button type="button" id="apOctDown" aria-label="Move the computer keys down an octave">◀<span class="ap-wide"> Octave</span><span class="ap-kbonly"> (Z)</span></button>
+    <span class="readout" id="apWin"></span>
+    <button type="button" id="apOctUp" aria-label="Move the computer keys up an octave"><span class="ap-wide">Octave </span><span class="ap-kbonly">(X) </span>▶</button>
+  </div>
+  <div class="ap-kbdwrap" id="apKbdWrap"><div class="ap-kbd" id="apKbd" role="group" aria-label="Piano keyboard, A0 to C8"></div></div>
+  <div class="ap-pedals" role="group" aria-label="Pedals">
+    <button type="button" id="apSoft" aria-pressed="false">Soft<small>left pedal</small></button>
+    <button type="button" id="apMute" aria-pressed="false">Practice mute<small>middle pedal</small></button>
+    <button type="button" id="apSus" aria-pressed="false">Sustain<small>right pedal<span class="ap-kbonly"> · Space</span></small></button>
+  </div>
+  <div class="ap-chips" aria-label="What each part does; the active part lights up">
+    <span id="apChipF">hammer: starts the modes</span>
+    <span>tension and stiffness of the wire: set the frequencies</span>
+    <span id="apChipD">damper: damps the modes that move under it</span>
+  </div>
+  <div class="ap-note" id="apNote" aria-live="polite">Press a key. The hammer pushes the string for a moment, then the string rings in its own modes.</div>
+  <div class="ap-graphs">
+    <div class="ap-graph"><canvas id="apWave" aria-label="Shape of the last string played, u(x, t)"></canvas><p class="cap">The string's displacement u(x, t) for the last key played, from its top end (left) to the bridge (right), with the hammer and the damper felt below it. Slowed down and enlarged; the sound is real time.</p></div>
+    <div class="ap-graph"><canvas id="apModes" aria-label="Amplitude of each mode now, and how strongly the damper acts on it"></canvas><p class="cap">Blue: each partial's amplitude in the sound you hear now (in this model, proportional to n times the mode's amplitude: the push it gives the bridge); grey: just after the strike. The pitch is still the fundamental's even when a higher partial is stronger. Orange ticks: how hard the damper felt pulls on each mode.</p></div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="core.js"></script>
+<script src="apiano.js"></script>
+</div>
+<p>To play, hold a key in the 3D view or on the strip below and let go to damp it; on a computer, A to ’ play an octave, Z and X shift it, and Space holds the sustain pedal.</p>
+<section id="what-you-are-seeing" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-are-seeing">What you are seeing</h2>
+<p><strong>The hammer starts the modes.</strong> A string fixed at both ends moves as a sum of modes, shapes sin(nπx/L) each swinging at its own frequency. The jack, a lever in each key’s action, throws the hammer and slips out from under it, so the hammer hits the string in free flight and falls back at once [<a href="#ref-19">19</a>]. That push sets how strongly each mode rings; once the hammer has left the string, it cannot add a frequency the string does not already have (in this linear model). Books commonly give 1/7 to 1/9 of the way along, though on modern pianos many notes are struck nearer the end, at 1/12 to 1/17 [<a href="#ref-11">11</a>]; the model uses 1/8, a node (a point that does not move) of modes 8 and 16, which stay silent.</p>
+<p><strong>The damper.</strong> Releasing a key returns a felt damper to its strings, just below the hammer [<a href="#ref-7">7</a>]. To a good approximation, each mode then dies at a rate set by how much it moves under the felt (the orange ticks); the felt covers about 5 cm of string (less on short strings), so every mode is caught. Pianos leave about the top octave and a half undamped, as those short strings die quickly [<a href="#ref-12">12</a>, <a href="#ref-13">13</a>]; this model leaves the top 20 keys, F6 to C8.</p>
+<p><strong>The three pedals.</strong> On an upright the left (soft) pedal moves the hammer rail toward the strings, so the hammers swing a shorter way and land more gently. The middle (practice mute) pedal drops a felt strip between hammers and strings. The right (sustain) pedal lifts every damper [<a href="#ref-1">1</a>, <a href="#ref-8">8</a>, <a href="#ref-9">9</a>, <a href="#ref-10">10</a>]. None changes a string’s tension or stiffness, so none changes its frequencies.</p>
+<p><strong>The strings.</strong> On a typical piano, and in this model, the lowest 10 notes have one string, the next 15 two, the rest three [<a href="#ref-3">3</a>]; the bass strings are copper-wound [<a href="#ref-2">2</a>] and overstrung, crossing the tenor strings on a bridge of their own [<a href="#ref-6">6</a>, <a href="#ref-8">8</a>, <a href="#ref-10">10</a>].</p>
+<p><strong>A stiff string.</strong> Thick steel wire also resists bending, which puts each partial (each frequency in the note) slightly sharp of a whole-number multiple, <span class="math inline">f_n = n f_0\sqrt{1 + B n^2}</span> [<a href="#ref-5">5</a>], where f₀ is the frequency the string would have without stiffness. B is least mid-keyboard and grows toward both ends [<a href="#ref-16">16</a>, <a href="#ref-17">17</a>]. Tuners therefore stretch octaves slightly wider than 2 : 1 [<a href="#ref-18">18</a>], which reduces the beating (a slow wobble in loudness) between the lower note’s sharp partials and the note above [<a href="#ref-17">17</a>, <a href="#ref-20">20</a>].</p>
+<p>Left out: each note is one ideal stiff string with pinned ends, with no coupling between strings and no soundboard resonances. The hammer is a brief push at one point (its felt’s nonlinearity is ignored); the damper felt is a uniform strip. B and the decay times are chosen by hand, not measured, and B here only rises toward the treble. String lengths other than the longest (119 cm) and a parlour grand’s shortest string (5.2 cm) [<a href="#ref-1">1</a>, <a href="#ref-4">4</a>] are illustrative.</p>
+<p><strong>Read more:</strong> <a href="../../posts/instruments-case-by-case/piano.html">The Shape of a Sound, post 4: Why do piano tuners stretch octaves?</a>.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><span id="ref-1"></span>Yamaha, <a href="https://usa.yamaha.com/products/musical_instruments/pianos/upright_pianos/u_series/specs.html">U Series upright pianos: specifications (U1: 152 × 122 × 61 cm, soft, mute and damper pedals, bass string #1 speaking length 46.8 in, spruce back posts, metal action rail)</a>.</li>
+<li><span id="ref-2"></span>Yamaha, <a href="https://www.yamaha.com/en/musical_instrument_guide/piano/mechanism/mechanism004.html">The structure of the piano: design of the strings (three, two and one strings per note; copper-wound bass strings; about 230 strings)</a>.</li>
+<li><span id="ref-3"></span>J. O. Smith III, <a href="https://ccrma.stanford.edu/~jos/PianoHammer/String_Count.html">String count, in Piano-Hammer Modeling, CCRMA, Stanford (10 single, 15 double, 63 triple)</a>.</li>
+<li><span id="ref-4"></span>J. O. Smith III, <a href="https://ccrma.stanford.edu/~jos/PianoHammer/Piano_String_Parameters.html">Piano string parameters, in Piano-Hammer Modeling (shortest string 52 mm)</a>.</li>
+<li><span id="ref-5"></span>J. O. Smith III, <a href="https://dsprelated.com/freebooks/pasp/Stiff_Piano_Strings.html">Stiff piano strings, in Physical Audio Signal Processing (f_n = n f_0 √(1 + B n²))</a>.</li>
+<li><span id="ref-6"></span>Sykes Pianos, <a href="https://sykespianos.co.uk/post/straight-strung-vs-over-strung">Straight strung vs over strung (bass strings cross the tenor strings diagonally)</a>.</li>
+<li><span id="ref-7"></span>Sykes Pianos, <a href="https://sykespianos.co.uk/post/2018/12/21/over-damped-vs-under-damped-upright-pianos">Over-damped vs under-damped upright pianos (dampers below the hammers)</a>.</li>
+<li><span id="ref-8"></span>Wikipedia, <a href="https://en.wikipedia.org/wiki/Piano">Piano (three upright pedals; one, two and three strings per note; cast-iron plate; spruce soundboard; over-stringing)</a>.</li>
+<li><span id="ref-9"></span>Wikipedia, <a href="https://en.wikipedia.org/wiki/Piano_pedals">Piano pedals (the upright’s soft pedal as a half-blow pedal; a middle pedal that lowers a felt muffler rail)</a>.</li>
+<li><span id="ref-10"></span>Millers Music, <a href="https://millersmusic.co.uk/blog/the-anatomy-of-an-upright-piano/">The anatomy of an upright piano (hammer rail, muffler pedal, sustain pedal, bass and treble bridges)</a>.</li>
+<li><span id="ref-11"></span>H. A. Conklin Jr., “Piano design factors – their influence on tone and acoustical performance” (<a href="https://www.speech.kth.se/music/5_lectures/conklin/whereshould.html">where should the hammer hit the string</a>), in <em>Five Lectures on the Acoustics of the Piano</em>, Royal Swedish Academy of Music, 1990.</li>
+<li><span id="ref-12"></span>Spectrasonics, <a href="https://support.spectrasonics.net/manual/Keyscape/11/en/topic/damper">Keyscape manual: Damper (acoustic pianos leave the top octave and a half undamped)</a>.</li>
+<li><span id="ref-13"></span>Kawai, <a href="https://kawaius.com/faq/why-do-the-upper-notes-of-my-kawai-digital-piano-sustain-without-using-the-damper-pedal">Why do the upper notes of my digital piano sustain without the damper pedal? (the uppermost strings have no dampers)</a>.</li>
+<li><span id="ref-14"></span>Wikipedia, <a href="https://en.wikipedia.org/wiki/Musical_keyboard">Musical keyboard (octave 164–165 mm, white keys 23.5 mm, black keys 13.7 mm on average)</a>.</li>
+<li><span id="ref-15"></span>P. Ceccarini, US Patent 9,633,630 B2, <a href="https://patents.google.com/patent/US9633630">Keyboard for musical instruments having improved ergonomics</a>, 25 April 2017 (black key tops about 9.5–10.1 mm wide).</li>
+<li><span id="ref-16"></span>Wikipedia, <a href="https://en.wikipedia.org/wiki/Piano_acoustics">Piano acoustics (inharmonicity grows as notes get further from the middle of the piano; the Railsback curve; stretched octaves)</a>.</li>
+<li><span id="ref-17"></span>N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapter 12.</li>
+<li><span id="ref-18"></span>O. L. Railsback, “Scale temperament as applied to piano tuning”, <em>Journal of the Acoustical Society of America</em> 9 (1938), 274 (<a href="https://doi.org/10.1121/1.1902056">DOI</a>).</li>
+<li><span id="ref-19"></span>A. Askenfelt and E. Jansson, “From touch to string vibrations” (<a href="https://www.speech.kth.se/music/5_lectures/askenflt/timing.html">timing in the action</a>), in <em>Five Lectures on the Acoustics of the Piano</em>, Royal Swedish Academy of Music, 1990 (described for the grand action; an upright’s jack and let-off work the same way).</li>
+<li><span id="ref-20"></span>UBC Wiki, <a href="https://wiki.ubc.ca/Course:Phys341_2020/Railsback_curve">Course:Phys341 2020/Railsback curve</a> (tuners stretch octaves because slightly inharmonic notes played together would beat).</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

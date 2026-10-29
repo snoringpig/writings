@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-29">
+<meta name="description" content="When the motion an equation describes is a sum of modes with frequencies read off a spectrum: the criterion, the three levels at which it holds, the theory behind it, the smallest examples where it fails, and what reaches the ear.">
+
+<title>When an equation has a spectrum – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">When an equation has a spectrum</h1>
+<p class="subtitle lead">The Shape of a Sound · 3</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">music</div>
+    <div class="quarto-category">the-shape-of-a-sound</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    When the motion an equation describes is a sum of modes with frequencies read off a spectrum: the criterion, the three levels at which it holds, the theory behind it, the smallest examples where it fails, and what reaches the ear.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/where-the-equations-come-from/index.html">← 2 · Where the equations come from</a> · <a href="../../posts/instruments-case-by-case/index.html">4 · Instruments, case by case →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p>Builds on <a href="../../posts/where-the-equations-come-from/index.html">post 2</a>, but recaps what it uses and stands on its own. Mathematics: matrices, eigenvalues, derivatives and complex numbers, each explained; section 5 and the folds use linear algebra and analysis. About 43 minutes, of which section 5 takes about 5 and can be skipped.</p>
+</div>
+<p><strong>The question.</strong> When is the motion a differential equation describes a sum of modes, with frequencies read off the spectrum of an operator; what theory lies behind that; and how does it connect back to what we hear?</p>
+<p><a href="../../posts/instruments-as-operators/index.html#the-series-in-one-paragraph">The series in one paragraph</a></p>
+<div class="newidea">
+<p><strong>In one sentence.</strong> When <span class="math inline">A</span> is symmetric, stores energy whenever the object is displaced, and the object is finite, every free motion is a sum of modes (apart from rigid drifts), at the frequencies <span class="math inline">\sqrt{\lambda}/2\pi</span>.</p>
+<p>Precisely: for a linear equation <span class="math inline">U' = BU</span> that doesn’t change in time, the solutions are exactly the combinations of modes <span class="math inline">e^{st}W</span> when, and only when, <span class="math inline">B</span> has a basis of eigenvectors; for the free vibration of a stable, frictionless object of finite size, <span class="math inline">u'' = -Au</span> with <span class="math inline">A</span> self-adjoint, positive and with compact resolvent, this always holds, at the frequencies <span class="math inline">\sqrt{\lambda}/2\pi</span> for the eigenvalues <span class="math inline">\lambda</span> of <span class="math inline">A</span> (any rigid drifts, <span class="math inline">\lambda = 0</span>, are split off first).</p>
+</div>
+<section id="recap" class="level2">
+<h2 class="anchored" data-anchor-id="recap">0 · Recap: the equation of motion</h2>
+<p>Post 2 derives the equations of motion; this post needs their form and a few cases.</p>
+<p><strong>The operator.</strong> For an object held in a given way, the <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a> <span class="math inline">A</span> is the linear map, defined on the shapes that the holding allows, that sends a shape to minus the acceleration that shape causes. It does not depend on time. <a href="../../posts/instruments-as-operators/glossary.html#linear">Linear</a> means <span class="math inline">A(au + bv) = a\,Au + b\,Av</span> for shapes <span class="math inline">u</span>, <span class="math inline">v</span> and numbers <span class="math inline">a</span>, <span class="math inline">b</span>. Newton’s law for small motions reads <span class="math display">
+u'' = -A\,u ,
+</span> with <span class="math inline">u(t)</span> the shape at time <span class="math inline">t</span> and primes time derivatives. Convention: <span class="math inline">A</span> includes its constants, <span class="math inline">\lambda</span> is an eigenvalue of <span class="math inline">A</span>, <span class="math inline">f = \sqrt{\lambda}/2\pi</span>.</p>
+<p><strong>One mass on a spring</strong> (<a href="../../posts/where-the-equations-come-from/index.html#spring">post 2</a>). Hooke’s law gives <span class="math inline">m\,x'' = -k\,x</span>, so <span class="math inline">A</span> is the number <span class="math inline">k/m</span>.</p>
+<p><strong>Two beads on a string</strong> (<a href="../../posts/where-the-equations-come-from/index.html#beads">post 2</a>). Two beads of mass <span class="math inline">m</span> sit on a string of tension <span class="math inline">T</span>, spaced <span class="math inline">h</span> apart and <span class="math inline">h</span> from the tied ends, at heights <span class="math inline">x_1</span> and <span class="math inline">x_2</span>.</p>
+<svg class="fig" viewbox="0 0 420 120" role="img" aria-label="Left: two beads on a string tied down at both ends. Right: the same two beads closed into a ring, so each bead is joined to the other on both sides.">
+  <path class="dash" d="M 20 70 L 200 70"></path>
+  <rect x="14" y="58" width="6" height="24" class="fillacc" opacity="0.5"></rect><rect x="200" y="58" width="6" height="24" class="fillacc" opacity="0.5"></rect>
+  <path class="ink" d="M 20 70 L 80 45 L 140 85 L 203 70"></path>
+  <circle cx="80" cy="45" r="6" class="fillacc"></circle><circle cx="140" cy="85" r="6" class="fillacc"></circle>
+  <text x="70" y="30">x₁</text><text x="132" y="108">x₂</text><text x="60" y="114">ends tied</text>
+  <circle cx="320" cy="68" r="38" class="ink" fill="none"></circle>
+  <circle cx="282" cy="68" r="6" class="fillacc"></circle><circle cx="358" cy="68" r="6" class="fillacc"></circle>
+  <text x="252" y="72">1</text><text x="370" y="72">2</text><text x="276" y="120">closed into a ring</text>
+</svg>
+<p>For small slopes, each stretch of string pulls the two beads at its ends toward each other with vertical force <span class="math inline">T/h</span> times their difference in height, a tied end counting as a bead at height 0. Newton’s law for each bead, with the heights in one column <span class="math inline">x = (x_1, x_2)</span>, becomes <span class="math display">
+\begin{gathered}
+m\,x_1'' = \frac{T}{h}\,(-2x_1 + x_2), \qquad m\,x_2'' = \frac{T}{h}\,(x_1 - 2x_2), \\
+\text{that is}\qquad x'' = -A\,x, \qquad A = \frac{T}{mh}\begin{pmatrix} 2 &amp; -1 \\ -1 &amp; 2 \end{pmatrix} .
+\end{gathered}
+</span></p>
+<p><strong>Continuous objects</strong> (<a href="../../posts/where-the-equations-come-from/index.html#operator-table">post 2’s table</a>), used in section 5:</p>
+<table class="table-striped caption-top table">
+<caption>The operators of post 2. Primes here are derivatives in position; <span class="math inline">\Delta = \partial_x^2 + \partial_y^2</span> is the <a href="../../posts/instruments-as-operators/glossary.html#laplacian">Laplacian</a>.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Object</th>
+<th style="text-align: left;">Operator <span class="math inline">A</span></th>
+<th style="text-align: left;">Allowed shapes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">string, tension <span class="math inline">T</span>, mass <span class="math inline">\mu</span> per length</td>
+<td style="text-align: left;"><span class="math inline">-c^2\,\frac{d^2}{dx^2}</span>, <span class="math inline">c^2 = T/\mu</span></td>
+<td style="text-align: left;"><span class="math inline">u = 0</span> at tied ends</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">air in a tube, on pressure <span class="math inline">p</span></td>
+<td style="text-align: left;"><span class="math inline">-c^2\,\frac{d^2}{dx^2}</span>, <span class="math inline">c</span> the speed of sound</td>
+<td style="text-align: left;"><span class="math inline">p = 0</span> at an open end, <span class="math inline">p' = 0</span> at a closed one</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bar</td>
+<td style="text-align: left;"><span class="math inline">\kappa^2\,\frac{d^4}{dx^4}</span></td>
+<td style="text-align: left;">clamped end <span class="math inline">u = u' = 0</span>; free end <span class="math inline">u'' = u''' = 0</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">drumhead</td>
+<td style="text-align: left;"><span class="math inline">-c^2\Delta</span></td>
+<td style="text-align: left;"><span class="math inline">u = 0</span> on the rim</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="smallest-examples" class="level2">
+<h2 class="anchored" data-anchor-id="smallest-examples">1 · The smallest examples</h2>
+<p><strong>The spring: one mode.</strong> In <span class="math inline">x'' = -\lambda x</span> with <span class="math inline">\lambda = k/m</span>, try <span class="math inline">x = a\cos(\omega t + \varphi)</span>. Two derivatives give <span class="math inline">-\omega^2x</span>, which matches when <span class="math inline">\omega^2 = \lambda</span>: the mass swings at <span class="math inline">f = \sqrt{\lambda}/2\pi</span>, whatever the amplitude <span class="math inline">a</span> and phase <span class="math inline">\varphi</span>, which the start fixes. One eigenvalue, one mode, one frequency.</p>
+<p><strong>Two beads: two modes.</strong> Add and subtract the bead equations. The sum <span class="math inline">S = x_1 + x_2</span> and the difference <span class="math inline">D = x_1 - x_2</span> obey <span class="math display">
+S'' = -\frac{T}{mh}\,S, \qquad D'' = -\frac{3T}{mh}\,D :
+</span> two independent springs, the second three times as stiff because in <span class="math inline">D</span> the tilted middle stretch pulls too. In matrix language, <span class="math inline">(1, 1)</span> and <span class="math inline">(1, -1)</span> are <a href="../../posts/instruments-as-operators/glossary.html#eigenvector">eigenvectors</a> of <span class="math inline">A</span>, columns that <span class="math inline">A</span> only rescales, with <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a> <span class="math inline">T/mh</span> and <span class="math inline">3T/mh</span>: in the ratio <span class="math inline">1 : 3</span>, so the frequencies are in the ratio <span class="math inline">1 : \sqrt 3 \approx 1 : 1.73</span>. Since <span class="math inline">x_1 = (S + D)/2</span> and <span class="math inline">x_2 = (S - D)/2</span>, every motion is an <span class="math inline">S</span>-swing plus a <span class="math inline">D</span>-swing.</p>
+<div class="ins">
+<div class="panel">
+  <div class="r2wrap" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0.75rem;align-items:center">
+    <canvas id="r2Canvas" style="height:170px" aria-label="Two beads on a string, moving: tied at both ends, or closed into a ring"></canvas>
+    <canvas id="r2Plane" style="height:170px" aria-label="The plane of the two heights, with the tilted S and D directions and the path of the motion"></canvas>
+  </div>
+  <div class="controls" role="group" aria-label="Start the two beads">
+    <button type="button" id="r2S" aria-pressed="false">Together, S</button>
+    <button type="button" id="r2D" aria-pressed="false">Opposite, D</button>
+    <button type="button" id="r2M" aria-pressed="true">A mix</button>
+    <label class="check"><input type="checkbox" id="r2Ring"> close into a ring</label>
+    <button type="button" id="r2Play" class="primary">Hear this motion</button>
+  </div>
+  <p class="cap">Slowed down. Tied ends: S swings at 1×, D at 1.73× (√3). Closed into a ring: nothing pulls S back; started at rest, it just stays shifted (a constant displacement), and D swings at 2×. On the right, the plane of the two heights (x₁ across, x₂ up): the path of a mix is a tangle, while S and D each run straight along their own tilted line. The model has no friction; the sound, with S at 196 Hz, fades only so that it stops.</p>
+</div>
+</div>
+<p><strong>The two-bead ring: a drift.</strong> Join the string’s ends to each other and each bead has the other as its neighbor on both sides: <span class="math inline">A_{\text{ring}} = \frac{T}{mh}\left(\begin{smallmatrix} 2 &amp; -2 \\ -2 &amp; 2 \end{smallmatrix}\right)</span>, a different operator for the same beads. Now <span class="math inline">A_{\text{ring}}(1, 1) = 0</span>: both beads move up together and nothing pulls back. Started moving, it drifts away silently, <span class="math inline">x = (1, 1)(a + bt)</span>. The other eigenvalue is <span class="math inline">4T/mh</span>.</p>
+<p><strong>The loop of string: exactly on the whole numbers.</strong> Join a continuous string into a loop, and measure position by the angle <span class="math inline">\theta</span>, in units where the circumference is <span class="math inline">2\pi</span>. Post 2’s string equation becomes <span class="math display">
+u_{tt} = -A\,u, \qquad A = -c^2\,\frac{d^2}{d\theta^2}, \qquad c^2 = \frac{T}{\mu},
+</span> on shapes that close up after one turn, <span class="math inline">X(\theta + 2\pi) = X(\theta)</span>; subscripts are <a href="../../posts/instruments-as-operators/glossary.html#partial-derivative">partial derivatives</a>. A mode’s shape satisfies <span class="math inline">AX = \lambda X</span>, that is, <span class="math inline">X'' = -(\lambda/c^2)\,X</span> (primes in <span class="math inline">\theta</span>). For <span class="math inline">\lambda = c^2k^2 &gt; 0</span> (here <span class="math inline">k</span> is a wavenumber, not the spring’s stiffness), <span class="math inline">X = a\cos k\theta + b\sin k\theta</span>, which closes up exactly when <span class="math inline">k</span> is a whole number <span class="math inline">n</span>. For <span class="math inline">\lambda = 0</span>, <span class="math inline">X = a + b\theta</span> closes up only if <span class="math inline">b = 0</span>: the whole loop lifted, no sound. No <span class="math inline">\lambda</span> is negative (fold). So mode <span class="math inline">n</span>, with eigenfunctions <span class="math inline">\cos n\theta</span> and <span class="math inline">\sin n\theta</span>, sounds at <span class="math display">
+f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{nc}{2\pi} = n\,f_1 ,
+</span> exactly a whole-number multiple of the lowest, for two reasons. Each wave has a whole number of crests, because it must close up. And every wave travels at the same speed: <span class="math inline">u = g(\theta - ct)</span> solves the equation for every shape <span class="math inline">g</span>, since <span class="math inline">u_{tt}</span> and <span class="math inline">c^2u_{\theta\theta}</span> both equal <span class="math inline">c^2g''</span>. Mode <span class="math inline">n</span> is two such waves running in opposite directions, <span class="math inline">\cos n\theta\cos nct = \tfrac12\cos n(\theta - ct) + \tfrac12\cos n(\theta + ct)</span>, whose <span class="math inline">n</span> crests pass a fixed point <span class="math inline">n</span> times while one crest goes around. On beads short waves are slower, on a stiff piano wire faster; both leave the whole numbers.</p>
+<div class="ins">
+<div class="panel">
+  <canvas id="cRing" style="height:220px" aria-label="Beads on a ring swinging in their lowest mode"></canvas>
+  <div class="slider"><label for="cN">Beads</label><input type="range" id="cN" min="0" max="16" step="1" value="3"><output id="cNo"></output></div>
+  <svg class="spec" id="cSpec" viewbox="0 0 320 100" style="max-width:520px" aria-label="Frequencies of the first modes relative to the lowest"></svg>
+  <div class="readout" id="cRead"></div>
+  <div class="controls"><button id="cPlay" class="primary">Hear the first modes together</button></div>
+  <p class="cap">A ring of beads with the loop's size, tension and total mass, the mass shared among more and more beads. Stems: the first ten frequencies, as multiples of the lowest; the slider's last position is the continuous loop, where every stem sits on its line. Higher modes are drawn and played quieter, so they are not shrill; the lowest plays at 196 Hz.</p>
+</div>
+</div>
+<p><strong>Every shape is a sum of these waves</strong>, its <a href="../../posts/instruments-as-operators/glossary.html#fourier-series">Fourier series</a> <span class="math inline">f(\theta) = \frac{a_0}{2} + \sum_{n\ge1}(a_n\cos n\theta + b_n\sin n\theta)</span> (the amounts, and in what sense, in the fold). Released from rest, each wave swings at its own frequency, <span class="math inline">u(\theta, t) = \frac{a_0}{2} + \sum_n (a_n\cos n\theta + b_n\sin n\theta)\cos(nct)</span>, so the motion repeats every <span class="math inline">2\pi/c</span>, and so does its sound (<a href="../../posts/what-you-hear/index.html#why-whole-numbers-repeat">post 1</a>).</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>No negative eigenvalues, and in what sense every shape is a sum of waves <span class="needs">uses complex numbers and analysis</span>
+</summary>
+<p><em>No negative eigenvalue.</em> If <span class="math inline">X'' = qX</span> with <span class="math inline">q &gt; 0</span> on the loop, multiply by <span class="math inline">X</span> and integrate over one turn. <a href="https://en.wikipedia.org/wiki/Integration_by_parts">Integration by parts</a>, with no boundary terms on a closed loop, gives <span class="math inline">\int X''X\,d\theta = -\int (X')^2\,d\theta \le 0</span>, while <span class="math inline">q\int X^2\,d\theta \ge 0</span>. Both are then zero, so <span class="math inline">X = 0</span>.</p>
+<p><em>The amounts.</em> For a shape <span class="math inline">f</span> of the loop, <span class="math display">
+\begin{gathered}
+f(\theta) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n\cos n\theta + b_n\sin n\theta\big), \\
+a_n = \frac{1}{\pi}\int_0^{2\pi} f\cos n\theta\,d\theta, \qquad b_n = \frac{1}{\pi}\int_0^{2\pi} f\sin n\theta\,d\theta .
+\end{gathered}
+</span> The amounts come from perpendicularity: <span class="math inline">\int_0^{2\pi}\cos n\theta\cos m\theta\,d\theta = 0</span> for <span class="math inline">n \ne m</span>, likewise for sines and for a sine against a cosine, so multiplying by <span class="math inline">\cos m\theta</span> and integrating leaves <span class="math inline">\pi a_m</span>. Whether every shape, a plucked corner included, is such a sum was argued over from the 1740s by d’Alembert, Euler and Daniel Bernoulli and settled much later.</p>
+<p><em>The series.</em> With <a href="../../posts/instruments-as-operators/glossary.html#euler-formula">Euler’s formula</a> <span class="math inline">e^{in\theta} = \cos n\theta + i\sin n\theta</span>, the series reads <span class="math inline">f = \sum_{n\in\mathbb Z} c_n e^{in\theta}</span> with <span class="math inline">c_n = \frac{1}{2\pi}\int_0^{2\pi} f e^{-in\theta}\,d\theta</span>, so <span class="math inline">c_{\pm n} = (a_n \mp i b_n)/2</span> for <span class="math inline">n \ge 1</span> and <span class="math inline">c_0 = a_0/2</span>. The functions <span class="math inline">e^{in\theta}/\sqrt{2\pi}</span> form an <a href="../../posts/instruments-as-operators/glossary.html#orthonormal">orthonormal</a> <a href="../../posts/instruments-as-operators/glossary.html#basis">basis</a> of <a href="../../posts/instruments-as-operators/glossary.html#l2"><span class="math inline">L^2(S^1)</span></a>, the functions on the circle with <span class="math inline">\int_0^{2\pi}|f|^2\,d\theta</span> finite, for the <a href="../../posts/instruments-as-operators/glossary.html#inner-product">inner product</a> <span class="math inline">\langle f, g\rangle = \int_0^{2\pi} f\bar g\,d\theta</span>: for every <span class="math inline">f</span> in <span class="math inline">L^2(S^1)</span>, <span class="math display">
+\Big\| f - \sum_{|n|\le M} c_n e^{in\theta}\Big\| \to 0 \quad (M \to \infty), \qquad \frac{1}{2\pi}\int_0^{2\pi}|f|^2\,d\theta = \sum_n |c_n|^2 ,
+</span> the second identity being <a href="https://en.wikipedia.org/wiki/Parseval%27s_theorem">Parseval’s</a>. Perpendicularity is the easy half. Completeness, that no nonzero <span class="math inline">f</span> is perpendicular to every <span class="math inline">e^{in\theta}</span>, is the real content: trigonometric sums approximate every continuous periodic function uniformly (<a href="https://en.wikipedia.org/wiki/Fej%C3%A9r%27s_theorem">Fejér’s theorem</a>), and continuous functions are dense in <span class="math inline">L^2</span> (Stein and Shakarchi, chapters 2 and 3).</p>
+<p><em>At single points.</em> Some continuous functions have Fourier series that diverge at a point, and Carleson proved in 1966 that the series of every <span class="math inline">L^2</span> function converges at almost every point. For shapes that are continuous and made of straight pieces it converges at every point (Dirichlet, 1829); the plucked triangle’s coefficients shrink like <span class="math inline">1/n^2</span>, which is why a few terms already look right in the demo below.</p>
+</details>
+</div>
+<p>Build a plucked shape out of waves, then let it go:</p>
+<div class="ins">
+<div class="panel">
+  <canvas id="cShape" style="height:220px" aria-label="A plucked shape on the unrolled loop and its partial Fourier sum"></canvas>
+  <div class="slider"><label for="cM" style="min-width:12rem">Waves used, up to</label><input type="range" id="cM" min="0" max="40" step="1" value="3"><output id="cMo"></output></div>
+  <div class="controls"><button id="cGo" aria-pressed="false">Let go</button><button id="cHear" class="primary">Hear the loop, at the plucked point</button></div>
+  <div class="readout" id="cShapeRead"></div>
+  <p class="cap">The loop is cut open and laid flat; its two edges are the same point. Dashed: the exact motion (once let go, the bump splits into two half-height copies that travel apart). Solid: the sum of the waves so far, each swinging at its own frequency. The sound adds those waves at the plucked point, the lowest at 196 Hz, faded only so that it stops.</p>
+</div>
+</div>
+</section>
+<section id="why-modes" class="level2">
+<h2 class="anchored" data-anchor-id="why-modes">2 · Why an equation that doesn’t change in time has modes</h2>
+<p>Why do such combinations exist? Three steps, for the two beads first.</p>
+<p><strong>1. The derivative of a solution is again a solution.</strong> Differentiate <span class="math inline">x'' = -Ax</span> once in time. Because <span class="math inline">A</span> doesn’t change with time, <span class="math inline">(x')'' = -A\,x'</span>: the velocity obeys the same equation. In pictures: a solution shifted in time, <span class="math inline">x(t + h)</span>, is a solution; by linearity so is <span class="math inline">(x(t + h) - x(t))/h</span>, which becomes <span class="math inline">x'</span> as <span class="math inline">h \to 0</span>. Both ingredients matter: if <span class="math inline">A</span> changed with time, differentiating would add <span class="math inline">-A'x</span>, and the derivative of a nonlinear force on <span class="math inline">x</span> is not the force on <span class="math inline">x'</span>.</p>
+<p><strong>2. Look for a solution whose derivative is a multiple of itself</strong>, <span class="math inline">x' = s\,x</span> for one number <span class="math inline">s</span>. Then <span class="math inline">(e^{-st}x)' = 0</span>, so <span class="math inline">x(t) = e^{st}X</span> for a fixed column <span class="math inline">X</span>.</p>
+<p><strong>3. Substitute.</strong> For <span class="math inline">x = e^{st}X</span>, the equation <span class="math inline">x'' = -Ax</span> reads <span class="math inline">s^2e^{st}X = -e^{st}AX</span>, so <span class="math display">
+A\,X = -s^2\,X :
+</span> <span class="math inline">X</span> is an eigenvector of <span class="math inline">A</span> with eigenvalue <span class="math inline">\lambda = -s^2</span>. For the beads <span class="math inline">\lambda &gt; 0</span>, so <span class="math inline">s = \pm i\sqrt{\lambda}</span> is imaginary, and by <a href="../../posts/instruments-as-operators/glossary.html#euler-formula">Euler’s formula</a>, <span class="math inline">e^{i\omega t} = \cos\omega t + i\sin\omega t</span>, the real part of <span class="math inline">e^{i\omega t}X</span> is <span class="math inline">\cos(\omega t)\,X</span>: the shape <span class="math inline">X</span> swinging at <a href="../../posts/instruments-as-operators/glossary.html#angular-frequency">angular frequency</a> <span class="math inline">\omega = \sqrt{\lambda}</span>. Two eigenvectors and two signs give four modes, as many as the numbers it takes to start two beads.</p>
+<p><strong>Every such equation, in one form.</strong> Collect the shape and its velocity into one state <span class="math inline">U = (u, u')</span>. Then <span class="math inline">u'' = -Au</span> becomes <span class="math display">
+U' = B\,U, \qquad B = \begin{pmatrix} 0 &amp; I \\ -A &amp; 0 \end{pmatrix},
+</span> with <span class="math inline">I</span> the identity (friction adds a term to the second row, section 4). Call <span class="math inline">B</span> the equation’s <em>generator</em>: it turns the state into its rate of change. The same steps apply: <span class="math inline">U'</span> is a solution whenever <span class="math inline">U</span> is, and <span class="math inline">U = e^{st}W</span> is one exactly when <span class="math inline">BW = sW</span>.</p>
+<div class="result">
+<p><strong>Definition 1 (mode).</strong> For a linear system <span class="math inline">U' = BU</span> with <span class="math inline">B</span> constant: a nonzero solution <span class="math inline">U(t) = e^{st}W</span>, i.e.&nbsp;<span class="math inline">BW = sW</span>. If <span class="math inline">s</span> is not real, its frequency is <span class="math inline">|\operatorname{Im} s|/2\pi</span> and it fades at rate <span class="math inline">-\operatorname{Re} s</span>; real motions are real parts, pairing <span class="math inline">s</span> with its complex conjugate.</p>
+</div>
+<p>When <span class="math inline">\operatorname{Re} s &lt; 0</span>, the mode shrinks by the factor <span class="math inline">e</span> in its fading time <span class="math inline">\tau = -1/\operatorname{Re} s</span>. The swing of step 3 has its own, older name.</p>
+<div class="result">
+<p><strong>Definition 2 (normal mode).</strong> For <span class="math inline">u'' = -Au</span>: a real solution <span class="math inline">u(t) = \cos(\omega t + \varphi)\,X</span> with <span class="math inline">X \ne 0</span> and <span class="math inline">\omega &gt; 0</span>. It exists if and only if <span class="math inline">AX = \omega^2X</span>.</p>
+</div>
+<p><strong>How the two definitions meet.</strong> Write <span class="math inline">u'' = -Au</span> as <span class="math inline">U' = BU</span> with <span class="math inline">U = (u, u')</span> and <span class="math inline">B</span> as above. A normal mode with <span class="math inline">\omega &gt; 0</span> is the real part of the pair of Definition-1 modes <span class="math inline">s = \pm i\omega</span>, <span class="math inline">W = (X, \pm i\omega X)</span>. At <span class="math inline">\omega = 0</span> the pair collapses into a <a href="https://en.wikipedia.org/wiki/Jordan_normal_form">Jordan block</a>, the smallest way for a matrix to lack eigenvectors (<span class="math inline">B</span> sends <span class="math inline">(0, X)</span> to <span class="math inline">(X, 0)</span> and that to zero): the rigid drift <span class="math inline">X(a + bt)</span>, <span class="math inline">b \ne 0</span>, is a solution but not a mode (a constant displacement <span class="math inline">X</span> is an <span class="math inline">s = 0</span> mode). In finite dimensions <span class="math inline">B</span> is diagonalizable, that is, has a basis of eigenvectors, exactly when <span class="math inline">A</span> is diagonalizable and invertible.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>Normal modes, drifts, and when <span class="math inline">B</span> has a basis of eigenvectors <span class="needs">uses linear algebra</span>
+</summary>
+<p><em>Definition 2’s condition.</em> For <span class="math inline">u = \cos(\omega t + \varphi)X</span>, <span class="math inline">u'' = -\omega^2\cos(\omega t + \varphi)X</span> and <span class="math inline">-Au = -\cos(\omega t + \varphi)AX</span>. These agree for all <span class="math inline">t</span> if and only if <span class="math inline">AX = \omega^2X</span>: if they agree, take a <span class="math inline">t</span> with <span class="math inline">\cos(\omega t + \varphi) \ne 0</span> and divide; the converse is the computation itself.</p>
+<p><em>Eigenvectors of <span class="math inline">B</span>.</em> Let <span class="math inline">W = (X, Y)</span>. Then <span class="math inline">BW = sW</span> says <span class="math inline">Y = sX</span> and <span class="math inline">-AX = sY</span>, that is, <span class="math inline">W = (X, sX)</span> with <span class="math inline">AX = -s^2X</span> and <span class="math inline">X \neq 0</span>. So each eigenvalue <span class="math inline">\lambda</span> of <span class="math inline">A</span> gives the eigenvalues <span class="math inline">s</span> of <span class="math inline">B</span> with <span class="math inline">s^2 = -\lambda</span>: two of them, <span class="math inline">\pm\sqrt{-\lambda}</span>, when <span class="math inline">\lambda \neq 0</span> (for <span class="math inline">\lambda = \omega^2 &gt; 0</span>, <span class="math inline">s = \pm i\omega</span>), and only <span class="math inline">s = 0</span> when <span class="math inline">\lambda = 0</span>. The eigenvectors of <span class="math inline">B</span> for <span class="math inline">s</span> are the <span class="math inline">(X, sX)</span> with <span class="math inline">X</span> in <span class="math inline">A</span>’s eigenspace for <span class="math inline">\lambda = -s^2</span>.</p>
+<p><em>The real part of the pair.</em> With <span class="math inline">W_\pm = (X, \pm i\omega X)</span>, <span class="math inline">\tfrac12\big(e^{i\varphi}e^{i\omega t}W_+ + e^{-i\varphi}e^{-i\omega t}W_-\big) = \big(\cos(\omega t + \varphi)X,\ -\omega\sin(\omega t + \varphi)X\big)</span>, which equals <span class="math inline">\operatorname{Re}\big(e^{i(\omega t + \varphi)}W_+\big)</span> and is the state <span class="math inline">(u, u')</span> of the normal mode.</p>
+<p><em>The drift.</em> If <span class="math inline">AX = 0</span> with <span class="math inline">X \ne 0</span>, then <span class="math inline">B(X, 0) = (0, 0)</span> and <span class="math inline">B(0, X) = (X, 0)</span>. The solution starting at <span class="math inline">(aX, bX)</span> is <span class="math inline">(X(a + bt), bX)</span>, as differentiating checks. The only eigenvectors of <span class="math inline">B</span> in the span of <span class="math inline">(X, 0)</span> and <span class="math inline">(0, X)</span> are the multiples of <span class="math inline">(X, 0)</span>, so for <span class="math inline">b \neq 0</span> this solution is not a combination of modes.</p>
+<p><em>Counting.</em> Work over the complex numbers, with <span class="math inline">A</span> of size <span class="math inline">n</span>, and let <span class="math inline">g_\lambda</span> be the dimension of <span class="math inline">A</span>’s eigenspace for <span class="math inline">\lambda</span>. By the second paragraph, and since eigenvectors for different eigenvalues are independent, <span class="math inline">B</span>, of size <span class="math inline">2n</span>, has exactly <span class="math inline">2\sum_{\lambda\ne0} g_\lambda + g_0</span> independent eigenvectors. Since <span class="math inline">\sum_\lambda g_\lambda \le n</span>, with equality exactly when <span class="math inline">A</span> is diagonalizable, this is at most <span class="math inline">2(n - g_0) + g_0 = 2n - g_0</span>, and it equals <span class="math inline">2n</span> exactly when <span class="math inline">g_0 = 0</span> (<span class="math inline">A</span> invertible) and <span class="math inline">\sum_\lambda g_\lambda = n</span> (<span class="math inline">A</span> diagonalizable).</p>
+</details>
+</div>
+<p><strong>How much this guarantees.</strong> In finite dimensions, at least one mode: <span class="math inline">BW = sW</span> has a solution <span class="math inline">W \ne 0</span> exactly when the polynomial <span class="math inline">\det(B - s)</span> (the <a href="../../posts/instruments-as-operators/glossary.html#determinant">determinant</a>, a polynomial in <span class="math inline">s</span> whose roots are the eigenvalues) vanishes, and every polynomial has a complex root. One mode is not a basis: <span class="math inline">x'' = 0</span> has only one (section 6). In infinite dimensions there may be none: on an infinite string the solutions <span class="math inline">e^{\pm ikx}</span> of <span class="math inline">-c^2X'' = \lambda X</span> have infinite energy, so none is an allowed shape.</p>
+</section>
+<section id="criterion" class="level2">
+<h2 class="anchored" data-anchor-id="criterion">3 · The criterion</h2>
+<p>When are the modes enough for every motion? In words (precise statement and proof in the fold):</p>
+<div class="result">
+<p><strong>The criterion.</strong> The solutions of an equation are exactly all combinations of a fixed set of modes, with any amounts, when and only when the equation is linear, unchanging in time, and its generator has a full set of eigenvectors.</p>
+</div>
+<p><strong>Checked on the two beads.</strong> Their <span class="math inline">A</span> has the eigenvectors <span class="math inline">(1, 1)</span> and <span class="math inline">(1, -1)</span> with the positive eigenvalues <span class="math inline">\lambda_1 = T/mh</span> and <span class="math inline">\lambda_2 = 3T/mh</span>, so it is diagonalizable and invertible, and <span class="math inline">B</span> has the full set of four eigenvectors <span class="math inline">(X, \pm i\omega X)</span>, for <span class="math inline">s = \pm i\omega_1</span>, <span class="math inline">\pm i\omega_2</span>. So the solutions are exactly the combinations of these four modes with any amounts; in real form, <span class="math display">
+x(t) = \begin{pmatrix}1\\1\end{pmatrix}\big(a_1\cos\omega_1 t + b_1\sin\omega_1 t\big) + \begin{pmatrix}1\\-1\end{pmatrix}\big(a_2\cos\omega_2 t + b_2\sin\omega_2 t\big), \qquad \omega_k = \sqrt{\lambda_k},
+</span> with any four real numbers, which the starting heights and velocities fix. On the two-bead ring the criterion fails: <span class="math inline">A_{\text{ring}}</span> has the eigenvalue <span class="math inline">0</span>, so <span class="math inline">B</span> has only three independent eigenvectors, and the drift <span class="math inline">(1, 1)(a + bt)</span>, <span class="math inline">b \neq 0</span>, is a solution no combination of modes produces. Split it off, as the takeaway does, and the rest passes.</p>
+<div class="result">
+<p><strong>Definition 3 (modal system).</strong> One whose modes form a basis of its states: every state is uniquely a (convergent) combination of mode vectors. (Infinite dimensions: a <a href="../../posts/instruments-as-operators/glossary.html#riesz-basis">Riesz basis</a> of the energy space, not merely a complete set.)</p>
+</div>
+<p>The two tied beads are modal; the two-bead ring is not. Section 5 explains the Riesz basis.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>The criterion as an equality of sets <span class="needs">uses linear algebra</span>
+</summary>
+<p><strong>Statement.</strong> Let <span class="math inline">F: \mathbb{C}^n \to \mathbb{C}^n</span>, and call a differentiable <span class="math inline">U: \mathbb{R} \to \mathbb{C}^n</span> a solution of <span class="math inline">U' = F(U)</span> if <span class="math inline">U'(t) = F(U(t))</span> for every <span class="math inline">t</span>. Let <span class="math inline">W_1, \dots, W_n</span> be a basis of <span class="math inline">\mathbb{C}^n</span>, let <span class="math inline">s_1, \dots, s_n</span> be complex numbers, and let <span class="math inline">W</span> be the matrix with columns <span class="math inline">W_k</span>. Then the solutions of <span class="math inline">U' = F(U)</span> are exactly all combinations <span class="math display">
+U(t) = \sum_{k=1}^n c_k\,e^{s_k t}\,W_k ,
+</span> with every coefficient vector <span class="math inline">c = (c_1, \dots, c_n) \in \mathbb{C}^n</span> allowed, if and only if <span class="math inline">F(U) = BU</span> for every <span class="math inline">U</span>, with <span class="math inline">B = W\operatorname{diag}(s)\,W^{-1}</span>.</p>
+<p><strong>Proof of “if”.</strong> Suppose <span class="math inline">F(U) = BU</span> with <span class="math inline">B = W\operatorname{diag}(s)W^{-1}</span>. Then <span class="math inline">BW = W\operatorname{diag}(s)</span>, which says <span class="math inline">BW_k = s_kW_k</span> for each <span class="math inline">k</span>. For any <span class="math inline">c</span>, the function <span class="math inline">U(t) = \sum_k c_ke^{s_kt}W_k</span> has <span class="math inline">U'(t) = \sum_k c_ks_ke^{s_kt}W_k = \sum_k c_ke^{s_kt}BW_k = BU(t)</span>, so it is a solution. Conversely, let <span class="math inline">U</span> be any solution, and set <span class="math inline">c = W^{-1}U(0)</span> and <span class="math inline">V(t) = \sum_k c_ke^{s_kt}W_k</span>, a solution with <span class="math inline">V(0) = U(0)</span>. The difference <span class="math inline">Z = W^{-1}(U - V)</span> satisfies <span class="math inline">Z' = W^{-1}B(U - V) = \operatorname{diag}(s)Z</span>, so each entry obeys <span class="math inline">z_k' = s_kz_k</span>; then <span class="math inline">(e^{-s_kt}z_k)' = 0</span>, so <span class="math inline">z_k(t) = e^{s_kt}z_k(0) = 0</span>. Hence <span class="math inline">U = V</span>.</p>
+<p><strong>Proof of “only if”.</strong> Suppose the solutions are exactly the combinations, every <span class="math inline">c</span> allowed. Take any vector <span class="math inline">Y \in \mathbb{C}^n</span> and choose <span class="math inline">c = W^{-1}Y</span>, which is allowed. The solution <span class="math inline">U(t) = \sum_kc_ke^{s_kt}W_k</span> has <span class="math inline">U(0) = Wc = Y</span> and <span class="math inline">U'(0) = \sum_kc_ks_kW_k = W\operatorname{diag}(s)\,c = W\operatorname{diag}(s)W^{-1}Y</span>. Because <span class="math inline">U</span> is a solution, <span class="math inline">U'(0) = F(U(0)) = F(Y)</span>. So <span class="math inline">F(Y) = W\operatorname{diag}(s)W^{-1}Y</span> for every <span class="math inline">Y</span>: the equation at time 0, applied to solutions starting at every state, forces <span class="math inline">F</span> to be this linear map.</p>
+<p><strong>Remarks.</strong> (1) The same argument at any time <span class="math inline">t_0</span> in place of <span class="math inline">0</span> shows that even an equation allowed to change in time, <span class="math inline">U' = F(t, U)</span>, whose solutions are exactly these combinations must have <span class="math inline">F(t, U) = BU</span> for every <span class="math inline">t</span>: linearity and time-invariance both follow, as the criterion in words says. (2) For a real equation, such as <span class="math inline">u'' = -Au</span> with <span class="math inline">A</span> real, the real solutions are those whose coefficients pair each mode with its complex conjugate, <span class="math inline">c_k</span> with <span class="math inline">\bar c_k</span>. (3) For continuous objects the same holds with a Riesz basis of the energy space in place of a basis, and square-summable coefficients (section 5).</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Why “with any amounts” matters <span class="needs">uses derivatives</span>
+</summary>
+<p>Exponentials with fixed exponents alone do not force an equation to be linear. On the half-line <span class="math inline">U &gt; -\tfrac14</span>, take <span class="math display">
+U' = 2U - \frac{\sqrt{1 + 4U} - 1}{2} ,
+</span> whose right side is smooth there. Every solution is <span class="math display">
+U(t) = c\,e^{t} + c^2\,e^{2t}
+</span> for one real number <span class="math inline">c</span>, for as long as it stays in <span class="math inline">U &gt; -\tfrac14</span>: for <span class="math inline">c \ge 0</span> that is all <span class="math inline">t</span>, and for <span class="math inline">c &lt; 0</span> the solution reaches the edge <span class="math inline">U = -\tfrac14</span> when <span class="math inline">c\,e^t = -\tfrac12</span>.</p>
+<p><em>Proof.</em> Put <span class="math inline">w = (\sqrt{1 + 4U} - 1)/2</span>, which maps <span class="math inline">U &gt; -\tfrac14</span> one-to-one onto <span class="math inline">w &gt; -\tfrac12</span>, with inverse <span class="math inline">U = w^2 + w</span>. In terms of <span class="math inline">w</span> the equation reads <span class="math inline">(2w + 1)\,w' = 2(w^2 + w) - w = w\,(2w + 1)</span>. Since <span class="math inline">2w + 1 &gt; 0</span>, this is <span class="math inline">w' = w</span>, so <span class="math inline">w = c\,e^t</span>, and <span class="math inline">U = w^2 + w = c\,e^t + c^2e^{2t}</span>, valid while <span class="math inline">c\,e^t &gt; -\tfrac12</span>.</p>
+<p>Every solution is built from the same two exponentials, <span class="math inline">e^t</span> and <span class="math inline">e^{2t}</span>, yet the equation is not linear: the coefficients are tied, the second always the square of the first, and the sum of two solutions, <span class="math inline">(c + d)e^t + (c^2 + d^2)e^{2t}</span>, is not a solution unless <span class="math inline">cd = 0</span>. In the criterion, “every coefficient vector allowed” rules this out.</p>
+</details>
+</div>
+</section>
+<section id="levels" class="level2">
+<h2 class="anchored" data-anchor-id="levels">4 · Three levels, from the familiar to the general</h2>
+<p>Three nested classes of equations, each with its exact condition: level 1 gives pure tones, level 2 adds fading, level 3 adds shapes whose parts lag behind one another.</p>
+<section id="level-1-free-vibration-without-friction" class="level3">
+<h3 class="anchored" data-anchor-id="level-1-free-vibration-without-friction">Level 1 · Free vibration without friction</h3>
+<p>The equation is <span class="math inline">u'' = -Au</span> with <span class="math inline">A</span> <a href="../../posts/instruments-as-operators/glossary.html#self-adjoint">self-adjoint</a> and positive: pure tones at <span class="math inline">\sqrt{\lambda}/2\pi</span>, energy conserved. For beads, self-adjoint means <a href="../../posts/instruments-as-operators/glossary.html#symmetric-matrix">symmetric</a>, entry <span class="math inline">(i, j)</span> equal to entry <span class="math inline">(j, i)</span>, and positive, <span class="math inline">A &gt; 0</span>, means <span class="math inline">x\cdot Ax &gt; 0</span> for every <span class="math inline">x \ne 0</span>.</p>
+<div class="result">
+<p><strong>Result (level 1, any number of beads).</strong> Let <span class="math inline">A</span> be a real symmetric <span class="math inline">n\times n</span> matrix with <span class="math inline">A &gt; 0</span>.</p>
+<ol type="1">
+<li><span class="math inline">A</span> has eigenvectors <span class="math inline">X_1, \dots, X_n</span> forming an orthonormal basis (perpendicular, each of length 1), with eigenvalues <span class="math inline">\lambda_1, \dots, \lambda_n &gt; 0</span>.</li>
+<li>Every solution of <span class="math inline">x'' = -Ax</span> is <span class="math display">
+x(t) = \sum_{i=1}^n X_i\Big(a_i\cos\omega_i t + \frac{b_i}{\omega_i}\sin\omega_i t\Big), \qquad \omega_i = \sqrt{\lambda_i},
+</span> with <span class="math inline">a_i = X_i\cdot x(0)</span> and <span class="math inline">b_i = X_i\cdot x'(0)</span>: mode <span class="math inline">i</span> sounds at <span class="math inline">f_i = \sqrt{\lambda_i}/2\pi</span>.</li>
+<li>The energy <span class="math inline">E = \tfrac12\,x'\cdot x' + \tfrac12\,x\cdot Ax</span> is the same at every moment.</li>
+</ol>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>Level 1 for any number of beads, and where symmetry comes from <span class="needs">uses linear algebra</span>
+</summary>
+<p>Part 1 is the <a href="https://en.wikipedia.org/wiki/Spectral_theorem">spectral theorem for symmetric matrices</a>; <span class="math inline">\lambda_i = X_i\cdot AX_i &gt; 0</span> because <span class="math inline">A &gt; 0</span>.</p>
+<p>For part 2, write <span class="math inline">x(t) = \sum_j c_j(t)X_j</span> with <span class="math inline">c_j = X_j\cdot x</span>, the amount of <span class="math inline">X_j</span> in <span class="math inline">x</span>. Take the dot product of <span class="math inline">x'' = -Ax</span> with <span class="math inline">X_i</span>. On the left, <span class="math inline">X_i\cdot x'' = c_i''</span>. On the right, <span class="math inline">X_i\cdot Ax = (AX_i)\cdot x</span>, because both sides equal <span class="math inline">\sum_{j,k}(X_i)_jA_{jk}x_k</span> once <span class="math inline">A_{jk} = A_{kj}</span>; so <span class="math inline">X_i\cdot Ax = \lambda_iX_i\cdot x = \lambda_ic_i</span>. Hence <span class="math inline">c_i'' = -\lambda_ic_i</span> for each <span class="math inline">i</span> separately: <span class="math inline">n</span> independent springs. Each has exactly one solution with <span class="math inline">c_i(0) = a_i</span> and <span class="math inline">c_i'(0) = b_i</span>, namely <span class="math inline">a_i\cos\omega_it + (b_i/\omega_i)\sin\omega_it</span> (uniqueness as in the criterion’s proof).</p>
+<p>For part 3, <span class="math inline">E' = x'\cdot x'' + \tfrac12(x'\cdot Ax + x\cdot Ax') = x'\cdot(x'' + Ax) = 0</span>, using <span class="math inline">x\cdot Ax' = x'\cdot Ax</span> for symmetric <span class="math inline">A</span>.</p>
+<p><em>Drifts.</em> If <span class="math inline">A</span> is symmetric with <span class="math inline">A \ge 0</span> and has the eigenvalue <span class="math inline">0</span>, its eigenvectors for <span class="math inline">0</span> (the drifts) are perpendicular to the others, and <span class="math inline">A</span> maps the perpendicular complement of the drifts to itself and is positive there. The motion splits accordingly: along each drift <span class="math inline">X</span>, <span class="math inline">c'' = 0</span>, so <span class="math inline">c = a + bt</span>; on the rest, the result above.</p>
+<p><em>Symmetry from energy.</em> Near rest the stored energy is <span class="math inline">V(x) \approx \tfrac12\,x\cdot Kx</span>, where the stiffness matrix <span class="math inline">K</span> is the matrix of second derivatives of <span class="math inline">V</span>, symmetric because mixed partial derivatives don’t depend on the order of differentiation. The restoring force is <span class="math inline">-\nabla V \approx -Kx</span>, keeping the first-order term; that is where linearity comes from. A stable rest means <span class="math inline">x\cdot Kx &gt; 0</span> except along rigid drifts.</p>
+<p><em>Unequal masses.</em> Newton’s law reads <span class="math inline">Mx'' = -Kx</span> with <span class="math inline">M</span> the diagonal matrix of masses, and <span class="math inline">A = M^{-1}K</span> is symmetric in the mass-weighted dot product <span class="math inline">\sum_i m_ix_iy_i</span>; equivalently <span class="math inline">v = M^{1/2}x</span> obeys <span class="math inline">v'' = -M^{-1/2}KM^{-1/2}v</span> with a symmetric matrix.</p>
+</details>
+</div>
+<p><strong>Why the instruments qualify.</strong> Symmetry: a stretch of string feels only the difference of its two beads’ heights, so bead <span class="math inline">j</span> pulls bead <span class="math inline">i</span> as hard as <span class="math inline">i</span> pulls <span class="math inline">j</span>. Positivity: displacing a held object stores energy. A shape storing none is a rigid drift, <span class="math inline">\lambda = 0</span>, moving as <span class="math inline">X(a + bt)</span>; it is split off. For strings, tubes, bars and drums, with <span class="math inline">\langle f, g\rangle = \int f\,g</span>, integration by parts gives symmetry and positivity (fold); that every shape is a sum of modes needs finiteness (section 5).</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>Symmetry and energy for strings, bars and drums <span class="needs">uses integration by parts</span>
+</summary>
+<p>For the string with tied ends, integrate by parts once: <span class="math display">
+\langle Af, g\rangle = -c^2\int_0^L f''\,g\,dx = -c^2\big[f'\,g\big]_0^L + c^2\int_0^L f'\,g'\,dx = c^2\int_0^L f'\,g'\,dx ,
+</span> since <span class="math inline">g(0) = g(L) = 0</span>. The last expression does not change when <span class="math inline">f</span> and <span class="math inline">g</span> swap, so <span class="math inline">\langle Af, g\rangle = \langle f, Ag\rangle</span>, and with <span class="math inline">g = f</span> it is <span class="math inline">c^2\int (f')^2 \ge 0</span>, zero only for a constant shape, which a tied end forbids. The bracket also vanishes on a loop and at a closed tube end, where <span class="math inline">f' = 0</span>. For a bar, integrating by parts twice gives <span class="math inline">\kappa^2\int f''g''\,dx</span>, every boundary term killed by clamped, pinned or free ends; for a drumhead, the two-dimensional version gives <span class="math inline">c^2\iint\nabla f\cdot\nabla g\,dA</span>, the rim term killed by the fixed rim.</p>
+<p>Two consequences follow as for matrices. Modes with different eigenvalues are perpendicular: if <span class="math inline">AX = \lambda X</span> and <span class="math inline">AY = \mu Y</span>, then <span class="math inline">\lambda\langle X, Y\rangle = \langle AX, Y\rangle = \langle X, AY\rangle = \mu\langle X, Y\rangle</span>. And energy is conserved: with <span class="math inline">E = \tfrac12\langle u_t, u_t\rangle + \tfrac12\langle Au, u\rangle</span>, symmetry gives <span class="math inline">E' = \langle u_t, u_{tt} + Au\rangle = 0</span>; times the mass per unit length, the two terms are the kinetic energy and the energy stored in the stretched string, <span class="math inline">\tfrac12T\int u_x^2\,dx</span>.</p>
+</details>
+</div>
+</section>
+<section id="level-2-friction-that-the-same-shapes-split" class="level3">
+<h3 class="anchored" data-anchor-id="level-2-friction-that-the-same-shapes-split">Level 2 · Friction that the same shapes split</h3>
+<p>The equation is <span class="math display">
+u'' + C\,u' + A\,u = 0 ,
+</span> with the friction <span class="math inline">C</span> symmetric and commuting with <span class="math inline">A</span>: <span class="math inline">AC = CA</span>, that is, applying <span class="math inline">C</span> then <span class="math inline">A</span> gives the same as <span class="math inline">A</span> then <span class="math inline">C</span>. For example <span class="math inline">C = \alpha + \beta A</span> (numbers <span class="math inline">\alpha</span>, <span class="math inline">\beta</span>; <span class="math inline">\alpha</span> stands for <span class="math inline">\alpha I</span>). In general, for unequal masses, <span class="math inline">Mu'' + Cu' + Ku = 0</span>, the condition is <span class="math inline">CM^{-1}K = KM^{-1}C</span> (Caughey and O’Kelly 1965). The standing shapes stay real, and each fades.</p>
+<div class="result">
+<p><strong>Result (level 2).</strong> Let <span class="math inline">A</span> and <span class="math inline">C</span> be real symmetric <span class="math inline">n\times n</span> matrices with <span class="math inline">AC = CA</span>.</p>
+<ol type="1">
+<li>There is an orthonormal basis <span class="math inline">X_1, \dots, X_n</span> of shared eigenvectors: <span class="math inline">AX_k = \lambda_kX_k</span> and <span class="math inline">CX_k = \gamma_kX_k</span>.</li>
+<li>Every solution of <span class="math inline">u'' + Cu' + Au = 0</span> is <span class="math inline">u(t) = \sum_k q_k(t)X_k</span>, where each amount obeys its own equation, <span class="math inline">q_k'' + \gamma_kq_k' + \lambda_kq_k = 0</span>.</li>
+<li>The system is modal exactly when, for every shared eigenvector (with values <span class="math inline">\lambda</span> for <span class="math inline">A</span> and <span class="math inline">\gamma</span> for <span class="math inline">C</span>), <span class="math inline">s^2 + \gamma s + \lambda = 0</span> has distinct roots.</li>
+</ol>
+<p>For light friction, <span class="math inline">\gamma_k^2 &lt; 4\lambda_k</span>, mode <span class="math inline">k</span> is the real shape <span class="math inline">X_k</span> swinging at <span class="math inline">f_k = \sqrt{\lambda_k - \gamma_k^2/4}\,/2\pi</span> and fading with the time <span class="math inline">\tau_k = 2/\gamma_k</span>.</p>
+</div>
+<p><a href="../../posts/instruments-as-operators/glossary.html#critical-damping">Critical damping</a> of one mode, <span class="math inline">\gamma^2 = 4\lambda</span>, breaks it: the roots coincide, and that mode moves as <span class="math inline">(a + bt)e^{-\gamma t/2}</span>, which no combination of modes produces (section 6).</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>Level 2 <span class="needs">uses linear algebra</span>
+</summary>
+<p><em>Part 1.</em> Each eigenspace <span class="math inline">E_\lambda</span> of <span class="math inline">A</span> is mapped to itself by <span class="math inline">C</span>: if <span class="math inline">AX = \lambda X</span> then <span class="math inline">A(CX) = CAX = \lambda\,CX</span>. On <span class="math inline">E_\lambda</span>, <span class="math inline">C</span> is symmetric, so <span class="math inline">E_\lambda</span> has an orthonormal basis of eigenvectors of <span class="math inline">C</span>. Together over all <span class="math inline">\lambda</span> these give part 1, since the eigenspaces of <span class="math inline">A</span> are perpendicular and fill out <span class="math inline">\mathbb{R}^n</span>.</p>
+<p><em>Part 2.</em> Take the dot product of the equation with <span class="math inline">X_k</span> and use symmetry as in level 1: <span class="math inline">X_k\cdot Cu' = \gamma_kq_k'</span> and <span class="math inline">X_k\cdot Au = \lambda_kq_k</span>, with <span class="math inline">q_k = X_k\cdot u</span>.</p>
+<p><em>Part 3.</em> In the state <span class="math inline">U = (u, u')</span> the generator is <span class="math inline">B = \left(\begin{smallmatrix} 0 &amp; I \\ -A &amp; -C\end{smallmatrix}\right)</span>. In the basis <span class="math inline">(X_1, 0), (0, X_1), \dots, (X_n, 0), (0, X_n)</span> it splits into <span class="math inline">2\times2</span> blocks <span class="math inline">B_k = \left(\begin{smallmatrix} 0 &amp; 1 \\ -\lambda_k &amp; -\gamma_k\end{smallmatrix}\right)</span>, with characteristic polynomial <span class="math inline">s^2 + \gamma_ks + \lambda_k</span>. A <span class="math inline">2\times2</span> matrix with two distinct eigenvalues has two independent eigenvectors. If the eigenvalue <span class="math inline">s_0</span> is repeated, <span class="math inline">B_k - s_0</span> is not zero (its top right entry is 1), so it has rank 1 and <span class="math inline">B_k</span> has only one eigenvector: a Jordan block. <span class="math inline">B</span> has a basis of eigenvectors exactly when every block does.</p>
+<p><em>Light friction.</em> For <span class="math inline">\gamma_k^2 &lt; 4\lambda_k</span> the roots are <span class="math inline">s = -\gamma_k/2 \pm i\sqrt{\lambda_k - \gamma_k^2/4}</span>, and the real solutions are <span class="math inline">q_k = e^{-\gamma_kt/2}\big(a\cos\tilde\omega_kt + b\sin\tilde\omega_kt\big)</span> with <span class="math inline">\tilde\omega_k = \sqrt{\lambda_k - \gamma_k^2/4}</span>.</p>
+<p><em>Why <span class="math inline">C</span> must be symmetric.</em> Friction that turns motion into heat comes from a dissipation function <span class="math inline">\tfrac12\,u'\cdot Cu'</span>, as Rayleigh introduced it, and is symmetric. An antisymmetric velocity term, such as a spinning object’s gyroscopic force, does no work and can commute with <span class="math inline">A</span> (for <span class="math inline">A = \omega^2I</span> it commutes with everything), yet its modes are rotating motions with complex shapes such as <span class="math inline">(1, \pm i)</span>, not real standing shapes.</p>
+</details>
+</div>
+<p><strong>Two piano strings in tune.</strong> A piano note has two or three strings tuned alike on one bridge. Keep one mode per string, one number <span class="math inline">q_j</span> each; in tune, <span class="math inline">A = \omega_0^2I</span> on the pair. The bridge, driven by both strings at once, gives each a friction in proportion to its motion: <span class="math inline">C = r\left(\begin{smallmatrix}1 &amp; 1\\1 &amp; 1\end{smallmatrix}\right)</span>, symmetric (the strings’ own losses aside). A multiple of the identity commutes with every matrix: level 2. The shared eigenvectors are <span class="math inline">(1, 1)</span>, swinging together, with <span class="math inline">\gamma = 2r</span>: both push the yielding bridge, and the mode fades at the rate <span class="math inline">\gamma/2 = r</span>; and <span class="math inline">(1, -1)</span>, swinging oppositely, with <span class="math inline">\gamma = 0</span>: their pushes cancel. An even hammer starts only <span class="math inline">(1, 1)</span>; an unequal strike starts both, so each string’s motion decays in two stages, fast then slow, in real modes, exactly in or out of step. This is the first half of Weinreich’s (1977) explanation: in this exact model the slow mode does not push the bridge at all, so it would hardly be heard; he showed that the strings’ slight mistuning, together with the hammer’s small irregularities, governs the aftersound, which is level 3.</p>
+</section>
+<section id="level-3-the-general-case" class="level3">
+<h3 class="anchored" data-anchor-id="level-3-the-general-case">Level 3 · The general case</h3>
+<p>The equation is any <span class="math inline">U' = BU</span>. With a basis of eigenvectors it is modal, its modes in general <em>complex</em>: the entries of <span class="math inline">W</span> have different phases, so parts of the shape peak at different moments.</p>
+<p><strong>The same two strings, mistuned.</strong> With <span class="math inline">A = \operatorname{diag}(\omega_1^2, \omega_2^2)</span>, <span class="math inline">\omega_1 \ne \omega_2</span>, <span class="math inline">A</span> no longer commutes with <span class="math inline">C</span>. For a mistuning <span class="math inline">\delta = \omega_1 - \omega_2</span> about as large as <span class="math inline">r</span> the modes are strongly complex: in each the strings swing out of step by an angle other than <span class="math inline">0^\circ</span> or <span class="math inline">180^\circ</span>, and both modes push the bridge, so the slow one is heard: the aftersound (numbers in the fold).</p>
+<p><strong>Radiation lands here too.</strong> Sound carried into unbounded air is a loss that depends on the shape and frequency, and the problem is no longer self-adjoint.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>The two strings, in tune and mistuned, in numbers <span class="needs">uses complex numbers</span>
+</summary>
+<p>This is a toy model: each string reduced to one mode, the bridge to the friction <span class="math inline">C = r\left(\begin{smallmatrix}1&amp;1\\1&amp;1\end{smallmatrix}\right)</span>, and the strings’ own losses left out. For light friction and small mistuning, write <span class="math inline">u = \operatorname{Re}\big(a(t)\,e^{i\bar\omega t}\big)</span> with <span class="math inline">\bar\omega = (\omega_1 + \omega_2)/2</span> and a slowly changing complex column <span class="math inline">a</span>. Keeping first-order terms in <span class="math inline">r</span> and <span class="math inline">\delta</span>, the equation becomes <span class="math display">
+a' = M a, \qquad M = \begin{pmatrix} i\delta/2 - r/2 &amp; -r/2 \\ -r/2 &amp; -i\delta/2 - r/2\end{pmatrix} ,
+</span> with eigenvalues <span class="math inline">-\tfrac r2 \pm \tfrac12\sqrt{r^2 - \delta^2}</span>.</p>
+<ul>
+<li><em>In tune</em>, <span class="math inline">\delta = 0</span>: eigenvalues <span class="math inline">0</span> and <span class="math inline">-r</span>, eigenvectors <span class="math inline">(1, -1)</span> and <span class="math inline">(1, 1)</span>, real.</li>
+<li><em>Mistuned by less than <span class="math inline">r</span></em> (at <span class="math inline">\delta = 0.6\,r</span>: the strings swing equally far in each mode, <span class="math inline">37^\circ</span> apart in the nearly-together mode, fading at <span class="math inline">0.9\,r</span>, and <span class="math inline">143^\circ</span> apart in the nearly-opposite one, fading at <span class="math inline">0.1\,r</span>): both modes at one frequency, fading at the different rates <span class="math inline">\tfrac r2 \mp \tfrac12\sqrt{r^2 - \delta^2}</span>. The eigenvector ratio <span class="math inline">a_2/a_1 = (i\delta/2 \mp \tfrac12\sqrt{r^2 - \delta^2})\cdot 2/r</span> has modulus 1 and a phase other than <span class="math inline">0</span> and <span class="math inline">180^\circ</span>. For <span class="math inline">\delta = 0.6\,r</span>: rates <span class="math inline">0.1\,r</span> and <span class="math inline">0.9\,r</span>, ratios <span class="math inline">-0.8 + 0.6i</span> and <span class="math inline">0.8 + 0.6i</span>, phases <span class="math inline">143^\circ</span> and <span class="math inline">37^\circ</span>.</li>
+<li><em>Mistuned by exactly <span class="math inline">r</span></em>: the two eigenvalues coincide at <span class="math inline">-r/2</span> with the single eigenvector <span class="math inline">(1, i)</span>, a Jordan block.</li>
+<li><em>Mistuned by more than <span class="math inline">r</span></em>: the frequencies split by <span class="math inline">\sqrt{\delta^2 - r^2}</span> and both modes fade at the rate <span class="math inline">r/2</span>: the strings beat.</li>
+</ul>
+<p>A numerical check of the full equations <span class="math inline">u'' + Cu' + Au = 0</span>, with <span class="math inline">r</span> at 2% of <span class="math inline">\omega_0</span> and <span class="math inline">\delta = 0.6\,r</span>, gives the same phases to within <span class="math inline">0.01^\circ</span>.</p>
+</details>
+</div>
+</section>
+</section>
+<section id="deeper-theory" class="level2">
+<h2 class="anchored" data-anchor-id="deeper-theory">5 · The deeper theory</h2>
+<p><em>This section needs linear algebra and analysis. <a href="#counterexamples">Skip to section 6</a> if you prefer; sections 6 and 7 can be read without it.</em></p>
+<p><strong>Self-adjoint <span class="math inline">A \ge 0</span>: the spectral theorem.</strong> On a <a href="../../posts/instruments-as-operators/glossary.html#l2">Hilbert space</a> of shapes (with an <a href="../../posts/instruments-as-operators/glossary.html#inner-product">inner product</a>, and limits), von Neumann’s spectral theorem (1930, 1932) represents <span class="math inline">A</span> as multiplication by <span class="math inline">\lambda</span> on its spectral parts, which defines <span class="math inline">\varphi(A)</span>: multiply the part at <span class="math inline">\lambda</span> by <span class="math inline">\varphi(\lambda)</span>. This always expresses the solution through <span class="math inline">A</span>’s spectrum, <span class="math display">
+u(t) = \cos\!\big(t\sqrt{A}\big)\,f + \frac{\sin\!\big(t\sqrt{A}\big)}{\sqrt{A}}\,g ,
+</span> for starting shape <span class="math inline">f</span> and velocity <span class="math inline">g</span>, reading <span class="math inline">\sin(t\sqrt A)/\sqrt A</span> as <span class="math inline">t</span> on drifts. For a matrix, <span class="math inline">\cos(t\sqrt A)f = \sum_i\cos(t\sqrt{\lambda_i})\,(X_i\cdot f)\,X_i</span>: level 1’s formula. The <a href="../../posts/instruments-as-operators/glossary.html#spectrum">spectrum</a> is the set of numbers <span class="math inline">z</span> for which <span class="math inline">A - z</span> has no bounded inverse; for self-adjoint <span class="math inline">A \ge 0</span> it lies in <span class="math inline">[0, \infty)</span>.</p>
+<p><strong>A list of notes exactly when the resolvent is compact.</strong> The <em>resolvent</em> <span class="math inline">(A - z)^{-1}</span> solves <span class="math inline">Au - zu = f</span> for <span class="math inline">u</span>. An operator is <em>compact</em> if it maps bounded sets to sets with compact closure; on a Hilbert space, equivalently, it is a limit in norm of operators with finite-dimensional range. For self-adjoint <span class="math inline">A \ge 0</span>, <span class="math inline">(A + 1)^{-1}</span> is compact exactly when the spectrum is a discrete list, eigenvalues <span class="math inline">\lambda_1 \le \lambda_2 \le \cdots \to \infty</span> of finite <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a>, with eigenvectors forming an orthonormal basis (fold). Then the formula is a sum over modes, a list of notes, and with <span class="math inline">A &gt; 0</span> the modes of <span class="math inline">B</span> form an orthonormal basis of the energy space, the states <span class="math inline">(u, u')</span> of finite energy. In finite dimensions every operator is compact; for continuous objects, this is what “the object is finite” means.</p>
+<p><strong>Which objects have it.</strong> Strings and tubes, by Sturm–Liouville theory; bars, by the same theorem through a compact <a href="../../posts/instruments-as-operators/glossary.html#green">Green’s operator</a>; drums on a bounded region with a reasonable edge, by Rellich’s theorem (fold). Courant and Hilbert (volume 1, chapters V and VI) treat all of these. Which shapes share a list of notes: <a href="../../posts/hear-the-shape-of-a-drum/index.html">Can you hear the shape of a drum?</a></p>
+<p><strong>The infinite string: spectral, but no list of notes.</strong> On the whole line <span class="math inline">A = -c^2\,d^2/dx^2</span> is self-adjoint and <span class="math inline">\ge 0</span> with spectrum <span class="math inline">[0, \infty)</span> and no eigenvectors; the resolvent is not compact. The formula still holds, the sum over modes becoming the Fourier transform, <span class="math display">
+u(x, t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}\Big(\hat f(k)\cos(ckt) + \hat g(k)\,\frac{\sin(ckt)}{ck}\Big)e^{ikx}\,dk ,
+</span> a continuous spread of frequencies.</p>
+<p><strong>Without symmetry</strong> (friction, radiation), for losses that only remove energy, the motion still exists and is unique (a <a href="../../posts/instruments-as-operators/glossary.html#semigroup">semigroup</a>), but the eigenvectors may fail to form a basis, and whether they form a Riesz basis has to be proved case by case (Gohberg and Krein). For a string with friction varying along it they do (Cox and Zuazua), and decaying modes can still make the motion grow for a while (Trefethen and Embree). Details in the fold.</p>
+<p><strong>Nonlinear or time-dependent equations</strong> have no spectrum in this sense: by the criterion, their solutions are not all the combinations of a fixed set of modes.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Which objects have a compact resolvent, and solutions in the energy sense <span class="needs">uses functional analysis</span>
+</summary>
+<ul>
+<li><em>Strings and tubes</em>: <a href="https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory">Sturm–Liouville theory</a>. On a finite interval, <span class="math inline">-(pu')' + qu = \lambda\rho u</span> with <span class="math inline">p, \rho &gt; 0</span> and a condition at each end has simple eigenvalues <span class="math inline">\lambda_1 &lt; \lambda_2 &lt; \cdots \to \infty</span> and eigenfunctions forming an orthogonal basis.</li>
+<li><em>Bars</em>: the same theorem through a compact <a href="../../posts/instruments-as-operators/glossary.html#green">Green’s operator</a>. The fourth-order bar is not a classical Sturm–Liouville problem, but <span class="math inline">(A + 1)^{-1}</span> is <span class="math inline">f \mapsto \int G(x, y)f(y)\,dy</span> with a kernel <span class="math inline">G</span>, the Green’s function, continuous on the square <span class="math inline">[0, L]^2</span>, which makes it compact.</li>
+<li><em>Drums</em>: Rellich’s theorem, on a bounded region with a reasonable edge: any set of shapes whose energies <span class="math inline">\iint(|\nabla u|^2 + u^2)</span> are bounded by one number has compact closure in <span class="math inline">L^2</span>, so the resolvent is compact. For a head fixed at its rim any bounded region will do; with a free edge, very irregular regions can fail.</li>
+</ul>
+<p><strong>Solutions in the energy sense.</strong> For a start of finite energy the formula gives the one motion of finite energy, which conserves it. A plucked string’s kink has no second derivative, so the plucked string solves <span class="math inline">u_{tt} = -Au</span> in this sense, not point by point.</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>A list of notes exactly when the resolvent is compact <span class="needs">uses functional analysis</span>
+</summary>
+<p>Let <span class="math inline">A \ge 0</span> be self-adjoint on an infinite-dimensional Hilbert space <span class="math inline">H</span>. Claim: <span class="math inline">R = (A + 1)^{-1}</span> is compact if and only if <span class="math inline">H</span> has an orthonormal basis of eigenvectors <span class="math inline">X_k</span> of <span class="math inline">A</span> whose eigenvalues <span class="math inline">\lambda_k</span> have finite multiplicity and tend to <span class="math inline">\infty</span>.</p>
+<p><em>If <span class="math inline">R</span> is compact.</em> <span class="math inline">R</span> is bounded, with <span class="math inline">\|R\| \le 1</span> because <span class="math inline">\langle(A + 1)u, u\rangle \ge \|u\|^2</span>; it is self-adjoint; and it is one-to-one, having the inverse <span class="math inline">A + 1</span>. The spectral theorem for compact self-adjoint operators gives an orthonormal basis of the closure of its range, which is <span class="math inline">H</span> because <span class="math inline">R</span> is self-adjoint and one-to-one, made of eigenvectors <span class="math inline">RX_k = \mu_kX_k</span> with <span class="math inline">\mu_k \to 0</span>, each nonzero <span class="math inline">\mu_k</span> of finite multiplicity, and no <span class="math inline">\mu_k = 0</span>. Applying <span class="math inline">A + 1</span> gives <span class="math inline">X_k = \mu_k(A + 1)X_k</span>, so <span class="math inline">AX_k = \lambda_kX_k</span> with <span class="math inline">\lambda_k = 1/\mu_k - 1 \to \infty</span>.</p>
+<p><em>If such a basis exists.</em> List the <span class="math inline">\lambda_k</span> in increasing order. Then <span class="math inline">Rf = \sum_k(1 + \lambda_k)^{-1}\langle f, X_k\rangle X_k</span>. Its truncations <span class="math inline">R_N</span>, summing over <span class="math inline">k \le N</span>, have finite-dimensional range, and <span class="math inline">\|R - R_N\| = \sup_{k &gt; N}(1 + \lambda_k)^{-1} \to 0</span>. A limit in norm of such operators is compact.</p>
+<p><em>The energy space.</em> Measure the energy of a state by <span class="math inline">\|(u, v)\|_E^2 = \langle Au, u\rangle + \langle v, v\rangle</span>. For <span class="math inline">A &gt; 0</span> with such a basis, the states <span class="math inline">W_{k,\pm} = (X_k, \pm i\omega_kX_k)/\sqrt{2\lambda_k}</span>, <span class="math inline">\omega_k = \sqrt{\lambda_k}</span>, have <span class="math inline">\|W_{k,\pm}\|_E^2 = (\lambda_k + \omega_k^2)/2\lambda_k = 1</span>, are mutually perpendicular (for the pair, <span class="math inline">\lambda_k + (i\omega_k)\overline{(-i\omega_k)} = \lambda_k - \omega_k^2 = 0</span>), and span the energy space; so they form an orthonormal basis of it, and the system is modal in the sense of Definition 3.</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Without symmetry: semigroups, Riesz bases and growth before decay <span class="needs">uses functional analysis</span>
+</summary>
+<p><em>Semigroups.</em> For a damped string or drum, energy can only decrease, <span class="math inline">\operatorname{Re}\langle BU, U\rangle_E \le 0</span> in the energy inner product, and <span class="math inline">B</span> generates a contraction semigroup <span class="math inline">e^{tB}</span>: bounded operators with <span class="math inline">e^{(t + t')B} = e^{tB}e^{t'B}</span>, <span class="math inline">e^{0B} = I</span>, continuous in <span class="math inline">t</span>, sending the starting state to the state at time <span class="math inline">t</span>, provided also that <span class="math inline">1 - B</span> is onto (together: <span class="math inline">B</span> is maximally dissipative; the Lumer–Phillips theorem). This gives existence and uniqueness without any modes.</p>
+<p><em>Riesz bases.</em> In finite dimensions the only way to lack a basis of eigenvectors is a Jordan block. In infinite dimensions the eigenvectors can be complete (no state is perpendicular to all of them) and still not be a basis, or be a basis in which expansions are unstable. The property that makes mode expansions behave like orthonormal ones is a <em>Riesz basis</em>: the image of an orthonormal basis under a bounded operator with a bounded inverse; equivalently, every state is uniquely <span class="math inline">U = \sum_kc_kW_k</span> with <span class="math inline">m\sum_k|c_k|^2 \le \|U\|^2 \le M\sum_k|c_k|^2</span> for fixed <span class="math inline">0 &lt; m \le M</span>. Gohberg and Krein (1969) is the classical account of when the eigenvectors of a non-self-adjoint operator are complete or form a basis. For the string <span class="math inline">u_{tt} + 2a(x)\,u_t = u_{xx}</span> on a finite interval, ends tied, with a friction coefficient <span class="math inline">a</span> of bounded variation, Cox and Zuazua (1994) proved that the eigenvectors form a Riesz basis of the energy space, and that the energy decays at exactly the rate set by the slowest-fading mode.</p>
+<p><em>Growth before decay.</em> Even with a basis of decaying modes, a non-normal <span class="math inline">B</span>, one that does not commute with its adjoint, so that its eigenvectors are not perpendicular, can make the size of the state grow for a while. The smallest example: <span class="math inline">B = \left(\begin{smallmatrix} -1 &amp; 10 \\ 0 &amp; -2\end{smallmatrix}\right)</span> has modes fading at the rates 1 and 2, with the nearly parallel eigenvectors <span class="math inline">(1, 0)</span> and <span class="math inline">(-10, 1)</span>. Starting from <span class="math inline">U(0) = (0, 1) = 10\,(1, 0) + (-10, 1)</span>, a near cancellation of two large modes, <span class="math display">
+U(t) = \big(10\,(e^{-t} - e^{-2t}),\ e^{-2t}\big),
+</span> which reaches size about 2.5 near <span class="math inline">t = 0.7</span> before it decays: the two modes fade at different rates and stop cancelling. Pseudospectra, the sets of <span class="math inline">z</span> where <span class="math inline">\|(B - z)^{-1}\|</span> is large, measure this (Trefethen and Embree 2005).</p>
+<p><em>Radiation.</em> For an object radiating into unbounded air, the slowly fading “modes” are resonances: complex frequencies at which the resolvent, continued past the real axis, has poles. Expansions in them hold only in restricted senses.</p>
+</details>
+</div>
+</section>
+<section id="counterexamples" class="level2">
+<h2 class="anchored" data-anchor-id="counterexamples">6 · Counterexamples, smallest first</h2>
+<p><strong>1. A drift: <span class="math inline">x'' = 0</span>.</strong> The generator <span class="math inline">B = \left(\begin{smallmatrix}0 &amp; 1\\0 &amp; 0\end{smallmatrix}\right)</span> has only the eigenvalue <span class="math inline">0</span> and only the eigenvectors along <span class="math inline">(1, 0)</span>, so <span class="math inline">x = a + bt</span> with <span class="math inline">b \ne 0</span> is not a combination of modes: a Jordan block. <em>You hear</em> nothing. In instruments: the two-bead ring, a free bar or drum sliding as a whole; split off.</p>
+<p><strong>2. Critical damping: <span class="math inline">u'' + 2u' + u = 0</span>.</strong> The roots of <span class="math inline">s^2 + 2s + 1 = (s + 1)^2</span> coincide, <span class="math inline">B = \left(\begin{smallmatrix}0 &amp; 1\\-1 &amp; -2\end{smallmatrix}\right)</span> has the single eigenvector <span class="math inline">(1, -1)</span>, and the solutions are <span class="math inline">(a + bt)\,e^{-t}</span>: the same Jordan block, moved by friction. <em>You hear</em> no ring: released, the mass creeps back to rest without swinging.</p>
+<p><strong>3. A property that changes in time.</strong> In Mathieu’s equation <span class="math inline">x'' = -(1 + \varepsilon\cos 2t)\,x</span> the stiffness wobbles, and differentiating a solution adds the term <span class="math inline">2\varepsilon\sin(2t)\,x</span>: no modes <span class="math inline">e^{st}W</span>. By <a href="../../posts/instruments-as-operators/glossary.html#floquet">Floquet’s theorem</a> the solutions are combinations of <span class="math inline">e^{\mu t}p(t)</span> with <span class="math inline">p</span> periodic, and for every small <span class="math inline">\varepsilon \neq 0</span> one exponent has a positive real part, about <span class="math inline">\varepsilon/4</span>: <a href="../../posts/instruments-as-operators/glossary.html#parametric-resonance">parametric resonance</a>, as when a child pumps a swing. A slow change is gentler: a talking drum’s player squeezes its cords while it rings, and when the tension changes slowly compared with one swing, each mode keeps its shape and its frequency follows the tension, to a good approximation. <em>You hear</em> the pitch glide with the squeeze, even within one stroke.</p>
+<p><strong>4. A force not proportional to the displacement.</strong> The wide pendulum, <span class="math inline">x'' = -\sin x</span>, is nonlinear and <em>softening</em>: wider swings are slower. Strings and drumheads stiffen instead, so a loud stroke starts sharp and its pitch drops as it fades. <em>You hear</em> pitch that moves with loudness: a hard guitar pluck’s twang, a gong’s glide; and a tamtam’s shimmer builds up as energy moves into higher modes (fold).</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>Softening, stiffening, and what you hear <span class="needs">uses no extra mathematics</span>
+</summary>
+<p>The pendulum swung wide, <span class="math inline">x'' = -\sin x</span>, is nonlinear (<span class="math inline">\sin 2x \neq 2\sin x</span>, so twice a solution is not one) and <em>softening</em>: its force grows less than in proportion, so wider swings are slower; out to <span class="math inline">90^\circ</span> a swing takes 18% longer than a small one. Strings and drumheads go the other way: a wide swing stretches them and raises the average tension, so a loud stroke starts sharp and its pitch drops as it fades. <em>You hear</em> a hard guitar pluck’s twang; the slight pitch drop of a loud kettledrum stroke; a gong’s pitch glide, up for some gongs and down for others, depending on the shell’s curvature and thickness; and a tamtam’s or cymbal’s shimmer building up after the strike, as the nonlinearity passes energy from low modes into high ones. In a modal system each mode’s amount evolves on its own, so energy cannot flow between modes.</p>
+</details>
+</div>
+<p><strong>5. Rayleigh’s self-sustained oscillator.</strong> In Rayleigh’s equation (1883), <span class="math display">
+x'' - \varepsilon\,\big(x' - \tfrac13 x'^3\big) + x = 0 ,
+</span> the middle term feeds energy in when the motion is slow and takes it out when it is fast. Every motion except rest settles into one repeating cycle, a <a href="../../posts/instruments-as-operators/glossary.html#limit-cycle">limit cycle</a>, of amplitude about 2 and angular frequency <span class="math inline">1 - \varepsilon^2/16 + \cdots</span>, near the linear value 1. It has no modes; being periodic, its partials sit at exact whole-number multiples. <em>You hear</em> the steady tone of a bowed string, a reed or a player’s lips, exactly harmonic for as long as the player keeps going; and a harmonica’s bent notes, where the player’s mouth, with the hole’s other reed, pulls the playing frequency.</p>
+<p><strong>6. The infinite string.</strong> On the whole line, <span class="math inline">u_{tt} = c^2u_{xx}</span> is linear, unchanging in time, symmetric and positive, with no allowed eigenvectors: spectral (section 5), no list of notes. <em>You hear</em> a click: a pluck splits into two half-height bumps that run apart, and each point falls still once they have passed.</p>
+<table class="table-striped caption-top table">
+<caption>The counterexamples, smallest first.</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Counterexample</th>
+<th style="text-align: left;">What fails</th>
+<th style="text-align: left;">What you hear</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1 drift</td>
+<td style="text-align: left;">a full set of eigenvectors</td>
+<td style="text-align: left;">nothing</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2 critical damping</td>
+<td style="text-align: left;">the same, with friction</td>
+<td style="text-align: left;">no ring</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3 pumped swing; talking drum</td>
+<td style="text-align: left;">unchanging in time</td>
+<td style="text-align: left;">growth; a gliding pitch</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4 wide pendulum; loud strings, heads, gongs</td>
+<td style="text-align: left;">linearity</td>
+<td style="text-align: left;">pitch moving with loudness; shimmer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5 Rayleigh’s oscillator</td>
+<td style="text-align: left;">linearity, with energy fed in</td>
+<td style="text-align: left;">a steady, exactly harmonic tone</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6 infinite string</td>
+<td style="text-align: left;">finite size</td>
+<td style="text-align: left;">a click</td>
+</tr>
+</tbody>
+</table>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>The counterexamples in equations <span class="needs">uses differential equations</span>
+</summary>
+<p><em>Stability.</em> An unstable rest, <span class="math inline">x'' = +x</span> (<span class="math inline">A = -1</span>), is modal, with the real exponents <span class="math inline">s = \pm1</span>, but one mode runs away exponentially: the takeaway’s “stable” is <span class="math inline">A \ge 0</span>, and after any drifts (<span class="math inline">\lambda = 0</span>) are split off, <span class="math inline">A &gt; 0</span>.</p>
+<p><em>The pumped swing.</em> For <span class="math inline">x'' + (1 + \varepsilon\cos 2t)x = 0</span> the map from the state at time <span class="math inline">0</span> to the state at time <span class="math inline">\pi</span> is a fixed matrix <span class="math inline">P</span> (the coefficient has period <span class="math inline">\pi</span>). Floquet’s theorem (1883) writes every solution, when <span class="math inline">P</span> has two distinct eigenvalues as here, as a combination of <span class="math inline">e^{\mu t}p(t)</span> with <span class="math inline">p</span> of period <span class="math inline">\pi</span> and <span class="math inline">e^{\mu\pi}</span> an eigenvalue of <span class="math inline">P</span> (<span class="math inline">\mu</span> may be complex). A numerical computation of <span class="math inline">P</span> gives the growth rate <span class="math inline">\operatorname{Re}\mu = 0.0125, 0.0250, 0.0499</span> for <span class="math inline">\varepsilon = 0.05, 0.1, 0.2</span>: about <span class="math inline">\varepsilon/4</span>.</p>
+<p><em>The slow change.</em> For <span class="math inline">x'' + \omega(t)^2x = 0</span> with <span class="math inline">\omega</span> changing slowly compared with one swing, <span class="math inline">x \approx (a/\sqrt{\omega(t)})\cos\big(\int_0^t\omega\,dt' + \varphi\big)</span>: the frequency follows <span class="math inline">\omega(t)</span>, and the energy divided by the frequency stays nearly constant (an adiabatic invariant).</p>
+<p><em>The wide pendulum.</em> The period of <span class="math inline">x'' = -\sin x</span> with amplitude <span class="math inline">x_0</span> is <span class="math inline">4K(\sin^2(x_0/2))</span>, where <span class="math inline">K(m) = \int_0^{\pi/2}(1 - m\sin^2\phi)^{-1/2}\,d\phi</span>, against <span class="math inline">2\pi</span> for small swings; at <span class="math inline">x_0 = 90^\circ</span> the ratio is <span class="math inline">1.180</span>.</p>
+<p><em>Rayleigh’s oscillator.</em> A numerical run of <span class="math inline">x'' - \varepsilon(x' - x'^3/3) + x = 0</span> settles to angular frequency <span class="math inline">0.99938</span>, <span class="math inline">0.9944</span>, <span class="math inline">0.9847</span> for <span class="math inline">\varepsilon = 0.1, 0.3, 0.5</span>, against <span class="math inline">1 - \varepsilon^2/16 = 0.99938</span>, <span class="math inline">0.99438</span>, <span class="math inline">0.98438</span>, with amplitude about 2. By contrast, a linear system driven by a periodic force is solved by its modes, and without friction the response at an exact resonance grows in proportion to time.</p>
+<p><em>Spinning objects.</em> Gyroscopic forces <span class="math inline">Gu'</span> with <span class="math inline">G</span> antisymmetric do no work and need no friction, yet the equation is not of the form <span class="math inline">Mu'' = -Ku</span>: the classical theory of small oscillations covers “natural” mechanical systems, whose energy is kinetic plus stored, without such terms.</p>
+<p><em>The surrounding air.</em> Treated as not squeezable near a drumhead, the air adds a fixed, symmetric, positive <a href="../../posts/instruments-as-operators/glossary.html#added-mass">added mass</a>, a generalized eigenvalue problem <span class="math inline">AX = \omega^2(1 + M_{\text{air}}/\sigma)X</span> inside level 1 once lengths are measured with the masses as weights, <span class="math inline">\langle x, (\sigma + M_{\text{air}})y\rangle</span>, as in the unequal-masses fold. Exactly, the added mass depends on the frequency and is complex, because sound radiates away into unbounded air, and the modes become resonances that fade at the rate the head radiates energy.</p>
+<p><em>No edges.</em> On the whole line, <span class="math inline">-c^2\,d^2/dx^2</span> has the continuous spectrum <span class="math inline">[0, \infty)</span> and no eigenfunctions with finite <span class="math inline">\int|X|^2</span>. With <span class="math inline">u_t(x, 0) = 0</span>, d’Alembert’s solution <span class="math inline">u(x, t) = \tfrac12\big(f(x - ct) + f(x + ct)\big)</span> shows the two half-height bumps; once both have passed a point, the string there is at rest.</p>
+</details>
+</div>
+</section>
+<section id="back-to-hearing" class="level2">
+<h2 class="anchored" data-anchor-id="back-to-hearing">7 · Back to what you hear</h2>
+<p>The motion is not yet the sound. Between the object and your ear sit the instrument’s body (a violin’s box, a piano’s soundboard), the air and the room, and each is a linear filter that doesn’t change in time; for a room this holds very well at the pressures of music, as long as nothing in it moves (Masovic). Such a filter keeps every <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>, changes the amounts <span class="math inline">a_k</span> and phases <span class="math inline">\varphi_k</span>, and adds its own ringing: the body’s resonances, and the room’s reverberation, which goes on after the instrument’s modes have faded and is how a room lengthens what you hear. The reason is section 2’s again: a filter that is the same at every moment sends <span class="math inline">e^{st}</span> to a multiple of <span class="math inline">e^{st}</span>, plus terms at its own exponents (fold). So the instrument’s part of the sound is <span class="math display">
+p(t) = \sum_k a_k\,e^{-t/\tau_k}\cos(2\pi f_kt + \varphi_k) ,
+</span> one term per mode, <span class="math inline">s = -1/\tau_k \pm 2\pi i f_k</span>. The equation of motion (the operator, together with friction and radiation) fixes the <span class="math inline">f_k</span> and <span class="math inline">\tau_k</span>; the playing, the radiation and where you listen fix the <span class="math inline">a_k</span>. The series derives the <span class="math inline">f_k</span>; the <span class="math inline">\tau_k</span> are mostly measured, and it says so where it uses them.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Proof</span>A filter keeps every exponent and adds its own <span class="needs">uses integrals</span>
+</summary>
+<p>A linear filter that is the same at every moment, at rest before the input <span class="math inline">v</span> starts at <span class="math inline">t = 0</span>, has output <span class="math inline">p(t) = \int_0^t h(t - t')\,v(t')\,dt'</span>, where <span class="math inline">h</span> is its response to a sudden tap. Take a body with finitely many decaying resonances, <span class="math inline">h(t) = \sum_jb_je^{r_jt}</span> with <span class="math inline">\operatorname{Re} r_j &lt; 0</span>, and the input <span class="math inline">v(t) = e^{st}</span> with <span class="math inline">s</span> different from every <span class="math inline">r_j</span>. Then <span class="math display">
+p(t) = \sum_j b_je^{r_jt}\int_0^te^{(s - r_j)t'}\,dt' = H(s)\,e^{st} - \sum_j\frac{b_j}{s - r_j}\,e^{r_jt}, \qquad H(s) = \sum_j\frac{b_j}{s - r_j} .
+</span> The input’s exponent <span class="math inline">s</span>, and with it its frequency and fading time, comes out unchanged, multiplied by the number <span class="math inline">H(s)</span>: its size scaled by <span class="math inline">|H(s)|</span> and its phase shifted by the angle of <span class="math inline">H(s)</span>. The other terms are the filter’s own ringing, at its own exponents <span class="math inline">r_j</span>. By linearity a sum of modes passes term by term, and a real input, the sum of a mode and its conjugate, gives a real output. A propagation delay <span class="math inline">d</span> multiplies <span class="math inline">e^{st}</span> by <span class="math inline">e^{-sd}</span>, again the same exponent.</p>
+</details>
+</div>
+<p><strong>The four aspects of sound, from the three lists.</strong> <a href="../../posts/what-you-hear/index.html#four-aspects">Post 1</a> defines pitch, loudness, timbre and duration as things we hear. What each is heard from, through the ear’s own weighting, is a fact about hearing, from psychoacoustics, not mathematics:</p>
+<table class="table-striped caption-top table">
+<caption>The four aspects (Moore 2012; ISO 226; Stevens 1957).</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Aspect</th>
+<th style="text-align: left;">Heard from</th>
+<th style="text-align: left;">Set by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Pitch</td>
+<td style="text-align: left;">mainly where the <span class="math inline">f_k</span> sit: for a single tone whose prominent partials lie near a harmonic series in the pitch range, that series’ base</td>
+<td style="text-align: left;">the equation of motion</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Loudness</td>
+<td style="text-align: left;">the sizes <span class="math inline">a_k</span>, weighted by frequency (equal-loudness contours); about twice as loud per 10 dB</td>
+<td style="text-align: left;">the playing, the radiation, where you listen</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Timbre</td>
+<td style="text-align: left;">all three lists, <span class="math inline">f_k</span>, <span class="math inline">a_k</span> and <span class="math inline">\tau_k</span>, especially early on, plus noise that is not a mode</td>
+<td style="text-align: left;">all of these</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Duration</td>
+<td style="text-align: left;">the fading times <span class="math inline">\tau_k</span>, and when the player stops or damps the note</td>
+<td style="text-align: left;">friction and radiation, and the player</td>
+</tr>
+</tbody>
+</table>
+<p>Bowed and blown instruments are different: their motion is a single repeating cycle, so its partials sit at exact whole-number multiples; the resonator’s modes shape which partials are strong, and the player sets loudness and duration.</p>
+<p><strong>The four routes to a clear pitch, now explained.</strong> <a href="../../posts/what-you-hear/index.html#four-routes">Post 1</a> lists four ways to partials at or very near whole-number multiples of one frequency. Each is a statement about these lists.</p>
+<ol type="1">
+<li><em>By nature: strings and air columns.</em> On an interval with tied or open ends, <span class="math inline">-c^2\,d^2/dx^2</span> gives <span class="math inline">f_n = nc/2L</span>, for section 1’s two reasons; a tube closed at one end, like a clarinet’s, gives the odd multiples <span class="math inline">(2n - 1)c/4L</span>.</li>
+<li><em>By design.</em> Added stiffness never lowers an eigenvalue and added mass never raises one (the <a href="../../posts/instruments-as-operators/glossary.html#min-max">min–max principle</a>), so makers reshape the operator until the modes that matter land near the lines: a kettledrum’s air loading, a marimba bar’s undercut, the tabla’s loaded patch, a bell’s profile (most principal partials on a harmonic series; the tierce, a minor third above the prime, is not on the series).</li>
+<li><em>By suppression.</em> A short <span class="math inline">\tau_k</span>, like a kalimba tine’s fast-dying off-line overtone, or a small <span class="math inline">a_k</span> and short <span class="math inline">\tau_k</span> together, like a kettledrum’s off-line round modes, which the usual playing spot starts more weakly than the spoke modes (<a href="../../posts/instruments-case-by-case/drum.html#one-drumhead-two-drums">drum page</a>) and which radiate their energy away fast (Fletcher and Rossing, chapter 18; Packer 1993).</li>
+<li><em>By a periodic drive: bow and breath.</em> Section 6’s Rayleigh oscillator: a limit cycle, exactly periodic and so exactly harmonic.</li>
+</ol>
+</section>
+<section id="what-we-found" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found">What we found</h2>
+<p>An equation’s solutions are exactly all the combinations of its modes, with any amounts, when it is linear, unchanging in time, and its generator has a basis of eigenvectors. The free vibration of a stable, frictionless, finite object always passes, at <span class="math inline">\sqrt{\lambda}/2\pi</span>; friction that the same shapes split keeps it, short of critical damping; general friction and radiation give complex modes, whose basis has to be proved. Each failure has a smallest example, and most can be heard.</p>
+</section>
+<section id="next" class="level2">
+<h2 class="anchored" data-anchor-id="next">Next</h2>
+<p>Post 4 runs this on each instrument: which modes start, how they fade, and, for bowed and blown instruments, the periodic motion their resonators shape. <a href="../../posts/instruments-case-by-case/index.html">4 · Instruments, case by case →</a></p>
+<div class="refs">
+<p><strong>References.</strong> <em>Mathematics.</em> T. K. Caughey and M. E. J. O’Kelly, “Classical normal modes in damped linear dynamic systems”, <em>Journal of Applied Mechanics</em> 32 (1965), 583–588. S. Cox and E. Zuazua, “The rate at which energy decays in a damped string”, <em>Communications in Partial Differential Equations</em> 19 (1994), 213–243 (<a href="https://doi.org/10.1080/03605309408821015">DOI</a>). I. C. Gohberg and M. G. Krein, <em>Introduction to the Theory of Linear Nonselfadjoint Operators</em>, Translations of Mathematical Monographs 18, American Mathematical Society, 1969. L. N. Trefethen and M. Embree, <em>Spectra and Pseudospectra: The Behavior of Nonnormal Matrices and Operators</em>, Princeton University Press, 2005. F. Rellich, <a href="https://eudml.org/doc/59297">“Ein Satz über mittlere Konvergenz”</a>, <em>Nachrichten von der Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse</em> (1930), 30–35. R. Courant and D. Hilbert, <em>Methods of Mathematical Physics</em>, vol.&nbsp;1, Interscience, 1953, chapters V and VI. J. von Neumann, “Allgemeine Eigenwerttheorie Hermitescher Funktionaloperatoren”, <em>Mathematische Annalen</em> 102 (1930), 49–131, and <em>Mathematische Grundlagen der Quantenmechanik</em>, Springer, 1932. G. Floquet, <a href="https://www.numdam.org/item/ASENS_1883_2_12__47_0">“Sur les équations différentielles linéaires à coefficients périodiques”</a>, <em>Annales scientifiques de l’École Normale Supérieure</em>, 2e série, 12 (1883), 47–88. E. M. Stein and R. Shakarchi, <em>Fourier Analysis: An Introduction</em>, Princeton University Press, 2003, chapters 1–3. Lord Rayleigh, “On maintained vibrations”, <em>Philosophical Magazine</em>, series 5, 15 (1883), 229–235. J. O. Smith, <a href="https://ccrma.stanford.edu/~jos/sasp/Daniel_Bernoulli_s_Modal_Decomposition.html">Daniel Bernoulli’s modal decomposition</a>, CCRMA, Stanford, for the 18th-century debate. Wikipedia, <a href="https://en.wikipedia.org/wiki/Spectral_theorem">Spectral theorem</a>, <a href="https://en.wikipedia.org/wiki/Jordan_normal_form">Jordan normal form</a>, <a href="https://en.wikipedia.org/wiki/Sturm%E2%80%93Liouville_theory">Sturm–Liouville theory</a>, <a href="https://en.wikipedia.org/wiki/Rellich%E2%80%93Kondrachov_theorem">Rellich–Kondrachov theorem</a>, <a href="https://en.wikipedia.org/wiki/Fourier_series">Fourier series</a>, <a href="https://en.wikipedia.org/wiki/Normal_mode">Normal mode</a>, <a href="https://en.wikipedia.org/wiki/Mathieu_function">Mathieu function</a>, <a href="https://en.wikipedia.org/wiki/Limit_cycle">Limit cycle</a> and <a href="https://en.wikipedia.org/wiki/Pendulum_(mechanics)">Pendulum (mechanics)</a>.</p>
+<p><em>Instruments.</em> G. Weinreich, “Coupled piano strings”, <em>Journal of the Acoustical Society of America</em> 62 (1977), 1474–1484, and <a href="https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html">The coupled motion of piano strings</a>, in <em>Five Lectures on the Acoustics of the Piano</em>, Royal Swedish Academy of Music, 1990, especially <a href="https://www.speech.kth.se/music/5_lectures/weinreic/strings.html">Two or more strings</a>. N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapters 5 (nonlinear systems), 18 (drums), 19 (mallet percussion) and 20 (cymbals and gongs), for the kettledrum’s pitch drop and strike point and the marimba’s undercut. J. O. Smith III, <a href="https://ccrma.stanford.edu/~jos/pasp/Tension_Modulation.html">Tension modulation</a>, in <em>Physical Audio Signal Processing</em>. F. Avanzini, R. Marogna and B. Bank, “Efficient synthesis of tension modulation in strings and membranes based on energy estimation”, <em>Journal of the Acoustical Society of America</em> 131 (2012), 897–906. N. H. Fletcher, “Nonlinear frequency shifts in quasispherical-cap shells: Pitch glide in Chinese gongs”, <em>Journal of the Acoustical Society of America</em> 78 (1985), 2069–2073. K. A. Legge and N. H. Fletcher, <a href="https://www.phys.unsw.edu.au/music/people/publications/Leggeetal1989.pdf">“Nonlinearity, chaos, and the sound of shallow gongs”</a>, <em>Journal of the Acoustical Society of America</em> 86 (1989), 2439–2442. Wikipedia, <a href="https://en.wikipedia.org/wiki/Talking_drum">Talking drum</a> and <a href="https://en.wikipedia.org/wiki/Strike_tone">Strike tone</a> (a bell’s partials). H. T. Bahnson, J. F. Antaki and Q. C. Beery, <a href="https://www.cs.bu.edu/fac/snyder/TablatureWeb/Bahnson%20JASA%201998.pdf">“Acoustical and physical dynamics of the diatonic harmonica”</a>, <em>Journal of the Acoustical Society of America</em> 103 (1998), 2134–2144. R. S. Christian, R. E. Davis, A. Tubis, C. A. Anderson, R. I. Mills and T. D. Rossing, “Effects of air loading on timpani membrane vibrations”, <em>Journal of the Acoustical Society of America</em> 76 (1984), 1336–1345. T. A. Packer, <a href="https://etheses.durham.ac.uk/id/eprint/5633/"><em>Acoustics of the Orchestral Kettledrum</em></a>, master’s thesis, University of Durham, 1993. C. V. Raman, “The Indian musical drums”, <em>Proceedings of the Indian Academy of Sciences</em> A 1 (1934), 179–188. D. M. F. Chapman, <a href="https://acoustics.org/pressroom/httpdocs/155th/chapman.htm">The sound of the African thumb piano (kalimba)</a>, Acoustics’08 Paris, 2008.</p>
+<p><em>Hearing and rooms.</em> B. C. J. Moore, <em>An Introduction to the Psychology of Hearing</em>, 6th ed., Emerald, Bingley, 2012 (reissued by Brill, Leiden, 2013), chapters 4, 6 and 8 for loudness, pitch and timbre. ISO 226:2023, <em>Acoustics — Normal equal-loudness-level contours</em>. S. S. Stevens, “On the psychophysical law”, <em>Psychological Review</em> 64 (1957), 153–181, and Wikipedia, <a href="https://en.wikipedia.org/wiki/Sone">Sone</a>, for “twice as loud per 10 dB”. D. Masovic, <a href="https://arxiv.org/abs/2111.01900"><em>Room Acoustics</em></a>, lecture notes, TU Berlin, 2021, for the room as a linear filter that doesn’t change in time. Wikipedia, <a href="https://en.wikipedia.org/wiki/Reverberation">Reverberation</a>.</p>
+</div>
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  // Two beads: S = x1 + x2 and D = x1 - x2 swing as independent springs. Tied ends: lambda = 1, 3 (in units of T/mh);
+  // ring: lambda = 0 (a constant displacement here, since it starts at rest), 4. The picture runs slowed down.
+  var C = Core, cv = document.getElementById("r2Canvas"), pl = document.getElementById("r2Plane");
+  if (!cv || !pl) return;
+  var g = cv.getContext("2d"), h = pl.getContext("2d"), aS = 0.55, aD = 0.45, ring = false, t0 = performance.now(), trail = [], which = "M";
+  var BASE = 0.4; // visual swings per second for lambda = 1
+  function lam() { return ring ? [0, 4] : [1, 3]; }
+  function setStart(k) {
+    which = k; aS = k === "D" ? 0 : (k === "S" ? 0.8 : 0.55); aD = k === "S" ? 0 : (k === "D" ? 0.8 : 0.45);
+    ["S", "D", "M"].forEach(function (q) { document.getElementById("r2" + q).setAttribute("aria-pressed", q === k ? "true" : "false"); });
+    t0 = performance.now(); trail = [];
+  }
+  function heights(t) {
+    var L = lam(), wS = 2 * Math.PI * BASE * Math.sqrt(L[0]), wD = 2 * Math.PI * BASE * Math.sqrt(L[1]);
+    var S = aS * Math.cos(wS * t), D = aD * Math.cos(wD * t + (which === "M" ? 0.3 : 0));
+    return [(S + D) / 2, (S - D) / 2];
+  }
+  function draw(now) {
+    var t = (now - t0) / 1000, x = heights(t);
+    var d = C.fit(cv), W = cv.width, H = cv.height, A = H * 0.38;
+    g.clearRect(0, 0, W, H); g.lineWidth = 2 * d;
+    if (!ring) {
+      var x0 = W * 0.06, x3 = W * 0.94, xa = W * 0.36, xb = W * 0.64, y0 = H / 2;
+      g.strokeStyle = C.rgb("--grid"); g.setLineDash([4 * d, 4 * d]); g.beginPath(); g.moveTo(x0, y0); g.lineTo(x3, y0); g.stroke(); g.setLineDash([]);
+      g.fillStyle = C.rgb("--muted"); g.fillRect(x0 - 4 * d, y0 - 14 * d, 4 * d, 28 * d); g.fillRect(x3, y0 - 14 * d, 4 * d, 28 * d);
+      var ya = y0 - A * x[0], yb = y0 - A * x[1];
+      g.strokeStyle = C.rgb("--ink"); g.beginPath(); g.moveTo(x0, y0); g.lineTo(xa, ya); g.lineTo(xb, yb); g.lineTo(x3, y0); g.stroke();
+      g.fillStyle = C.rgb("--accent"); [[xa, ya], [xb, yb]].forEach(function (p) { g.beginPath(); g.arc(p[0], p[1], 7 * d, 0, 2 * Math.PI); g.fill(); });
+    } else {
+      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.3;
+      g.strokeStyle = C.rgb("--grid"); g.beginPath(); g.arc(cx, cy, R, 0, 2 * Math.PI); g.stroke();
+      var r1 = R + A * 0.5 * x[0], r2 = R + A * 0.5 * x[1];
+      g.strokeStyle = C.rgb("--ink"); g.beginPath(); g.ellipse(cx + (r2 - r1) / 2, cy, (r1 + r2) / 2, R, 0, 0, 2 * Math.PI); g.stroke();
+      g.fillStyle = C.rgb("--accent"); [[cx - r1, cy], [cx + r2, cy]].forEach(function (p) { g.beginPath(); g.arc(p[0], p[1], 7 * d, 0, 2 * Math.PI); g.fill(); });
+    }
+    // the plane of the two heights
+    var e = C.fit(pl), P = pl.width, Q = pl.height, m = Math.min(P, Q), ox = P / 2, oy = Q / 2, sc = m * 0.42;
+    h.clearRect(0, 0, P, Q); h.lineWidth = 1 * e;
+    h.strokeStyle = C.rgb("--grid"); h.beginPath(); h.moveTo(ox - sc, oy); h.lineTo(ox + sc, oy); h.moveTo(ox, oy - sc); h.lineTo(ox, oy + sc); h.stroke();
+    h.strokeStyle = C.rgb("--accent"); h.lineWidth = 1.5 * e; h.beginPath(); h.moveTo(ox - sc * 0.8, oy + sc * 0.8); h.lineTo(ox + sc * 0.8, oy - sc * 0.8); h.moveTo(ox - sc * 0.8, oy - sc * 0.8); h.lineTo(ox + sc * 0.8, oy + sc * 0.8); h.stroke();
+    h.fillStyle = C.rgb("--muted"); h.font = (11 * e) + "px " + getComputedStyle(document.body).fontFamily;
+    h.fillText("x₁", ox + sc - 12 * e, oy - 5 * e); h.fillText("x₂", ox + 5 * e, oy - sc + 10 * e); h.fillText("S", ox + sc * 0.82, oy - sc * 0.82); h.fillText("D", ox + sc * 0.82, oy + sc * 0.9);
+    trail.push([x[0], x[1]]); if (trail.length > 420) trail.shift();
+    h.strokeStyle = C.rgb("--ink"); h.globalAlpha = 0.6; h.lineWidth = 1.5 * e; h.beginPath();
+    trail.forEach(function (p, i) { var X = ox + sc * p[0] * 1.6, Y = oy - sc * p[1] * 1.6; if (i) h.lineTo(X, Y); else h.moveTo(X, Y); }); h.stroke(); h.globalAlpha = 1;
+    h.fillStyle = C.rgb("--accent"); h.beginPath(); h.arc(ox + sc * x[0] * 1.6, oy - sc * x[1] * 1.6, 4 * e, 0, 2 * Math.PI); h.fill();
+    requestAnimationFrame(draw);
+  }
+  ["S", "D", "M"].forEach(function (k) { document.getElementById("r2" + k).addEventListener("click", function () { setStart(k); }); });
+  document.getElementById("r2Ring").addEventListener("change", function (ev) { ring = ev.target.checked; t0 = performance.now(); trail = []; });
+  document.getElementById("r2Play").addEventListener("click", function () {
+    // S at 196 Hz for lambda = 1; a constant displacement (lambda = 0) makes no sound
+    var L = lam(), parts = [];
+    if (L[0] > 0 && aS > 0) parts.push({ f: 196 * Math.sqrt(L[0]), amp: aS, tau: 0.9 });
+    if (aD > 0) parts.push({ f: 196 * Math.sqrt(L[1]), amp: aD, tau: 0.9 });
+    if (!parts.length) parts = [{ f: 1, amp: 0, tau: 1 }];
+    C.play(C.render(parts, 2.2), 0.7);
+  });
+  requestAnimationFrame(draw);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  // ---------- beads to loop ----------
+  var NL = [3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 48, 64, 100, 200, 1000, Infinity], N = 6, t0 = performance.now();
+  var rc = document.getElementById("cRing"), rx = rc.getContext("2d");
+  function ratio(k) { return isFinite(N) ? Math.sin(Math.PI * k / N) / Math.sin(Math.PI / N) : k; }
+  function kmax() { return isFinite(N) ? Math.min(10, Math.floor(N / 2)) : 10; }
+  function specA() {
+    var parts = []; for (var k = 1; k <= kmax(); k++) parts.push({ ratio: ratio(k), amp: 1 / k });
+    C.stems(document.getElementById("cSpec"), parts, { W: 320, H: 100, rmax: 10, fs: 8, sw: 3 });
+    var k5 = Math.min(5, kmax()), r = ratio(k5);
+    document.getElementById("cNo").textContent = isFinite(N) ? N : "∞";
+    document.getElementById("cRead").innerHTML = isFinite(N)
+      ? N + " beads: mode " + k5 + " sounds at <b>" + r.toFixed(2) + "×</b> the lowest, not " + k5 + "×"
+      : "A continuous loop: every mode sounds at <b>exactly</b> a whole-number multiple of the lowest";
+  }
+  function drawRing(now) {
+    var d = C.fit(rc), W = rc.width, H = rc.height, cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.34, t = (now - t0) / 1000, s = 0.22 * Math.cos(2 * Math.PI * 0.5 * t);
+    rx.clearRect(0, 0, W, H);
+    rx.strokeStyle = C.rgb("--grid"); rx.lineWidth = d; rx.beginPath(); rx.arc(cx, cy, R, 0, 2 * Math.PI); rx.stroke();
+    var n = isFinite(N) ? N : 240;
+    rx.strokeStyle = C.rgb(isFinite(N) ? "--muted" : "--accent"); rx.lineWidth = (isFinite(N) ? 1.5 : 3) * d; rx.beginPath();
+    for (var j = 0; j <= n; j++) { var th = 2 * Math.PI * j / n - Math.PI / 2, r = R * (1 + s * Math.cos(2 * Math.PI * j / n)), x = cx + r * Math.cos(th), y = cy + r * Math.sin(th); if (j) rx.lineTo(x, y); else rx.moveTo(x, y); }
+    rx.stroke();
+    if (isFinite(N)) {
+      var rad = Math.max(1.5, Math.min(6, 60 / N)) * d;
+      for (var j = 0; j < N; j++) { var th = 2 * Math.PI * j / N - Math.PI / 2, r = R * (1 + s * Math.cos(2 * Math.PI * j / N)); rx.fillStyle = C.rgb("--accent"); rx.beginPath(); rx.arc(cx + r * Math.cos(th), cy + r * Math.sin(th), rad, 0, 2 * Math.PI); rx.fill(); }
+    }
+  }
+  var ns = document.getElementById("cN");
+  ns.addEventListener("input", function () { N = NL[parseInt(ns.value, 10)]; specA(); });
+  N = NL[parseInt(ns.value, 10)];
+  document.getElementById("cPlay").addEventListener("click", function () {
+    // no friction in the model; the sound is faded out only so that it stops
+    var parts = []; for (var k = 1; k <= kmax(); k++) parts.push({ f: 196 * ratio(k), amp: 1 / k, tau: 0.9 });
+    C.play(C.render(parts, 2.4), 0.7);
+  });
+
+  // ---------- one pluck, many eigenfunctions ----------
+  var sc = document.getElementById("cShape"), sx = sc.getContext("2d"), M = 3, w = 0.7, going = false, tg = 0, last = null, OMEGA = 2 * Math.PI / 4;
+  function tri(s) { s = ((s % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI); var z = Math.abs(s - Math.PI); return Math.max(0, 1 - z / w); }
+  function an(n) { return n === 0 ? w / (2 * Math.PI) : (n % 2 ? -1 : 1) * 2 * (1 - Math.cos(n * w)) / (Math.PI * n * n * w); }
+  function partial(th, t) { var s = an(0); for (var n = 1; n <= M; n++) s += an(n) * Math.cos(n * th) * Math.cos(n * OMEGA * t); return s; }
+  function exact(th, t) { return 0.5 * (tri(th - OMEGA * t) + tri(th + OMEGA * t)); }
+  function readB() {
+    document.getElementById("cMo").textContent = M;
+    var e = 0; for (var i = 0; i <= 400; i++) { var th = 2 * Math.PI * i / 400; e = Math.max(e, Math.abs(partial(th, 0) - exact(th, 0))); }
+    document.getElementById("cShapeRead").innerHTML = "Waves with up to " + M + " crests: the sum misses the plucked shape by at most <b>" + e.toFixed(2) + "</b>, on a peak 1 high";
+  }
+  function drawShape(now) {
+    var d = C.fit(sc), W = sc.width, H = sc.height, L = 12 * d, R = W - 12 * d, base = H * 0.78, amp = H * 0.6;
+    if (going && last != null) tg += (now - last) / 1000; last = now;
+    function X(th) { return L + (R - L) * th / (2 * Math.PI); }
+    sx.clearRect(0, 0, W, H);
+    sx.strokeStyle = C.rgb("--grid"); sx.lineWidth = d; sx.beginPath(); sx.moveTo(L, base); sx.lineTo(R, base); sx.stroke();
+    [L, R].forEach(function (x) { sx.beginPath(); sx.moveTo(x, base - amp - 6 * d); sx.lineTo(x, base + 8 * d); sx.stroke(); });
+    sx.setLineDash([5 * d, 4 * d]); sx.strokeStyle = C.rgb("--muted"); sx.lineWidth = 1.5 * d; sx.beginPath();
+    for (var i = 0; i <= 600; i++) { var th = 2 * Math.PI * i / 600, y = base - amp * exact(th, tg); if (i) sx.lineTo(X(th), y); else sx.moveTo(X(th), y); }
+    sx.stroke(); sx.setLineDash([]);
+    sx.strokeStyle = C.rgb("--accent"); sx.lineWidth = 2.5 * d; sx.beginPath();
+    for (var i = 0; i <= 600; i++) { var th = 2 * Math.PI * i / 600, y = base - amp * partial(th, tg); if (i) sx.lineTo(X(th), y); else sx.moveTo(X(th), y); }
+    sx.stroke();
+    sx.fillStyle = C.rgb("--muted"); sx.font = (11 * d) + "px 'IBM Plex Mono', monospace";
+    sx.fillText("start", L, H - 4 * d); var tw = sx.measureText("one turn later (same point)").width; sx.fillText("one turn later (same point)", R - tw, H - 4 * d);
+  }
+  var ms = document.getElementById("cM");
+  ms.addEventListener("input", function () { M = parseInt(ms.value, 10); readB(); });
+  var go = document.getElementById("cGo");
+  go.addEventListener("click", function () {
+    going = !going; go.setAttribute("aria-pressed", going); go.textContent = going ? "Pause" : (tg > 0 ? "Continue" : "Let go");
+  });
+  document.getElementById("cHear").addEventListener("click", function () {
+    // the motion at the pluck point theta = pi: a_n cos(n pi) = 2(1 - cos nw)/(pi n^2 w), all positive
+    var parts = []; for (var n = 1; n <= Math.max(1, M); n++) parts.push({ f: 196 * n, amp: an(n) * (n % 2 ? -1 : 1), tau: 0.9 });
+    C.play(C.render(parts, 2.4), 0.7);
+  });
+
+  function frame(now) { drawRing(now); drawShape(now); requestAnimationFrame(frame); }
+  C.onTheme(function () { specA(); });
+  specA(); readB(); requestAnimationFrame(frame);
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

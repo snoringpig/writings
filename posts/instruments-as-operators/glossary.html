@@ -185,47 +185,91 @@ window.Quarto = {
 
 
 <div class="series-nav slim">
-<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/instruments-as-operators/spectrum.html">Spectrum of an operator</a> · <a href="../../posts/instruments-as-operators/map.html">Map</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+<p><a href="../../posts/what-you-hear/index.html">1 · What you hear →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
 </div>
 <p>Technical words in the series link here, usually the first time they appear on a page. Each entry gives a plain definition and a link to a fuller explanation.</p>
 <section id="sound" class="level2">
 <h2 class="anchored" data-anchor-id="sound">Sound</h2>
 <dl>
+<dt><span id="sound">Sound</span></dt>
+<dd>
+The air pressure <span class="math inline">p(t)</span> at a listener, as a function of time, measured from the average air pressure. It reaches the listener as a wave of pressure travelling through the air, at about 343 m/s at 20 °C. <a href="https://en.wikipedia.org/wiki/Sound">Wikipedia</a>
+</dd>
 <dt><span id="hertz">Hertz (Hz)</span></dt>
 <dd>
 One cycle per second, the unit of frequency. The A above middle C is tuned to 440 Hz. <a href="https://en.wikipedia.org/wiki/Hertz">Wikipedia</a>
 </dd>
-<dt><span id="periodic">Periodic</span></dt>
+<dt><span id="pure-tone">Pure tone</span></dt>
 <dd>
-A signal <span class="math inline">p(t)</span> is periodic with period <span class="math inline">P &gt; 0</span> if it repeats exactly every <span class="math inline">P</span> seconds: <span class="math inline">p(t + P) = p(t)</span> for all <span class="math inline">t</span>. Its <em>shortest</em> such <span class="math inline">P</span> is usually what is meant by the period. <a href="https://en.wikipedia.org/wiki/Periodic_function">Wikipedia</a>
-</dd>
-<dt><span id="pitch">Pitch</span></dt>
-<dd>
-How high or low a note sounds. For a periodic sound with shortest period <span class="math inline">P</span>, the pitch is heard at the repetition rate <span class="math inline">1/P</span>, even when no component at that frequency is present, as long as that rate is between a few dozen and a few thousand per second. <a href="https://en.wikipedia.org/wiki/Pitch_(music)">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/note.html">page 0</a>
+The simplest sound: a single sinusoidal pressure swing <span class="math inline">a\cos(2\pi f t + \varphi)</span>, with frequency <span class="math inline">f</span>, size <span class="math inline">a</span>, and phase <span class="math inline">\varphi</span>, which says where in its cycle it starts. A tuning fork’s sound is close to one. <a href="https://en.wikipedia.org/wiki/Pure_tone">Wikipedia</a>
 </dd>
 <dt><span id="partial">Partial, overtone</span></dt>
 <dd>
-A sound can be split into components of single frequencies; each one is a partial. An overtone is any partial above the lowest. <a href="https://en.wikipedia.org/wiki/Overtone">Wikipedia</a>
-</dd>
-<dt><span id="fundamental">Fundamental</span></dt>
-<dd>
-For a periodic sound, the frequency <span class="math inline">f = 1/P</span> at which it repeats; its harmonics are the whole-number multiples of <span class="math inline">f</span>. It is usually the lowest and strongest partial, but it can be weak or even missing, and the pitch is still heard at <span class="math inline">f</span> (<a href="../../posts/instruments-as-operators/note.html">page 0</a>). For a sound that is not periodic, such as a drum’s, “fundamental” just means the lowest partial. <a href="https://en.wikipedia.org/wiki/Fundamental_frequency">Wikipedia</a>
+A partial is one sinusoidal component of a sound, with its own frequency, size and fading. An overtone is any partial above the lowest. <a href="https://en.wikipedia.org/wiki/Overtone">Wikipedia</a>
 </dd>
 <dt><span id="harmonic">Harmonic</span></dt>
 <dd>
-A partial at a whole-number multiple <span class="math inline">nf</span> of the fundamental. A periodic sound contains only harmonics. <a href="https://en.wikipedia.org/wiki/Harmonic">Wikipedia</a>
+A partial at a whole-number multiple <span class="math inline">n f</span> of a base frequency <span class="math inline">f</span>: the <span class="math inline">n</span>-th harmonic. A <em>harmonic sound</em> is one whose partials are all harmonics of one base; for it, the first overtone is the second harmonic. <a href="https://en.wikipedia.org/wiki/Harmonic">Wikipedia</a>
 </dd>
 <dt><span id="harmonic-series">Harmonic series</span></dt>
 <dd>
-The whole-number multiples <span class="math inline">f, 2f, 3f, \dots</span> of one frequency <span class="math inline">f</span>. All the partials of a periodic sound belong to one harmonic series. <a href="https://en.wikipedia.org/wiki/Harmonic_series_(music)">Wikipedia</a>
+The whole-number multiples <span class="math inline">f, 2f, 3f, \dots</span> of one frequency <span class="math inline">f</span>. <a href="https://en.wikipedia.org/wiki/Harmonic_series_(music)">Wikipedia</a>
+</dd>
+<dt><span id="periodic">Periodic</span></dt>
+<dd>
+A signal <span class="math inline">p(t)</span> is periodic with period <span class="math inline">P &gt; 0</span> if it repeats exactly every <span class="math inline">P</span> seconds: <span class="math inline">p(t + P) = p(t)</span> for all <span class="math inline">t</span>. Its <em>shortest</em> such <span class="math inline">P</span> is usually what is meant by the period. A sum of steady partials is periodic exactly when all their frequencies are whole-number multiples of one frequency (<a href="../../posts/what-you-hear/index.html#why-whole-numbers-repeat">post 1</a>). <a href="https://en.wikipedia.org/wiki/Periodic_function">Wikipedia</a>
+</dd>
+<dt><span id="repetition-rate">Repetition rate</span></dt>
+<dd>
+For a sound whose partials are steady and sit at exact whole-number multiples of a common frequency: 1 over its shortest period, which is the largest such common frequency. For partials that fade, or sit only near multiples: the largest frequency in the range we hear as pitch that they fit within a stated tolerance, such as each partial within 2% of a multiple. Partials at 440, 660 and 880 Hz have the repetition rate 220 Hz, though no partial sits there. The term is this series’; <a href="../../posts/what-you-hear/index.html#why-whole-numbers-repeat">post 1</a> proves the first half. <a href="https://en.wikipedia.org/wiki/Fundamental_frequency">Wikipedia: Fundamental frequency</a>
+</dd>
+<dt><span id="fundamental">Fundamental</span></dt>
+<dd>
+For a harmonic sound, the partial at its <a href="#repetition-rate">repetition rate</a>, the largest frequency of which all its partials are whole-number multiples. It is usually the lowest and strongest partial, but it can be weak or even missing, and the pitch is still heard there (<a href="#missing-fundamental">missing fundamental</a>). For a sound whose partials are not harmonics of one base, such as a drum’s, “fundamental” just means the lowest partial. <a href="https://en.wikipedia.org/wiki/Fundamental_frequency">Wikipedia</a>
+</dd>
+<dt><span id="pitch">Pitch</span></dt>
+<dd>
+A perception: how high or low a sound is, measured as the frequency of the <a href="#pure-tone">pure tone</a> that listeners match it to. Pitch that can carry a melody is heard from about 30 Hz up to 4 or 5 kHz for pure tones, <em>the range we hear as pitch</em> (<a href="../../posts/what-you-hear/index.html#four-aspects">post 1</a> gives the sources). Its relation to the <a href="#repetition-rate">repetition rate</a>, a finding about hearing: for a single tone whose prominent partials lie near a harmonic series in that range, the pitch is close to the series’ base, even when no partial sits there. Three kinds of sound are exceptions. In a chord the ear sorts the partials into several series and hears several pitches. In bells and kettledrums a harmonic subset of the partials sets the pitch, and the ear may choose an octave above the base of the series the partials fit. Strongly stretched partials, running steadily sharp of the lines, pull the pitch up with them. <a href="https://en.wikipedia.org/wiki/Pitch_(music)">Wikipedia</a>, and <a href="../../posts/what-you-hear/index.html#exceptions">post 1</a>
+</dd>
+<dt><span id="missing-fundamental">Missing fundamental</span></dt>
+<dd>
+A harmonic sound with no partial at its <a href="#repetition-rate">repetition rate</a>, such as partials at 440, 660, 880, … Hz with nothing at 220 Hz. The <em>missing-fundamental effect</em> is that the ear still hears its pitch at the repetition rate, here 220 Hz; it is why a deep voice keeps its pitch over a telephone line that carries little below about 300 Hz. <a href="https://en.wikipedia.org/wiki/Missing_fundamental">Wikipedia</a>, and <a href="../../posts/what-you-hear/index.html#missing-fundamental">post 1</a>
+</dd>
+<dt><span id="spl">Sound pressure level, decibel</span> <span id="decibel"></span></dt>
+<dd>
+The <em>decibel</em> (dB) measures a ratio on a logarithmic scale: two powers in the ratio <span class="math inline">r</span> differ by <span class="math inline">10\log_{10} r</span> dB, so 10 dB is a factor of 10 in power, and 20 dB a factor of 10 in pressure. The <em>sound pressure level</em> of a sound is <span class="math inline">20\log_{10}(p_{\mathrm{rms}}/20\,\mu\mathrm{Pa})</span> dB, where <span class="math inline">p_{\mathrm{rms}}</span>, the root-mean-square pressure, is the square root of the average squared pressure swing, and 20 μPa is about the quietest 1 kHz tone a young listener can hear. The <em>intensity</em> of a sound wave, the power it carries through each square metre, grows as <span class="math inline">p_{\mathrm{rms}}^2</span>, so 10 dB more is ten times the intensity. <a href="https://en.wikipedia.org/wiki/Sound_pressure">Wikipedia: Sound pressure</a>, <a href="https://en.wikipedia.org/wiki/Decibel">Decibel</a>
+</dd>
+<dt><span id="loudness">Loudness</span></dt>
+<dd>
+A perception: how strong a sound seems. It is set mainly by the <a href="#spl">sound pressure level</a>; it also depends on frequency (<a href="#equal-loudness">equal-loudness contours</a>) and on how widely the partials are spread, and it grows roughly as the 0.3 power of intensity, so 10 dB more sounds about twice as loud (Stevens). <a href="https://en.wikipedia.org/wiki/Loudness">Wikipedia</a>, and <a href="../../posts/what-you-hear/index.html#four-aspects">post 1</a>
+</dd>
+<dt><span id="equal-loudness">Equal-loudness contour</span></dt>
+<dd>
+A curve giving, for each frequency, the sound pressure level at which a pure tone sounds as loud as a 1 kHz tone at a chosen level, as judged by young listeners with normal hearing. The standard curves are ISO 226. By them a 100 Hz tone needs about 79 dB to sound as loud as a 1 kHz tone at 60 dB: the ear is less sensitive to low frequencies. <a href="https://en.wikipedia.org/wiki/Equal-loudness_contour">Wikipedia</a>, and <a href="https://www.iso.org/standard/83117.html">ISO 226:2023</a>
+</dd>
+<dt><span id="attack-decay">Attack and decay</span></dt>
+<dd>
+How a sound starts and how it fades. The <em>attack</em> is the start, the rise from silence: sudden for a pluck or a strike, gradual for a bowed or blown note. The <em>decay</em> is the fading that follows; for an instrument left to ring, each partial shrinks at its own rate, by the factor <span class="math inline">e</span> in its <a href="#fading-time">fading time</a>. The whole outline of a note’s loudness over time is its <em>envelope</em>, which synthesizers set by four stages, attack, decay, sustain and release. This series counts attack and decay as part of timbre. <a href="https://en.wikipedia.org/wiki/Envelope_(music)">Wikipedia: Envelope (music)</a>
+</dd>
+<dt><span id="formant">Formant</span></dt>
+<dd>
+A band of frequencies that a sound source’s fixed resonances favor whatever note is played. In a voice the formants are the resonances of the throat and mouth, which set the vowel; on a violin, the body’s resonances play the same part. This series also counts a clarinet’s tone-hole cutoff, roughly 1 to 1.5 kHz, above which sound waves travel on past the open tone holes, as one. Because formants stay put while the partials move with the note, they shape every note’s timbre alike. <a href="https://en.wikipedia.org/wiki/Formant">Wikipedia</a>
+</dd>
+<dt><span id="timbre">Timbre</span></dt>
+<dd>
+What distinguishes sounds that agree in pitch (if they have one), loudness and duration: which partials are present, their relative sizes, how far they sit from whole-number multiples, how the sound starts and fades (<a href="#attack-decay">attack and decay</a>), noise and transients that are not modes (bow noise, breath, a hammer’s thump), and fixed resonances that stay put whatever note is played (<a href="#formant">formants</a>: a violin’s body, a clarinet’s tone-hole cutoff). The standard definition is shorter: what tells apart two sounds of the same loudness and pitch, such as a violin and a flute both playing A (ANSI/ASA). <a href="https://en.wikipedia.org/wiki/Timbre">Wikipedia</a>, and <a href="../../posts/what-you-hear/index.html#four-aspects">post 1</a>
+</dd>
+<dt><span id="duration">Duration</span></dt>
+<dd>
+How long a note sounds. For a ringing instrument it is set by its fading times and by when the player damps it (releasing a piano key, a mute, a hand or a leg on a drumhead); a bowed or blown note lasts as long as the player keeps going. How a note fades belongs to its timbre; how long it lasts is its duration. <a href="https://en.wikipedia.org/wiki/Duration_(music)">Wikipedia: Duration (music)</a>
+</dd>
+<dt><span id="fading-time">Fading time</span></dt>
+<dd>
+For a partial or a mode that fades as <span class="math inline">e^{-t/\tau}</span>: the time <span class="math inline">\tau</span> in which it shrinks by the factor <span class="math inline">e \approx 2.7</span>. In that time its level drops by <span class="math inline">20\log_{10} e \approx 8.7</span> dB, so a fall of 60 dB, the usual measure of a room’s reverberation, takes about <span class="math inline">6.9\,\tau</span>. A mode <span class="math inline">e^{st}W</span> with <span class="math inline">\operatorname{Re} s &lt; 0</span> has <span class="math inline">\tau = -1/\operatorname{Re} s</span>. <a href="https://en.wikipedia.org/wiki/Exponential_decay">Wikipedia: Exponential decay</a>
 </dd>
 <dt><span id="inharmonic">Inharmonic</span></dt>
 <dd>
 Having partials that are not whole-number multiples of one frequency. A bell, a drum and a kalimba tine are strongly inharmonic; a piano string is slightly inharmonic. <a href="https://en.wikipedia.org/wiki/Inharmonicity">Wikipedia</a>
-</dd>
-<dt><span id="timbre">Timbre</span></dt>
-<dd>
-What tells two notes of the same pitch and loudness apart, such as a violin and a flute both playing A. It depends mostly on the relative strengths of the partials and how they change over the course of the note. <a href="https://en.wikipedia.org/wiki/Timbre">Wikipedia</a>
 </dd>
 <dt><span id="note-names">Note names: C4, A4, middle C</span></dt>
 <dd>
@@ -253,11 +297,11 @@ When two pure tones of nearly equal frequency sound together, their sum swells a
 </dd>
 <dt><span id="heterodyning">Heterodyning</span></dt>
 <dd>
-Mixing two signals of frequencies <span class="math inline">f_1</span> and <span class="math inline">f_2</span> in a nonlinear circuit, one whose output is not just their sum, to produce new frequencies, among them their difference <span class="math inline">f_1 - f_2</span>. A mixer that multiplies the two signals does it, since <span class="math inline">\sin(2\pi f_1 t)\,\sin(2\pi f_2 t) = \tfrac12\cos(2\pi(f_1 - f_2)t) - \tfrac12\cos(2\pi(f_1 + f_2)t)</span>, and a filter then keeps the difference. Two radio oscillators at 300,440 Hz and 300,000 Hz give an audible tone at 440 Hz; this is how a theremin makes its sound. <a href="#beats">Beats</a> are different: two tones simply added contain no tone at the difference frequency, only a swell and fade in loudness at that rate. <a href="https://en.wikipedia.org/wiki/Heterodyne">Wikipedia: Heterodyne</a>, <a href="https://en.wikipedia.org/wiki/Theremin">Theremin</a>, and the <a href="../../posts/instruments-as-operators/map.html#where-the-classes-and-the-mathematics-part-ways">map</a>
+Mixing two signals of frequencies <span class="math inline">f_1</span> and <span class="math inline">f_2</span> in a nonlinear circuit, one whose output is not just their sum, to produce new frequencies, among them their difference <span class="math inline">f_1 - f_2</span>. A mixer that multiplies the two signals does it, since <span class="math inline">\sin(2\pi f_1 t)\,\sin(2\pi f_2 t) = \tfrac12\cos(2\pi(f_1 - f_2)t) - \tfrac12\cos(2\pi(f_1 + f_2)t)</span>, and a filter then keeps the difference. Two radio oscillators at 300,440 Hz and 300,000 Hz give an audible tone at 440 Hz; this is how a theremin makes its sound. <a href="#beats">Beats</a> are different: two tones simply added contain no tone at the difference frequency, only a swell and fade in loudness at that rate. <a href="https://en.wikipedia.org/wiki/Heterodyne">Wikipedia: Heterodyne</a>, <a href="https://en.wikipedia.org/wiki/Theremin">Theremin</a>, and the <a href="../../posts/instruments-as-operators/index.html#operator-families-and-instrument-classes">series index</a>
 </dd>
 <dt><span id="consonance">Consonance, roughness</span></dt>
 <dd>
-Consonance is how smooth or stable two notes sound together. Roughness is one ingredient of it: the harsh quality of fast beats between partials that are close but not equal. <a href="https://en.wikipedia.org/wiki/Consonance_and_dissonance">Wikipedia</a>, and the <a href="../../posts/instruments-as-operators/epilogue.html">epilogue</a>
+Consonance is how smooth or stable two notes sound together. Roughness is one ingredient of it: the harsh quality of fast beats between partials that are close but not equal. <a href="https://en.wikipedia.org/wiki/Consonance_and_dissonance">Wikipedia</a>, and <a href="../../posts/instruments-and-scales/index.html"><em>Did instruments shape our scales?</em></a>
 </dd>
 </dl>
 </section>
@@ -268,17 +312,21 @@ Consonance is how smooth or stable two notes sound together. Roughness is one in
 <dd>
 On a string instrument, the two points that end a string’s vibrating length: the nut at the top of the neck, the bridge on the body. The bridge also carries the string’s vibration to the body, or on a piano to the soundboard. On a kalimba, the bridge is the bar the tines are pressed against. <a href="https://en.wikipedia.org/wiki/Bridge_(instrument)">Wikipedia</a>
 </dd>
+<dt><span id="resonator">Resonator</span></dt>
+<dd>
+An object with resonances: frequencies, near those of its modes, at which it responds strongly when driven. In this series, the resonator of a bowed or blown instrument is the part the bow or the breath drives, the string or the air column; its modes decide which partials of the driven, repeating motion are strong. A violin’s or a guitar’s body is a resonator too, driven by the strings. <a href="https://en.wikipedia.org/wiki/Resonator">Wikipedia</a>, and <a href="../../posts/instruments-case-by-case/index.html#three-things">post 4</a>
+</dd>
 <dt><span id="open-string">Open string</span></dt>
 <dd>
 A string played with no finger pressing it down, so its whole length between the nut and the bridge vibrates. <a href="https://en.wikipedia.org/wiki/Open_string_(music)">Wikipedia</a>
 </dd>
 <dt><span id="string-harmonics">Harmonics, on a string</span></dt>
 <dd>
-Notes a string player gets by touching the string lightly at a fraction of its length, such as the middle, instead of pressing it down. Only the modes with a still point under the finger keep sounding. <a href="https://en.wikipedia.org/wiki/String_harmonic">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/violin.html">page 4</a>
+Notes a string player gets by touching the string lightly at a fraction of its length, such as the middle, instead of pressing it down. Only the modes with a still point under the finger keep sounding. <a href="https://en.wikipedia.org/wiki/String_harmonic">Wikipedia</a>, and the <a href="../../posts/instruments-case-by-case/violin.html">violin page</a>
 </dd>
 <dt><span id="overblow">Overblowing, register key</span></dt>
 <dd>
-Making a wind instrument’s air column jump to a higher mode. A flutist overblows by blowing faster; a clarinetist presses the register key, which opens a small hole that spoils the lowest mode. <a href="https://en.wikipedia.org/wiki/Overblowing">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/clarinet.html">page 5</a>
+Making a wind instrument’s air column jump to a higher mode. A flutist overblows by blowing faster; a clarinetist presses the register key, which opens a small hole that spoils the lowest mode. <a href="https://en.wikipedia.org/wiki/Overblowing">Wikipedia</a>, and the <a href="../../posts/instruments-case-by-case/clarinet.html">clarinet page</a>
 </dd>
 <dt><span id="draw">Blow, draw</span></dt>
 <dd>
@@ -307,11 +355,11 @@ The middle pedal on many uprights. It lowers a strip of felt between the hammers
 <dl>
 <dt><span id="hornbostel-sachs">Hornbostel–Sachs classification</span></dt>
 <dd>
-The usual scheme for sorting musical instruments, published by Erich von Hornbostel and Curt Sachs in 1914. It groups instruments by what makes the sound: idiophones, where the body of the instrument itself vibrates (glockenspiel, kalimba); membranophones, a stretched skin (drums); chordophones, strings (violin, piano); aerophones, air (flute, clarinet, harmonica); and electrophones, electric circuits (theremin), a fifth group added later. These five top-level groups are usually called classes, and each is divided further by decimal codes: the piano is 314.122, a board zither with a resonator box. <a href="https://en.wikipedia.org/wiki/Hornbostel%E2%80%93Sachs">Wikipedia</a>, and the <a href="../../posts/instruments-as-operators/map.html#operator-families-and-instrument-classes">map</a>
+The usual scheme for sorting musical instruments, published by Erich von Hornbostel and Curt Sachs in 1914. It groups instruments by what makes the sound: idiophones, where the body of the instrument itself vibrates (glockenspiel, kalimba); membranophones, a stretched skin (drums); chordophones, strings (violin, piano); aerophones, air (flute, clarinet, harmonica); and electrophones, electric circuits (theremin), a fifth group added later. These five top-level groups are usually called classes, and each is divided further by decimal codes: the piano is 314.122, a board zither with a resonator box. <a href="https://en.wikipedia.org/wiki/Hornbostel%E2%80%93Sachs">Wikipedia</a>, and the <a href="../../posts/instruments-as-operators/index.html#operator-families-and-instrument-classes">series index</a>
 </dd>
 <dt><span id="operator-family">Operator family</span></dt>
 <dd>
-This series’ name for a group of instruments whose operators are the same up to constants and how they are held: the same rule, with different numbers in it and possibly different ends. The violin string and the air in a flute or a clarinet form one, with the rule <span class="math inline">-c^2\,d^2/dx^2</span>; the kalimba tine, the harmonica reed and the glockenspiel bar form another, with the rule <span class="math inline">\kappa^2\,d^4/dx^4</span>. One calculation covers a whole operator family, but the frequency ratios can still differ between its members, because the ends are part of each operator: the clamped tine sounds <span class="math inline">1 : 6.27 : 17.55</span>, the free glockenspiel bar <span class="math inline">1 : 2.76 : 5.40</span>. An operator family is not a Hornbostel–Sachs class. See the <a href="../../posts/instruments-as-operators/map.html#operator-families-and-instrument-classes">map</a>.
+This series’ name for a group of instruments whose operators are the same up to constants and how they are held: the same rule, with different numbers in it and possibly different ends. The violin string and the air in a flute or a clarinet form one, with the rule <span class="math inline">-c^2\,d^2/dx^2</span>; the kalimba tine, the harmonica reed and the glockenspiel bar form another, with the rule <span class="math inline">\kappa^2\,d^4/dx^4</span>. One calculation covers a whole operator family, but the frequency ratios can still differ between its members, because the ends are part of each operator: the clamped tine sounds <span class="math inline">1 : 6.27 : 17.55</span>, the free glockenspiel bar <span class="math inline">1 : 2.76 : 5.40</span>. An operator family is not a Hornbostel–Sachs class. See the <a href="../../posts/instruments-as-operators/index.html#operator-families-and-instrument-classes">series index</a>.
 </dd>
 </dl>
 </section>
@@ -336,15 +384,27 @@ The counterpart of angular frequency in space: a wave <span class="math inline">
 </dd>
 <dt><span id="linear">Linear</span></dt>
 <dd>
-An equation with no outside force is linear if sums and multiples of solutions are again solutions. An equation with an outside force is linear when it reads (left side) = (the force), where the force does not involve <span class="math inline">u</span>, and the left side is built from <span class="math inline">u</span> and its derivatives only by multiplying each by a number, or by a given function of position and time, and adding: no <span class="math inline">u^2</span>, no <span class="math inline">u\,u_x</span>, no <span class="math inline">\sin u</span>. The <a href="../../posts/instruments-as-operators/piano.html">piano page</a>’s <span class="math inline">\mu u_{tt} + b\,u_t - Tu_{xx} + EI\,u_{xxxx} = f(x, t)</span> is an example. Then the difference of any two solutions solves the same equation without the force. The operators in this series are linear, a good model for the small vibrations of instruments. What keeps a bowed string, a clarinet reed or a harmonica reed going is not linear: the bow’s grip and slip and a reed opening and closing. <a href="https://en.wikipedia.org/wiki/Linear_differential_equation">Wikipedia</a>
+An equation with no outside force is linear if sums and multiples of solutions are again solutions. An equation with an outside force is linear when it reads (left side) = (the force), where the force does not involve <span class="math inline">u</span>, and the left side is built from <span class="math inline">u</span> and its derivatives only by multiplying each by a number, or by a given function of position and time, and adding: no <span class="math inline">u^2</span>, no <span class="math inline">u\,u_x</span>, no <span class="math inline">\sin u</span>. The <a href="../../posts/instruments-case-by-case/piano.html">piano page</a>’s <span class="math inline">\mu u_{tt} + b\,u_t - Tu_{xx} + EI\,u_{xxxx} = f(x, t)</span> is an example. Then the difference of any two solutions solves the same equation without the force. The operators in this series are linear, a good model for the small vibrations of instruments. What keeps a bowed string, a clarinet reed or a harmonica reed going is not linear: the bow’s grip and slip and a reed opening and closing. <a href="https://en.wikipedia.org/wiki/Linear_differential_equation">Wikipedia</a>
+</dd>
+<dt><span id="first-order">First-order approximation</span></dt>
+<dd>
+Keeping only the terms proportional to a small change and dropping those proportional to its square and higher powers. For a small <span class="math inline">\varepsilon</span>, <span class="math inline">(1 + \varepsilon)^3 = 1 + 3\varepsilon + 3\varepsilon^2 + \varepsilon^3 \approx 1 + 3\varepsilon</span> to first order. A second-order approximation keeps the <span class="math inline">\varepsilon^2</span> terms too. <a href="https://en.wikipedia.org/wiki/Perturbation_theory">Wikipedia</a>
+</dd>
+<dt><span id="linearization">Linearization</span></dt>
+<dd>
+Replacing a force by its <a href="#first-order">first-order</a> part, the part that is linear in the displacement and its slopes, which is accurate for small motions. A pendulum’s restoring force <span class="math inline">mg\sin\theta</span> becomes <span class="math inline">mg\,\theta</span>, with an error of about <span class="math inline">\theta^3/6</span>, half a percent of <span class="math inline">\sin\theta</span> at 10°. The result is a <a href="#linear">linear</a> equation, whose frequencies do not depend on the size of the motion; the true pendulum’s swing takes longer the wider it is. <a href="https://en.wikipedia.org/wiki/Linearization">Wikipedia</a>, and <a href="../../posts/where-the-equations-come-from/index.html#spring">post 2</a>
 </dd>
 <dt><span id="superposition">Superposition</span></dt>
 <dd>
-Adding solutions of a linear equation to get another solution. The free motion of an instrument, once nothing is driving it, is a superposition, a sum, of its modes. <a href="https://en.wikipedia.org/wiki/Superposition_principle">Wikipedia</a>
+Adding solutions of a linear equation to get another solution. The free motion of a <a href="#modal-system">modal</a> instrument, once nothing is driving it, is a superposition, a sum, of its modes. <a href="https://en.wikipedia.org/wiki/Superposition_principle">Wikipedia</a>
 </dd>
 <dt><span id="mode">Mode, normal mode</span> <span id="normal-mode"></span></dt>
 <dd>
-A motion of an object, with no friction and nothing driving it, in which every part swings at the same single frequency and the overall shape stays the same, only growing and shrinking. Every small, <a href="#linear">linearized</a> free vibration of a stable object of finite size without friction is a sum of modes. The amounts of the modes in a motion are its <em>normal coordinates</em>, the coordinates in which the object splits into independent springs, one per mode. For two beads on a tied string they are the sum and the difference of the two heights (<a href="../../posts/instruments-as-operators/ring.html">page 2</a>). <a href="https://en.wikipedia.org/wiki/Normal_mode">Wikipedia</a>
+In plain words, a mode is a motion an object can make on its own, with nothing driving it, in which every part follows the same time course: it swings at one frequency, or does not swing at all, and fades at one rate (or, if the object is unstable, grows); with friction the parts need not move in step. A <em>normal mode</em> is the frictionless kind in which every part moves in step: a fixed shape swinging back and forth at one frequency, only growing and shrinking. Precisely: for a linear system <span class="math inline">U' = BU</span> with <span class="math inline">B</span> constant, a <em>mode</em> is a nonzero solution <span class="math inline">U(t) = e^{st}W</span>, which exists exactly when <span class="math inline">BW = sW</span>; if <span class="math inline">s</span> is not real, its frequency is <span class="math inline">|\operatorname{Im} s|/2\pi</span> and it fades at the rate <span class="math inline">-\operatorname{Re} s</span>, and real motions are real parts, pairing <span class="math inline">s</span> with its complex conjugate. For <span class="math inline">u'' = -Au</span>, a <em>normal mode</em> is a real solution <span class="math inline">u(t) = \cos(\omega t + \varphi)\,X</span> with <span class="math inline">X \ne 0</span> and <span class="math inline">\omega &gt; 0</span>; it exists exactly when <span class="math inline">AX = \omega^2 X</span>. The two meet when <span class="math inline">u'' = -Au</span> is written as <span class="math inline">U' = BU</span> with <span class="math inline">U = (u, u')</span>: a normal mode is the real part of the pair of modes <span class="math inline">s = \pm i\omega</span>, <span class="math inline">W = (X, \pm i\omega X)</span>. At <span class="math inline">\omega = 0</span> the pair collapses into a <a href="#jordan-block">Jordan block</a>: the rigid drift <span class="math inline">X(a + bt)</span>, <span class="math inline">b \ne 0</span>, is a solution but not a mode. The amounts of the normal modes in a motion are its <em>normal coordinates</em>, in which the object splits into independent springs; for two beads on a tied string they are the sum and the difference of the two heights (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#smallest-examples">post 3</a>). <a href="https://en.wikipedia.org/wiki/Normal_mode">Wikipedia</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#why-modes">post 3</a>
+</dd>
+<dt><span id="complex-mode">Complex mode</span></dt>
+<dd>
+A mode whose parts do not move in step: every part swings at the same frequency and fades at the same rate, but they reach their peaks at different moments, so the shape does not simply grow and shrink in place. In <span class="math inline">e^{st}W</span> the entries of <span class="math inline">W</span> have different phases. A <em>real</em> mode, in which they all share one phase (up to sign), is a standing shape. Complex modes appear with friction that the frictionless modes do not split, such as two slightly mistuned piano strings on one bridge (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#levels">post 3</a>). <a href="https://nasa.gov/centers-and-facilities/nesc/tb-26-08-complex-modes-in-lightly-damped-structural-systemsa-two-mode-interaction-perspective">NASA NESC: Complex modes in lightly damped structural systems</a>
 </dd>
 <dt><span id="standing-wave">Standing wave</span></dt>
 <dd>
@@ -356,23 +416,51 @@ A node is a point of a standing wave that does not move; an antinode is a point 
 </dd>
 <dt><span id="wave-equation">Wave equation</span></dt>
 <dd>
-The equation <span class="math inline">u_{tt} = c^2u_{xx}</span> for the height <span class="math inline">u(x, t)</span> of a stretched string, and its relatives for air in a pipe and for a drumhead. The constant <span class="math inline">c</span> is the speed at which a bump travels. <a href="https://en.wikipedia.org/wiki/Wave_equation">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/circle.html">page 3</a>
+The equation <span class="math inline">u_{tt} = c^2u_{xx}</span> for the height <span class="math inline">u(x, t)</span> of a stretched string, and its relatives for air in a pipe and for a drumhead. The constant <span class="math inline">c</span> is the speed at which a bump travels. <a href="https://en.wikipedia.org/wiki/Wave_equation">Wikipedia</a>, and <a href="../../posts/where-the-equations-come-from/index.html#string">post 2</a>
+</dd>
+<dt><span id="membrane">Membrane</span></dt>
+<dd>
+A sheet with no stiffness of its own, stretched with the same tension <span class="math inline">T</span> in every direction, <span class="math inline">T</span> being a force per unit length of cut; an ideal drumhead is one. Like a string, it resists only being stretched. Its small motions obey <span class="math inline">u_{tt} = c^2\Delta u</span>, with <span class="math inline">\Delta</span> the <a href="#laplacian">Laplacian</a>, <span class="math inline">c^2 = T/\sigma</span> and <span class="math inline">\sigma</span> its mass per unit area. <a href="https://en.wikipedia.org/wiki/Vibration_of_a_circular_membrane">Wikipedia: Vibration of a circular membrane</a>, and <a href="../../posts/where-the-equations-come-from/index.html#drumhead">post 2</a>
 </dd>
 <dt><span id="boundary-condition">Boundary condition</span></dt>
 <dd>
-A rule for what happens at the edge of a vibrating object, set by how it is held. A string tied down at an end has <span class="math inline">u = 0</span> there. A bar clamped at an end can neither move nor tilt there: <span class="math inline">u = 0</span> and <span class="math inline">u_x = 0</span>. At the open end of a pipe the pressure equals room pressure. <a href="https://en.wikipedia.org/wiki/Boundary_value_problem">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/violin.html">page 4</a>
+A rule for what happens at the edge of a vibrating object, set by how it is held. A string tied down at an end has <span class="math inline">u = 0</span> there. A bar clamped at an end can neither move nor tilt there: <span class="math inline">u = 0</span> and <span class="math inline">u_x = 0</span>. At the open end of a pipe the pressure equals room pressure. Each condition is either <a href="#natural-bc">imposed or natural</a>. <a href="https://en.wikipedia.org/wiki/Boundary_value_problem">Wikipedia</a>, and <a href="../../posts/where-the-equations-come-from/index.html#boundary-conditions">post 2</a>
 </dd>
-<dt><span id="dirichlet">Dirichlet and Neumann conditions</span></dt>
+<dt><span id="dirichlet">Dirichlet and Neumann conditions</span> <span id="neumann"></span></dt>
 <dd>
-Two kinds of boundary condition. A Dirichlet condition fixes the value at the edge, such as <span class="math inline">u = 0</span> at a string’s tied end or <span class="math inline">p = 0</span> at a pipe’s open end. A Neumann condition fixes the slope, such as <span class="math inline">p_x = 0</span> at a clarinet’s reed end. <a href="https://en.wikipedia.org/wiki/Dirichlet_boundary_condition">Wikipedia: Dirichlet</a>, <a href="https://en.wikipedia.org/wiki/Neumann_boundary_condition">Neumann</a>
+Two kinds of boundary condition. A Dirichlet condition fixes the value at the edge, such as <span class="math inline">u = 0</span> at a string’s tied end or <span class="math inline">p = 0</span> at a pipe’s open end. A Neumann condition fixes the slope across the edge, the derivative in the direction out of the object, such as <span class="math inline">p_x = 0</span> at a clarinet’s nearly closed reed end, where the air cannot move and so, by Newton’s law, the pressure has no slope. <a href="https://en.wikipedia.org/wiki/Dirichlet_boundary_condition">Wikipedia: Dirichlet</a>, <a href="https://en.wikipedia.org/wiki/Neumann_boundary_condition">Neumann</a>
+</dd>
+<dt><span id="natural-bc">Imposed and natural boundary conditions</span> <span id="imposed-bc"></span></dt>
+<dd>
+An <em>imposed</em> boundary condition is a restriction on the allowed shapes, which the holder enforces with whatever force it takes: a tied end’s <span class="math inline">u = 0</span>, a clamp’s <span class="math inline">u = u_x = 0</span>. A <em>natural</em> boundary condition restricts no shape; the motion obeys it because no force can act where nothing holds the object: a free bar end’s <span class="math inline">u_{xx} = u_{xxx} = 0</span>, or <span class="math inline">u_x = 0</span> at a string’s end tied to a massless ring that slides without friction on a rod. Which kind a condition is can depend on the variable: in the pressure of a tube, the open end’s <span class="math inline">p = 0</span> is imposed and the closed end’s <span class="math inline">p_x = 0</span> natural. In the energy form of a problem, the <a href="#rayleigh-quotient">Rayleigh quotient</a>, only the imposed conditions are required of the shapes. <a href="https://www-users.cse.umn.edu/~olver/a_/bcvp.pdf">P. J. Olver, Boundary conditions and null Lagrangians in the calculus of variations and elasticity</a>, and <a href="../../posts/where-the-equations-come-from/index.html#boundary-conditions">post 2</a>
+</dd>
+<dt><span id="end-correction">End correction</span></dt>
+<dd>
+The amount by which an open pipe acts longer than it is. The air just outside an open end moves with the air inside, so the pressure falls to room pressure a little beyond the end: about 0.6 of the pipe’s radius beyond a bare open end. Frequencies computed with <span class="math inline">p = 0</span> exactly at the end come out slightly too high unless the length is corrected. <a href="https://en.wikipedia.org/wiki/End_correction">Wikipedia</a>, <a href="https://newt.phys.unsw.edu.au/jw/pipes.html">J. Wolfe, UNSW: Pipes and harmonics</a>, and <a href="../../posts/where-the-equations-come-from/index.html#tube">post 2</a>
 </dd>
 <dt><span id="damping">Damping</span></dt>
 <dd>
 Friction that drains energy from a vibration, so that it dies away. A term <span class="math inline">b\,u_t</span> in the equation, proportional to velocity, is the simplest model. <a href="https://en.wikipedia.org/wiki/Damping">Wikipedia</a>
 </dd>
+<dt><span id="critical-damping">Critical damping</span></dt>
+<dd>
+The amount of friction at which a mass on a spring, pulled aside and released, returns to rest fastest without swinging past it. In <span class="math inline">u'' + \gamma u' + \lambda u = 0</span> it is <span class="math inline">\gamma^2 = 4\lambda</span>; with less friction the mass swings with shrinking size, with more it creeps back more slowly. At critical damping the two exponents <span class="math inline">s</span> of the motion coincide, and the solutions are <span class="math inline">(a + bt)\,e^{-\gamma t/2}</span>; the part <span class="math inline">bt\,e^{-\gamma t/2}</span> is not a combination of modes, the sign of a <a href="#jordan-block">Jordan block</a>. <a href="https://en.wikipedia.org/wiki/Damping">Wikipedia: Damping</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#counterexamples">post 3</a>
+</dd>
+<dt><span id="internal-friction">Internal friction</span></dt>
+<dd>
+Energy loss inside a material as it is bent or stretched: no material is perfectly springy, and some of the work of deforming it turns into heat on every swing. It is one of the three ways a vibrating object loses energy, with losses to its supports and to <a href="#radiation">radiation</a>. <a href="https://en.wikipedia.org/wiki/Anelasticity">Wikipedia: Anelasticity</a>, and <a href="../../posts/where-the-equations-come-from/index.html#what-gets-added">post 2</a>
+</dd>
+<dt><span id="radiation">Radiation, as a loss</span></dt>
+<dd>
+The energy a vibrating object loses to the sound it makes: its moving surface pushes the air, and the sound wave carries energy away and never brings it back. It is how we hear an instrument at all, and it also damps the instrument. Shapes that push the air one way over a wide area, like a drumhead’s round modes, radiate strongly and fade fast; where neighbouring parts move in opposite directions, their sounds partly cancel. In the equation of motion radiation adds an <a href="#added-mass">added mass</a> and a loss that both depend on frequency, so the problem is no longer <a href="#self-adjoint">self-adjoint</a> (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#levels">post 3</a>). <a href="https://www.acs.psu.edu/drussell/Demos/rad2/mdq.html">D. A. Russell, Sound fields radiated by simple sources</a>; N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., Springer, 1998, chapters 7 and 18; the <a href="../../posts/instruments-case-by-case/drum.html#ringing">drum page</a>, and <a href="../../posts/where-the-equations-come-from/index.html#what-gets-added">post 2</a>
+</dd>
 <dt><span id="self-sustained">Self-sustained oscillation, limit cycle</span> <span id="limit-cycle"></span></dt>
 <dd>
 An oscillation kept going at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath. In normal playing the motion settles into one repeating cycle, called a limit cycle: a repeating motion that the oscillator settles into from any start near it, and in simple models such as the <a href="https://en.wikipedia.org/wiki/Van_der_Pol_oscillator">van der Pol oscillator</a> from any start except complete rest. Under some conditions it does not settle, as in the unsteady, warbling <em>wolf note</em> of some cellos. This needs a mechanism that is not linear, such as the bow’s grip and slip or a reed opening and closing. <a href="https://en.wikipedia.org/wiki/Self-oscillation">Wikipedia</a>
+</dd>
+<dt><span id="softening">Softening and stiffening</span> <span id="stiffening"></span></dt>
+<dd>
+Two ways a vibration can fail to be <a href="#linear">linear</a>. In a <em>softening</em> system the restoring force grows less than in proportion to the displacement, so wider swings are slower: a pendulum swung out to 90° takes 18% longer per swing than a small one. In a <em>stiffening</em>, or hardening, system it grows more than in proportion, so wider swings are faster: a string or a drumhead swung wide is stretched, which raises its average tension, so a loud stroke starts sharp and its pitch drops as it fades. A piano hammer’s felt is a stiffening spring too. Either way the frequency moves with the size of the motion, which in a linear system it cannot. <a href="https://en.wikipedia.org/wiki/Duffing_equation">Wikipedia: Duffing equation</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#counterexamples">post 3</a>
 </dd>
 <dt><span id="coupling">Coupling</span></dt>
 <dd>
@@ -382,17 +470,29 @@ Two vibrating parts are coupled when the motion of one pushes on the other, as w
 <dd>
 Growth of a vibration when a property of the system, such as its stiffness or its effective length, is changed back and forth periodically, most strongly at about twice its natural frequency. A child pumping a swing by standing and squatting at the right points of each swing does this. The simplest model is <span class="math inline">x'' = -(1 + \varepsilon\cos 2t)\,x</span>: a spring of frequency 1 whose stiffness wobbles at frequency 2, and for small <span class="math inline">\varepsilon</span> its swings grow. Such a system has no fixed modes. <a href="https://en.wikipedia.org/wiki/Parametric_oscillator">Wikipedia: Parametric oscillator</a>
 </dd>
+<dt><span id="floquet">Floquet theory</span></dt>
+<dd>
+The theory of linear equations whose coefficients repeat in time with some period <span class="math inline">P</span>, such as Mathieu’s <span class="math inline">x'' = -(1 + \varepsilon\cos 2t)\,x</span>, with <span class="math inline">P = \pi</span>. Floquet’s theorem (1883): when the map taking the state at time <span class="math inline">0</span> to the state at time <span class="math inline">P</span> has distinct eigenvalues, every solution is a combination of solutions <span class="math inline">e^{\mu t}p(t)</span> with <span class="math inline">p</span> of period <span class="math inline">P</span>. The <em>Floquet exponents</em> <span class="math inline">\mu</span> play the part of a mode’s <span class="math inline">s</span>, and one with positive real part means growth: <a href="#parametric-resonance">parametric resonance</a>. <a href="https://en.wikipedia.org/wiki/Floquet_theory">Wikipedia</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#counterexamples">post 3</a>
+</dd>
 <dt><span id="added-mass">Added mass</span></dt>
 <dd>
-The extra inertia of a vibrating surface because it must push the surrounding air or water along with it. It acts like extra mass on the surface and so lowers its frequencies. On <a href="../../posts/instruments-as-operators/drum.html">page 8</a> the air on both sides of a timpani head adds the most mass to the head’s coarsest shapes, and lowers their frequencies the most. <a href="https://en.wikipedia.org/wiki/Added_mass">Wikipedia</a>
+The extra inertia of a vibrating surface because it must push the surrounding air or water along with it. It acts like extra mass on the surface and so lowers its frequencies. On the <a href="../../posts/instruments-case-by-case/drum.html">drum page</a> the air on both sides of a timpani head adds the most mass to the head’s coarsest shapes, and lowers their frequencies the most. <a href="https://en.wikipedia.org/wiki/Added_mass">Wikipedia</a>
 </dd>
 <dt><span id="helmholtz-motion">Helmholtz motion</span></dt>
 <dd>
 The way a bowed string moves. The string sticks to the bow, slips back, and sticks again; seen from the side, a single sharp corner races back and forth along the string, one round trip per period. <a href="https://newt.phys.unsw.edu.au/jw/Bows.html">J. Wolfe, UNSW: The bowed string</a>
 </dd>
+<dt><span id="ends">Clamped, free and pinned ends</span> <span id="clamped"></span> <span id="free-end"></span> <span id="pinned"></span></dt>
+<dd>
+Three ways of holding the end of a bar or a stiff string, each giving two conditions there. A <em>clamped</em> end can neither move nor tilt: <span class="math inline">u = u_x = 0</span>, like a kalimba tine’s base. A <em>free</em> end is not held at all, so no bending moment and no shear force act there: <span class="math inline">u_{xx} = u_{xxx} = 0</span>, like the tine’s tip. A <em>pinned</em> end is held in place but free to pivot, so no bending moment acts there: <span class="math inline">u = u_{xx} = 0</span>, close to how a piano string is held. The same bar sounds differently when held differently: clamped at one end and free at the other, its frequencies are in the ratios <span class="math inline">1 : 6.27 : 17.55</span>; free at both ends, <span class="math inline">1 : 2.76 : 5.40</span>. <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Wikipedia: Euler–Bernoulli beam theory</a>, and <a href="../../posts/where-the-equations-come-from/index.html#bar">post 2</a>
+</dd>
 <dt><span id="cantilever">Cantilever, clamped bar</span></dt>
 <dd>
 A bar fixed rigidly at one end, so that end can neither move nor tilt, and free at the other, like a diving board. A kalimba tine is close to a cantilever: it is pressed against a bridge near one end and its tip is free. <a href="https://en.wikipedia.org/wiki/Cantilever">Wikipedia</a>
+</dd>
+<dt><span id="neutral-axis">Neutral axis</span></dt>
+<dd>
+The line along a bent bar that keeps its length: fibers on the outside of the curve stretch, those on the inside compress, and the neutral axis between them does neither. For a bar of one material that is bent but not stretched overall, it runs through the centroid, the middle, of each cross-section. <a href="https://en.wikipedia.org/wiki/Neutral_axis">Wikipedia</a>, and <a href="../../posts/where-the-equations-come-from/index.html#bar">post 2</a>
 </dd>
 <dt><span id="beam">Euler–Bernoulli beam</span></dt>
 <dd>
@@ -418,9 +518,13 @@ How the shape of a bar’s cross-section resists bending, written <span class="m
 <dd>
 How hard a material is to compress: the pressure needed, divided by the fraction by which the volume shrinks. In a sound wave the squeezes are too quick for heat to flow in or out, which is called adiabatic, and for air this gives about <span class="math inline">1.4 \times</span> atmospheric pressure. <a href="https://en.wikipedia.org/wiki/Bulk_modulus">Wikipedia</a>
 </dd>
-<dt><span id="first-order">First-order approximation</span></dt>
+<dt><span id="capacitance">Capacitance</span></dt>
 <dd>
-Keeping only the terms proportional to a small change and dropping those proportional to its square and higher powers. For a small <span class="math inline">\varepsilon</span>, <span class="math inline">(1 + \varepsilon)^3 = 1 + 3\varepsilon + 3\varepsilon^2 + \varepsilon^3 \approx 1 + 3\varepsilon</span> to first order. A second-order approximation keeps the <span class="math inline">\varepsilon^2</span> terms too. <a href="https://en.wikipedia.org/wiki/Perturbation_theory">Wikipedia</a>
+How much electric charge a capacitor, a pair of facing conducting plates, holds per volt across it: <span class="math inline">C = q/V</span>, measured in farads. So holding the charge <span class="math inline">q</span> puts the voltage <span class="math inline">q/C</span> across it. In a circuit of a coil and a capacitor, <span class="math inline">1/C</span> plays the part of a spring’s stiffness. <a href="https://en.wikipedia.org/wiki/Capacitance">Wikipedia</a>, and <a href="../../posts/where-the-equations-come-from/index.html#circuit">post 2</a>
+</dd>
+<dt><span id="inductance">Inductance</span></dt>
+<dd>
+How strongly a coil opposes a change in the current through it: the voltage it develops per unit rate of change of current, <span class="math inline">V = L\,dI/dt</span>, measured in henries. In a circuit of a coil and a capacitor, <span class="math inline">L</span> plays the part of a mass. <a href="https://en.wikipedia.org/wiki/Inductance">Wikipedia</a>, and <a href="../../posts/where-the-equations-come-from/index.html#circuit">post 2</a>
 </dd>
 </dl>
 </section>
@@ -433,7 +537,7 @@ For a square matrix <span class="math inline">K</span> and a list of numbers <sp
 </dd>
 <dt><span id="eigenvector">Eigenvector, eigenvalue</span></dt>
 <dd>
-A nonzero vector <span class="math inline">v</span> that a matrix <span class="math inline">K</span> only rescales, multiplying it by a number <span class="math inline">\lambda</span>: <span class="math inline">Kv = \lambda v</span>. The number <span class="math inline">\lambda</span> is the eigenvalue. On the bead ring of <a href="../../posts/instruments-as-operators/ring.html">page 2</a>, <span class="math inline">v</span> lists how far each bead is displaced and <span class="math inline">Kv</span> the forces pulling them back, up to a constant; an eigenvector is a shape in which each bead is pulled back in proportion to its own displacement, so all the beads swing at one frequency. Eigenvalues are squared angular frequencies, up to a constant. <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">Wikipedia</a>
+A nonzero vector <span class="math inline">v</span> that a matrix <span class="math inline">K</span> only rescales, multiplying it by a number <span class="math inline">\lambda</span>: <span class="math inline">Kv = \lambda v</span>. The number <span class="math inline">\lambda</span> is the eigenvalue. For the two beads on a tied string of <a href="../../posts/when-an-equation-has-a-spectrum/index.html#smallest-examples">post 3</a>, <span class="math inline">v</span> lists the two heights and <span class="math inline">Av</span> is minus their accelerations; the eigenvectors <span class="math inline">(1, 1)</span> and <span class="math inline">(1, -1)</span> are shapes in which each bead is pulled back in proportion to its own displacement, by the same factor, so both beads swing at one frequency. For an operator <span class="math inline">A</span> of this series, which includes its constants, an eigenvalue is a squared angular frequency, <span class="math inline">\lambda = \omega^2</span>. <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">Wikipedia</a>
 </dd>
 <dt><span id="eigenvalue">Eigenvalue</span></dt>
 <dd>
@@ -459,17 +563,29 @@ A set of vectors is orthonormal when each is <a href="#orthogonal">perpendicular
 <dd>
 A square matrix of real numbers equal to its own mirror image across the diagonal: the entry in row <span class="math inline">i</span>, column <span class="math inline">j</span> equals the entry in row <span class="math inline">j</span>, column <span class="math inline">i</span>. The spectral theorem says its eigenvalues are real and it has a full set of perpendicular eigenvectors. <a href="https://en.wikipedia.org/wiki/Spectral_theorem">Wikipedia</a>
 </dd>
+<dt><span id="diagonalizable">Diagonalizable</span></dt>
+<dd>
+A square matrix <span class="math inline">B</span> is diagonalizable when it has a <a href="#basis">basis</a> of eigenvectors <span class="math inline">W_1, \dots, W_n</span>, complex numbers allowed. Then <span class="math inline">B = W\operatorname{diag}(s_1, \dots, s_n)\,W^{-1}</span>, with <span class="math inline">W</span> the matrix whose columns are the <span class="math inline">W_k</span> and <span class="math inline">s_k</span> their eigenvalues: in that basis <span class="math inline">B</span> just multiplies each coordinate by its eigenvalue. Every <a href="#symmetric-matrix">symmetric matrix</a> is diagonalizable; a <a href="#jordan-block">Jordan block</a> of size 2 or more is not. For <span class="math inline">u'' = -Au</span>, the <a href="#generator">generator</a> <span class="math inline">B</span> is diagonalizable exactly when <span class="math inline">A</span> is diagonalizable and invertible (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#why-modes">post 3</a>). <a href="https://en.wikipedia.org/wiki/Diagonalizable_matrix">Wikipedia</a>
+</dd>
+<dt><span id="jordan-block">Jordan block</span></dt>
+<dd>
+A square matrix with one number <span class="math inline">s</span> all down its diagonal, 1 just above the diagonal and 0 elsewhere, such as <span class="math inline">\left(\begin{smallmatrix} s &amp; 1 \\ 0 &amp; s \end{smallmatrix}\right)</span>. A block of size 2 or more has the single eigenvalue <span class="math inline">s</span> but only one independent eigenvector, so it is the smallest way for a matrix to lack a basis of eigenvectors; every square matrix is, in a suitable basis, made of Jordan blocks down its diagonal (its Jordan normal form). For <span class="math inline">U' = BU</span>, a block of size 2 gives the solutions <span class="math inline">(a + bt)\,e^{st}</span>, which for <span class="math inline">b \ne 0</span> are not combinations of modes: a rigid drift (<span class="math inline">s = 0</span>) or <a href="#critical-damping">critical damping</a>. <a href="https://en.wikipedia.org/wiki/Jordan_normal_form">Wikipedia: Jordan normal form</a>
+</dd>
+<dt><span id="commuting">Commuting matrices</span></dt>
+<dd>
+Two square matrices <span class="math inline">A</span> and <span class="math inline">C</span> commute when <span class="math inline">AC = CA</span>: applying <span class="math inline">C</span> then <span class="math inline">A</span> gives the same as applying <span class="math inline">A</span> then <span class="math inline">C</span>. Most pairs of matrices do not commute; a multiple of the identity commutes with every matrix, and <span class="math inline">C = \alpha + \beta A</span> commutes with <span class="math inline">A</span>. Two symmetric matrices that commute share an orthonormal basis of eigenvectors, which is why friction that commutes with <span class="math inline">A</span> keeps the frictionless mode shapes (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#levels">post 3</a>). <a href="https://en.wikipedia.org/wiki/Commuting_matrices">Wikipedia</a>
+</dd>
 <dt><span id="determinant">Determinant</span></dt>
 <dd>
 A number computed from a square matrix that is zero exactly when the matrix sends some nonzero vector to zero. So linear equations with all right-hand sides zero have a solution other than all zeros exactly when the determinant of their coefficients is zero. For a <span class="math inline">2\times2</span> matrix with rows <span class="math inline">(p, q)</span> and <span class="math inline">(r, s)</span> it is <span class="math inline">ps - qr</span>. <a href="https://en.wikipedia.org/wiki/Determinant">Wikipedia</a>
 </dd>
 <dt><span id="circulant">Circulant matrix</span></dt>
 <dd>
-A square matrix in which each row is the row above shifted one place to the right, wrapping around. Whatever its entries, the complex waves <span class="math inline">e^{2\pi ijk/N}</span> of the discrete Fourier transform, the next entry, are eigenvectors of it; when the matrix is also symmetric, as on page 2, so are the real cosine and sine waves. <a href="https://en.wikipedia.org/wiki/Circulant_matrix">Wikipedia</a>
+A square matrix in which each row is the row above shifted one place to the right, wrapping around. Whatever its entries, the complex waves <span class="math inline">e^{2\pi ijk/N}</span> of the discrete Fourier transform, the next entry, are eigenvectors of it; when the matrix is also symmetric, as for beads closed into a ring (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#smallest-examples">post 3</a>), so are the real cosine and sine waves. <a href="https://en.wikipedia.org/wiki/Circulant_matrix">Wikipedia</a>
 </dd>
 <dt><span id="dft">Discrete Fourier transform (DFT)</span></dt>
 <dd>
-Writing a list of <span class="math inline">N</span> numbers, indexed by <span class="math inline">j = 0, \dots, N-1</span>, as a sum of the waves <span class="math inline">\cos(2\pi jk/N)</span> and <span class="math inline">\sin(2\pi jk/N)</span> for <span class="math inline">k = 0, \dots, N-1</span>; with <a href="#euler-formula">Euler’s formula</a> these are combined into <span class="math inline">e^{2\pi ijk/N}</span>. <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/ring.html">page 2</a>
+Writing a list of <span class="math inline">N</span> numbers, indexed by <span class="math inline">j = 0, \dots, N-1</span>, as a sum of the waves <span class="math inline">\cos(2\pi jk/N)</span> and <span class="math inline">\sin(2\pi jk/N)</span> for <span class="math inline">k = 0, \dots, N-1</span>; with <a href="#euler-formula">Euler’s formula</a> these are combined into <span class="math inline">e^{2\pi ijk/N}</span>. <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">Wikipedia</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#smallest-examples">post 3</a>
 </dd>
 <dt><span id="euler-formula">Euler’s formula</span></dt>
 <dd>
@@ -477,7 +593,15 @@ Writing a list of <span class="math inline">N</span> numbers, indexed by <span c
 </dd>
 <dt><span id="operator">Operator</span></dt>
 <dd>
-A rule that takes a function and returns another function. In this series the operator <span class="math inline">A</span> takes a shape <span class="math inline">u</span> of the instrument (for air in a tube, its pressure) and returns minus its acceleration: for a string or a bar, minus the restoring force per unit mass. So the motion obeys <span class="math inline">u_{tt} = -Au</span>. The operator includes its constant, for example <span class="math inline">A = -c^2\,d^2/dx^2</span> for a string with <span class="math inline">c^2 = T/\mu</span>, and comes with its allowed shapes, those that obey the boundary conditions. All of these operators are linear. Each eigenvalue <span class="math inline">\lambda</span> of <span class="math inline">A</span> gives a frequency <span class="math inline">\sqrt{\lambda}/2\pi</span>. The idea is laid out on <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a>. <a href="https://en.wikipedia.org/wiki/Operator_(mathematics)">Wikipedia</a>
+For an object held in a given way: the <a href="#linear">linear</a> map, defined on the shapes that the holding allows, that sends a shape to minus the acceleration that shape causes. It does not depend on time. A <em>shape</em> is whatever records the object’s state at one moment: a number for a mass on a spring, a list of heights for beads, a curve <span class="math inline">u(x)</span> for a string or a bar, the pressure along a tube. So the free motion obeys <span class="math inline">u_{tt} = -Au</span>. The operator includes its constants and comes with its allowed shapes, those that obey the boundary conditions: for a string, <span class="math inline">A = -c^2\,d^2/dx^2</span> with <span class="math inline">c^2 = T/\mu</span>, on shapes that are zero at both ends. Each eigenvalue <span class="math inline">\lambda</span> of <span class="math inline">A</span> gives a frequency <span class="math inline">\sqrt{\lambda}/2\pi</span>. In general an operator is any rule that takes a function, or a list of numbers, and returns another. <a href="https://en.wikipedia.org/wiki/Operator_(mathematics)">Wikipedia</a>, and <a href="../../posts/where-the-equations-come-from/index.html#operator-table">post 2</a>
+</dd>
+<dt><span id="generator">Generator</span></dt>
+<dd>
+For a linear equation <span class="math inline">U' = BU</span> that does not change in time, the matrix or operator <span class="math inline">B</span>: it turns the state <span class="math inline">U</span> into its rate of change. For <span class="math inline">u'' = -Au</span> the state is the shape with its velocity, <span class="math inline">U = (u, u')</span>, and <span class="math inline">B = \left(\begin{smallmatrix} 0 &amp; I \\ -A &amp; 0 \end{smallmatrix}\right)</span>; friction <span class="math inline">C</span> puts <span class="math inline">-C</span> in the bottom right corner. The solutions are <span class="math inline">U(t) = e^{tB}U(0)</span>, which is why <span class="math inline">B</span> is said to generate them. <a href="https://en.wikipedia.org/wiki/Matrix_exponential">Wikipedia: Matrix exponential</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#why-modes">post 3</a>
+</dd>
+<dt><span id="modal-system">Modal system</span></dt>
+<dd>
+A linear system <span class="math inline">U' = BU</span> whose <a href="#mode">modes</a> form a <a href="#basis">basis</a> of its states: every state is, in exactly one way, a (convergent) combination of mode vectors <span class="math inline">W</span>. In infinite dimensions the requirement is a <a href="#riesz-basis">Riesz basis</a> of the energy space, not merely a complete set. Then every motion is a sum of modes, each with its own amount. Two beads on a tied string are modal; two beads closed into a ring, which can drift, are not. The term is this series’ (Definition 3 of <a href="../../posts/when-an-equation-has-a-spectrum/index.html#criterion">post 3</a>).
 </dd>
 <dt><span id="eigenfunction">Eigenfunction</span></dt>
 <dd>
@@ -485,7 +609,7 @@ A nonzero function <span class="math inline">f</span> that an operator only resc
 </dd>
 <dt><span id="spectrum">Spectrum</span></dt>
 <dd>
-For every instrument in this series, the list of its operator’s eigenvalues <span class="math inline">\lambda</span>; the frequencies are <span class="math inline">\sqrt{\lambda}/2\pi</span>. (In general, for an operator on an infinite-dimensional space, the spectrum is the set of numbers <span class="math inline">\lambda</span> for which <span class="math inline">A - \lambda</span> has no well-behaved inverse, which can contain more than eigenvalues.) See <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a>. <a href="https://en.wikipedia.org/wiki/Spectrum_(functional_analysis)">Wikipedia</a>
+For the operators of this series’ instruments, objects of finite size without friction: the list of the operator’s eigenvalues <span class="math inline">\lambda</span>, each giving a frequency <span class="math inline">\sqrt{\lambda}/2\pi</span>. (In general, the spectrum of an operator <span class="math inline">A</span> is the set of numbers <span class="math inline">z</span> for which <span class="math inline">A - z</span> has no bounded inverse; it contains the eigenvalues and can contain more.) An infinite string has a <em>continuous</em> spectrum, all of <span class="math inline">[0, \infty)</span>, and no eigenvalues at all: spectral, but no list of notes. For a <a href="#self-adjoint">self-adjoint</a> <span class="math inline">A \ge 0</span> the spectrum is a list exactly when the resolvent is compact (<a href="#compact-resolvent">compact resolvent</a>). <a href="https://en.wikipedia.org/wiki/Spectrum_(functional_analysis)">Wikipedia</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#deeper-theory">post 3</a>
 </dd>
 <dt><span id="inner-product">Inner product</span></dt>
 <dd>
@@ -497,11 +621,11 @@ The space of functions on the circle <span class="math inline">S^1</span> with <
 </dd>
 <dt><span id="self-adjoint">Symmetric and self-adjoint operators</span></dt>
 <dd>
-An operator <span class="math inline">A</span> is symmetric if <span class="math inline">\langle Af, g\rangle = \langle f, Ag\rangle</span> for all allowed <span class="math inline">f</span> and <span class="math inline">g</span>, the analogue of a symmetric matrix. That alone makes its eigenvalues real and its eigenfunctions for different eigenvalues perpendicular. Self-adjoint is a stronger condition on the set of allowed shapes, roughly that it is neither too small nor too large. Together with a further property that every instrument here has, it is what the spectral theorem needs to give enough eigenfunctions to build every shape (<a href="../../posts/instruments-as-operators/circle.html">page 3</a>). (For readers who know functional analysis: self-adjoint means <span class="math inline">A = A^*</span>, domains included; for the loop the domain is <span class="math inline">H^2(S^1)</span>, and the further property is that <span class="math inline">(A + 1)^{-1}</span> is compact.) <a href="https://en.wikipedia.org/wiki/Self-adjoint_operator">Wikipedia</a>
+An operator <span class="math inline">A</span> is symmetric if <span class="math inline">\langle Af, g\rangle = \langle f, Ag\rangle</span> for all allowed <span class="math inline">f</span> and <span class="math inline">g</span>, the analogue of a symmetric matrix. That alone makes its eigenvalues real and its eigenfunctions for different eigenvalues perpendicular. Self-adjoint is a stronger condition on the set of allowed shapes, roughly that it is neither too small nor too large. Together with a further property that every instrument here has, a <a href="#compact-resolvent">compact resolvent</a>, it is what the spectral theorem needs to give enough eigenfunctions to build every shape (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#deeper-theory">post 3</a>). (For readers who know functional analysis: self-adjoint means <span class="math inline">A = A^*</span>, domains included; for the loop the domain is <span class="math inline">H^2(S^1)</span>, and the further property is that <span class="math inline">(A + 1)^{-1}</span> is compact.) <a href="https://en.wikipedia.org/wiki/Self-adjoint_operator">Wikipedia</a>
 </dd>
 <dt><span id="fourier-series">Fourier series</span></dt>
 <dd>
-Writing a periodic function as a sum of sines and cosines, or of <span class="math inline">e^{in\theta}</span>, of whole-number frequencies. On <a href="../../posts/instruments-as-operators/circle.html">page 3</a> this is the expansion in eigenfunctions of <span class="math inline">-d^2/d\theta^2</span>. <a href="https://en.wikipedia.org/wiki/Fourier_series">Wikipedia</a>
+Writing a periodic function as a sum of sines and cosines, or of <span class="math inline">e^{in\theta}</span>, of whole-number frequencies. In <a href="../../posts/when-an-equation-has-a-spectrum/index.html#smallest-examples">post 3</a> this is the expansion in eigenfunctions of <span class="math inline">-d^2/d\theta^2</span> on the loop of string. <a href="https://en.wikipedia.org/wiki/Fourier_series">Wikipedia</a>
 </dd>
 <dt><span id="laplacian">Laplacian</span></dt>
 <dd>
@@ -513,7 +637,7 @@ Looking for solutions that are a product of a function of one variable and a fun
 </dd>
 <dt><span id="bessel">Bessel function</span></dt>
 <dd>
-The functions <span class="math inline">J_m(r)</span> that describe how the modes of a round drum vary from the center to the rim, as sines do along a string. <span class="math inline">J_0</span> starts at 1 and swings like a slowly fading cosine, crossing zero at <span class="math inline">r \approx 2.405,\ 5.520,\ 8.654, \dots</span>; for <span class="math inline">m \ge 1</span>, <span class="math inline">J_m</span> starts at 0. Their zeros, which are not whole-number multiples of the first one, set the drum’s frequencies. <a href="https://en.wikipedia.org/wiki/Bessel_function">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/drum.html">page 8</a>
+The functions <span class="math inline">J_m(r)</span> that describe how the modes of a round drum vary from the center to the rim, as sines do along a string. <span class="math inline">J_0</span> starts at 1 and swings like a slowly fading cosine, crossing zero at <span class="math inline">r \approx 2.405,\ 5.520,\ 8.654, \dots</span>; for <span class="math inline">m \ge 1</span>, <span class="math inline">J_m</span> starts at 0. Their zeros, which are not whole-number multiples of the first one, set the drum’s frequencies. <a href="https://en.wikipedia.org/wiki/Bessel_function">Wikipedia</a>, and the <a href="../../posts/instruments-case-by-case/drum.html">drum page</a>
 </dd>
 <dt><span id="divergence-theorem">Divergence theorem</span></dt>
 <dd>
@@ -525,7 +649,44 @@ The stored energy of a shape divided by its kinetic weight, the mass-weighted si
 </dd>
 <dt><span id="min-max">Min–max principle</span></dt>
 <dd>
-Also called the Courant–Fischer theorem. List an operator’s eigenvalues in order, <span class="math inline">\lambda_1 \le \lambda_2 \le \cdots</span>. Then <span class="math inline">\lambda_n</span> is the least possible value, over all <span class="math inline">n</span>-dimensional families of allowed shapes (all combinations of <span class="math inline">n</span> independent shapes), of the largest <a href="#rayleigh-quotient">Rayleigh quotient</a> in the family. For <span class="math inline">n = 1</span> a family is the multiples of one shape, so <span class="math inline">\lambda_1</span> is the smallest quotient of any shape. Adding stiffness never lowers any shape’s quotient, so it never lowers any eigenvalue; adding mass never raises any quotient, so it never raises any eigenvalue; and holding the object more firmly, which leaves fewer allowed shapes, never lowers one either. <a href="https://en.wikipedia.org/wiki/Min-max_theorem">Wikipedia</a>, and <a href="../../posts/instruments-as-operators/spectrum.html">The spectrum of an operator</a>
+Also called the Courant–Fischer theorem. List an operator’s eigenvalues in order, <span class="math inline">\lambda_1 \le \lambda_2 \le \cdots</span>. Then <span class="math inline">\lambda_n</span> is the least possible value, over all <span class="math inline">n</span>-dimensional families of allowed shapes (all combinations of <span class="math inline">n</span> independent shapes), of the largest <a href="#rayleigh-quotient">Rayleigh quotient</a> in the family. For <span class="math inline">n = 1</span> a family is the multiples of one shape, so <span class="math inline">\lambda_1</span> is the smallest quotient of any shape. Adding stiffness never lowers any shape’s quotient, so it never lowers any eigenvalue; adding mass never raises any quotient, so it never raises any eigenvalue; and holding the object more firmly, which leaves fewer allowed shapes, never lowers one either. <a href="https://en.wikipedia.org/wiki/Min-max_theorem">Wikipedia</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#back-to-hearing">post 3</a>
+</dd>
+</dl>
+</section>
+<section id="the-deeper-theory" class="level2">
+<h2 class="anchored" data-anchor-id="the-deeper-theory">The deeper theory</h2>
+<dl>
+<dt><span id="resolvent">Resolvent</span></dt>
+<dd>
+For an operator <span class="math inline">A</span> and a number <span class="math inline">z</span>, the inverse <span class="math inline">(A - z)^{-1}</span>, when it exists and is bounded (changes the size of a shape by at most a fixed factor): the operator that solves <span class="math inline">Au - zu = f</span> for <span class="math inline">u</span>, given <span class="math inline">f</span>. The numbers <span class="math inline">z</span> at which it fails to exist are the <a href="#spectrum">spectrum</a>. <a href="https://en.wikipedia.org/wiki/Resolvent_formalism">Wikipedia: Resolvent formalism</a>
+</dd>
+<dt><span id="compact-operator">Compact operator, compact resolvent</span> <span id="compact-resolvent"></span></dt>
+<dd>
+An operator on a Hilbert space is <em>compact</em> when it is a limit, with the error measured by the operator norm, of operators whose outputs fill only finitely many dimensions; equivalently, it maps every bounded set into a set whose closure is compact. Every matrix is compact. An operator <span class="math inline">A</span> has <em>compact resolvent</em> when <span class="math inline">(A - z)^{-1}</span> is compact for some <span class="math inline">z</span> outside its spectrum, and then it is compact for every such <span class="math inline">z</span>. For self-adjoint <span class="math inline">A \ge 0</span> this holds exactly when the spectrum is a discrete list <span class="math inline">\lambda_1 \le \lambda_2 \le \cdots \to \infty</span> of eigenvalues of finite <a href="#multiplicity">multiplicity</a> whose eigenvectors form an orthonormal basis: a list of notes. Strings, bars and drums of finite size have it; an infinite string does not. <a href="https://en.wikipedia.org/wiki/Compact_operator_on_Hilbert_space">Wikipedia: Compact operator on Hilbert space</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#deeper-theory">post 3</a>
+</dd>
+<dt><span id="green">Green’s function, Green’s operator</span></dt>
+<dd>
+For a <a href="#linear">linear</a> problem <span class="math inline">Au = f</span> with boundary conditions, the Green’s function <span class="math inline">G(x, y)</span> is the response at <span class="math inline">x</span> to a unit point load at <span class="math inline">y</span>, and the Green’s operator is the solution map <span class="math inline">f \mapsto u = \int G(x, y)\,f(y)\,dy</span>: the inverse <span class="math inline">A^{-1}</span>, written as an integral. Post 3 uses it for the bar, where <span class="math inline">(A + 1)^{-1}</span> has a kernel continuous on the square <span class="math inline">[0, L]^2</span>, which makes it compact. <a href="https://en.wikipedia.org/wiki/Green%27s_function">Wikipedia</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#deeper-theory">post 3</a>
+</dd>
+<dt><span id="functional-calculus">Functional calculus</span></dt>
+<dd>
+A way to apply a function <span class="math inline">\varphi</span> of numbers to an operator, making sense of <span class="math inline">\varphi(A)</span>. For a symmetric matrix with orthonormal eigenvectors <span class="math inline">X_i</span> and eigenvalues <span class="math inline">\lambda_i</span>, <span class="math inline">\varphi(A)f = \sum_i \varphi(\lambda_i)\,(X_i\cdot f)\,X_i</span>: the part of <span class="math inline">f</span> along each eigenvector is multiplied by <span class="math inline">\varphi</span> of its eigenvalue. For a self-adjoint operator on a Hilbert space, von Neumann’s spectral theorem does the same, with the sum replaced by an integral over the spectrum when the spectrum is continuous. It lets post 3 write every motion of <span class="math inline">u'' = -Au</span> as <span class="math inline">u(t) = \cos(t\sqrt A)\,f + \big(\sin(t\sqrt A)/\sqrt A\big)\,g</span>. <a href="https://en.wikipedia.org/wiki/Borel_functional_calculus">Wikipedia: Borel functional calculus</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#deeper-theory">post 3</a>
+</dd>
+<dt><span id="semigroup">Semigroup</span></dt>
+<dd>
+For an equation <span class="math inline">U' = BU</span>, the family of operators <span class="math inline">e^{tB}</span>, <span class="math inline">t \ge 0</span>, each sending a starting state to the state at time <span class="math inline">t</span>: <span class="math inline">e^{0B} = I</span>, <span class="math inline">e^{(t + t')B} = e^{tB}e^{t'B}</span> (running for <span class="math inline">t'</span> and then for <span class="math inline">t</span> is running for <span class="math inline">t + t'</span>), and continuous in <span class="math inline">t</span>. For a matrix, <span class="math inline">e^{tB}</span> is the <a href="https://en.wikipedia.org/wiki/Matrix_exponential">matrix exponential</a>. For an operator such as a damped string’s generator, which is unbounded, semigroup theory (the Hille–Yosida and Lumer–Phillips theorems) builds <span class="math inline">e^{tB}</span> directly, and so proves that every start has exactly one motion, whether or not there are enough modes. <a href="https://en.wikipedia.org/wiki/C0-semigroup">Wikipedia: C0-semigroup</a>
+</dd>
+<dt><span id="riesz-basis">Riesz basis</span></dt>
+<dd>
+A basis of a Hilbert space that behaves like an orthonormal one up to fixed factors: the image of an orthonormal basis under a bounded operator with a bounded inverse. Equivalently, every vector is uniquely <span class="math inline">U = \sum_k c_kW_k</span>, with <span class="math inline">m\sum_k|c_k|^2 \le \|U\|^2 \le M\sum_k|c_k|^2</span> for fixed numbers <span class="math inline">0 &lt; m \le M</span>, so a vector is small exactly when its coefficients are. A set can be complete, with no nonzero vector perpendicular to all of it, and still fail to be a Riesz basis. <a href="https://encyclopediaofmath.org/wiki/Riesz_basis">Encyclopedia of Mathematics</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#deeper-theory">post 3</a>
+</dd>
+<dt><span id="non-normal">Normal and non-normal</span></dt>
+<dd>
+A matrix <span class="math inline">B</span> is <em>normal</em> when it commutes with its adjoint, <span class="math inline">BB^* = B^*B</span>, the adjoint being the conjugate transpose (for a real matrix, the transpose); exactly then it has an orthonormal basis of eigenvectors. Symmetric matrices are normal. A <em>non-normal</em> matrix may still be diagonalizable, but its eigenvectors are not all perpendicular, and when some are nearly parallel, decaying modes can nearly cancel at the start and then stop cancelling, so the motion grows for a while before it decays. <a href="https://en.wikipedia.org/wiki/Normal_matrix">Wikipedia: Normal matrix</a>, and <a href="../../posts/when-an-equation-has-a-spectrum/index.html#deeper-theory">post 3</a>
+</dd>
+<dt><span id="pseudospectrum">Pseudospectrum</span></dt>
+<dd>
+For a matrix <span class="math inline">B</span> and a small number <span class="math inline">\varepsilon &gt; 0</span>, the <span class="math inline">\varepsilon</span>-pseudospectrum is the set of numbers <span class="math inline">z</span> at which <span class="math inline">\|(B - z)^{-1}\| &gt; 1/\varepsilon</span>; equivalently, the set of eigenvalues of all matrices <span class="math inline">B + E</span> with <span class="math inline">\|E\| &lt; \varepsilon</span>. For a normal <span class="math inline">B</span> it is just the points within <span class="math inline">\varepsilon</span> of the spectrum; for a non-normal one it can reach much farther, and how far measures how much the behaviour departs from what the eigenvalues alone predict, such as growth before decay (Trefethen and Embree). <a href="https://en.wikipedia.org/wiki/Pseudospectrum">Wikipedia</a>
 </dd>
 </dl>
 </section>
@@ -534,7 +695,7 @@ Also called the Courant–Fischer theorem. List an operator’s eigenvalues in o
 <dl>
 <dt><span id="weyl">Weyl’s law</span></dt>
 <dd>
-For a drum of area <span class="math inline">|\Omega|</span>, the number <span class="math inline">N(\Lambda)</span> of eigenvalues of <span class="math inline">-\Delta</span> below a large number <span class="math inline">\Lambda</span> is close to <span class="math inline">|\Omega|\Lambda/4\pi</span>, so the spectrum “hears” the area. A second term, <span class="math inline">-P\sqrt\Lambda/4\pi</span> with <span class="math inline">P</span> the perimeter, is proved only under extra conditions, but for drums with smooth or polygonal rims the perimeter can be heard anyway, by a smoother count (<a href="../../posts/instruments-as-operators/shape.html">page 9</a>). <a href="https://en.wikipedia.org/wiki/Weyl_law">Wikipedia</a>
+For a drum of area <span class="math inline">|\Omega|</span>, the number <span class="math inline">N(\Lambda)</span> of eigenvalues of <span class="math inline">-\Delta</span> below a large number <span class="math inline">\Lambda</span> is close to <span class="math inline">|\Omega|\Lambda/4\pi</span>, so the spectrum “hears” the area. A second term, <span class="math inline">-P\sqrt\Lambda/4\pi</span> with <span class="math inline">P</span> the perimeter, is proved only under extra conditions, but for drums with smooth or polygonal rims the perimeter can be heard anyway, by a smoother count (<a href="../../posts/hear-the-shape-of-a-drum/index.html"><em>Can you hear the shape of a drum?</em></a>). <a href="https://en.wikipedia.org/wiki/Weyl_law">Wikipedia</a>
 </dd>
 <dt><span id="isospectral">Isospectral</span></dt>
 <dd>

@@ -125,3 +125,6 @@ svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
 
 .needs { display: inline-block; max-width: 100%; }
 @media (max-width: 640px) { .needs { display: block; width: fit-content; margin: 0.3rem 0 0; border-radius: 0.5rem; padding: 0.1rem 0.5rem; } }
+
+/* prose tables (four aspects) wrap on phones */
+@media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
