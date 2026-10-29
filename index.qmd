@@ -1,7 +1,15 @@
 ---
 #title: "blog"
 listing:
-  contents: "posts/*/index.qmd"
+  # One row per series: a series' parts are reached from its index post, not listed here.
+  contents:
+    - "posts/*/index.qmd"
+    - "!posts/what-you-hear/index.qmd"
+    - "!posts/where-the-equations-come-from/index.qmd"
+    - "!posts/when-an-equation-has-a-spectrum/index.qmd"
+    - "!posts/instruments-case-by-case/index.qmd"
+    - "!posts/hear-the-shape-of-a-drum/index.qmd"
+    - "!posts/instruments-and-scales/index.qmd"
   sort: "date desc"
   type: table
   fields: [date, title]
