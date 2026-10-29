@@ -1,6 +1,6 @@
 ---
-title: "The Shape of a Sound"
-subtitle: "The mathematics of musical sound: a series"
+title: "The Shape of a Sound: a series"
+subtitle: "The mathematics of musical sound, in four posts and two more beyond"
 date: 2026-10-25
 date-modified: 2026-10-29
 categories: [math, music, the-shape-of-a-sound]
@@ -24,6 +24,15 @@ A piano note has a pitch you could hum; a drum's thud has none. Both are a stret
 3. Where do the differential equations of instruments come from?
 4. When is the solution of a differential equation a sum over the spectrum of an operator, what is the deeper theory, and how does it connect back to 1 and 2?
 
+## The posts
+
+1. [**What you hear**](../what-you-hear/index.qmd) answers questions 1 and 2, with sounds and no differential equations. A clear pitch means the partials sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, so the sound nearly repeats at that rate; a piano's partials very nearly do this and a drum's don't.
+2. [**Where the equations come from**](../where-the-equations-come-from/index.qmd) answers question 3. For small motions, Newton's law on a small piece, together with a law of the material, gives $u_{tt} = -Au$, with an operator $A$ for each object: spring, beads, string, air column, bar, stiff string, drumhead, and a coil with a capacitor.
+3. [**When an equation has a spectrum**](../when-an-equation-has-a-spectrum/index.qmd) answers question 4, the mathematical answer. The solutions of $U' = BU$ are exactly the combinations of modes when $B$ has a basis of [eigenvectors](glossary.qmd#eigenvector); for a stable, frictionless object of finite size this always holds (once any rigid drift is split off), and the post shows where it fails.
+4. [**Instruments, case by case**](../instruments-case-by-case/index.qmd) puts the answers to work on one instrument per page, starting from an orchestra: violin, clarinet, kalimba, harmonica, piano, bass drum and kettledrum.
+
+Two further posts take up questions the answers raise: [*Can you hear the shape of a drum?*](../hear-the-shape-of-a-drum/index.qmd) and [*Did instruments shape our scales?*](../instruments-and-scales/index.qmd). [*A Piano*](../a-piano/index.qmd) is a playable upright with all 88 keys and its three pedals. Technical words link to the [glossary](glossary.qmd).
+
 ## The series in one paragraph {#the-series-in-one-paragraph}
 
 A vibrating object of finite size whose motion is [linear](glossary.qmd#linear) and unchanging in time moves, left to itself, as a sum of [modes](glossary.qmd#mode), apart from the special cases [post 3 lists](../when-an-equation-has-a-spectrum/index.qmd#counterexamples): shapes that each oscillate at their own frequency $f_k$ and fade with their own time $\tau_k$. The body, the air and the room pass that motion on to a listener in a way that is also linear and unchanging in time: this keeps every $f_k$ and $\tau_k$, changes the amounts, and adds the filter's own ringing (the body's resonances, the room's reverberation). So the instrument's part of the sound is
@@ -35,15 +44,6 @@ The equation of motion (the operator, together with friction and radiation) fixe
 The series derives the $f_k$; the $\tau_k$ are mostly measured, and it says so where it uses them.
 
 Here $p(t)$ is the air pressure at the listener; $a_k$ is how strongly the $k$-th partial sounds, $\varphi_k$ where in its cycle it starts, and $e^{-t/\tau_k}$ says that it shrinks by a factor of $e \approx 2.7$ every $\tau_k$ seconds.
-
-## The posts
-
-1. [**What you hear**](../what-you-hear/index.qmd) answers questions 1 and 2, with sounds and no differential equations. A clear pitch means the partials sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, so the sound nearly repeats at that rate; a piano's partials very nearly do this and a drum's don't.
-2. [**Where the equations come from**](../where-the-equations-come-from/index.qmd) answers question 3. For small motions, Newton's law on a small piece, together with a law of the material, gives $u_{tt} = -Au$, with an operator $A$ for each object: spring, beads, string, air column, bar, stiff string, drumhead, and a coil with a capacitor.
-3. [**When an equation has a spectrum**](../when-an-equation-has-a-spectrum/index.qmd) answers question 4, the mathematical answer. The solutions of $U' = BU$ are exactly the combinations of modes when $B$ has a basis of [eigenvectors](glossary.qmd#eigenvector); for a stable, frictionless object of finite size this always holds (once any rigid drift is split off), and the post shows where it fails.
-4. [**Instruments, case by case**](../instruments-case-by-case/index.qmd) puts the answers to work on one instrument per page, starting from an orchestra: violin, clarinet, kalimba, harmonica, piano, bass drum and kettledrum.
-
-Two further posts take up questions the answers raise: [*Can you hear the shape of a drum?*](../hear-the-shape-of-a-drum/index.qmd) and [*Did instruments shape our scales?*](../instruments-and-scales/index.qmd). [*A Piano*](../a-piano/index.qmd) is a playable upright with all 88 keys and its three pedals. Technical words link to the [glossary](glossary.qmd).
 
 ## Reading paths {#reading-paths}
 
