@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css]
 ---
 
@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 0, the note](note.qmd); page 3 is not needed. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 0, the note](note.qmd); page 3 is not needed. Math: up to partial derivatives (explained). About 3 minutes for the summary; about 30 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -40,6 +40,10 @@ Listen first: pluck the string, then pick a point to touch and pluck again. Stri
 </div>
 ```
 
+::: {.newidea}
+**In one sentence.** A light touch at the middle drains every mode that moves under the finger and leaves the even modes, which stand still there: a note an octave up.
+:::
+
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
@@ -47,7 +51,7 @@ Listen first: pluck the string, then pick a point to touch and pluck again. Stri
 2. *The operator* is minus $c^2$ times the second derivative, $A = -c^2\,d^2/dx^2$, acting on shapes held still at both ends.
 3. *Its spectrum*: mode $n$ has $n$ arches, eigenvalue $\lambda_n = (n\pi c/L)^2$ and frequency $f_n = n f_1$, a whole-number multiple of the lowest.
 4. *On the diagram*: the stems sit exactly on the whole-number lines.
-5. *What we hear*: a clear note at the lowest frequency; a light touch at the middle drains every mode that moves under the finger and leaves the even ones, a note an octave up.
+5. *What we hear*: a clear note at the lowest frequency; a light touch at the middle acts as a damper: it drains the modes that move under the finger and leaves the even ones, which stand still there, a note an octave up.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
@@ -210,7 +214,7 @@ The stems below are the frequencies in the result box, drawn as multiples of the
 
 ## 5 · What we hear {#what-we-hear}
 
-**A light touch keeps only the shapes that are still under the finger.** Where a shape has a still point, a [node](glossary.qmd#node), the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. The shape $\sin(n\pi x/L)$ is still at the middle exactly when $n$ is even: 2, 4, 6, … arches, at 2, 4, 6, … times the open string's frequency. The survivors repeat twice as often, so you hear a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a [fifth](glossary.qmd#octave) up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the [piano page](piano.qmd) derives for felt dampers.)
+**A light touch keeps only the shapes that are still under the finger.** The finger is a damper: a soft, lossy contact that takes energy from whatever moves under it. It does not hold the string still there, as a new end would (pressing down does that; see below). Where a shape has a still point, a [node](glossary.qmd#node), the finger has nothing to grab, and that shape rings on. Every other shape moves under the finger and loses its energy to it within a moment. The shape $\sin(n\pi x/L)$ is still at the middle exactly when $n$ is even: 2, 4, 6, … arches, at 2, 4, 6, … times the open string's frequency. The survivors repeat twice as often, so you hear a note an octave up. At a third, the survivors have 3, 6, 9, … arches: three times the frequency, an octave and a [fifth](glossary.qmd#octave) up (a factor 2 times a factor 3/2). (In this simple model the finger drains each shape in proportion to how much that shape moves under it, the rule the [piano page](piano.qmd) derives for felt dampers.)
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Which modes survive a light touch <span class="needs">uses the sine function</span></summary>
@@ -298,10 +302,10 @@ Where this comes from: at each moment the string is two straight pieces, like a 
 
 ## What we found
 
-Newton's law on a short piece of string gave the wave equation, $u_{tt} = c^2u_{xx}$. Read as a rule, with the ends tied, it is the operator $A = -c^2\,d^2/dx^2$ on shapes that vanish at both ends. Its spectrum is $\lambda_n = (n\pi c/L)^2$, with eigenfunctions the arch shapes $\sin(n\pi x/L)$, so the frequencies are exactly $n f_1$, with $f_1 = \frac{1}{2L}\sqrt{T/\mu}$: on the diagram, every stem on a line, and what we hear is a clear note. A light touch drains every mode that moves under the finger, so only the eigenfunctions already still there survive: at the middle, the even ones, a note an octave up. And the operator lesson: the rule for what the ends may do, a [boundary condition](glossary.qmd#boundary-condition), is part of the operator. It decides which shapes are allowed, and so which frequencies.
+Tied at both ends, the string's operator $A = -c^2\,d^2/dx^2$ has the arch shapes $\sin(n\pi x/L)$ as its modes, at exactly $n f_1$ with $f_1 = \frac{1}{2L}\sqrt{T/\mu}$: the [boundary condition](glossary.qmd#boundary-condition) is part of the operator and decides the frequencies. A light touch is a damper: it drains the modes that move under the finger and leaves the ones with a node there, at the middle the even ones, an octave up. The next page keeps the operator and changes the ends, for the air in a tube.
 
 ::: {.family}
-**Same operator, different constants.** Guitar, cello and harp strings obey the same equation with the same tied ends. They differ in length, tension and mass per length, which set the lowest frequency, and in how they are played: plucked (guitar, harp) or bowed (violin, cello).
+**The string's operator family.** Guitar, cello and harp strings obey the same equation with the same tied ends, so the series puts them in one [operator family](glossary.qmd#operator-family) with the violin string: the same operator up to its constants. They differ in length, tension and mass per length, which set the lowest frequency, and in how they are played: plucked (guitar, harp) or bowed (violin, cello).
 :::
 
 

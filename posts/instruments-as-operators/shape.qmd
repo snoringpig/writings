@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css, gww.py, gww_modes.py]
 ---
 
@@ -14,7 +14,7 @@ resources: [core.js, ins.css, gww.py, gww_modes.py]
 :::
 
 ::: {.pageinfo}
-Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Math: up to the Laplacian (page 8). About 3 minutes for the summary; about 20 with the mathematics.
+Builds on [page 8, the drum](drum.qmd), and runs the recipe of [The spectrum of an operator](spectrum.qmd) backwards. Math: up to the Laplacian (page 8). About 3 minutes for the summary; about 25 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -44,6 +44,10 @@ Listen first: play each drum with every mode equally loud. Then click a drum to 
 </div>
 </div>
 ```
+
+::: {.newidea}
+**In one sentence.** All of a drum's frequencies tell you its area and, for a reasonable rim, its perimeter, but not always its shape: two different drums can have exactly the same frequencies.
+:::
 
 ::: {.gist}
 **The recipe on this page, in brief.** Every earlier page ran the recipe forwards, from an instrument to its sound. This page runs it backwards.
@@ -201,7 +205,7 @@ In the figure, $R = 5.3$: there are 17 dots, and the formula gives 16.8. The str
 :::
 
 ::: {.derive}
-<details><summary><span class="label">Proof sketch</span>Hearing the perimeter of any drum: a smoother count <span class="needs">uses the heat equation and the reflection trick of page 4</span></summary>
+<details><summary><span class="label">Proof sketch</span>Hearing the perimeter of a drum with a smooth or straight-sided rim: a smoother count <span class="needs">uses the heat equation and the reflection trick of page 4</span></summary>
 
 $N(\Lambda)$ jumps by one at every eigenvalue, and those jumps can bunch up, which is what Ivrii's condition controls. A smoother count avoids them. For $t > 0$ let
 $$
@@ -259,7 +263,7 @@ The scripts are [gww.py](gww.py) for the eigenvalues and [gww_modes.py](gww_mode
 
 ## What we found
 
-Run forwards, the recipe gives the drum's sound: Newton's law on a patch of head gives $u_{tt} = c^2\Delta u$; the operator is $A = -c^2\Delta$ with the rim held still; its spectrum is the list of eigenvalues $\lambda_n = c^2k_n^2$, with $-\Delta X_n = k_n^2X_n$, and the frequencies are $f_n = \sqrt{\lambda_n}/2\pi$. Run backwards, it asks what the spectrum says about the drum. Counting the spectrum with Weyl's law recovers the drum's area and, for smooth or straight-sided rims, the length of its rim, and for a round drum that pins down the shape. In general it does not: two differently shaped drums can share every eigenvalue, and so every frequency, though struck at a point they still sound different. On the spectrum diagram, both drums are off the lines, like the ideal drumhead of page 8, and in exactly the same places. The study of such questions, what a spectrum says about the shape behind it, is called *spectral geometry*.
+A drum's spectrum, the eigenvalues of $A = -c^2\Delta$ with the rim held still, tells you its area through Weyl's law and, for a smooth or straight-sided rim, the length of its rim, which is enough to recognize a round drum. It does not always tell you the shape: Gordon, Webb and Wolpert's two drums share every frequency, though struck at a point they sound different. The study of what a spectrum says about the shape behind it is called *spectral geometry*; the last page asks what a spectrum says about music.
 
 ## The next puzzle
 

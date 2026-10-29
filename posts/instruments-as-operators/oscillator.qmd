@@ -37,6 +37,10 @@ Listen first: change how far you pull the mass, and watch how long each bob take
 </div>
 ```
 
+::: {.newidea}
+**In one sentence.** A mass on a spring vibrates at one frequency, $\sqrt{k/m}/2\pi$ ($k$ its stiffness, $m$ its mass), and the size of the swing doesn't enter (for small swings), which is why a fading note keeps its pitch.
+:::
+
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
@@ -134,7 +138,7 @@ Add a friction force proportional to the velocity, $-2m\gamma\,\dot x$, so that 
 
 ## What we found
 
-Newton's law with Hooke's pull gave the equation $m\ddot x = -kx$; the operator is the smallest there is, multiply by $k/m$; its spectrum is that one number, and its square root, divided by $2\pi$, is the one frequency, $f = \frac{1}{2\pi}\sqrt{k/m}$: a single stem, a pure tone. The amplitude is not in it, which is why a fading note keeps its pitch, very nearly. One mass gives one stem on the pitch ruler; a note needs many. On the next page the one number becomes a table of numbers, a matrix, with many eigenvalues, and so many frequencies.
+The operator of one mass on a spring is a single number, $k/m$, so there is one frequency, $\sqrt{k/m}/2\pi$, with no amplitude in it: a fading note keeps its pitch, very nearly. A note needs many frequencies; on the next page two masses already give two, and the one number becomes a table of numbers, a matrix.
 
 ## The next puzzle
 

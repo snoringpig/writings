@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css]
 ---
 
@@ -14,11 +14,11 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd). Math: up to cosh, sinh and a 2×2 determinant (explained). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 4, the violin string](violin.qmd). Math: up to cosh, sinh and a 2×2 determinant (explained). About 3 minutes for the summary; about 30 with the mathematics.
 :::
 
 ::: {.puzzle}
-A kalimba tine's first [overtone](glossary.qmd#partial) sits at about 6.3 times its [fundamental](glossary.qmd#fundamental), nowhere near a whole number. Overtones off the whole numbers are what make a bell clang. So why does a kalimba sound like a clean note?
+A kalimba tine is a steel bar clamped at one end. Its first [overtone](glossary.qmd#partial) sits at about 6.3 times its [fundamental](glossary.qmd#fundamental), off the whole numbers, and overtones off the whole numbers are what make a bell clang. So why does a kalimba sound like a clean note?
 :::
 
 Listen first: tap a tine. Then tick the box that keeps the overtones ringing, and tap it again.
@@ -48,14 +48,18 @@ Listen first: tap a tine. Then tick the box that keeps the overtones ringing, an
 </div>
 ```
 
+::: {.newidea}
+**In one sentence.** A bar clamped at one end has overtones off whole-number multiples (6.27×, 17.55×), yet a kalimba sounds clean because those overtones die within a fraction of a second (observed, not derived).
+:::
+
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
 1. *Newton's law* on a thin slice of bent steel gives the beam equation $u_{tt} = -\kappa^2 u_{xxxx}$, with four derivatives where a string had two.
 2. *The operator* is $\kappa^2$ times the fourth derivative, $A = \kappa^2\,d^4/dx^4$, on a tine clamped at one end and free at the other.
-3. *Its spectrum*: the end conditions allow a mode only when $\cos\beta L\cosh\beta L = -1$, which puts the frequencies in the ratios $1 : 6.27 : 17.55 : 34.39$, far from whole numbers.
-4. *On the diagram*: the overtones sit far off the whole-number lines.
-5. *What we hear*: a click of off-line overtones at the start, which die within a fraction of a second, and then the fundamental alone: a clean note.
+3. *Its spectrum*: the end conditions allow a mode only when $\cos\beta L\cosh\beta L = -1$, which puts the frequencies in the ratios $1 : 6.27 : 17.55 : 34.39$, off the whole numbers.
+4. *On the diagram*: the overtones sit off the whole-number lines.
+5. *What we hear*: a click of off-line overtones at the start, which die within a fraction of a second (observed on real kalimbas, not derived here), and then the fundamental alone: a clean note.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
@@ -197,7 +201,7 @@ The operator $d^4/dx^4$ with these four conditions is symmetric, by integrating 
 
 ## 4 · On the spectrum diagram
 
-Here are one tine's frequencies from the result box, as multiples of the lowest: 1×, then 6.27×, far from the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how hard that mode [pushes sideways](glossary.qmd#moment) on the bridge just after a pluck, one of the two loads a tine puts on the bridge (the fold in stage 5 has both). Tap a stem to see the shape of that mode.
+Here are one tine's frequencies from the result box, as multiples of the lowest: 1×, then 6.27×, off the gray whole-number lines, and further up 17.55× and 34.39×, off the right edge. Each stem's height is how hard that mode [pushes sideways](glossary.qmd#moment) on the bridge just after a pluck, one of the two loads a tine puts on the bridge (the fold in stage 5 has both). Tap a stem to see the shape of that mode.
 
 ```{=html}
 <div class="ins">
@@ -212,7 +216,7 @@ Here are one tine's frequencies from the result box, as multiples of the lowest:
 
 ## 5 · What we hear {#what-we-hear}
 
-**Why the note still sounds clean.** You might guess the overtone is too quiet to hear. It isn't. In how far the tine swings, the overtone is tiny; but the body hears the push on the bridge, not the swing, and in that push the overtone starts strong (fold below). That strong start is the click at the beginning of each note. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on, and the fundamental left on its own is a clean note. Why it dies so fast is not computed here; the page takes it from measurement. The acoustician D. M. F. Chapman found exactly this pattern on a real kalimba: one dominant overtone, at 5.9 to 6.8 times the fundamental, gone soon after the attack. With the box ticked, the off-line overtones keep ringing, and the same tine clangs like a bell.
+**Why the note still sounds clean.** You might guess the overtone is too quiet to hear. It isn't. In how far the tine swings, the overtone is tiny; but the body hears the push on the bridge, not the swing, and in that push the overtone starts strong (fold below). That strong start is the click at the beginning of each note. What keeps the note clean is that the overtone dies within a fraction of a second, while the fundamental rings on, and the fundamental left on its own is a clean note. That fast decay is observed, not derived: the model of stages 1 to 3 has no damping, and the page takes the decay from measurement. The acoustician D. M. F. Chapman found exactly this pattern on a real kalimba: one dominant overtone, at 5.9 to 6.8 times the fundamental, which dies away so fast that it is heard only at the instant the note starts. With the box ticked, the off-line overtones keep ringing, and the same tine clangs like a bell.
 
 ::: {.derive}
 <details><summary><span class="label">Step-by-step derivation</span>How strongly a pluck at the tip excites each mode <span class="needs">uses integration by parts</span></summary>
@@ -235,10 +239,10 @@ A plucked tine moves as the sum of its modes, $u = \sum_n a_n X_n(x)\cos(2\pi f_
 
 ## What we found
 
-Newton's law on a thin slice of bent steel gave the beam equation, $u_{tt} = -\kappa^2 u_{xxxx}$. Read as a rule, with the tine clamped at one end and free at the other, it is the operator $A = \kappa^2\,d^4/dx^4$. Its spectrum, from $\cos\beta L\cosh\beta L = -1$, puts the frequencies at $1 : 6.27 : 17.55 : 34.39$, growing like the square of the mode number: on the diagram, the overtones sit far off the whole-number lines, and by the series' rule the tine should clang. What we hear is clean, because the off-line overtones die almost at once and leave the fundamental ringing alone. The operator taught two things on the way: four derivatives make the frequencies spread apart like the squares, and the way the ends are held decides whether they land on whole numbers.
+A tine is a bar clamped at one end, with the operator $A = \kappa^2\,d^4/dx^4$, and its spectrum, from $\cos\beta L\cosh\beta L = -1$, puts the overtones at 6.27 and 17.55 times the lowest, off the whole-number multiples: four derivatives spread the frequencies like the squares, and the clamped and free ends keep them off the whole numbers. A kalimba still sounds clean because those overtones die within a fraction of a second, which is observed on real kalimbas, not derived here. The next page blows the same kind of bar instead of plucking it.
 
 ::: {.family}
-**Same math elsewhere.** Harmonica reeds and the steel comb of a music box are also bars held at one end and free at the other.
+**The tine's operator family.** Harmonica reeds and the teeth of a music box's steel comb are also bars clamped at one end and free at the other: the same operator with the same ends, so the series puts them in the kalimba's [operator family](glossary.qmd#operator-family).
 :::
 
 

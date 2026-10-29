@@ -5,7 +5,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
-date-modified: 2026-10-27
+date-modified: 2026-10-29
 resources: [core.js, ins.css]
 ---
 
@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). Math: up to partial derivatives (explained). About 3 minutes for the summary; about 25 with the mathematics and the playable piano.
+Builds on [page 4, the violin string](violin.qmd), and [page 6, the kalimba](kalimba.qmd). Math: up to partial derivatives (explained). About 3 minutes for the summary; about 30 with the mathematics and the playable piano.
 :::
 
 ::: {.puzzle}
@@ -73,6 +73,10 @@ Listen first: an octave tuned to exactly 2 : 1, then a stretched one. The slow w
 </div>
 ```
 
+::: {.newidea}
+**In one sentence.** A piano wire's stiffness puts each overtone slightly above its whole-number multiple, so tuners stretch octaves to reduce the beating, a slow wobble in loudness, most at the ends of the keyboard.
+:::
+
 ::: {.gist}
 **The recipe on this instrument, in brief.**
 
@@ -80,7 +84,7 @@ Listen first: an octave tuned to exactly 2 : 1, then a stretched one. The slow w
 2. *The operator* is the string's plus the bar's, $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$, with pinned ends.
 3. *Its spectrum*: the frequencies are $f_n = n f_0\sqrt{1 + Bn^2}$, with $B$ a small stiffness constant that pushes them a little sharp.
 4. *On the diagram*: every [partial](glossary.qmd#partial), each single frequency in the sound, sits a little sharp of its line, more so the higher it goes.
-5. *What we hear*: one clear note, but the second partial sits a little above twice the fundamental, so an octave tuned to exactly 2 : 1 beats against it; tuners stretch the octave until the beat stops.
+5. *What we hear*: one clear note, but the second partial sits a little above twice the fundamental, so an octave tuned to exactly 2 : 1 beats against it; tuners stretch octaves to reduce the beating, most at the ends of the keyboard.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
@@ -202,7 +206,9 @@ Here are the frequencies of a piano note, middle C, or the last key you played o
 $$
 \frac{f_2}{f_1} = 2\sqrt{\frac{1 + 4B}{1 + B}} \approx 2\Big(1 + \frac{3B}{2}\Big),
 $$
-using $\sqrt{1+x} \approx 1 + x/2$ (square it: $(1 + x/2)^2 = 1 + x + x^2/4$, and $x^2/4$ is tiny) and $1/\sqrt{1+x} \approx 1 - x/2$ for small $x$. So the second partial is more than twice the fundamental, by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental sits just below it, and the two beat. The tuner raises the upper note until the beat stops, which makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and stiffness makes it impossible to silence all of them at once, so real tuning is a compromise; tick "Play every partial" in the demo at the top to hear it, as the stretched octave then wobbles too. Repeated across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), the top of a piano ends up sharp and the bottom flat. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
+using $\sqrt{1+x} \approx 1 + x/2$ (square it: $(1 + x/2)^2 = 1 + x + x^2/4$, and $x^2/4$ is tiny) and $1/\sqrt{1+x} \approx 1 - x/2$ for small $x$. So the second partial is more than twice the fundamental, by a factor of about $1 + 3B/2$. An upper note tuned to exactly twice the fundamental sits just below it, and the two beat. Raising the upper note slows this beat and makes the octave slightly wider than 2 : 1. Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and the upper note's own partials run sharp too, so stiffness makes it impossible to silence all of the beats at once. So the tuner can only reduce the beating: real tuning is a compromise. Tick "Play every partial" in the demo at the top to hear it: the stretched octave then wobbles too. On a stiff string, "exactly 2 : 1" lines up the wrong pair of frequencies.
+
+**The stretch is largest at the ends of the keyboard.** Repeated octave by octave across the keyboard, this is *stretch tuning*: compared with [equal temperament](glossary.qmd#equal-temperament), the top of a piano ends up sharp and the bottom flat. Two things make the stretch grow toward the ends. The small widenings add up, octave by octave, away from the middle; and the most inharmonic strings are at the two ends: the short treble strings, and the bass strings, which the size of the piano keeps short for their pitch. O. L. Railsback measured this stretch on pianos tuned by ear in the 1930s; the plot of how far each note sits from equal temperament is called the *Railsback curve*: close to equal temperament in the middle of the keyboard, flat in the bass, sharp in the treble.
 
 A struck wire moves as the sum of its modes, $u = \sum_n a_n X_n \cos(2\pi f_n t + \phi_n)$, so its sound is a sum of tones at the frequencies $f_n$ of stage 3, each fading at its own rate (damping, added to the model); the demos on this page synthesize it exactly this way. Because the low partials sit so close to the lines, the ear hears one clear note.
 
@@ -266,10 +272,10 @@ whose solution $e^{-\gamma_m t}\cos\big(\sqrt{\omega_m^2 - \gamma_m^2}\,t\big)$ 
 
 ## What we found
 
-Newton's law on a short piece of wire (stage 1) gave its operator (stage 2), $A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$: the string's operator plus the bar's. Operators add, and with pinned ends so do their eigenvalues, so the spectrum is $f_n = n f_0\sqrt{1 + Bn^2}$ (stage 3). That puts every partial a little sharp of the lines of the spectrum diagram (stage 4), more so the higher it goes: close enough that you hear one clear note, far enough that an exact octave beats, which is why tuners stretch (stage 5). The hammer, the dampers and the pedals act on how the modes start and die, not on the operator, so none of them moves a frequency by more than a hair.
+A piano wire is a string and a bar at once, $A = -c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$, and with pinned ends its spectrum, $f_n = n f_0\sqrt{1 + Bn^2}$, puts each partial slightly above its whole-number multiple, more so the higher it goes. So an exact 2 : 1 octave beats, and tuners stretch octaves to reduce the beating, most at the ends of the keyboard; the hammer, the dampers and the pedals change how the modes start and die, not where they sit. The next page turns the line into a sheet: the drum.
 
 ::: {.family}
-**Every real string is a little stiff.** Guitar and harp strings belong here too, faintly. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.
+**The stiff string's operator family.** Every real string is a little stiff, so a more exact model puts guitar and harp strings in this [operator family](glossary.qmd#operator-family) too, with a smaller stiffness constant $B$. The piano is where stiffness is large enough to hear, and large enough to change how pianos are tuned.
 :::
 
 ## Play the whole piano
@@ -355,7 +361,7 @@ Every instrument so far has been a line: a string, a tube, a bar. What changes w
 [← 6b · Harmonica](harmonica.qmd) · [Next: 8 · Drum →](drum.qmd)
 
 ::: {.refs}
-**References.** Wikipedia, [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity), [Piano pedals](https://en.wikipedia.org/wiki/Piano_pedals), [Sustain pedal](https://en.wikipedia.org/wiki/Sustain_pedal) and [Soft pedal](https://en.wikipedia.org/wiki/Soft_pedal). G. Weinreich, [The coupled motion of piano strings](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990. Sykes Pianos, [Over-damped vs under-damped upright pianos](https://sykespianos.co.uk/post/2018/12/21/over-damped-vs-under-damped-upright-pianos), 2018. N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 12. The string dimensions used for $B$ are rough illustrative values.
+**References.** Wikipedia, [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity), [Piano pedals](https://en.wikipedia.org/wiki/Piano_pedals), [Sustain pedal](https://en.wikipedia.org/wiki/Sustain_pedal) and [Soft pedal](https://en.wikipedia.org/wiki/Soft_pedal). G. Weinreich, [The coupled motion of piano strings](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990. Sykes Pianos, [Over-damped vs under-damped upright pianos](https://sykespianos.co.uk/post/2018/12/21/over-damped-vs-under-damped-upright-pianos), 2018. N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 12. O. L. Railsback, "Scale temperament as applied to piano tuning", *Journal of the Acoustical Society of America* 9 (1938), 274 ([DOI](https://doi.org/10.1121/1.1902056)), and Wikipedia, [Piano acoustics](https://en.wikipedia.org/wiki/Piano_acoustics), for the Railsback curve and why the stretch grows toward both ends. The string dimensions used for $B$ are rough illustrative values.
 :::
 
 ```{=html}

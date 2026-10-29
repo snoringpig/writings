@@ -14,7 +14,7 @@ resources: [core.js, ins.css]
 :::
 
 ::: {.pageinfo}
-Builds on [page 1, the spring](oscillator.qmd). Math: up to matrices (explained). About 3 minutes for the summary; about 25 with the mathematics.
+Builds on [page 1, the spring](oscillator.qmd). Math: up to matrices (explained). About 3 minutes for the summary; about 35 with the mathematics.
 :::
 
 ::: {.puzzle}
@@ -37,14 +37,18 @@ Listen first: press "Hear this motion" on the tangle, then press a mode button a
 </div>
 ```
 
+::: {.newidea}
+**In one sentence.** With many masses the operator is a table of numbers (a [matrix](glossary.qmd#matrix-vector)); the shapes it only rescales (its [eigenvectors](glossary.qmd#eigenvector)) swing as independent springs, and any motion is a mix of them.
+:::
+
 ::: {.gist}
-**The recipe on this instrument, in brief.**
+**The recipe on this instrument, in brief.** Stages 2 and 3 start with just two beads, the smallest case, then go on to any number.
 
 1. *Newton's law* for one bead: it is pulled toward the average of its two neighbors.
 2. *The operator* is a matrix, $A = \frac{T}{mh}K$, acting on the list of all the beads' heights; the ring closing on itself is its boundary condition.
 3. *Its spectrum*: the eigenvectors are waves around the ring; the wave with $k$ crests has eigenvalue $\frac{4T}{mh}\sin^2(\pi k/N)$, so its frequency grows more slowly than the number of crests.
 4. *On the diagram*: the low modes sit near the whole-number lines, the high ones far off.
-5. *What we hear*: a pluck starts many waves at once, each at its own frequency, so the jangle is a chord, and each clean tone is one of its eigenvectors.
+5. *What we hear*: a pluck starts many waves at once, each at its own frequency, so the jangle is a mix of pure tones off the whole-number lines, and each clean tone is one eigenvector.
 
 [Skip to what we hear](#what-we-hear) if you only want the answer.
 :::
@@ -85,11 +89,42 @@ m\,\ddot u_j = \frac{T}{h}\left(u_{j+1} - 2u_j + u_{j-1}\right).
 $$
 The bracket is twice the gap between the average of the two neighbors and bead $j$ itself: a bead sitting above its neighbors is pulled down, one sitting below is pulled up. So each bead is a mass on a spring, except that where its spring pulls it depends on where its neighbors are.
 
+A bead next to a tied-down end is pulled the same way, with that end counting as a neighbor at height 0.
+
 **What we assumed.** Small slopes, a tension that does not change as the string flexes, point-like beads on a massless string, no friction, and the idealized closed ring described above.
 
 ## 2 · The operator
 
-The force on each bead depends on its neighbors, so the rule that turns the shape into the force acts on all the beads at once. Collect the heights into one column $u = (u_1, \dots, u_N)$. The $N$ equations become one,
+**Start with two beads, ends tied.** Take two beads on a string whose two ends are tied down, at heights $x_1$ and $x_2$. Step 3 of stage 1, with the tied ends as neighbors at height 0, gives
+$$
+m\,\ddot x_1 = \frac{T}{h}\,(0 - 2x_1 + x_2), \qquad m\,\ddot x_2 = \frac{T}{h}\,(x_1 - 2x_2 + 0) .
+$$
+Each bead's acceleration depends on where the other bead is: the two equations are tangled together. Collect the two heights into one column $x = (x_1, x_2)$, and the two equations become one,
+$$
+\ddot x = -A\,x, \qquad A = \frac{T}{mh}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} .
+$$
+The product $Ax$ is worked out row by row: the first entry is the first row, $(2, -1)$, times the column $(x_1, x_2)$, that is $\frac{T}{mh}(2x_1 - x_2)$, which is minus the first equation's right side divided by $m$; the second row gives the second equation. Notice that the table is the same read across or down: entry (1, 2) equals entry (2, 1). One stretch of string joins the two beads and feels only the difference of their heights, so moving bead 2 up by one unit pulls bead 1 exactly as hard as moving bead 1 up by one unit pulls bead 2. A table with this property is called [symmetric](glossary.qmd#symmetric-matrix).
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 120" role="img" aria-label="Left: two beads on a string tied down at both ends. Right: the same two beads closed into a ring, so each bead is joined to the other on both sides.">
+  <path class="dash" d="M 20 70 L 200 70"/>
+  <rect x="14" y="58" width="6" height="24" class="fillacc" opacity="0.5"/><rect x="200" y="58" width="6" height="24" class="fillacc" opacity="0.5"/>
+  <path class="ink" d="M 20 70 L 80 45 L 140 85 L 203 70"/>
+  <circle cx="80" cy="45" r="6" class="fillacc"/><circle cx="140" cy="85" r="6" class="fillacc"/>
+  <text x="70" y="30">x₁</text><text x="132" y="108">x₂</text><text x="60" y="114">ends tied</text>
+  <circle cx="320" cy="68" r="38" class="ink" fill="none"/>
+  <circle cx="282" cy="68" r="6" class="fillacc"/><circle cx="358" cy="68" r="6" class="fillacc"/>
+  <text x="252" y="72">1</text><text x="370" y="72">2</text><text x="276" y="120">closed into a ring</text>
+</svg>
+```
+
+**The same two beads, closed into a ring.** Now join the string's two ends to each other instead of tying them down. Both of a bead's neighbors are now the other bead: bead 1 is joined to bead 2 by the string on its left and again by the string on its right. So $m\,\ddot x_1 = \frac{T}{h}(x_2 - x_1) + \frac{T}{h}(x_2 - x_1)$, and the same for bead 2:
+$$
+A_{\text{ring}} = \frac{T}{mh}\begin{pmatrix} 2 & -2 \\ -2 & 2 \end{pmatrix} .
+$$
+The same beads on the same string, held a different way, give a different operator: how the beads are held is part of the operator.
+
+**Any number of beads on a ring.** The force on each bead depends on its neighbors, so the rule that turns the shape into the force acts on all the beads at once. Collect the heights into one column $u = (u_1, \dots, u_N)$. The $N$ equations become one,
 $$
 \ddot u = -\frac{T}{mh}\,K\,u ,
 $$
@@ -109,25 +144,56 @@ a matrix acting on the list of all the beads' heights, with the ring closed (bea
 
 ## 3 · Its spectrum
 
-A mode is a shape that keeps its form while it swings. Most starting shapes change as they move: that is the tangle. But in a few special shapes, every bead is pulled back in proportion to its own height, by the same factor for every bead. Then every bead is a mass on the same spring, they all swing in step, and the shape only grows and shrinks. In matrix language, a nonzero column $v$ is an [eigenvector](glossary.qmd#eigenvector) of $A$, with [eigenvalue](glossary.qmd#eigenvalue) $\lambda$, if
-$$
-A v = \lambda\, v ,
-$$
-so the matrix only rescales it, possibly by zero. The list of all the eigenvalues is the matrix's [spectrum](glossary.qmd#spectrum). Since $A = \frac{T}{mh}K$, the eigenvectors of $A$ are those of $K$: if $Kv = s\,v$, then $Av = \lambda v$ with $\lambda = \frac{T}{mh}\,s$. So it is enough to find the eigenvectors of the simpler matrix $K$.
+A mode is a shape that keeps its form while it swings. Most starting shapes change as they move: that is the tangle. Start again with the two tied beads.
 
-**1. Each eigenvector swings like one mass on a spring.** If $Av = \lambda v$, try $u(t) = v\cos(\omega t)$. Differentiating twice gives $\ddot u = -\omega^2 v\cos\omega t$, while $-Au = -\lambda\, v\cos\omega t$. These agree when
+**1. Two beads: a lucky guess.** The two beads are mirror images of each other, which suggests adding and subtracting their equations. With the sum $S = x_1 + x_2$ and the difference $D = x_1 - x_2$, adding gives $\ddot S = -\frac{T}{mh}\big((2x_1 - x_2) + (2x_2 - x_1)\big)$ and subtracting gives $\ddot D = -\frac{T}{mh}\big((2x_1 - x_2) - (2x_2 - x_1)\big)$, that is,
 $$
-\omega^2 = \lambda .
+\ddot S = -\frac{T}{mh}\,S, \qquad \ddot D = -\frac{3T}{mh}\,D .
 $$
-Every bead swings at the same [angular frequency](glossary.qmd#angular-frequency) $\omega = \sqrt{\lambda}$ (radians per second; page 1), in the fixed shape $v$: the mass on a spring again, once for each eigenvector, at frequency $f = \sqrt{\lambda}/2\pi$.
+The tangle has come apart into two independent springs, each the spring of page 1. In $S$ the beads move up and down together, one arch, and the stretch of string between them stays level. In $D$ they move in opposite directions, two arches, and each bead is also pulled by the middle stretch, which is tilted by twice the bead's height: three times as stiff in all. Going back, $x_1 = (S + D)/2$ and $x_2 = (S - D)/2$, so every motion of the two beads is some $S$-swing plus some $D$-swing, at the frequencies $\frac{1}{2\pi}\sqrt{T/mh}$ and $\sqrt 3$ times that. Their ratio, 1 : 1.73, is already off the whole numbers.
 
-**2. With three beads, find the special shapes by hand.** For $N = 3$,
-$$
-K = \begin{pmatrix} 2 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 2 \end{pmatrix}.
-$$
-Row $j$ gives $(Kv)_j = 3v_j - (v_1 + v_2 + v_3)$. The column $(1, 1, 1)$ gives $K(1,1,1) = (0,0,0)$: an eigenvector with $s = 0$. Every bead moves up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts; this is the mode 0 of the demo. Any column whose entries add up to zero gives $(Kv)_j = 3v_j$, so $Kv = 3v$. Every such column is a combination $a(1, -1, 0) + b(0, 1, -1)$, so these eigenvectors fill a whole plane: every one is built from those two shapes, and neither of the two is a multiple of the other. The eigenvalues of $K$ are $0, 3, 3$, with 3 counted twice: it has [multiplicity](glossary.qmd#multiplicity) 2. Those of $A$ are $0$ and $3T/mh$, twice.
+```{=html}
+<svg class="fig" viewBox="0 0 300 300" style="max-width:300px" role="img" aria-label="The plane of the two bead heights, x1 across and x2 up. A mixed motion traces a tangled path. Along the tilted axes S, at 45 degrees, and D, at minus 45 degrees, the same motion is two separate back-and-forth swings.">
+<path class="dash" d="M 20 150 L 280 150"/><path class="dash" d="M 150 280 L 150 20"/>
+<text x="266" y="166">x₁</text><text x="156" y="30">x₂</text>
+<path class="acc" d="M 50 250 L 250 50"/><path class="acc" d="M 50 50 L 250 250"/>
+<text x="196" y="40">S (together)</text><text x="186" y="274">D (opposite)</text>
+<path class="ink" opacity="0.5" d="M 252 137 L 252 137 L 251 136 L 250 135 L 249 134 L 248 134 L 246 133 L 245 132 L 243 131 L 241 130 L 239 129 L 238 127 L 235 126 L 233 125 L 231 124 L 229 123 L 226 122 L 224 120 L 221 119 L 218 118 L 215 117 L 213 115 L 210 114 L 207 113 L 204 111 L 201 110 L 197 109 L 194 108 L 191 107 L 188 106 L 185 105 L 181 104 L 178 103 L 175 102 L 172 101 L 168 100 L 165 99 L 162 98 L 159 98 L 155 97 L 152 97 L 149 96 L 146 96 L 143 96 L 140 95 L 137 95 L 134 95 L 131 95 L 128 95 L 126 96 L 123 96 L 120 96 L 118 97 L 116 98 L 113 98 L 111 99 L 109 100 L 107 101 L 105 102 L 103 103 L 101 105 L 100 106 L 98 108 L 97 109 L 95 111 L 94 113 L 93 115 L 92 117 L 91 119 L 90 121 L 90 123 L 89 126 L 89 128 L 88 131 L 88 133 L 88 136 L 88 138 L 88 141 L 88 144 L 88 147 L 88 150 L 89 153 L 89 156 L 90 159 L 90 162 L 91 165 L 92 168 L 93 171 L 94 174 L 95 177 L 96 180 L 97 184 L 98 187 L 99 190 L 100 193 L 102 196 L 103 199 L 104 202 L 106 205 L 107 208 L 109 211 L 110 214 L 111 216 L 113 219 L 114 222 L 116 224 L 117 227 L 119 229 L 120 231 L 122 233 L 123 235 L 124 237 L 126 239 L 127 241 L 128 243 L 129 244 L 131 246 L 132 247 L 133 248 L 134 249 L 135 250 L 136 251 L 137 251 L 138 252 L 139 252 L 140 252 L 140 253 L 141 252 L 142 252 L 142 252 L 143 251 L 143 251 L 143 250 L 144 249 L 144 248 L 144 247 L 144 246 L 144 244 L 144 243 L 144 241 L 144 239 L 144 237 L 144 235 L 143 233 L 143 231 L 143 229 L 142 226 L 142 223 L 141 221 L 141 218 L 140 215 L 139 212 L 139 209 L 138 206 L 137 203 L 137 200 L 136 196 L 135 193 L 134 189 L 134 186 L 133 182 L 132 179 L 131 175 L 131 172 L 130 168 L 129 165 L 128 161 L 128 157 L 127 154 L 127 150 L 126 146 L 125 143 L 125 139 L 124 136 L 124 132 L 124 129 L 123 126 L 123 122 L 123 119 L 123 116 L 123 113 L 123 110 L 123 107 L 123 104 L 123 101 L 123 98 L 124 95 L 124 93 L 125 90 L 125 88 L 126 86 L 126 84 L 127 82 L 128 80 L 129 78 L 130 76 L 131 75 L 133 73 L 134 72 L 135 71 L 137 70 L 138 69 L 140 68 L 142 67 L 143 67 L 145 66 L 147 66 L 149 66 L 151 66 L 153 66 L 155 66 L 157 66 L 160 67 L 162 67 L 164 68 L 166 68 L 169 69 L 171 70 L 174 71 L 176 72 L 179 73 L 181 75 L 184 76 L 186 78 L 189 79 L 191 81 L 194 82 L 196 84 L 199 86 L 201 88 L 203 90 L 206 92 L 208 94 L 210 96 L 213 98 L 215 100 L 217 102 L 219 104 L 221 106 L 223 109 L 225 111 L 227 113 L 228 115 L 230 117 L 232 120 L 233 122 L 234 124 L 236 126 L 237 128 L 238 130 L 239 132 L 239 134 L 240 136 L 241 138 L 241 140 L 241 142 L 242 143 L 242 145 L 242 147 L 242 148 L 241 150 L 241 151 L 240 153 L 240 154 L 239 155 L 238 156 L 237 157 L 235 158 L 234 159 L 233 160 L 231 161 L 229 162 L 227 162 L 225 163 L 223 164 L 221 164 L 219 164 L 217 165 L 214 165 L 211 165 L 209 165 L 206 165 L 203 165 L 200 165 L 197 165 L 194 165 L 191 165 L 187 164 L 184 164 L 181 164 L 177 163 L 174 163 L 170 162 L 166 162 L 163 161 L 159 161 L 155 160 L 152 159 L 148 159 L 144 158 L 141 157 L 137 157 L 133 156 L 130 155 L 126 155 L 123 154 L 119 154 L 115 153 L 112 152 L 109 152 L 105 151 L 102 151 L 99 150 L 96 150 L 92 149 L 89 149 L 87 149 L 84 149 L 81 148 L 78 148 L 76 148 L 73 148 L 71 148 L 69 148 L 67 148 L 65 148 L 63 149 L 61 149 L 60 149 L 58 150 L 57 150 L 56 151 L 55 151 L 54 152 L 53 153 L 52 154 L 52 155 L 52 156 L 51 157 L 51 158 L 51 159 L 51 160 L 52 161 L 52 163 L 53 164 L 53 165 L 54 167 L 55 168 L 56 170 L 57 171 L 59 173 L 60 175 L 62 176 L 63 178 L 65 180 L 67 182 L 69 183 L 71 185 L 73 187 L 75 189 L 77 190 L 80 192 L 82 194 L 84 196 L 87 197 L 90 199 L 92 201 L 95 202 L 98 204 L 100 206 L 103 207 L 106 209 L 109 210 L 112 211 L 115 213 L 118 214 L 120 215 L 123 216 L 126 217 L 129 218 L 132 219 L 135 220 L 137 221 L 140 221 L 143 222 L 146 222 L 148 222 L 151 223 L 153 223 L 156 223 L 158 223 L 161 222 L 163 222 L 165 222 L 167 221 L 169 220 L 171 220 L 173 219 L 175 218 L 177 217 L 178 215 L 180 214 L 181 213 L 183 211 L 184 209 L 185 208 L 186 206 L 187 204 L 188 202 L 189 199 L 190 197 L 191 195 L 191 192 L 192 190 L 192 187 L 192 184 L 193 181 L 193 179 L 193 176 L 193 172 L 193 169 L 193 166 L 192 163 L 192 160 L 192 156 L 191 153 L 191 150 L 190 146 L 190 143 L 189 139 L 188 136 L 187 133 L 187 129 L 186 126 L 185 122 L 184 119 L 183 115 L 182 112 L 181 109 L 180 105 L 179 102 L 178 99 L 177 95 L 176 92 L 175 89 L 174 86 L 173 83 L 172 81 L 171 78 L 170 75 L 170 73 L 169 70 L 168 68 L 167 65 L 166 63 L 165 61 L 165 59 L 164 57 L 164 56 L 163 54 L 162 53 L 162 51 L 162 50 L 161 49 L 161 48 L 161 47 L 161 47 L 160 46 L 160 46 L 160 46 L 160 46 L 161 46 L 161 46 L 161 46 L 161 47 L 162 47 L 162 48 L 162 49 L 163 50 L 164 51 L 164 52 L 165 54 L 166 55 L 166 57 L 167 59 L 168 61 L 169 63 L 170 65 L 171 67 L 172 69 L 173 72 L 174 74 L 175 77 L 176 80 L 177 83 L 178 85 L 179 88 L 180 91 L 181 94 L 182 98 L 184 101 L 185 104 L 186 107 L 187 111 L 188 114 L 189 117 L 190 121 L 191 124 L 191 127 L 192 131 L 193 134 L 194 138 L 194 141 L 195 144 L 196 148 L 196 151 L 197 154 L 197 157 L 197 161 L 197 164 L 198 167 L 198 170 L 198 173 L 198 176 L 197 179 L 197 181 L 197 184 L 196 187 L 196 189 L 195 192 L 194 194 L 194 196 L 193 198 L 192 200 L 190 202 L 189 204 L 188 206 L 187 207 L 185 209 L 183 210 L 182 212 L 180 213 L 178 214 L 176 215 L 174 216 L 172 217 L 170 217 L 168 218 L 165 218 L 163 218 L 161 219 L 158 219 L 155 219 L 153 219 L 150 218 L 147 218 L 145 218 L 142 217 L 139 217 L 136 216 L 133 215 L 130 214 L 127 213 L 124 212 L 121 211 L 118 210 L 115 209 L 112 208 L 109 207 L 106 205 L 103 204 L 100 202 L 98 201 L 95 199 L 92 198 L 89 196 L 87 195 L 84 193 L 81 191 L 79 190 L 77 188 L 74 186 L 72 185 L 70 183 L 68 182 L 66 180 L 64 178 L 62 177 L 60 175 L 59 174 L 57 172 L 56 171 L 55 169 L 54 168 L 53 167 L 52 165 L 51 164 L 51 163 L 50 162 L 50 161 L 50 160"/>
+</svg>
+```
 
-**3. For any number of beads, the special shapes are waves around the ring.** On a ring no bead is special, so try waves that fit a whole number of times around: $v_j = \cos(2\pi jk/N)$, a wave with $k$ crests. The identity $\cos(a + b) + \cos(a - b) = 2\cos a\cos b$, with $a = 2\pi jk/N$ and $b = 2\pi k/N$, gives $v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j$, so
+In the plane of the two heights, with $x_1$ across and $x_2$ up, a mixed motion traces a tangled path; measured along the tilted directions $S$ and $D$, the same motion is two separate back-and-forth swings.
+
+**2. Why the good directions are eigenvectors.** Guessing worked because the two beads are mirror images. In general, look for a motion that keeps its shape and only changes its size: $x(t) = v\,q(t)$, a fixed column $v$ times a number $q(t)$ that changes with time. Newton's law $\ddot x = -Ax$ becomes $\ddot q\,v = -q\,Av$. At any moment when $q \neq 0$, this says $Av = (-\ddot q/q)\,v$: the matrix only rescales $v$. Since $A$ and $v$ do not change with time, the rescaling factor $-\ddot q/q$ cannot change either; call it $\lambda$. So
+$$
+A v = \lambda\, v, \qquad \ddot q = -\lambda\, q .
+$$
+A nonzero column $v$ with $Av = \lambda v$ is called an [eigenvector](glossary.qmd#eigenvector) of $A$, and $\lambda$ its [eigenvalue](glossary.qmd#eigenvalue); the list of all the eigenvalues is the matrix's [spectrum](glossary.qmd#spectrum). And $\ddot q = -\lambda q$ is page 1's spring: $q = \cos(\omega t + \phi)$ with $\omega^2 = \lambda$, so the shape $v$ swings at [angular frequency](glossary.qmd#angular-frequency) $\omega = \sqrt{\lambda}$, frequency $f = \sqrt{\lambda}/2\pi$. The directions in which the beads split into independent springs are exactly the eigenvectors. Since $A = \frac{T}{mh}K$, the eigenvectors of $A$ are those of the simpler table $K$: if $Kv = s\,v$, then $Av = \lambda v$ with $\lambda = \frac{T}{mh}\,s$.
+
+**3. Finding them by hand.** For the two tied beads $K = \begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$. Write $v = (a, b)$. The two rows of $Kv = s\,v$ say $2a - b = sa$ and $-a + 2b = sb$, that is, $b = (2 - s)\,a$ and $a = (2 - s)\,b$. Here $a \neq 0$, since otherwise the first equation gives $b = 0$ and $v$ would be zero. Putting the first equation into the second, $a = (2 - s)^2 a$, so $(2 - s)^2 = 1$: $s = 1$ or $s = 3$. For $s = 1$, $b = a$: the column $(1, 1)$, the direction $S$. For $s = 3$, $b = -a$: the column $(1, -1)$, the direction $D$. Check: $K(1, 1) = (2 - 1, -1 + 2) = (1, 1)$ and $K(1, -1) = (3, -3) = 3\,(1, -1)$. The eigenvalues of $A$ are $T/mh$ and $3T/mh$, the two springs of step 1.
+
+**4. The ring of two beads.** For the ring, $K_{\text{ring}} = \begin{pmatrix} 2 & -2 \\ -2 & 2 \end{pmatrix}$. Now $K_{\text{ring}}(1, 1) = (0, 0)$: an eigenvector with $s = 0$. Both beads move up together, nothing stretches, nothing pulls back, and the frequency is 0, so the ring just drifts, with no sound. And $K_{\text{ring}}(1, -1) = (4, -4)$: $s = 4$, the beads swinging oppositely. Tied ends give eigenvalues proportional to 1 and 3; the ring gives 0 and 4. The way the beads are held changed the spectrum.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <div class="r2wrap" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0.75rem;align-items:center">
+    <canvas id="r2Canvas" style="height:170px" aria-label="Two beads on a string, moving: tied at both ends, or closed into a ring"></canvas>
+    <canvas id="r2Plane" style="height:170px" aria-label="The plane of the two heights, with the tilted S and D directions and the path of the motion"></canvas>
+  </div>
+  <div class="controls" role="group" aria-label="Start the two beads">
+    <button type="button" id="r2S" aria-pressed="false">Together, S</button>
+    <button type="button" id="r2D" aria-pressed="false">Opposite, D</button>
+    <button type="button" id="r2M" aria-pressed="true">A mix</button>
+    <label class="check"><input type="checkbox" id="r2Ring"> close into a ring</label>
+    <button type="button" id="r2Play" class="primary">Hear this motion</button>
+  </div>
+  <p class="cap">Slowed down. Tied ends: S swings at 1×, D at 1.73× (√3). Closed into a ring: S has nothing pulling it back, so it only drifts (here it just stays shifted), and D swings at 2×. In the plane on the right, the path of a mix is a tangle, while S and D each run straight along their own tilted line.</p>
+</div>
+</div>
+```
+
+**5. For any number of beads on a ring, the special shapes are waves around the ring.** On a ring no bead is special, so try waves that fit a whole number of times around: $v_j = \cos(2\pi jk/N)$, a wave with $k$ crests. The identity $\cos(a + b) + \cos(a - b) = 2\cos a\cos b$, with $a = 2\pi jk/N$ and $b = 2\pi k/N$, gives $v_{j+1} + v_{j-1} = 2\cos(2\pi k/N)\,v_j$, so
 $$
 \begin{aligned}
 (Kv)_j &= 2v_j - v_{j+1} - v_{j-1} \\
@@ -150,7 +216,7 @@ In the 1730s Daniel Bernoulli studied systems like this, weights strung along a 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Every motion is a sum of modes <span class="needs">uses linear algebra</span></summary>
 
-The matrix $A$ is symmetric: the entry in row $i$, column $j$ equals the entry in row $j$, column $i$. By the [spectral theorem for symmetric matrices](https://en.wikipedia.org/wiki/Spectral_theorem), $A$ has a basis of $N$ mutually [orthogonal](glossary.qmd#orthogonal) (perpendicular) eigenvectors $v^{(1)}, \dots, v^{(N)}$ with real eigenvalues $\lambda_1, \dots, \lambda_N$. Write the motion as $u(t) = \sum_k a_k(t)\,v^{(k)}$. Substituting into $\ddot u = -Au$ and taking the dot product with $v^{(k)}$, which removes every other term because they are perpendicular, gives $\ddot a_k = -\lambda_k a_k$: each coefficient obeys its own mass-on-a-spring equation, with $\omega_k = \sqrt{\lambda_k}$. With starting shape $u(0) = \sum_k c_k v^{(k)}$ and starting velocity $\dot u(0) = \sum_k d_k v^{(k)}$, and by the uniqueness of solutions from page 1, every motion is $u(t) = \sum_k \big(c_k\cos\omega_k t + \frac{d_k}{\omega_k}\sin\omega_k t\big)v^{(k)}$, read as $c_k + d_k t$ when $\omega_k = 0$. The eigenvalues are nonnegative because $u \cdot Ku = \sum_j u_j(2u_j - u_{j+1} - u_{j-1}) = \sum_j (u_{j+1} - u_j)^2 \ge 0$, by regrouping the terms around the ring; for an eigenvector of $A$ this gives $\lambda\,(u\cdot u) = \frac{T}{mh}\,u\cdot Ku \ge 0$.
+The matrix $A$ is symmetric, so the hub's [Result](spectrum.qmd#why-every-motion-is-a-mix-of-modes) applies word for word: its eigenvectors form a perpendicular basis, each amount obeys its own mass-on-a-spring equation, and the starting shape and velocity fix the motion. The one fact specific to the ring is that the eigenvalues are nonnegative: $u \cdot Ku = \sum_j u_j(2u_j - u_{j+1} - u_{j-1}) = \sum_j (u_{j+1} - u_j)^2 \ge 0$, by regrouping the terms around the ring, and for an eigenvector of $A$ this gives $\lambda\,(u\cdot u) = \frac{T}{mh}\,u\cdot Ku \ge 0$.
 
 </details>
 :::
@@ -179,7 +245,7 @@ The stems are the frequencies $f_k$ from the result box, as multiples of mode 1'
 
 ## 5 · What we hear {#what-we-hear}
 
-**The jangle is a chord.** Pluck one bead and the starting shape is not a wave; but it is a sum of waves, and each wave swings at its own frequency. So the plucked ring sounds all those frequencies at once. They sit off the lines, so the chord is a jangle. Start the ring in one wave's shape and only that one frequency sounds: a pure tone. The clean tones were in the jangle all along, as its eigenvectors.
+**The jangle is a mix of pure tones.** Pluck one bead and the starting shape is not a wave; but it is a sum of waves, and each wave swings at its own frequency. So the plucked ring sounds all those frequencies at once. They sit off the lines, so they don't fuse into one note: a jangle. Start the ring in one wave's shape and only that one frequency sounds: a pure tone. The clean tones were in the jangle all along, as its eigenvectors.
 
 Any motion of the ring is a sum of modes, $u(t) = \sum_k a_k\, v^{(k)}\cos(2\pi f_k t + \phi_k)$, each swinging at its own frequency as if it were alone (the proof is in the fold above). The demo's sound is exactly this sum: it adds the modes' frequencies $f_k$, with mode 1 set to 196 Hz, each as strong as the motion contains it.
 
@@ -195,7 +261,7 @@ Mode $k$ has frequency proportional to $\sin(\pi k/N)$, which is not proportiona
 
 ## What we found
 
-Newton's law for each bead gave the equation $m\ddot u_j = \frac{T}{h}(u_{j+1} - 2u_j + u_{j-1})$; written for all the beads at once, it reads $\ddot u = -Au$ with the operator $A = \frac{T}{mh}K$, a matrix whose corner entries close the ring. Its eigenvectors are waves around the ring, its eigenvalues are $\lambda_k = \frac{4T}{mh}\sin^2(\pi k/N)$, and their square roots, divided by $2\pi$, are the modes' frequencies. On the spectrum diagram the low modes sit near the lines but not on them. Any motion, even a tangle, is a sum of modes: the jangle you hear is that chord, and each clean tone is one eigenvector.
+With many masses the operator is a matrix, and its eigenvectors are the directions in which the motion splits into independent springs: for two tied beads, together and opposite, at 1 and √3 times; for $N$ beads on a ring, waves with $\lambda_k = \frac{4T}{mh}\sin^2(\pi k/N)$. Any motion, even a tangle, is a mix of these springs, and on the spectrum diagram the low ones sit near the lines but not on them.
 
 ## The next puzzle
 
@@ -293,6 +359,73 @@ The beads' low frequencies creep toward the lines as you add beads. With infinit
   }
   C.onTheme(draw);
   draw();
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  // Two beads: S = x1 + x2 and D = x1 - x2 swing as independent springs. Tied ends: lambda = 1, 3 (in units of T/mh);
+  // ring: lambda = 0 (drift), 4. The picture runs slowed down: the S spring of the tied beads takes 2.5 s per swing.
+  var C = Core, cv = document.getElementById("r2Canvas"), pl = document.getElementById("r2Plane");
+  if (!cv || !pl) return;
+  var g = cv.getContext("2d"), h = pl.getContext("2d"), aS = 0.55, aD = 0.45, ring = false, t0 = performance.now(), trail = [], which = "M";
+  var BASE = 0.4; // visual swings per second for lambda = 1
+  function lam() { return ring ? [0, 4] : [1, 3]; }
+  function setStart(k) {
+    which = k; aS = k === "D" ? 0 : (k === "S" ? 0.8 : 0.55); aD = k === "S" ? 0 : (k === "D" ? 0.8 : 0.45);
+    ["S", "D", "M"].forEach(function (q) { document.getElementById("r2" + q).setAttribute("aria-pressed", q === k ? "true" : "false"); });
+    t0 = performance.now(); trail = [];
+  }
+  function heights(t) {
+    var L = lam(), wS = 2 * Math.PI * BASE * Math.sqrt(L[0]), wD = 2 * Math.PI * BASE * Math.sqrt(L[1]);
+    var S = aS * Math.cos(wS * t), D = aD * Math.cos(wD * t + (which === "M" ? 0.3 : 0));
+    return [(S + D) / 2, (S - D) / 2];
+  }
+  function draw(now) {
+    var t = (now - t0) / 1000, x = heights(t);
+    var d = C.fit(cv), W = cv.width, H = cv.height, A = H * 0.38;
+    g.clearRect(0, 0, W, H); g.lineWidth = 2 * d;
+    if (!ring) {
+      var x0 = W * 0.06, x3 = W * 0.94, xa = W * 0.36, xb = W * 0.64, y0 = H / 2;
+      g.strokeStyle = C.rgb("--grid"); g.setLineDash([4 * d, 4 * d]); g.beginPath(); g.moveTo(x0, y0); g.lineTo(x3, y0); g.stroke(); g.setLineDash([]);
+      g.fillStyle = C.rgb("--muted"); g.fillRect(x0 - 4 * d, y0 - 14 * d, 4 * d, 28 * d); g.fillRect(x3, y0 - 14 * d, 4 * d, 28 * d);
+      var ya = y0 - A * x[0], yb = y0 - A * x[1];
+      g.strokeStyle = C.rgb("--ink"); g.beginPath(); g.moveTo(x0, y0); g.lineTo(xa, ya); g.lineTo(xb, yb); g.lineTo(x3, y0); g.stroke();
+      g.fillStyle = C.rgb("--accent"); [[xa, ya], [xb, yb]].forEach(function (p) { g.beginPath(); g.arc(p[0], p[1], 7 * d, 0, 2 * Math.PI); g.fill(); });
+    } else {
+      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.3;
+      g.strokeStyle = C.rgb("--grid"); g.beginPath(); g.arc(cx, cy, R, 0, 2 * Math.PI); g.stroke();
+      var r1 = R + A * 0.5 * x[0], r2 = R + A * 0.5 * x[1];
+      g.strokeStyle = C.rgb("--ink"); g.beginPath(); g.ellipse(cx + (r2 - r1) / 2, cy, (r1 + r2) / 2, R, 0, 0, 2 * Math.PI); g.stroke();
+      g.fillStyle = C.rgb("--accent"); [[cx - r1, cy], [cx + r2, cy]].forEach(function (p) { g.beginPath(); g.arc(p[0], p[1], 7 * d, 0, 2 * Math.PI); g.fill(); });
+    }
+    // the plane of the two heights
+    var e = C.fit(pl), P = pl.width, Q = pl.height, m = Math.min(P, Q), ox = P / 2, oy = Q / 2, sc = m * 0.42;
+    h.clearRect(0, 0, P, Q); h.lineWidth = 1 * e;
+    h.strokeStyle = C.rgb("--grid"); h.beginPath(); h.moveTo(ox - sc, oy); h.lineTo(ox + sc, oy); h.moveTo(ox, oy - sc); h.lineTo(ox, oy + sc); h.stroke();
+    h.strokeStyle = C.rgb("--accent"); h.lineWidth = 1.5 * e; h.beginPath(); h.moveTo(ox - sc * 0.8, oy + sc * 0.8); h.lineTo(ox + sc * 0.8, oy - sc * 0.8); h.moveTo(ox - sc * 0.8, oy - sc * 0.8); h.lineTo(ox + sc * 0.8, oy + sc * 0.8); h.stroke();
+    h.fillStyle = C.rgb("--muted"); h.font = (11 * e) + "px " + getComputedStyle(document.body).fontFamily;
+    h.fillText("x₁", ox + sc - 12 * e, oy - 5 * e); h.fillText("x₂", ox + 5 * e, oy - sc + 10 * e); h.fillText("S", ox + sc * 0.82, oy - sc * 0.82); h.fillText("D", ox + sc * 0.82, oy + sc * 0.9);
+    trail.push([x[0], x[1]]); if (trail.length > 420) trail.shift();
+    h.strokeStyle = C.rgb("--ink"); h.globalAlpha = 0.6; h.lineWidth = 1.5 * e; h.beginPath();
+    trail.forEach(function (p, i) { var X = ox + sc * p[0] * 1.6, Y = oy - sc * p[1] * 1.6; if (i) h.lineTo(X, Y); else h.moveTo(X, Y); }); h.stroke(); h.globalAlpha = 1;
+    h.fillStyle = C.rgb("--accent"); h.beginPath(); h.arc(ox + sc * x[0] * 1.6, oy - sc * x[1] * 1.6, 4 * e, 0, 2 * Math.PI); h.fill();
+    requestAnimationFrame(draw);
+  }
+  ["S", "D", "M"].forEach(function (k) { document.getElementById("r2" + k).addEventListener("click", function () { setStart(k); }); });
+  document.getElementById("r2Ring").addEventListener("change", function (ev) { ring = ev.target.checked; t0 = performance.now(); trail = []; });
+  document.getElementById("r2Play").addEventListener("click", function () {
+    // S at 196 Hz for lambda = 1; a drift (lambda = 0) makes no sound
+    var L = lam(), parts = [];
+    if (L[0] > 0 && aS > 0) parts.push({ f: 196 * Math.sqrt(L[0]), amp: aS, tau: 0.9 });
+    if (aD > 0) parts.push({ f: 196 * Math.sqrt(L[1]), amp: aD, tau: 0.9 });
+    if (!parts.length) parts = [{ f: 1, amp: 0, tau: 1 }];
+    C.play(C.render(parts, 2.2), 0.7);
+  });
+  requestAnimationFrame(draw);
 })();
 </script>
 ```
