@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/one-string-end-to-end/index.html",
+      "/posts/other-instruments-same-recipe/index.html",
       "/posts/a-piano/index.html",
       "/posts/instruments-as-operators/index.html",
       "/posts/bicycle-wheel/index.html",

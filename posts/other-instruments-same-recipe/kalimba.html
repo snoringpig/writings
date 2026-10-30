@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.20">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-29">
+<meta name="description" content="The kalimba tine: its overtones sit far off the whole-number lines, and the note still sounds clean because they fade within a fraction of a second.">
+
+<title>Why does a kalimba sound clean? – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Why does a kalimba sound clean?</h1>
+<p class="subtitle lead">The Shape of a Sound · 3 · Deep dive</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">music</div>
+    <div class="quarto-category">the-shape-of-a-sound</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    The kalimba tine: its overtones sit far off the whole-number lines, and the note still sounds clean because they fade within a fraction of a second.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/other-instruments-same-recipe/clarinet.html">← Clarinet</a> · <a href="../../posts/other-instruments-same-recipe/harmonica.html">Harmonica →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p>A deep dive from the <a href="../../posts/other-instruments-same-recipe/index.html#kalimba">kalimba entry</a> of post 3. Builds on <a href="../../posts/one-string-end-to-end/index.html">post 2, One string, end to end</a>. Uses derivatives, and cosh and sinh (explained); proofs and fine print are in folds you can skip. About 12 minutes. Written in collaboration with Claude, Anthropic’s AI model.</p>
+</div>
+<div class="puzzle page-columns page-full">
+<p>A kalimba tine’s first <a href="../../posts/instruments-as-operators/glossary.html#partial">overtone</a> sits at about 6.3 times its <a href="../../posts/instruments-as-operators/glossary.html#fundamental">fundamental</a>, far off the whole numbers, and overtones off the whole numbers are what make a bell clang.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> So why does a kalimba sound like a clean note?</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Inharmonicity">Inharmonicity</a>: bells and other instruments whose overtones are not whole-number multiples of the fundamental.</p></div></div></div>
+<p>A kalimba sounds clean because its off-line overtone dies within a fraction of a second, and the fundamental rings on alone. Tap a tine; then tick the box, which keeps the overtones ringing, and tap it again.</p>
+<style>
+.slice text { font-family: var(--f-mono); font-size: 12px; fill: var(--ink); }
+.slice .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.5; }
+.slice .m { fill: none; stroke: var(--pos); stroke-width: 2; }
+.slice .v { stroke: var(--neg); stroke-width: 2; }
+.slice .vh { fill: var(--neg); }
+.slice .mh { fill: var(--pos); }
+.slice .ax { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+</style>
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="kal" style="height:300px" aria-label="Seventeen kalimba tines. Tap a tine to pluck it; drag across tines for a glissando."></canvas>
+  <div class="controls" style="padding:0.5rem 0.25rem 0">
+    <label class="check"><input type="checkbox" id="keq"> Overtones ring as long as the fundamental</label>
+    <span class="readout" id="kRead" style="flex-basis:100%">Tap a tine, or drag across several.</span>
+  </div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">The tines are drawn to scale: a tine half as long sounds two octaves higher, as this page explains.</p>
+</section>
+</div>
+<p>The reason, in one sentence: <strong>a tine springs back by resisting bending, which puts its overtones far off the whole-number lines, and the strongest of them starts loud but fades almost at once.</strong> The first half follows from Newton’s law; the second is measured.</p>
+<section id="newton" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="newton">Where the equation comes from</h2>
+<p>A tine is under no tension: it springs back because steel resists being bent. Let <span class="math inline">u(x, t)</span> be its height at distance <span class="math inline">x</span> from the clamp. Bend it, and the steel on the outside of the curve stretches while the inside compresses; together these forces turn each cross-section, a <a href="../../posts/instruments-as-operators/glossary.html#moment">bending moment</a> <span class="math inline">M = EI\,u_{xx}</span> proportional to the curvature (<span class="math inline">E</span> is steel’s <a href="../../posts/instruments-as-operators/glossary.html#youngs-modulus">Young’s modulus</a>, how stiff the material is, and <span class="math inline">I</span> the <a href="../../posts/instruments-as-operators/glossary.html#second-moment">second moment of area</a>, how strongly the cross-section’s shape resists bending).</p>
+<p>A thin slice of the tine cannot spin, so the moments on its two faces are balanced by a sideways shear force <span class="math inline">V = -M_x</span>, and the difference of the shear forces on its two faces accelerates it. For a slice of density <span class="math inline">\rho</span> and cross-sectional area <span class="math inline">S</span>, Newton’s law gives <span class="math display">
+u_{tt} = -\kappa^2 u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho S},
+</span> the <a href="../../posts/instruments-as-operators/glossary.html#beam">Euler–Bernoulli beam</a> equation, with four derivatives where the string had two.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Euler–Bernoulli beam theory</a>; N. H. Fletcher and T. D. Rossing, <a href="https://link.springer.com/book/10.1007/978-0-387-21603-4"><em>The Physics of Musical Instruments</em></a>, 2nd ed., Springer, 1998, chapter 2 (bars).</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Cantilever">Cantilever</a>: a beam supported at one end only.</p></div></div><p>The ends complete the problem. The base is <a href="../../posts/instruments-as-operators/glossary.html#clamped">clamped</a>: it can neither move nor tilt, <span class="math inline">u = u_x = 0</span>. The tip is <a href="../../posts/instruments-as-operators/glossary.html#free-end">free</a>: no moment and no shear force act there, <span class="math inline">u_{xx} = u_{xxx} = 0</span>. A bar held like this is a <a href="../../posts/instruments-as-operators/glossary.html#cantilever">cantilever</a>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> So the equation reads <span class="math inline">u_{tt} = -Au</span> with <span class="math display">
+A = \kappa^2\,\frac{d^4}{dx^4},
+</span> acting on shapes with <span class="math inline">u = u_x = 0</span> at the clamp and <span class="math inline">u_{xx} = u_{xxx} = 0</span> at the tip. The model assumes small slopes, a uniform bar clamped at exactly one point, and no friction.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>The slice, step by step <span class="needs">an integral over a cross-section</span>
+</summary>
+<p>Bend the bar, and a middle line, the neutral axis, keeps its length. For small slopes the curvature is <span class="math inline">u_{xx}</span>, and a fiber at height <span class="math inline">y</span> above the neutral axis is stretched by the fraction <span class="math inline">-y\,u_{xx}</span>, so by Hooke’s law it carries the force per unit area <span class="math inline">-E\,y\,u_{xx}</span>. Over the cross-section these forces cancel, but their turning effects add up to <span class="math display">
+\begin{gathered}
+M = -\int y(-Ey\,u_{xx})\,dA = EI\,u_{xx}, \\
+I = \int y^2\,dA .
+\end{gathered}
+</span> A thin slice’s rotational inertia is negligible, so the turning effects on it balance: <span class="math inline">V\,dx + dM = 0</span>, that is, <span class="math inline">V = -M_x = -EI\,u_{xxx}</span>. The shear forces on the two faces differ by <span class="math inline">V_x\,dx</span>, which accelerates the slice’s mass <span class="math inline">\rho S\,dx</span>: <span class="math inline">\rho S\,u_{tt} = V_x = -EI\,u_{xxxx}</span>. A fourth-order equation needs two conditions at each end, which the clamp and the free tip supply. The model ignores the slices’ rotational inertia and shear deformation, which matter only for thick bars and high modes (Wikipedia, <a href="https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory">Euler–Bernoulli beam theory</a>).</p>
+</details>
+</div>
+<p><strong>What four derivatives do.</strong> Squeeze a shape into half the length and every rate of change along it doubles. A string’s pull depends on two derivatives, so it grows <span class="math inline">2 \times 2 = 4</span> times; a tine’s push depends on four, so it grows <span class="math inline">2^4 = 16</span> times. Short wiggles are far stiffer in a tine than in a string, and both of the tine’s surprises below come from this.</p>
+</section>
+<section id="spectrum" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="spectrum">The tine’s shapes</h2>
+<p>As for the string, the shapes that matter are the ones <span class="math inline">A</span> only stretches, <span class="math inline">AX = \lambda X</span>. Write <span class="math inline">\lambda = \kappa^2\beta^4</span>, so that <span class="math inline">X'''' = \beta^4X</span>. Four functions return to themselves after four derivatives: <span class="math inline">\cos\beta x</span> and <span class="math inline">\sin\beta x</span>, and <span class="math inline">\cosh\beta x</span> and <span class="math inline">\sinh\beta x</span>, the <a href="../../posts/instruments-as-operators/glossary.html#hyperbolic">hyperbolic functions</a> <span class="math inline">\cosh y = (e^y + e^{-y})/2</span> and <span class="math inline">\sinh y = (e^y - e^{-y})/2</span>. The four end conditions are four equations for the four coefficients, and they have a solution other than zero exactly when <span class="math display">
+\cos\beta L\,\cosh\beta L = -1 .
+</span> Since <span class="math inline">\cosh\beta L</span> grows fast, <span class="math inline">\cos\beta L</span> must be close to 0, so <span class="math inline">\beta L</span> sits near <span class="math inline">(n - \tfrac12)\pi</span>. Solved numerically, the roots are <span class="math inline">\beta_nL = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots</span>, and so <span class="math display">
+\lambda_n = \kappa^2\beta_n^4, \qquad f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{\kappa\,\beta_n^2}{2\pi},
+</span> in the ratios <span class="math inline">1 : 6.27 : 17.55 : 34.39</span>, growing like <span class="math inline">(2n - 1)^2</span>: off the whole-number lines.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> The first root is the furthest from its estimate, <span class="math inline">\pi/2 \approx 1.571</span>, and that shift is what breaks the pattern: if every root sat exactly at <span class="math inline">(n - \tfrac12)\pi</span>, the ratios would be the whole numbers <span class="math inline">1 : 9 : 25</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;N. H. Fletcher and T. D. Rossing, <a href="https://link.springer.com/book/10.1007/978-0-387-21603-4"><em>The Physics of Musical Instruments</em></a>, 2nd ed., Springer, 1998, chapter 2: the clamped–free bar’s frequencies, in the ratios 1 : 6.27 : 17.55 : 34.39.</p></div></div><div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>The mode condition from the four end conditions <span class="needs">a 2×2 determinant</span>
+</summary>
+<p>The clamp, <span class="math inline">X(0) = X'(0) = 0</span>, leaves two constants: <span class="math display">
+\begin{aligned}
+X = {} &amp; a\,(\cos\beta x - \cosh\beta x) \\
+&amp; + b\,(\sin\beta x - \sinh\beta x) .
+\end{aligned}
+</span> With the shorthand <span class="math inline">c_1 = \cos\beta L</span>, <span class="math inline">s_1 = \sin\beta L</span>, <span class="math inline">c_2 = \cosh\beta L</span>, <span class="math inline">s_2 = \sinh\beta L</span>, and dropping the common factors <span class="math inline">\beta^2</span> and <span class="math inline">\beta^3</span>, the free tip’s <span class="math inline">X''(L) = 0</span> and <span class="math inline">X'''(L) = 0</span> read <span class="math display">
+\begin{gathered}
+-(c_1 + c_2)\,a - (s_1 + s_2)\,b = 0, \\
+(s_1 - s_2)\,a - (c_1 + c_2)\,b = 0 .
+\end{gathered}
+</span> Two equations <span class="math inline">pa + qb = 0</span> and <span class="math inline">ra + sb = 0</span> have a solution other than <span class="math inline">a = b = 0</span> exactly when the <a href="../../posts/instruments-as-operators/glossary.html#determinant">determinant</a> <span class="math inline">ps - qr</span> vanishes. Here <span class="math display">
+\begin{aligned}
+&amp; (c_1 + c_2)^2 + (s_1 + s_2)(s_1 - s_2) \\
+&amp; \quad = c_1^2 + s_1^2 + 2c_1c_2 + c_2^2 - s_2^2 \\
+&amp; \quad = 2 + 2c_1c_2 ,
+\end{aligned}
+</span> by <span class="math inline">c_1^2 + s_1^2 = 1</span> and <span class="math inline">c_2^2 - s_2^2 = 1</span>. So a mode exists exactly when <span class="math inline">\cos\beta L\,\cosh\beta L = -1</span>. The modes are <span class="math inline">X_n = \cosh\beta_n x - \cos\beta_n x - \sigma_n(\sinh\beta_n x - \sin\beta_n x)</span>, with <span class="math inline">\sigma_n = (\sinh\beta_nL - \sin\beta_nL)/(\cosh\beta_nL + \cos\beta_nL)</span> from the second equation.</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Reader question</span>Would other ends give whole numbers?
+</summary>
+<p>Yes, for some. A bar held in place at both ends but free to pivot has <span class="math inline">u = u_{xx} = 0</span> at each end. Then <span class="math inline">\sin(n\pi x/L)</span> satisfies all four conditions, four derivatives multiply it by <span class="math inline">(n\pi/L)^4</span>, and the frequency ratios are <span class="math inline">1 : 4 : 9 : 16</span>, whole numbers. The clamp and the free tip are what move the roots, and the first root most.</p>
+</details>
+</div>
+<p>In the panel, each stem is one <span class="math inline">f_n</span> on the pitch ruler of <a href="../../posts/what-you-hear/index.html">post 1</a>, against its gray whole-number lines; 17.55× and 34.39× are off the right edge. A stem’s height is how hard that mode pushes on the bridge just after a pluck, the subject of the next section. Tap a stem to see its shape.</p>
+<div class="ins">
+<div class="panel">
+    <h3 class="anchored">Modes of one tine · tap a stem</h3>
+    <svg class="spec" id="kSpec" viewbox="0 0 320 120" aria-label="Partials of a plucked tine"></svg>
+    <canvas id="kShape" style="height:140px" aria-label="Side view of the selected tine mode"></canvas>
+    <div class="readout" id="kSel"></div>
+  </div>
+</div>
+</section>
+<section id="ringing" class="level2">
+<h2 class="anchored" data-anchor-id="ringing">The pluck: a click</h2>
+<p>Released at rest from the bent shape a thumb holds it in, the tine moves as a sum of its shapes, each swinging at its own frequency: <span class="math display">
+u(x, t) = \sum_{n = 1}^{\infty} a_n \cos(2\pi f_n t)\,X_n(x) .
+</span> In how far the tine swings, the first overtone is tiny: <span class="math inline">a_2</span> is 2.5% of <span class="math inline">a_1</span>, because each mode gives way to the thumb in inverse proportion to its stiffness <span class="math inline">\lambda_n</span>. But the kalimba’s body feels the push of the tine on the bridge, not its swing, and in that push the higher modes weigh more. There the first overtone starts at about 55% of the fundamental. That strong start is the click at the beginning of each note.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>How strongly a pluck at the tip starts each mode <span class="needs">integration by parts</span>
+</summary>
+<ol type="1">
+<li><em>The pluck shape.</em> Before release, a push <span class="math inline">F</span> at the tip holds the tine still. Inside, nothing pushes, so <span class="math inline">EI\,u_0'''' = 0</span> and <span class="math inline">u_0</span> is a cubic. The clamp, the moment-free tip and the tip height <span class="math inline">h</span> leave <span class="math inline">u_0 = h\,x^2(3L - x)/2L^3</span>, with <span class="math inline">u_0'''(L) = -3h/L^3 \ne 0</span>: the shear force <span class="math inline">F = 3EIh/L^3</span> of the thumb. The start is smooth, as it must be: a shape with a corner has <span class="math inline">u_x</span> jumping, so <span class="math inline">u_{xx}</span> contains a spike and the bending energy <span class="math inline">\tfrac12 EI\int (u_{xx})^2</span> is infinite, which a finite push cannot store. The start fails the tip condition <span class="math inline">u_{xxx}(L) = 0</span>, but only where the thumb pushed. That is allowed: in post 2’s <a href="../../posts/one-string-end-to-end/index.html#decoupling">weak sense of solution</a>, a solution is tested only against smooth shapes <span class="math inline">\varphi</span> that satisfy all four end conditions, through <span class="math inline">\langle u(t), \varphi\rangle</span>, so the series needs only a start of finite bending energy with <span class="math inline">u_0 = u_0' = 0</span> at the clamp; the tip’s conditions need not hold.</li>
+<li><em>Split it into modes.</em> Write <span class="math inline">u_0 = \sum_n a_n X_n</span>, each mode scaled so that <span class="math inline">\int_0^L X_n^2\,dx = L</span>, and compute <span class="math inline">\int_0^L EI\,u_0\,X_n''''\,dx</span> in two ways. By the mode equation <span class="math inline">EI\,X_n'''' = \rho S\,\omega_n^2X_n</span>, with <span class="math inline">\omega_n = 2\pi f_n</span>, and because different modes are perpendicular, it equals <span class="math inline">\rho SL\,\omega_n^2\,a_n</span>. Integrating by parts four times instead, every term vanishes except the tip’s shear force times <span class="math inline">X_n(L)</span>. So <span class="math inline">\rho SL\,\omega_n^2\,a_n = F\,X_n(L)</span>: mode <span class="math inline">n</span> is a spring of stiffness proportional to <span class="math inline">\omega_n^2</span>, pushed with a force proportional to its value at the tip.</li>
+<li><em>Tip values.</em> In the form of the fold above, <span class="math inline">\sigma_1 \approx 0.734</span>, <span class="math inline">\sigma_2 \approx 1.018</span>, and every mode has <span class="math inline">X_n(L) = \pm2</span> (a known property of clamped–free modes, easily confirmed numerically). So <span class="math inline">a_n \propto 1/\omega_n^2</span>, and <span class="math inline">a_2/a_1 = 1/6.27^2 \approx 2.5\%</span>.</li>
+<li><em>Forces on the bridge.</em> In this model the tine is clamped right at the bridge, so the forces at the clamp are the forces on the bridge. With <span class="math inline">X_n''(0) = 2\beta_n^2</span> and <span class="math inline">X_n'''(0) = -2\sigma_n\beta_n^3</span>, and <span class="math inline">a_n \propto 1/\beta_n^4</span>, the second mode’s bending moment at the clamp is <span class="math inline">(\beta_1/\beta_2)^2 \approx 16\%</span> of the first’s, and its shear force <span class="math inline">(\sigma_2/\sigma_1)(\beta_1/\beta_2) \approx 1.39 \times 0.40 \approx 55\%</span>. These are two measures of the push, not a range of uncertainty; the demo uses the shear force.</li>
+</ol>
+<p>A real tine is held a little behind the bridge and rests on it partway along, rather than being clamped at one point. Chapman found that the measured overtone ratios are “correlated with the subdivided lengths of the vibrating beam”, which is one reason they spread around the ideal 6.27 (D. M. F. Chapman, <a href="https://acoustics.org/pressroom/httpdocs/155th/chapman.htm">The sound of the African thumb piano (kalimba)</a>, Acoustics’08 Paris, 2008).</p>
+</details>
+</div>
+</section>
+<section id="fading" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="fading">Fading: the overtone goes first</h2>
+<p>The click is gone within a fraction of a second, while the fundamental rings on. This part is observed, not derived: the model has no friction, so in it every mode rings forever. The acoustician D. M. F. Chapman measured a Hugh Tracey kalimba and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, and found that the off-line overtones die away rapidly.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;D. M. F. Chapman, <a href="https://acoustics.org/pressroom/httpdocs/155th/chapman.htm">The sound of the African thumb piano (kalimba)</a>, Acoustics’08 Paris, paper 5aMUf1, Acoustical Society of America, 2008: measured on “the Hugh Tracey Pentatonic Kalimba”; “a single overtone (f1) whose frequency ratio f1/f0 is about 5.9-6.8”; “the anharmonic overtones die away rapidly”.</p></div></div><p>The demo’s sound is made this way. It adds the first five modes at the frequencies above, each starting with its strength in the push on the bridge; the fundamental fades over a couple of seconds and the overtones within a small fraction of that. Those fading times are illustrative, chosen to match Chapman’s observation. Tick the box and every mode fades as slowly as the fundamental: the same spectrum then clangs like a bell.</p>
+</section>
+<section id="what-we-hear" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="what-we-hear">What you hear</h2>
+<p><strong>A click, then a clean note.</strong> What remains after the click is the fundamental alone, a single partial, and a single partial has a clear pitch at its own frequency. The spectrum alone would clang, as a bell’s does; the fading decides. The player sets the loudness by how far the tip is pushed, since every <span class="math inline">a_n</span> grows in proportion to it.</p>
+<p><strong>Half the length, two octaves up.</strong> The numbers <span class="math inline">\beta_nL</span> do not depend on the length, so <span class="math inline">f_n = \kappa\,(\beta_nL)^2/(2\pi L^2)</span>: a tine’s frequency goes as one over its length squared. Half the length gives four times the frequency, two octaves, where a string rises only one. That is why, in the demo, the low tines are not twice as long as the tines an octave above them. It is also why a small change of length goes a long way when a tine is tuned: its length is measured from where it is held down on the bridge, and longer is lower, shorter higher.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;Kalimba Magic, <a href="https://www.kalimbamagic.com/?p=49">on tuning tines</a>: “Making tines longer (from the point where they are held down on the bridge) will lower their pitch, and making them shorter will make their pitch higher.”</p></div></div></section>
+<section id="next" class="level2">
+<h2 class="anchored" data-anchor-id="next">Next</h2>
+<p>A harmonica reed is the same kind of bar, with the same off-line overtones; blown, though, its notes land exactly on the lines: <a href="../../posts/other-instruments-same-recipe/harmonica.html">where did the overtones go?</a></p>
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  var STEPS = [0, 2, 4, 5, 7, 9, 11];
+  var NOTES = [];
+  for (var i = 0; i < 17; i++) { var oct = Math.floor(i / 7), key = 60 + 12 * oct + STEPS[i % 7]; NOTES.push({ key: key, f: C.mtof(key), name: C.noteName(C.mtof(key)).name }); }
+  // positions: lowest in the center, then alternating left and right
+  var ORDER = new Array(17), center = 8;
+  for (var i = 0; i < 17; i++) { var off = Math.ceil(i / 2) * (i % 2 ? -1 : 1); ORDER[center + off] = i; }
+  var longOv = false, cache = {}, plucks = {};
+  var cv = document.getElementById("kal"), ctx = cv.getContext("2d");
+  function geom() {
+    var d = C.fit(cv), W = cv.width, H = cv.height, slot = W / 17, yb = H - 34 * d, Lmax = yb - 28 * d;
+    return { d: d, W: W, H: H, slot: slot, yb: yb, Lmax: Lmax };
+  }
+  function tineLen(g, n) { return g.Lmax * Math.sqrt(NOTES[0].f / NOTES[n].f); }
+  function buffer(n) {
+    var k = n + (longOv ? "L" : "S");
+    if (!cache[k]) cache[k] = C.render(C.toHz(C.models.kalimba.partials({ f1: NOTES[n].f, longOvertones: longOv }), NOTES[n].f), longOv ? 3.2 : 2.6);
+    return cache[k];
+  }
+  function pluck(n) {
+    C.play(buffer(n), 0.8); plucks[n] = performance.now();
+    var nn = NOTES[n]; document.getElementById("kRead").innerHTML = "<b>" + nn.name + "</b> · " + nn.f.toFixed(1) + " Hz · first overtone at " + (nn.f * C.KM[1].ratio).toFixed(0) + " Hz";
+  }
+  function hit(e) {
+    var r = cv.getBoundingClientRect(), g = geom(), px = (e.clientX - r.left) * g.d, py = (e.clientY - r.top) * g.d;
+    var slot = Math.max(0, Math.min(16, Math.floor(px / g.slot))), n = ORDER[slot];
+    return (py < g.yb + 20 * g.d && py > g.yb - tineLen(g, n) - 16 * g.d) ? n : -1;
+  }
+  var down = false, lastN = -1;
+  cv.addEventListener("pointerdown", function (e) { down = true; cv.setPointerCapture(e.pointerId); var n = hit(e); lastN = n; if (n >= 0) pluck(n); });
+  cv.addEventListener("pointermove", function (e) { if (!down) return; var n = hit(e); if (n >= 0 && n !== lastN) pluck(n); lastN = n; });
+  function up() { down = false; lastN = -1; }
+  cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+  document.getElementById("keq").addEventListener("change", function (e) { longOv = e.target.checked; kspec(); });
+
+  function draw(now) {
+    var g = geom(), d = g.d; ctx.clearRect(0, 0, g.W, g.H);
+    ctx.fillStyle = C.rgb("--wood", 0.45); ctx.fillRect(0, g.yb - 6 * d, g.W, g.H - g.yb + 6 * d);
+    ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace"; ctx.textAlign = "center";
+    for (var s = 0; s < 17; s++) {
+      var n = ORDER[s], L = tineLen(g, n), cx = (s + 0.5) * g.slot, w = Math.min(g.slot * 0.55, 14 * d), wob = 0;
+      var t0 = plucks[n];
+      if (t0 != null) { var dt = (now - t0) / 1000; if (dt < 2.5) wob = 3.5 * d * Math.exp(-dt * 2.2) * Math.sin(dt * 2 * Math.PI * 9); }
+      ctx.fillStyle = C.rgb(t0 != null && now - t0 < 600 ? "--accent" : "--metal");
+      ctx.beginPath();
+      ctx.moveTo(cx - w / 2, g.yb + 14 * d); ctx.lineTo(cx - w / 2 + wob * 0.2, g.yb - L + w / 2);
+      ctx.arc(cx + wob, g.yb - L + w / 2, w / 2, Math.PI, 0); ctx.lineTo(cx + w / 2, g.yb + 14 * d); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText(NOTES[n].name.replace(/\d/, ""), cx, g.yb - L - 6 * d);
+    }
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(0, g.yb - 3 * d, g.W, 6 * d);
+    drawShape(now);
+    requestAnimationFrame(draw);
+  }
+
+  var sel = 0, sv = document.getElementById("kShape"), sctx = sv.getContext("2d");
+  function kspec() {
+    var p = C.models.kalimba.partials({ longOvertones: longOv });
+    C.stems(document.getElementById("kSpec"), p, { W: 320, H: 120, rmax: 12, fs: 9, sw: 2.5, noOff: true, sel: sel, onPick: function (i) { sel = i; kspec(); tone(i); } });
+    var m = C.KM[sel];
+    document.getElementById("kSel").innerHTML = sel ? "mode " + (sel + 1) + " · <b>" + m.ratio.toFixed(2) + "×</b> the fundamental · " + (Math.log2(m.ratio) * 12).toFixed(1) + " semitones up" : "mode 1 · the fundamental";
+  }
+  function tone(i) { C.play(C.render([{ f: 440 * C.KM[i].ratio, amp: 1, tau: 0.6 }], 1.2), 0.6); }
+  function drawShape(now) {
+    var d = C.fit(sv), W = sv.width, H = sv.height, x0 = 22 * d, x1 = W - 14 * d, mid = H / 2, A = H * 0.36, f = C.KM[sel].shape, mx = 0;
+    for (var i = 0; i <= 120; i++) mx = Math.max(mx, Math.abs(f(i / 120)));
+    var ph = C.reduce ? 1 : Math.cos(2 * Math.PI * Math.min(3, 0.4 * Math.sqrt(C.KM[sel].ratio)) * now / 1000);
+    sctx.clearRect(0, 0, W, H);
+    sctx.strokeStyle = C.rgb("--grid"); sctx.lineWidth = d; sctx.beginPath(); sctx.moveTo(x0, mid); sctx.lineTo(x1, mid); sctx.stroke();
+    sctx.fillStyle = C.rgb("--ink"); sctx.fillRect(x0 - 12 * d, mid - 26 * d, 12 * d, 52 * d);
+    sctx.strokeStyle = C.rgb("--accent"); sctx.lineWidth = 3 * d; sctx.beginPath();
+    for (var i = 0; i <= 160; i++) { var xi = i / 160, y = mid - A * ph * f(xi) / mx, x = x0 + xi * (x1 - x0); if (i) sctx.lineTo(x, y); else sctx.moveTo(x, y); }
+    sctx.stroke();
+    sctx.fillStyle = C.rgb("--ink"); var prev = f(0.01);
+    for (var i = 2; i <= 160; i++) { var cur = f(i / 160); if (prev * cur < 0) { sctx.beginPath(); sctx.arc(x0 + (i - 0.5) / 160 * (x1 - x0), mid, 3.5 * d, 0, 2 * Math.PI); sctx.fill(); } prev = cur; }
+  }
+  C.onTheme(kspec);
+  kspec(); requestAnimationFrame(draw);
+})();
+</script>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.20">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-29">
+<meta name="description" content="The violin string, plucked and bowed: its modes sit on the whole-number lines, the pluck sets how strongly each starts, and a light touch damps every mode that moves under the finger.">
+
+<title>Why does a light touch make a string jump an octave? – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Why does a light touch make a string jump an octave?</h1>
+<p class="subtitle lead">The Shape of a Sound · 3 · Deep dive</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">music</div>
+    <div class="quarto-category">the-shape-of-a-sound</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    The violin string, plucked and bowed: its modes sit on the whole-number lines, the pluck sets how strongly each starts, and a light touch damps every mode that moves under the finger.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/other-instruments-same-recipe/index.html">← The gallery</a> · <a href="../../posts/other-instruments-same-recipe/clarinet.html">Clarinet →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p>A deep dive from <a href="../../posts/other-instruments-same-recipe/index.html#violin">the violin’s entry</a> in post 3. Builds on <a href="../../posts/one-string-end-to-end/index.html">post 2</a>, whose string this is. Uses sines and one sum; derivations are in folds. About 15 minutes. Written in collaboration with Claude, Anthropic’s AI model.</p>
+</div>
+<div class="puzzle">
+<p>Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an <a href="../../posts/instruments-as-operators/glossary.html#octave">octave</a>. Touch it a third of the way along and it jumps to three times the frequency. How can a feather-light finger, which does not shorten the string, change the note so much?</p>
+</div>
+<p>The finger moves none of the string’s frequencies. It silences every shape of the string that moves under it, and the shapes it spares, those standing still at the middle, are exactly the shapes of a note an octave up. Pluck the string, then pick a point to touch and pluck again; string players call these touched notes <a href="../../posts/instruments-as-operators/glossary.html#string-harmonics">harmonics</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;J. Wolfe, <a href="https://newt.phys.unsw.edu.au/jw/strings.html">Strings, standing waves and harmonics</a>, UNSW: touching the string lightly at a point 1/n of its length gives the harmonics.</p></div></div><div class="ins">
+<div class="panel">
+  <canvas id="tCanvas" style="height:170px" aria-label="A string, the point where it is plucked, and the finger touching it lightly"></canvas>
+  <div class="controls" role="group" aria-label="Where the finger touches">
+    <span class="cap" style="margin-right:0.25rem">Touch lightly at</span>
+    <button data-touch="0" aria-pressed="true">no touch</button><button data-touch="0.5">1/2</button><button data-touch="0.3333333">1/3</button><button data-touch="0.25">1/4</button><button data-touch="0.2">1/5</button>
+  </div>
+  <div class="slider"><label for="tP">Pluck point, from the bridge</label><input type="range" id="tP" min="0.04" max="0.5" step="0.01" value="0.16"><output id="tPo"></output></div>
+  <div class="controls"><button id="tPluck" class="primary">Pluck</button></div>
+  <svg class="spec" id="tSpec" viewbox="0 0 320 96" style="max-width:520px" aria-label="Strength of each mode a quarter second after the pluck"></svg>
+  <div class="readout" id="tRead"></div>
+  <p class="cap">Left end: the <a href="../instruments-as-operators/glossary.html#bridge">nut</a>, near the tuning pegs; right end: the bridge. The motion is slowed for the eye. Stems: how far each mode still swings a quarter of a second after the pluck. The fading rates are an illustrative choice, not measured.</p>
+</div>
+</div>
+<p>The reason, in one sentence: <strong>a light touch is a <a href="../../posts/instruments-as-operators/glossary.html#damper">damper</a> at one point, and a shape that stands still there gives the damper nothing to grab.</strong> Below, that sentence is built from Newton’s law; then the bow keeps the same string going.</p>
+<section id="operator" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="operator">The string’s shapes</h2>
+<p>The violin string is post 2’s string. Let it run from the <a href="../../posts/instruments-as-operators/glossary.html#bridge">nut</a>, near the pegs, at <span class="math inline">x = 0</span>, to the bridge at <span class="math inline">x = L</span>, with tension <span class="math inline">T</span> and mass <span class="math inline">\mu</span> per unit length. Newton’s law on a short piece of it gives the <a href="../../posts/instruments-as-operators/glossary.html#wave-equation">wave equation</a>, derived in <a href="../../posts/one-string-end-to-end/index.html#newton">post 2</a>:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math display">
+\begin{gathered}
+u_{tt} = -Au, \qquad Au = -c^2u_{xx}, \\
+c^2 = \frac{T}{\mu},
+\end{gathered}
+</span> for shapes with <span class="math inline">u(0) = u(L) = 0</span>. In words: each bit of string accelerates in proportion to how sharply it bends, and the tied ends decide which shapes are allowed.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;N. H. Fletcher and T. D. Rossing, <a href="https://link.springer.com/book/10.1007/978-0-387-21603-4"><em>The Physics of Musical Instruments</em></a>, 2nd ed., Springer, 1998, chapter 2 (the vibrating string).</p></div></div><div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>Where the equation comes from <span class="needs">partial derivatives</span>
+</summary>
+<p>Take the piece of string from <span class="math inline">x</span> to <span class="math inline">x + dx</span>, of mass <span class="math inline">\mu\,dx</span>. The tension <span class="math inline">T</span> pulls along the string at both ends; for a small slope, the sideways part of each pull is <span class="math inline">T</span> times the slope <span class="math inline">u_x</span>. The net sideways force is therefore <span class="math inline">T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx</span>, and Newton’s law sets it equal to mass times acceleration, <span class="math inline">\mu\,dx\,u_{tt}</span>. Dividing by <span class="math inline">\mu\,dx</span> gives <span class="math inline">u_{tt} = c^2u_{xx}</span> with <span class="math inline">c^2 = T/\mu</span>. The nut and the bridge hold the ends still, <span class="math inline">u(0, t) = u(L, t) = 0</span>. The model assumes a perfectly flexible string, small slopes, no air and no friction; <a href="../../posts/one-string-end-to-end/index.html#newton">post 2</a> draws the forces.</p>
+</details>
+</div>
+<p><span id="spectrum"></span>The shapes that the <a href="../../posts/instruments-as-operators/glossary.html#operator">operator</a> <span class="math inline">A</span> only stretches, its <a href="../../posts/instruments-as-operators/glossary.html#eigenfunction">eigenfunctions</a>, and their <a href="../../posts/instruments-as-operators/glossary.html#eigenvalue">eigenvalues</a>, are <span class="math display">
+\begin{gathered}
+X_n(x) = \sin\frac{n\pi x}{L}, \qquad \lambda_n = \Big(\frac{n\pi c}{L}\Big)^2, \\
+f_n = \frac{\sqrt{\lambda_n}}{2\pi} = n f_1, \qquad f_1 = \frac{1}{2L}\sqrt{\frac{T}{\mu}} .
+\end{gathered}
+</span> Shape <span class="math inline">n</span> has <span class="math inline">n</span> arches and swings at exactly <span class="math inline">n</span> times the lowest frequency, so every partial of a free string sits on a whole-number line of the pitch ruler.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>The shapes, step by step, and why there are no others <span class="needs">derivatives, integration by parts</span>
+</summary>
+<p>Solve <span class="math inline">AX = \lambda X</span>, that is <span class="math inline">-c^2X'' = \lambda X</span> with <span class="math inline">X(0) = X(L) = 0</span>. Writing <span class="math inline">\lambda = c^2k^2</span> with <span class="math inline">k &gt; 0</span>, the solutions of <span class="math inline">X'' = -k^2X</span> are <span class="math inline">a\cos kx + b\sin kx</span>. The nut, <span class="math inline">X(0) = 0</span>, forces <span class="math inline">a = 0</span>; the bridge, <span class="math inline">X(L) = 0</span>, then needs <span class="math inline">\sin kL = 0</span>, so <span class="math inline">k = n\pi/L</span> for <span class="math inline">n = 1, 2, 3, \dots</span> This gives <span class="math inline">\lambda_n = (n\pi c/L)^2</span> and <span class="math inline">f_n = \sqrt{\lambda_n}/2\pi = nc/2L</span>.</p>
+<p>No zero or negative <span class="math inline">\lambda</span> occurs. Multiply <span class="math inline">-c^2X'' = \lambda X</span> by <span class="math inline">X</span> and integrate by parts; the boundary term vanishes because <span class="math inline">X = 0</span> at both ends, which leaves <span class="math inline">\lambda\int_0^L X^2\,dx = c^2\int_0^L (X')^2\,dx</span>. A <span class="math inline">\lambda \le 0</span> would force <span class="math inline">X' = 0</span>, so <span class="math inline">X</span> would be a constant vanishing at the ends, that is <span class="math inline">X = 0</span>. Each <span class="math inline">\lambda_n</span> has <a href="../../posts/instruments-as-operators/glossary.html#multiplicity">multiplicity</a> 1, since the nut removed the cosine. Post 2 <a href="../../posts/one-string-end-to-end/index.html#decoupling">shows</a> that measured along these shapes the string falls apart into independent springs, and that every starting shape is a sum of them.</p>
+</details>
+</div>
+<p>Released in any shape, the string moves as a sum of these, each shape fading at its own rate <span class="math inline">1/\tau_n</span>: <span class="math display">
+u = \sum_n a_n e^{-t/\tau_n} X_n(x)\cos(2\pi f_n t) .
+</span> The pluck sets the amounts <span class="math inline">a_n</span>. The fading rates are measured, not derived, and the high partials fade first;<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> the demo’s rates are illustrative.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;J. Wolfe, <a href="https://newt.phys.unsw.edu.au/jw/strings.html">Strings, standing waves and harmonics</a>, UNSW: high-frequency components “disappear quickly”, so a plucked note becomes “more mellow”.</p></div></div></section>
+<section id="ringing" class="level2">
+<h2 class="anchored" data-anchor-id="ringing">Where you pluck sets the brightness</h2>
+<p>A string pulled aside a height <span class="math inline">h</span> at the point <span class="math inline">x_0</span> and let go at rest starts shape <span class="math inline">n</span> with the amount <span class="math display">
+a_n = \frac{2hL^2}{\pi^2 x_0(L - x_0)}\cdot\frac{\sin(n\pi x_0/L)}{n^2},
+</span> post 2’s <a href="../../posts/one-string-end-to-end/index.html#the-solution">pluck formula</a>. You hear the string through its push on the bridge, which is proportional to the string’s slope there, so partial <span class="math inline">n</span> reaches the bridge in proportion to <span class="math inline">n a_n</span>, that is, to <span class="math inline">\sin(n\pi x_0/L)/n</span>.</p>
+<p>Pluck near the bridge and <span class="math inline">\sin(n\pi x_0/L) \approx n\pi x_0/L</span> for the first several shapes, so they push the bridge about equally hard: a bright sound. Pluck at the middle and the even shapes are missing, since they stand still where you pulled, and the rest fall off like <span class="math inline">1/n</span>: a mellow, hollow sound. Move the pluck slider in the demo and watch.</p>
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="vS4" viewbox="0 0 320 96" style="max-width:520px" aria-label="The open string's modes after a pluck 0.16 of the way from the bridge, at 1, 2, 3, ... times the lowest frequency"></svg>
+  <p class="cap">The open string, plucked 0.16 of its length from the bridge: mode n at n times the lowest frequency, exactly on line n, drawn as far as it swings just after the pluck.</p>
+</div>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>Where the pluck formula comes from <span class="needs">integration by parts</span>
+</summary>
+<p>The coefficient is <span class="math inline">a_n = \frac{2}{L}\int_0^L u_0\,X_n\,dx</span>, since the sines are perpendicular: <span class="math inline">\int_0^L X_mX_n\,dx = 0</span> for <span class="math inline">m \ne n</span>. The plucked triangle <span class="math inline">u_0</span> is straight on each side of <span class="math inline">x_0</span>, so integrating by parts twice on each piece leaves only the jump in slope at the corner, from <span class="math inline">h/x_0</span> to <span class="math inline">-h/(L - x_0)</span>, times <span class="math inline">X_n(x_0)(L/n\pi)^2</span>. That is the formula above, and the <span class="math inline">1/n^2</span> comes from the single corner. Measuring <span class="math inline">x_0</span> from the bridge instead, as the demo’s slider does, only flips the sign of every second <span class="math inline">a_n</span>, because <span class="math inline">\sin(n\pi(L - x_0)/L) = \pm\sin(n\pi x_0/L)</span>; signs do not change how loud a shape is.</p>
+</details>
+</div>
+</section>
+<section id="stopping" class="level2">
+<h2 class="anchored" data-anchor-id="stopping">Pressing down makes a new end</h2>
+<p>Pressing a finger firmly onto the fingerboard ties the string down there, which changes the operator itself: only the piece between finger and <a href="../../posts/instruments-as-operators/glossary.html#bridge">bridge</a> sounds, and by the formula for <span class="math inline">f_1</span> a shorter string sounds higher, in inverse proportion to its length. Two thirds of the length sounds a <a href="../../posts/instruments-as-operators/glossary.html#octave">fifth</a> up, half the length an octave up, and the <a href="../../posts/instruments-as-operators/glossary.html#semitone">semitone</a> positions bunch together toward the bridge. Play a whole violin: press and hold a string to bow it, slide sideways to finger it, or switch to plucking.</p>
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="fiddle" style="height:260px" tabindex="0" aria-label="Violin fingerboard. Press and hold on a string to bow it; slide sideways to change the finger position."></canvas>
+  <div class="controls" style="padding:0.5rem 0.25rem 0">
+    <button id="mBow" aria-pressed="true">Bow (hold)</button><button id="mPizz" aria-pressed="false">Pizzicato, plucked (tap)</button>
+    <label class="check"><input type="checkbox" id="body" checked=""> Wooden body</label>
+    <span class="readout" id="vRead" style="flex-basis:100%">Press and hold a string. Slide left and right to finger it.</span>
+  </div>
+  <svg class="spec" id="playSpec" viewbox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the note being played, as heard through the body"></svg>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Left edge: the nut; right edge: the bridge. Ticks: where the finger goes for each semitone (fold below). Stems: the partials you hear; switching the body off or on changes their heights, never their positions.</p>
+</section>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>Where the finger goes for each semitone <span class="needs">powers</span>
+</summary>
+<p>An <a href="../../posts/instruments-as-operators/glossary.html#open-string">open string</a> is one not pressed down by a finger. With the finger at distance <span class="math inline">d</span> from the nut, the vibrating length shrinks to <span class="math inline">L - d</span>, so the pitch rises by the factor <span class="math inline">L/(L - d)</span>. In <a href="../../posts/instruments-as-operators/glossary.html#equal-temperament">equal temperament</a> the twelve semitones of an octave are equal frequency ratios, each <span class="math inline">2^{1/12}</span>, so <span class="math inline">k</span> semitones are <span class="math inline">2^{k/12}</span>. Solving <span class="math inline">L/(L - d) = 2^{k/12}</span> gives <span class="math inline">d_k = (1 - 2^{-k/12})L</span>: the positions bunch together toward the bridge. These are the ticks on the violin’s fingerboard above.</p>
+</details>
+</div>
+</section>
+<section id="sustained" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sustained">The bow: one repeating cycle</h2>
+<p>A bowed string does not fade: the bow keeps feeding it, and its motion settles into one repeating cycle. The bow grips the string, drags it along until the string’s pull tears it free, lets it slip back, and grips it again, once per cycle. By 1860 Hermann von Helmholtz had watched the result through a vibration microscope:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> two straight pieces joined by one sharp corner, which races between bridge and finger and back, <a href="../../posts/instruments-as-operators/glossary.html#helmholtz-motion">Helmholtz motion</a>. The corner runs at the wave speed <span class="math inline">c</span>, so the round trip of <span class="math inline">2L</span> takes <span class="math inline">2L/c = 1/f_1</span> seconds: the cycle repeats at the string’s lowest frequency. As a sum of the string’s shapes, <span class="math display">
+u(x, t) \propto \sum_{n \ge 1} \frac{1}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(2\pi n f_1 t) .
+</span> Every partial sits exactly on a line, because the motion repeats exactly (<a href="../../posts/what-you-hear/index.html#why-whole-numbers-repeat">post 1</a>), and partial <span class="math inline">n</span> pushes the bridge in proportion to <span class="math inline">1/n</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;H. Helmholtz, “On the motion of the strings of a violin”, <em>Proceedings of the Philosophical Society of Glasgow</em> 5 (1860–64), 17–21, read 19 December 1860 (<a href="https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5">archive.org</a>); also H. von Helmholtz, <a href="https://archive.org/details/onsensationsofto00helmrich/mode/2up"><em>On the Sensations of Tone</em></a>, 1863, translated by A. J. Ellis, 2nd English ed., Longmans, Green, 1895.</p></div></div><div class="ins">
+<div class="panel">
+    <canvas id="helm" style="height:180px" aria-label="Slow-motion string shape"></canvas>
+    <div class="controls"><button id="hBow" aria-pressed="true">Bowed</button><button id="hPluck" aria-pressed="false">Plucked at 1/4</button></div>
+    <svg class="spec" id="vSpec" viewbox="0 0 320 110" style="max-width:520px" aria-label="Partials of the bridge force"></svg>
+    <p class="cap">Slowed about 500 times. The faint lens-shaped outline is the path the corner traces. Stems: the partials of the push on the bridge.</p>
+  </div>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>Helmholtz motion as a sum of modes <span class="needs">the pluck formula above</span>
+</summary>
+<p>A vibration microscope’s lens rides on a vibrating tuning fork, so that a bright speck on the string traces a pattern revealing its motion. Helmholtz reported what he saw in 1860 (H. Helmholtz, “On the motion of the strings of a violin”, <em>Proceedings of the Philosophical Society of Glasgow</em> 5 (1860–64), 17–21, read 19 December 1860, <a href="https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5">archive.org</a>) and in his 1863 book (H. von Helmholtz, <a href="https://archive.org/details/onsensationsofto00helmrich/mode/2up"><em>On the Sensations of Tone</em></a>, translated by A. J. Ellis, 2nd English ed., Longmans, Green, 1895).</p>
+<p>At each moment the string is two straight pieces, like a plucked string, with the corner at some point <span class="math inline">x_c</span>. Helmholtz showed that the corner’s height is proportional to <span class="math inline">x_c(L - x_c)</span>, so it traces two arcs of a parabola, the lens in the demo, and that the corner moves at the wave speed <span class="math inline">c = 2Lf_1</span>. Put that height in place of <span class="math inline">h</span> in the pluck formula with <span class="math inline">x_0 = x_c</span>: the factor <span class="math inline">x_c(L - x_c)</span> cancels, leaving <span class="math inline">a_n \propto \sin(n\pi x_c/L)/n^2</span>. With <span class="math inline">x_c = 2Lf_1t</span> this is <span class="math inline">\sin(2\pi nf_1t)/n^2</span>. On the way back the corner runs along the lower arc, and the same formula covers it: for <span class="math inline">x_c</span> between <span class="math inline">L</span> and <span class="math inline">2L</span>, <span class="math inline">\sin(n\pi x_c/L)</span> describes a corner at <span class="math inline">2L - x_c</span> with negative height. The force on the bridge is proportional to the slope there, and the slope of <span class="math inline">\sin(n\pi x/L)</span> carries an extra factor <span class="math inline">n\pi/L</span>, so partial <span class="math inline">n</span> pushes the bridge in proportion to <span class="math inline">1/n</span>.</p>
+</details>
+</div>
+<p>A real string is slightly stiff, so its own frequencies run a little sharp of the lines (the <a href="../../posts/other-instruments-same-recipe/piano.html">piano page</a>); bowed, its motion is still “nearly exactly periodic”, so the bow pulls the partials onto the lines.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> The locking comes from the bow’s friction, which is not <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a>: a <a href="../../posts/instruments-as-operators/glossary.html#self-sustained">self-sustained oscillation</a> (<a href="../../posts/when-an-equation-has-a-spectrum/index.html#counterexamples">appendix</a>), not derived here. Faster bowing, or bowing nearer the bridge, makes a larger swing and a louder note; more force makes a brighter tone; and only a limited range of force keeps Helmholtz motion going at all.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;J. Wolfe, <a href="https://newt.phys.unsw.edu.au/jw/Bows.html">Bows and strings</a>, UNSW: “the motion of the string is nearly exactly periodic”, so bowing reduces the inharmonicity that plucking shows.</p></div><div id="fn6"><p><sup>6</sup>&nbsp;J. Wolfe, <a href="https://newt.phys.unsw.edu.au/jw/Bows.html">Bows and strings</a>, UNSW: “if you bow with greater speed, the stick point will travel further and the amplitude will be greater”; the amplitude grows “as you move the bowing point towards the bridge”; “with more applied force, you excite more higher harmonics”; only a range of force sustains Helmholtz motion. See also <a href="https://link.springer.com/book/10.1007/978-0-387-21603-4">Fletcher and Rossing</a>, chapter 10 (bowed strings).</p></div></div><div class="derive">
+<details>
+<summary>
+<span class="label">Details</span>How bow and string lock together
+</summary>
+<p>The bow adds a friction force at one point, which depends on how fast the string slips past the hair there. How the two lock into Helmholtz motion is observed and reproduced in computer models (M. E. McIntyre, R. T. Schumacher and J. Woodhouse, <a href="https://www.damtp.cam.ac.uk/user/mem2/papers/MUS-ACOUST/">“On the oscillations of musical instruments”</a>, <em>J. Acoust. Soc. Am.</em> 74 (1983), 1325–1345; N. H. Fletcher and T. D. Rossing, <a href="https://link.springer.com/book/10.1007/978-0-387-21603-4"><em>The Physics of Musical Instruments</em></a>, 2nd ed., Springer, 1998, chapter 10). The demo’s bowed voice adds a gentle vibrato, as players do, which wobbles the lines slightly (J. Wolfe, <a href="https://newt.phys.unsw.edu.au/jw/violinarticulation.html">Articulation and vibrato on the violin</a>, UNSW).</p>
+</details>
+</div>
+</section>
+<section id="what-we-hear" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-hear">What the light touch does</h2>
+<p><strong>A light touch keeps only the shapes that stand still under the finger.</strong> The finger is soft and lossy: it takes energy from whatever moves under it, but does not hold the string still, as a new end would. A shape with a still point, a <a href="../../posts/instruments-as-operators/glossary.html#node">node</a>, under the finger rings on; every other shape loses its energy within a moment. In the model, a finger at <span class="math inline">x_f</span> drains shape <span class="math inline">n</span> at a rate proportional to <span class="math inline">X_n(x_f)^2</span>, how much that shape moves under it.</p>
+<p>At the middle, <span class="math inline">X_n(L/2) = \sin(n\pi/2)</span> is zero exactly when <span class="math inline">n</span> is even. The survivors swing at <span class="math inline">2f_1, 4f_1, 6f_1, \dots</span>, multiples of <span class="math inline">2f_1</span>, so they repeat twice as often: a note an octave up. At a third, the survivors are <span class="math inline">n = 3, 6, 9, \dots</span>, with lowest frequency <span class="math inline">3f_1</span>: an octave and a fifth up, since <span class="math inline">2 \times \tfrac32 = 3</span>. No frequency moved; the finger chose which shapes keep ringing.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Why the drain rate is <span class="math inline">X_n(x_f)^2</span> <span class="needs">matrices</span>
+</summary>
+<p>A friction force <span class="math inline">-r\,u_t(x_f, t)</span> at the one point <span class="math inline">x_f</span> turns post 2’s separate springs into <span class="math inline">q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0</span> with <span class="math inline">C_{nm} \propto r\,X_n(x_f)X_m(x_f)</span> (<a href="../../posts/one-string-end-to-end/index.html#fading">post 2</a>). A shape with <span class="math inline">X_n(x_f) = 0</span> has a zero row and column in <span class="math inline">C</span>, so it rings on untouched. For a light touch <span class="math inline">C</span> is small, its off-diagonal entries matter only to second order, and each other shape drains at the rate <span class="math inline">C_{nn} \propto X_n(x_f)^2</span>, the rule the <a href="../../posts/other-instruments-same-recipe/piano.html">piano page</a> uses for felt dampers. The demo adds 45 per second times <span class="math inline">X_n(x_f)^2</span> to each shape’s own fading rate.</p>
+</details>
+</div>
+</section>
+<section id="body" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="body">The body changes amounts, never frequencies</h2>
+<p>The string rocks the bridge, the bridge shakes the wooden body, and the body moves the air. Each step is <a href="../../posts/instruments-as-operators/glossary.html#linear">linear</a>: shaken at one frequency, it responds at that frequency, louder or quieter. So the body’s resonances, the same for every note, change the partials’ heights, not their positions, and are part of the violin’s <a href="../../posts/instruments-as-operators/glossary.html#timbre">timbre</a>. Its air resonance sits near 300 Hz, and the bridge passes vibration to the body best from about 1 to 4 kHz.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> Toggle the wooden body on the violin above: the stems change height and stay put. (The demo’s four body resonances are rough illustrative values.)</p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;J. Wolfe, <a href="https://www.phys.unsw.edu.au/jw/violintro.html">Violin acoustics: an introduction</a>, UNSW: the air resonance “at around 300 Hz”; the bridge “is very effective at transmitting power to the body at frequencies from about one to four kHz”.</p></div></div><p><span id="four-aspects"></span>The <a href="../../posts/what-you-hear/index.html#four-aspects">four aspects</a> of the string’s sound, for both ways of playing it:</p>
+<div class="aspects">
+<table class="table-striped caption-top table">
+<caption>The violin string’s four aspects.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Aspect</th>
+<th style="text-align: left;">Plucked</th>
+<th style="text-align: left;">Bowed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/glossary.html#pitch">Pitch</a></td>
+<td style="text-align: left;"><span class="math inline">f_1</span>, set by the stopped length and the tension</td>
+<td style="text-align: left;">the same <span class="math inline">f_1</span>, the bowed cycle’s rate</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Loudness</td>
+<td style="text-align: left;">how far the string is pulled aside</td>
+<td style="text-align: left;">bow speed and how near the bridge it plays</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="../../posts/instruments-as-operators/glossary.html#timbre">Timbre</a></td>
+<td style="text-align: left;">the pluck point; the body’s fixed resonances</td>
+<td style="text-align: left;">bow force and position; the body’s fixed resonances</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Duration</td>
+<td style="text-align: left;">the modes’ fading, or a damping finger</td>
+<td style="text-align: left;">as long as the bow moves</td>
+</tr>
+</tbody>
+</table>
+</div>
+<style>
+/* The four-aspects tables are prose: let them wrap on narrow screens instead of scrolling sideways. */
+@media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
+</style>
+</section>
+<section id="next" class="level2">
+<h2 class="anchored" data-anchor-id="next">Next</h2>
+<p>The next page keeps the operator and changes the ends, for the air in a tube: <a href="../../posts/other-instruments-same-recipe/clarinet.html">why is a clarinet almost an octave deeper than a flute?</a></p>
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  var OPEN = [{ n: "G3", f: 196.0 }, { n: "D4", f: 293.66 }, { n: "A4", f: 440.0 }, { n: "E5", f: 659.26 }];
+  var SMAX = 0.75, mode = "bow";
+  var cv = document.getElementById("fiddle"), ctx = cv.getContext("2d");
+  var active = null; // {si, s, t0}
+  var ringing = []; // pizz visuals {si, s, t0}
+
+  // ---------- audio voices ----------
+  var wave = null, voice = null;
+  function periodic(a) {
+    if (wave) return wave;
+    var N = 40, re = new Float32Array(N + 1), im = new Float32Array(N + 1);
+    for (var n = 1; n <= N; n++) im[n] = 1 / n;
+    wave = a.createPeriodicWave(re, im, { disableNormalization: false }); return wave;
+  }
+  function startBow(f) {
+    var a = C.ac(), t = a.currentTime, osc = a.createOscillator(), lfo = a.createOscillator(), lg = a.createGain(), g = a.createGain(), lp = a.createBiquadFilter();
+    osc.setPeriodicWave(periodic(a)); osc.frequency.value = f;
+    lfo.frequency.value = 5.6; lg.gain.value = 0; lfo.connect(lg); lg.connect(osc.frequency);
+    lp.type = "lowpass"; lp.frequency.value = 6000;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.32, t + 0.09);
+    lg.gain.setTargetAtTime(f * 0.005, t + 0.4, 0.25);
+    osc.connect(lp);
+    if (bodyOn) { var bc = C.bodyChain(a); lp.connect(bc.input); bc.output.connect(g); } else lp.connect(g);
+    g.connect(C.out); osc.start(); lfo.start();
+    voice = { osc: osc, lfo: lfo, lg: lg, g: g };
+  }
+  function moveBow(f) { if (!voice) return; var t = C.ac().currentTime; voice.osc.frequency.setTargetAtTime(f, t, 0.012); voice.lg.gain.setTargetAtTime(f * 0.005, t, 0.2); }
+  function stopBow() {
+    if (!voice) return; var a = C.ac(), t = a.currentTime;
+    voice.g.gain.cancelScheduledValues(t); voice.g.gain.setTargetAtTime(0, t, 0.07);
+    voice.osc.stop(t + 0.6); voice.lfo.stop(t + 0.6); voice = null;
+  }
+  function pizz(f) {
+    var parts = C.toHz(C.models.violin.partials({ pluck: 0.27 }), f), a = C.ac();
+    var src = a.createBufferSource(), g = a.createGain(); src.buffer = C.render(parts, 1.6); g.gain.value = 0.9;
+    if (bodyOn) { var bc = C.bodyChain(a); src.connect(bc.input); bc.output.connect(g); } else src.connect(g);
+    g.connect(C.out); src.start();
+  }
+  var bodyOn = true;
+  document.getElementById("body").addEventListener("change", function (e) { bodyOn = e.target.checked; if (lastF) playSpec(lastF); });
+  var lastF = 0;
+  function playSpec(f) {
+    lastF = f;
+    var p = (mode === "bow" ? C.models.violin.partials() : C.models.violin.partials({ pluck: 0.27 })).slice(0, 20)
+      .map(function (q) { return { ratio: q.ratio, amp: q.amp * (bodyOn ? C.bodyGain(q.ratio * f) : 1) }; });
+    C.stems(document.getElementById("playSpec"), p, { W: 320, H: 90, rmax: 20, fs: 8, sw: 2, labelEvery: 4 });
+  }
+
+  // ---------- geometry ----------
+  function geom() {
+    var d = C.fit(cv), W = cv.width, H = cv.height, xn = 34 * d, xb = W - 18 * d;
+    var lanes = OPEN.map(function (_, i) { return H * (0.2 + 0.2 * i); });
+    return { d: d, W: W, H: H, xn: xn, xb: xb, lanes: lanes };
+  }
+  function freqOf(si, s) { return OPEN[si].f / (1 - s); }
+  function locate(e) {
+    var r = cv.getBoundingClientRect(), g = geom(), px = (e.clientX - r.left) * g.d, py = (e.clientY - r.top) * g.d;
+    var si = 0, bd = 1e9; g.lanes.forEach(function (y, i) { if (Math.abs(y - py) < bd) { bd = Math.abs(y - py); si = i; } });
+    var s = Math.max(0, Math.min(SMAX, (px - g.xn) / (g.xb - g.xn)));
+    return { si: si, s: s };
+  }
+  function readout(si, s) {
+    var f = freqOf(si, s), nn = C.noteName(f);
+    playSpec(f);
+    document.getElementById("vRead").innerHTML = OPEN[si].n + " string · finger " + Math.round(100 * s) + "% of the way to the bridge · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? ", " + Math.abs(nn.cents) + " cents " + (nn.cents > 0 ? "sharp" : "flat") : "");
+  }
+  cv.addEventListener("pointerdown", function (e) {
+    var p = locate(e); cv.setPointerCapture(e.pointerId); readout(p.si, p.s);
+    if (mode === "bow") { active = { si: p.si, s: p.s, t0: performance.now() }; startBow(freqOf(p.si, p.s)); }
+    else { ringing.push({ si: p.si, s: p.s, t0: performance.now() }); pizz(freqOf(p.si, p.s)); }
+  });
+  cv.addEventListener("pointermove", function (e) {
+    if (!active) return; var p = locate(e); active.s = p.s; moveBow(freqOf(active.si, p.s)); readout(active.si, p.s);
+  });
+  function end() { if (active) { active = null; stopBow(); } }
+  cv.addEventListener("pointerup", end); cv.addEventListener("pointercancel", end);
+
+  function drawFiddle(now) {
+    var g = geom(), d = g.d; ctx.clearRect(0, 0, g.W, g.H);
+    ctx.fillStyle = C.rgb("--wood", 0.35); ctx.fillRect(g.xn, g.lanes[0] - 22 * d, (g.xb - g.xn) * 0.78, g.lanes[3] - g.lanes[0] + 44 * d);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(g.xn - 4 * d, g.lanes[0] - 26 * d, 4 * d, g.lanes[3] - g.lanes[0] + 52 * d);
+    ctx.fillRect(g.xb, g.lanes[0] - 26 * d, 3 * d, g.lanes[3] - g.lanes[0] + 52 * d);
+    ctx.font = (13 * d) + "px 'IBM Plex Mono', monospace"; ctx.textBaseline = "middle"; ctx.textAlign = "right";
+    for (var k = 1; k <= 24; k++) {
+      var s = 1 - Math.pow(2, -k / 12); if (s > SMAX) break;
+      var x = g.xn + s * (g.xb - g.xn), dot = [3, 5, 7, 12, 15, 17, 19, 24].indexOf(k) >= 0;
+      ctx.fillStyle = C.rgb("--muted", dot ? 0.9 : 0.45);
+      g.lanes.forEach(function (y) { ctx.fillRect(x - 0.75 * d, y - 9 * d, 1.5 * d, 18 * d); });
+      if (k === 12) { ctx.textAlign = "center"; ctx.fillText("octave", x, g.lanes[3] + 30 * d); ctx.textAlign = "right"; }
+    }
+    ringing = ringing.filter(function (r) { return now - r.t0 < 1400; });
+    OPEN.forEach(function (o, i) {
+      var y = g.lanes[i], w = (2.6 - 0.45 * i) * d;
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText(o.n, g.xn - 10 * d, y);
+      var vib = null;
+      if (active && active.si === i) vib = { s: active.s, a: 7 * d, decay: 1 };
+      ringing.forEach(function (r) { if (r.si === i) vib = { s: r.s, a: 8 * d, decay: Math.exp(-(now - r.t0) / 350) }; });
+      ctx.strokeStyle = C.rgb("--metal"); ctx.lineWidth = w;
+      if (!vib) { ctx.beginPath(); ctx.moveTo(g.xn, y); ctx.lineTo(g.xb, y); ctx.stroke(); return; }
+      var xf = g.xn + vib.s * (g.xb - g.xn);
+      ctx.beginPath(); ctx.moveTo(g.xn, y); ctx.lineTo(xf, y); ctx.stroke();
+      ctx.strokeStyle = C.rgb("--accent", 0.25); ctx.lineWidth = 2 * vib.a * vib.decay;
+      ctx.beginPath(); ctx.moveTo(xf, y);
+      for (var q = 1; q <= 60; q++) { var xi = q / 60; ctx.lineTo(xf + xi * (g.xb - xf), y); }
+      ctx.stroke();
+      ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = w;
+      var ph = Math.sin(now / 9);
+      ctx.beginPath(); ctx.moveTo(xf, y);
+      for (var q = 1; q <= 60; q++) { var xi = q / 60; ctx.lineTo(xf + xi * (g.xb - xf), y - vib.a * vib.decay * ph * Math.sin(Math.PI * xi)); }
+      ctx.stroke();
+      ctx.fillStyle = C.rgb("--ink"); ctx.beginPath(); ctx.arc(xf, y, 6 * d, 0, 2 * Math.PI); ctx.fill();
+    });
+  }
+
+  // ---------- Helmholtz motion ----------
+  var hv = document.getElementById("helm"), hctx = hv.getContext("2d"), hmode = "bow";
+  function shapeAt(xi, t) {
+    var s = 0;
+    for (var n = 1; n <= 40; n++) {
+      if (hmode === "bow") s += Math.sin(n * Math.PI * xi) * Math.sin(n * t) / (n * n);
+      else s += Math.sin(n * Math.PI * 0.25) * Math.sin(n * Math.PI * xi) * Math.cos(n * t) / (n * n);
+    }
+    return s;
+  }
+  var env = null;
+  function computeEnv() {
+    var v = [], mx = 0;
+    for (var i = 0; i <= 80; i++) { var m = 0; for (var k = 0; k < 96; k++) m = Math.max(m, Math.abs(shapeAt(i / 80, 2 * Math.PI * k / 96))); v.push(m); mx = Math.max(mx, m); }
+    env = { mode: hmode, v: v, max: mx || 1 };
+  }
+  function drawHelm(now) {
+    var d = C.fit(hv), W = hv.width, H = hv.height, x0 = 14 * d, x1 = W - 14 * d, mid = H / 2, A = H * 0.38;
+    hctx.clearRect(0, 0, W, H);
+    if (!env || env.mode !== hmode) computeEnv();
+    var nrm = env.max;
+    hctx.strokeStyle = C.rgb("--grid"); hctx.lineWidth = 1.5 * d; hctx.beginPath();
+    for (var i = 0; i <= 80; i++) { var y = mid - A * env.v[i] / nrm, x = x0 + (i / 80) * (x1 - x0); if (i) hctx.lineTo(x, y); else hctx.moveTo(x, y); }
+    for (var i = 80; i >= 0; i--) hctx.lineTo(x0 + (i / 80) * (x1 - x0), mid + A * env.v[i] / nrm);
+    hctx.closePath(); hctx.stroke();
+    hctx.fillStyle = C.rgb("--ink"); hctx.fillRect(x0 - 3 * d, mid - 16 * d, 3 * d, 32 * d); hctx.fillRect(x1, mid - 16 * d, 3 * d, 32 * d);
+    var t = C.reduce ? 1.1 : (now / 1000) * 2 * Math.PI * 0.45;
+    hctx.strokeStyle = C.rgb("--accent"); hctx.lineWidth = 2.5 * d; hctx.beginPath();
+    for (var i = 0; i <= 200; i++) { var xi = i / 200, y = mid - A * shapeAt(xi, t) / nrm; if (i) hctx.lineTo(x0 + xi * (x1 - x0), y); else hctx.moveTo(x0, y); }
+    hctx.stroke();
+  }
+  function vspec() {
+    var p = hmode === "bow" ? C.models.violin.partials() : C.models.violin.partials({ pluck: 0.25 });
+    C.stems(document.getElementById("vSpec"), p, { W: 320, H: 110, rmax: 12, fs: 9, sw: 2.5, noOff: true });
+  }
+  function setH(m) { hmode = m; document.getElementById("hBow").setAttribute("aria-pressed", m === "bow"); document.getElementById("hPluck").setAttribute("aria-pressed", m !== "bow"); vspec(); }
+  document.getElementById("hBow").addEventListener("click", function () { setH("bow"); });
+  document.getElementById("hPluck").addEventListener("click", function () { setH("pluck"); });
+  function setM(m) { mode = m; document.getElementById("mBow").setAttribute("aria-pressed", m === "bow"); document.getElementById("mPizz").setAttribute("aria-pressed", m !== "bow"); }
+  document.getElementById("mBow").addEventListener("click", function () { setM("bow"); });
+  document.getElementById("mPizz").addEventListener("click", function () { setM("pizz"); });
+
+  C.onTheme(function () { vspec(); playSpec(lastF || 196); });
+  vspec(); playSpec(196);
+  function loop(now) { drawFiddle(now); drawHelm(now); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, F1 = 196, NM = 24, G = 45, touch = 0, pluckP = 0.16, t0 = -1e9, amps = [], gam = [];
+  var cv = document.getElementById("tCanvas"), ctx = cv.getContext("2d");
+  function setup() {
+    amps = []; gam = [];
+    for (var n = 1; n <= NM; n++) {
+      amps.push(Math.sin(n * Math.PI * pluckP) / (n * n));
+      var g = 0.6 + 0.02 * n * n, x = touch ? Math.sin(n * Math.PI * touch) : 0;
+      gam.push(g + G * x * x);
+    }
+  }
+  function survivors() { if (!touch) return null; var out = []; for (var n = 1; n <= 12; n++) if (Math.abs(Math.sin(n * Math.PI * touch)) < 1e-6) out.push(n); return out; }
+  var NAMES = { 2: "an octave up", 3: "an octave and a fifth up", 4: "two octaves up", 5: "two octaves and a major third up" };
+  function read() {
+    document.getElementById("tPo").textContent = pluckP.toFixed(2) + " of the length";
+    var sv = survivors(), txt;
+    if (!sv) txt = "open string: every mode sounds, lowest " + F1 + " Hz";
+    else txt = "only modes with a still point under the finger survive: modes " + sv.slice(0, 4).join(", ") + ", … · you hear <b>" + (sv[0] * F1) + " Hz</b>, " + NAMES[sv[0]];
+    document.getElementById("tRead").innerHTML = txt + " · plucked " + (pluckP < 0.12 ? "near the bridge: bright" : pluckP > 0.4 ? "near the middle: mellow, even modes weak" : "between bridge and middle");
+    var parts = amps.map(function (a, i) { return { ratio: i + 1, amp: Math.abs(a) * Math.exp(-gam[i] * 0.25) }; });
+    C.stems(document.getElementById("tSpec"), parts, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3 });
+  }
+  function pluck() {
+    setup(); read(); t0 = performance.now();
+    C.play(C.render(amps.map(function (a, i) { return { f: F1 * (i + 1), amp: a * (i + 1), tau: 1 / gam[i] }; }), 3), 0.8); // heard through the bridge force, n times the displacement amplitude
+  }
+  function draw(now) {
+    var d = C.fit(cv), W = cv.width, H = cv.height, L = 18 * d, R = W - 18 * d, y0 = H * 0.5, A = H * 0.32, t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.rgb("--ink"); ctx.fillRect(L - 4 * d, y0 - 22 * d, 4 * d, 44 * d); ctx.fillRect(R, y0 - 22 * d, 4 * d, 44 * d);
+    var norm = 0; amps.forEach(function (a) { norm += Math.abs(a); }); norm = norm || 1;
+    ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = 2 * d; ctx.beginPath();
+    for (var i = 0; i <= 300; i++) {
+      var x = i / 300, u = 0;
+      if (t >= 0 && t < 6) for (var n = 1; n <= NM; n++) u += amps[n - 1] * Math.exp(-gam[n - 1] * t) * Math.sin(n * Math.PI * x) * Math.cos(2 * Math.PI * n * 0.9 * t);
+      var px = L + (R - L) * x, py = y0 - A * u / norm * 2.2; if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+    }
+    ctx.stroke();
+    var pxp = L + (R - L) * (1 - pluckP);
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace"; ctx.fillText("pluck", pxp - 14 * d, H - 6 * d);
+    ctx.beginPath(); ctx.moveTo(pxp, H - 18 * d); ctx.lineTo(pxp, H - 26 * d); ctx.strokeStyle = C.rgb("--muted"); ctx.lineWidth = d; ctx.stroke();
+    if (touch) {
+      var fx = L + (R - L) * touch;
+      ctx.fillStyle = C.rgb("--pos"); ctx.beginPath(); ctx.ellipse(fx, y0 - 16 * d, 7 * d, 11 * d, 0, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillText("finger", fx - 18 * d, 14 * d);
+    }
+    requestAnimationFrame(draw);
+  }
+  document.querySelectorAll("[data-touch]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      touch = parseFloat(b.getAttribute("data-touch"));
+      document.querySelectorAll("[data-touch]").forEach(function (c) { c.setAttribute("aria-pressed", c === b); });
+      pluck();
+    });
+  });
+  var ps = document.getElementById("tP"); ps.addEventListener("input", function () { pluckP = parseFloat(ps.value); setup(); read(); });
+  document.getElementById("tPluck").addEventListener("click", pluck);
+  C.onTheme(read);
+  setup(); read(); requestAnimationFrame(draw);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var C = Core;
+  function draw() {
+    var p = []; for (var n = 1; n <= 12; n++) p.push({ ratio: n, amp: Math.abs(Math.sin(n * Math.PI * 0.16)) / (n * n) });
+    C.stems(document.getElementById("vS4"), p, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
+})();
+</script>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

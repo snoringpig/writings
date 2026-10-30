@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.10.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-a14d652b86e00f03abd5043129e363d4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -196,7 +196,7 @@ window.Quarto = {
 </header>
 
 
-<p>This is an upright piano with its front panels and lid off: 88 keys, three pedals, 229 strings (as modelled here), and the action, the levers that link each key to its hammer and damper. It follows a Yamaha U1, 152 × 122 × 61 cm [<a href="#ref-1">1</a>], with standard key widths [<a href="#ref-14">14</a>, <a href="#ref-15">15</a>]. Strike a key and the graphs show its string moving and each mode’s strength; the sound is computed live from a stiff-string model. Built with <a href="#how-this-was-made">Claude</a>, Anthropic’s AI model.</p>
+<p>This is an upright piano with its front panels and lid off: 88 keys, three pedals, 229 strings (as modelled here), and the action, the levers that link each key to its hammer and damper. It follows a Yamaha U1, 152 × 122 × 61 cm [<a href="#ref-1">1</a>], with standard key widths [<a href="#ref-14">14</a>, <a href="#ref-15">15</a>]. Strike a key and the graphs show its string moving and each mode’s strength; the sound is computed live from a stiff-string model. Made in collaboration with Claude, Anthropic’s AI model.</p>
 <div class="column-page">
 <div class="apiano" id="apiano">
   <div class="ap-stage" id="apStage">
@@ -242,7 +242,7 @@ window.Quarto = {
 <p><strong>The strings.</strong> On a typical piano, and in this model, the lowest 10 notes have one string, the next 15 two, the rest three [<a href="#ref-3">3</a>]; the bass strings are copper-wound [<a href="#ref-2">2</a>] and overstrung, crossing the tenor strings on a bridge of their own [<a href="#ref-6">6</a>, <a href="#ref-8">8</a>, <a href="#ref-10">10</a>].</p>
 <p><strong>A stiff string.</strong> Thick steel wire also resists bending, which puts each partial (each frequency in the note) slightly sharp of a whole-number multiple, <span class="math inline">f_n = n f_0\sqrt{1 + B n^2}</span> [<a href="#ref-5">5</a>], where f₀ is the frequency the string would have without stiffness. B is least mid-keyboard and grows toward both ends [<a href="#ref-16">16</a>, <a href="#ref-17">17</a>]. Tuners therefore stretch octaves slightly wider than 2 : 1 [<a href="#ref-18">18</a>], which reduces the beating (a slow wobble in loudness) between the lower note’s sharp partials and the note above [<a href="#ref-17">17</a>, <a href="#ref-20">20</a>].</p>
 <p>Left out: each note is one ideal stiff string with pinned ends, with no coupling between strings and no soundboard resonances. The hammer is a brief push at one point (its felt’s nonlinearity is ignored); the damper felt is a uniform strip. B and the decay times are chosen by hand, not measured, and B here only rises toward the treble. String lengths other than the longest (119 cm) and a parlour grand’s shortest string (5.2 cm) [<a href="#ref-1">1</a>, <a href="#ref-4">4</a>] are illustrative.</p>
-<p><strong>Read more:</strong> <a href="../../posts/instruments-case-by-case/piano.html">The Shape of a Sound, post 4: Why do piano tuners stretch octaves?</a>.</p>
+<p><strong>Read more:</strong> <a href="../../posts/other-instruments-same-recipe/index.html#piano">The Shape of a Sound, post 3: the piano, and why tuners stretch octaves</a>.</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
@@ -268,9 +268,6 @@ window.Quarto = {
 <li><span id="ref-19"></span>A. Askenfelt and E. Jansson, “From touch to string vibrations” (<a href="https://www.speech.kth.se/music/5_lectures/askenflt/timing.html">timing in the action</a>), in <em>Five Lectures on the Acoustics of the Piano</em>, Royal Swedish Academy of Music, 1990 (described for the grand action; an upright’s jack and let-off work the same way).</li>
 <li><span id="ref-20"></span>UBC Wiki, <a href="https://wiki.ubc.ca/Course:Phys341_2020/Railsback_curve">Course:Phys341 2020/Railsback curve</a> (tuners stretch octaves because slightly inharmonic notes played together would beat).</li>
 </ol>
-<div id="how-this-was-made" class="made">
-<p><em>How this was made.</em> I asked for this piano and said what it should show. Claude, an AI model made by Anthropic, built the 3D model, the sound and the text, in conversation with me. Before publishing, separate Claude agents reviewed it, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the post. Mistakes may remain.</p>
-</div>
 
 
 </section>
