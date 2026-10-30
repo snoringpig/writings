@@ -200,7 +200,7 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/where-the-equations-come-from/index.html">← 2 · Where the equations come from</a> · <a href="../../posts/instruments-case-by-case/index.html">4 · Instruments, case by case →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
 </div>
 <div class="pageinfo">
-<p>Builds on <a href="../../posts/where-the-equations-come-from/index.html">post 2</a>, but recaps what it uses and stands on its own. Mathematics: matrices, eigenvalues, derivatives and complex numbers, each explained; section 5 and the folds use linear algebra and analysis. About 43 minutes, of which section 5 takes about 5 and can be skipped.</p>
+<p>Builds on <a href="../../posts/where-the-equations-come-from/index.html">post 2</a>, but recaps what it uses and stands on its own. Mathematics: matrices, eigenvalues, derivatives and complex numbers, each explained; section 5 and the folds use linear algebra and analysis. About 43 minutes, of which section 5 takes about 5 and can be skipped. Written with <a href="#how-this-was-made">Claude</a>, Anthropic’s AI model.</p>
 </div>
 <p><strong>The question.</strong> When is the motion a differential equation describes a sum of modes, with frequencies read off the spectrum of an operator; what theory lies behind that; and how does it connect back to what we hear?</p>
 <p><a href="../../posts/instruments-as-operators/index.html#the-series-in-one-paragraph">The series in one paragraph</a></p>
@@ -858,6 +858,9 @@ p(t) = \sum_j b_je^{r_jt}\int_0^te^{(s - r_j)t'}\,dt' = H(s)\,e^{st} - \sum_j\fr
   specA(); readB(); requestAnimationFrame(frame);
 })();
 </script>
+<div id="how-this-was-made" class="made">
+<p><em>How this was made.</em> I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.</p>
+</div>
 
 
 </section>

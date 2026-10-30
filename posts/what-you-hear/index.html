@@ -200,7 +200,7 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/where-the-equations-come-from/index.html">2 · Where the equations come from →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
 </div>
 <div class="pageinfo">
-<p>Start here: this post builds on nothing. Math: cosines and fractions; one proof, in a fold, uses integrals and divisibility. About 30 minutes, with every demo. <a href="../../posts/instruments-as-operators/index.html#the-series-in-one-paragraph">The series in one paragraph</a>.</p>
+<p>Start here: this post builds on nothing. Math: cosines and fractions; one proof, in a fold, uses integrals and divisibility. About 30 minutes, with every demo. <a href="../../posts/instruments-as-operators/index.html#the-series-in-one-paragraph">The series in one paragraph</a>. Written with <a href="#how-this-was-made">Claude</a>, Anthropic’s AI model.</p>
 </div>
 <div class="puzzle">
 <p>What in a sound makes a clear pitch, so that a plucked string gives a note you could hum and a struck drum a thud, and what do we hear as a sound’s loudness, timbre and duration?</p>
@@ -692,6 +692,9 @@ p(t) = \sum_k a_k\, e^{-t/\tau_k} \cos(2\pi f_k t + \varphi_k),
   setAll([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 7, 1 / 8]); drawRulers(); wave(); beatDraw();
 })();
 </script>
+<div id="how-this-was-made" class="made">
+<p><em>How this was made.</em> I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.</p>
+</div>
 
 
 </section>

@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="single-nested-for-loop" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="single-nested-for-loop"><span class="header-section-number">1</span> Single Nested <code>for</code> Loop</h2>
 <p>In a <code>for</code>-<code>else</code> clause, <code>else</code> is reached precisely when the <code>for</code> loop is not broken. We give 2 examples to demonstrate this.</p>
-<div id="c47ae074" class="cell" data-execution_count="1">
+<div id="b3ae6e2a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">4</span>:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Finished for loop layer 1</code></pre>
 </div>
 </div>
-<div id="ea34ad31" class="cell" data-execution_count="2">
+<div id="30cd086f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">2</span>:</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
@@ -222,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="double-nested-for-loop" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="double-nested-for-loop"><span class="header-section-number">2</span> Double Nested <code>for</code> Loop</h2>
 <p>Here, the program halts right after <code>(i,j)</code> reaches <code>(2,1)</code>, which is what we want.</p>
-<div id="7b41fe64" class="cell" data-execution_count="3">
+<div id="b4b3a163" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>): <span class="co"># Layer 1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Layer 1 for i = </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: start"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>): <span class="co"># Layer 2</span></span>
@@ -250,7 +250,7 @@ Layer 1 for i = 2: start
 </div>
 </div>
 <p>Here, no <code>continue</code> in the <code>else</code> part. Thus, the program breaks unconditionally after finishing its job in the <code>i==0</code> round.</p>
-<div id="2a3ea79e" class="cell" data-execution_count="4">
+<div id="c34f6a58" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Layer 1 for i = </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: start"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
@@ -272,7 +272,7 @@ Layer 1 for i = 2: start
 <section id="triple-nested-for-loop" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="triple-nested-for-loop"><span class="header-section-number">3</span> Triple Nested <code>for</code> Loop</h2>
 <p>OK, we’ve learnt enough. Now, let’s test it on a triple nested <code>for</code> loop!</p>
-<div id="228aa6d0" class="cell" data-execution_count="5">
+<div id="10847206" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
