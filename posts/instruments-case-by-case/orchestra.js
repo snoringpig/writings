@@ -571,7 +571,7 @@
       text(g, "snoringpig.github.io/writings/posts/instruments-as-operators", 140, 660, 34, rgba(LINK, b2), { font: SANS });
       text(g, "Music: Edvard Grieg, In the Hall of the Mountain King (1875), public domain. Arrangement and synthesis made for this video.", 140, 900, 24, rgba(MUT, b2), { italic: true });
       text(g, "Classes: E. M. von Hornbostel and C. Sachs (1914); D. J. Benson, Music: A Mathematical Offering, chapter 3.", 140, 940, 24, rgba(MUT, b2), { italic: true });
-      text(g, "Code, mathematics and video drafted with Claude, an AI model made by Anthropic.", 140, 980, 24, rgba(MUT, b2), { italic: true });
+      text(g, "Made in collaboration with Claude, Anthropic’s AI model.", 140, 980, 24, rgba(MUT, b2), { italic: true });
     }
     g.restore();
   };

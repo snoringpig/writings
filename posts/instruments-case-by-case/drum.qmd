@@ -18,7 +18,7 @@ aliases: [/posts/instruments-as-operators/drum.html]
 :::
 
 ::: {.pageinfo}
-A page of [post 4, Instruments, case by case](index.qmd). Builds on [post 1, What you hear](../what-you-hear/index.qmd); the drumhead's equation is derived in [post 2](../where-the-equations-come-from/index.qmd#drumhead). Math: derivatives, polar coordinates (quoted) and Bessel functions (described, computed numerically). About 18 minutes. New to the series? [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written with [Claude](#how-this-was-made), Anthropic's AI model.
+A page of [post 4, Instruments, case by case](index.qmd). Builds on [post 1, What you hear](../what-you-hear/index.qmd); the drumhead's equation is derived in [post 2](../where-the-equations-come-from/index.qmd#drumhead). Math: derivatives, polar coordinates (quoted) and Bessel functions (described, computed numerically). About 18 minutes. New to the series? [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -639,7 +639,3 @@ Turn the question around: if you could hear every frequency a drum makes, could 
 })();
 </script>
 ```
-
-::: {.made #how-this-was-made}
-*How this was made.* I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.
-:::

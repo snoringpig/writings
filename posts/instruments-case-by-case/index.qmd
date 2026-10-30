@@ -16,7 +16,7 @@ resources: [core.js, ins.css, orchestra.js, fonts/*.woff2, mountain-king.mp4, mo
 :::
 
 ::: {.pageinfo}
-Builds on [post 1, What you hear](../what-you-hear/index.qmd). Posts [2](../where-the-equations-come-from/index.qmd) and [3](../when-an-equation-has-a-spectrum/index.qmd) derive the equations and spectra these pages use, but every page here can be read after post 1 alone. Mathematics on this page: none in the main text; the recipe cards' formulas, in folds, are derived on the instrument pages. About 10 minutes for this page, with the orchestra; 16 to 18 for each instrument page, more with the folds. Written with [Claude](#how-this-was-made), Anthropic's AI model.
+Builds on [post 1, What you hear](../what-you-hear/index.qmd). Posts [2](../where-the-equations-come-from/index.qmd) and [3](../when-an-equation-has-a-spectrum/index.qmd) derive the equations and spectra these pages use, but every page here can be read after post 1 alone. Mathematics on this page: none in the main text; the recipe cards' formulas, in folds, are derived on the instrument pages. About 10 minutes for this page, with the orchestra; 16 to 18 for each instrument page, more with the folds. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 **The question.** For a particular instrument, what decides how it sounds: where its partials can sit, how it is played, or how its sound fades?
@@ -83,7 +83,7 @@ Simplified: no breath, bow or stick noise; the glockenspiel's overtone fading ti
 <p><i>Aerophone, clarinet.</i> Newton's law on a thin slice of the air in the tube; operator A = −c² d²/dx² on pressure, closed at the reed and open at the far end; the tube's spectrum f<sub>n</sub> = (2n − 1) c / 4L. Blown, the air repeats one cycle, so the partials sit exactly on the lines; the tube's odd modes make the odd ones strong and the even ones weak: a hollow note.</p>
 <p><i>Idiophone, glockenspiel.</i> Newton's law on a thin slice of a steel bar; operator A = κ² d⁴/dx⁴, both ends free; spectrum from cos βL cosh βL = 1, ratios 1 : 2.76 : 5.40. Off the lines, but the overtones die fast: a bright, clean note.</p>
 <p><i>Membranophones, bass drum and timpani.</i> Newton's law on a small patch of the drumhead; operator A = −c²Δ, rim held still; spectrum from J<sub>m</sub>(ka) = 0, ratios 1 : 1.59 : 2.14 : 2.30 …; the timpani's spectrum is measured, not derived. Bass drum: struck off centre, mostly round modes, off the lines and fading fast: a boom with no clear pitch. Timpani: the same skin; the air it drags along pulls its spoke modes near 2 : 3 : 4 : 5, the stroke favours them and the round modes fade fast: a note.</p>
-<p><i>Every sound in this video was built from pure tones at these spectra. No recordings, no samples.</i> Code, mathematics and video drafted with Claude, an AI model made by Anthropic.</p>
+<p><i>Every sound in this video was built from pure tones at these spectra. No recordings, no samples.</i> Made in collaboration with Claude, Anthropic's AI model.</p>
 </details></div>
 <script>
 document.querySelectorAll("a[data-t]").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); var v = document.getElementById("mkVideo"); v.currentTime = +a.getAttribute("data-t"); v.play(); }); });
@@ -396,7 +396,3 @@ Start with the string: [why does a light touch make it jump an octave?](violin.q
 })();
 </script>
 ```
-
-::: {.made #how-this-was-made}
-*How this was made.* I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.
-:::
