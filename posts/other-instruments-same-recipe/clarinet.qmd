@@ -1,0 +1,311 @@
+---
+title: "Why is a clarinet almost an octave deeper than a flute?"
+subtitle: "The Shape of a Sound · 3 · Deep dive"
+date: 2026-10-29T12:00:00
+draft: false
+categories: [math, music, the-shape-of-a-sound]
+description: "The clarinet and the flute: a tube closed at one end has modes only at odd multiples of its lowest frequency, and a blown tone is one repeating cycle whose strong partials the tube's modes pick."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+    reference-location: margin
+resources: [core.js, ins.css]
+aliases: [/posts/instruments-case-by-case/clarinet.html, /posts/instruments-as-operators/clarinet.html]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← Violin](violin.qmd) · [Kalimba →](kalimba.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+A deep dive from [the clarinet's entry](index.qmd#clarinet) in post 3, which also covers [the flute](index.qmd#flute). Builds on [post 2](../one-string-end-to-end/index.qmd); the air obeys the string's equation. Uses sines, cosines and derivatives; derivations are in folds. About 13 minutes. Written in collaboration with Claude, Anthropic's AI model.
+:::
+
+::: {.puzzle}
+A clarinet and a flute are about the same length, yet the clarinet's lowest note is almost an [octave](../instruments-as-operators/glossary.qmd#octave) below the flute's. And when players [overblow](../instruments-as-operators/glossary.qmd#overblow), the flute jumps up an octave while the clarinet jumps an [octave and a fifth](../instruments-as-operators/glossary.qmd#octave). The same equation governs the air in both tubes. What is different?
+:::
+
+The ends. A flute is open at both ends and a clarinet is closed at the reed, and a tube closed at one end fits a quarter of a wave where an open tube fits a half, so the same length sounds an octave lower and has modes only at the odd multiples of its lowest frequency. Hold the blow button on the clarinet, then switch the same tube to a flute and blow again; the register key (on the flute it stands in for a faster, narrower airstream) makes either tube jump to its next mode.
+
+```{=html}
+<style>
+#blow { min-width: 9rem; min-height: 3rem; font-size: 1.05rem; touch-action: none; user-select: none; -webkit-user-select: none; }
+#blow.on { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+</style>
+```
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <canvas id="pipe" style="height:150px" aria-label="Clarinet bore with six tone holes. Tap a hole to open or close it."></canvas>
+  <div class="controls" style="padding:0.6rem 0.25rem 0">
+    <button id="blow" class="primary">Hold to blow</button>
+    <button id="reg" aria-pressed="false">Register key</button>
+    <button id="tClar" aria-pressed="true">Closed at reed (clarinet)</button><button id="tFlute" aria-pressed="false">Open both ends (flute)</button>
+  </div>
+  <div class="controls" style="padding:0.5rem 0.25rem 0" id="fing" role="group" aria-label="Fingerings"></div>
+  <div class="readout" id="cRead" style="padding:0.5rem 0.25rem 0"></div>
+  <svg class="spec" id="cSpec" viewBox="0 0 320 90" style="max-width:520px;padding:0.4rem 0.25rem 0" aria-label="Partials of the sound"></svg>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Shading: how much the pressure swings, dark where it swings most, pale where it stays at room pressure. The first open hole acts, roughly, as the end of the tube.</p>
+</section>
+</div>
+```
+
+The reason, in one sentence: **the two tubes have the same operator with different ends, and the ends decide which shapes, and so which frequencies, the air can have.**
+
+## The tube's equation {#operator}
+
+Let $p(x, t)$ be the air pressure in the tube minus room pressure, at distance $x$ from the reed end. Newton's law on a thin slab of air, pushed by the pressure difference across it, together with the way air pushes back when squeezed, gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation) again, the string's equation, now for the pressure (the [flute's entry](index.qmd#flute) derives it):
+$$
+\begin{gathered}
+p_{tt} = -Ap, \qquad Ap = -c^2p_{xx}, \\
+c^2 = \frac{K}{\rho} .
+\end{gathered}
+$$
+In words: the pressure at each point changes in proportion to how sharply the pressure shape bends. Here $K$ is the air's [bulk modulus](../instruments-as-operators/glossary.qmd#bulk-modulus), its resistance to being squeezed, $\rho$ its density, and $c$ the speed of sound, about 343 m/s at 20 °C.[^speed]
+
+Only the ends differ between a flute and a clarinet, and they are part of the [operator](../instruments-as-operators/glossary.qmd#operator) $A$:
+
+- **An open end** meets the room, so the pressure there is room pressure, $p = 0$, a [Dirichlet condition](../instruments-as-operators/glossary.qmd#dirichlet).[^pipes1] The flute has two: $p(0) = p(L) = 0$.
+- **The clarinet's reed** is nearly shut, so the air there cannot move back and forth, and air that never moves feels no net push: the pressure has no slope, $p_x(0) = 0$, a [Neumann condition](../instruments-as-operators/glossary.qmd#neumann). Its bell is open, $p(L) = 0$.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The reed end, the end correction, and what the model leaves out</summary>
+
+Let $\xi(x, t)$ be how far the air that normally sits at $x$ has moved along the tube. Newton's law on a slab is $\rho\,\xi_{tt} = -p_x$. At the reed the air cannot move, so $\xi = 0$ there at all times, so $\xi_{tt} = 0$, and Newton's law gives $p_x = 0$. The air just outside an open end moves with the air inside, so the tube acts slightly longer, by about 0.6 of its radius, an amount called the [end correction](../instruments-as-operators/glossary.qmd#end-correction) (J. Wolfe, [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW: "usually about 0.6 times the radius"). The model assumes a narrow cylindrical tube, small pressure changes and no friction at the walls. A real clarinet's bore is not exactly cylindrical, and its holes and bell matter; they refine the numbers below, not the picture (N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapters 8 and 15).
+
+</details>
+:::
+
+## Two tubes, two spectra {#spectrum}
+
+The shapes the operator only stretches, $AX_n = \lambda_nX_n$, swing at $f_n = \sqrt{\lambda_n}/2\pi$. With the flute's ends they are the string's sines; with the clarinet's they are cosines that fit an odd number of quarter waves:
+$$
+\begin{aligned}
+&\text{flute:} && X_n = \sin\frac{n\pi x}{L}, \\
+& && f_n = n\,\frac{c}{2L}, \\
+&\text{clarinet:} && X_n = \cos\frac{(2n - 1)\pi x}{2L}, \\
+& && f_n = (2n - 1)\,\frac{c}{4L} .
+\end{aligned}
+$$
+The flute's modes sit at 1, 2, 3, 4, … times its lowest frequency, the clarinet's at 1, 3, 5, 7, … times its lowest, and the clarinet's lowest, $c/4L$, is half the flute's $c/2L$.[^pipes2]
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The two spectra, step by step <span class="needs">derivatives</span></summary>
+
+Writing $\lambda = c^2k^2$, the mode equation $-c^2X'' = \lambda X$ becomes $X'' = -k^2X$, solved by $X = a\cos kx + b\sin kx$, with $f = \sqrt\lambda/2\pi = ck/2\pi$.
+
+*Flute.* $X(0) = 0$ forces $a = 0$, and $X(L) = 0$ needs $\sin kL = 0$, so $kL = n\pi$: one half wave, two half waves, and so on. So $\lambda_n = (n\pi c/L)^2$ and $f_n = nc/2L$.
+
+*Clarinet.* $X'(0) = bk = 0$ forces $b = 0$, leaving $X = \cos kx$, and $X(L) = 0$ needs $\cos kL = 0$, so $kL = (2n - 1)\pi/2$: one quarter wave, three quarter waves, and so on. So $\lambda_n = \big((2n - 1)\pi c/2L\big)^2$ and $f_n = (2n - 1)c/4L$.
+
+As for the string, integration by parts rules out $\lambda \le 0$, and every pressure shape is a sum of these modes; the [appendix](../when-an-equation-has-a-spectrum/index.qmd#levels) says when such a sum is guaranteed.
+
+</details>
+:::
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="cM4a" viewBox="0 0 320 96" style="max-width:520px" aria-label="The open tube's modes: every whole-number multiple of its lowest frequency"></svg>
+  <svg class="spec" id="cM4b" viewBox="0 0 320 96" style="max-width:520px" aria-label="The closed tube's modes: odd multiples of its lowest frequency only"></svg>
+  <p class="cap">The tubes' modes, as multiples of each tube's lowest frequency: open at both ends (top), every line; closed at one end (bottom), the odd lines only. The stems mark where modes can sit; their heights carry no meaning here.</p>
+</div>
+</div>
+```
+
+## Almost an octave deeper {#what-we-hear}
+
+**A closed tube fits a wave twice as long.** The flute's lowest mode, $\sin(\pi x/L)$, has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet's, $\cos(\pi x/2L)$, swings most at the reed and has room pressure at the bell: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end.[^fvc1] Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.
+
+## Blown: one repeating cycle {#sustained}
+
+A blown tube does not ring and fade: the reed or the air jet keeps feeding it, and the air settles into one motion that repeats. The clarinet's reed acts as a valve: when the pressure in the mouthpiece drops it closes, and when the pressure rises it opens, so the air column drives the reed that feeds it.[^wolfe-clar1] On a flute, a jet of air blown across the embouchure hole does the reed's job.[^wolfe-flute1] Either way the result is a [self-sustained oscillation](../instruments-as-operators/glossary.qmd#self-sustained) ([appendix](../when-an-equation-has-a-spectrum/index.qmd#counterexamples)), at a playing frequency close to the tube's sounding mode. For the lowest notes that is $c/4L$ on the clarinet and $c/2L$ on the flute, with $L$ the tube up to the first open hole: the fingers choose the note by choosing $L$.
+
+**The tube's modes pick the strong partials.** A sound that repeats has partials only at whole-number multiples of its repetition rate ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)), but it may have all of them. So the clarinet's *modes* are odd multiples only, while its *sound* has even multiples too: weak in the low register, where no mode of the tube supports them, but not absent. In the low register the clarinet has strong first and third harmonics and weak second and fourth; from about E4 up, the even harmonics matter more.[^wolfe-clar2] Blowing harder drives the reed further from gentle, nearly linear motion, which adds high harmonics, so the tone gets brighter as well as louder.[^wolfe-clar3]
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="cS4a" viewBox="0 0 320 96" style="max-width:520px" aria-label="The flute's blown sound: every whole-number multiple"></svg>
+  <svg class="spec" id="cS4b" viewBox="0 0 320 96" style="max-width:520px" aria-label="The clarinet's blown sound: strong odd multiples, faint even ones"></svg>
+  <p class="cap">The blown sounds, as multiples of the note being played: the flute (top) has every whole-number multiple; the clarinet (bottom) has strong odd multiples and faint even ones. The demos' sounds are made this way; the exact strengths are an illustrative choice.</p>
+</div>
+</div>
+```
+
+## Overblowing: a twelfth or an octave {#overblowing}
+
+The flute's spectrum has every whole-number multiple of its lowest frequency; the clarinet's has only the odd ones, with nothing in between. So when a clarinetist presses the register key, the tube jumps to its next mode, 3 times its lowest frequency: an octave and a fifth, called a twelfth.[^fvc2] A flutist overblows with a faster jet, and the flute's next mode is 2 times its lowest, an octave.[^wolfe-flute2] That is why clarinet fingerings repeat a twelfth apart and flute fingerings an octave apart. (The demo keeps the low-register tone colour when the register key is on.)
+
+::: {.derive}
+<details><summary><span class="label">Details</span>How the register key picks out the 3× mode</summary>
+
+The register key opens a small hole about a third of the way down the closed part of the tube. An open hole pulls the pressure there toward room pressure, which spoils the fundamental, a mode that needs pressure variation at that point. For one note in the low register the hole sits right where that note's $3f_1$ mode has no pressure variation anyway, so the open hole does not disturb that mode. For the other notes the hole is off that point, and a second effect helps: the air in a small hole has mass, so the faster it must move back and forth, the harder it is to move. At the fundamental's lower frequency the hole leaks enough to spoil that mode; at the $3f_1$ mode's higher frequency it acts almost as a plug: "high frequency waves pass by as though it were closed". Either way the tube jumps to the $3f_1$ mode. (J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html), UNSW)
+
+</details>
+:::
+
+[]{#four-aspects}For a sustained instrument the [four aspects](../what-you-hear/index.qmd#four-aspects) come from different places than for a ringing one: the repeating cycle gives the whole-number multiples, the tube's modes set which are strong, and the player sets the rest.
+
+::: {.aspects}
+
+| Aspect | Clarinet (and flute) |
+|:--|:--|
+| [Pitch](../instruments-as-operators/glossary.qmd#pitch) | the playing frequency, close to the tube's sounding mode: $c/4L$ for the clarinet's lowest notes ($c/2L$ for the flute's), with $L$ chosen by the fingers; the register key jumps to $3\times$ (the flute overblows to $2\times$) |
+| Loudness | the breath: blowing harder is louder |
+| [Timbre](../instruments-as-operators/glossary.qmd#timbre) | in the low register, strong odd partials and weak even ones, picked by the tube's modes; more even ones higher up; brighter when played louder |
+| Duration | as long as the player blows |
+
+: The clarinet's four aspects, read off its blown sound. {.striped}
+
+:::
+
+```{=html}
+<style>
+/* The four-aspects tables are prose: let them wrap on narrow screens instead of scrolling sideways. */
+@media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
+</style>
+```
+
+## Next
+
+The next page changes the rule itself, to a steel tine that resists bending instead of being stretched: [why does a kalimba sound clean?](kalimba.qmd)
+
+[^speed]: Wikipedia, [Speed of sound](https://en.wikipedia.org/wiki/Speed_of_sound): about 343 m/s in dry air at 20 °C.
+[^pipes1]: J. Wolfe, [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW: at an open end the "sound pressure (difference from atmospheric) is close to zero".
+[^pipes2]: J. Wolfe, [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW: closed cylindrical bores "have only odd harmonics starting one octave lower".
+[^fvc1]: J. Wolfe, [Open vs closed pipes (flutes vs clarinets)](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html), UNSW: for the same length, the closed pipe's lowest frequency "c/4L = 140 Hz – one octave lower than the flute".
+[^wolfe-clar1]: J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html), UNSW: "the reed acts like an oscillating valve".
+[^wolfe-flute1]: J. Wolfe, [Flute acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html), UNSW: "The flutist blows a rapid jet of air across the embouchure hole"; "The flute is open at both ends."
+[^wolfe-clar2]: J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html), UNSW: "the sound spectrum in the low register has strong first and third harmonics, but weak second and fourth"; even harmonics become more important from about E4.
+[^wolfe-clar3]: J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html), UNSW: added harmonics make the sound brighter and louder; soft playing in the linear range gives "few high harmonics".
+[^fvc2]: J. Wolfe, [Open vs closed pipes (flutes vs clarinets)](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html), UNSW: "the second register of the clarinet is a musical twelfth above the first".
+[^wolfe-flute2]: J. Wolfe, [Flute acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html), UNSW: blowing harder or narrowing the lips gives "a faster jet", and the flute "jumps up" to the octave, $2f_1$.
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, CSOUND = 343, LTOT = 0.585;
+  var SEMIS = [11, 9, 7, 5, 4, 2]; // holes from the reed toward the bell
+  var HOLES = SEMIS.map(function (s) { return LTOT * Math.pow(2, -s / 12); });
+  var open = [false, false, false, false, false, false], reg = false, flute = false, voice = null;
+  var FING = [{ n: "1", s: 0 }, { n: "2", s: 2 }, { n: "3", s: 4 }, { n: "4", s: 5 }, { n: "5", s: 7 }, { n: "6", s: 9 }, { n: "7", s: 11 }];
+  function setFingering(s) { for (var i = 0; i < 6; i++) open[i] = s > 0 && SEMIS[i] <= s; update(); }
+  function Leff() { for (var i = 0; i < 6; i++) if (open[i]) return HOLES[i]; return LTOT; }
+  function modeN() { return reg ? 2 : 1; }
+  function freq() { var L = Leff(); return flute ? modeN() * CSOUND / (2 * L) : (2 * modeN() - 1) * CSOUND / (4 * L); }
+  function parts() { return C.models.clarinet.partials({ flute: flute }); }
+
+  var fing = document.getElementById("fing");
+  var FBTN = [];
+  FING.forEach(function (fg) { var b = document.createElement("button"); b.type = "button"; b.textContent = fg.n; b.addEventListener("click", function () { setFingering(fg.s); }); fing.appendChild(b); FBTN.push(b); });
+  function freqFor(s) { var L = LTOT; for (var i = 0; i < 6; i++) if (s > 0 && SEMIS[i] <= s) { L = HOLES[i]; break; } return flute ? modeN() * CSOUND / (2 * L) : (2 * modeN() - 1) * CSOUND / (4 * L); }
+  function labelFingerings() { FING.forEach(function (fg, i) { var nm = C.noteName(freqFor(fg.s)).name; FBTN[i].textContent = nm; FBTN[i].setAttribute("aria-label", "Fingering " + fg.n + ": " + nm); }); }
+
+  function startBlow() {
+    if (voice) return; var a = C.ac(), t = a.currentTime, osc = a.createOscillator(), g = a.createGain(), lp = a.createBiquadFilter();
+    osc.setPeriodicWave(C.wave(a, parts())); osc.frequency.value = freq();
+    lp.type = "lowpass"; lp.frequency.value = flute ? 3500 : 4500;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(flute ? 0.4 : 0.3, t + 0.06);
+    osc.connect(lp); lp.connect(g); g.connect(C.out); osc.start();
+    voice = { osc: osc, g: g, lp: lp }; document.getElementById("blow").classList.add("on");
+  }
+  function stopBlow() {
+    if (!voice) return; var t = C.ac().currentTime; voice.g.gain.cancelScheduledValues(t); voice.g.gain.setTargetAtTime(0, t, 0.04); voice.osc.stop(t + 0.4); voice = null;
+    document.getElementById("blow").classList.remove("on");
+  }
+  function update() {
+    if (voice) { var a = C.ac(); voice.osc.frequency.setTargetAtTime(freq(), a.currentTime, 0.01); voice.osc.setPeriodicWave(C.wave(a, parts())); voice.lp.frequency.value = flute ? 3500 : 4500; }
+    var f = freq(), nn = C.noteName(f), L = Leff();
+    labelFingerings();
+    document.getElementById("cRead").innerHTML = "mode " + modeN() + ", at <b>" + (flute ? modeN() : 2 * modeN() - 1) + "×</b> the tube's lowest · <b>" + f.toFixed(1) + " Hz</b> · " + nn.name + (nn.cents ? ", " + Math.abs(nn.cents) + " cents " + (nn.cents > 0 ? "sharp" : "flat") : "");
+    C.stems(document.getElementById("cSpec"), parts().slice(0, 12), { W: 320, H: 90, rmax: 12, fs: 8, sw: 2.5 });
+  }
+  var blow = document.getElementById("blow");
+  blow.addEventListener("pointerdown", function (e) { e.preventDefault(); blow.setPointerCapture(e.pointerId); startBlow(); });
+  blow.addEventListener("pointerup", stopBlow); blow.addEventListener("pointercancel", stopBlow);
+  // capture phase, so the page claims its keys before the blog's search shortcut sees them
+  function mine(e) { var k = parseInt(e.key, 10); return e.code === "Space" || (k >= 1 && k <= 7); }
+  window.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT") || !mine(e)) return;
+    e.preventDefault(); e.stopPropagation(); if (e.repeat) return;
+    if (e.code === "Space") { startBlow(); return; }
+    setFingering(FING[parseInt(e.key, 10) - 1].s);
+  }, true);
+  window.addEventListener("keyup", function (e) {
+    if (!mine(e)) return; e.stopPropagation();
+    if (e.code === "Space") stopBlow();
+  }, true);
+  var regB = document.getElementById("reg");
+  regB.addEventListener("click", function () { reg = !reg; regB.setAttribute("aria-pressed", reg); update(); });
+  function setType(fl) { flute = fl; document.getElementById("tClar").setAttribute("aria-pressed", !fl); document.getElementById("tFlute").setAttribute("aria-pressed", fl); update(); }
+  document.getElementById("tClar").addEventListener("click", function () { setType(false); });
+  document.getElementById("tFlute").addEventListener("click", function () { setType(true); });
+
+  var cv = document.getElementById("pipe"), ctx = cv.getContext("2d");
+  function geom() { var d = C.fit(cv), W = cv.width, H = cv.height, x0 = 30 * d, x1 = W - 16 * d; return { d: d, W: W, H: H, x0: x0, x1: x1, top: H * 0.32, bot: H * 0.68 }; }
+  function X(g, L) { return g.x0 + (g.x1 - g.x0) * L / LTOT; }
+  cv.addEventListener("pointerdown", function (e) {
+    var r = cv.getBoundingClientRect(), g = geom(), px = (e.clientX - r.left) * g.d, best = -1, bd = 26 * g.d;
+    HOLES.forEach(function (L, i) { var dx = Math.abs(X(g, L) - px); if (dx < bd) { bd = dx; best = i; } });
+    if (best >= 0) { open[best] = !open[best]; update(); }
+  });
+  function draw(now) {
+    var g = geom(), d = g.d, L = Leff(), xe = X(g, L), n = modeN();
+    ctx.clearRect(0, 0, g.W, g.H);
+    var ph = C.reduce || !voice ? 1 : Math.cos(2 * Math.PI * 0.8 * now / 1000);
+    for (var px = Math.floor(g.x0); px < g.x1; px += Math.max(1, Math.round(d))) {
+      var xx = (px - g.x0) / (g.x1 - g.x0) * LTOT, amp;
+      if (xx <= L) {
+        var u = xx / L;
+        amp = flute ? Math.sin(n * Math.PI * u) : Math.cos((2 * n - 1) * Math.PI * u / 2);
+        var v = amp * ph, c = v >= 0 ? C.col["--pos"] : C.col["--neg"];
+        ctx.fillStyle = C.rgb(c, Math.min(1, Math.abs(v)) * 0.85 + 0.05);
+      } else ctx.fillStyle = C.rgb("--grid", 0.5);
+      ctx.fillRect(px, g.top, Math.max(1, Math.round(d)), g.bot - g.top);
+    }
+    ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 2 * d; ctx.strokeRect(g.x0, g.top, g.x1 - g.x0, g.bot - g.top);
+    if (flute) { ctx.fillStyle = C.rgb("--paper"); ctx.fillRect(g.x0 - 2 * d, g.top + 2 * d, 4 * d, g.bot - g.top - 4 * d); }
+    else { ctx.fillStyle = C.rgb("--ink"); ctx.beginPath(); ctx.moveTo(g.x0, g.top); ctx.lineTo(g.x0 - 22 * d, (g.top + g.bot) / 2 - 3 * d); ctx.lineTo(g.x0 - 22 * d, (g.top + g.bot) / 2 + 3 * d); ctx.lineTo(g.x0, g.bot); ctx.closePath(); ctx.fill(); }
+    HOLES.forEach(function (Lh, i) {
+      var x = X(g, Lh), r = 9 * d;
+      ctx.beginPath(); ctx.arc(x, g.top - r - 6 * d, r, 0, 2 * Math.PI);
+      if (open[i]) { ctx.fillStyle = C.rgb("--paper"); ctx.fill(); ctx.strokeStyle = C.rgb("--ink"); ctx.lineWidth = 2 * d; ctx.stroke(); }
+      else { ctx.fillStyle = C.rgb("--ink"); ctx.fill(); }
+      ctx.fillStyle = C.rgb("--muted"); ctx.fillRect(x - 1 * d, g.top - 6 * d, 2 * d, 6 * d);
+    });
+    ctx.strokeStyle = C.rgb("--accent"); ctx.lineWidth = 2 * d; ctx.setLineDash([4 * d, 4 * d]);
+    ctx.beginPath(); ctx.moveTo(xe, g.top - 2 * d); ctx.lineTo(xe, g.bot + 14 * d); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.rgb("--muted"); ctx.font = (11 * d) + "px 'IBM Plex Mono', monospace"; ctx.textAlign = "center";
+    var lab = "sounding end", lw = ctx.measureText(lab).width, lx = Math.max(lw / 2 + 4 * d, Math.min(g.W - lw / 2 - 4 * d, xe));
+    ctx.fillText(lab, lx, g.bot + 26 * d);
+    ctx.textAlign = "left"; ctx.fillText(flute ? "open" : "reed", 4 * d, g.bot + 26 * d);
+    requestAnimationFrame(draw);
+  }
+  C.onTheme(update);
+  update(); requestAnimationFrame(draw);
+})();
+</script>
+```
+
+```{=html}
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models;
+  function modes(step) { var out = []; for (var n = 1; n <= 10; n += step) out.push({ ratio: n, amp: 1 }); return out; }
+  function draw() {
+    C.stems(document.getElementById("cM4a"), modes(1), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+    C.stems(document.getElementById("cM4b"), modes(2), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+    C.stems(document.getElementById("cS4a"), M.clarinet.partials({ flute: true }), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+    C.stems(document.getElementById("cS4b"), M.clarinet.partials(), { W: 320, H: 96, rmax: 10, fs: 8, sw: 3, noOff: true });
+  }
+  C.onTheme(draw);
+  draw();
+})();
+</script>
+```

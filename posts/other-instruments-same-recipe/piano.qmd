@@ -1,0 +1,684 @@
+---
+title: "Why do piano tuners stretch octaves?"
+subtitle: "The Shape of a Sound · 3 · Deep dive"
+date: 2026-10-29T12:00:00
+draft: false
+categories: [math, music, the-shape-of-a-sound]
+description: "The piano: a wire that is a string and a bar at once has its overtones slightly sharp of the whole-number lines, so exact octaves beat and tuners stretch them; the hammer, dampers and pedals change how the modes start and die, not where they sit."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+    reference-location: margin
+resources: [core.js, ins.css]
+aliases: [/posts/instruments-case-by-case/piano.html, /posts/instruments-as-operators/piano.html]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← Harmonica](harmonica.qmd) · [Bass drum and kettledrum →](drum.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+A deep dive from the [piano entry](index.qmd#piano) of post 3. Builds on [post 2, One string, end to end](../one-string-end-to-end/index.qmd), and on the [kalimba page](kalimba.qmd) for bending. Uses derivatives and square roots; proofs and fine print are in folds you can skip. About 14 minutes with the playable piano. Written in collaboration with Claude, Anthropic's AI model.
+:::
+
+::: {.puzzle}
+Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](../instruments-as-operators/glossary.qmd#equal-temperament), the tuning in which all twelve semitones are the same ratio. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
+:::
+
+Exact sounds wrong because a piano wire's second partial sits a little above twice its fundamental, so an exact 2 : 1 octave puts two nearly equal frequencies side by side, and they [beat](../instruments-as-operators/glossary.qmd#beats): a slow wobble in loudness. Listen: an exact octave, then a stretched one.
+
+```{=html}
+<style>
+.kbdwrap { overflow-x: auto; overflow-y: hidden; border-radius: 6px; scrollbar-width: thin; }
+.kbd { position: relative; height: 150px; user-select: none; -webkit-user-select: none; touch-action: none; }
+.kbd .w, .kbd .b { position: absolute; top: 0; padding: 0; min-height: 0; border-radius: 0 0 5px 5px; font-family: var(--f-mono); font-size: 10px; display: flex; align-items: flex-end; justify-content: center; }
+.kbd .w { height: 100%; background: #fbfbf8; border: 1px solid var(--rule); color: #6a707c; padding-bottom: 5px; }
+.kbd .b { height: 60%; background: #1d2230; border: 1px solid #1d2230; color: #c8ccd6; z-index: 2; padding-bottom: 4px; }
+.kbd .w.win { background: #eef1fb; }
+.kbd .b.win { background: #2c3a6a; }
+.kbd .on { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+.pedals { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.pedals button { min-width: 7.5rem; border-radius: 6px 6px 14px 14px; font-size: 0.9rem; }
+.pedals button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pedals small { display: block; font-size: 0.75rem; opacity: 0.8; }
+.act-wrap { position: relative; border-radius: 8px; overflow: hidden; background: linear-gradient(#f3f4f6, #e6e8ec); }
+#act3dCanvas { height: 500px; cursor: grab; }
+@media (max-width: 640px) { #act3dCanvas { height: 440px; } }
+.act-tools { position: absolute; top: 8px; right: 8px; display: flex; gap: 6px; }
+.act-tools button { min-height: 1.9rem; padding: 0.15rem 0.55rem; font-size: 0.82rem; background: rgba(255,255,255,0.85); }
+.eqx { font-family: "Spectral", Georgia, serif; font-size: 1.15rem; text-align: center; padding: 0.4rem 0 0.1rem; line-height: 2; }
+.eqx span.t { padding: 0.05rem 0.3rem; border-radius: 4px; transition: background 0.15s, opacity 0.2s; }
+.eqx span.t.op { border-bottom: 2px solid var(--accent); }
+.eqx span.t.on { background: rgba(201, 87, 47, 0.18); }
+.eqx span.t.off { opacity: 0.3; text-decoration: line-through; }
+.eqkey { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; font-family: var(--f-ui); font-size: 0.82rem; color: var(--muted); }
+.eqkey b { color: var(--ink); font-weight: 500; }
+.mini2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.75rem; }
+@media (max-width: 640px) { .mini2 { grid-template-columns: minmax(0, 1fr); } }
+.mini2 canvas { height: 120px; }
+.actnote { text-align: center; font-size: 0.95rem; min-height: 2.8em; padding: 0.5rem 0.5rem 0; color: var(--ink); max-width: 46rem; margin: 0 auto; }
+#act3d .controls button small { display: block; font-size: 0.75rem; opacity: 0.75; }
+.eqx span.t.mod { box-shadow: inset 0 0 0 1.5px rgba(46, 75, 176, 0.6); }
+.eqx.plain { font-family: var(--f-ui); font-size: 0.9rem; line-height: 1.6; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 0.6rem; }
+.eqx.plain span.t { border: 1px solid var(--rule); }
+@media (hover: none) and (pointer: coarse) { .kbonly { display: none; } }
+</style>
+```
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <div class="controls"><button id="o21">C4 + C5, exactly 2 : 1</button><button id="ost" class="primary">C4 + C5, stretched</button></div>
+    <div class="slider"><label for="oMult">Stiffness ×</label><input type="range" id="oMult" min="1" max="12" step="0.5" value="6"><output id="oMulto">6.0</output></div>
+    <label class="check"><input type="checkbox" id="oAll"> Play every partial</label>
+    <div class="readout" id="oRead"></div>
+    <p class="cap">Until you tick "Play every partial", each note plays only its lowest partials (C4: 1 to 3, C5: 1 and 2), so the one beat a tuner listens for stands out and the stretched octave is steady. Stiffness starts at 6 times a real middle C wire's, so the wobble is quick enough to hear; at 1 it is a slow swell every few seconds.</p>
+  </div>
+</div>
+```
+
+The reason, in one sentence: **a piano wire is a string and a bar at once, and the bar's stiffness pushes every partial sharp of its whole-number line, the more so the higher the partial.**
+
+## Where the equation comes from {#newton}
+
+Two forces act on each short piece of a piano wire, and they add. Tension pulls it toward the inside of its curve, the net force $T\,u_{xx}$ per unit length of the string in [post 2](../one-string-end-to-end/index.qmd#newton). Stiff steel resists bending, the force $-EI\,u_{xxxx}$ per unit length of the [kalimba's tine](kalimba.qmd#newton). Newton's law for a wire of mass $\mu$ per unit length takes their sum:[^fr1]
+$$
+\mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx} .
+$$
+Here $T$ is the tension, $E$ steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus), and $I = \pi d^4/64$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment) of a round wire of diameter $d$. At the bridge and at the far bearing point the wire is held in place, $u = 0$, and if it can pivot freely there, no bending moment acts, $u_{xx} = 0$: the ends are [pinned](../instruments-as-operators/glossary.qmd#pinned). So $u_{tt} = -Au$ with
+$$
+\begin{gathered}
+A = -c^2\frac{d^2}{dx^2} + \kappa^2\frac{d^4}{dx^4}, \\
+c^2 = \frac{T}{\mu}, \qquad \kappa^2 = \frac{EI}{\mu},
+\end{gathered}
+$$
+the string's operator plus the bar's.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>What the model leaves out</summary>
+
+The model assumes a plain, uniform steel wire, pinned ends, small slopes and no friction; the fading comes back below. Real piano strings are held a little more firmly than pinned, which shifts the numbers slightly but not the picture. Bass strings are wound with copper, which adds mass but little stiffness (N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 12).
+
+</details>
+:::
+
+## The wire's shapes {#spectrum}
+
+The string's sines still work. Each $X_n = \sin(n\pi x/L)$ is zero at both ends, and so is $X_n''$, so the pinned ends hold; two derivatives multiply it by $-k^2$ and four by $k^4$, with $k = n\pi/L$. So both terms of $A$ only stretch it, and their stretch factors add:
+$$
+\begin{gathered}
+X_n(x) = \sin\frac{n\pi x}{L}, \\
+\lambda_n = c^2k^2 + \kappa^2k^4 .
+\end{gathered}
+$$
+Taking $f_n = \sqrt{\lambda_n}/2\pi$ and factoring out the string's part gives
+$$
+\begin{gathered}
+f_n = n f_0\sqrt{1 + Bn^2}, \\
+f_0 = \frac{c}{2L}, \qquad B = \frac{\pi^2EI}{TL^2} .
+\end{gathered}
+$$
+Here $f_0$ is the lowest frequency the wire would have without stiffness. The stiffness constant $B$ is small, but it multiplies $n^2$: the fundamental barely moves, while high [partials](../instruments-as-operators/glossary.qmd#partial) run sharp. The wire is slightly [inharmonic](../instruments-as-operators/glossary.qmd#inharmonic).[^inh]
+
+For a middle C wire $B$ is roughly $4.4\times10^{-4}$, which puts the 10th partial about 37 [cents](../instruments-as-operators/glossary.qmd#cents), a third of a semitone, sharp of ten times the fundamental. Since $I$ grows like the fourth power of the diameter and $B$ falls like $1/L^2$, short strings that are thick for their length are the stiffest.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>There are no other modes <span class="needs">inner products</span></summary>
+
+The sines already form a basis of shapes on $[0, L]$ (post 2's [Fourier sine series](../one-string-end-to-end/index.qmd#decoupling)). With pinned ends, integrating by parts shows that $A$ is symmetric, $\int (Au)\,w = \int u\,(Aw)$, so eigenfunctions for different eigenvalues are perpendicular. An eigenfunction for any eigenvalue other than the $\lambda_n$ would be perpendicular to every sine, hence zero.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>How big is $B$? A middle C wire <span class="needs">logarithms</span></summary>
+
+Take roughly $d = 1$ mm and $L = 0.6$ m, with steel's $E = 2\times10^{11}$ Pa and density $7850$ kg/m³; a tension of about $610$ N then gives middle C. So $I \approx 4.9\times10^{-14}$ m$^4$ and $B \approx 4.4\times10^{-4}$. The 10th partial, at $10f_0\sqrt{1 + 100B}$, sits $1200\log_2\sqrt{(1 + 100B)/(1 + B)} \approx 37$ cents sharp of ten times the fundamental $f_1 = f_0\sqrt{1 + B}$. These are rough illustrative values; real strings vary.
+
+</details>
+:::
+
+In the panel, each stem is one $f_n/f_1$ of the last key played on the keyboard further down (middle C to start), against the gray whole-number lines, with its shift in cents in the readout. A stem's height is how strongly the hammer starts that mode.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+    <h3>Partials of the last key</h3>
+    <svg class="spec" id="pSpec" viewBox="0 0 320 120" aria-label="Partials of the last key played"></svg>
+    <div class="readout" id="pPart"></div>
+    <p class="cap">Try the soft pedal or the practice mute on the keyboard below: the high stems shrink, but none of them moves.</p>
+  </div>
+</div>
+```
+
+## Why exact octaves beat {#octaves}
+
+A tuner sets an octave by ear, listening for beats between the lower note's second partial and the upper note's fundamental; two nearly equal frequencies played together beat at a rate equal to their difference. The spectrum says where that second partial sits:
+$$
+\frac{f_2}{f_1} = 2\sqrt{\frac{1 + 4B}{1 + B}} \approx 2\Big(1 + \frac{3B}{2}\Big) .
+$$
+It is more than twice the fundamental. An upper note tuned to exactly twice the fundamental sits just below it, and the two beat; raising the upper note slows the beat, so the beat-free octave is slightly wider than 2 : 1. Tick "Play every partial" in the demo at the top and the stretched octave wobbles too: no octave silences every beat.
+
+::: {.derive}
+<details><summary><span class="label">Reader question</span>Why can't a tuner silence every beat?</summary>
+
+Tuners also listen to other pairs, such as the lower note's fourth partial against the upper note's second, and the upper note's own partials run sharp too, by different amounts. Widening the octave until one pair stops beating leaves the others beating slowly, so real tuning is a compromise among them.
+
+</details>
+:::
+
+**The stretch is largest at the ends of the keyboard.** Repeated octave by octave, the small widenings add up away from the middle, and the most inharmonic strings sit at both ends: the short treble strings, and the bass strings, which are shorter than their pitch would call for.[^pa2] O. L. Railsback measured this stretch on pianos tuned by ear in the 1930s. The plot of how far each note sits from equal temperament is the *Railsback curve*: close to equal temperament in the middle, flat in the bass, sharp in the treble.[^rails]
+
+## Struck: how the modes start and stop {#ringing}
+
+Treat the hammer's blow as a quick kick: the wire starts straight but moving. It then moves as a sum of its shapes, each fading at its own rate:
+$$
+u = \sum_n a_n e^{-t/\tau_n}\sin(2\pi f_n t)\,X_n(x) .
+$$
+The demos are built this way, with illustrative fading times.
+
+**The hammer sets the amounts.** A blow starts each mode in proportion to the mode's own height where the hammer hits, so a mode with a still point there stays silent. In the demos the hammer strikes an eighth of the way along, where the 8th and 16th modes stand still. How hard the key is struck matters too, and not only for loudness: the hammer's felt acts like a soft spring under a gentle blow and a hard one under a heavy blow, so a heavy blow starts many more high partials, and loud notes sound brighter ([post 1](../what-you-hear/index.qmd#dynamics-and-timbre)).[^russell]
+
+**Two strings, two stages.** Most notes have two or three strings, [coupled](../instruments-as-operators/glossary.qmd#coupling) through the bridge. Moving in step, they shake the bridge hard and lose energy fast; moving opposite, they leave it nearly still and ring on. So a note starts loud and fades fast, then leaves a quiet, long aftersound.[^wein] The demos leave this coupling out.
+
+**The player's damping.** Letting go of a key drops a felt [damper](../instruments-as-operators/glossary.qmd#damper) on its strings, which drains each mode in proportion to how much it moves under the felt. The pedals act on the dampers or on the hammer's blow.[^pedals] So every control a pianist touches changes how strongly the modes start or how fast they die; only the tuner's wrench, which changes the tension, moves the frequencies.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>What each control changes</summary>
+
+::: {.aspects}
+
+| Control | What it changes | Effect |
+|:--|:--|:--|
+| key held down | lifts that note's damper | the note rings |
+| key released | drops the damper on the string | the modes die, each at its own rate |
+| [sustain pedal](https://en.wikipedia.org/wiki/Sustain_pedal) (right) | lifts every damper | released notes ring on |
+| [soft pedal](../instruments-as-operators/glossary.qmd#soft-pedal) (left) | the hammer blow: on a grand it strikes fewer strings, with a softer part of its felt; on an upright it starts closer to the strings | quieter; high modes weaker |
+| [practice mute](../instruments-as-operators/glossary.qmd#practice-pedal) (middle, on uprights) | the hammer blow: a felt strip sits between hammer and string | much quieter; most high modes gone |
+| tuning pin | the operator: the tension | every frequency moves |
+
+:::
+
+On a grand piano the middle pedal is usually the *sostenuto*, which holds up only the dampers of keys already down (Wikipedia, [Piano pedals](https://en.wikipedia.org/wiki/Piano_pedals) and [Soft pedal](https://en.wikipedia.org/wiki/Soft_pedal)).
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The hammer weights and the damping rates <span class="needs">integrals of products of modes</span></summary>
+
+With the hammer and the dampers, the string's equation is
+$$
+\begin{aligned}
+\mu\,u_{tt} + b(x, t)\,u_t = {} & T\,u_{xx} - EI\,u_{xxxx} \\
+& + p(x, t),
+\end{aligned}
+$$
+where $p$ is the hammer's force per unit length and $b$ the friction of the felt dampers plus small internal losses. The operator fixes the frequencies and shapes, $p$ how much of each mode starts, and $b$ how fast each dies. In the table above, the dampers and the sustain pedal change $b$; the soft pedal and the practice mute change $p$; only the tuning pin changes $A$.
+
+Write $u = \sum_n q_n(t)X_n(x)$, multiply by $X_m$ and integrate along the string. Since $A$ is symmetric, the $X_n$ are perpendicular, and
+$$
+\begin{aligned}
+\mu N_m\,(q_m'' + \omega_m^2 q_m) & \\
++ \sum_n D_{mn}\,q_n' & = P_m(t),
+\end{aligned}
+$$
+with $\omega_m = 2\pi f_m$, $N_m = \int X_m^2$, $D_{mn} = \int b\,X_mX_n$ and $P_m = \int p\,X_m$. The felt touches a short stretch near $x_h$, so $P_m(t) \approx X_m(x_h)P(t)$, with $P$ the total force: every mode gets the same push in time, weighted by its height at the hammer. If the damping is weak, the cross terms $D_{mn}$, $m \ne n$, change the answer only at second order, which leaves one damped spring per mode, fading at the rate $\gamma_m = D_{mm}/2\mu N_m$: a mode is damped in proportion to how much it moves under the felt. A real damper is not weak, since it stops a note in a fraction of a second, so the formula gives the picture but not exact decay times.
+
+</details>
+:::
+
+## Play the whole piano {#play}
+
+None of the keys and pedals here moves a frequency; the stiffness slider does, because it changes the wire itself. Hold keys to play, release them to damp, try the pedals, and watch the stems in the panel above shrink without moving.
+
+```{=html}
+<div class="ins">
+<section class="instrument" aria-labelledby="play">
+  <div class="controls" style="padding:0 0.25rem 0.5rem">
+    <button id="octDown" aria-label="Move down an octave">◀ Octave<span class="kbonly"> (Z)</span></button>
+    <span class="readout" id="winRead"></span>
+    <button id="octUp" aria-label="Move up an octave">Octave<span class="kbonly"> (X)</span> ▶</button>
+  </div>
+  <div class="kbdwrap" id="kbdwrap"><div class="kbd" id="kbd" aria-label="Piano keyboard, A0 to C8"></div></div>
+  <div class="pedals" style="padding:0.75rem 0.25rem 0" role="group" aria-label="Pedals">
+    <button id="pSoft" aria-pressed="false">Soft<small>left pedal</small></button>
+    <button id="pMute" aria-pressed="false">Practice mute<small>middle pedal</small></button>
+    <button id="pSus" aria-pressed="false">Sustain<small>right pedal<span class="kbonly"> · Space</span></small></button>
+  </div>
+  <div class="slider" style="padding:0.75rem 0.25rem 0"><label for="mult">Stiffness ×</label><input type="range" id="mult" min="0" max="12" step="0.5" value="1"><output id="multo">1.0</output></div>
+  <div class="readout" id="pRead" style="padding:0.4rem 0.25rem 0">Hold keys to sound them; release to damp.<span class="kbonly"> Computer keys A W S E D F T G Y H U J K O L P ; ' play the highlighted range.</span></div>
+  <p class="cap" style="padding:0.4rem 0.25rem 0">Release a key and its felt damper stops the note; the top 20 keys have no dampers, as on a real piano. Stiffness rises toward the treble; its size here is illustrative.</p>
+</section>
+</div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Reader question</span>What would a piano without dampers sound like?</summary>
+
+Releasing a key would do nothing: every string would ring until it died on its own, as if the sustain pedal were always down. The keyboard above leaves its top 20 keys without dampers, as real pianos leave their highest notes undamped: those short strings die out quickly by themselves (Kawai, [Why do the upper notes of my digital piano sustain without the damper pedal?](https://kawaius.com/faq/why-do-the-upper-notes-of-my-kawai-digital-piano-sustain-without-using-the-damper-pedal): the uppermost strings of an acoustic piano have no dampers).
+
+</details>
+:::
+
+For the inside of a piano, hammers, dampers and pedals, see the standalone post [A Piano: the whole upright, all 88 keys, with its pedals](../a-piano/index.qmd).
+
+## Next
+
+Every instrument so far has been a line: a string, a tube, a bar. The next page makes it a sheet: [why does a drum thud?](drum.qmd)
+
+[^fr1]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 12 (the piano): the stiff string and its inharmonicity.
+[^inh]: Wikipedia, [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity), on the partials of stiff strings.
+[^pa2]: Wikipedia, [Piano acoustics](https://en.wikipedia.org/wiki/Piano_acoustics): "octaves are normally stretched on a well-tuned piano. That is, the high notes are tuned higher, and the low notes tuned lower, than they are in a mathematically idealized equal-tempered scale"; "As the tuning progresses up and down the scale, the inharmonicity, hence the stretch, accumulates"; "the bass strings on the piano are shorter than the 'double with each octave' rule would predict".
+[^rails]: O. L. Railsback, "Scale temperament as applied to piano tuning", *Journal of the Acoustical Society of America* 9 (1938), 274, [doi:10.1121/1.1902056](https://doi.org/10.1121/1.1902056).
+[^russell]: D. A. Russell, [Hammer nonlinearity, dynamics and the piano sound](https://www.acs.psu.edu/drussell/Piano/Dynamics.html), 1997: a gentle blow "acts as a soft spring", a heavy one "acts as a hard spring"; "Loud notes sound brighter than soft notes." See also A. Askenfelt and E. Jansson, ["The nonlinear hammer"](https://www.speech.kth.se/music/5_lectures/askenflt/nonlinea.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990.
+[^wein]: G. Weinreich, ["Two or more strings"](https://www.speech.kth.se/music/5_lectures/weinreic/strings.html), from [The coupled motion of piano strings](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990: in the out-of-phase motion "the decay rate of the vibration will be very slow", so the vibration can "decompose into a prompt sound and an aftersound".
+[^pedals]: Wikipedia, [Piano pedals](https://en.wikipedia.org/wiki/Piano_pedals).
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, mult = 1, cache = {}, last = 60, base = 60;
+  var LOW = 21, HIGH = 108, WK = 24, UNDAMPED = 89;
+  var BLACK = { 1: 1, 3: 1, 6: 1, 8: 1, 10: 1 };
+  var CODES = ["KeyA", "KeyW", "KeyS", "KeyE", "KeyD", "KeyF", "KeyT", "KeyG", "KeyY", "KeyH", "KeyU", "KeyJ", "KeyK", "KeyO", "KeyL", "KeyP", "Semicolon", "Quote"];
+  var LABEL = ["A", "W", "S", "E", "D", "F", "T", "G", "Y", "H", "U", "J", "K", "O", "L", "P", ";", "'"];
+  var ped = { sus: false, soft: false, mute: false }, held = {}, voices = {};
+  // touch screens have no computer keys: hide the key letters and the key window there
+  var TOUCH = !!(window.matchMedia && window.matchMedia("(hover: none) and (pointer: coarse)").matches);
+  var kbd = document.getElementById("kbd"), wrap = document.getElementById("kbdwrap"), btn = {}, wi = 0;
+  for (var k = LOW; k <= HIGH; k++) if (!BLACK[k % 12]) wi++;
+  kbd.style.width = (wi * WK) + "px";
+  var x = 0;
+  for (var k = LOW; k <= HIGH; k++) {
+    var b = document.createElement("button"); b.type = "button"; b.dataset.key = k; b.tabIndex = -1;
+    b.setAttribute("aria-label", C.noteName(C.mtof(k)).name);
+    if (BLACK[k % 12]) { b.className = "b"; b.style.left = (x * WK - WK * 0.31) + "px"; b.style.width = (WK * 0.62) + "px"; }
+    else { b.className = "w"; b.style.left = (x * WK) + "px"; b.style.width = WK + "px"; x++; }
+    kbd.appendChild(b); btn[k] = b;
+  }
+  function labels() {
+    for (var k = LOW; k <= HIGH; k++) {
+      var i = k - base, inWin = !TOUCH && i >= 0 && i < CODES.length, b = btn[k];
+      b.classList.toggle("win", inWin);
+      b.textContent = inWin ? LABEL[i] : (k % 12 === 0 ? C.noteName(C.mtof(k)).name : "");
+    }
+    document.getElementById("winRead").innerHTML = TOUCH ? "" : "computer keys: <b>" + C.noteName(C.mtof(base)).name + "–" + C.noteName(C.mtof(base + CODES.length - 1)).name + "</b>";
+    var el = btn[base]; if (el) wrap.scrollLeft = Math.max(0, parseFloat(el.style.left) - wrap.clientWidth / 2 + 4 * WK);
+  }
+  function shift(d) { base = Math.max(LOW + (12 - LOW % 12) % 12, Math.min(96, base + 12 * d)); labels(); }
+  document.getElementById("octDown").addEventListener("click", function () { shift(-1); });
+  document.getElementById("octUp").addEventListener("click", function () { shift(1); });
+
+  function opts() { return { rolloff: ped.mute ? 4.5 : (ped.soft ? 9 : 14) }; }
+  function partsFor(k, f1, m) { var o = opts(); o.B = C.models.piano.B(k, m == null ? mult : m); o.f1 = f1 || C.mtof(k); return C.models.piano.partials(o); }
+  function level() { return 0.7 * (ped.soft ? 0.55 : 1) * (ped.mute ? 0.25 : 1); }
+  // voices[k]: the sounding voice of key k. Releasing a key (without sustain) crossfades it into its damped version.
+  function damp(k) { var v = voices[k]; if (!v || v.released) return; voices[k] = C.pianoDamp(v); }
+  function strike(k) {
+    if (k < LOW || k > HIGH) return;
+    if (voices[k]) C.pianoStop(voices[k], 0.008);
+    voices[k] = C.pianoStrike(k, mult, ped.soft, ped.mute, level());
+    held[k] = true; btn[k].classList.add("on"); last = k; pspec();
+    var nn = C.noteName(C.mtof(k));
+    document.getElementById("pRead").innerHTML = "<b>" + nn.name + "</b> · " + C.mtof(k).toFixed(1) + " Hz" + (k >= UNDAMPED ? " · no damper" : "");
+  }
+  function release(k) {
+    if (!held[k]) return; delete held[k]; btn[k].classList.remove("on");
+    if (!ped.sus && k < UNDAMPED) damp(k);
+  }
+  function setPed(name, on) {
+    ped[name] = on; document.getElementById({ sus: "pSus", soft: "pSoft", mute: "pMute" }[name]).setAttribute("aria-pressed", on);
+    if (name === "sus" && !on) Object.keys(voices).forEach(function (k) { k = +k; if (!held[k] && k < UNDAMPED) damp(k); });
+    if (name !== "sus") pspec();
+  }
+  document.getElementById("pSus").addEventListener("click", function () { setPed("sus", !ped.sus); });
+  document.getElementById("pSoft").addEventListener("click", function () { setPed("soft", !ped.soft); });
+  document.getElementById("pMute").addEventListener("click", function () { setPed("mute", !ped.mute); });
+
+  var down = false, curK = -1;
+  function keyAt(e) { var el = document.elementFromPoint(e.clientX, e.clientY); return el && el.dataset && el.dataset.key ? +el.dataset.key : -1; }
+  kbd.addEventListener("pointerdown", function (e) { e.preventDefault(); down = true; kbd.setPointerCapture(e.pointerId); curK = keyAt(e); if (curK > 0) strike(curK); });
+  kbd.addEventListener("pointermove", function (e) { if (!down) return; var k = keyAt(e); if (k !== curK) { if (curK > 0) release(curK); if (k > 0) strike(k); curK = k; } });
+  function up() { down = false; if (curK > 0) release(curK); curK = -1; }
+  kbd.addEventListener("pointerup", up); kbd.addEventListener("pointercancel", up);
+  var codeKey = {};
+  // capture phase, so the page claims its keys before the blog's search shortcut ("s", "f", "/") sees them
+  function mine(e) { if (window.__act3dInView) return false; return e.code === "Space" || e.code === "KeyZ" || e.code === "KeyX" || CODES.indexOf(e.code) >= 0; }
+  window.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT")) return;
+    if (!mine(e)) return;
+    e.preventDefault(); e.stopPropagation();
+    if (e.repeat) return;
+    if (e.code === "Space") { setPed("sus", true); return; }
+    if (e.code === "KeyZ") { shift(-1); return; }
+    if (e.code === "KeyX") { shift(1); return; }
+    var k = base + CODES.indexOf(e.code); codeKey[e.code] = k; strike(k);
+  }, true);
+  window.addEventListener("keyup", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT")) return;
+    if (!mine(e)) return;
+    e.preventDefault(); e.stopPropagation();
+    if (e.code === "Space") { setPed("sus", false); return; }
+    var k = codeKey[e.code]; if (k != null) { delete codeKey[e.code]; release(k); }
+  }, true);
+
+  var ms = document.getElementById("mult"), mo = document.getElementById("multo");
+  ms.addEventListener("input", function () { mult = parseFloat(ms.value); mo.textContent = mult.toFixed(1); pspec(); });
+  function pspec() {
+    var p = partsFor(last);
+    C.stems(document.getElementById("pSpec"), p, { W: 320, H: 120, rmax: 16, fs: 8, sw: 2, labelEvery: 2, noOff: true });
+    var r10 = p[9] ? p[9].ratio : null;
+    document.getElementById("pPart").innerHTML = C.noteName(C.mtof(last)).name + " · 2nd partial <b>" + (1200 * Math.log2(p[1].ratio / 2)).toFixed(1) + " cents</b> sharp" + (r10 ? " · 10th partial <b>" + (1200 * Math.log2(r10 / 10)).toFixed(0) + " cents</b> sharp" : "");
+  }
+  // The octave demo has its own stiffness, so the beat can be made quick enough to hear without changing the keyboard.
+  var om = 6, oAll = false;
+  function rn(n, B) { return n * Math.sqrt((1 + B * n * n) / (1 + B)); }
+  function oB(k) { return C.models.piano.B(k, om); }
+  function r2(k) { return rn(2, oB(k)); }
+  function octRead() {
+    var f = C.mtof(60), B4 = oB(60), B5 = oB(72), f5s = f * r2(60);
+    var txt = "exactly 2 : 1: wobbles <b>" + (f * (r2(60) - 2)).toFixed(1) + " times a second</b> · stretched: steady, the octave <b>" + (1200 * Math.log2(r2(60) / 2)).toFixed(0) + " cents</b> wider";
+    if (oAll) txt += " · with every partial, C4's 4th against C5's 2nd wobbles <b>" + Math.abs(f * rn(4, B4) - 2 * f * rn(2, B5)).toFixed(1) + "</b> times a second exact, <b>" + Math.abs(f * rn(4, B4) - f5s * rn(2, B5)).toFixed(1) + "</b> stretched";
+    document.getElementById("oRead").innerHTML = txt;
+  }
+  // The lowest partials only, with fixed strengths, so the 2 : 1 pair dominates.
+  function lowest(f1, B, amps, tau) { return amps.map(function (a, i) { return { f: f1 * rn(i + 1, B), amp: a, tau: tau }; }); }
+  function octave(stretch) {
+    var f = C.mtof(60), f5 = stretch ? f * r2(60) : 2 * f, a, b;
+    if (oAll) {
+      a = C.toHz(partsFor(60, f, om), f); b = C.toHz(partsFor(72, f5, om), f5);
+      b.forEach(function (p) { p.amp *= 0.8; });
+    } else {
+      a = lowest(f, oB(60), [1, 0.7, 0.3], 2.6); b = lowest(f5, oB(72), [0.7, 0.25], 2.0);
+    }
+    C.play(C.render(a.concat(b), 4.5), 0.8);
+  }
+  var oms = document.getElementById("oMult"), omo = document.getElementById("oMulto");
+  oms.addEventListener("input", function () { om = parseFloat(oms.value); omo.textContent = om.toFixed(1); octRead(); });
+  document.getElementById("oAll").addEventListener("change", function (e) { oAll = e.target.checked; octRead(); });
+  document.getElementById("o21").addEventListener("click", function () { octave(false); });
+  document.getElementById("ost").addEventListener("click", function () { octave(true); });
+  C.onTheme(pspec);
+  labels(); pspec(); octRead();
+  window.addEventListener("load", labels);
+})();
+
+// ---------- 3D upright piano, front panel removed: one octave, wired to the string equation ----------
+(function () {
+  "use strict";
+  var C = Core, T = window.THREE, host = document.getElementById("act3d");
+  if (!host) return;
+  function fallback() { host.innerHTML = "<p class='cap' style='padding:0.5rem 0.25rem'>The 3D view of the inside of the piano needs WebGL, which this browser could not start.</p>"; }
+  if (!T || !T.OrbitControls) { fallback(); return; }
+  var cv = document.getElementById("act3dCanvas"), note = document.getElementById("actNote");
+  var probe = document.createElement("canvas");
+  if (!(probe.getContext("webgl") || probe.getContext("experimental-webgl"))) { fallback(); return; }
+  var renderer;
+  try { renderer = new T.WebGLRenderer({ canvas: cv, antialias: true, alpha: true }); if (!renderer.getContext()) throw new Error("no context"); }
+  catch (err) { fallback(); return; }
+  var scene = new T.Scene(), camera = new T.PerspectiveCamera(38, 1, 0.1, 300);
+  var controls = new T.OrbitControls(camera, cv);
+  controls.enableDamping = true; controls.minDistance = 6; controls.maxDistance = 70;
+  scene.add(new T.HemisphereLight(0xffffff, 0x5a6270, 0.9));
+  var sun = new T.DirectionalLight(0xffffff, 0.75); sun.position.set(8, 14, 12); scene.add(sun);
+  var fill = new T.DirectionalLight(0xffffff, 0.25); fill.position.set(-10, 4, 6); scene.add(fill);
+
+  function mat(c, r, m, o) { var M = new T.MeshStandardMaterial({ color: c, roughness: r == null ? 0.6 : r, metalness: m || 0.02 }); if (o != null) { M.transparent = true; M.opacity = o; } return M; }
+  var M_IVORY = mat(0xf6f2e7, 0.35), M_EBONY = mat(0x15171c, 0.3), M_LACQ = mat(0x101114, 0.22, 0.1), M_WOOD = mat(0x8c6a48, 0.7), M_SPRUCE = mat(0xe3cf9f, 0.75),
+      M_FELT = mat(0xe8e1cf, 0.95), M_DFELT = mat(0x2b2b30, 0.95), M_MUTE = mat(0xa8342c, 0.95), M_GOLD = mat(0xc9a54e, 0.4, 0.35), M_STEEL = mat(0xb9bec6, 0.3, 0.9),
+      M_BRASS = mat(0xd8b765, 0.3, 0.35), M_FLOOR = mat(0xdfe1e4, 0.95);
+  function box(w, h, d, m, x, y, z, parent) { var o = new T.Mesh(new T.BoxGeometry(w, h, d), m); o.position.set(x, y, z); (parent || scene).add(o); return o; }
+  var labels = [];
+  function label(text, x, y, z, size) {
+    var c = document.createElement("canvas"), g = c.getContext("2d"), fs = 40, font = "500 " + fs + "px 'IBM Plex Sans Condensed', Arial, sans-serif";
+    g.font = font; var w = Math.ceil(g.measureText(text).width) + 22; c.width = w; c.height = fs + 18; g.font = font;
+    g.fillStyle = "rgba(255,255,255,0.88)"; g.fillRect(0, 0, w, c.height); g.fillStyle = "#1c2230"; g.textBaseline = "middle"; g.fillText(text, 11, c.height / 2);
+    var tex = new T.CanvasTexture(c); tex.minFilter = T.LinearFilter;
+    var sp = new T.Sprite(new T.SpriteMaterial({ map: tex, depthTest: false })), s = size || 0.62;
+    sp.scale.set(s * w / c.height, s, 1); sp.position.set(x, y, z); sp.renderOrder = 10; scene.add(sp); labels.push(sp); return sp;
+  }
+
+  // ---- geometry constants (one unit is about 2.4 cm; heights are compressed) ----
+  var FLOOR = -7.2, KEY_FRONT = 0.6, KEY_BACK = -4.4, PIVOT_Z = -1.9, ZS = -6.2, Y_STRIKE = 5.8, BUTT_Y = 1.6, BUTT_Z = -5.0, SHANK = Y_STRIKE - BUTT_Y;
+  var GAP = 0.7, GAP_SOFT = 0.35, LOWK = 60, BLACK = { 1: 1, 3: 1, 6: 1, 8: 1, 10: 1 };
+  function lenOf(k) { return 9.5 * Math.pow(C.mtof(LOWK) / C.mtof(k), 0.5); }
+
+  // ---- cabinet, keybed, soundboard, plate ----
+  box(12, 0.05, 14, M_FLOOR, 0, FLOOR - 0.03, -2.5);
+  box(9.6, 0.4, 7.0, M_WOOD, 0, -0.55, -2.5);                       // keybed
+  box(9.6, 0.55, 0.4, M_LACQ, 0, -0.2, KEY_FRONT + 0.25);            // key slip
+  [-1, 1].forEach(function (sx) {
+    box(0.45, 0.8, 2.6, M_LACQ, sx * 4.95, 0.05, -0.4);              // cheek blocks
+    box(0.45, 16.6, 5.7, M_LACQ, sx * 4.95, FLOOR + 8.3, -4.25);     // cabinet sides, full depth from the back to under the keybed
+    box(0.5, 0.5, 3.0, M_LACQ, sx * 4.7, FLOOR + 0.25, -0.2);        // toe blocks
+  });
+  box(10.4, 0.45, 5.9, M_LACQ, 0, FLOOR + 16.8, -4.25);               // top (lid)
+  box(9.5, 0.7, 1.0, M_LACQ, 0, FLOOR + 0.35, -1.6);                  // bottom board, behind the pedals
+  box(9.4, 15.6, 0.15, M_SPRUCE, 0, FLOOR + 8.0, -6.95);              // soundboard
+  box(9.0, 0.9, 0.35, M_GOLD, 0, 8.2, -6.55);                          // plate: top bar (over the pin block)
+  box(9.0, 1.1, 0.35, M_GOLD, 0, -5.4, -6.55);                         // plate: bottom bar (hitch pins)
+  [-4.35, 4.35].forEach(function (x) { box(0.45, 14.5, 0.35, M_GOLD, x, 1.4, -6.55); });
+  box(9.2, 0.9, 0.5, M_WOOD, 0, 9.0, -6.45);                           // pin block cap
+
+  var KEYS = [], wx = 0;
+  var action = new T.Group(); scene.add(action);                       // hammers ride on the hammer rail
+  var hammerRail = box(9.0, 0.22, 0.22, M_WOOD, 0, BUTT_Y + 0.4, BUTT_Z + 0.45, action);
+  var damperRail = box(9.0, 0.18, 0.18, M_WOOD, 0, 0.9, -5.55);
+  var bridgePts = [];
+  for (var k = LOWK; k <= LOWK + 12; k++) {
+    var black = !!BLACK[k % 12], x;
+    if (black) x = wx - 0.5 - 3.5; else { x = wx - 3.5; wx++; }
+    // key: pivots on the balance rail; front goes down, back comes up
+    var pivot = new T.Group(); pivot.position.set(x, 0, PIVOT_Z); scene.add(pivot);
+    var key;
+    if (black) {
+      var sh = new T.Shape(); sh.moveTo(-0.27, 0); sh.lineTo(0.27, 0); sh.lineTo(0.21, 0.46); sh.lineTo(-0.21, 0.46); sh.lineTo(-0.27, 0);
+      var geo = new T.ExtrudeGeometry(sh, { depth: 3.2, bevelEnabled: false }); geo.translate(0, 0, -3.2);
+      key = new T.Mesh(geo, M_EBONY); key.position.set(0, 0.21, (KEY_FRONT - 1.8) - PIVOT_Z);
+    } else {
+      key = new T.Mesh(new T.BoxGeometry(0.94, 0.4, KEY_FRONT - KEY_BACK), M_IVORY); key.position.set(0, 0, (KEY_FRONT + KEY_BACK) / 2 - PIVOT_Z);
+    }
+    key.userData = { kind: "key", idx: k - LOWK }; pivot.add(key);
+    var L = lenOf(k), yTop = Y_STRIKE + L / 8, yBot = yTop - L;
+    // hammer: a butt on a flange, a vertical shank, a felt head facing the strings
+    var hammer = new T.Group(); hammer.position.set(x, BUTT_Y, BUTT_Z); action.add(hammer);
+    box(0.22, 0.5, 0.4, M_WOOD, 0, 0, 0, hammer);
+    box(0.07, SHANK, 0.07, M_WOOD, 0, SHANK / 2, 0, hammer);
+    box(0.3, 0.42, 0.5, M_FELT, 0, SHANK, -0.3, hammer);
+    // three strings per note, from the pressure bar down to the bridge
+    var strings = [];
+    for (var j = 0; j < 3; j++) {
+      var g = new T.BufferGeometry(), pts = new Float32Array(49 * 3), sx = x + (j - 1) * 0.1;
+      for (var q = 0; q <= 48; q++) { pts[3 * q] = sx; pts[3 * q + 1] = yTop - L * q / 48; pts[3 * q + 2] = ZS; }
+      g.setAttribute("position", new T.BufferAttribute(pts, 3));
+      var line = new T.Line(g, new T.LineBasicMaterial({ color: 0x8d939d })); scene.add(line); strings.push(line);
+      var pin = new T.Mesh(new T.CylinderGeometry(0.035, 0.035, 0.5, 8), M_STEEL); pin.rotation.x = Math.PI / 2; pin.position.set(sx, yTop + 1.1, -6.15); scene.add(pin);
+    }
+    bridgePts.push(new T.Vector3(x, yBot, ZS - 0.1));
+    // damper: a felt block on a wire, pressed against the strings from the front by its lever
+    var damper = new T.Group(); scene.add(damper);
+    var dhead = box(0.36, 0.5, 0.3, M_DFELT, 0, 0, 0, damper);
+    var dwire = box(0.03, 1, 0.03, M_STEEL, 0, 0, 0.12, damper);
+    var mute = box(0.62, 0.9, 0.06, M_MUTE, x, Y_STRIKE, ZS + 0.18); mute.visible = false;
+    KEYS.push({ k: k, x: x, L: L, yTop: yTop, pivot: pivot, key: key, hammer: hammer, strings: strings, damper: damper, dhead: dhead, dwire: dwire, mute: mute,
+                held: false, hitT: -1e9, voice: null, vis: null });
+  }
+  bridgePts.sort(function (a, b) { return a.x - b.x; });
+  scene.add(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(bridgePts), 40, 0.09, 6, false), M_WOOD));
+  // trapwork: three pedals with rods up to what each one moves
+  // pedals at the floor; each pushes a wooden dowel up toward the keybed, where levers carry the motion into the action
+  var PED = [{ name: "soft", x: -2.4 }, { name: "mute", x: 0 }, { name: "sus", x: 2.4 }].map(function (p) {
+    var m = box(0.8, 0.18, 2.4, M_BRASS, p.x, FLOOR + 0.6, 0.0); m.userData = { kind: "pedal", name: p.name };
+    var rod = box(0.1, -0.75 - FLOOR - 0.6, 0.1, M_WOOD, p.x, (-0.75 + FLOOR + 0.6) / 2, -1.0);
+    return { name: p.name, mesh: m, rod: rod };
+  });
+  label("tuning pins", -3.3, 9.9, -5.6); label("strings, 3 per note", 3.6, 2.6, -5.9); label("hammers", -5.6, Y_STRIKE + 0.2, -5.2);
+  label("dampers", -5.6, 3.9, -5.6); label("soundboard", 3.4, -3.8, -6.7); label("iron plate", -3.2, -5.2, -6.2);
+  label("soft", -2.4, FLOOR + 1.3, 1.6, 0.55); label("mute", 0, FLOOR + 1.3, 1.6, 0.55); label("sustain", 2.4, FLOOR + 1.3, 1.6, 0.55);
+  var muteLabel = label("mute felt", 3.9, Y_STRIKE + 0.9, -5.6); muteLabel.visible = false;
+
+  // ---- camera: fit the whole piano at any window shape ----
+  var CENTER = new T.Vector3(0, 1.0, -2.4), RADIUS = 11.7, DIR = new T.Vector3(0.48, 0.32, 0.82).normalize();
+  function fit() {
+    var w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+    var vf = camera.fov * Math.PI / 180, hf = 2 * Math.atan(Math.tan(vf / 2) * camera.aspect);
+    return RADIUS / Math.sin(Math.min(vf, hf) / 2) * 0.92;
+  }
+  function resetView() { var d = fit(); camera.position.copy(CENTER).addScaledVector(DIR, d); controls.target.copy(CENTER); controls.update(); }
+  window.addEventListener("resize", function () { fit(); });
+  document.getElementById("aReset").addEventListener("click", resetView);
+  var lb = document.getElementById("aLabels"), showLabels = true;
+  lb.addEventListener("click", function () { showLabels = !showLabels; lb.setAttribute("aria-pressed", showLabels); });
+
+  // ---- state, sound and the visual mirror of the modes ----
+  var ped = { soft: false, mute: false, sus: false }, dmp = { xd: 0.22, w: 0.05, G: 15 }, sel = 0, softShift = 0, muteDrop = 0;
+  function level() { return 0.7 * (ped.soft ? 0.55 : 1) * (ped.mute ? 0.25 : 1); }
+  function say(html) { note.innerHTML = html; }
+  function visStart(K, v) {
+    var amax = 0; v.parts.forEach(function (p) { amax = Math.max(amax, Math.abs(p.amp)); });
+    var scale = (ped.soft ? 0.7 : 1) * (ped.mute ? 0.4 : 1);
+    K.vis = { t0: performance.now() / 1000, modes: v.parts.slice(0, 16).map(function (p, i) {
+      return { a: p.amp / amax * scale, a0: Math.abs(p.amp / amax * scale), tau: p.tau, fv: Math.min(9, 0.9 * (i + 1)) };
+    }) };
+  }
+  function visDamp(K) {
+    if (!K.vis) return; var t = performance.now() / 1000;
+    K.vis.modes.forEach(function (m, i) { m.a = m.a * Math.exp(-(t - K.vis.t0) / m.tau); m.tau = 1 / (1 / m.tau + dmp.G * C.damperWeight(i + 1, dmp.xd, dmp.w)); });
+    K.vis.t0 = t;
+  }
+  function strike(i) {
+    var K = KEYS[i]; if (K.voice) C.pianoStop(K.voice, 0.008);
+    K.voice = C.pianoStrike(K.k, 1, ped.soft, ped.mute, level()); visStart(K, K.voice);
+    K.held = true; K.hitT = performance.now() / 1000; sel = i;
+    say("<b>Hammer strike.</b> The key's back end lifts the action and throws the hammer at the strings, about 1/8 of the way down from the top. That brief push sets how much of each mode rings (the bars); it cannot add a frequency the wire does not already have." +
+        (ped.soft ? " With the soft pedal down the hammer starts closer to the strings, so it arrives more gently." : "") + (ped.mute ? " The mute felt softens the blow further." : ""));
+  }
+  function release(i) {
+    var K = KEYS[i]; if (!K.held) return; K.held = false;
+    if (ped.sus) { say("<b>Key released, sustain down.</b> The damper stays away from the strings, so the note rings on at its own frequencies."); return; }
+    if (K.voice && !K.voice.released) K.voice = C.pianoDamp(K.voice, dmp); visDamp(K);
+    say("<b>Key released.</b> The damper swings back and presses its felt on the strings. Each mode now dies at a rate proportional to how much it moves under the felt (the orange ticks); its frequency does not change.");
+  }
+  function setPed(name, on) {
+    ped[name] = on; document.getElementById({ soft: "aSoft", mute: "aMute", sus: "aSus" }[name]).setAttribute("aria-pressed", on);
+    if (name === "sus") {
+      if (on) say("<b>Sustain pedal down.</b> Its rod pushes the damper lift rail, which swings every damper away from the strings at once, so notes ring after you let go. Nothing touches the wire's tension or stiffness, so each note keeps its frequencies.");
+      else { KEYS.forEach(function (K) { if (!K.held && K.voice && !K.voice.released) { K.voice = C.pianoDamp(K.voice, dmp); visDamp(K); } }); say("<b>Sustain pedal up.</b> The dampers fall back onto every string that is not held."); }
+    } else if (name === "soft") {
+      say(on ? "<b>Soft pedal down.</b> On an upright it moves the hammer rail toward the strings, so every hammer starts its swing closer and lands more gently. Only the blow changes: quieter notes and weaker high modes, at the same frequencies."
+             : "<b>Soft pedal up.</b> The hammers return to their full distance.");
+    } else {
+      say(on ? "<b>Practice mute down.</b> A strip of felt drops between the hammers and the strings. The blow that reaches the string becomes much softer and loses its sharp edge, so most high modes are never excited. The frequencies still do not move."
+             : "<b>Practice mute up.</b> The felt strip lifts out of the way.");
+    }
+  }
+  document.getElementById("aSoft").addEventListener("click", function () { setPed("soft", !ped.soft); });
+  document.getElementById("aMute").addEventListener("click", function () { setPed("mute", !ped.mute); });
+  document.getElementById("aSus").addEventListener("click", function () { setPed("sus", !ped.sus); });
+  var xs = document.getElementById("aXd"), xo = document.getElementById("aXdo");
+  xs.addEventListener("input", function () { dmp.xd = parseFloat(xs.value); xo.textContent = dmp.xd.toFixed(2) + " of the length"; });
+
+  // ---- input ----
+  var ray = new T.Raycaster(), ndc = new T.Vector2(), down = -1;
+  var pickables = KEYS.map(function (K) { return K.key; }).concat(PED.map(function (p) { return p.mesh; }));
+  function pick(e) {
+    var r = cv.getBoundingClientRect(); ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera); var hit = ray.intersectObjects(pickables, false)[0]; return hit ? hit.object.userData : null;
+  }
+  cv.addEventListener("pointerdown", function (e) {
+    var u = pick(e); if (!u) return;
+    if (u.kind === "pedal") { setPed(u.name, !ped[u.name]); return; }
+    controls.enabled = false; down = u.idx; cv.setPointerCapture(e.pointerId); strike(u.idx);
+  });
+  function up() { if (down >= 0) { release(down); down = -1; } controls.enabled = true; }
+  cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+  var CODES = ["KeyA", "KeyW", "KeyS", "KeyE", "KeyD", "KeyF", "KeyT", "KeyG", "KeyY", "KeyH", "KeyU", "KeyJ", "KeyK"], inView = false;
+  new IntersectionObserver(function (es) { inView = es[0].isIntersecting; window.__act3dInView = inView; if (inView) fit(); }).observe(host);
+  window.addEventListener("keydown", function (e) {
+    if (!inView || e.metaKey || e.ctrlKey || e.altKey || (e.target && e.target.tagName === "INPUT")) return;
+    var i = CODES.indexOf(e.code); if (i < 0 && e.code !== "Space") return;
+    e.preventDefault(); e.stopImmediatePropagation(); if (e.repeat) return;
+    if (e.code === "Space") setPed("sus", true); else strike(i);
+  }, true);
+  window.addEventListener("keyup", function (e) {
+    if (!inView) return; var i = CODES.indexOf(e.code); if (i < 0 && e.code !== "Space") return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (e.code === "Space") setPed("sus", false); else release(i);
+  }, true);
+
+  // ---- 2D panels ----
+  var wv = document.getElementById("actWave"), mv = document.getElementById("actModes");
+  function shapeAt(K, s, t) {
+    if (!K.vis) return 0; var y = 0;
+    K.vis.modes.forEach(function (m, i) { var a = m.a * Math.exp(-(t - K.vis.t0) / m.tau); if (Math.abs(a) > 1e-3) y += a * Math.sin((i + 1) * Math.PI * s) * Math.cos(2 * Math.PI * m.fv * t); });
+    return y;
+  }
+  function drawWave(t) {
+    var K = KEYS[sel], d = C.fit(wv), W = wv.width, H = wv.height, x = wv.getContext("2d"), pad = 8 * d;
+    x.clearRect(0, 0, W, H); x.strokeStyle = C.rgb("--grid"); x.lineWidth = d; x.beginPath(); x.moveTo(pad, H / 2); x.lineTo(W - pad, H / 2); x.stroke();
+    var xd0 = pad + (W - 2 * pad) * (dmp.xd - dmp.w / 2), xd1 = pad + (W - 2 * pad) * (dmp.xd + dmp.w / 2), damped = !(K.held || ped.sus);
+    x.fillStyle = C.rgb("--ink", damped ? 0.6 : 0.15); x.fillRect(xd0, damped ? H / 2 - 16 * d : 6 * d, xd1 - xd0, 12 * d);
+    x.fillStyle = C.rgb("--muted"); x.fillRect(pad + (W - 2 * pad) / 8 - d, H - 12 * d, 2 * d, 10 * d);
+    x.strokeStyle = C.rgb("--accent"); x.lineWidth = 2 * d; x.beginPath();
+    for (var q = 0; q <= 120; q++) { var s = q / 120, y = H / 2 - shapeAt(K, s, t) * H * 0.3; if (q) x.lineTo(pad + s * (W - 2 * pad), y); else x.moveTo(pad, y); }
+    x.stroke();
+    document.getElementById("actWaveCap").textContent = C.noteName(C.mtof(K.k)).name + " string, top end at left, slowed · hammer at 1/8 (gray tick) · damper felt " + (damped ? "on the string" : "lifted");
+  }
+  function drawModes(t) {
+    var K = KEYS[sel], d = C.fit(mv), W = mv.width, H = mv.height, x = mv.getContext("2d"), N = 16, bw = (W - 16 * d) / N, base = H - 22 * d, gmax = 0;
+    x.clearRect(0, 0, W, H);
+    for (var n = 1; n <= N; n++) gmax = Math.max(gmax, C.damperWeight(n, dmp.xd, dmp.w));
+    for (var n = 1; n <= N; n++) {
+      var m = K.vis ? K.vis.modes[n - 1] : null, a = m ? Math.abs(m.a * Math.exp(-(t - K.vis.t0) / m.tau)) : 0, a0 = m ? m.a0 : 0, x0 = 8 * d + (n - 1) * bw, h = base - 6 * d;
+      x.fillStyle = C.rgb("--grid"); x.fillRect(x0 + bw * 0.2, base - h * Math.min(1, a0), bw * 0.6, h * Math.min(1, a0));
+      x.fillStyle = C.rgb("--accent"); x.fillRect(x0 + bw * 0.2, base - h * Math.min(1, a), bw * 0.6, h * Math.min(1, a));
+      var gw = C.damperWeight(n, dmp.xd, dmp.w) / gmax; x.fillStyle = C.rgb("--pos"); x.fillRect(x0 + bw * 0.2, H - 4 * d - 12 * d * gw, bw * 0.6, 12 * d * gw);
+    }
+  }
+
+  var tF = document.getElementById("tF"), tD = document.getElementById("tDamp");
+  function frame() {
+    requestAnimationFrame(frame);
+    if (!inView) return;
+    var t = performance.now() / 1000, anyDamped = false, forcing = false;
+    softShift += ((ped.soft ? GAP - GAP_SOFT : 0) - softShift) * 0.2;
+    muteDrop += ((ped.mute ? 1 : 0) - muteDrop) * 0.2;
+    hammerRail.position.z = BUTT_Z + 0.45 - softShift;
+    PED.forEach(function (p) { var dn = ped[p.name] ? 0.12 : 0; p.mesh.position.y = FLOOR + 0.6 - dn; p.rod.position.y = (-0.75 + FLOOR + 0.6) / 2 + dn; });
+    damperRail.position.z = -5.55 + (ped.sus ? 0.4 : 0);
+    labels.forEach(function (l) { l.visible = showLabels; }); muteLabel.visible = showLabels && ped.mute;
+    KEYS.forEach(function (K) {
+      K.pivot.rotation.x += ((K.held ? 0.06 : 0) - K.pivot.rotation.x) * 0.35;
+      var dt = t - K.hitT, lift = dt < 0.06 ? dt / 0.06 : dt < 0.3 ? 1 - (dt - 0.06) / 0.24 * 0.8 : (K.held ? 0.2 : Math.max(0, 0.2 - (dt - 0.3) * 2));
+      if (dt < 0.08) forcing = true;
+      var gap = GAP - softShift - (ped.mute ? 0.1 : 0);
+      // swing the hammer about its butt: rest tilt from the soft pedal, plus the throw toward the strings
+      K.hammer.rotation.x = -(softShift + lift * gap) / SHANK;
+      K.mute.visible = muteDrop > 0.02; K.mute.position.y = Y_STRIKE + (1 - muteDrop) * 1.6;
+      var up = K.held || ped.sus, yd = K.yTop - K.L * dmp.xd, off = up ? 0.45 : 0;
+      K.damper.position.set(K.x, yd, ZS + 0.2 + off);
+      var wl = Math.max(0.2, yd - 0.9); K.dwire.scale.y = wl; K.dwire.position.y = -wl / 2;
+      var energy = 0;
+      K.strings.forEach(function (line, j) {
+        var pos = line.geometry.attributes.position.array, e = 0;
+        for (var q = 0; q <= 48; q++) { var s = q / 48, z = shapeAt(K, s, t) * 0.5; pos[3 * q + 2] = ZS - z; e = Math.max(e, Math.abs(z)); }
+        line.geometry.attributes.position.needsUpdate = true; line.material.color.setHex(e > 0.01 ? 0x2e4bb0 : 0x8d939d); energy = Math.max(energy, e);
+      });
+      if (!up && energy > 0.01) anyDamped = true;
+    });
+    tF.classList.toggle("on", forcing); tF.classList.toggle("mod", ped.soft || ped.mute);
+    tD.classList.toggle("on", anyDamped && !ped.sus); tD.classList.toggle("off", ped.sus);
+    controls.update(); renderer.render(scene, camera);
+    drawWave(t); drawModes(t);
+  }
+  resetView();
+  requestAnimationFrame(frame);
+})();
+</script>
+```

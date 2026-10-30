@@ -67,7 +67,7 @@
       document.getElementById("msNo").textContent = N;
       document.getElementById("msXo").textContent = x0.toFixed(2) + " L";
       var zeros = []; for (var n = 1; n <= 12; n++) if (Math.abs(Math.sin(n * Math.PI * x0)) < 1e-9) zeros.push(n);
-      document.getElementById("msRead").textContent = "First " + N + (N === 1 ? " mode" : " modes") + (zeros.length ? " · Bₙ = 0 for n = " + zeros.join(", ") + ": those modes have a still point at the pluck" : "");
+      document.getElementById("msRead").textContent = "First " + N + (N === 1 ? " shape" : " shapes") + (zeros.length ? " · aₙ = 0 for n = " + zeros.join(", ") + ": those shapes have a still point at the pluck" : "");
       var parts = []; for (var n = 1; n <= 12; n++) parts.push({ ratio: n, amp: Math.abs(B(n)) });
       C.stems(document.getElementById("msSpec"), parts, { W: 320, H: 90, rmax: 12, fs: 8, sw: 3, noOff: true });
     }
@@ -124,7 +124,7 @@
       var sv = survivors(), txt;
       var started = sv ? sv.filter(function (n) { return Math.abs(Math.sin(n * Math.PI * x0)) > 1e-6; }) : null;
       if (!sv) txt = "No touch: every mode the pluck starts sounds; lowest " + F1 + " Hz";
-      else if (!started.length) txt = "Only modes " + sv.slice(0, 3).join(", ") + ", … could keep ringing, and the pluck at " + x0.toFixed(2) + " L started none of them (Bₙ = 0): near silence. Move the pluck point and pluck again";
+      else if (!started.length) txt = "Only modes " + sv.slice(0, 3).join(", ") + ", … could keep ringing, and the pluck at " + x0.toFixed(2) + " L started none of them (aₙ = 0): near silence. Move the pluck point and pluck again";
       else txt = "Only modes with a still point under the finger keep ringing: " + sv.slice(0, 4).join(", ") + ", … · you hear " + (started[0] * F1) + " Hz" + (NAMES[started[0]] ? ", " + NAMES[started[0]] : "");
       document.getElementById("tcRead").textContent = txt + " · plucked " + (x0 < 0.12 ? "near an end: bright" : x0 > 0.495 ? "at the middle: even modes absent, hollow" : x0 > 0.4 ? "near the middle: even modes weak, hollow" : "between an end and the middle");
       var parts = amps.map(function (a, i) { return { ratio: i + 1, amp: Math.abs(a) * (i + 1) * Math.exp(-gam[i] * 0.25) }; });
