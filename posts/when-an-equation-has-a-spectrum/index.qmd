@@ -21,25 +21,32 @@ aliases: [/posts/instruments-as-operators/spectrum.html, /posts/instruments-as-o
 An optional appendix for mathematical readers. It recaps what it uses from [post 2](../one-string-end-to-end/index.qmd), so it stands on its own. Uses matrices, eigenvalues, derivatives and complex numbers, each explained; the section on the deeper theory and the folds use linear algebra and analysis. About 40 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
-The motion a linear equation describes is a sum of modes, each with a frequency read off a spectrum, exactly when the equation does not change in time and its generator has a full set of eigenvectors. For the free vibration of a stable, frictionless object of finite size this always holds: every free motion is a sum of modes, apart from rigid drifts, at the frequencies $\sqrt{\lambda}/2\pi$ for the eigenvalues $\lambda$ of its operator $A$.
+A linear equation $U' = BU$ that does not change in time has as its solutions exactly the combinations of modes $e^{st}W$ when, and only when, $B$ has a basis of eigenvectors. The free vibration of a stable, frictionless object of finite size, $u'' = -Au$ with $A$ self-adjoint, positive and with compact resolvent, always passes once any rigid drifts ($\lambda = 0$) are split off, with frequencies $\sqrt{\lambda}/2\pi$ for the eigenvalues $\lambda$ of $A$. This page works up to that from the smallest examples, then gives the theory behind it, the smallest examples where it fails, and how it connects back to what we hear.
 
 The reason, in one sentence: **for a linear equation that does not change in time, the time derivative of a solution is again a solution, so there are solutions $e^{st}W$ that differentiation only rescales, and these are enough exactly when the vectors $W$ form a basis.**
 
-Precisely: written as $U' = BU$, the solutions are exactly the combinations of modes $e^{st}W$ when, and only when, $B$ has a basis of eigenvectors; the free vibration of such an object is $u'' = -Au$ with $A$ self-adjoint, positive and with compact resolvent, for which this holds once any rigid drifts ($\lambda = 0$) are split off. This page works up to that from the two smallest examples, then gives the theory behind it, the smallest examples where it fails, and how it connects back to what we hear.
-
 ## Recap: the equation of motion {#recap}
 
-Post 2 derives the string's equation, and post 3's entries give the others; this post needs their form and a few cases.
+For an object held in a given way, the [operator](../instruments-as-operators/glossary.qmd#operator) $A$ is the [linear](../instruments-as-operators/glossary.qmd#linear) map, defined on the shapes the holding allows, that sends a shape to minus the acceleration it causes, and Newton's law for small motions reads $u'' = -A\,u$, with $u(t)$ the shape at time $t$ and primes time derivatives. As in the rest of the series, $A$ includes its constants, $\lambda$ is an eigenvalue of $A$ and $f = \sqrt{\lambda}/2\pi$: a mass $m$ on a spring of stiffness $s$ has $A = s/m$ and one mode. [Post 2's two beads](../one-string-end-to-end/index.qmd#two-beads), of mass $m$ on a string of tension $T$, spaced $h$ apart and $h$ from the tied ends, have $A = \frac{T}{mh}\left(\begin{smallmatrix} 2 & -1 \\ -1 & 2 \end{smallmatrix}\right)$, with [eigenvectors](../instruments-as-operators/glossary.qmd#eigenvector) $(1, 1)$ and $(1, -1)$ and [eigenvalues](../instruments-as-operators/glossary.qmd#eigenvalue) $T/mh$ and $3T/mh$: the sum $S = u_1 + u_2$ and the difference $D = u_1 - u_2$ swing as independent springs, with frequencies in the ratio $1 : \sqrt3$.
 
-**The operator.** For an object held in a given way, the [operator](../instruments-as-operators/glossary.qmd#operator) $A$ is the linear map, defined on the shapes that the holding allows, that sends a shape to minus the acceleration that shape causes. It does not depend on time. [Linear](../instruments-as-operators/glossary.qmd#linear) means $A(au + bv) = a\,Au + b\,Av$ for shapes $u$, $v$ and numbers $a$, $b$. Newton's law for small motions reads
-$$
-u'' = -A\,u ,
-$$
-with $u(t)$ the shape at time $t$ and primes time derivatives. Convention: $A$ includes its constants, $\lambda$ is an eigenvalue of $A$, $f = \sqrt{\lambda}/2\pi$.
+::: {.derive}
+<details><summary><span class="label">Details</span>The operators of posts 2 and 3, used in the deeper theory</summary>
 
-**One mass on a spring** ([post 2](../one-string-end-to-end/index.qmd#the-solution)). Hooke's law gives $m\,x'' = -s\,x$, with $s$ the spring's stiffness, so $A$ is the number $s/m$.
+| Object | Operator $A$ | Allowed shapes |
+|:--|:--|:--|
+| string, tension $T$, mass $\mu$ per length | $-c^2\,\frac{d^2}{dx^2}$, $c^2 = T/\mu$ | $u = 0$ at tied ends |
+| air in a tube, on pressure $p$ | $-c^2\,\frac{d^2}{dx^2}$, $c$ the speed of sound | $p = 0$ at an open end, $p' = 0$ at a closed one |
+| bar | $\kappa^2\,\frac{d^4}{dx^4}$ | clamped end $u = u' = 0$; free end $u'' = u''' = 0$ |
+| drumhead | $-c^2\Delta$ | $u = 0$ on the rim |
 
-**Two beads on a string** ([post 2](../one-string-end-to-end/index.qmd#two-beads)). Two beads of mass $m$ sit on a weightless string of tension $T$, spaced $h$ apart and $h$ from the tied ends, at heights $u_1$ and $u_2$ (post 2 takes $m = \mu h$, the string's own mass shared out).
+: The operators of posts 2 and 3. Primes here are derivatives in position; $\Delta = \partial_x^2 + \partial_y^2$ is the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian). {.striped}
+
+</details>
+:::
+
+## The smallest examples {#smallest-examples}
+
+Two variations on post 2's beads and string show what is new: closing the beads into a ring gives a motion that is not a combination of modes, and closing the string into a loop puts its frequencies exactly on the whole numbers.
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 120" role="img" aria-label="Left: two beads on a string tied down at both ends. Right: the same two beads closed into a ring, so each bead is joined to the other on both sides.">
@@ -54,34 +61,7 @@ with $u(t)$ the shape at time $t$ and primes time derivatives. Convention: $A$ i
 </svg>
 ```
 
-For small slopes, each stretch of string pulls the two beads at its ends toward each other with vertical force $T/h$ times their difference in height, a tied end counting as a bead at height 0. Newton's law for each bead, with the heights in one column $u = (u_1, u_2)$, becomes
-$$
-\begin{gathered}
-m\,u_1'' = \frac{T}{h}\,(-2u_1 + u_2), \qquad m\,u_2'' = \frac{T}{h}\,(u_1 - 2u_2), \\
-\text{that is}\qquad u'' = -A\,u, \qquad A = \frac{T}{mh}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix} .
-\end{gathered}
-$$
-
-**Continuous objects** ([post 2](../one-string-end-to-end/index.qmd) and [post 3](../other-instruments-same-recipe/index.qmd)), used in [the deeper theory](#deeper-theory):
-
-| Object | Operator $A$ | Allowed shapes |
-|:--|:--|:--|
-| string, tension $T$, mass $\mu$ per length | $-c^2\,\frac{d^2}{dx^2}$, $c^2 = T/\mu$ | $u = 0$ at tied ends |
-| air in a tube, on pressure $p$ | $-c^2\,\frac{d^2}{dx^2}$, $c$ the speed of sound | $p = 0$ at an open end, $p' = 0$ at a closed one |
-| bar | $\kappa^2\,\frac{d^4}{dx^4}$ | clamped end $u = u' = 0$; free end $u'' = u''' = 0$ |
-| drumhead | $-c^2\Delta$ | $u = 0$ on the rim |
-
-: The operators of posts 2 and 3. Primes here are derivatives in position; $\Delta = \partial_x^2 + \partial_y^2$ is the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian). {.striped}
-
-## The smallest examples {#smallest-examples}
-
-**The spring: one mode.** In $x'' = -\lambda x$ with $\lambda = s/m$, try $x = a\cos(\omega t + \varphi)$. Two derivatives give $-\omega^2x$, which matches when $\omega^2 = \lambda$: the mass swings at $f = \sqrt{\lambda}/2\pi$, whatever the amplitude $a$ and phase $\varphi$, which the start fixes. One eigenvalue, one mode, one frequency.
-
-**Two beads: two modes.** Add and subtract the bead equations. The sum $S = u_1 + u_2$ and the difference $D = u_1 - u_2$ (post 2's $q_1$ and $q_2$, times $\sqrt2$) obey
-$$
-S'' = -\frac{T}{mh}\,S, \qquad D'' = -\frac{3T}{mh}\,D :
-$$
-two independent springs, the second three times as stiff because in $D$ the tilted middle stretch pulls too. In matrix language, $(1, 1)$ and $(1, -1)$ are [eigenvectors](../instruments-as-operators/glossary.qmd#eigenvector) of $A$, columns that $A$ only rescales, with [eigenvalues](../instruments-as-operators/glossary.qmd#eigenvalue) $T/mh$ and $3T/mh$: in the ratio $1 : 3$, so the frequencies are in the ratio $1 : \sqrt 3 \approx 1 : 1.73$. Since $u_1 = (S + D)/2$ and $u_2 = (S - D)/2$, every motion is an $S$-swing plus a $D$-swing.
+**The two-bead ring: a drift.** Join the string's ends to each other and each bead has the other as its neighbor on both sides: $A_{\text{ring}} = \frac{T}{mh}\left(\begin{smallmatrix} 2 & -2 \\ -2 & 2 \end{smallmatrix}\right)$, a different operator for the same beads. Now $A_{\text{ring}}(1, 1) = 0$: both beads move up together and nothing pulls back. Started moving, it drifts away silently, $u = (1, 1)(a + bt)$. The other eigenvalue is $4T/mh$.
 
 ```{=html}
 <div class="ins">
@@ -101,8 +81,6 @@ two independent springs, the second three times as stiff because in $D$ the tilt
 </div>
 </div>
 ```
-
-**The two-bead ring: a drift.** Join the string's ends to each other and each bead has the other as its neighbor on both sides: $A_{\text{ring}} = \frac{T}{mh}\left(\begin{smallmatrix} 2 & -2 \\ -2 & 2 \end{smallmatrix}\right)$, a different operator for the same beads. Now $A_{\text{ring}}(1, 1) = 0$: both beads move up together and nothing pulls back. Started moving, it drifts away silently, $u = (1, 1)(a + bt)$. The other eigenvalue is $4T/mh$.
 
 **The loop of string: exactly on the whole numbers.** Join a continuous string into a loop, and measure position by the angle $\theta$, in units where the circumference is $2\pi$. Post 2's string equation becomes
 $$
@@ -366,7 +344,15 @@ For light friction, $\gamma_k^2 < 4\lambda_k$, mode $k$ is the real shape $X_k$ 
 </details>
 :::
 
-**Two piano strings in tune.** A piano note has two or three strings tuned alike on one bridge. Keep one mode per string, one number $q_j$ each; in tune, $A = \omega_0^2I$ on the pair. The bridge, driven by both strings at once, gives each a friction in proportion to its motion: $C = r\left(\begin{smallmatrix}1 & 1\\1 & 1\end{smallmatrix}\right)$, symmetric (the strings' own losses aside). A multiple of the identity commutes with every matrix: level 2. The shared eigenvectors are $(1, 1)$, swinging together, with $\gamma = 2r$: both push the yielding bridge, and the mode fades at the rate $\gamma/2 = r$; and $(1, -1)$, swinging oppositely, with $\gamma = 0$: their pushes cancel. An even hammer starts only $(1, 1)$; an unequal strike starts both, so each string's motion decays in two stages, fast then slow, in real modes, exactly in or out of step. This is the first half of Weinreich's explanation:[^weinreich] in this exact model the slow mode does not push the bridge at all, so it would hardly be heard; he showed that the strings' slight mistuning, together with the hammer's small irregularities, governs the aftersound, which is level 3.
+**Two piano strings in tune.** Two strings tuned alike on one bridge, one mode each, have $A = \omega_0^2I$ and, through the bridge they both drive, the friction $C = r\left(\begin{smallmatrix}1 & 1\\1 & 1\end{smallmatrix}\right)$: level 2, since a multiple of the identity commutes with every matrix. The shared eigenvectors are $(1, 1)$, swinging together and fading at the rate $r$, and $(1, -1)$, swinging oppositely, whose pushes on the bridge cancel, so the bridge does not drain it (only the strings' own, smaller losses do). An unequal strike starts both, so each string's motion decays in two stages, fast then slow.[^weinreich]
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The two-string model, and what it leaves to level 3</summary>
+
+A piano note has two or three strings tuned alike on one bridge. Keep one mode per string, one number $q_j$ each; in tune, $A = \omega_0^2I$ on the pair. The bridge, driven by both strings at once, gives each a friction in proportion to its motion, $C = r\left(\begin{smallmatrix}1 & 1\\1 & 1\end{smallmatrix}\right)$, symmetric (the strings' own losses aside). For $(1, 1)$, $\gamma = 2r$: both push the yielding bridge, and the mode fades at the rate $\gamma/2 = r$; for $(1, -1)$, $\gamma = 0$. An even hammer starts only $(1, 1)$; an unequal strike starts both, in real modes, exactly in or out of step. This is the first half of Weinreich's explanation (G. Weinreich, [The coupled motion of piano strings](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, 1990): in this exact model the slow mode does not push the bridge at all, so it would hardly be heard; he showed that the strings' slight mistuning, together with the hammer's small irregularities, governs the aftersound, which is level 3.
+
+</details>
+:::
 
 ### Level 3 · The general case
 

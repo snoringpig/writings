@@ -128,3 +128,9 @@ svg.fig .bar { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
 
 /* prose tables (four aspects) wrap on phones */
 @media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
+
+/* Boxes that hold a margin note become full-width grids (Quarto adds page-columns): keep the box on its paragraph. */
+main .puzzle.page-columns, main .newidea.page-columns, main .result.page-columns { background: none; border: 0; border-radius: 0; padding: 0; }
+main .puzzle.page-columns > p { border-left: 3px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0; }
+main .result.page-columns > p { border-left: 2px solid var(--accent); padding: 0.1rem 0 0.1rem 0.9rem; margin: 0 0 0.25rem; }
+main .derive.page-columns { display: block; }

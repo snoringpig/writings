@@ -45,7 +45,7 @@ All of a drum's frequencies tell you its area and, for a reasonable rim, the len
 </div>
 ```
 
-The reason, in one sentence: **the number of a drum's frequencies below a high limit grows with its area and falls short by an amount set by its rim, so those two can be heard, but these two drums are cut from the same seven triangles in such a way that every mode of one can be rebuilt, piece by piece, on the other.** In 1966 the mathematician Mark Kac asked whether a perfect ear could work out a drum's shape from its frequencies;[^kac1] for drums in the plane the answer, found in 1992, is no.
+The reason: **Counting a drum's frequencies reveals its area and its rim. But these two drums are cut from the same seven triangles so that every mode of one can be rebuilt on the other.** In 1966 the mathematician Mark Kac asked whether a perfect ear could work out a drum's shape from its frequencies;[^kac1] for drums in the plane the answer, found in 1992, is no.
 
 ## The drum's spectrum
 

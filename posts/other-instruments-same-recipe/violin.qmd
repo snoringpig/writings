@@ -58,6 +58,14 @@ c^2 = \frac{T}{\mu},
 $$
 for shapes with $u(0) = u(L) = 0$. In words: each bit of string accelerates in proportion to how sharply it bends, and the tied ends decide which shapes are allowed.
 
+::: {.derive}
+<details><summary><span class="label">Details</span>Where the equation comes from <span class="needs">partial derivatives</span></summary>
+
+Take the piece of string from $x$ to $x + dx$, of mass $\mu\,dx$. The tension $T$ pulls along the string at both ends; for a small slope, the sideways part of each pull is $T$ times the slope $u_x$. The net sideways force is therefore $T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx$, and Newton's law sets it equal to mass times acceleration, $\mu\,dx\,u_{tt}$. Dividing by $\mu\,dx$ gives $u_{tt} = c^2u_{xx}$ with $c^2 = T/\mu$. The nut and the bridge hold the ends still, $u(0, t) = u(L, t) = 0$. The model assumes a perfectly flexible string, small slopes, no air and no friction; [post 2](../one-string-end-to-end/index.qmd#newton) draws the forces.
+
+</details>
+:::
+
 []{#spectrum}The shapes that the [operator](../instruments-as-operators/glossary.qmd#operator) $A$ only stretches, its [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction), and their [eigenvalues](../instruments-as-operators/glossary.qmd#eigenvalue), are
 $$
 \begin{gathered}

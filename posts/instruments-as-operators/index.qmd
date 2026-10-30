@@ -35,11 +35,11 @@ A piano note has a pitch you could hum and a drum's thud has none because the pi
 
 1. [**What you hear**](../what-you-hear/index.qmd), with sounds and no differential equations: what makes a clear pitch, and what we hear as a sound's pitch, loudness, timbre and duration. A clear pitch means the [partials](glossary.qmd#partial) sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, so the sound nearly repeats at that rate.
 2. [**One string, end to end**](../one-string-end-to-end/index.qmd) works the plucked string completely: where its equation comes from, [from Newton's law](../one-string-end-to-end/index.qmd#newton); why the sines are the right coordinates; why there is exactly one solution; how the motion becomes [the sound](../one-string-end-to-end/index.qmd#sound); and [which conditions it used](../one-string-end-to-end/index.qmd#conditions). A plucked string moves as a sum of shapes $\sin(n\pi x/L)$, each swinging at its own frequency $nc/2L$, because in the basis of sines, and only in a basis of [eigenfunctions](glossary.qmd#eigenfunction), the equation splits into independent springs.
-3. [**Other instruments, same recipe**](../other-instruments-same-recipe/index.qmd) runs the string's recipe on a piano, a kalimba, a glockenspiel, drums, a bowed violin, a flute, a clarinet, a harmonica and a theremin, starting from an orchestra: each entry gives the problem, its spectrum, an animation and its sound, with the derivation of its equation in a fold.
+3. [**Other instruments, same recipe**](../other-instruments-same-recipe/index.qmd) runs the string's recipe on a piano, a kalimba, a glockenspiel, drums, a bowed violin, a flute, a clarinet, a harmonica and a theremin, starting from an orchestra: a short entry for each, with its spectrum and its sound. Six deep dives work one instrument each in full, with the derivation of its equation: [the violin](../other-instruments-same-recipe/violin.qmd), [the clarinet](../other-instruments-same-recipe/clarinet.qmd), [the kalimba](../other-instruments-same-recipe/kalimba.qmd), [the harmonica](../other-instruments-same-recipe/harmonica.qmd), [the piano](../other-instruments-same-recipe/piano.qmd) and [the drum](../other-instruments-same-recipe/drum.qmd).
 
 **Beyond.** The appendix [*When does an equation have a spectrum?*](../when-an-equation-has-a-spectrum/index.qmd) gives the general theory for mathematical readers: when the solution of a differential equation is a sum over the spectrum of an operator, the deeper theory, and counterexamples, smallest first. Two further posts take up questions the answers raise: [*Can you hear the shape of a drum?*](../hear-the-shape-of-a-drum/index.qmd) and [*Did instruments shape our scales?*](../instruments-and-scales/index.qmd). [*A Piano*](../a-piano/index.qmd) is a playable upright with all 88 keys and its three pedals. Technical words link to the [glossary](glossary.qmd).
 
-**Reading paths.** In order, 1 → 2 → 3, since each post uses the one before it. A listener can read 1 → 3, skipping post 3's folds; each entry links to the step of post 2 it reuses. A mathematician can read post 2, then the appendix.
+**Reading paths.** In order, 1 → 2 → 3, since each post uses the one before it, then any of the six deep dives. A listener can read 1 → 3 and stop at the gallery, or open a deep dive such as [the kalimba](../other-instruments-same-recipe/kalimba.qmd) or [the drum](../other-instruments-same-recipe/drum.qmd) for one instrument; each links to the step of post 2 it reuses. A mathematician can read post 2, the deep dives for the derivations, then the appendix.
 
 ## The series in one paragraph {#the-series-in-one-paragraph}
 
@@ -49,7 +49,7 @@ p(t) = \sum_k a_k\, e^{-t/\tau_k} \cos(2\pi f_k t + \varphi_k).
 $$
 Here $p(t)$ is the air pressure at the listener; partial $k$ has frequency $f_k$, starting size $a_k$ and phase $\varphi_k$, and shrinks by a factor of $e \approx 2.7$ every $\tau_k$ seconds. This holds because a vibrating object of finite size whose motion is [linear](glossary.qmd#linear) and unchanging in time moves, left to itself, as a sum of [modes](glossary.qmd#mode), shapes that each oscillate at their own frequency and fade at their own rate, apart from the special cases [the appendix lists](../when-an-equation-has-a-spectrum/index.qmd#counterexamples). The body, the air and the room pass that motion on in a way that is also linear and unchanging in time, which keeps every $f_k$ and $\tau_k$, changes the amounts, and adds the filter's own ringing (the body's resonances, the room's reverberation).
 
-The equation of motion, through its operator together with friction and radiation, fixes the $f_k$ and $\tau_k$; the playing, the radiation and where you listen fix the $a_k$. Pitch is heard mainly from where the $f_k$ sit; loudness from the sizes, weighted by frequency; timbre from all three lists, especially early on, plus noise that is not a mode; duration from the fading and from when the player stops or damps the note. Bowed and blown instruments are different: their motion is a single repeating cycle, so its partials sit at exact whole-number multiples, the resonator's modes shape which partials are strong, and the player sets loudness and duration. The series derives the $f_k$; the $\tau_k$ are mostly measured, and it says so where it uses them.
+The equation of motion, through its operator together with friction and radiation, fixes where the partials sit and how fast they fade (the $f_k$, which the series derives, and the $\tau_k$, which are mostly measured); the playing, and where you listen, fix how strong they are, the $a_k$. Bowed and blown notes are different: their motion repeats one cycle, so their partials sit at exact whole-number multiples.
 
 ## Operator families and instrument classes {#operator-families-and-instrument-classes}
 
@@ -57,19 +57,19 @@ The [Hornbostel–Sachs classification](glossary.qmd#hornbostel-sachs), the sche
 
 | Hornbostel–Sachs class | Instrument | Operator family: the rule, and how it is held | In the series |
 |:--|:--|:--|:--|
-| chordophone, 321.322 | violin, guitar | $-c^2\,d^2/dx^2$ on the string; ends tied | [2](../one-string-end-to-end/index.qmd) · [3](../other-instruments-same-recipe/index.qmd#violin) |
+| chordophone, 321.322 | violin, guitar | $-c^2\,d^2/dx^2$ on the string; ends tied | [2](../one-string-end-to-end/index.qmd) · [3](../other-instruments-same-recipe/index.qmd#violin) · [deep dive](../other-instruments-same-recipe/violin.qmd) |
 | chordophone, 322 | harp | the same | [2](../one-string-end-to-end/index.qmd) |
-| chordophone, 314.122 | piano | $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$; ends pinned | [3](../other-instruments-same-recipe/index.qmd#piano) |
+| chordophone, 314.122 | piano | $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$; ends pinned | [3](../other-instruments-same-recipe/index.qmd#piano) · [deep dive](../other-instruments-same-recipe/piano.qmd) |
 | aerophone, 421.121.12 | flute | $-c^2\,d^2/dx^2$ on the air's pressure; both ends open | [3](../other-instruments-same-recipe/index.qmd#flute) |
-| aerophone, 422.211.2 | clarinet | the same; closed at the reed | [3](../other-instruments-same-recipe/index.qmd#clarinet) |
-| aerophone, 412.132 | harmonica | $\kappa^2\,d^4/dx^4$ on the reed; clamped and free | [3](../other-instruments-same-recipe/index.qmd#harmonica) |
-| idiophone, 122.1 | kalimba | $\kappa^2\,d^4/dx^4$; clamped and free | [3](../other-instruments-same-recipe/index.qmd#kalimba) |
+| aerophone, 422.211.2 | clarinet | the same; closed at the reed | [3](../other-instruments-same-recipe/index.qmd#clarinet) · [deep dive](../other-instruments-same-recipe/clarinet.qmd) |
+| aerophone, 412.132 | harmonica | $\kappa^2\,d^4/dx^4$ on the reed; clamped and free | [3](../other-instruments-same-recipe/index.qmd#harmonica) · [deep dive](../other-instruments-same-recipe/harmonica.qmd) |
+| idiophone, 122.1 | kalimba | $\kappa^2\,d^4/dx^4$; clamped and free | [3](../other-instruments-same-recipe/index.qmd#kalimba) · [deep dive](../other-instruments-same-recipe/kalimba.qmd) |
 | idiophone, 111.222 | glockenspiel | $\kappa^2\,d^4/dx^4$; both ends free | [3](../other-instruments-same-recipe/index.qmd#glockenspiel) · [scales](../instruments-and-scales/index.qmd) |
-| membranophone, 211.11 | timpani | $-c^2\Delta$ on a disk; rim fixed, air and kettle around it | [3](../other-instruments-same-recipe/index.qmd#drums) |
-| membranophone, 211.212.1 | bass drum | $-c^2\Delta$ on a disk; rim fixed, a second head | [3](../other-instruments-same-recipe/index.qmd#drums) |
+| membranophone, 211.11 | timpani | $-c^2\Delta$ on a disk; rim fixed, air and kettle around it | [3](../other-instruments-same-recipe/index.qmd#drums) · [deep dive](../other-instruments-same-recipe/drum.qmd) |
+| membranophone, 211.212.1 | bass drum | $-c^2\Delta$ on a disk; rim fixed, a second head | [3](../other-instruments-same-recipe/index.qmd#drums) · [deep dive](../other-instruments-same-recipe/drum.qmd) |
 | electrophone, 531.1 | theremin | the number $1/LC$ | [3](../other-instruments-same-recipe/index.qmd#theremin) |
 
-: Hornbostel–Sachs class, instrument, operator family, and where the series treats it: post 2 for the string, completely; post 3 for the others. {.striped}
+: Hornbostel–Sachs class, instrument, operator family, and where the series treats it: post 2 for the string, completely; post 3 for the others, and its deep dives where they exist. {.striped}
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The decimal codes, and when electrophones were added</summary>

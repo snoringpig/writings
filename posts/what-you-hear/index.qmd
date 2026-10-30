@@ -45,7 +45,7 @@ The reason, in one sentence: **partials on the multiples of one frequency add up
 
 ## Four aspects of a sound {#four-aspects}
 
-We hear four aspects of a sound, and for an instrument left to ring each is heard from three things about its partials, where they sit, how strong they are and how fast they fade: pitch mainly from where they sit; loudness from their strengths, weighted by frequency; timbre from all three, especially early on, plus noise that is not a mode; duration from the fading and from when the player stops or damps the note. Bowed and blown instruments are different ([route 4 below](#four-routes)). All of this is about hearing, measured by asking listeners, not mathematics.[^aspects]
+We hear four things in a sound: pitch, loudness, timbre and duration. All four are facts about hearing, measured by asking listeners, not mathematics.[^aspects]
 
 **Sound** is the air pressure $p(t)$ at a listener, as a function of time. The simplest sound is a *pure tone*, the sound of a tuning fork: a pressure swing $a\cos(2\pi f t + \varphi)$ about the average air pressure, with frequency $f$ in [hertz](../instruments-as-operators/glossary.qmd#hertz) (cycles per second), size $a$, and phase $\varphi$, which says where in its cycle it starts.
 
@@ -94,7 +94,7 @@ The *sound pressure level* is $20\log_{10}(p_{\mathrm{rms}}/20\,\mu\mathrm{Pa})$
 
 ### Timbre
 
-**Timbre** is what tells apart two sounds of the same loudness and pitch.[^timbredef] It is mostly the partials' sizes and how they change, the start especially.[^timbre] It also includes how far the partials sit from whole-number multiples, how the sound starts and fades ([attack and decay](../instruments-as-operators/glossary.qmd#attack-decay)), noise and transients that are not modes (bow noise, breath, hammer thump), and fixed resonances that stay put whatever note is played ([formants](../instruments-as-operators/glossary.qmd#formant): a violin's body, a clarinet's tone-hole cutoff).
+**Timbre** is what tells apart two sounds of the same loudness and pitch.[^timbredef] It is mostly the partials' sizes and how they change, the start especially.[^timbre] It also includes how far the partials sit from whole-number multiples, how the sound starts and fades ([attack and decay](../instruments-as-operators/glossary.qmd#attack-decay)), noise and transients that are not modes (bow noise, breath, hammer thump), and fixed resonances that stay put whatever note is played ([formants](../instruments-as-operators/glossary.qmd#formant): a violin's body, a clarinet's tone-hole cutoff).[^formants]
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The evidence, and the formants</summary>
@@ -127,17 +127,11 @@ Removing the onsets of recorded instrument tones cut listeners' accuracy at nami
 </div>
 ```
 
-The rest of this post asks where the $f_k$ must sit for a clear pitch.
+For an instrument left to ring, all four are heard from three things about its partials: where they sit, how strong they are and how fast they fade. Pitch is heard mainly from where they sit; loudness from their strengths, weighted by frequency; timbre from all three, especially early on, plus sounds such as breath or bow noise; duration from the fading and from when the player stops or damps the note. Bowed and blown notes are different ([route 4 below](#four-routes)). The rest of this post asks where the partials must sit for a clear pitch.
 
 ## Why whole numbers repeat {#why-whole-numbers-repeat}
 
-A sum of steady partials repeats exactly when all its frequencies are whole-number multiples of one frequency, and then it repeats at the largest such frequency. A signal $p$ is [periodic](../instruments-as-operators/glossary.qmd#periodic) with period $P > 0$ if $p(t+P) = p(t)$ for every $t$. Precisely: let
-$$
-p(t) = a_0 + \sum_{k=1}^{n} a_k\cos(2\pi f_k t + \varphi_k),
-$$
-with distinct frequencies $f_k > 0$ and sizes $a_k \ne 0$. Then a time $P > 0$ is a period of $p$ exactly when every $f_k$ is a whole-number multiple of $1/P$. So $p$ is periodic exactly when every ratio $f_k/f_1$ is a fraction, and then its shortest period is $1/g$, where $g$ is the largest frequency of which every $f_k$ is a whole-number multiple.
-
-Take two pure tones with frequency ratio $f_2/f_1 = j/k$, a fraction in lowest terms. After $P = k/f_1$ seconds the lower tone has completed $k$ whole cycles and the upper one $j$, so the sum begins again: it repeats at the rate $g = f_1/k$. At 1.59 : 1, which is 159/100, that is every 100 cycles of the lower tone: 2.2 times a second for a lower tone at 220 Hz, far below the pitch range. That the sum repeats *only* for fractions needs one more fact, that sinusoids of different frequencies cannot cancel one another; the proof is in the fold.
+Two pure tones repeat together only when their frequency ratio is a fraction. Take 220 Hz and 330 Hz, in the ratio 3 : 2: after two cycles of the lower tone the upper one has completed three, so the sum begins again, 110 times a second. In general, for a ratio $j/k$ in lowest terms, the sum repeats every $k$ cycles of the lower tone, at the rate $f_1/k$. At 1.59 : 1, which is 159/100, that takes 100 cycles: 2.2 times a second for a lower tone at 220 Hz, far below the pitch range.
 
 ```{=html}
 <div class="ins">
@@ -150,6 +144,16 @@ Take two pure tones with frequency ratio $f_2/f_1 = j/k$, a fraction in lowest t
 </div>
 </div>
 ```
+
+The same holds for any number of steady partials: their sum repeats exactly when all their frequencies are whole-number multiples of one frequency, and then it repeats at the largest such frequency. A signal $p$ is [periodic](../instruments-as-operators/glossary.qmd#periodic) with period $P > 0$ if $p(t+P) = p(t)$ for every $t$, and the **repetition rate** of a sound whose partials are steady and exact whole-number multiples of a common frequency is 1 over its shortest period, which is that largest common frequency. That the sum repeats *only* for fractions needs one more fact, that sinusoids of different frequencies cannot cancel one another.
+
+::: {.result}
+**Precisely.** Let
+$$
+p(t) = a_0 + \sum_{k=1}^{n} a_k\cos(2\pi f_k t + \varphi_k),
+$$
+with distinct frequencies $f_k > 0$ and sizes $a_k \ne 0$. A time $P > 0$ is a period of $p$ exactly when every $f_k$ is a whole-number multiple of $1/P$. So $p$ is periodic exactly when every ratio $f_k/f_1$ is a fraction, and then its shortest period is $1/g$, where $g$ is the largest frequency of which every $f_k$ is a whole-number multiple.
+:::
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Sinusoids of different frequencies are independent, so a period must fit every partial <span class="needs">integrals of products of cosines, and divisibility</span></summary>
@@ -171,9 +175,7 @@ Expanding each term into $\alpha_k\cos(2\pi f_k t) + \beta_k\sin(2\pi f_k t)$ gi
 </details>
 :::
 
-The **repetition rate** of a sound whose partials are steady and exact whole-number multiples of a common frequency is 1 over its shortest period, which is the largest such common frequency. For partials that fade, or sit only near multiples, it is the largest frequency in the range we hear as pitch that they fit within a stated tolerance.
-
-The second half covers real instruments. A sound that fades cannot repeat exactly, but it can nearly: if every partial sits on a multiple of $g$ and fades with the same time $\tau$, each period is the one before shrunk by the factor $e^{-1/(g\tau)}$, by 0.45% at $g = 220$ Hz and $\tau = 1$ s. How near the multiples is near enough is a fact about hearing: a low partial mistuned by more than about 1 to 3%, depending on the listener, stands out as a separate tone.[^mgp1] Within 2%, the middle of that range, the lowest strong partials of the drum in the first demo fit no frequency above about 20 Hz, below the pitch range; the string's fit 196 Hz exactly.
+For real instruments, whose partials fade or sit only near the multiples, the repetition rate is the largest frequency in the range we hear as pitch that the partials fit within a stated tolerance. A sound that fades cannot repeat exactly, but it can nearly: if every partial sits on a multiple of $g$ and fades with the same time $\tau$, each period is the one before shrunk by the factor $e^{-1/(g\tau)}$, by 0.45% at $g = 220$ Hz and $\tau = 1$ s. How near the multiples is near enough is a fact about hearing: a low partial mistuned by more than about 1 to 3%, depending on the listener, stands out as a separate tone.[^mgp1] Within 2%, the middle of that range, the lowest strong partials of the drum in the first demo fit no frequency above about 20 Hz, below the pitch range; the string's fit 196 Hz exactly.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>How the drum fails to fit, at different tolerances</summary>
@@ -275,8 +277,8 @@ Instruments reach a clear pitch by four routes: modes on the whole numbers by na
 ```
 
 1. **By nature: strings and air columns.** A string's $n$-th mode fits $n$ half-waves between its ends (the picture), and every wave travels along the string at the same speed, so an ideal [string](../one-string-end-to-end/index.qmd)'s $n$-th mode swings at exactly $n$ times the lowest frequency. A flute's air column, open at both ends, resonates at every whole-number multiple, and a [clarinet](../other-instruments-same-recipe/index.qmd#clarinet)'s, closed at the reed, at the odd ones.[^wolfefc] Guitars and harps take this route, and the [piano](../other-instruments-same-recipe/index.qmd#piano) nearly, since stiffness pushes its partials slightly sharp. Bowed strings and winds start here too; route 4 makes their partials exact.
-2. **By design.** A kettledrum's air slows its coarse shapes most, pulling one set of modes near 2 : 3 : 4 : 5 ([the drums in post 3](../other-instruments-same-recipe/index.qmd#drums)). A marimba bar's arch, cut underneath, moves its first overtone from 2.76 times the lowest, for a uniform bar, to 4 times; a xylophone's shallower cut, to 3 times.[^bars] A patch of paste loading the middle of a tabla's head brings its modes near whole-number ratios.[^raman] Founders shape and tune a bell so that most of its principal partials sit on multiples of half the strike note, all but the minor-third tierce ([the series index](../instruments-as-operators/index.qmd#did-instrument-makers-know) tells the history).
-3. **By suppression.** Some off-line partials are weak or die fast: a [kalimba](../other-instruments-same-recipe/index.qmd#kalimba) tine's overtones, at 6.27 and 17.55 times its lowest, die within a fraction of a second,[^chapman] and a struck glockenspiel bar's modes all die out quickly except the lowest.[^scavone] Others are never started: a strike at a still point of a mode does not set that mode going, and timpanists strike between halfway and three-quarters of the way out,[^timp2] near the still lines of several modes that do not fit the note
+2. **By design.** A kettledrum's air slows its coarse shapes most, pulling one set of modes near 2 : 3 : 4 : 5 ([the drums in post 3](../other-instruments-same-recipe/index.qmd#drums)). A marimba bar's arch, cut underneath, moves its first overtone from 2.76 times the lowest, for a uniform bar, to 4 times; a xylophone's shallower cut, to 3 times.[^bars] A patch of paste loading the middle of a tabla's head brings its modes near whole-number ratios.[^raman] Founders shape and tune a bell so that most of its principal partials sit on multiples of half the strike note, all but the minor-third tierce.[^bellfound]
+3. **By suppression.** Some off-line partials are weak or die fast: a [kalimba](../other-instruments-same-recipe/index.qmd#kalimba) tine's overtones, at 6.27 and 17.55 times its lowest, die within a fraction of a second,[^chapman] and a struck glockenspiel bar's modes all die out quickly except the lowest.[^scavone] Others are never started: a strike at a still point of a mode does not set that mode going, and timpanists strike between halfway and three-quarters of the way out,[^timp2] near the still lines of several modes that do not fit the note.
 4. **By a periodic drive: bow and breath.** A bow or a breath keeps feeding the motion, which settles into a single repeating cycle, so its partials sit at exact whole-number multiples, whatever the object's own modes:[^wolfehh] a bow's stick and slip drive all of a string's resonances at exactly harmonic ratios, and a harmonica reed, whose own overtones are off the lines, chops the air into identical puffs ([the harmonica in post 3](../other-instruments-same-recipe/index.qmd#harmonica)). The [resonator](../instruments-as-operators/glossary.qmd#resonator)'s modes only shape which partials are strong, and the player sets loudness and duration.
 
 ```{=html}
@@ -325,6 +327,8 @@ A harder blow sounds louder and brighter. A piano hammer's felt gets harder the 
 [^moorebeats]: Moore, [*An Introduction to the Psychology of Hearing*](https://auditory.org/postings/2012/87.html), 6th ed., 2012, chapter 1.
 [^pl]: R. Plomp and W. J. M. Levelt, [Tonal consonance and critical bandwidth](https://www.mpi.nl/publications/item66382/tonal-consonance-and-critical-bandwidth), *J. Acoust. Soc. Am.* 38 (1965), 548–560.
 [^bregman]: A. S. Bregman, [*Auditory Scene Analysis: The Perceptual Organization of Sound*](https://doi.org/10.7551/mitpress/1486.001.0001), MIT Press, 1990; and his page [Introduction to auditory scene analysis](https://webpages.mcgill.ca/staff/Group2/abregm1/web/downloadsintro.htm).
+[^formants]: M. Schleske, [Introduction to violin acoustics: sound](https://schleske.de/en/research/introduction-violin-acoustics/introduction/sound.html), on the violin body's fixed resonances; E. Moers and J. Kergomard, "On the cutoff frequency of clarinet-like instruments. Geometrical versus acoustical regularity", *Acta Acustica united with Acustica* 97 (2011), 984–996 ([arXiv:1101.4742](https://ar5iv.labs.arxiv.org/html/1101.4742)), and J. Wolfe and colleagues, [Clarinet acoustics: F3](https://newt.phys.unsw.edu.au/music/clarinet/F3.html), UNSW, on the clarinet's tone-hole cutoff.
+[^bellfound]: W. A. Hibbert, [The upper partials of bells](https://www.hibberts.co.uk/the-upper-partials-of-bells/); Wikipedia, [Strike tone](https://en.wikipedia.org/wiki/Strike_tone).
 [^hibbert]: W. A. Hibbert, [What note do we hear when a bell rings?](https://www.hibberts.co.uk/what-note-do-we-hear-when-a-bell-rings/)
 [^timp1]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), tabulating A. H. Benade, [*Fundamentals of Musical Acoustics*](https://archive.org/details/fundamentalsofmu0000bena), Oxford University Press, 1976.
 [^jaatinen]: J. Jaatinen and J. Pätynen, [Effect of inharmonicity on pitch perception and subjective tuning of piano tones](https://doi.org/10.1121/10.0013572), *J. Acoust. Soc. Am.* 152 (2022), 1146–1157.

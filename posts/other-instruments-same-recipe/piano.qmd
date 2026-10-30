@@ -23,7 +23,7 @@ A deep dive from the [piano entry](index.qmd#piano) of post 3. Builds on [post 2
 :::
 
 ::: {.puzzle}
-Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](../instruments-as-operators/glossary.qmd#equal-temperament), the tuning in which all twelve semitones are the same ratio. An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
+Piano tuners don't tune octaves to an exact frequency ratio of 2 : 1. They stretch them slightly, so the top of a piano ends up sharp and the bottom flat, compared with [equal temperament](../instruments-as-operators/glossary.qmd#equal-temperament), the tuning in which all twelve semitones are the same ratio.[^pa1] An octave tuned to exactly 2 : 1 on a piano wobbles. Why would exact sound wrong?
 :::
 
 Exact sounds wrong because a piano wire's second partial sits a little above twice its fundamental, so an exact 2 : 1 octave puts two nearly equal frequencies side by side, and they [beat](../instruments-as-operators/glossary.qmd#beats): a slow wobble in loudness. Listen: an exact octave, then a stretched one.
@@ -94,6 +94,14 @@ c^2 = \frac{T}{\mu}, \qquad \kappa^2 = \frac{EI}{\mu},
 \end{gathered}
 $$
 the string's operator plus the bar's.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The piece of wire, step by step <span class="needs">partial derivatives</span></summary>
+
+Take the piece of wire between $x$ and $x + dx$, of mass $\mu\,dx$. Tension pulls along the wire at both ends; for small slopes the upward part of each pull is $T$ times the slope, so the net upward force is $T u_x(x + dx) - T u_x(x) \approx T\,u_{xx}\,dx$, as for post 2's string. Bending adds the bar's force: a bent wire carries the [bending moment](../instruments-as-operators/glossary.qmd#moment) $M = EI\,u_{xx}$; a thin slice cannot spin, so its turning effects balance and the sideways shear force is $V = -M_x = -EI\,u_{xxx}$; and the shear forces on the two faces differ by $V_x\,dx = -EI\,u_{xxxx}\,dx$ (the [kalimba's fold](kalimba.qmd#newton) has the steps). Newton's law takes the total force, so the two add: $\mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx}$. Small slopes also keep the tension at $T$.
+
+</details>
+:::
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>What the model leaves out</summary>
@@ -206,25 +214,9 @@ On a grand piano the middle pedal is usually the *sostenuto*, which holds up onl
 :::
 
 ::: {.derive}
-<details><summary><span class="label">Precisely</span>The hammer weights and the damping rates <span class="needs">integrals of products of modes</span></summary>
+<details><summary><span class="label">Precisely</span>How fast a damper drains each mode</summary>
 
-With the hammer and the dampers, the string's equation is
-$$
-\begin{aligned}
-\mu\,u_{tt} + b(x, t)\,u_t = {} & T\,u_{xx} - EI\,u_{xxxx} \\
-& + p(x, t),
-\end{aligned}
-$$
-where $p$ is the hammer's force per unit length and $b$ the friction of the felt dampers plus small internal losses. The operator fixes the frequencies and shapes, $p$ how much of each mode starts, and $b$ how fast each dies. In the table above, the dampers and the sustain pedal change $b$; the soft pedal and the practice mute change $p$; only the tuning pin changes $A$.
-
-Write $u = \sum_n q_n(t)X_n(x)$, multiply by $X_m$ and integrate along the string. Since $A$ is symmetric, the $X_n$ are perpendicular, and
-$$
-\begin{aligned}
-\mu N_m\,(q_m'' + \omega_m^2 q_m) & \\
-+ \sum_n D_{mn}\,q_n' & = P_m(t),
-\end{aligned}
-$$
-with $\omega_m = 2\pi f_m$, $N_m = \int X_m^2$, $D_{mn} = \int b\,X_mX_n$ and $P_m = \int p\,X_m$. The felt touches a short stretch near $x_h$, so $P_m(t) \approx X_m(x_h)P(t)$, with $P$ the total force: every mode gets the same push in time, weighted by its height at the hammer. If the damping is weak, the cross terms $D_{mn}$, $m \ne n$, change the answer only at second order, which leaves one damped spring per mode, fading at the rate $\gamma_m = D_{mm}/2\mu N_m$: a mode is damped in proportion to how much it moves under the felt. A real damper is not weak, since it stops a note in a fraction of a second, so the formula gives the picture but not exact decay times.
+For weak damping each mode fades at a rate set by how much it moves under the felt, $\gamma_n \propto \int_{\text{felt}} X_n^2\,dx \big/ \int_0^L X_n^2\,dx$, so a mode with a still point under the felt barely notices the damper.
 
 </details>
 :::
@@ -270,7 +262,8 @@ Every instrument so far has been a line: a string, a tube, a bar. The next page 
 
 [^fr1]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 12 (the piano): the stiff string and its inharmonicity.
 [^inh]: Wikipedia, [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity), on the partials of stiff strings.
-[^pa2]: Wikipedia, [Piano acoustics](https://en.wikipedia.org/wiki/Piano_acoustics): "octaves are normally stretched on a well-tuned piano. That is, the high notes are tuned higher, and the low notes tuned lower, than they are in a mathematically idealized equal-tempered scale"; "As the tuning progresses up and down the scale, the inharmonicity, hence the stretch, accumulates"; "the bass strings on the piano are shorter than the 'double with each octave' rule would predict".
+[^pa1]: Wikipedia, [Piano acoustics](https://en.wikipedia.org/wiki/Piano_acoustics): "octaves are normally stretched on a well-tuned piano. That is, the high notes are tuned higher, and the low notes tuned lower, than they are in a mathematically idealized equal-tempered scale."
+[^pa2]: Wikipedia, [Piano acoustics](https://en.wikipedia.org/wiki/Piano_acoustics): "As the tuning progresses up and down the scale, the inharmonicity, hence the stretch, accumulates"; "the bass strings on the piano are shorter than the 'double with each octave' rule would predict".
 [^rails]: O. L. Railsback, "Scale temperament as applied to piano tuning", *Journal of the Acoustical Society of America* 9 (1938), 274, [doi:10.1121/1.1902056](https://doi.org/10.1121/1.1902056).
 [^russell]: D. A. Russell, [Hammer nonlinearity, dynamics and the piano sound](https://www.acs.psu.edu/drussell/Piano/Dynamics.html), 1997: a gentle blow "acts as a soft spring", a heavy one "acts as a hard spring"; "Loud notes sound brighter than soft notes." See also A. Askenfelt and E. Jansson, ["The nonlinear hammer"](https://www.speech.kth.se/music/5_lectures/askenflt/nonlinea.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990.
 [^wein]: G. Weinreich, ["Two or more strings"](https://www.speech.kth.se/music/5_lectures/weinreic/strings.html), from [The coupled motion of piano strings](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990: in the out-of-phase motion "the decay rate of the vibration will be very slow", so the vibration can "decompose into a prompt sound and an aftersound".

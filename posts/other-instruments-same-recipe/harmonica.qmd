@@ -56,7 +56,7 @@ The reason, in one sentence: **where a blown note's partials sit is decided by t
 
 ## The reed's equation {#operator}
 
-A reed is a thin brass bar riveted at one end over a slot and free at the other: the kalimba tine's bar, so it has the tine's equation, derived in [the kalimba's entry](index.qmd#kalimba). With $u(x, t)$ the reed's sideways displacement at distance $x$ from the rivet,
+A reed is a thin brass bar riveted at one end over a slot and free at the other: the kalimba tine's bar, so it has the tine's equation (derived in the fold below). With $u(x, t)$ the reed's sideways displacement at distance $x$ from the rivet,
 $$
 \begin{gathered}
 u_{tt} = -Au, \qquad Au = \kappa^2u_{xxxx}, \\
@@ -66,9 +66,22 @@ $$
 In words: brass resists bending, and the force per unit mass pulling each point back is the shape's fourth derivative times a constant set by the brass and the thickness.[^fr-bar] Here $E$ is brass's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus), $\rho$ its density, $S$ the area of the reed's cross-section and $I$ its [second moment of area](../instruments-as-operators/glossary.qmd#second-moment); the last form is for a rectangular reed of width $w$ and thickness $h$, where $I = wh^3/12$ and $S = wh$. The ends complete the [operator](../instruments-as-operators/glossary.qmd#operator): at the rivet the reed can neither move nor tilt, $u = u_x = 0$; at the free tip nothing bends or pushes it, $u_{xx} = u_{xxx} = 0$.
 
 ::: {.derive}
-<details><summary><span class="label">Details</span>What the model leaves out</summary>
+<details><summary><span class="label">Details</span>Where the equation comes from <span class="needs">partial derivatives, an integral over a cross-section</span></summary>
 
-The model assumes small motions, a uniform bar clamped at exactly one point, no damping and no air around the reed. Real reeds are not exactly uniform, so their overtones differ somewhat from the ideal values below.
+Bend the reed, and fibers on the outside of the curve stretch while those on the inside compress; a middle line, the neutral axis, keeps its length. For small slopes the curvature is $u_{xx}$, and a fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$, so by Hooke's law it carries the force per unit area $-E\,y\,u_{xx}$. Over the cross-section these forces cancel, but their turning effects add up to the [bending moment](../instruments-as-operators/glossary.qmd#moment)
+$$
+\begin{gathered}
+M = \int y\,(E\,y\,u_{xx})\,dA = EI\,u_{xx}, \\
+I = \int y^2\,dA .
+\end{gathered}
+$$
+Each face of a thin slice also carries a sideways shear force $V$. A thin slice's rotational inertia is negligible, so the turning effects on it balance: $V\,dx + dM = 0$, that is, $V = -M_x = -EI\,u_{xxx}$. The shear forces on the two faces differ by $V_x\,dx$, which by Newton's law accelerates the slice's mass $\rho S\,dx$:
+$$
+\rho S\,u_{tt} = V_x = -EI\,u_{xxxx},
+$$
+the [Euler–Bernoulli beam](../instruments-as-operators/glossary.qmd#beam) equation, with $\kappa^2 = EI/\rho S$. A fourth-order equation needs two conditions at each end. The riveted end can neither move nor tilt: $u = u_x = 0$. At the free tip nothing bends or pushes the reed: $M = 0$ and $V = 0$, that is, $u_{xx} = u_{xxx} = 0$. For a rectangular reed, $I = wh^3/12$ and $S = wh$, so $\kappa^2 = Eh^2/12\rho$.
+
+The model assumes small motions, a uniform bar clamped at exactly one point, no damping and no air around the reed; it ignores the slices' rotational inertia and shear deformation, which matter only for thick bars and high modes (Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory)). Real reeds are not exactly uniform, so their overtones differ somewhat from the ideal values below.
 
 </details>
 :::
@@ -82,11 +95,34 @@ $$
 \beta_nL = 1.8751,\ 4.6941,\ 7.8548, \dots,
 \end{gathered}
 $$
-so the frequencies $f_n = \sqrt{\lambda_n}/2\pi = \kappa\beta_n^2/2\pi$ stand in the ratios $1 : 6.27 : 17.55 : \cdots$, off the whole-number lines.[^fr-bar2] The [kalimba's entry](index.qmd#kalimba) solves the equation step by step. The lowest is
+so the frequencies $f_n = \sqrt{\lambda_n}/2\pi = \kappa\beta_n^2/2\pi$ stand in the ratios $1 : 6.27 : 17.55 : \cdots$, off the whole-number lines.[^fr-bar2] The fold below solves the equation step by step. The lowest is
 $$
 f_1 = \frac{(1.8751)^2}{2\pi}\cdot\frac{h}{L^2}\sqrt{\frac{E}{12\rho}} .
 $$
 The width $w$ cancels: it decides how much air the reed moves, not its pitch. Low reeds are long, high reeds short.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The spectrum, step by step <span class="needs">a 2×2 determinant</span></summary>
+
+With $\lambda = \kappa^2\beta^4$ the mode equation $AX = \lambda X$ is $X'''' = \beta^4X$, solved by $\cos\beta x$, $\sin\beta x$, $\cosh\beta x$ and $\sinh\beta x$, where $\cosh y = (e^y + e^{-y})/2$ and $\sinh y = (e^y - e^{-y})/2$ are the [hyperbolic functions](../instruments-as-operators/glossary.qmd#hyperbolic). The rivet, $X(0) = X'(0) = 0$, leaves
+$$
+\begin{aligned}
+X = {} & a\,(\cos\beta x - \cosh\beta x) \\
+& + b\,(\sin\beta x - \sinh\beta x).
+\end{aligned}
+$$
+With $c_1 = \cos\beta L$, $s_1 = \sin\beta L$, $c_2 = \cosh\beta L$, $s_2 = \sinh\beta L$, the free tip's $X''(L) = X'''(L) = 0$ reads $-(c_1 + c_2)a - (s_1 + s_2)b = 0$ and $(s_1 - s_2)a - (c_1 + c_2)b = 0$. A solution other than $a = b = 0$ exists exactly when the [determinant](../instruments-as-operators/glossary.qmd#determinant) vanishes:
+$$
+\begin{aligned}
+& (c_1 + c_2)^2 + (s_1 + s_2)(s_1 - s_2) \\
+& \quad = 2 + 2c_1c_2 = 0,
+\end{aligned}
+$$
+using $c_1^2 + s_1^2 = 1$ and $c_2^2 - s_2^2 = 1$. So $\cos\beta L\,\cosh\beta L = -1$. Since $\cosh\beta L$ grows fast, $\cos\beta L$ must be near 0, so $\beta_nL$ is near $(n - \tfrac12)\pi$; numerically $1.8751, 4.6941, 7.8548, 10.9955$. The ratios follow from $f_n \propto \beta_n^2$: $(4.6941/1.8751)^2 \approx 6.27$ and $(7.8548/1.8751)^2 \approx 17.55$. Pinned ends would give the sines and the ratios $1 : 4 : 9$; the rivet and the free tip shift the first root most, which puts the ratios off the lines. Substituting $\kappa = h\sqrt{E/12\rho}$ into $f_1 = \kappa\beta_1^2/2\pi$ gives the formula for $f_1$ below.
+
+</details>
+:::
+
 
 Below, the plucked reed's stems sit at this spectrum, off the lines; the blown reed's sit on every line, with none at $6.27\times$. Same reed, same operator; only the way it is played differs.
 
@@ -128,7 +164,7 @@ The bowed string and the clarinet work the same way, but their own frequencies a
 
 ## Tuning a reed with a file {#filing}
 
-Reed makers tune by scraping metal off, and where they scrape decides the direction. The first mode bends most near the rivet and moves most near the tip. Thin the reed near the rivet and you remove stiffness where it counts: the pitch drops. Thin it near the tip and you remove mass where it counts: the pitch rises. The [Rayleigh quotient](../instruments-as-operators/glossary.qmd#rayleigh-quotient) says this exactly:
+Reeds are tuned by scraping metal off the tongue: scraping near the tip raises the pitch, and scraping near the rivet lowers it.[^pykett-tune] The first mode explains the direction: it bends most near the rivet and moves most near the tip. Thin the reed near the rivet and you remove stiffness where it counts, so the pitch drops; thin it near the tip and you remove mass where it counts, so the pitch rises. The [Rayleigh quotient](../instruments-as-operators/glossary.qmd#rayleigh-quotient) says this exactly:
 $$
 \omega_1^2 = \min_{u} \frac{\int_0^L EI\,(u'')^2\,dx}{\int_0^L \rho S\,u^2\,dx},
 $$
@@ -166,7 +202,7 @@ The demo uses the full quotient with the original mode shape, which is accurate 
 
 ## The player, and the chromatic slide {#slide}
 
-The breath sets how hard the air flows. The reed's frequency hardly varies with the wind pressure, which changes its loudness and the shape of each puff, and so the tone.[^pykett3] A free reed loses little energy per cycle, so it is slow to start,[^pykett4] and the note lasts as long as the breath. Skilled players bend some notes on a diatonic harmonica downward by coupling the reeds to resonances of their own mouth and throat: a case where the player does move the pitch.[^cott2]
+The breath sets how hard the air flows. The reed's frequency hardly varies with the wind pressure, which changes its loudness and the shape of each puff, and so the tone.[^pykett3] A free reed loses little energy per cycle, so it is slow to start,[^pykett4] and the note lasts as long as the breath. Skilled players bend some notes on a diatonic harmonica downward by coupling the reeds to resonances of their own mouth and throat: a case where the player does move the pitch.[^cott2] Both of the hole's reeds, the blow reed and the draw reed over the same chamber, take part, and the bent note lies between their two notes.[^bahnson]
 
 A chromatic harmonica has two sets of reeds, the second tuned a [semitone](../instruments-as-operators/glossary.qmd#semitone) higher; in each set, every hole has a blow reed, sounded by breathing out, and a [draw](../instruments-as-operators/glossary.qmd#draw) reed, sounded by breathing in. Pushing the slide moves a bar that sends the air to the other set, so every note rises a semitone. In *solo tuning*, the usual layout, each group of four holes holds C, E, G, C on the blow and D, F, A, B on the draw.[^chrom] Here is a whole one to play.
 
@@ -218,6 +254,8 @@ The next page returns to the string and adds the bar's stiffness to it: [why do 
 [^pykett3]: C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023: "its frequency hardly varies with variations in wind pressure which affect its loudness"; the pulse shape, and so the tone, changes with the pressure.
 [^pykett4]: C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023: "Another implication of its high Q is that the free reed comes onto speech relatively slowly."
 [^cott2]: J. Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), *Physics Today* 64(3), 2011, 44–48: pitch bending through the player's vocal tract.
+[^pykett-tune]: C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023, section "Tuning and voicing": "Reeds are tuned by removing metal from the tongue. Removing it from the tip raises the pitch, and scraping it from nearer the riveted end lowers it."
+[^bahnson]: H. T. Bahnson, J. F. Antaki and Q. C. Beery, ["Acoustical and physical dynamics of the diatonic harmonica"](https://www.cs.bu.edu/fac/snyder/TablatureWeb/Bahnson%20JASA%201998.pdf), *J. Acoust. Soc. Am.* 103 (1998), 2134–2144: in a bend the blow and draw reeds of the hole both vibrate, and the bent pitch lies between their natural frequencies.
 [^chrom]: Wikipedia, [Chromatic harmonica](https://en.wikipedia.org/wiki/Chromatic_harmonica): a "sliding bar to redirect air" to a second reed plate, giving "the same scale a semitone higher in each hole"; solo tuning, blow C, E, G, C and draw D, F, A, B.
 
 ```{=html}

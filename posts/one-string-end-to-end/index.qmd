@@ -139,23 +139,23 @@ Shape $n$ has $n$ arches.
 $$
 q_n'' = \tfrac{2}{L}\!\int_0^L u_{tt}X_n = \tfrac{2}{L}\!\int_0^L c^2u_{xx}X_n = \tfrac{2}{L}\!\int_0^L c^2u\,X_n'' = -\lambda_n\,q_n .
 $$
-The middle step moves both derivatives from $u$ onto $X_n$ by integrating by parts twice; the boundary terms vanish because both $u$ and $X_n$ are zero at the ends. The last step is $X_n'' = -(\lambda_n/c^2)X_n$. So, measured along the sines, the string is a row of independent springs, spring $n$ swinging at
+The middle step moves both derivatives from $u$ onto $X_n$ by integrating by parts twice (for a pluck, whose corner has no $u_{xx}$, read this through the second fold below); the boundary terms vanish because both $u$ and $X_n$ are zero at the ends. The last step is $X_n'' = -(\lambda_n/c^2)X_n$. So, measured along the sines, the string is a row of independent springs, spring $n$ swinging at
 $$
 f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{n c}{2L} = n f_1 .
 $$
 
-**Why only these shapes.** Measure along any other family of shapes and the same calculation gives $q_i'' = -\sum_j M_{ij}\,q_j$ with $M_{ij} = \frac{2}{L}\int (A\psi_j)\psi_i$: each coordinate feels the others, as the bead heights did. The coordinates come apart exactly when $M$ is diagonal, and that happens exactly when every shape in the family is an eigenfunction. Nothing about the form of the solution was assumed: choosing coordinates along eigenfunctions is the one choice that separates the springs.
+**Why only these shapes.** Measure along any other set of perpendicular shapes that vanish at the ends and build every shape (an orthonormal basis $\psi_1, \psi_2, \dots$, such as the sines scaled by $\sqrt{2/L}$), and the same calculation gives $q_i'' = -\sum_j M_{ij}\,q_j$ with $M_{ij} = \int (A\psi_j)\psi_i$: each coordinate feels the others, as the bead heights $u_1$ and $u_2$ did. The coordinates come apart exactly when $M$ is diagonal, and that happens exactly when every shape in the family is an eigenfunction. Nothing about the form of the solution was assumed: choosing coordinates along eigenfunctions is the one choice that separates the springs.
 
 **Why these shapes are enough.** Every starting shape is a sum of sines, $u_0 = \sum a_n X_n$; this is the Fourier sine series, and it is the one theorem this post quotes rather than proves.[^ss]
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Decoupling happens exactly in an eigenbasis <span class="needs">inner products, orthonormal bases</span></summary>
 
-Write $\langle u, w\rangle = \int_0^L u\,w\,dx$. For shapes $u, w$ vanishing at the ends, two integrations by parts give $\langle Au, w\rangle = c^2\!\int u'w' = \langle u, Aw\rangle$: $A$ is symmetric, like $K$. With $w = u$, $\langle Au, u\rangle = c^2\!\int (u')^2 > 0$ unless $u'$ is identically zero, which with $u(0) = 0$ forces $u = 0$; so $A$ is positive, and $AX = \lambda X$ forces $\lambda > 0$. That is why no $\lambda \le 0$ appears above.
+Write $\langle u, w\rangle = \int_0^L u\,w\,dx$. (The main text's sines are orthogonal but have $\int X_n^2 = L/2$; normalised, $\sqrt{2/L}\,\sin(n\pi x/L)$, the factor $2/L$ in $q_n$ disappears.) For shapes $u, w$ vanishing at the ends, two integrations by parts give $\langle Au, w\rangle = c^2\!\int u'w' = \langle u, Aw\rangle$: $A$ is symmetric, like $K$. With $w = u$, $\langle Au, u\rangle = c^2\!\int (u')^2 > 0$ unless $u'$ is identically zero, which with $u(0) = 0$ forces $u = 0$; so $A$ is positive, and $AX = \lambda X$ forces $\lambda > 0$. That is why no $\lambda \le 0$ appears above.
 
 **Proposition.** Let $\psi_1, \psi_2, \dots$ be an orthonormal basis of square-integrable shapes, each twice differentiable and zero at the ends, and let $q_j = \langle u, \psi_j\rangle$. Then $q_i'' = -\sum_j M_{ij}q_j$ with $M_{ij} = \langle A\psi_j, \psi_i\rangle$, and $M$ is diagonal if and only if every $\psi_j$ is an eigenfunction of $A$.
 
-*Proof.* As above, $q_i'' = \langle u_{tt}, \psi_i\rangle = -\langle Au, \psi_i\rangle = -\langle u, A\psi_i\rangle$, by symmetry of $A$. Expanding $u = \sum_j q_j\psi_j$ gives $q_i'' = -\sum_j q_j\langle\psi_j, A\psi_i\rangle = -\sum_j M_{ij}q_j$. If $A\psi_j = \mu_j\psi_j$ for every $j$, then $M_{ij} = \mu_j\langle\psi_j, \psi_i\rangle$ is diagonal. Conversely, $A\psi_j = \sum_i M_{ij}\psi_i$ (expansion in the basis), which is $M_{jj}\psi_j$ when $M$ is diagonal. $\square$
+*Proof.* For a smooth solution, $q_i'' = \langle u_{tt}, \psi_i\rangle = -\langle Au, \psi_i\rangle = -\langle u, A\psi_i\rangle$, by symmetry of $A$; for a pluck, $q_i'' = -\langle u, A\psi_i\rangle$ is the definition of solution in the next fold, with $\varphi = \psi_i$. Expanding $u = \sum_j q_j\psi_j$ gives $q_i'' = -\sum_j q_j\langle\psi_j, A\psi_i\rangle = -\sum_j M_{ij}q_j$. If $A\psi_j = \mu_j\psi_j$ for every $j$, then $M_{ij} = \mu_j\langle\psi_j, \psi_i\rangle$ is diagonal. Conversely, $A\psi_j = \sum_i M_{ij}\psi_i$ (expansion in the basis), which is $M_{jj}\psi_j$ when $M$ is diagonal. $\square$
 
 In a basis of polynomials vanishing at the ends (Gram–Schmidt on $x(L - x)x^k$), $M$ has nonzero entries far from the diagonal; with $L = 1$ its top-left entry is $10c^2$, just above $\lambda_1 = \pi^2c^2 \approx 9.87c^2$.
 
@@ -169,7 +169,7 @@ The triangle has a corner, where $u_{xx}$ does not exist, so the equation cannot
 
 *Uniqueness.* With $\varphi = X_n$, each $q_n$ solves $q_n'' = -\lambda_nq_n$ with given $q_n(0), q_n'(0)$. That has exactly one solution: the difference $r$ of two has $r(0) = r'(0) = 0$, and $E = (r')^2 + \lambda_nr^2$ has $E' = 0$, so $r = 0$. Two solutions with the same start therefore have the same coordinates, so they are equal (the sines are a basis).
 
-*Existence.* The series $\sum_n (a_n\cos\omega_nt + b_n\sin\omega_nt)X_n$, with $\omega_n = \sqrt{\lambda_n}$, is a solution when the start has finite energy, $\int(u_0')^2 < \infty$ and $\int v_0^2 < \infty$. Integration by parts and Bessel's inequality give $\sum n^2a_n^2 < \infty$, so Cauchy–Schwarz gives $\sum |a_n| + |b_n| < \infty$; the series and its term-by-term time derivatives against $\varphi$ then converge uniformly, and the defining identity holds.
+*Existence.* The series $\sum_n (a_n\cos\omega_nt + b_n\sin\omega_nt)X_n$, with $\omega_n = \sqrt{\lambda_n}$, $a_n = \frac{2}{L}\int u_0X_n$ and $b_n = \frac{2}{L}\int v_0X_n/\omega_n$, is a solution when the start has finite energy, $\int(u_0')^2 < \infty$ and $\int v_0^2 < \infty$. Integration by parts and Bessel's inequality give $\sum n^2a_n^2 < \infty$, so Cauchy–Schwarz gives $\sum |a_n| + |b_n| < \infty$; the series and its term-by-term time derivatives against $\varphi$ then converge uniformly, and the defining identity holds.
 
 *Counting.* A mass on a spring has one eigenvalue and a two-dimensional space of motions ($\cos$ and $\sin$); two beads have two eigenvalues and four; the string has two dimensions of motion for each eigenvalue.
 
@@ -198,7 +198,7 @@ The dashed curve in the demo is the exact motion in d'Alembert's form: extend $u
 
 ## What you hear {#sound}
 
-You hear the string through the bridge, which it pushes at the frequencies $f_n = n f_1$: whole-number multiples of one frequency. So the push repeats every $1/f_1$ seconds, and you hear the pitch $f_1$ ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat) explains why repeating means pitch).
+You hear the string through the bridge, which it pushes at the frequencies $f_n = n f_1$: whole-number multiples of one frequency. So, in this frictionless model, the push repeats every $1/f_1$ seconds (fading comes [below](#fading)), and you hear the pitch $f_1$ ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat) explains why repeating means pitch).
 
 The push on the bridge is the upward part of the tension at $x = L$, $-T u_x(L, t)$. Its partials have sizes proportional to $n a_n$, that is, to $\sin(n\pi x_0/L)/n$. For a sharp pluck it is a rectangular wave, a short strong pull once per period and a weak pull the other way the rest of the time:
 
@@ -240,7 +240,7 @@ Three everyday facts follow from that one formula.
 
 Real strings fade, and they lose their high partials first, which is why a guitar note turns mellower as it rings.[^wolfe] Friction that acts the same way all along the string, like air drag, keeps the springs separate: each coordinate becomes a damped spring, $q_n'' + \gamma q_n' + \lambda_n q_n = 0$, and fades on its own at its own rate. Losses that grow with frequency, as in Chaigne and Askenfelt's model of a piano string, are still split by the sines.[^ca]
 
-Friction at one point is different, and it explains a trick every string player knows. Rest a finger lightly at the middle of the string and the note jumps up an octave. The finger is friction at one point: it drains every shape that moves under it, and it cannot touch the shapes that have a still point there. At the middle those are the even shapes, at $2f_1, 4f_1, 6f_1, \dots$, all multiples of $2f_1$: the octave. No frequency moved; the finger only chose which shapes keep ringing. Touch at a third and $3f_1, 6f_1, \dots$ survive, an octave and a fifth up. String players call these [harmonics](../instruments-as-operators/glossary.qmd#string-harmonics). Try it in the demo above.
+Friction at one point is different, and it explains a trick every string player knows. Rest a finger lightly at the middle of the string and the note jumps up an octave.[^wolfe2] The finger is friction at one point: it drains every shape that moves under it, and it cannot touch the shapes that have a still point there. At the middle those are the even shapes, at $2f_1, 4f_1, 6f_1, \dots$, all multiples of $2f_1$: the octave. No frequency moved; the finger only chose which shapes keep ringing. Touch at a third and $3f_1, 6f_1, \dots$ survive, an octave and a fifth up. String players call these [harmonics](../instruments-as-operators/glossary.qmd#string-harmonics). Try it in the demo above.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Which frictions keep the springs apart <span class="needs">matrices</span></summary>
@@ -286,7 +286,8 @@ Yes: products of a basis in $x$ and a basis in $t$ form a basis for functions of
 [^fr]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 2 (the vibrating string).
 [^ss]: E. M. Stein and R. Shakarchi, [*Fourier Analysis: An Introduction*](https://press.princeton.edu/books/hardcover/9780691113845/fourier-analysis), Princeton University Press, 2003, chapters 2–3 (Fejér's theorem; mean-square convergence). A shape on $[0, L]$ extended to an odd function of period $2L$ has a Fourier series of sines only.
 [^mer]: M. Mersenne, [*Harmonie universelle*](https://imslp.org/wiki/Harmonie_universelle_(Mersenne,_Marin)), S. Cramoisy, Paris, 1636–1637.
-[^wolfe]: J. Wolfe, [Strings, standing waves and harmonics](https://newt.phys.unsw.edu.au/jw/strings.html), UNSW: high-frequency components "disappear quickly", so a guitar note becomes "more mellow"; touching the string lightly at a point 1/n of its length gives the harmonics.
+[^wolfe]: J. Wolfe, [Strings, standing waves and harmonics](https://newt.phys.unsw.edu.au/jw/strings.html), UNSW: high-frequency components "disappear quickly", so a guitar note becomes "more mellow".
+[^wolfe2]: J. Wolfe, [Strings, standing waves and harmonics](https://newt.phys.unsw.edu.au/jw/strings.html), UNSW: touching the string lightly at a point 1/n of its length gives the harmonics.
 [^ca]: A. Chaigne and A. Askenfelt, ["Numerical simulations of piano strings. I. A physical model for a struck string using finite difference methods"](https://web.phys.ntnu.no/~stovneng/TFY4160_2007/oving8/numerical_simulations_of_pianostrings_I.pdf), *J. Acoust. Soc. Am.* 95 (1994), 1112–1118.
 [^jos]: J. O. Smith III, ["Recent Developments for Strings"](https://ccrma.stanford.edu/~jos/jnmr/Recent_Developments_Strings.html), in *Virtual Acoustic Musical Instruments: Review and Update*, CCRMA, Stanford University: "an increase in pitch at high vibration amplitudes".
 

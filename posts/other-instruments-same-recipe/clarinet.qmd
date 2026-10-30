@@ -117,7 +117,7 @@ As for the string, integration by parts rules out $\lambda \le 0$, and every pre
 
 ## Almost an octave deeper {#what-we-hear}
 
-**A closed tube fits a wave twice as long.** The flute's lowest mode, $\sin(\pi x/L)$, has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet's, $\cos(\pi x/2L)$, swings most at the reed and has room pressure at the bell: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end.[^fvc1] Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.
+**A closed tube fits a wave twice as long.** The flute's lowest mode, $\sin(\pi x/L)$, has room pressure at both ends and swings most in the middle: half a wavelength fits in the tube. The clarinet's, $\cos(\pi x/2L)$, swings most at the reed and has room pressure at the bell: only a quarter of a wavelength fits. A wave twice as long has half the frequency, so the same ideal tube sounds exactly an octave lower closed at one end.[^fvc1] Real flutes and clarinets differ a little in length, the clarinet's mouthpiece and bell change its effective length, and open ends act slightly longer than they are, so the real interval comes out a bit less than an octave.[^fvc3]
 
 ## Blown: one repeating cycle {#sustained}
 
@@ -177,6 +177,7 @@ The next page changes the rule itself, to a steel tine that resists bending inst
 [^pipes1]: J. Wolfe, [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW: at an open end the "sound pressure (difference from atmospheric) is close to zero".
 [^pipes2]: J. Wolfe, [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW: closed cylindrical bores "have only odd harmonics starting one octave lower".
 [^fvc1]: J. Wolfe, [Open vs closed pipes (flutes vs clarinets)](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html), UNSW: for the same length, the closed pipe's lowest frequency "c/4L = 140 Hz – one octave lower than the flute".
+[^fvc3]: J. Wolfe, [Open vs closed pipes (flutes vs clarinets)](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html), UNSW: the flute's lowest note is close to middle C, while "the lowest note on a clarinet is either the D or the C# below middle C"; "There are complications due to end corrections", and the clarinet has a mouthpiece at one end and "a flare and a bell" at the other.
 [^wolfe-clar1]: J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html), UNSW: "the reed acts like an oscillating valve".
 [^wolfe-flute1]: J. Wolfe, [Flute acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html), UNSW: "The flutist blows a rapid jet of air across the embouchure hole"; "The flute is open at both ends."
 [^wolfe-clar2]: J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html), UNSW: "the sound spectrum in the low register has strong first and third harmonics, but weak second and fourth"; even harmonics become more important from about E4.

@@ -41,7 +41,7 @@ Two notes sound smooth together when their [partials](../instruments-as-operator
 </div>
 ```
 
-The reason, in one sentence: **partials that sit close together but not on top of each other [beat](../instruments-as-operators/glossary.qmd#beats) and sound rough, and which intervals make two notes' partials coincide depends on where an instrument's partials sit.** The engineer and musician William Sethares, building on Reinier Plomp and Willem Levelt's listening experiments, argues that this is one reason scales fit the instruments they are played on.[^sethares1] It would also help explain why a Javanese gamelan, an orchestra of tuned metal bars and gongs, uses scales that fit no piano.
+The reason, in one sentence: **partials that sit close together but not on top of each other [beat](../instruments-as-operators/glossary.qmd#beats) and sound rough, and which intervals make two notes' partials coincide depends on where an instrument's partials sit.** The engineer and musician William Sethares, building on Reinier Plomp and Willem Levelt's listening experiments, argues that this is one reason scales fit the instruments they are played on.[^sethares1] It would also help explain why a Javanese gamelan, an orchestra of tuned metal bars and gongs, uses scales that fit no piano.[^sethares0]
 
 ## On the roughness curve
 
@@ -69,6 +69,17 @@ Here the list $f_1, f_2, \dots$ holds the partials of both notes: those of the l
 
 A glockenspiel bar is a uniform metal bar resting on soft supports, so both of its ends are free. Its operator is the bar's operator derived from Newton's law in [post 3](../other-instruments-same-recipe/index.qmd#glockenspiel),[^fr1] $A = \kappa^2\,d^4/dx^4$ with $\kappa^2 = EI/\rho S$; only the ends differ. A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ a mode $X$ must satisfy $X'' = 0$ and $X''' = 0$.
 
+::: {.result}
+**The free bar's operator:** $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $X'' = X''' = 0$ at both ends.
+
+**Its spectrum:** the eigenvalue $0$, twice (sliding and tilting, which make no sound), and the eigenvalues $\lambda_n = \kappa^2\beta_n^4$, where $\cos\beta_n L\,\cosh\beta_n L = 1$, $\beta_n > 0$.[^eb] The frequencies are $f_n = \sqrt{\lambda_n}/2\pi = \kappa\beta_n^2/2\pi$, in the ratios $1 : 2.756 : 5.404 : 8.933$: off the lines.
+
+In words: the same bar as the kalimba's, but with both ends free its overtones sit at different places, still far from whole numbers.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Solving for the free bar's modes <span class="needs">cosh, sinh and a determinant</span></summary>
+
 The spectrum follows the steps of post 3's kalimba fold, with these new end conditions. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
 
 1. **Four candidate shapes.** As for the kalimba in post 3, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
@@ -81,14 +92,11 @@ $$
 $$
 \cos\beta L\,\cosh\beta L = 1 .
 $$
-5. **The roots.** $\lambda = 0$ is also an eigenvalue: $X'''' = 0$ with free ends leaves exactly $X = a + bx$, belonging to the bar sliding ($X = 1$) or tilting ($X = x$) as a whole without bending, which makes no sound. The other roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page.[^eb]
+5. **The roots.** $\lambda = 0$ is also an eigenvalue: $X'''' = 0$ with free ends leaves exactly $X = a + bx$, belonging to the bar sliding ($X = 1$) or tilting ($X = x$) as a whole without bending, which makes no sound. The other roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page.
 
-::: {.result}
-**The free bar's operator:** $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $X'' = X''' = 0$ at both ends.
+The same steps with one end clamped give the kalimba's tine, worked on [the kalimba page](../other-instruments-same-recipe/kalimba.qmd).
 
-**Its spectrum:** the eigenvalue $0$, twice (sliding and tilting, which make no sound), and the eigenvalues $\lambda_n = \kappa^2\beta_n^4$, where $\cos\beta_n L\,\cosh\beta_n L = 1$, $\beta_n > 0$. The frequencies are $f_n = \sqrt{\lambda_n}/2\pi = \kappa\beta_n^2/2\pi$, in the ratios $1 : 2.756 : 5.404 : 8.933$: off the lines.
-
-In words: the same bar as the kalimba's, but with both ends free its overtones sit at different places, still far from whole numbers.
+</details>
 :::
 
 **What we assumed.** The bar assumptions of post 3 (small slopes, a uniform bar, no rotational inertia or shear deformation of the slices, no damping), and that a glockenspiel bar resting on soft supports near its fundamental's still points vibrates as if both ends were free.
@@ -107,6 +115,7 @@ In words: the same bar as the kalimba's, but with both ends free its overtones s
 
 The [entries of post 3](../other-instruments-same-recipe/index.qmd) put every instrument's operator and spectrum side by side; [back to the series](../instruments-as-operators/index.qmd).
 
+[^sethares0]: Sethares, [*Tuning, Timbre, Spectrum, Scale*](https://sethares.engr.wisc.edu/ttss.html), 2005, chapter 1 ([book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)), on the gamelan's metallophones and scales.
 [^sethares1]: W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, 2nd ed., Springer, 2005 ([book site](https://sethares.engr.wisc.edu/ttss.html)).
 [^pl]: R. Plomp and W. J. M. Levelt, [Tonal consonance and critical bandwidth](https://www.mpi.nl/publications/item66382/tonal-consonance-and-critical-bandwidth), *J. Acoust. Soc. Am.* 38 (1965), 548–560, as cited by Sethares.
 [^sethares2]: W. A. Sethares, "Adaptive tunings for musical scales", *J. Acoust. Soc. Am.* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
