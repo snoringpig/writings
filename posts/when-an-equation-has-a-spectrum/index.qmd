@@ -17,7 +17,7 @@ aliases: [/posts/instruments-as-operators/spectrum.html, /posts/instruments-as-o
 :::
 
 ::: {.pageinfo}
-Builds on [post 2](../where-the-equations-come-from/index.qmd), but recaps what it uses and stands on its own. Mathematics: matrices, eigenvalues, derivatives and complex numbers, each explained; section 5 and the folds use linear algebra and analysis. About 43 minutes, of which section 5 takes about 5 and can be skipped.
+Builds on [post 2](../where-the-equations-come-from/index.qmd), but recaps what it uses and stands on its own. Mathematics: matrices, eigenvalues, derivatives and complex numbers, each explained; section 5 and the folds use linear algebra and analysis. About 43 minutes, of which section 5 takes about 5 and can be skipped. Written with [Claude](#how-this-was-made), Anthropic's AI model.
 :::
 
 **The question.** When is the motion a differential equation describes a sum of modes, with frequencies read off the spectrum of an operator; what theory lies behind that; and how does it connect back to what we hear?
@@ -732,3 +732,7 @@ Post 4 runs this on each instrument: which modes start, how they fade, and, for 
 })();
 </script>
 ```
+
+::: {.made #how-this-was-made}
+*How this was made.* I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.
+:::

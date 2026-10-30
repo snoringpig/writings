@@ -14,7 +14,7 @@ resources:
   - core.js
 ---
 
-This is an upright piano with its front panels and lid off: 88 keys, three pedals, 229 strings (as modelled here), and the action, the levers that link each key to its hammer and damper. It follows a Yamaha U1, 152 × 122 × 61 cm [[1](#ref-1)], with standard key widths [[14](#ref-14), [15](#ref-15)]. Strike a key and the graphs show its string moving and each mode's strength; the sound is computed live from a stiff-string model.
+This is an upright piano with its front panels and lid off: 88 keys, three pedals, 229 strings (as modelled here), and the action, the levers that link each key to its hammer and damper. It follows a Yamaha U1, 152 × 122 × 61 cm [[1](#ref-1)], with standard key widths [[14](#ref-14), [15](#ref-15)]. Strike a key and the graphs show its string moving and each mode's strength; the sound is computed live from a stiff-string model. Built with [Claude](#how-this-was-made), Anthropic's AI model.
 
 ::: {.column-page}
 ```{=html}
@@ -95,3 +95,7 @@ Left out: each note is one ideal stiff string with pinned ends, with no coupling
 18. []{#ref-18}O. L. Railsback, "Scale temperament as applied to piano tuning", *Journal of the Acoustical Society of America* 9 (1938), 274 ([DOI](https://doi.org/10.1121/1.1902056)).
 19. []{#ref-19}A. Askenfelt and E. Jansson, "From touch to string vibrations" ([timing in the action](https://www.speech.kth.se/music/5_lectures/askenflt/timing.html)), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990 (described for the grand action; an upright's jack and let-off work the same way).
 20. []{#ref-20}UBC Wiki, [Course:Phys341 2020/Railsback curve](https://wiki.ubc.ca/Course:Phys341_2020/Railsback_curve) (tuners stretch octaves because slightly inharmonic notes played together would beat).
+
+::: {#how-this-was-made .made}
+*How this was made.* I asked for this piano and said what it should show. Claude, an AI model made by Anthropic, built the 3D model, the sound and the text, in conversation with me. Before publishing, separate Claude agents reviewed it, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the post. Mistakes may remain.
+:::

@@ -17,7 +17,7 @@ aliases: [/posts/instruments-as-operators/note.html]
 :::
 
 ::: {.pageinfo}
-Start here: this post builds on nothing. Math: cosines and fractions; one proof, in a fold, uses integrals and divisibility. About 30 minutes, with every demo. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph).
+Start here: this post builds on nothing. Math: cosines and fractions; one proof, in a fold, uses integrals and divisibility. About 30 minutes, with every demo. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written with [Claude](#how-this-was-made), Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -581,3 +581,7 @@ The four routes: J. Wolfe, [Open vs closed pipes (flutes vs clarinets)](https://
 })();
 </script>
 ```
+
+::: {.made #how-this-was-made}
+*How this was made.* I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.
+:::
