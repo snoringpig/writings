@@ -1,0 +1,453 @@
+---
+title: "One string, end to end"
+subtitle: "The Shape of a Sound · 2"
+date: 2026-10-30T12:00:00
+categories: [math, music, the-shape-of-a-sound]
+description: "A plucked string, worked completely: the problem, where its equation comes from, why the sines are the right coordinates, why there is exactly one solution, and how its motion becomes the sound you hear."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+resources: [core.js, ins.css, string.js]
+aliases: [/posts/where-the-equations-come-from/index.html, /posts/instruments-as-operators/oscillator.html]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 1 · What you hear](../what-you-hear/index.qmd) · [3 · Other instruments, same recipe →](../other-instruments-same-recipe/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [post 1](../what-you-hear/index.qmd) for the words *partial*, *harmonic* and *pitch*. Mathematics: derivatives, integrals and integration by parts; matrices, eigenvectors and orthonormal bases, each recalled where it is used. The folds hold technical points you can skip. About 40 minutes with the mathematics; about 5 for the summary and the demos. Written in collaboration with Claude, Anthropic's AI model.
+:::
+
+This post answers one question for one instrument: what does a plucked string do, and why does the answer come out as a sum of sines?
+
+[The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph)
+
+::: {.newidea}
+**In one sentence.** A plucked string's motion is a sum of shapes $\sin(n\pi x/L)$, each swinging at its own frequency $nc/2L$; the equation and the fixed ends set the frequencies, the pluck sets the amounts, and this works because in the basis of sines, and only in a basis of [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction), the equation splits into independent springs.
+:::
+
+::: {.gist}
+**The problem.** The string's height obeys the wave equation, is held at both ends, and starts as a triangle, at rest.
+
+**Coupled coordinates.** Point by point, each part of the string is pulled by its neighbours, so the motions of different points are tied together.
+
+**The right coordinates.** Measured along the sines, and only along eigenfunctions of the string's operator, the equation splits into separate springs.
+
+**The solution.** Spring $n$ swings at $f_n = nc/2L$, the pluck sets how much each starts with, and there is exactly one solution: that sum.
+
+**The sound.** The frequencies are whole-number multiples of $f_1$, so the sound repeats and has the pitch $f_1$.
+
+**What it took.** Six conditions; each instrument in [post 3](../other-instruments-same-recipe/index.qmd) keeps some and breaks others.
+:::
+
+[Skip to the sound](#sound) if you only want the answer.
+
+## 1 · The problem {#problem}
+
+A string of length $L$ is tied at both ends, pulled aside at one point and let go. We want its height at every point and every later moment.
+
+Write $u(x, t)$ for the height of the string above its rest line at position $x$, from $x = 0$ at one end to $x = L$ at the bridge, and time $t \ge 0$. The whole problem is four lines:
+$$
+\begin{aligned}
+&u_{tt} = c^2 u_{xx} &&\text{for } 0 < x < L,\ t > 0,\\
+&u(0, t) = u(L, t) = 0 &&\text{for } t \ge 0,\\
+&u(x, 0) = u_0(x) &&\text{for } 0 \le x \le L,\\
+&u_t(x, 0) = v_0(x) = 0 &&\text{for } 0 \le x \le L.
+\end{aligned}
+$$
+Line by line:
+
+- the equation of motion, where subscripts are [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative): $u_{tt}$ is a point's acceleration, $u_{xx}$ the string's curvature there, and $c$ is a constant of the string (section 2);
+- the ends are tied, at every moment;
+- the starting shape $u_0$;
+- the starting velocity $v_0$, zero here because the string is let go at rest.
+
+The second line is a [boundary condition](../instruments-as-operators/glossary.qmd#boundary-condition): it holds at the edges of the string, at all times. The last two are initial conditions: they hold at every point, at one moment. Space has two edges here; time has one start.
+
+The starting shape of a pluck is a triangle with its apex at height $h$ above the point $x_0$:
+$$
+u_0(x) = \begin{cases} h\,x/x_0, & 0 \le x \le x_0,\\[2pt] h\,(L - x)/(L - x_0), & x_0 \le x \le L.\end{cases}
+$$
+It has a corner at $x_0$, where $u_{xx}$ does not exist. Section 4 says what "solution" means so that the pluck counts.
+
+## 2 · Where the equation comes from {#newton}
+
+Newton's law, applied to a short piece of string, gives the equation, as long as the slopes stay small.
+
+Let the string have tension $T$ and mass $\mu$ per unit length. The piece between $x$ and $x + dx$ has mass $\mu\,dx$, so Newton's law reads $\mu\,dx\,u_{tt} = F$, with $F$ the net upward force on the piece. A perfectly flexible string resists only stretching, so the only forces on the piece are the tension $T$ pulling along the string at its two ends.
+
+```{=html}
+<svg class="fig" viewBox="0 48 420 104" role="img" aria-label="A short piece of string between x and x plus dx on a hump; the tension pulls along the string at each end, and both pulls tilt downward, so the net force pulls the hump back down">
+  <path class="dash" d="M 60 110 Q 210 30 360 100"/>
+  <path class="acc" d="M 120 84 Q 210 54 300 78"/>
+  <circle cx="120" cy="84" r="4" class="fillacc"/><circle cx="300" cy="78" r="4" class="fillacc"/>
+  <path class="neg" d="M 120 84 L 66 102"/><path class="neg" d="M 75.9 103.2 L 66 102 L 73.3 95.1"/>
+  <path class="neg" d="M 300 78 L 356 93"/><path class="neg" d="M 348.3 86.6 L 356 93 L 346.2 94.8"/>
+  <text x="44" y="122">T</text><text x="364" y="110">T</text>
+  <text x="112" y="70">x</text><text x="282" y="64">x + dx</text>
+  <text x="104" y="142">upward part of each pull ≈ T × slope</text>
+</svg>
+```
+
+A pull $T$ at a small angle $\theta$ to the horizontal has upward part $T\sin\theta \approx T\tan\theta$, the tension times the slope $u_x$. At the right end of the piece that is $T\,u_x(x + dx)$; at the left end the pull points the other way, $-T\,u_x(x)$. The net upward force is
+$$
+F = T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx ,
+$$
+and dividing Newton's law by $\mu\,dx$ gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation)
+$$
+u_{tt} = c^2\,u_{xx}, \qquad c = \sqrt{T/\mu} .
+$$
+The assumptions are a perfectly flexible string with small slopes (which also keep the tension at $T$), and no air or friction (section 12 adds friction). At the two ends the string cannot move: $u = 0$ there.
+
+## 3 · Two beads: the string seen at two points {#two-beads}
+
+Before the string, a version with only two moving points, where everything is a $2 \times 2$ matrix and can be watched.
+
+Replace the string by a weightless string of the same length and tension, carrying two beads at $x = L/3$ and $x = 2L/3$. Each bead carries its share of the string's mass, $m = \mu h$, where $h = L/3$ is the spacing. Let $u_1$ and $u_2$ be the beads' heights. The same small-slope rule as in section 2 gives each bead an upward pull $\tfrac{T}{h}\times$(neighbour's height $-$ its own) from each side, with the tied ends as neighbours at height 0:
+$$
+m\,u_1'' = \frac{T}{h}\,(-2u_1 + u_2), \qquad m\,u_2'' = \frac{T}{h}\,(u_1 - 2u_2) .
+$$
+In matrix form,
+$$
+\begin{pmatrix} u_1 \\ u_2 \end{pmatrix}'' = -K\begin{pmatrix} u_1 \\ u_2 \end{pmatrix}, \qquad K = \frac{T}{mh}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}, \qquad \frac{T}{mh} = \frac{c^2}{h^2} = \frac{9c^2}{L^2} .
+$$
+Each bead's equation involves the other bead's height: in these coordinates the equations are *coupled*.
+
+**A motion that keeps its shape.** Look for motions of the form $(u_1, u_2)(t) = q(t)\,v$, a fixed column $v \neq 0$ scaled by a number $q(t)$ that changes in time. Substituting gives $q''\,v = -q\,Kv$. At a moment when $q \neq 0$ this says $Kv = \lambda v$ with $\lambda = -q''/q$: $v$ must be an [eigenvector](../instruments-as-operators/glossary.qmd#eigenvector) of $K$, and then $q'' = -\lambda q$ at all times, a spring. The eigenvectors are
+$$
+K\begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{T}{mh}\begin{pmatrix} 1 \\ 1 \end{pmatrix}, \qquad K\begin{pmatrix} 1 \\ -1 \end{pmatrix} = \frac{3T}{mh}\begin{pmatrix} 1 \\ -1 \end{pmatrix},
+$$
+the beads moving together, and moving opposite. These are exactly the sines $\sin(\pi x/L)$ and $\sin(2\pi x/L)$ sampled at the beads: $\sin(\pi/3) = \sin(2\pi/3)$ and $\sin(2\pi/3) = -\sin(4\pi/3)$.
+
+**Coordinates along the eigenvectors.** Measure the motion along the two unit eigenvectors instead: $q_1 = (u_1 + u_2)/\sqrt2$ and $q_2 = (u_1 - u_2)/\sqrt2$. Adding and subtracting the bead equations gives
+$$
+q_1'' = -\frac{T}{mh}\,q_1, \qquad q_2'' = -\frac{3T}{mh}\,q_2 :
+$$
+two independent springs. Every motion of the beads is a $q_1$-swing plus a $q_2$-swing, at frequencies in the ratio $1 : \sqrt3 \approx 1 : 1.73$.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <div class="r2wrap" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0.75rem;align-items:center">
+    <canvas id="bdCanvas" style="height:170px" aria-label="Two beads on a string tied at both ends, moving"></canvas>
+    <canvas id="bdPlane" style="height:170px" aria-label="The plane of the two heights u1 and u2, with the tilted q1 and q2 directions and the path of the motion"></canvas>
+  </div>
+  <div class="controls" role="group" aria-label="Start the two beads">
+    <button type="button" id="bdS" aria-pressed="false">Together: q₁ only</button>
+    <button type="button" id="bdD" aria-pressed="false">Opposite: q₂ only</button>
+    <button type="button" id="bdM" aria-pressed="true">A mix</button>
+    <button type="button" id="bdPlay" class="primary">Hear this motion</button>
+  </div>
+  <p class="cap">Slowed down. On the right, the plane of the two heights (u₁ across, u₂ up). A mix traces a tangle, because u₁ and u₂ each carry both frequencies; started along q₁ or along q₂, the motion runs straight along that tilted line, at 1× or 1.73× (√3). The model has no friction; the sound, with the q₁ swing at 196 Hz, fades only so that it stops.</p>
+</div>
+</div>
+```
+
+The shapes $(1, 1)$ and $(1, -1)$ are exactly the string's first two sines; the frequency ratio $\sqrt3$ is a coarse version of the string's $2$, and with more beads it improves (fold). Everything that follows is this calculation again, for the string: an operator in place of $K$, sines in place of $(1, 1)$ and $(1, -1)$, and infinitely many coordinates.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Many beads, and the string as their limit <span class="needs">uses matrices and limits</span></summary>
+
+With $N$ equally spaced beads, $h = L/(N + 1)$, the same rule gives $u'' = -Ku$ with $K = \frac{T}{mh}\,\mathrm{tridiag}(-1, 2, -1)$, the tied ends built into the first and last rows. Its eigenvectors are again the sampled sines, $(\sin(n\pi\,jh/L))_{j = 1}^{N}$ for $n = 1, \dots, N$, with eigenvalues $\frac{T}{mh}\,4\sin^2\!\big(\frac{n\pi}{2(N+1)}\big)$. The frequency ratios $\sin\big(\frac{n\pi}{2(N+1)}\big)\big/\sin\big(\frac{\pi}{2(N+1)}\big)$ tend to $1 : 2 : 3 : \dots$ whatever the beads weigh; the frequencies themselves converge to the string's $nc/2L$ only if each bead carries its share $m = \mu h$ of the string's mass, since then $\frac{T}{mh}\,4\sin^2\big(\frac{n\pi h}{2L}\big) = \frac{c^2}{h^2}\,4\sin^2\big(\frac{n\pi h}{2L}\big) \to \big(\frac{n\pi c}{L}\big)^2$. For two beads, $N = 2$: the ratio is $\sin(\pi/3)/\sin(\pi/6) = \sqrt3$. Row $j$ of the bead equation, $\ddot u_j = c^2\,(u_{j+1} - 2u_j + u_{j-1})/h^2$, tends to $u_{tt} = c^2u_{xx}$ for a smooth shape sampled at the beads (Taylor's theorem: the fraction is $u_{xx} + O(h^2)$).
+
+</details>
+:::
+
+## 4 · Shapes, states and the operator {#shapes-and-states}
+
+To repeat section 3 for the string we need its versions of "a column of heights", "the matrix $K$" and "an eigenvector". A shape is now a whole curve; the operator acts on shapes; and a state is a shape together with its velocity.
+
+**Definitions.**
+
+- **Shape.** A function $w$ on $[0, L]$, the string's height at each point at one moment. The shapes with $\int_0^L w^2\,dx$ finite form the space [$L^2(0, L)$](../instruments-as-operators/glossary.qmd#l2); they add and scale like columns of numbers.
+- **Inner product.** $\langle u, w\rangle = \int_0^L u(x)\,w(x)\,dx$, the continuous version of the dot product $\sum_i u_iw_i$, with length $\|w\| = \sqrt{\langle w, w\rangle}$. Shapes $X_1, X_2, \dots$ are [orthonormal](../instruments-as-operators/glossary.qmd#orthonormal) if $\langle X_m, X_n\rangle$ is 1 for $m = n$ and 0 otherwise.
+- **Orthonormal basis.** An orthonormal list $X_1, X_2, \dots$ such that every shape is the sum of its coordinates times the basis shapes, $w = \sum_n \langle w, X_n\rangle X_n$. The sum converges in the mean-square sense: $\|w - \sum_{n \le N}\langle w, X_n\rangle X_n\| \to 0$ as $N \to \infty$. The partial sums need not converge at every point.
+- **The operator.** $A = -c^2\,d^2/dx^2$, acting on the set $D(A)$ of shapes with a continuous second derivative on $[0, L]$ and $w(0) = w(L) = 0$. In words, $A$ takes a shape held still at both ends and returns minus $c^2$ times its curvature. The ends are part of $A$: the same formula on a different set of shapes is a different operator (section 13 has an example). The equation of section 1 reads $u_{tt} = -Au$.
+- **State.** The shape and the velocity at one moment, $(u(\cdot, t), u_t(\cdot, t))$. The equation is second order in time, so the state, not the shape alone, decides what happens next. For a mass on a spring the shape is one number $x$ and the state is $(x, x')$.
+
+**What a solution is.** The plucked triangle has a corner, where $u_{xx}$ does not exist, and the corner moves. So we ask the equation to hold only as seen through smooth test shapes $\varphi$. This needs no second derivative of $u$, and the pluck qualifies.
+
+*Definition (solution, weak sense).* A solution is a shape $u(t) \in L^2(0, L)$ for each $t \ge 0$, changing continuously with $t$ in the mean-square sense, such that for every $\varphi \in D(A)$ the number $\langle u(t), \varphi\rangle$ is twice differentiable in $t$ and
+$$
+\frac{d^2}{dt^2}\langle u(t), \varphi\rangle = -\langle u(t), A\varphi\rangle, \qquad \langle u(0), \varphi\rangle = \langle u_0, \varphi\rangle, \qquad \frac{d}{dt}\langle u(t), \varphi\rangle\Big|_{t = 0} = \langle v_0, \varphi\rangle .
+$$
+A smooth solution of section 1 satisfies this: multiply $u_{tt} = c^2u_{xx}$ by $\varphi$, integrate, and move both $x$-derivatives onto $\varphi$ by integrating by parts twice; the boundary terms vanish because $u$ and $\varphi$ vanish at the ends. Conversely, for a smooth $u$ the identity forces $u = 0$ at the ends, because the leftover boundary term is $c^2\,[u\,\varphi']_0^L$ and $\varphi'(0)$, $\varphi'(L)$ can be anything.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The domain, and Sobolev spaces <span class="needs">uses functional analysis</span></summary>
+
+On $D(A)$ the operator is symmetric (section 5) but not self-adjoint; its closure is the Dirichlet operator $-c^2\,d^2/dx^2$ on $H^2(0, L) \cap H^1_0(0, L)$, which is [self-adjoint](../instruments-as-operators/glossary.qmd#self-adjoint), with the same eigenfunctions. Testing against either domain gives the same solutions (approximate a test shape of the larger domain by shapes in $D(A)$, in the $H^2$ sense); the classical $D(A)$ keeps the calculus elementary. The definition above is a version of the weak solutions of L. C. Evans, *Partial Differential Equations*, section 7.2, where $u(t) \in H^1_0$ and the identity is tested against $H^1_0$.
+
+</details>
+:::
+
+## 5 · Proposition 1: symmetric and positive {#symmetric}
+
+The string pulls on itself as symmetrically as the beads did, and holding it in any shape other than flat costs energy, because the ends are tied.
+
+**Proposition 1.** For $u, w \in D(A)$,
+$$
+\langle Au, w\rangle = c^2\int_0^L u'w'\,dx = \langle u, Aw\rangle, \qquad \langle Au, u\rangle = c^2\int_0^L (u')^2\,dx > 0 \ \text{ for } u \neq 0 .
+$$
+
+*Proof.* Integration by parts gives $\langle Au, w\rangle = -c^2\int_0^L u''w\,dx = -c^2\,[u'w]_0^L + c^2\int_0^L u'w'\,dx$, and the boundary term vanishes because $w(0) = w(L) = 0$. The result is symmetric in $u$ and $w$, so it also equals $\langle u, Aw\rangle$. With $w = u$ it is $c^2\int (u')^2 \ge 0$, and it is $0$ only if $u' = 0$ everywhere ($u'$ is continuous), that is, if $u$ is constant; then $u(0) = 0$ makes $u = 0$. $\square$
+
+The tied ends do the work twice: they kill the boundary term, which gives the symmetry, and they rule out the constant shape, which gives positivity. In energy terms, $\tfrac{\mu}{2}\langle Au, u\rangle = \tfrac{T}{2}\int (u')^2\,dx$ is the energy stored in the shape $u$. The beads' $K$ has the same two properties: $K$ is a [symmetric matrix](../instruments-as-operators/glossary.qmd#symmetric-matrix), and $v^{\mathsf T}Kv > 0$ for $v \neq 0$.
+
+## 6 · The eigenfunctions, derived {#eigenfunctions}
+
+A shape that keeps its shape while it moves must satisfy $AX = \lambda X$, as in section 3. We solve that equation.
+
+**Definition.** An *eigenfunction* of $A$ is a shape $X \neq 0$ in $D(A)$ with $AX = \lambda X$ for some number $\lambda$, its [eigenvalue](../instruments-as-operators/glossary.qmd#eigenvalue). The list of eigenvalues is the [spectrum](../instruments-as-operators/glossary.qmd#spectrum) of $A$.
+
+**Solving it.** The equation is $-c^2X'' = \lambda X$ with $X(0) = X(L) = 0$.
+
+1. $\lambda > 0$, by Proposition 1: $\lambda\|X\|^2 = \langle AX, X\rangle > 0$.
+2. Write $\lambda = c^2k^2$ with $k > 0$. Then $X'' = -k^2X$, whose solutions are exactly $X = a\cos kx + b\sin kx$ (fold).
+3. $X(0) = 0$ gives $a = 0$. Then $X(L) = b\sin kL = 0$ with $b \neq 0$ forces $kL = n\pi$ for a whole number $n \ge 1$.
+
+::: {.result}
+**The spectrum of the string.**
+$$
+\lambda_n = \Big(\frac{n\pi c}{L}\Big)^2, \qquad X_n(x) = \sqrt{\frac{2}{L}}\,\sin\frac{n\pi x}{L}, \qquad n = 1, 2, 3, \dots
+$$
+These are all the eigenvalues, and each has one eigenfunction up to a factor; the factor $\sqrt{2/L}$ makes $\|X_n\| = 1$. In words: mode $n$ is the shape with $n$ arches, and it swings at $f_n = \sqrt{\lambda_n}/2\pi = nc/2L = n f_1$.
+:::
+
+The $X_n$ are orthogonal for the same reason as eigenvectors of a symmetric matrix: for $m \neq n$, $\lambda_m\langle X_m, X_n\rangle = \langle AX_m, X_n\rangle = \langle X_m, AX_n\rangle = \lambda_n\langle X_m, X_n\rangle$ by Proposition 1, and $\lambda_m \neq \lambda_n$, so $\langle X_m, X_n\rangle = 0$.
+
+Two different spaces appear here; keep them apart. For each $k$, the equation $X'' = -k^2X$ has a two-dimensional space of solutions; the tied ends cut it down to one dimension, and only for the special values $k = n\pi/L$. The space of the string's *motions* is another space, counted in section 10.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>Why $a\cos kx + b\sin kx$ are all the solutions of $X'' = -k^2X$ <span class="needs">uses derivatives</span></summary>
+
+Both functions solve it. Given any solution $X$, let $W = X - X(0)\cos kx - \frac{X'(0)}{k}\sin kx$. Then $W'' = -k^2W$ with $W(0) = W'(0) = 0$. The quantity $E = (W')^2 + k^2W^2$ has $E' = 2W'(W'' + k^2W) = 0$, so $E$ is constant, and $E(0) = 0$. So $W = 0$. Section 10 uses the same argument for the springs.
+
+</details>
+:::
+
+## 7 · Proposition 2: decoupling happens exactly in an eigenbasis {#decoupling}
+
+Written point by point, the string's equation ties each point to its neighbours. Which coordinates split it into separate springs? Exactly the coordinates along eigenfunctions. Nothing is assumed about the form of the solution; the separate springs are a consequence of choosing these coordinates.
+
+**Proposition 2.** Let $\psi_1, \psi_2, \dots$ be an orthonormal basis of $L^2(0, L)$ lying in $D(A)$, and let $q_j(t) = \langle u(t), \psi_j\rangle$ be the coordinates of a solution $u$. Then
+$$
+q_i'' = -\sum_j M_{ij}\,q_j, \qquad M_{ij} = \langle A\psi_j, \psi_i\rangle ,
+$$
+and $M$ is symmetric. The coordinates decouple, each $q_i''$ depending on $q_i$ alone, exactly when $M$ is diagonal, and $M$ is diagonal exactly when every $\psi_j$ is an eigenfunction of $A$.
+
+*Proof.* By the definition of solution with $\varphi = \psi_i$, $q_i'' = -\langle u, A\psi_i\rangle$. Expanding $u = \sum_j q_j\psi_j$ in the basis, and taking the inner product with $A\psi_i$ term by term (allowed, since the partial sums converge in mean square and $|\langle w, A\psi_i\rangle| \le \|w\|\,\|A\psi_i\|$), gives $q_i'' = -\sum_j q_j\langle\psi_j, A\psi_i\rangle$, and $\langle\psi_j, A\psi_i\rangle = \langle A\psi_j, \psi_i\rangle = M_{ij}$ by Proposition 1, which also gives $M_{ij} = M_{ji}$. If every $\psi_j$ is an eigenfunction, $A\psi_j = \mu_j\psi_j$, then $M_{ij} = \mu_j\langle\psi_j, \psi_i\rangle$ is diagonal. Conversely, expanding $A\psi_j$ in the basis gives $A\psi_j = \sum_i M_{ij}\psi_i$, which is $M_{jj}\psi_j$ when $M$ is diagonal. $\square$
+
+So *finding coordinates that decouple is finding the eigenfunctions*, the spectrum. The beads of section 3 are the $2 \times 2$ analogue: in the heights $(u_1, u_2)$ the matrix $K$ is not diagonal; along $(1, 1)$ and $(1, -1)$ it becomes $\mathrm{diag}(T/mh,\, 3T/mh)$. An eigenbasis is a choice of coordinates, and Proposition 2 shows it is the only choice that decouples; the next section shows the sines are an admissible choice, a basis.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>What $M$ looks like in a basis that is not an eigenbasis <span class="needs">uses Gram–Schmidt</span></summary>
+
+Take $L = 1$ and orthonormalize the polynomials $x(1 - x)\,x^k$, $k = 0, 1, 2, \dots$ (they vanish at both ends, so they lie in $D(A)$). In units of $c^2$, the top corner of $M$ is (computed numerically)
+$$
+\begin{pmatrix} 10 & 0 & 3.46 & 0 \\ 0 & 42 & 0 & 19.9 \\ 3.46 & 0 & 102 & 0 \\ 0 & 19.9 & 0 & 198 \end{pmatrix} .
+$$
+Entries linking two shapes of the same symmetry about the middle are nonzero, however far from the diagonal; the others vanish because $A$ commutes with the reflection $x \mapsto 1 - x$. The first entry, $10$, sits just above $\lambda_1 = \pi^2 \approx 9.87$: it is the [Rayleigh quotient](../instruments-as-operators/glossary.qmd#rayleigh-quotient) $\langle A\psi_1, \psi_1\rangle$ of a parabola, and no shape in $D(A)$ has a smaller one than the sine. The finite-element method's "hat" functions are not in $D(A)$ (they have corners); in the weak form they couple only neighbours, through a tridiagonal stiffness matrix and a tridiagonal mass matrix.
+
+</details>
+:::
+
+## 8 · Theorem: the sines are a basis {#completeness}
+
+Every shape is a sum of sines. This is the one theorem quoted here rather than proved.
+
+**Theorem (completeness).** The $X_n$ form an orthonormal basis of $L^2(0, L)$: every shape $w$ with $\int_0^L w^2 < \infty$ equals $\sum_n \langle w, X_n\rangle X_n$ in mean square, and $\|w\|^2 = \sum_n \langle w, X_n\rangle^2$.
+
+This is the completeness of the Fourier sine series: extend $w$ to an odd function of period $2L$, whose Fourier series has only sine terms. It is proved, for example, in E. M. Stein and R. Shakarchi, *Fourier Analysis*, chapter 3. In two dimensions, two orthonormal eigenvectors are automatically a basis; in infinitely many, an orthonormal list can miss directions ($X_2, X_3, \dots$ misses $X_1$), so completeness needs a proof. It is used wherever a shape is rebuilt from its coordinates: in matching the starting shape, in uniqueness, and in applying Proposition 2 to the sines.
+
+::: {.derive}
+<details><summary><span class="label">Proof sketch</span>Why the sines are complete <span class="needs">uses uniform approximation</span></summary>
+
+Continuous functions are dense in $L^2(0, L)$, and the continuous functions vanishing at both ends are dense too. Extend such a function oddly to $[-L, L]$ and periodically: the result is continuous and $2L$-periodic, so by Fejér's theorem its Fejér means, which are combinations of $\sin(n\pi x/L)$ and $\cos(n\pi x/L)$, converge to it uniformly; the odd extension makes the cosine terms vanish. Uniform convergence implies mean-square convergence on $[0, L]$, so finite combinations of the $X_n$ are dense, which for an orthonormal list means it is a basis.
+
+</details>
+:::
+
+## 9 · Proposition 3: each coordinate is a spring {#springs}
+
+Seen through the $n$-th sine, the string is a mass on a spring.
+
+**Proposition 3.** For a solution $u$, the coordinate $q_n(t) = \langle u(t), X_n\rangle$ satisfies
+$$
+q_n'' = -\lambda_n\,q_n, \qquad q_n(0) = \langle u_0, X_n\rangle, \qquad q_n'(0) = \langle v_0, X_n\rangle .
+$$
+
+*Proof.* Take $\varphi = X_n$ in the definition of solution: $q_n'' = -\langle u, AX_n\rangle = -\lambda_n\langle u, X_n\rangle = -\lambda_n q_n$, and the two starting values are the definition's last two conditions. $\square$
+
+This is Proposition 2 with $\psi_j = X_j$: in the sines, $M = \mathrm{diag}(\lambda_1, \lambda_2, \dots)$.
+
+## 10 · Corollary: exactly one solution, and it is the series {#the-solution}
+
+Each spring has exactly one motion for each start, and the sines rebuild the shape from its coordinates, so the string has exactly one motion for each start, and we can write it down.
+
+**The spring.** $q'' = -\lambda q$ with $\lambda = \omega^2 > 0$, $q(0) = a$ and $q'(0) = \omega b$ has exactly one solution, $q(t) = a\cos\omega t + b\sin\omega t$. It is a solution, by two derivatives. If $r$ is the difference of two solutions, then $r(0) = r'(0) = 0$ and $E = (r')^2 + \lambda r^2$ has $E' = 2r'(r'' + \lambda r) = 0$, so $E = 0$ and $r = 0$. This is where the cosine and sine come from: they are the spring's two motions, and the start picks the combination.
+
+**Corollary.** Let $\omega_n = \sqrt{\lambda_n} = n\pi c/L$, $a_n = \langle u_0, X_n\rangle$ and $b_n = \langle v_0, X_n\rangle/\omega_n$.
+
+(i) *Uniqueness.* Every solution has $q_n(t) = a_n\cos\omega_nt + b_n\sin\omega_nt$, by Proposition 3 and the spring. Two solutions with the same start therefore have the same coordinates for every $n$; their difference has all coordinates zero, so it is zero, by the Theorem.
+
+(ii) *Existence.* The series
+$$
+u(t) = \sum_{n = 1}^{\infty}\big(a_n\cos\omega_nt + b_n\sin\omega_nt\big)\,X_n
+$$
+is a solution, for any start with finite energy, $\int(u_0')^2$ and $\int v_0^2$ finite. In plain words, the coefficients shrink fast enough that adding up all the modes gives a genuine solution; the estimate is in the fold.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>The series is a solution <span class="needs">uses Cauchy–Schwarz</span></summary>
+
+*Size of the coefficients.* Integrating by parts, $\langle u_0', \sqrt{2/L}\cos(n\pi x/L)\rangle = (n\pi/L)\,a_n$ (the boundary terms vanish since $u_0(0) = u_0(L) = 0$), and these cosines are orthonormal, so $\sum_n (n\pi/L)^2a_n^2 \le \int(u_0')^2$ (Bessel's inequality). By Cauchy–Schwarz, $\sum|a_n| \le \big(\sum n^2a_n^2\big)^{1/2}\big(\sum n^{-2}\big)^{1/2} < \infty$, and $\sum|b_n| \le \|v_0\|\,\big(\sum\omega_n^{-2}\big)^{1/2} < \infty$.
+
+*The identity.* Since $|X_n| \le \sqrt{2/L}$, the series converges uniformly in $x$ and $t$, so $u(t)$ is continuous in $t$, in mean square too. For $\varphi \in D(A)$, $\langle u(t), \varphi\rangle = \sum_n q_n(t)\langle X_n, \varphi\rangle$ with $q_n = a_n\cos\omega_nt + b_n\sin\omega_nt$. Since $\langle X_n, A\varphi\rangle = \langle AX_n, \varphi\rangle = \lambda_n\langle X_n, \varphi\rangle$, differentiating twice term by term gives $\sum_n q_n''\langle X_n, \varphi\rangle = -\sum_n q_n\langle X_n, A\varphi\rangle$. This series is dominated by $\|A\varphi\|\sum(|a_n| + |b_n|)$ uniformly in $t$, and the once-differentiated series by $\|A\varphi\|\sum(|a_n| + |b_n|)/\omega_1$, so term-by-term differentiation is justified, and the result is $-\langle u(t), A\varphi\rangle$. At $t = 0$: $\langle u(0), \varphi\rangle = \sum a_n\langle X_n, \varphi\rangle = \langle u_0, \varphi\rangle$, and the velocity is $\sum\omega_nb_n\langle X_n, \varphi\rangle = \sum\langle v_0, X_n\rangle\langle X_n, \varphi\rangle = \langle v_0, \varphi\rangle$, both by the Theorem.
+
+</details>
+:::
+
+**How many motions?** One for each start $(u_0, v_0)$, or in coordinates, one pair $(q_n(0), q_n'(0)) = (a_n, \omega_nb_n)$ for each $n$. Each eigenvalue contributes a two-dimensional block of motions, spanned by $X_n\cos\omega_nt$ and $X_n\sin\omega_nt$:
+
+| | A mass on a spring | Two beads | The string |
+|:--|:--|:--|:--|
+| shapes | numbers $x$ | columns $(u_1, u_2)$ | $L^2(0, L)$ |
+| operator | $s/m$ (stiffness $s$) | $K$ | $A$ on $D(A)$ |
+| eigenvalues | one, $\omega_0^2 = s/m$ | two | $\lambda_1, \lambda_2, \dots$ |
+| motions | 2-dimensional | 4-dimensional | 2 dimensions per eigenvalue |
+
+**The pluck.** Here $v_0 = 0$, so every $b_n = 0$, and computing $a_n$ for the triangle (fold) gives
+$$
+u(x, t) = \sum_{n = 1}^{\infty} B_n\cos\frac{n\pi ct}{L}\,\sin\frac{n\pi x}{L}, \qquad B_n = \frac{2hL^2\,\sin(n\pi x_0/L)}{\pi^2n^2\,x_0(L - x_0)}
+$$
+(checked numerically). $B_n = 0$ when $nx_0/L$ is a whole number: a mode with a still point at the pluck is not started. Plucked a fifth of the way along, the string has no 5th, 10th, … harmonic. The demo draws the sum of the first $N$ modes beside the exact solution.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="msCanvas" style="height:190px" aria-label="A plucked string moving: the sum of its first N modes, and the exact solution dashed"></canvas>
+  <div class="slider"><label for="msN">Modes added, N</label><input type="range" id="msN" min="1" max="40" step="1" value="5"><output id="msNo">5</output></div>
+  <div class="slider"><label for="msX">Pluck point x₀</label><input type="range" id="msX" min="0.05" max="0.5" step="0.01" value="0.2"><output id="msXo">0.20 L</output></div>
+  <div class="controls"><button type="button" id="msRestart">Release again</button><button type="button" id="msPlay" class="primary">Hear the pluck</button></div>
+  <svg class="spec" id="msSpec" viewBox="0 0 320 90" style="max-width:520px" aria-label="The sizes of the modes in the starting shape"></svg>
+  <div class="readout" id="msRead"></div>
+  <p class="cap">Slowed down: one period of the lowest mode takes 4 s here (on a violin's G string, 1/196 s). Dashed: the exact solution, d'Alembert's form (fold below); solid: the sum of the first N modes, which approaches it as N grows. The two corners of the dashed shape run along the string and flip over at the ends. Stems: the sizes |Bₙ| of the modes in the starting shape. The model has no friction; the sound, at 196 Hz, is made from the force on the bridge (section 11), with illustrative fading.</p>
+</div>
+</div>
+```
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The coefficients of the pluck, and d'Alembert's form <span class="needs">uses integration by parts</span></summary>
+
+*The coefficients.* $B_n = \sqrt{2/L}\,a_n = \frac{2}{L}\int_0^L u_0(x)\sin\frac{n\pi x}{L}\,dx$. Integrating by parts twice, with $u_0'' = 0$ except at $x_0$, where the slope jumps by $-h/x_0 - h/(L - x_0) = -hL/(x_0(L - x_0))$, gives $\frac{2}{L}\cdot\frac{L^2}{n^2\pi^2}\cdot\frac{hL}{x_0(L - x_0)}\sin\frac{n\pi x_0}{L}$, the formula above.
+
+*d'Alembert's form.* Let $F$ be the odd, $2L$-periodic extension of $u_0$. Then $u(x, t) = \tfrac12\big(F(x - ct) + F(x + ct)\big)$, two copies of the starting shape running in opposite directions at speed $c$, and its sine series is the series above, since $\sin\frac{n\pi(x \mp ct)}{L}$ average to $\sin\frac{n\pi x}{L}\cos\frac{n\pi ct}{L}$. This is J. d'Alembert's solution of 1747. For the pluck it is a piecewise straight shape whose corners travel; at a corner $u_{xx}$ does not exist, which is why section 4 defines a solution without it.
+
+</details>
+:::
+
+## 11 · From motion to sound {#sound}
+
+We hear the string through the bridge, which it pushes with the same frequencies $f_n$. They are whole-number multiples of $f_1$, so the sound repeats and we hear the pitch $f_1$.
+
+At the bridge, $x = L$, the string pulls with the upward part of its tension, $-T\,u_x(L, t)$ (the minus sign because the string lies to the left of the bridge). From the series,
+$$
+-T\,u_x(L, t) = T\sum_{n = 1}^{\infty}(-1)^{n+1}\,\frac{n\pi}{L}\,B_n\cos\omega_nt ,
+$$
+with sizes proportional to $nB_n \propto \sin(n\pi x_0/L)/n$, at the frequencies $f_n = nc/2L$. For the ideal pluck this force is a rectangular wave: constant, then jumping each time a corner reaches the bridge. Its series converges in mean square, not at every moment.
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 150" role="img" aria-label="The force of an ideally plucked string on the bridge over two periods, plucked a fifth of the way along: a rectangular wave, a short strong pull one way once per period and a weaker pull the other way the rest of the time. A thin line shows the sum of its first 12 partials, which overshoots next to each jump.">
+  <path class="dash" d="M 30 54.2 L 410 54.2"/>
+  <path d="M 30.0 41.6 L 31.2 41.3 L 32.4 40.7 L 33.6 39.8 L 34.8 38.9 L 35.9 38.1 L 37.1 37.7 L 38.3 37.7 L 39.5 38.2 L 40.7 39.0 L 41.9 40.0 L 43.1 40.9 L 44.2 41.5 L 45.4 41.6 L 46.6 41.3 L 47.8 40.5 L 49.0 39.6 L 50.2 38.6 L 51.4 37.8 L 52.6 37.5 L 53.8 37.6 L 54.9 38.3 L 56.1 39.2 L 57.3 40.3 L 58.5 41.2 L 59.7 41.8 L 60.9 41.9 L 62.1 41.4 L 63.2 40.4 L 64.4 39.3 L 65.6 38.2 L 66.8 37.4 L 68.0 37.1 L 69.2 37.4 L 70.4 38.2 L 71.6 39.5 L 72.8 40.8 L 73.9 41.9 L 75.1 42.5 L 76.3 42.4 L 77.5 41.6 L 78.7 40.3 L 79.9 38.8 L 81.1 37.3 L 82.2 36.3 L 83.4 36.1 L 84.6 36.7 L 85.8 38.1 L 87.0 40.0 L 88.2 42.0 L 89.4 43.6 L 90.6 44.4 L 91.8 44.0 L 92.9 42.4 L 94.1 39.9 L 95.3 36.8 L 96.5 34.0 L 97.7 32.1 L 98.9 31.9 L 100.1 34.0 L 101.2 38.7 L 102.4 45.9 L 103.6 55.3 L 104.8 66.1 L 106.0 77.5 L 107.2 88.6 L 108.4 98.4 L 109.6 106.3 L 110.8 112.0 L 111.9 115.4 L 113.1 116.9 L 114.3 116.8 L 115.5 115.7 L 116.7 114.3 L 117.9 112.9 L 119.1 111.9 L 120.2 111.4 L 121.4 111.3 L 122.6 111.4 L 123.8 111.6 L 125.0 111.7 L 126.2 111.6 L 127.4 111.4 L 128.6 111.3 L 129.8 111.4 L 130.9 111.9 L 132.1 112.9 L 133.3 114.3 L 134.5 115.7 L 135.7 116.8 L 136.9 116.9 L 138.1 115.4 L 139.2 112.0 L 140.4 106.3 L 141.6 98.4 L 142.8 88.6 L 144.0 77.5 L 145.2 66.1 L 146.4 55.3 L 147.6 45.9 L 148.8 38.7 L 149.9 34.0 L 151.1 31.9 L 152.3 32.1 L 153.5 34.0 L 154.7 36.8 L 155.9 39.9 L 157.1 42.4 L 158.2 44.0 L 159.4 44.4 L 160.6 43.6 L 161.8 42.0 L 163.0 40.0 L 164.2 38.1 L 165.4 36.7 L 166.6 36.1 L 167.8 36.3 L 168.9 37.3 L 170.1 38.8 L 171.3 40.3 L 172.5 41.6 L 173.7 42.4 L 174.9 42.5 L 176.1 41.9 L 177.2 40.8 L 178.4 39.5 L 179.6 38.2 L 180.8 37.4 L 182.0 37.1 L 183.2 37.4 L 184.4 38.2 L 185.6 39.3 L 186.8 40.4 L 187.9 41.4 L 189.1 41.9 L 190.3 41.8 L 191.5 41.2 L 192.7 40.3 L 193.9 39.2 L 195.1 38.3 L 196.2 37.6 L 197.4 37.5 L 198.6 37.8 L 199.8 38.6 L 201.0 39.6 L 202.2 40.5 L 203.4 41.3 L 204.6 41.6 L 205.8 41.5 L 206.9 40.9 L 208.1 40.0 L 209.3 39.0 L 210.5 38.2 L 211.7 37.7 L 212.9 37.7 L 214.1 38.1 L 215.3 38.9 L 216.4 39.8 L 217.6 40.7 L 218.8 41.3 L 220.0 41.6 L 221.2 41.3 L 222.4 40.7 L 223.6 39.8 L 224.8 38.9 L 225.9 38.1 L 227.1 37.7 L 228.3 37.7 L 229.5 38.2 L 230.7 39.0 L 231.9 40.0 L 233.1 40.9 L 234.2 41.5 L 235.4 41.6 L 236.6 41.3 L 237.8 40.5 L 239.0 39.6 L 240.2 38.6 L 241.4 37.8 L 242.6 37.5 L 243.8 37.6 L 244.9 38.3 L 246.1 39.2 L 247.3 40.3 L 248.5 41.2 L 249.7 41.8 L 250.9 41.9 L 252.1 41.4 L 253.2 40.4 L 254.4 39.3 L 255.6 38.2 L 256.8 37.4 L 258.0 37.1 L 259.2 37.4 L 260.4 38.2 L 261.6 39.5 L 262.8 40.8 L 263.9 41.9 L 265.1 42.5 L 266.3 42.4 L 267.5 41.6 L 268.7 40.3 L 269.9 38.8 L 271.1 37.3 L 272.2 36.3 L 273.4 36.1 L 274.6 36.7 L 275.8 38.1 L 277.0 40.0 L 278.2 42.0 L 279.4 43.6 L 280.6 44.4 L 281.8 44.0 L 282.9 42.4 L 284.1 39.9 L 285.3 36.8 L 286.5 34.0 L 287.7 32.1 L 288.9 31.9 L 290.1 34.0 L 291.2 38.7 L 292.4 45.9 L 293.6 55.3 L 294.8 66.1 L 296.0 77.5 L 297.2 88.6 L 298.4 98.4 L 299.6 106.3 L 300.8 112.0 L 301.9 115.4 L 303.1 116.9 L 304.3 116.8 L 305.5 115.7 L 306.7 114.3 L 307.9 112.9 L 309.1 111.9 L 310.2 111.4 L 311.4 111.3 L 312.6 111.4 L 313.8 111.6 L 315.0 111.7 L 316.2 111.6 L 317.4 111.4 L 318.6 111.3 L 319.8 111.4 L 320.9 111.9 L 322.1 112.9 L 323.3 114.3 L 324.5 115.7 L 325.7 116.8 L 326.9 116.9 L 328.1 115.4 L 329.3 112.0 L 330.4 106.3 L 331.6 98.4 L 332.8 88.6 L 334.0 77.5 L 335.2 66.1 L 336.4 55.3 L 337.6 45.9 L 338.8 38.7 L 339.9 34.0 L 341.1 31.9 L 342.3 32.1 L 343.5 34.0 L 344.7 36.8 L 345.9 39.9 L 347.1 42.4 L 348.2 44.0 L 349.4 44.4 L 350.6 43.6 L 351.8 42.0 L 353.0 40.0 L 354.2 38.1 L 355.4 36.7 L 356.6 36.1 L 357.8 36.3 L 358.9 37.3 L 360.1 38.8 L 361.3 40.3 L 362.5 41.6 L 363.7 42.4 L 364.9 42.5 L 366.1 41.9 L 367.2 40.8 L 368.4 39.5 L 369.6 38.2 L 370.8 37.4 L 372.0 37.1 L 373.2 37.4 L 374.4 38.2 L 375.6 39.3 L 376.8 40.4 L 377.9 41.4 L 379.1 41.9 L 380.3 41.8 L 381.5 41.2 L 382.7 40.3 L 383.9 39.2 L 385.1 38.3 L 386.2 37.6 L 387.4 37.5 L 388.6 37.8 L 389.8 38.6 L 391.0 39.6 L 392.2 40.5 L 393.4 41.3 L 394.6 41.6 L 395.8 41.5 L 396.9 40.9 L 398.1 40.0 L 399.3 39.0 L 400.5 38.2 L 401.7 37.7 L 402.9 37.7 L 404.1 38.1 L 405.2 38.9 L 406.4 39.8 L 407.6 40.7 L 408.8 41.3 L 410.0 41.6" fill="none" stroke="currentColor" stroke-opacity="0.45" stroke-width="1"/>
+  <path class="acc" d="M 30.0 39.6 L 106.0 39.6 L 106.0 112.4 L 144.0 112.4 L 144.0 39.6 L 296.0 39.6 L 296.0 112.4 L 334.0 112.4 L 334.0 39.6 L 410.0 39.6" fill="none"/>
+  <text x="26" y="144">t = 0</text><text x="206" y="144">1/f₁</text><text x="386" y="144">2/f₁</text>
+  <text x="35" y="22.0">force on the bridge</text>
+</svg>
+<p class="cap" style="max-width:640px;margin:0 auto">The force of the ideal pluck on the bridge, plucked a fifth of the way along, over two periods (computed). Thick: the exact rectangular wave; thin: the sum of its first 12 partials, which overshoots next to each jump.</p>
+```
+
+The frequencies are whole-number multiples, $f_n = n f_1$, so in this lossless model the force, and the sound it drives, repeats with period $1/f_1$: we hear the pitch $f_1$ ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)). Section 12 adds the fading. Three things follow from the formula:
+
+- **Brightness.** Plucked near an end, $\sin(n\pi x_0/L)/n \approx \pi x_0/L$ for $n$ well below $L/x_0$: many partials start equally strong, and the sound is bright. Plucked at the middle, the even partials are missing, and the sound is hollow.
+- **Mellowness.** A fingertip makes a rounded start instead of a sharp corner, and a rounder start makes the high partials smaller, so the sound is mellower than with a pick.
+- **Mersenne's law.** $f_1 = \dfrac{1}{2L}\sqrt{\dfrac{T}{\mu}}$: the pitch is inversely proportional to the length, rises with the square root of the tension and falls with the square root of the mass per length, as M. Mersenne stated in 1636.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <canvas id="tcCanvas" style="height:170px" aria-label="A string, the point where it is plucked, and a finger touching it lightly"></canvas>
+  <div class="slider"><label for="tcX">Pluck point x₀</label><input type="range" id="tcX" min="0.04" max="0.5" step="0.01" value="0.2"><output id="tcXo">0.20 L</output></div>
+  <div class="controls" role="group" aria-label="Where the finger touches">
+    <span class="cap" style="margin-right:0.25rem">Touch lightly at</span>
+    <button type="button" data-touch="0" aria-pressed="true">no touch</button><button type="button" data-touch="0.5">1/2</button><button type="button" data-touch="0.3333333">1/3</button><button type="button" data-touch="0.25">1/4</button><button type="button" data-touch="0.2">1/5</button>
+  </div>
+  <div class="controls"><button type="button" id="tcPluck" class="primary">Pluck</button></div>
+  <svg class="spec" id="tcSpec" viewBox="0 0 320 96" style="max-width:520px" aria-label="The size of each partial in the force on the bridge, a quarter second after the pluck"></svg>
+  <div class="readout" id="tcRead"></div>
+  <p class="cap">Slowed for the eye. Stems: the size of each partial in the force on the bridge, which is what the sound is made from, a quarter of a second after the pluck. The touch positions are measured from the left end. The fading rates are an illustrative choice, not measured; the finger adds a drain proportional to how much each mode moves under it (section 12).</p>
+</div>
+</div>
+```
+
+## 12 · Fading, and a light touch {#fading}
+
+Friction makes the modes fade. Friction that acts the same everywhere along the string is split by the same sines, so each mode still fades on its own; friction at one point is not, and that is how a light touch picks out an octave.
+
+**Uniform friction.** Add a drag proportional to the velocity: $u_{tt} + \gamma u_t = c^2u_{xx}$, with $\gamma > 0$. Testing against $X_n$ as in Proposition 3 gives $q_n'' + \gamma q_n' + \lambda_nq_n = 0$: still one equation per mode. For $\gamma < 2\omega_n$ its solutions are $e^{-\gamma t/2}$ times a swing at angular frequency $\sqrt{\lambda_n - \gamma^2/4}$, that is, at frequency $\sqrt{\lambda_n - \gamma^2/4}/2\pi$, a shade below $f_n$. Real strings lose more at high frequencies, through the string's internal friction, the bridge and the air. Losses that grow with frequency, such as those in A. Chaigne and A. Askenfelt's model of a piano string, are still split by the sines, so each partial fades at its own rate. Those rates are measured or chosen, not derived here, and the demos label theirs as illustrative.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Losses that the sines split, and a loss at one point <span class="needs">uses matrices</span></summary>
+
+A loss term $\alpha u_t + \beta Au_t$ gives $q_n'' + (\alpha + \beta\lambda_n)q_n' + \lambda_nq_n = 0$: mode $n$ fades as $e^{-(\alpha + \beta\lambda_n)t/2}$, faster for higher $n$. Any loss built from $A$ and time derivatives alone (Chaigne and Askenfelt use a $u_t$ and a $u_{ttt}$ term) is split the same way. A friction force $-r\,u_t(s, t)$ concentrated at the point $s$ gives instead $q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0$ with $C_{nm} = (r/\mu)\,X_n(s)X_m(s)$: a matrix of rank one, which couples the modes. The modes with $X_n(s) = 0$ have a zero row and column in $C$, so they are exact modes of the damped string and never feel the finger; for a light touch (small $r$), each other mode drains at a rate proportional to $X_n(s)^2$, to first order in $r$.
+
+</details>
+:::
+
+**The touched harmonic.** A finger resting lightly at the middle, $s = L/2$, is friction at one point. It leaves exactly the modes with a still point there untouched, the even ones, since $\sin(n\pi/2) = 0$ for even $n$, and it drains the others, each at a rate proportional to $X_n(s)^2$, how much that mode moves under the finger. The survivors are at $2f_1, 4f_1, 6f_1, \dots$, whole-number multiples of $2f_1$: the note jumps an octave. No frequency moved; the finger changed which modes keep ringing. Touch at $1/2$ in the demo above. Touched at a third, the survivors are $3f_1, 6f_1, \dots$: an octave and a fifth up. String players call these touched notes [harmonics](../instruments-as-operators/glossary.qmd#string-harmonics).
+
+## 13 · What we used {#conditions}
+
+Six conditions made every step work. Each is listed with what breaks without it, using the string itself where possible:
+
+- **The string is bounded.** On an infinite string there are no eigenfunctions with finite $\int X^2$, and the sum over $n$ becomes an integral over all wavenumbers, a Fourier integral.
+- **The ends make $A$ symmetric.** A bridge that absorbs energy puts a friction term into the boundary condition at $x = L$, and the boundary term of Proposition 1 no longer vanishes: the modes become complex and no longer orthogonal.
+- **$A$ is positive.** Let both ends slide on frictionless rings, so that $u_x = 0$ there. Then the constant shape has $\lambda = 0$, and the whole string drifts, $q = a + bt$. A negative $\lambda$ would make a coordinate grow exponentially.
+- **No friction, or friction the sines split.** Friction at one point couples the modes (section 12). The light touch keeps only the modes it cannot reach.
+- **Linear: small slopes.** A hard pluck stretches the string, so its tension, and its pitch, rise with the amplitude; as the sound fades, the pitch glides down.
+- **Unchanging in time.** If a peg is turned while the string rings, the sines stay but each $\lambda_n(t)$ glides, so there are no fixed frequencies. If a finger slides along the string, $L(t)$ changes, the sines themselves move, and the modes mix.
+
+::: {.derive}
+<details><summary><span class="label">Reader question</span>Why eigenfunctions in $x$, and not in $t$? <span class="needs">uses complex exponentials</span></summary>
+
+The two variables play different roles in the problem. Space has two edges, where a condition holds at all times; time has one start, where conditions hold at all points. The operator $A$ is built from the $x$-derivatives together with the conditions at the two edges, so its eigenfunctions are functions of $x$. Time is then handled by one ordinary differential equation per eigenvalue, with its two starting values (sections 9 and 10). Nothing in the problem fixes a second edge in time, so there is no operator in $t$ with a domain that would pick out a basis. Seen in space and time together, a product $X(x)e^{i\omega t}$ solves $u_{tt} = -Au$ exactly when $AX = \omega^2X$: for $X = \sin kx$ this is the dispersion relation $\omega^2 = c^2k^2 = \lambda$, and the ends select $k = n\pi/L$.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Reader question</span>Isn't every function of $(x, t)$ a sum of products $f(x)g(t)$? <span class="needs">uses tensor products</span></summary>
+
+Yes, and that is why "a sum of products" is not what makes the method work. If $(X_n)$ is an orthonormal basis of $L^2(0, L)$ and $(Y_m)$ one of $L^2(0, \tau)$, then the products $X_n(x)Y_m(t)$ form an orthonormal basis of $L^2$ of the rectangle $[0, L] \times [0, \tau]$, so every square-integrable function of $(x, t)$, solution or not, is a mean-square sum $\sum c_{nm}X_n(x)Y_m(t)$ (M. Reed and B. Simon, *Methods of Modern Mathematical Physics I*, section II.4). Grouping the terms by $n$ writes it as $\sum_n q_n(t)X_n(x)$. What is special for a solution is Proposition 3: in the eigenbasis, each $q_n$ obeys its own equation $q_n'' = -\lambda_nq_n$, so it is $a_n\cos\omega_nt + b_n\sin\omega_nt$, decided by the start.
+
+</details>
+:::
+
+## What we found
+
+A plucked string's motion is a sum of the shapes $\sin(n\pi x/L)$, each swinging at its own frequency $nc/2L$. The equation and the tied ends decide the frequencies, through the eigenvalues of $A$; the pluck decides the amounts, through the coordinates $a_n$ of the starting shape. It works because measured along eigenfunctions, and only along eigenfunctions, the equation splits into independent springs, and the sines are enough to build every shape.
+
+## Next
+
+[Post 3, Other instruments, same recipe](../other-instruments-same-recipe/index.qmd), runs this recipe on a piano, a kalimba, a glockenspiel, drums, a violin, wind instruments and a theremin: the same steps with other operators and other numbers. The general theory, when an equation has a spectrum at all, with counterexamples, is in the optional appendix, [When does an equation have a spectrum?](../when-an-equation-has-a-spectrum/index.qmd).
+
+::: {.refs}
+**References.** The string and its equation: N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 2. Completeness of the sine series: E. M. Stein and R. Shakarchi, *Fourier Analysis: An Introduction*, Princeton University Press, 2003, chapter 3; R. Courant and D. Hilbert, *Methods of Mathematical Physics*, vol. 1, Interscience, 1953, chapter II. Weak solutions: L. C. Evans, *Partial Differential Equations*, 2nd ed., American Mathematical Society, 2010, section 7.2. Products of bases: M. Reed and B. Simon, *Methods of Modern Mathematical Physics I: Functional Analysis*, revised ed., Academic Press, 1980, section II.4. J. le Rond d'Alembert, "Recherches sur la courbe que forme une corde tenduë mise en vibration", *Histoire de l'Académie royale des sciences et belles-lettres de Berlin* 3 (1747, published 1749), 214–219. M. Mersenne, *Harmonie universelle*, Paris, 1636. Losses that grow with frequency: A. Chaigne and A. Askenfelt, "Numerical simulations of piano strings. I. A physical model for a struck string using finite difference methods", *J. Acoust. Soc. Am.* 95 (1994), 1112–1118. The pitch rise at large amplitude: J. O. Smith, [Recent developments: strings](https://ccrma.stanford.edu/~jos/jnmr/Recent_Developments_Strings.html), CCRMA, Stanford University ("an increase in pitch at high vibration amplitudes"), and the model it cites, T. Tolonen, V. Välimäki and M. Karjalainen, "Modeling of tension modulation nonlinearity in plucked strings", *IEEE Transactions on Speech and Audio Processing* 8 (2000), 300–310. Touched harmonics: J. Wolfe, [Strings, standing waves and harmonics](https://newt.phys.unsw.edu.au/jw/strings.html), UNSW.
+:::
+
+```{=html}
+<script src="core.js"></script>
+<script src="string.js"></script>
+```

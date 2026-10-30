@@ -71,7 +71,7 @@ To play, hold a key in the 3D view or on the strip below and let go to damp it; 
 
 Left out: each note is one ideal stiff string with pinned ends, with no coupling between strings and no soundboard resonances. The hammer is a brief push at one point (its felt's nonlinearity is ignored); the damper felt is a uniform strip. B and the decay times are chosen by hand, not measured, and B here only rises toward the treble. String lengths other than the longest (119 cm) and a parlour grand's shortest string (5.2 cm) [[1](#ref-1), [4](#ref-4)] are illustrative.
 
-**Read more:** [The Shape of a Sound, post 4: Why do piano tuners stretch octaves?](../instruments-case-by-case/piano.qmd).
+**Read more:** [The Shape of a Sound, post 3: the piano, and why tuners stretch octaves](../other-instruments-same-recipe/index.qmd#piano).
 
 ## References
 
