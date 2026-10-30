@@ -11,24 +11,24 @@
       op: "A = \\frac{1}{LC}", held: "a single number, like a mass on a spring",
       spec: "f = \\frac{1}{2\\pi \\sqrt{LC}}", specNote: "",
       verdict: "One stem: a pure tone. A real theremin runs two such circuits at radio frequencies, the hand changing C of one, and you hear the difference of their frequencies, with a few overtones.",
-      hue: [120, 230, 170], pan: 0.25, page: "oscillator", where: "The circuit and the spring: post 2" },
+      hue: [120, 230, 170], pan: 0.25, page: "oscillator", where: "The theremin: post 3" },
     { id: "chord", name: "Chordophone", inst: "Piano", plain: "a stiff string", law: "Newton’s law on", piece: "a short piece of stiff steel wire",
       op: "A = -c^2 \\frac{d^2}{dx^2} + \\kappa^2 \\frac{d^4}{dx^4}", held: "ends pinned",
       spec: "f_n = n f_0 \\sqrt{1 + B n^2}", specNote: "",
-      verdict: "Just above the lines, more so as n grows: a note, slightly stretched.", hue: [233, 196, 106], pan: -0.2, page: "piano", where: "Derived in post 2; the piano: post 4" },
+      verdict: "Just above the lines, more so as n grows: a note, slightly stretched.", hue: [233, 196, 106], pan: -0.2, page: "piano", where: "The piano: post 3" },
     { id: "aero", name: "Aerophone", inst: "Clarinet", plain: "a column of air", law: "Newton’s law on", piece: "a thin slice of the air in the tube",
       op: "A = -c^2 \\frac{d^2}{dx^2}", held: "on pressure; closed at the reed, open at the far end",
       spec: "f_n = (2n - 1) \\frac{c}{4L}", specNote: "",
-      verdict: "Blown, the air repeats one cycle, so the partials sit exactly on the lines; the tube’s odd modes make the odd ones strong and the even ones weak: a hollow note.", hue: [120, 200, 255], pan: -0.45, page: "clarinet", where: "Derived in post 2; the clarinet: post 4" },
+      verdict: "Blown, the air repeats one cycle, so the partials sit exactly on the lines; the tube’s odd modes make the odd ones strong and the even ones weak: a hollow note.", hue: [120, 200, 255], pan: -0.45, page: "clarinet", where: "The clarinet: post 3" },
     { id: "idio", name: "Idiophone", inst: "Glockenspiel", plain: "a steel bar", law: "Newton’s law on", piece: "a thin slice of a steel bar",
       op: "A = \\kappa^2 \\frac{d^4}{dx^4}", held: "both ends free",
       spec: "\\cos \\beta L \\; \\cosh \\beta L = 1", specNote: "ratios 1 : 2.76 : 5.40",
-      verdict: "Off the lines, but the overtones die fast: a bright, clean note.", hue: [190, 160, 255], pan: 0.45, page: "epilogue", where: "The bar: post 2; both ends free: the scales post" },
+      verdict: "Off the lines, but the overtones die fast: a bright, clean note.", hue: [190, 160, 255], pan: 0.45, page: "epilogue", where: "The glockenspiel: post 3" },
     { id: "membrane", name: "Membranophones", inst: "Bass drum and timpani", plain: "a stretched skin", law: "Newton’s law on", piece: "a small patch of the drumhead",
       op: "A = -c^2 \\Delta", held: "rim held still",
       spec: "J_m(ka) = 0", specNote: "ratios 1 : 1.59 : 2.14 : 2.30 …",
       verdict: "Bass drum: struck off centre, mostly round modes, off the lines and fading fast: a boom with no clear pitch. Timpani: the same skin; the air it drags along pulls its spoke modes near 2 : 3 : 4 : 5, the stroke favours them and the round modes fade fast: a note.",
-      hue: [255, 134, 102], pan: 0, page: "drum", where: "Derived in post 2; the two drums: post 4" }
+      hue: [255, 134, 102], pan: 0, page: "drum", where: "The two drums: post 3" }
   ];
   O.famIndex = {}; O.FAM.forEach(function (f, i) { O.famIndex[f.id] = i; });
   // the lanes of the performance view: one per instrument, so the two drums show their different spectra
@@ -490,6 +490,7 @@
     }
     g.restore();
   }
+  O.sketch = sketch; // exported for the gallery post, which draws each instrument on its own small canvas
   function fade(t, t0, d) { return Math.max(0, Math.min(1, (t - t0) / (d || 0.5))); }
 
   // Draw the frame at time t (seconds on the timeline) into a 2D context whose canvas is W×H (16:9).

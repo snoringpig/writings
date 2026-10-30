@@ -31,11 +31,11 @@ This post answers one question for one instrument: what does a plucked string do
 ::: {.gist}
 **The problem.** The string's height obeys the wave equation, is held at both ends, and starts as a triangle, at rest.
 
-**Coupled coordinates.** Point by point, each part of the string is pulled by its neighbours, so the motions of different points are tied together.
+**Coupled coordinates.** Point by point, each part of the string is pulled by its neighbours, so the points' motions are tied together.
 
 **The right coordinates.** Measured along the sines, and only along eigenfunctions of the string's operator, the equation splits into separate springs.
 
-**The solution.** Spring $n$ swings at $f_n = nc/2L$, the pluck sets how much each starts with, and there is exactly one solution: that sum.
+**The solution.** Spring $n$ swings at $f_n = nc/2L$, the pluck sets its amount, and that sum is the only solution.
 
 **The sound.** The frequencies are whole-number multiples of $f_1$, so the sound repeats and has the pitch $f_1$.
 
@@ -194,7 +194,7 @@ $$
 
 *Proof.* Integration by parts gives $\langle Au, w\rangle = -c^2\int_0^L u''w\,dx = -c^2\,[u'w]_0^L + c^2\int_0^L u'w'\,dx$, and the boundary term vanishes because $w(0) = w(L) = 0$. The result is symmetric in $u$ and $w$, so it also equals $\langle u, Aw\rangle$. With $w = u$ it is $c^2\int (u')^2 \ge 0$, and it is $0$ only if $u' = 0$ everywhere ($u'$ is continuous), that is, if $u$ is constant; then $u(0) = 0$ makes $u = 0$. $\square$
 
-The tied ends do the work twice: they kill the boundary term, which gives the symmetry, and they rule out the constant shape, which gives positivity. In energy terms, $\tfrac{\mu}{2}\langle Au, u\rangle = \tfrac{T}{2}\int (u')^2\,dx$ is the energy stored in the shape $u$. The beads' $K$ has the same two properties: $K$ is a [symmetric matrix](../instruments-as-operators/glossary.qmd#symmetric-matrix), and $v^{\mathsf T}Kv > 0$ for $v \neq 0$.
+The tied ends do the work twice: they kill the boundary term, giving symmetry, and rule out the constant shape, giving positivity. In energy terms, $\tfrac{\mu}{2}\langle Au, u\rangle = \tfrac{T}{2}\int (u')^2\,dx$ is the energy stored in the shape $u$. The beads' $K$ is likewise a [symmetric matrix](../instruments-as-operators/glossary.qmd#symmetric-matrix) with $v^{\mathsf T}Kv > 0$ for $v \neq 0$.
 
 ## 6 · The eigenfunctions, derived {#eigenfunctions}
 
@@ -218,7 +218,7 @@ These are all the eigenvalues, and each has one eigenfunction up to a factor; th
 
 The $X_n$ are orthogonal for the same reason as eigenvectors of a symmetric matrix: for $m \neq n$, $\lambda_m\langle X_m, X_n\rangle = \langle AX_m, X_n\rangle = \langle X_m, AX_n\rangle = \lambda_n\langle X_m, X_n\rangle$ by Proposition 1, and $\lambda_m \neq \lambda_n$, so $\langle X_m, X_n\rangle = 0$.
 
-Two different spaces appear here; keep them apart. For each $k$, the equation $X'' = -k^2X$ has a two-dimensional space of solutions; the tied ends cut it down to one dimension, and only for the special values $k = n\pi/L$. The space of the string's *motions* is another space, counted in section 10.
+Keep two spaces apart. For each $k$, the equation $X'' = -k^2X$ has a two-dimensional space of solutions; the tied ends cut it to one dimension, and only for $k = n\pi/L$. The string's *motions* form another space, counted in section 10.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>Why $a\cos kx + b\sin kx$ are all the solutions of $X'' = -k^2X$ <span class="needs">uses derivatives</span></summary>
@@ -297,7 +297,7 @@ Each spring has exactly one motion for each start, and the sines rebuild the sha
 $$
 u(t) = \sum_{n = 1}^{\infty}\big(a_n\cos\omega_nt + b_n\sin\omega_nt\big)\,X_n
 $$
-is a solution, for any start with finite energy, $\int(u_0')^2$ and $\int v_0^2$ finite. In plain words, the coefficients shrink fast enough that adding up all the modes gives a genuine solution; the estimate is in the fold.
+is a solution, for any start with finite energy: $u_0$ zero at the ends, with $\int(u_0')^2$ and $\int v_0^2$ finite. In plain words, the coefficients shrink fast enough that adding up all the modes gives a genuine solution; the estimate is in the fold.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>The series is a solution <span class="needs">uses Cauchy–Schwarz</span></summary>

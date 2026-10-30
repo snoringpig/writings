@@ -17,7 +17,7 @@ aliases: [/posts/instruments-as-operators/epilogue.html]
 :::
 
 ::: {.pageinfo}
-Builds on [post 1](../what-you-hear/index.qmd), for partials, and on [the bar](../where-the-equations-come-from/index.qmd#bar) (post 2) and [the kalimba page](../instruments-case-by-case/kalimba.qmd) (post 4), for bars. Math: up to cosh, sinh and a determinant (as on the kalimba page). About 4 minutes for the summary; about 20 with the mathematics. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written in collaboration with Claude, Anthropic's AI model.
+Builds on [post 1](../what-you-hear/index.qmd), for partials, and on [the glockenspiel and the kalimba](../other-instruments-same-recipe/index.qmd#glockenspiel) in post 3, for bars. Math: up to cosh, sinh and a determinant (as in post 3's kalimba fold). About 4 minutes for the summary; about 20 with the mathematics. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -51,8 +51,8 @@ Listen first: pick a sound, then slide the interval between two notes of that so
 ::: {.gist}
 **The recipe on this page, in brief.** Two notes sound rough when their [partials](../instruments-as-operators/glossary.qmd#partial) sit close together but not on top of each other, so they [beat](../instruments-as-operators/glossary.qmd#beats); the roughness of two notes is computed from their spectra. So the recipe now runs one step further, from the spectrum to which intervals sound smooth.
 
-1. *Newton's law* on a slice of a metal bar gives the bending equation of [post 2](../where-the-equations-come-from/index.qmd#bar).
-2. *The operator* is again $\kappa^2\,d^4/dx^4$, now with both ends free; a string's is $-c^2\,d^2/dx^2$ with both ends tied ([post 2](../where-the-equations-come-from/index.qmd#string)).
+1. *Newton's law* on a slice of a metal bar gives the bending equation of [post 3](../other-instruments-same-recipe/index.qmd#glockenspiel).
+2. *The operator* is again $\kappa^2\,d^4/dx^4$, now with both ends free; a string's is $-c^2\,d^2/dx^2$ with both ends tied ([post 2](../one-string-end-to-end/index.qmd#newton)).
 3. *Its spectrum*: the bar's frequencies sit at 1, 2.756, 5.404, … times the lowest, off the lines; the string's sit on them.
 4. *On the diagram*, here the roughness curve computed from those spectra: a string's smooth intervals are simple whole-number ratios such as 3 : 2 and 2 : 1; a bar's smooth intervals move, and the exact octave is no longer one of them.
 5. *What we hear*: the octave that is smooth on a string is not the smoothest interval on a bar.
@@ -68,7 +68,7 @@ The curve shows how rough two notes of the chosen sound are, against the ratio b
 
 ## Roughness, computed from the spectrum
 
-*Mathematics used: $e^x$ and $\ln$, and cosh, sinh and a determinant as on the kalimba page. The bar's spectrum follows the recipe of [post 3](../when-an-equation-has-a-spectrum/index.qmd).*
+*Mathematics used: $e^x$ and $\ln$, and cosh, sinh and a determinant, as in post 3's kalimba fold. The bar's spectrum follows the recipe of [post 2](../one-string-end-to-end/index.qmd).*
 
 **Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness.
 
@@ -88,11 +88,11 @@ Here the list $f_1, f_2, \dots$ holds the partials of both notes: those of the l
 
 ## The metal bar's spectrum
 
-A glockenspiel bar is a uniform metal bar resting on soft supports, so both of its ends are free. Its operator is the bar's operator derived from Newton's law in [post 2](../where-the-equations-come-from/index.qmd#bar), $A = \kappa^2\,d^4/dx^4$ with $\kappa^2 = EI/\rho S$; only the ends differ. A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ a mode $X$ must satisfy $X'' = 0$ and $X''' = 0$.
+A glockenspiel bar is a uniform metal bar resting on soft supports, so both of its ends are free. Its operator is the bar's operator derived from Newton's law in [post 3](../other-instruments-same-recipe/index.qmd#glockenspiel), $A = \kappa^2\,d^4/dx^4$ with $\kappa^2 = EI/\rho S$; only the ends differ. A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ a mode $X$ must satisfy $X'' = 0$ and $X''' = 0$.
 
-The spectrum follows the kalimba page's steps, with these new end conditions. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
+The spectrum follows the steps of post 3's kalimba fold, with these new end conditions. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
 
-1. **Four candidate shapes.** As on the kalimba page, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
+1. **Four candidate shapes.** As for the kalimba in post 3, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
 2. **The left end is free.** Nothing bends or pushes the bar at $x = 0$: $X''(0) = \beta^2(-b_1 + b_3) = 0$ and $X'''(0) = \beta^3(-b_2 + b_4) = 0$, so $b_3 = b_1$ and $b_4 = b_2$. Then $X = b_1(\cos\beta x + \cosh\beta x) + b_2(\sin\beta x + \sinh\beta x)$.
 3. **The right end is free.** The same two conditions at $x = L$. Dividing by $\beta^2$ and $\beta^3$, and writing $c_1 = \cos\beta L$, $s_1 = \sin\beta L$, $c_2 = \cosh\beta L$, $s_2 = \sinh\beta L$ for short:
 $$
@@ -126,7 +126,7 @@ In words: the same bar as the kalimba's, but with both ends free its overtones s
 
 ## What we found
 
-Two notes sound smooth together when their partials coincide or sit far apart, so the dips of the roughness curve, computed from an instrument's spectrum, sit at simple whole-number ratios for a string and move for a free bar, which loses the exact octave. Sethares argues, after Plomp and Levelt, that this is one reason instruments and their scales fit each other; how much it shaped the world's music is an open question, since what a culture finds beautiful is also learned. The [recipe cards](../instruments-case-by-case/index.qmd#recipe-cards) put every instrument's operator and spectrum side by side.
+Two notes sound smooth together when their partials coincide or sit far apart, so the dips of the roughness curve, computed from an instrument's spectrum, sit at simple whole-number ratios for a string and move for a free bar, which loses the exact octave. Sethares argues, after Plomp and Levelt, that this is one reason instruments and their scales fit each other; how much it shaped the world's music is an open question, since what a culture finds beautiful is also learned. The [entries of post 3](../other-instruments-same-recipe/index.qmd) put every instrument's operator and spectrum side by side.
 
 [Back to the series](../instruments-as-operators/index.qmd)
 

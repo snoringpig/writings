@@ -13,11 +13,11 @@ aliases: [/posts/instruments-as-operators/shape.html]
 ---
 
 ::: {.series-nav .slim}
-[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 4 · Instruments, case by case](../instruments-case-by-case/index.qmd) · [Beyond · Did instruments shape our scales? →](../instruments-and-scales/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← Beyond · When does an equation have a spectrum?](../when-an-equation-has-a-spectrum/index.qmd) · [Beyond · Did instruments shape our scales? →](../instruments-and-scales/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
 :::
 
 ::: {.pageinfo}
-Builds on [the drumhead's equation](../where-the-equations-come-from/index.qmd#drumhead) (post 2) and [the drum page](../instruments-case-by-case/drum.qmd) (post 4), and runs the recipe of [post 3](../when-an-equation-has-a-spectrum/index.qmd) backwards. Math: up to the Laplacian (post 2). About 3 minutes for the summary; about 25 with the mathematics. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written in collaboration with Claude, Anthropic's AI model.
+Builds on [the drums in post 3](../other-instruments-same-recipe/index.qmd#drums), for the drumhead's equation and its spectrum, and runs the recipe of [post 2](../one-string-end-to-end/index.qmd) backwards. Math: up to the Laplacian (post 3). About 3 minutes for the summary; about 25 with the mathematics. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -55,7 +55,7 @@ Listen first: play each drum with every mode equally loud. Then click a drum to 
 ::: {.gist}
 **The recipe on this page, in brief.** Every earlier page ran the recipe forwards, from an instrument to its sound. This page runs it backwards.
 
-1. *Newton's law* on a patch of drumhead gives the drum's equation $u_{tt} = c^2\Delta u$, with the rim held still ([post 2](../where-the-equations-come-from/index.qmd#drumhead)).
+1. *Newton's law* on a patch of drumhead gives the drum's equation $u_{tt} = c^2\Delta u$, with the rim held still ([post 3](../other-instruments-same-recipe/index.qmd#drums)).
 2. *The operator* is $-c^2$ times the Laplacian, $A = -c^2\Delta$, on the drum's shape, with the rim held still.
 3. *Its spectrum*: eigenvalues $\lambda_n = c^2k_n^2$, where $-\Delta X_n = k_n^2 X_n$, so apart from the factor $c$ the frequencies are decided by the shape alone.
 4. *On the diagram*: the two drums above have their stems in exactly the same places, off the lines.
@@ -70,7 +70,7 @@ So the answer to Kac is no: different shapes can share every frequency. But the 
 
 *Mathematics used: the Laplacian (post 2), and counting.*
 
-This page asks what the spectrum says about the drum. First, the equation, which [post 2](../where-the-equations-come-from/index.qmd#drumhead) derived step by step.
+This page asks what the spectrum says about the drum. First, the equation, which [post 3](../other-instruments-same-recipe/index.qmd#drums) derived step by step.
 
 Let the drumhead be a region $\Omega$ of the plane, in one piece, and let $u(x, y, t)$ be the height of the head above the point $(x, y)$ at time $t$. In post 2, Newton's law for one small patch of the head, pulled by the tension in its edges, gave the drum's equation
 $$
@@ -113,7 +113,7 @@ In words: apart from the one overall factor $c$, the frequencies are decided by 
 
 ## 4 · On the spectrum diagram
 
-Here are both drums' first twelve frequencies, as multiples of the lowest, $\sqrt{\lambda_n/\lambda_1} = k_n/k_1$: 1×, 1.20×, 1.43×, 1.60×, 1.69×, 1.90×, 2.04×, …. Like the drum on [the drum page](../instruments-case-by-case/drum.qmd), they sit off the gray whole-number lines, so neither drum has a clear pitch. And the two lists are the same to every digit computed: the stems under drum A and drum B stand in the same places. In the demo, each stem's height is how strongly a strike at the clicked point starts that mode (below, every mode is drawn equally tall): all equal until you click, then different on the two drums, because it depends on the mode's shape at the struck point.
+Here are both drums' first twelve frequencies, as multiples of the lowest, $\sqrt{\lambda_n/\lambda_1} = k_n/k_1$: 1×, 1.20×, 1.43×, 1.60×, 1.69×, 1.90×, 2.04×, …. Like the drum in [post 3](../other-instruments-same-recipe/index.qmd#drums), they sit off the gray whole-number lines, so neither drum has a clear pitch. And the two lists are the same to every digit computed: the stems under drum A and drum B stand in the same places. In the demo, each stem's height is how strongly a strike at the clicked point starts that mode (below, every mode is drawn equally tall): all equal until you click, then different on the two drums, because it depends on the mode's shape at the struck point.
 
 ```{=html}
 <div class="ins">
@@ -176,7 +176,7 @@ Ivrii's condition: a billiard path is the path of a ball rolling inside the drum
 ::: {.derive}
 <details><summary><span class="label">Proof sketch</span>Weyl's law for a square, by counting dots <span class="needs">uses partial derivatives</span></summary>
 
-Take the square of side $s$. Its eigenfunctions of $-\Delta$ are $\sin(m\pi x/s)\sin(n\pi y/s)$ for whole numbers $m, n \ge 1$, with eigenvalues $k^2 = (\pi/s)^2(m^2 + n^2)$; substituting them into the equation checks this, as for the loop of string in [post 3](../when-an-equation-has-a-spectrum/index.qmd#smallest-examples). So $N(\Lambda)$ is the number of dots $(m, n)$, with $m, n \ge 1$, inside the quarter circle of radius $R = s\sqrt\Lambda/\pi$.
+Take the square of side $s$. Its eigenfunctions of $-\Delta$ are $\sin(m\pi x/s)\sin(n\pi y/s)$ for whole numbers $m, n \ge 1$, with eigenvalues $k^2 = (\pi/s)^2(m^2 + n^2)$; substituting them into the equation checks this, as for the loop of string in [the appendix](../when-an-equation-has-a-spectrum/index.qmd#smallest-examples). So $N(\Lambda)$ is the number of dots $(m, n)$, with $m, n \ge 1$, inside the quarter circle of radius $R = s\sqrt\Lambda/\pi$.
 
 ```{=html}
 <svg class="fig" viewBox="0 0 260 215" role="img" aria-label="Grid points inside a quarter circle, each owning a unit square, with thin strips along the axes left uncovered">
@@ -216,7 +216,7 @@ Z(t) = \sum_n e^{-k_n^2 t}.
 $$
 Each eigenvalue adds nearly 1 if $k_n^2$ is much less than $1/t$ and nearly 0 if it is much more, so $Z(t)$ is roughly $N(1/t)$, with the jumps smoothed out. Like $N$, $Z$ is determined by the list of eigenvalues.
 
-$Z$ has a physical meaning. Heat spreading on the drumhead, with the rim held at temperature 0, obeys $v_t = \Delta v$, the drum's equation with one time derivative instead of two, so each mode now decays like $e^{-k_n^2 t}$ instead of oscillating. Start a unit burst of heat at a point $x$ and let it spread for time $t$. The temperature it leaves at $x$ itself, added up over all points $x$ of the drum, is $Z(t)$. (Write the burst as a sum of modes, each scaled so that $\iint X_n^2\,dA = 1$. A burst at $x$ contains mode $n$ in proportion to $X_n(x)$, the same rule as a strike on the [drum page](../instruments-case-by-case/drum.qmd); after time $t$ that part has shrunk by $e^{-k_n^2 t}$, and its temperature at $x$ is again proportional to $X_n(x)$. So the temperature left at $x$ is $\sum_n e^{-k_n^2 t}X_n(x)^2$, and adding it up over the drum gives $\sum_n e^{-k_n^2 t}$.) In a short time $t$ heat travels a distance of about $\sqrt t$, so a burst only feels the rim if it starts within about that distance of it. Kac called this "not feeling the boundary". Then:
+$Z$ has a physical meaning. Heat spreading on the drumhead, with the rim held at temperature 0, obeys $v_t = \Delta v$, the drum's equation with one time derivative instead of two, so each mode now decays like $e^{-k_n^2 t}$ instead of oscillating. Start a unit burst of heat at a point $x$ and let it spread for time $t$. The temperature it leaves at $x$ itself, added up over all points $x$ of the drum, is $Z(t)$. (Write the burst as a sum of modes, each scaled so that $\iint X_n^2\,dA = 1$. A burst at $x$ contains mode $n$ in proportion to $X_n(x)$, the same rule as a strike on the [drums in post 3](../other-instruments-same-recipe/index.qmd#drums); after time $t$ that part has shrunk by $e^{-k_n^2 t}$, and its temperature at $x$ is again proportional to $X_n(x)$. So the temperature left at $x$ is $\sum_n e^{-k_n^2 t}X_n(x)^2$, and adding it up over the drum gives $\sum_n e^{-k_n^2 t}$.) In a short time $t$ heat travels a distance of about $\sqrt t$, so a burst only feels the rim if it starts within about that distance of it. Kac called this "not feeling the boundary". Then:
 
 1. *Away from the rim*, the burst spreads as on an endless plane, and the temperature it leaves at its starting point is $1/(4\pi t)$. Adding this up over the drum gives $|\Omega|/(4\pi t)$.
 2. *Near a straight piece of rim*, at distance $r$ from it, the rim's condition $v = 0$ is met by adding a mirror-image burst of opposite sign on the far side of the rim; a wave on a string meets a tied end the same way, as if an upside-down mirror image arrived from beyond it. The image is a distance $2r$ away, and lowers the temperature at $x$ by $e^{-r^2/t}/(4\pi t)$. Adding this up over a strip along the rim, using $\int_0^\infty e^{-r^2/t}\,dr = \tfrac12\sqrt{\pi t}$ for each unit of rim length, gives $-P/(8\sqrt{\pi t})$.
@@ -253,7 +253,7 @@ This argument is called *transplantation*. It grew out of work of Peter Buser on
 ::: {.derive}
 <details><summary><span class="label">Details</span>How the numbers on this page were computed <span class="needs">uses matrices, as for the beads in post 2</span></summary>
 
-Each drum is covered by a square grid of spacing $h$, and the Laplacian is replaced by its five-point version: at each grid point, the sum of the four neighbors minus four times the point, divided by $h^2$. This is the bead model of [post 2](../where-the-equations-come-from/index.qmd#beads) in two dimensions. Grid points on the rim are held at zero. The drums' corners sit on grid points, so whether each point is inside, on the rim, or outside is decided with exact whole-number arithmetic.
+Each drum is covered by a square grid of spacing $h$, and the Laplacian is replaced by its five-point version: at each grid point, the sum of the four neighbors minus four times the point, divided by $h^2$. This is the bead model of [post 2](../one-string-end-to-end/index.qmd#two-beads) in two dimensions. Grid points on the rim are held at zero. The drums' corners sit on grid points, so whether each point is inside, on the rim, or outside is decided with exact whole-number arithmetic.
 
 At $h = 1/40$ and $h = 1/80$ the two drums give the same first twelve eigenvalues $k_n^2$ of $-\Delta$ to a relative difference of $3\times10^{-14}$, which is rounding error. This is expected, as far as I can tell, because the grid lines up with every triangle's edges, so transplantation works for the grid model too; Moler's post transplants grid eigenvectors in the same way. Combining the two grids ([Richardson extrapolation](https://en.wikipedia.org/wiki/Richardson_extrapolation)) gives values within 0.03% of the high-accuracy values in Table 3.1 of Driscoll's paper, after multiplying his by 4: his drums are twice the size of these. That is a check, not a precise computation: Richardson's trick assumes the grid error shrinks like $h^2$, and the drums' inward-pointing corners slow that down. The page uses Driscoll's values.
 

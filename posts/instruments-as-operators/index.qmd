@@ -1,10 +1,10 @@
 ---
 title: "The Shape of a Sound"
-subtitle: "The mathematics of musical sound, in four posts and two more beyond"
+subtitle: "The mathematics of musical sound, in three posts and more beyond"
 date: 2026-10-25
-date-modified: 2026-10-29
+date-modified: 2026-10-30
 categories: [math, music]
-description: "Why a piano note has a pitch and a drum's thud doesn't, where the equations of instruments come from, and when an equation of motion is a list of notes: a series in four posts, with two more beyond."
+description: "Why a piano note has a pitch and a drum's thud doesn't: what we hear, one plucked string worked completely from Newton's law to its sound, and every other instrument run through the same recipe; with an appendix on the general theory and more beyond."
 format:
   html:
     html-math-method: katex
@@ -20,31 +20,30 @@ aliases: [/posts/instruments-as-operators/map.html]
 ```{=html}
 <figure class="ins" style="margin:0 0 1.2rem">
 <video controls preload="none" playsinline poster="mountain-king-performance.jpg" style="width:100%;height:auto;aspect-ratio:16/9;background:#0d1016;border-radius:6px"><source src="mountain-king-performance.mp4" type="video/mp4"></video>
-<figcaption class="cap">Listen first (1 min): Grieg's In the Hall of the Mountain King, played by one instrument from each of the five classes of instruments, every sound built from pure tones. Each lane draws its instrument's frequencies as stems against gray lines at whole-number multiples: the clarinet's sit on the lines and the piano's very nearly, while the bass drum's fall between them. Why that matters is <a href="../what-you-hear/index.html">post 1</a>; the full video, with where the stems come from, is in <a href="../instruments-case-by-case/index.html#orchestra">post 4</a>. Simplified: no breath, bow or stick noise; the timpani is measured.</figcaption>
+<figcaption class="cap">Listen first (1 min): Grieg's In the Hall of the Mountain King, played by one instrument from each of the five classes of instruments, every sound built from pure tones. Each lane draws its instrument's frequencies as stems against gray lines at whole-number multiples: the clarinet's sit on the lines and the piano's very nearly, while the bass drum's fall between them. Why that matters is <a href="../what-you-hear/index.html">post 1</a>; the full video, with where the stems come from, is in <a href="../other-instruments-same-recipe/index.html#orchestra">post 3</a>. Simplified: no breath, bow or stick noise; the timpani is measured.</figcaption>
 </figure>
 ```
 
-A piano note has a pitch you could hum; a drum's thud has none. Both are a stretched, struck piece of material. This series explains the difference with one piece of mathematics, the [spectrum](glossary.qmd#spectrum) of an [operator](glossary.qmd#operator), and it is organised around four questions:
+A piano note has a pitch you could hum; a drum's thud has none. Both are a stretched, struck piece of material. This series explains the difference with one piece of mathematics, the [spectrum](glossary.qmd#spectrum) of an [operator](glossary.qmd#operator). It works one instrument, the plucked string, completely, and then runs the same recipe on the others. Four questions, and where each is answered:
 
-1. How do we explain what we hear, for example a drum (no clear pitch) against a piano (a clear pitch)?
-2. How do we explain the four aspects of a sound: pitch, loudness, timbre and duration?
-3. Where do the differential equations of instruments come from?
-4. When is the solution of a differential equation a sum over the spectrum of an operator, what is the deeper theory, and how does it connect back to 1 and 2?
+1. How do we explain what we hear, for example a drum (no clear pitch) against a piano (a clear pitch)? In [post 1](../what-you-hear/index.qmd), with sounds; for the string, from its equation, in [post 2](../one-string-end-to-end/index.qmd#sound).
+2. How do we explain the four aspects of a sound: pitch, loudness, timbre and duration? In [post 1](../what-you-hear/index.qmd).
+3. Where do the differential equations of instruments come from? For the string, from Newton's law, in [post 2](../one-string-end-to-end/index.qmd#newton); for every other instrument, in the folds of [post 3](../other-instruments-same-recipe/index.qmd).
+4. When is the solution of a differential equation a sum over the spectrum of an operator? For the string, end to end, in [post 2](../one-string-end-to-end/index.qmd), which ends with the conditions it used and what breaks without each; in general, with the deeper theory and counterexamples, in the appendix [*When does an equation have a spectrum?*](../when-an-equation-has-a-spectrum/index.qmd).
 
 Written in collaboration with Claude, Anthropic's AI model.
 
 ## The posts
 
 1. [**What you hear**](../what-you-hear/index.qmd) answers questions 1 and 2, with sounds and no differential equations. A clear pitch means the partials sit at, or very near, whole-number multiples of one frequency in the range we hear as pitch, so the sound nearly repeats at that rate; a piano's partials very nearly do this and a drum's don't.
-2. [**Where the equations come from**](../where-the-equations-come-from/index.qmd) answers question 3. For small motions, Newton's law on a small piece, together with a law of the material, gives $u_{tt} = -Au$, with an operator $A$ for each object: spring, beads, string, air column, bar, stiff string, drumhead, and a coil with a capacitor.
-3. [**When an equation has a spectrum**](../when-an-equation-has-a-spectrum/index.qmd) answers question 4, the mathematical answer. The solutions of $U' = BU$ are exactly the combinations of modes when $B$ has a basis of [eigenvectors](glossary.qmd#eigenvector); for a stable, frictionless object of finite size this always holds (once any rigid drift is split off), and the post shows where it fails.
-4. [**Instruments, case by case**](../instruments-case-by-case/index.qmd) puts the answers to work on one instrument per page, starting from an orchestra: violin, clarinet, kalimba, harmonica, piano, bass drum and kettledrum.
+2. [**One string, end to end**](../one-string-end-to-end/index.qmd) works the plucked string completely: the problem, where its equation comes from, why the sines are the right coordinates, why there is exactly one solution, and how the motion becomes the sound. A plucked string's motion is a sum of shapes $\sin(n\pi x/L)$, each swinging at its own frequency $nc/2L$; the equation and the fixed ends set the frequencies, the pluck sets the amounts, and this works because in the basis of sines, and only in a basis of [eigenfunctions](glossary.qmd#eigenfunction), the equation splits into independent springs.
+3. [**Other instruments, same recipe**](../other-instruments-same-recipe/index.qmd) runs the string's recipe on a piano, a kalimba, a glockenspiel, drums, a bowed violin, a flute, a clarinet, a harmonica and a theremin, starting from an orchestra: each entry gives the full problem, its spectrum, an animation and its sound, with the derivation in a fold.
 
-Two further posts take up questions the answers raise: [*Can you hear the shape of a drum?*](../hear-the-shape-of-a-drum/index.qmd) and [*Did instruments shape our scales?*](../instruments-and-scales/index.qmd). [*A Piano*](../a-piano/index.qmd) is a playable upright with all 88 keys and its three pedals. Technical words link to the [glossary](glossary.qmd).
+**Beyond.** The appendix [*When does an equation have a spectrum?*](../when-an-equation-has-a-spectrum/index.qmd) gives the general theory for mathematical readers: the criterion, the deeper theory and counterexamples, smallest first. Two further posts take up questions the answers raise: [*Can you hear the shape of a drum?*](../hear-the-shape-of-a-drum/index.qmd) and [*Did instruments shape our scales?*](../instruments-and-scales/index.qmd). [*A Piano*](../a-piano/index.qmd) is a playable upright with all 88 keys and its three pedals. Technical words link to the [glossary](glossary.qmd).
 
 ## The series in one paragraph {#the-series-in-one-paragraph}
 
-A vibrating object of finite size whose motion is [linear](glossary.qmd#linear) and unchanging in time moves, left to itself, as a sum of [modes](glossary.qmd#mode), apart from the special cases [post 3 lists](../when-an-equation-has-a-spectrum/index.qmd#counterexamples): shapes that each oscillate at their own frequency $f_k$ and fade with their own time $\tau_k$. The body, the air and the room pass that motion on to a listener in a way that is also linear and unchanging in time: this keeps every $f_k$ and $\tau_k$, changes the amounts, and adds the filter's own ringing (the body's resonances, the room's reverberation). So the instrument's part of the sound is
+A vibrating object of finite size whose motion is [linear](glossary.qmd#linear) and unchanging in time moves, left to itself, as a sum of [modes](glossary.qmd#mode), apart from the special cases [the appendix lists](../when-an-equation-has-a-spectrum/index.qmd#counterexamples): shapes that each oscillate at their own frequency $f_k$ and fade with their own time $\tau_k$. The body, the air and the room pass that motion on to a listener in a way that is also linear and unchanging in time: this keeps every $f_k$ and $\tau_k$, changes the amounts, and adds the filter's own ringing (the body's resonances, the room's reverberation). So the instrument's part of the sound is
 $$
 p(t) = \sum_k a_k\, e^{-t/\tau_k} \cos(2\pi f_k t + \varphi_k).
 $$
@@ -56,29 +55,29 @@ Here $p(t)$ is the air pressure at the listener; $a_k$ is how strongly the $k$-t
 
 ## Reading paths {#reading-paths}
 
-- **In order**, 1 → 2 → 3 → 4: each post uses the one before it.
-- **A listener's path**, 1 → 4: every page of post 4 can be read after post 1 alone, and links to the derivation and the mathematics for its instrument.
-- **A mathematician's path**, post 3 alone: it recaps what it uses from posts 1 and 2 and links to the derivations.
+- **In order**, 1 → 2 → 3: each post uses the one before it.
+- **A listener's path**, 1 → 3: the entries of post 3 can be read after post 1, skipping their folds; each links to the step of post 2 it reuses.
+- **A mathematician's path**, post 2, then the appendix [*When does an equation have a spectrum?*](../when-an-equation-has-a-spectrum/index.qmd).
 
 ## Operator families and instrument classes {#operator-families-and-instrument-classes}
 
 The [Hornbostel–Sachs classification](glossary.qmd#hornbostel-sachs), the scheme most used by those who study instruments, sorts them into five *classes* by what makes the sound. This series groups them by [operator family](glossary.qmd#operator-family): instruments whose operators agree up to constants and how they are held, so that one calculation covers them all.
 
-| Hornbostel–Sachs class | Instrument | Operator family: the rule, and how it is held | Derived · heard |
+| Hornbostel–Sachs class | Instrument | Operator family: the rule, and how it is held | In the series |
 |:--|:--|:--|:--|
-| chordophone, 321.322 | violin, guitar | $-c^2\,d^2/dx^2$ on the string; ends tied | [2](../where-the-equations-come-from/index.qmd#string) · [4](../instruments-case-by-case/violin.qmd) |
-| chordophone, 322 | harp | the same | [2](../where-the-equations-come-from/index.qmd#string) · [4](../instruments-case-by-case/violin.qmd) |
-| chordophone, 314.122 | piano | $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$; ends pinned | [2](../where-the-equations-come-from/index.qmd#stiff-string) · [4](../instruments-case-by-case/piano.qmd) |
-| aerophone, 421.121.12 | flute | $-c^2\,d^2/dx^2$ on the air's pressure; both ends open | [2](../where-the-equations-come-from/index.qmd#tube) · [4](../instruments-case-by-case/clarinet.qmd) |
-| aerophone, 422.211.2 | clarinet | the same; closed at the reed | [2](../where-the-equations-come-from/index.qmd#tube) · [4](../instruments-case-by-case/clarinet.qmd) |
-| aerophone, 412.132 | harmonica | $\kappa^2\,d^4/dx^4$ on the reed; clamped and free | [2](../where-the-equations-come-from/index.qmd#bar) · [4](../instruments-case-by-case/harmonica.qmd) |
-| idiophone, 122.1 | kalimba | $\kappa^2\,d^4/dx^4$; clamped and free | [2](../where-the-equations-come-from/index.qmd#bar) · [4](../instruments-case-by-case/kalimba.qmd) |
-| idiophone, 111.222 | glockenspiel | $\kappa^2\,d^4/dx^4$; both ends free | [2](../where-the-equations-come-from/index.qmd#bar) · [scales](../instruments-and-scales/index.qmd) |
-| membranophone, 211.11 | timpani | $-c^2\Delta$ on a disk; rim fixed, air and kettle around it | [2](../where-the-equations-come-from/index.qmd#drumhead) · [4](../instruments-case-by-case/drum.qmd) |
-| membranophone, 211.212.1 | bass drum | $-c^2\Delta$ on a disk; rim fixed, a second head | [2](../where-the-equations-come-from/index.qmd#drumhead) · [4](../instruments-case-by-case/drum.qmd) |
-| electrophone, 531.1 | theremin | the number $1/LC$ | [2](../where-the-equations-come-from/index.qmd#circuit) |
+| chordophone, 321.322 | violin, guitar | $-c^2\,d^2/dx^2$ on the string; ends tied | [2](../one-string-end-to-end/index.qmd) · [3](../other-instruments-same-recipe/index.qmd#violin) |
+| chordophone, 322 | harp | the same | [2](../one-string-end-to-end/index.qmd) |
+| chordophone, 314.122 | piano | $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$; ends pinned | [3](../other-instruments-same-recipe/index.qmd#piano) |
+| aerophone, 421.121.12 | flute | $-c^2\,d^2/dx^2$ on the air's pressure; both ends open | [3](../other-instruments-same-recipe/index.qmd#flute) |
+| aerophone, 422.211.2 | clarinet | the same; closed at the reed | [3](../other-instruments-same-recipe/index.qmd#clarinet) |
+| aerophone, 412.132 | harmonica | $\kappa^2\,d^4/dx^4$ on the reed; clamped and free | [3](../other-instruments-same-recipe/index.qmd#harmonica) |
+| idiophone, 122.1 | kalimba | $\kappa^2\,d^4/dx^4$; clamped and free | [3](../other-instruments-same-recipe/index.qmd#kalimba) |
+| idiophone, 111.222 | glockenspiel | $\kappa^2\,d^4/dx^4$; both ends free | [3](../other-instruments-same-recipe/index.qmd#glockenspiel) · [scales](../instruments-and-scales/index.qmd) |
+| membranophone, 211.11 | timpani | $-c^2\Delta$ on a disk; rim fixed, air and kettle around it | [3](../other-instruments-same-recipe/index.qmd#drums) |
+| membranophone, 211.212.1 | bass drum | $-c^2\Delta$ on a disk; rim fixed, a second head | [3](../other-instruments-same-recipe/index.qmd#drums) |
+| electrophone, 531.1 | theremin | the number $1/LC$ | [3](../other-instruments-same-recipe/index.qmd#theremin) |
 
-: Hornbostel–Sachs class, instrument, operator family, and the posts that derive the operator (2) and hear the instrument (4). {.striped}
+: Hornbostel–Sachs class, instrument, operator family, and where the series treats it: post 2 for the string, completely; post 3 for the others. {.striped}
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The decimal codes, and when electrophones were added</summary>
@@ -97,9 +96,9 @@ Inside one operator family the rule stays and the rest varies:
 
 - **Strings and air columns**, $-c^2\,d^2/dx^2$. What moves, the string's height or the air's pressure; the constants that set the lowest frequency, such as length, tension and mass per length; the ends, which are part of the operator: tied, open at both ends (flute) or closed at one (clarinet, pan pipes); and the playing: plucked (guitar, harp), bowed (violin) or blown.
 - **Bending bars**, $\kappa^2\,d^4/dx^4$. Steel tine, brass reed or metal bar; the ends, one clamped or both free, which change the frequency ratios; and the playing: plucked, struck or blown, which decides whether you hear the bar's own overtones or the whole-number multiples of a steady airflow.
-- **Stiff strings**, $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$. The stiffness, whose effect is largest at the two ends of a piano's keyboard ([the piano page](../instruments-case-by-case/piano.qmd)).
+- **Stiff strings**, $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$. The stiffness, whose effect is largest at the two ends of a piano's keyboard ([the piano in post 3](../other-instruments-same-recipe/index.qmd#piano)).
 - **Membranes**, $-c^2\Delta$. Tension and size, and what surrounds the head, which matters for timpani.
-- **A single number**, such as $k/m$ for a mass on a spring or $1/LC$ for a coil and a capacitor. Nothing varies but the number.
+- **A single number**, such as $s/m$ for a mass $m$ on a spring of stiffness $s$ or $1/LC$ for a coil and a capacitor. Nothing varies but the number.
 
 </details>
 :::
@@ -109,12 +108,12 @@ Inside one operator family the rule stays and the rest varies:
 
 Hornbostel–Sachs asks what makes the sound; the operator asks what oscillates and by what rule. Mostly the answers line up. Where they part, the difference is instructive.
 
-- **The piano** is a chordophone, a board zither whose strings are struck by hammers, but its operator adds the bar's fourth derivative to the string's, $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$: its steel wire is stiff enough to bend like a bar ([the piano page](../instruments-case-by-case/piano.qmd)).
-- **The harmonica** is an aerophone, classed by its interrupted airstream, though its reed is a clamped bar like the kalimba's tine. That agrees with [the harmonica page](../instruments-case-by-case/harmonica.qmd): the steady sound has only whole-number multiples of the puff rate, set by the chopped airflow, and the reed's own off-line overtones are absent from it.
+- **The piano** is a chordophone, a board zither whose strings are struck by hammers, but its operator adds the bar's fourth derivative to the string's, $-c^2\,d^2/dx^2 + \kappa^2\,d^4/dx^4$: its steel wire is stiff enough to bend like a bar ([the piano in post 3](../other-instruments-same-recipe/index.qmd#piano)).
+- **The harmonica** is an aerophone, classed by its interrupted airstream, though its reed is a clamped bar like the kalimba's tine. That agrees with [the harmonica in post 3](../other-instruments-same-recipe/index.qmd#harmonica): the steady sound has only whole-number multiples of the puff rate, set by the chopped airflow, and the reed's own off-line overtones are absent from it.
 - **The glockenspiel and the kalimba** are idiophones in different groups, struck and plucked, and in one operator family. They share the rule $\kappa^2\,d^4/dx^4$, but their ends differ, both free for the glockenspiel bar and one clamped for the tine, so their operators differ, and so do their frequency ratios, $1 : 2.76 : 5.40$ against $1 : 6.27 : 17.55$.
-- **A violin string and a flute's air column** are in different classes, yet their operators agree up to constants, so they are in one operator family: both are $-c^2\,d^2/dx^2$ with the value held at zero at both ends, the string's height at its tied ends and the air's extra pressure at the flute's open ends ([post 2](../where-the-equations-come-from/index.qmd#tube)).
+- **A violin string and a flute's air column** are in different classes, yet their operators agree up to constants, so they are in one operator family: both are $-c^2\,d^2/dx^2$ with the value held at zero at both ends, the string's height at its tied ends and the air's extra pressure at the flute's open ends ([post 3](../other-instruments-same-recipe/index.qmd#flute)).
 - **An electric guitar** is a chordophone with a pickup: its strings make the sound, and the electronics only pick it up and amplify it.
-- **A theremin** is an electrophone: its oscillators are coil-and-capacitor circuits, whose operator is the single number $1/LC$; [post 2](../where-the-equations-come-from/index.qmd#circuit) derives it and explains how the player's hand sets the pitch.
+- **A theremin** is an electrophone: its oscillators are coil-and-capacitor circuits, whose operator is the single number $1/LC$; [post 3](../other-instruments-same-recipe/index.qmd#theremin) derives it and explains how the player's hand sets the pitch.
 
 </details>
 :::
@@ -128,7 +127,7 @@ Mostly not. The mathematics in this series explained instruments after they were
 
 **Instruments came first.** How Antonio Stradivari made his violins is not documented, so saying that he worked by trial and ear is an inference. Bells show trial and ear at work more plainly. The blind Utrecht carillonneur Jacob van Eyck picked out the separate [partials](glossary.qmd#partial) of a bell by whistling at them, and held that a bell must be tuned after casting by changing its shape. In 1644 the city of Zutphen ordered a carillon from the founders Pieter and François Hemony, with van Eyck as its adviser. The brothers cast the bells slightly too thick, turned each on a lathe and shaved metal from the inside until its five principal partials were in tune. The Zutphen carillon is counted as the first tuned carillon.
 
-**Laws from experiment.** The Pythagorean tradition tied consonant intervals to simple ratios of string lengths: half the length sounds an octave higher. In the late 1580s Vincenzo Galilei, Galileo's father, hung weights on strings and found that tension works differently: an octave needs four times the weight and a fifth $9 : 4$, so the frequency goes with the square root of the tension. Marin Mersenne's *Harmonie universelle* (1636) stated the laws of a string together: its frequency is inversely proportional to its length, proportional to the square root of its tension and inversely proportional to the square root of its mass per length, as in $f_1 = \frac{1}{2L}\sqrt{T/\mu}$ on [post 2](../where-the-equations-come-from/index.qmd#string). In Oxford in the mid-1670s William Noble and Thomas Pigot found that a string can vibrate in parts with still points between them: small pieces of paper hung on the string stayed at rest at some points and trembled at others. John Wallis reported the discovery in the *Philosophical Transactions* in 1677. In 1701 Joseph Sauveur explained such motions to the Paris Academy: a string can vibrate at higher frequencies, which he called harmonics, separated by still points, which he called [nodes](glossary.qmd#node). Both words are still in use.
+**Laws from experiment.** The Pythagorean tradition tied consonant intervals to simple ratios of string lengths: half the length sounds an octave higher. In the late 1580s Vincenzo Galilei, Galileo's father, hung weights on strings and found that tension works differently: an octave needs four times the weight and a fifth $9 : 4$, so the frequency goes with the square root of the tension. Marin Mersenne's *Harmonie universelle* (1636) stated the laws of a string together: its frequency is inversely proportional to its length, proportional to the square root of its tension and inversely proportional to the square root of its mass per length, as in $f_1 = \frac{1}{2L}\sqrt{T/\mu}$ in [post 2](../one-string-end-to-end/index.qmd#sound). In Oxford in the mid-1670s William Noble and Thomas Pigot found that a string can vibrate in parts with still points between them: small pieces of paper hung on the string stayed at rest at some points and trembled at others. John Wallis reported the discovery in the *Philosophical Transactions* in 1677. In 1701 Joseph Sauveur explained such motions to the Paris Academy: a string can vibrate at higher frequencies, which he called harmonics, separated by still points, which he called [nodes](glossary.qmd#node). Both words are still in use.
 
 **The mathematics, after the fact.** Brook Taylor (1713) worked out from mechanics the shape and the period of a string's simplest vibration. Jean le Rond d'Alembert (1747) wrote down the [wave equation](glossary.qmd#wave-equation) and solved it as two waves running in opposite directions. Daniel Bernoulli (1753) stated that the general motion of a vibrating system is a [superposition](glossary.qmd#superposition) of its modes; Euler, d'Alembert and Lagrange did not accept that sums of sines could match an arbitrary starting shape. Leonhard Euler worked out the vibrations of a drumhead (published 1766), and the functions now named after Bessel appear there for every whole-number order; the simplest, $J_0$, had already turned up in Daniel Bernoulli's hanging chain in the 1730s. Ernst Chladni (1787) made the [nodal lines](glossary.qmd#node) of vibrating plates visible with sand. Joseph Fourier, in a memoir of 1807 and a book of 1822, argued that any function can be written as a sum of sines and cosines, and used such sums to solve the equation of heat flow. Charles Sturm and Joseph Liouville (1836–37) developed expansions of this kind for a whole class of second-order equations, the eigenvalue problems now named after them. Karl Weierstrass (1858) corrected a conclusion of Lagrange, repeated by Laplace and others: they had held that two equal frequencies would make a small oscillation grow with time, and Weierstrass showed that for small oscillations about a stable rest they do not. Lord Rayleigh's *The Theory of Sound* (1877) gathered the subject into one treatise. David Hilbert's work on integral equations in the 1900s introduced the name *spectral theory*, and Hermann Weyl (1911) proved that the frequencies of a drum determine its area ([*Can you hear the shape of a drum?*](../hear-the-shape-of-a-drum/index.qmd)).
 
