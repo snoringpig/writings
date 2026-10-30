@@ -8,6 +8,7 @@ format:
   html:
     html-math-method: katex
     css: ins.css
+    reference-location: margin
 resources: [core.js, ins.css]
 aliases: [/posts/instruments-as-operators/epilogue.html]
 ---
@@ -17,14 +18,10 @@ aliases: [/posts/instruments-as-operators/epilogue.html]
 :::
 
 ::: {.pageinfo}
-Builds on [post 1](../what-you-hear/index.qmd), for partials, and on [the bar](../where-the-equations-come-from/index.qmd#bar) (post 2) and [the kalimba page](../instruments-case-by-case/kalimba.qmd) (post 4), for bars. Math: up to cosh, sinh and a determinant (as on the kalimba page). About 4 minutes for the summary; about 20 with the mathematics. [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph). Written with [Claude](#how-this-was-made), Anthropic's AI model.
+Builds on [post 1](../what-you-hear/index.qmd), for partials and beats, and on [the glockenspiel](../other-instruments-same-recipe/index.qmd#glockenspiel) in post 3, for bars. Uses $e^x$, cosh, sinh and a determinant. About 15 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
-::: {.puzzle}
-Play two notes an [octave](../instruments-as-operators/glossary.qmd#octave) apart, then two notes a [semitone](../instruments-as-operators/glossary.qmd#semitone) apart, the smallest step on a piano. The octave sounds smooth and the semitone sounds rough. Why? And why does a Javanese gamelan, an orchestra of tuned metal bars and gongs, use scales that fit no piano?
-:::
-
-Listen first: pick a sound, then slide the interval between two notes of that sound and listen. The curve shows how rough each interval sounds.
+Two notes sound smooth together when their [partials](../instruments-as-operators/glossary.qmd#partial) line up, so instruments with different partials can favour different intervals, and so different scales: an [octave](../instruments-as-operators/glossary.qmd#octave) is smooth on a string, but on a metal bar a slightly narrower interval is smoother. Pick a sound below, slide the interval between two of its notes, and listen; the curve shows how rough each interval sounds.
 
 ```{=html}
 <div class="ins">
@@ -44,35 +41,17 @@ Listen first: pick a sound, then slide the interval between two notes of that so
 </div>
 ```
 
-::: {.newidea}
-**In one sentence.** Two notes sound smooth together when their overtones line up, so instruments with different overtones can favour different scales, as Sethares argues (after Plomp and Levelt).
-:::
-
-::: {.gist}
-**The recipe on this page, in brief.** Two notes sound rough when their [partials](../instruments-as-operators/glossary.qmd#partial) sit close together but not on top of each other, so they [beat](../instruments-as-operators/glossary.qmd#beats); the roughness of two notes is computed from their spectra. So the recipe now runs one step further, from the spectrum to which intervals sound smooth.
-
-1. *Newton's law* on a slice of a metal bar gives the bending equation of [post 2](../where-the-equations-come-from/index.qmd#bar).
-2. *The operator* is again $\kappa^2\,d^4/dx^4$, now with both ends free; a string's is $-c^2\,d^2/dx^2$ with both ends tied ([post 2](../where-the-equations-come-from/index.qmd#string)).
-3. *Its spectrum*: the bar's frequencies sit at 1, 2.756, 5.404, … times the lowest, off the lines; the string's sit on them.
-4. *On the diagram*, here the roughness curve computed from those spectra: a string's smooth intervals are simple whole-number ratios such as 3 : 2 and 2 : 1; a bar's smooth intervals move, and the exact octave is no longer one of them.
-5. *What we hear*: the octave that is smooth on a string is not the smoothest interval on a bar.
-
-[Skip to what we hear](#what-we-hear) if you only want the answer.
-
-The engineer and musician William Sethares, building on Plomp and Levelt's listening experiments, argues that this is one reason scales fit the instruments they are played on.
-:::
+The reason, in one sentence: **partials that sit close together but not on top of each other [beat](../instruments-as-operators/glossary.qmd#beats) and sound rough, and which intervals make two notes' partials coincide depends on where an instrument's partials sit.** The engineer and musician William Sethares, building on Reinier Plomp and Willem Levelt's listening experiments, argues that this is one reason scales fit the instruments they are played on.[^sethares1] It would also help explain why a Javanese gamelan, an orchestra of tuned metal bars and gongs, uses scales that fit no piano.[^sethares0]
 
 ## On the roughness curve
 
-The curve shows how rough two notes of the chosen sound are, against the ratio between their frequencies, from 1 (the same note) to 3. The dips are the smoothest intervals. With the string-like sound, up to the octave, the dips sit at 6 : 5, 5 : 4, 4 : 3, 3 : 2, 5 : 3 and 2 : 1: the intervals of Western harmony. Switch to the metal bar and the dips move. The octave, 2 : 1, is no longer a dip; a slightly narrower interval, about 1.96, is smoother.
+The dips of the curve are the smoothest intervals. It shows how rough two notes of the chosen sound are, against the ratio between their frequencies, from 1 (the same note) to 3. With the string-like sound, up to the octave, the dips sit at 6 : 5, 5 : 4, 4 : 3, 3 : 2, 5 : 3 and 2 : 1: the intervals of Western harmony. Between them sit rough intervals such as the [semitone](../instruments-as-operators/glossary.qmd#semitone), the smallest step on a piano. Switch to the metal bar and the dips move. The octave, 2 : 1, is no longer a dip; a slightly narrower interval, about 1.96, is smoother.
 
 ## Roughness, computed from the spectrum
 
-*Mathematics used: $e^x$ and $\ln$, and cosh, sinh and a determinant as on the kalimba page. The bar's spectrum follows the recipe of [post 3](../when-an-equation-has-a-spectrum/index.qmd).*
+**Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies ([post 1](../what-you-hear/index.qmd#beats)). Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart you hear two separate, smooth tones. In 1965 Plomp and Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness.[^pl]
 
-**Close partials beat.** Two pure tones close in frequency produce beats: their sum swells and fades at the difference of their frequencies. Slow beats sound like a wobble, faster ones like roughness, and once the tones are far enough apart the roughness fades away and you hear two separate, smooth tones. In 1965 Reinier Plomp and Willem Levelt asked listeners how dissonant pairs of pure tones sounded, as a function of their separation; for two pure tones, the answers tracked this roughness.
-
-**The roughness of two pure tones.** Sethares fitted a formula to Plomp and Levelt's results. For two pure tones of equal loudness, the lower at frequency $f$ and the other $x$ hertz above it, the roughness is
+**The roughness of two pure tones.** Sethares fitted a formula to Plomp and Levelt's results.[^sethares2] For two pure tones of equal loudness, the lower at frequency $f$ and the other $x$ hertz above it, the roughness is
 $$
 \delta(f, x) = e^{-3.5\,s\,x} - e^{-5.75\,s\,x}, \qquad s = \frac{0.24}{0.021\,f + 19},
 $$
@@ -88,11 +67,22 @@ Here the list $f_1, f_2, \dots$ holds the partials of both notes: those of the l
 
 ## The metal bar's spectrum
 
-A glockenspiel bar is a uniform metal bar resting on soft supports, so both of its ends are free. Its operator is the bar's operator derived from Newton's law in [post 2](../where-the-equations-come-from/index.qmd#bar), $A = \kappa^2\,d^4/dx^4$ with $\kappa^2 = EI/\rho S$; only the ends differ. A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ a mode $X$ must satisfy $X'' = 0$ and $X''' = 0$.
+A glockenspiel bar is a uniform metal bar resting on soft supports, so both of its ends are free. Its operator is the bar's operator derived from Newton's law in [post 3](../other-instruments-same-recipe/index.qmd#glockenspiel),[^fr1] $A = \kappa^2\,d^4/dx^4$ with $\kappa^2 = EI/\rho S$; only the ends differ. A free end carries no bending moment and no shear force, so at both $x = 0$ and $x = L$ a mode $X$ must satisfy $X'' = 0$ and $X''' = 0$.
 
-The spectrum follows the kalimba page's steps, with these new end conditions. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
+::: {.result}
+**The free bar's operator:** $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $X'' = X''' = 0$ at both ends.
 
-1. **Four candidate shapes.** As on the kalimba page, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
+**Its spectrum:** the eigenvalue $0$, twice (sliding and tilting, which make no sound), and the eigenvalues $\lambda_n = \kappa^2\beta_n^4$, where $\cos\beta_n L\,\cosh\beta_n L = 1$, $\beta_n > 0$.[^eb] The frequencies are $f_n = \sqrt{\lambda_n}/2\pi = \kappa\beta_n^2/2\pi$, in the ratios $1 : 2.756 : 5.404 : 8.933$: off the lines.
+
+In words: the same bar as the kalimba's, but with both ends free its overtones sit at different places, still far from whole numbers.
+:::
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Solving for the free bar's modes <span class="needs">cosh, sinh and a determinant</span></summary>
+
+The spectrum follows the steps of post 3's kalimba fold, with these new end conditions. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
+
+1. **Four candidate shapes.** As for the kalimba in post 3, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
 2. **The left end is free.** Nothing bends or pushes the bar at $x = 0$: $X''(0) = \beta^2(-b_1 + b_3) = 0$ and $X'''(0) = \beta^3(-b_2 + b_4) = 0$, so $b_3 = b_1$ and $b_4 = b_2$. Then $X = b_1(\cos\beta x + \cosh\beta x) + b_2(\sin\beta x + \sinh\beta x)$.
 3. **The right end is free.** The same two conditions at $x = L$. Dividing by $\beta^2$ and $\beta^3$, and writing $c_1 = \cos\beta L$, $s_1 = \sin\beta L$, $c_2 = \cosh\beta L$, $s_2 = \sinh\beta L$ for short:
 $$
@@ -104,41 +94,38 @@ $$
 $$
 5. **The roots.** $\lambda = 0$ is also an eigenvalue: $X'''' = 0$ with free ends leaves exactly $X = a + bx$, belonging to the bar sliding ($X = 1$) or tilting ($X = x$) as a whole without bending, which makes no sound. The other roots are $\beta L = 4.7300,\ 7.8532,\ 10.9956,\ 14.1372, \dots$, computed on this page.
 
-::: {.result}
-**The free bar's operator:** $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $X'' = X''' = 0$ at both ends.
+The same steps with one end clamped give the kalimba's tine, worked on [the kalimba page](../other-instruments-same-recipe/kalimba.qmd).
 
-**Its spectrum:** the eigenvalue $0$, twice (sliding and tilting, which make no sound), and the eigenvalues $\lambda_n = \kappa^2\beta_n^4$, where $\cos\beta_n L\,\cosh\beta_n L = 1$, $\beta_n > 0$. The frequencies are $f_n = \sqrt{\lambda_n}/2\pi = \kappa\beta_n^2/2\pi$, in the ratios $1 : 2.756 : 5.404 : 8.933$: off the lines.
-
-In words: the same bar as the kalimba's, but with both ends free its overtones sit at different places, still far from whole numbers.
+</details>
 :::
 
-**What we assumed.** The bar assumptions, as in post 2 (small slopes, a uniform bar, no rotational inertia or shear deformation of the slices, no damping), and that a glockenspiel bar resting on soft supports near its fundamental's still points vibrates as if both ends were free.
+**What we assumed.** The bar assumptions of post 3 (small slopes, a uniform bar, no rotational inertia or shear deformation of the slices, no damping), and that a glockenspiel bar resting on soft supports near its fundamental's still points vibrates as if both ends were free.
 
-[]{#what-we-hear}**A metal bar moves the dips.** With the bar's partials at 1, 2.756, 5.404 and 8.933 times the lowest, the coincidences happen elsewhere. At a ratio of 2.756, the upper note's lowest partial lands on the lower note's second. At about 1.961, the upper note's second partial lands on the lower note's third ($1.961 \times 2.756 \approx 5.404$), and that is the dip just below the octave. At exactly 2, nothing lines up. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too.)
+[]{#what-we-hear}**A metal bar moves the dips.** With the bar's partials at 1, 2.756, 5.404 and 8.933 times the lowest, the coincidences happen elsewhere. At a ratio of 2.756, the upper note's lowest partial lands on the lower note's second. At about 1.961, the upper note's second partial lands on the lower note's third ($1.961 \times 2.756 \approx 5.404$), and that is the dip just below the octave. At exactly 2, nothing lines up. (Xylophone and marimba bars are thinned underneath, in the middle, to move the first overtone onto a whole-number multiple, 3 on a xylophone and 4 on a marimba; gamelan bars are shaped too.[^fr2])
 
 ## What the spectrum does not decide {#not-decide}
 
-**Sethares's hypothesis.** The roughness curve of this page is what Sethares calls a *dissonance curve*. That an instrument's spectrum favours the scales whose steps sit at the dips of its dissonance curve is his hypothesis, built on Plomp and Levelt's experiments on how dissonant pairs of pure tones sound; the mathematics on this page computes the dips, and does not by itself show that musicians chose their scales by them.
+**Sethares's hypothesis.** The roughness curve of this page is what Sethares calls a *dissonance curve*. That an instrument's spectrum favours the scales whose steps sit at the dips of its dissonance curve is his hypothesis, built on Plomp and Levelt's experiments;[^sethares3] the mathematics on this page computes the dips, and does not by itself show that musicians chose their scales by them.
 
-**The gamelan.** Sethares measured the spectra of gamelan metallophones, instruments of tuned metal bars, and reports that "the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans". The demo's bars are idealized, not measured gamelan bars, so it shows the mechanism, not his result; real gamelan bars are shaped by their makers, and tunings vary from one gamelan to another.
+**The gamelan.** Sethares measured the spectra of gamelan metallophones, instruments of tuned metal bars, and reports that "the dissonance curve for these metallophones have minima that occur at or near the scale steps used by the gamelans".[^sethares4] The demo's bars are idealized, not measured gamelan bars, so it shows the mechanism, not his result; real gamelan bars are shaped by their makers, and tunings vary from one gamelan to another.
 
-**Roughness is not the whole story.** The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for [consonant](../instruments-as-operators/glossary.qmd#consonance) chords followed *harmonicity*, whether the frequencies fit one [harmonic series](../instruments-as-operators/glossary.qmd#harmonic-series), more than it followed beating, and grew with musical training. In 2016 McDermott and colleagues found that the Tsimane', a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.
+**Roughness is not the whole story.** The curve measures sensory roughness, which is one ingredient of what sounds pleasant, not all of it. In a study of more than 250 American college students, Josh McDermott, Andriana Lehr and Andrew Oxenham found in 2010 that liking for [consonant](../instruments-as-operators/glossary.qmd#consonance) chords followed *harmonicity*, whether the frequencies fit one [harmonic series](../instruments-as-operators/glossary.qmd#harmonic-series), more than it followed beating, and grew with musical training.[^mcd1] In 2016 McDermott and colleagues found that the Tsimane', a society in the Bolivian Amazon with little exposure to Western music, rated consonant and dissonant chords as equally pleasant, although they disliked roughness just as other groups did.[^mcd2] How much roughness shaped the world's scales is an open question, since what a culture finds pleasant is also learned.
 
-## What we found
+## Next
 
-Two notes sound smooth together when their partials coincide or sit far apart, so the dips of the roughness curve, computed from an instrument's spectrum, sit at simple whole-number ratios for a string and move for a free bar, which loses the exact octave. Sethares argues, after Plomp and Levelt, that this is one reason instruments and their scales fit each other; how much it shaped the world's music is an open question, since what a culture finds beautiful is also learned. The [recipe cards](../instruments-case-by-case/index.qmd#recipe-cards) put every instrument's operator and spectrum side by side.
+The [entries of post 3](../other-instruments-same-recipe/index.qmd) put every instrument's operator and spectrum side by side; [back to the series](../instruments-as-operators/index.qmd).
 
-[Back to the series](../instruments-as-operators/index.qmd)
-
-::: {.refs}
-**References.** N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba).
-W. A. Sethares, "Adaptive tunings for musical scales", *Journal of the Acoustical Society of America* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
-W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, 2nd ed., Springer, 2005 ([book site](https://sethares.engr.wisc.edu/ttss.html); quotation from chapter 1, p. 6, of the [book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
-R. Plomp and W. J. M. Levelt, "Tonal consonance and critical bandwidth", *Journal of the Acoustical Society of America* 38 (1965), 548–560, as cited by Sethares.
-J. H. McDermott, A. J. Lehr and A. J. Oxenham, "Individual differences reveal the basis of consonance", *Current Biology* 20 (2010), 1035–1041 ([summary](https://www.sciencedaily.com/releases/2010/05/100520131431.htm)).
-J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, "Indifference to dissonance in native Amazonians reveals cultural variation in music perception", *Nature* 535 (2016), 547–550 ([summary](https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713)).
-The free bar's modes: Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory).
-:::
+[^sethares0]: Sethares, [*Tuning, Timbre, Spectrum, Scale*](https://sethares.engr.wisc.edu/ttss.html), 2005, chapter 1 ([book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)), on the gamelan's metallophones and scales.
+[^sethares1]: W. A. Sethares, *Tuning, Timbre, Spectrum, Scale*, 2nd ed., Springer, 2005 ([book site](https://sethares.engr.wisc.edu/ttss.html)).
+[^pl]: R. Plomp and W. J. M. Levelt, [Tonal consonance and critical bandwidth](https://www.mpi.nl/publications/item66382/tonal-consonance-and-critical-bandwidth), *J. Acoust. Soc. Am.* 38 (1965), 548–560, as cited by Sethares.
+[^sethares2]: W. A. Sethares, "Adaptive tunings for musical scales", *J. Acoust. Soc. Am.* 96 (1994), 10–18 ([PDF](https://minds.wisconsin.edu/bitstream/handle/1793/9494/file_1.pdf?sequence=1)), for the roughness formula.
+[^fr1]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 19 (mallet percussion: glockenspiel, xylophone, marimba).
+[^eb]: For the free-end conditions and the bar's modes: Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory).
+[^fr2]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 1998, chapter 19.
+[^sethares3]: Sethares, [*Tuning, Timbre, Spectrum, Scale*](https://sethares.engr.wisc.edu/ttss.html), 2005, for the dissonance curve and the hypothesis.
+[^sethares4]: Sethares, *Tuning, Timbre, Spectrum, Scale*, 2005, chapter 1, p. 6 ([book PDF](https://sethares.engr.wisc.edu/paperspdf/ttss.pdf)).
+[^mcd1]: J. H. McDermott, A. J. Lehr and A. J. Oxenham, "Individual differences reveal the basis of consonance", *Current Biology* 20 (2010), 1035–1041 ([summary](https://www.sciencedaily.com/releases/2010/05/100520131431.htm)).
+[^mcd2]: J. H. McDermott, A. F. Schultz, E. A. Undurraga and R. A. Godoy, "Indifference to dissonance in native Amazonians reveals cultural variation in music perception", *Nature* 535 (2016), 547–550 ([summary](https://news.mit.edu/2016/music-tastes-cultural-not-hardwired-brain-0713)).
 
 ```{=html}
 <script src="core.js"></script>
@@ -210,7 +197,3 @@ The free bar's modes: Wikipedia, [Euler–Bernoulli beam theory](https://en.wiki
 })();
 </script>
 ```
-
-::: {.made #how-this-was-made}
-*How this was made.* I chose the questions the series answers and planned the key mathematics. Claude, an AI model made by Anthropic, drafted the derivations, the prose and the code for every demo, in conversation with me. Before publishing, separate Claude agents reviewed each post, reading it as a high-school student, a math undergraduate, a math PhD student, a mathematician and a musician, and another checked every source; their corrections are in the text. Mistakes may remain.
-:::
