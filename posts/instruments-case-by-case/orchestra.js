@@ -382,6 +382,14 @@
     return best;
   }
   O.sounding = sounding;
+  // on a card, a lane whose voice is silent at time t shows its last stroke's spectrum, faint, so the diagram never sits empty
+  function soundingOrLast(notes, fam, t, only) {
+    var snd = sounding(notes, fam, t, only); if (snd) return snd;
+    var last = null; for (var i = 0; i < notes.length; i++) { var n = notes[i]; if (n.fam === fam && (!only || n.v === only) && (!last || Math.abs(n.t - t) < Math.abs(last.t - t))) last = n; }
+    if (!last) return null;
+    var sp = partsOf(last.v, last.k);
+    return { n: last, base: sp.base, v: last.v, faint: true, parts: sp.parts.map(function (p) { return { ratio: p.ratio, a: Math.abs(p.amp) / sp.m * 0.8, thud: p.thud }; }) };
+  }
 
   // the spectrum diagram: gray lines at whole-number multiples of the base, one stem per mode
   function ruler(g, x, y, w, h, fam, snd, rmax, big) {
@@ -398,7 +406,7 @@
       if (p.ratio > rmax + 0.3) return;
       var hh = (base - top) * Math.min(1, p.a);
       if (hh < 1.5) return;
-      g.strokeStyle = rgba(f.hue, p.thud ? 0.4 : 1); g.lineWidth = p.thud ? lw * 0.6 : lw; g.lineCap = "round";
+      g.strokeStyle = rgba(f.hue, (p.thud ? 0.4 : 1) * (snd.faint ? 0.4 : 1)); g.lineWidth = p.thud ? lw * 0.6 : lw; g.lineCap = "round";
       g.beginPath(); g.moveTo(X(p.ratio), base); g.lineTo(X(p.ratio), base - hh); g.stroke();
     });
     var hz = snd.v === "bassdrum" ? snd.base : C.mtof(snd.n.k), nm = spell(snd.n.k);
@@ -548,9 +556,9 @@
       lab("4", "On the spectrum diagram", 606, a0);
       if (f.id === "membrane") {
         text(g, "bass drum: computed from this operator", VX, 606, 24, rgba(MUT, a0), { italic: true });
-        ruler(g, LX, 618, W - 2 * LX, 168, f.id, sounding(tl.notes, f.id, t, "bassdrum"), 10, false);
+        ruler(g, LX, 618, W - 2 * LX, 168, f.id, soundingOrLast(tl.notes, f.id, t, "bassdrum"), 10, false);
         text(g, "timpani: measured, not derived; the lines are multiples of a base an octave below its note", VX, 812, 24, rgba(MUT, a0), { italic: true });
-        ruler(g, LX, 824, W - 2 * LX, 132, f.id, sounding(tl.notes, f.id, t, "timpani"), 10, false);
+        ruler(g, LX, 824, W - 2 * LX, 132, f.id, soundingOrLast(tl.notes, f.id, t, "timpani"), 10, false);
       } else ruler(g, LX, 618, W - 2 * LX, 300, f.id, sounding(tl.notes, f.id, t), 10, true);
       var yv = f.id === "membrane" ? 990 : 982;
       al = fade(t1, 5.4); lab("5", "What you hear", yv, al);
