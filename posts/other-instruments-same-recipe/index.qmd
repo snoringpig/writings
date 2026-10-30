@@ -3,7 +3,7 @@ title: "Other instruments, same recipe"
 subtitle: "The Shape of a Sound · 3"
 date: 2026-10-30T12:00:00
 categories: [math, music, the-shape-of-a-sound]
-description: "Post 2's recipe run on a piano, a kalimba, a glockenspiel, two drums, a bowed violin, a flute, a clarinet, a harmonica and a theremin: struck and plucked instruments sound at the frequencies of their own eigenvalues; bowed and blown ones repeat one cycle."
+description: "Post 2's recipe run on a piano, a kalimba, a glockenspiel, two drums, a bowed violin, a flute, a clarinet, a harmonica and a theremin: most struck and plucked instruments sound at the frequencies of their own eigenvalues; bowed and blown ones repeat one cycle."
 format:
   html:
     html-math-method: katex
@@ -25,7 +25,7 @@ Builds on [post 2, One string, end to end](../one-string-end-to-end/index.qmd), 
 [The series in one paragraph](../instruments-as-operators/index.qmd#the-series-in-one-paragraph)
 
 ::: {.newidea}
-**In one sentence.** The other instruments run the string's recipe with other numbers: struck and plucked ones sound at the frequencies of their own eigenvalues, wherever those fall; bowed and blown ones, and the theremin, repeat one cycle, so their partials sit exactly on the whole-number lines.
+**In one sentence.** The other instruments run the string's recipe with other numbers: most struck and plucked ones sound at the frequencies of their own eigenvalues, wherever those fall; bowed and blown ones, and the theremin, repeat one cycle, so their partials sit exactly on the whole-number lines.
 :::
 
 ## The orchestra {#orchestra}
@@ -84,7 +84,7 @@ document.querySelectorAll("a[data-t]").forEach(function (a) { a.addEventListener
 </script>
 ```
 
-Every instrument below is a problem of the same shape as the string's: an equation, how the object is held (its [boundary conditions](../instruments-as-operators/glossary.qmd#boundary-condition)), and how it starts or how the player drives it. For the ringing ones, the [theorem of post 2](../one-string-end-to-end/index.qmd#completeness) holds in the same form: each of these operators is [self-adjoint](../instruments-as-operators/glossary.qmd#self-adjoint) and $\geq 0$ on a bounded object with a reasonable edge (precisely, it has a [compact resolvent](../instruments-as-operators/glossary.qmd#compact-resolvent)), so it has an [orthonormal basis](../instruments-as-operators/glossary.qmd#orthonormal) of [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction), drifts ($\lambda = 0$) split off (Sturm–Liouville for strings and tubes; a compact [Green's operator](../instruments-as-operators/glossary.qmd#green) for bars; Rellich for drums; Courant–Hilbert, vol. 1). A drift is a shape with $\lambda = 0$, which moves as $a + bt$ instead of swinging. The kettledrum is the exception: its air loading and radiation take it outside this theorem, which is why its ratios are measured. Each of the others runs post 2's recipe with its own eigenfunctions and eigenvalues, and with frequencies $f_n = \sqrt{\lambda_n}/2\pi$.
+Every instrument below is a problem of the same shape as the string's: an equation, how the object is held (its [boundary conditions](../instruments-as-operators/glossary.qmd#boundary-condition)), and how it starts or how the player drives it. For the ringing ones, the [theorem of post 2](../one-string-end-to-end/index.qmd#completeness) holds in the same form: each of these operators is [self-adjoint](../instruments-as-operators/glossary.qmd#self-adjoint) and $\geq 0$ on a bounded object with a reasonable edge (precisely, it has a [compact resolvent](../instruments-as-operators/glossary.qmd#compact-resolvent)), so it has an [orthonormal basis](../instruments-as-operators/glossary.qmd#orthonormal) of [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction), drifts ($\lambda = 0$) split off (Sturm–Liouville for strings and tubes; a compact [Green's operator](../instruments-as-operators/glossary.qmd#green) for bars; Rellich for drums; Courant–Hilbert, vol. 1). A drift is a shape with $\lambda = 0$, which moves as $a + bt$ instead of swinging. The kettledrum is the exception: its radiation, sound carried away into the unbounded air around it, takes it outside this theorem, which is why its ratios are measured. The air's added mass alone would not (the drums entry's toy model of the air stays inside). Each of the others runs post 2's recipe with its own eigenfunctions and eigenvalues, and with frequencies $f_n = \sqrt{\lambda_n}/2\pi$.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>The three names in the theorem <span class="needs">uses Hilbert spaces</span></summary>
@@ -100,7 +100,7 @@ The entries come in two kinds. A *ringing* entry is struck or plucked, then left
 
 So a self-sustained entry has two spectra. The *resonator's spectrum* is that of the part being driven, the string, the air column, the reed or the circuit: the eigenvalues of its operator, the frequencies at which it would ring if struck. The *sound's spectrum* is that of one repeating cycle at a playing frequency near a resonance, so its partials are exact whole-number multiples ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)); the drive's waveform and the [resonator](../instruments-as-operators/glossary.qmd#resonator) (for the violin, also the body) decide which are strong.
 
-Each entry gives its problem, its spectrum, a demo, what you hear, which of post 2's [six conditions](../one-string-end-to-end/index.qmd#conditions) it keeps, and one musical fact. In every demo the stems are the partials of the sound on the pitch ruler, taller when stronger, and the picture moves with the same partials at the same strengths, slowed down so that one swing of the lowest takes about a second, and enlarged.
+Each entry gives its problem, its spectrum, a demo, what you hear, which of post 2's [six conditions](../one-string-end-to-end/index.qmd#conditions) it keeps, and one musical fact. In every demo the stems are the partials of the sound on the pitch ruler, taller when stronger, and in ringing entries they shrink as each partial fades. The picture moves at the same frequencies, slowed down so that one swing of the lowest takes about a second, and enlarged; where its strengths differ from the stems', the caption says why.
 
 ## A piano {#piano}
 
@@ -109,7 +109,7 @@ $$
 \begin{gathered}
 u_{tt} = c^2u_{xx} - \kappa^2u_{xxxx} \quad (0 < x < L), \\
 u = u_{xx} = 0 \ \text{ at } x = 0, L, \\
-u(x, 0),\ u_t(x, 0)\text{: left by the hammer.}
+u(x, 0) = 0, \quad u_t(x, 0) = v_0(x)\text{: the hammer's blow, concentrated near } x = L/8.
 \end{gathered}
 $$
 Here $c^2 = T/\mu$, tension over mass per length; $\kappa^2 = EI/\mu$, with $E$ steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus) and $I = \pi d^4/64$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment) of a wire of diameter $d$. The ends are [pinned](../instruments-as-operators/glossary.qmd#pinned): held, free to pivot.
@@ -128,13 +128,13 @@ each partial a little sharp of its line, more so the higher it is (Fletcher and 
   <canvas class="gsk" role="img" aria-label="A piano wire between two pins, swinging in its first twelve modes"></canvas>
   <svg class="spec" viewBox="0 0 320 100" role="img" aria-label="The piano note's partials, each a little sharp of its whole-number line"></svg>
   <div class="controls"><button type="button" class="primary" data-gplay>▶ Play</button><span class="cap">motion slowed and enlarged</span></div>
-  <p class="cap">Middle C, struck an eighth of the way along, where the 8th mode stands still, so its stem is nearly zero. Computed: the stem positions, with B = 4.4 × 10⁻⁴, a rough value for a middle C wire. Modelled: each mode starts in proportion to its height under the hammer, with a roll-off for the felt. Illustrative: the fading times.</p>
+  <p class="cap">Middle C, struck an eighth of the way along, where the 8th mode stands still, so in the model its stem is zero. Computed: the stem positions, with B = 4.4 × 10⁻⁴, a rough value for a middle C wire. Modelled: each mode starts in proportion to its height under the hammer, with a roll-off for the felt. Illustrative: the fading times.</p>
 </div></div>
 ```
 
 **What you hear.** A clear note whose upper partials run slightly sharp; the player controls the hammer's speed (harder is louder and brighter, as the felt stiffens when squashed), the key's release, which drops a felt damper on the wire, and the pedals, none of which moves a frequency ([A Piano](../a-piano/index.qmd)).
 
-**Post 2's conditions.** All six hold while the key is down; the damper, friction at one place, breaks *no friction, or friction the sines split*, like post 2's light touch.
+**Post 2's conditions.** All six hold while the key is down. The damper is friction over a short stretch that, unlike post 2's light touch, reaches every mode, so it breaks *no friction, or friction the sines split*; landing at one moment, it also breaks *unchanging in time*.
 
 **Musical fact.** The second partial exceeds twice the fundamental by a factor of about $1 + 3B/2$, so an exact 2 : 1 octave [beats](../instruments-as-operators/glossary.qmd#beats); tuners widen octaves, most at the keyboard's ends, a stretch Railsback measured (Railsback 1938).
 
@@ -178,7 +178,7 @@ Here $\kappa^2 = EI/\rho S$, with $\rho$ the density, $S$ the cross-section's ar
   <canvas class="gsk" role="img" aria-label="A kalimba tine clamped on the left, released from a bent shape and swinging"></canvas>
   <svg class="spec" viewBox="0 0 320 100" role="img" aria-label="The tine's partials at 1, 6.27 and 17.55 times its lowest frequency, off the whole-number lines"></svg>
   <div class="controls"><button type="button" class="primary" data-gplay>▶ Play</button><span class="cap">motion slowed and enlarged</span></div>
-  <p class="cap">A tine at A4, 440 Hz, pushed at its tip and let go. Computed: the stem positions and each stem's starting height, the push on the bridge (the shear force at the clamp) from the cubic start. Illustrative: the fading times, chosen to match Chapman's observation that the overtones die at once. The tine is drawn as it moves; in displacement its first overtone is only 2.5% of the fundamental, so the picture shows mostly the first mode, while in the push on the bridge it starts at 55%.</p>
+  <p class="cap">A tine at A4, 440 Hz, pushed at its tip and let go. Computed: the stem positions and each stem's starting height, the push on the bridge (the shear force at the clamp) from the cubic start. Illustrative: the fading times, chosen to match Chapman's observation that the overtones die within a fraction of a second; the stems shrink as each partial fades. The tine is drawn as it moves; in displacement its first overtone is only 2.5% of the fundamental, so the picture shows mostly the first mode, while in the push on the bridge it starts at 55%.</p>
 </div></div>
 ```
 
@@ -232,7 +232,7 @@ using $c_1^2 + s_1^2 = 1$ and $c_2^2 - s_2^2 = 1$. So $\cos\beta L\,\cosh\beta L
 ::: {.derive}
 <details><summary><span class="label">Details</span>The cubic start, and how much of each mode it holds <span class="needs">uses integration by parts</span></summary>
 
-Before release, a push $F$ at the tip holds the tine still. Inside, nothing pushes, so $EI\,u_0'''' = 0$: $u_0$ is a cubic. The clamp gives $u_0(0) = u_0'(0) = 0$, the free tip carries no moment, $u_0''(L) = 0$, and the tip height is $h$: this leaves $u_0 = h\,x^2(3L - x)/2L^3$, smooth, with $u_0'''(L) = -3h/L^3 \neq 0$, the shear force $F = 3EIh/L^3$ of the thumb. Any shape with a corner has $u_x$ jumping, so $u_{xx}$ contains a spike and the bending energy $\tfrac12 EI\int(u_{xx})^2$ is infinite; a finite push cannot store infinite energy. In post 2's definition a solution is tested only against smooth shapes $\varphi$ in the operator's domain, through $\langle u(t), \varphi\rangle$, so $u_0$ needs only $\int u_0^2 < \infty$ and the failed condition at the tip costs nothing. Its coordinates: with the modes $X_n$ scaled so that $\int_0^L X_n^2 = L$, integrating by parts four times gives $\rho SL\,\omega_n^2\,a_n = F\,X_n(L)$, and $X_n(L) = \pm 2$ for every $n$, so $a_n \propto 1/\omega_n^2$ and $a_2/a_1 = 1/6.27^2 \approx 2.5\%$. The bridge feels the shear force at the clamp, $EI\,u_{xxx}(0)$, in which mode $n$ carries the extra factor $X_n'''(0) \propto \sigma_n\beta_n^3$ ($\sigma_1 = 0.734$, $\sigma_2 = 1.018$): there the second mode starts at about 55% of the first. Chapman measured one dominant overtone at 5.9 to 6.8 times the fundamental on a real kalimba, near the ideal 6.27, dying away quickly after the attack.
+Before release, a push $F$ at the tip holds the tine still. Inside, nothing pushes, so $EI\,u_0'''' = 0$: $u_0$ is a cubic. The clamp gives $u_0(0) = u_0'(0) = 0$, the free tip carries no moment, $u_0''(L) = 0$, and the tip height is $h$: this leaves $u_0 = h\,x^2(3L - x)/2L^3$, smooth, with $u_0'''(L) = -3h/L^3 \neq 0$, the shear force $F = 3EIh/L^3$ of the thumb. Any shape with a corner has $u_x$ jumping, so $u_{xx}$ contains a spike and the bending energy $\tfrac12 EI\int(u_{xx})^2$ is infinite; a finite push cannot store infinite energy. In post 2's definition a solution is tested only against smooth shapes $\varphi$ in the operator's domain, through $\langle u(t), \varphi\rangle$, so the series of post 2 needs only a start of finite bending energy with $u_0 = u_0' = 0$ at the clamp; the tip's natural conditions need not hold. Its coordinates: with the modes $X_n$ scaled so that $\int_0^L X_n^2 = L$, integrating by parts four times gives $\rho SL\,\omega_n^2\,a_n = F\,X_n(L)$, and $X_n(L) = \pm 2$ for every $n$, so $a_n \propto 1/\omega_n^2$ and $a_2/a_1 = 1/6.27^2 \approx 2.5\%$. The bridge feels the shear force at the clamp, $EI\,u_{xxx}(0)$, in which mode $n$ carries the extra factor $X_n'''(0) \propto \sigma_n\beta_n^3$ ($\sigma_1 = 0.734$, $\sigma_2 = 1.018$): there the second mode starts at about 55% of the first. Chapman measured one dominant overtone at 5.9 to 6.8 times the fundamental on a real kalimba, near the ideal 6.27, dying away quickly after the attack.
 
 </details>
 :::
@@ -260,7 +260,7 @@ Here $\kappa^2 = EI/\rho S$ as for the kalimba, and $v_0$ is the mallet's blow, 
 </div></div>
 ```
 
-**What you hear.** A bright, clear note: the overtones sit off the lines, but they are high and die quickly, leaving the fundamental (UBC PHYS 341 wiki, after Fletcher and Rossing); the player sets the loudness by the strength of the blow and, by where the mallet lands, how strongly each mode starts.
+**What you hear.** A bright, clear note: the overtones sit off the lines, but they are high and die quickly, leaving the fundamental (UBC PHYS 341 wiki, after Fletcher and Rossing); the player sets the loudness by the strength of the blow, the brightness by the mallet (brass or hard plastic is brighter than rubber or yarn), and, by where the mallet lands, how strongly each mode starts; an orchestral glockenspiel usually has no dampers, so players stop the ring with a hand.
 
 **Post 2's conditions.** $A$ is only $\geq 0$: the drifts break *$A$ is positive*. The supports hold them: the bar rests at its fundamental's two still points, $0.224L$ from each end, so they barely damp the fundamental.
 
@@ -352,9 +352,9 @@ Step through what separates the two drums: where each is struck, what surrounds 
 </div>
 ```
 
-**What you hear.** The bass drum booms: struck slightly off center, it starts mostly round modes, off the lines and fading fast, and the player shortens it by muffling the head with a leg or a towel (Aleo; Graham). The kettledrum plays a note: the air its head drags along pulls the spoke modes near 2 : 3 : 4 : 5 times a base, the timpanist strikes between halfway and three-quarters of the way out, where the lowest round mode starts more weakly than the spoke modes, and the round modes radiate their energy away within a fraction of a second (HyperPhysics; Fletcher and Rossing, chapter 18); the head's tension tunes it.
+**What you hear.** The bass drum booms: struck slightly off center, it starts mostly round modes, off the lines and fading fast, and the player shortens it by muffling the head with a leg or a towel (Aleo; Graham). The kettledrum plays a note: the air its head drags along pulls the spoke modes near 2 : 3 : 4 : 5 times a base, the timpanist strikes between halfway and three-quarters of the way out, where the lowest round mode starts more weakly than the spoke modes, and the round modes radiate their energy away within a fraction of a second (HyperPhysics; Fletcher and Rossing, chapter 18); the timpanist retunes it with a pedal that changes the head's tension.
 
-**Post 2's conditions.** The ideal head keeps all six. The kettledrum breaks *the ends make $A$ symmetric*: the air around its head, which loads it and carries energy away as sound, makes its problem non-self-adjoint, and its ratios here are measured.
+**Post 2's conditions.** The ideal head keeps all six. The kettledrum breaks post 2's symmetry condition, here through the air around the head rather than at the ends: sound carried away into the unbounded air makes its problem non-self-adjoint (the air's added mass alone would keep it symmetric), and its ratios here are measured.
 
 **Musical fact.** The kettledrum's note is named at the (1,1) mode, its principal tone, and the modes above sit a fifth, an octave and a major tenth higher, the ratios 3/2, 2 and 5/2 (HyperPhysics; Institute of Musical Acoustics, Vienna). A bass drum has a head at each end, commonly tuned about a fourth apart (HyperPhysics).
 
@@ -416,11 +416,11 @@ $$
 </div></div>
 ```
 
-**What you hear.** A held note at $f_1$; the player controls the loudness with the bow's speed and how near the bridge it plays, the brightness with the bow's force, and the length with the stroke (Wolfe).
+**What you hear.** A held note at $f_1$; the left hand chooses $L$ by stopping the string, and adds vibrato; the bow's speed and its distance from the bridge set the loudness, the bow's force and nearness to the bridge the brightness, and the stroke the length (Wolfe).
 
 **Post 2's conditions.** The string keeps all six; the bow breaks *linear* and feeds energy in.
 
-**Musical fact.** Helmholtz watched this motion through a vibration microscope by 1860. The model's cycle repeats exactly; Wolfe calls a real bowed string "nearly exactly periodic", though a real string's own modes run slightly sharp: bowing reduces its inharmonicity (Helmholtz 1860; Wolfe).
+**Musical fact.** Helmholtz watched this motion through a vibration microscope by 1860. The model's cycle repeats exactly; Wolfe calls a real bowed string "nearly exactly periodic", and the bow locks the partials onto the lines although a real string's own modes run slightly sharp (Helmholtz 1860; Wolfe).
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the equation comes from</summary>
@@ -469,11 +469,11 @@ $$
 </div></div>
 ```
 
-**What you hear.** A steady note; the player chooses $L$ with the keys, the loudness with the breath, and the register by blowing harder, which makes the tube jump to its next mode (Wolfe).
+**What you hear.** A steady note; the player chooses $L$ with the keys, the loudness with the breath, and the register with a faster, narrower airstream, which makes the tube jump to its next mode (Wolfe).
 
 **Post 2's conditions.** In this model the air column keeps all six; the jet breaks *linear*.
 
-**Musical fact.** With every hole closed, blowing ever harder sounds the tube's modes in turn, 1, 2, 3, 4, … times the lowest: the open tube's spectrum, heard as the harmonic series (Wolfe).
+**Musical fact.** With every hole closed, an ever faster, narrower airstream sounds the tube's modes in turn, 1, 2, 3, 4, … times the lowest: the open tube's spectrum, heard as the harmonic series (Wolfe).
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the equation comes from <span class="needs">uses partial derivatives, including mixed ones</span></summary>
@@ -629,7 +629,7 @@ A mixer multiplies the two oscillators' signals, and $\sin(2\pi f_1t)\sin(2\pi f
 
 ## What we found
 
-Every instrument here runs post 2's recipe: an equation, how the object is held, and a start or a drive. Struck and plucked, the piano, the kalimba, the glockenspiel and the bass drum sound at the frequencies of their own eigenvalues, a little sharp of the lines, far off them, or scattered between them, while the kettledrum's air pulls one set near the lines. Bowed and blown, the violin, the flute, the clarinet and the harmonica repeat one cycle, so their partials sit exactly on the lines, and the resonator decides only which are strong.
+Every instrument here runs post 2's recipe: an equation, how the object is held, and a start or a drive. Struck and plucked, the piano, the kalimba, the glockenspiel and the bass drum sound at the frequencies of their own eigenvalues, a little sharp of the lines, far off them, or scattered between them, while the kettledrum's air pulls one set near the lines. Bowed and blown, the violin, the flute, the clarinet and the harmonica repeat one cycle, and so does the theremin's circuit, so their partials sit exactly on the lines, and the drive and the resonator decide only which are strong.
 
 ## Next
 

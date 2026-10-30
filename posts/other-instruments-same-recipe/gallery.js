@@ -129,7 +129,7 @@
   function sketchOf(v) { return function (g, st, t, W, H) { O.sketch(g, v, { parts: st.map(function (p) { return { ratio: p.ratio, a: p.a }; }) }, t, 16, 6, W - 32, H - 12, acc(), false); }; }
   function range(n0, n1, step) { var out = []; for (var n = n0; n <= n1; n += step) out.push(n); return out; }
   var V = {
-    piano: { ring: true, f: 261.63, dur: 4, rmax: 10, parts: function () { return O.voices.piano.parts(60).parts; }, draw: sketchOf("piano") },
+    piano: { ring: true, f: 261.63, dur: 4, rmax: 11, parts: function () { return O.voices.piano.parts(60).parts; }, draw: sketchOf("piano") },
     kalimba: { ring: true, f: 440, dur: 3.5, rmax: 18, every: 3, offLabel: true, parts: function () { return M.kalimba.partials({ f1: 440 }); }, draw: drawTine },
     glockenspiel: { ring: true, f: C.mtof(84), dur: 3, rmax: 6, parts: function () { return O.voices.glock.parts(84).parts; }, draw: sketchOf("glock") },
     violin: { ring: false, f: 196, dur: 2.6, rmax: 10, ticks: range(1, 10, 1), parts: function () { return M.violin.partials(); }, draw: drawBowed },

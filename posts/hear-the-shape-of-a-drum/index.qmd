@@ -68,11 +68,11 @@ So the answer to Kac is no: different shapes can share every frequency. But the 
 
 ## 1 · Newton's law: the equation of motion
 
-*Mathematics used: the Laplacian (post 2), and counting.*
+*Mathematics used: the Laplacian (post 3), and counting.*
 
 This page asks what the spectrum says about the drum. First, the equation, which [post 3](../other-instruments-same-recipe/index.qmd#drums) derived step by step.
 
-Let the drumhead be a region $\Omega$ of the plane, in one piece, and let $u(x, y, t)$ be the height of the head above the point $(x, y)$ at time $t$. In post 2, Newton's law for one small patch of the head, pulled by the tension in its edges, gave the drum's equation
+Let the drumhead be a region $\Omega$ of the plane, in one piece, and let $u(x, y, t)$ be the height of the head above the point $(x, y)$ at time $t$. In post 3's drums entry, Newton's law for one small patch of the head, pulled by the tension in its edges, gave the drum's equation
 $$
 u_{tt} = c^2\,\Delta u \ \text{ inside } \Omega, \qquad u = 0 \ \text{ on the rim},
 $$
@@ -241,7 +241,7 @@ with equality only for the disk. Both sides can be heard, for a rim that is smoo
 Why do they share every frequency? Cut each drum into its seven triangles. Any mode of drum A can be rebuilt on drum B: fill each of B's triangles with three triangle-shaped pieces of the mode, taken from A's triangles, turned or flipped to fit, some with their signs reversed. With the right choice of pieces and signs, they join smoothly across every seam and stay still on B's rim, so the result is a mode of B, at the same frequency. The construction runs backwards too, so the two drums have exactly the same frequencies, with the same number of modes at each.
 
 ::: {.derive}
-<details><summary><span class="label">Details</span>Transplantation: carrying a mode from one drum to the other <span class="needs">uses the Laplacian (post 2)</span></summary>
+<details><summary><span class="label">Details</span>Transplantation: carrying a mode from one drum to the other <span class="needs">uses the Laplacian (post 3)</span></summary>
 
 Cut each drum along its seams into its seven triangles. Take any eigenfunction $X$ of drum A, with $-\Delta X = k^2 X$. On each triangle of drum B, place a sum of three pieces of $X$, each taken from one of A's triangles, turned or reflected to fit, and some with a minus sign. Each piece satisfies $-\Delta X = k^2 X$, so the sum does too, inside each triangle. With the right choice of pieces and signs, the result is zero on B's rim, and across every seam of B both its values and its slopes match. A function that satisfies the equation on both sides of a line, with values and slopes matching on the line, satisfies it across the line too, a standard fact about this equation. At the points where several seams meet, one more standard fact closes the gap: a solution that stays bounded around a single point, and satisfies the equation everywhere near it except possibly at the point itself, satisfies it there too. So the result is an eigenfunction of B with the same $k^2$, and so the same frequency. The construction can be reversed, so each eigenvalue has the same multiplicity on both drums.
 

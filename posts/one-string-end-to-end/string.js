@@ -122,10 +122,15 @@
     function read() {
       document.getElementById("tcXo").textContent = x0.toFixed(2) + " L";
       var sv = survivors(), txt;
+      var started = sv ? sv.filter(function (n) { return Math.abs(Math.sin(n * Math.PI * x0)) > 1e-6; }) : null;
       if (!sv) txt = "No touch: every mode the pluck starts sounds; lowest " + F1 + " Hz";
-      else txt = "Only modes with a still point under the finger keep ringing: " + sv.slice(0, 4).join(", ") + ", … · you hear " + (sv[0] * F1) + " Hz, " + NAMES[sv[0]];
+      else if (!started.length) txt = "Only modes " + sv.slice(0, 3).join(", ") + ", … could keep ringing, and the pluck at " + x0.toFixed(2) + " L started none of them (Bₙ = 0): near silence. Move the pluck point and pluck again";
+      else txt = "Only modes with a still point under the finger keep ringing: " + sv.slice(0, 4).join(", ") + ", … · you hear " + (started[0] * F1) + " Hz" + (NAMES[started[0]] ? ", " + NAMES[started[0]] : "");
       document.getElementById("tcRead").textContent = txt + " · plucked " + (x0 < 0.12 ? "near an end: bright" : x0 > 0.4 ? "near the middle: even modes weak, hollow" : "between an end and the middle");
       var parts = amps.map(function (a, i) { return { ratio: i + 1, amp: Math.abs(a) * (i + 1) * Math.exp(-gam[i] * 0.25) }; });
+      // scale against the strongest partial at the moment of the pluck, so that a touch that silences everything shows as silence
+      var ref = 0; amps.forEach(function (a, i) { ref = Math.max(ref, Math.abs(a) * (i + 1)); });
+      parts.push({ ratio: 1000, amp: ref });
       C.stems(document.getElementById("tcSpec"), parts, { W: 320, H: 96, rmax: 12, fs: 8, sw: 3, noOff: true });
     }
     function pluck() {

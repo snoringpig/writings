@@ -37,7 +37,7 @@ This post answers one question for one instrument: what does a plucked string do
 
 **The solution.** Spring $n$ swings at $f_n = nc/2L$, the pluck sets its amount, and that sum is the only solution.
 
-**The sound.** The frequencies are whole-number multiples of $f_1$, so the sound repeats and has the pitch $f_1$.
+**The sound.** The frequencies are whole-number multiples of $f_1$, so the sound repeats (nearly, once it fades) and has the pitch $f_1$.
 
 **What it took.** Six conditions; each instrument in [post 3](../other-instruments-same-recipe/index.qmd) keeps some and breaks others.
 :::
@@ -167,13 +167,13 @@ To repeat section 3 for the string we need its versions of "a column of heights"
 - **The operator.** $A = -c^2\,d^2/dx^2$, acting on the set $D(A)$ of shapes with a continuous second derivative on $[0, L]$ and $w(0) = w(L) = 0$. In words, $A$ takes a shape held still at both ends and returns minus $c^2$ times its curvature. The ends are part of $A$: the same formula on a different set of shapes is a different operator (section 13 has an example). The equation of section 1 reads $u_{tt} = -Au$.
 - **State.** The shape and the velocity at one moment, $(u(\cdot, t), u_t(\cdot, t))$. The equation is second order in time, so the state, not the shape alone, decides what happens next. For a mass on a spring the shape is one number $x$ and the state is $(x, x')$.
 
-**What a solution is.** The plucked triangle has a corner, where $u_{xx}$ does not exist, and the corner moves. So we ask the equation to hold only as seen through smooth test shapes $\varphi$. This needs no second derivative of $u$, and the pluck qualifies.
+**What a solution is.** The plucked triangle has a corner, where $u_{xx}$ does not exist, and the corner moves. So we ask the equation to hold only as seen through smooth test shapes $\varphi$. This loses nothing: smooth shapes vanishing at the ends can approximate any shape in mean square, so a shape $w$ with $\langle w, \varphi\rangle = 0$ for every such $\varphi$ is zero. And it needs no second derivative of $u$, so the pluck qualifies.
 
 *Definition (solution, weak sense).* A solution is a shape $u(t) \in L^2(0, L)$ for each $t \ge 0$, changing continuously with $t$ in the mean-square sense, such that for every $\varphi \in D(A)$ the number $\langle u(t), \varphi\rangle$ is twice differentiable in $t$ and
 $$
 \frac{d^2}{dt^2}\langle u(t), \varphi\rangle = -\langle u(t), A\varphi\rangle, \qquad \langle u(0), \varphi\rangle = \langle u_0, \varphi\rangle, \qquad \frac{d}{dt}\langle u(t), \varphi\rangle\Big|_{t = 0} = \langle v_0, \varphi\rangle .
 $$
-A smooth solution of section 1 satisfies this: multiply $u_{tt} = c^2u_{xx}$ by $\varphi$, integrate, and move both $x$-derivatives onto $\varphi$ by integrating by parts twice; the boundary terms vanish because $u$ and $\varphi$ vanish at the ends. Conversely, for a smooth $u$ the identity forces $u = 0$ at the ends, because the leftover boundary term is $c^2\,[u\,\varphi']_0^L$ and $\varphi'(0)$, $\varphi'(L)$ can be anything.
+A smooth solution of section 1 satisfies this: multiply $u_{tt} = c^2u_{xx}$ by $\varphi$, integrate, and move both $x$-derivatives onto $\varphi$ by integrating by parts twice; the boundary terms vanish because $u$ and $\varphi$ vanish at the ends. Conversely, for a smooth $u$ that satisfies $u_{tt} = c^2u_{xx}$ inside, the identity forces $u = 0$ at the ends, because the leftover boundary term is $c^2\,[u\,\varphi']_0^L$ and $\varphi'(0)$, $\varphi'(L)$ can be anything.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>The domain, and Sobolev spaces <span class="needs">uses functional analysis</span></summary>
@@ -356,7 +356,7 @@ At the bridge, $x = L$, the string pulls with the upward part of its tension, $-
 $$
 -T\,u_x(L, t) = T\sum_{n = 1}^{\infty}(-1)^{n+1}\,\frac{n\pi}{L}\,B_n\cos\omega_nt ,
 $$
-with sizes proportional to $nB_n \propto \sin(n\pi x_0/L)/n$, at the frequencies $f_n = nc/2L$. For the ideal pluck this force is a rectangular wave: constant, then jumping each time a corner reaches the bridge. Its series converges in mean square, not at every moment.
+with sizes proportional to $nB_n \propto \sin(n\pi x_0/L)/n$, at the frequencies $f_n = nc/2L$. For the ideal pluck this force is a rectangular wave: constant, then jumping each time a corner reaches the bridge. Its series converges at every moment (at a jump, to the midpoint), but not uniformly: next to each jump the partial sums overshoot, by an amount that does not shrink as more terms are added.
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 150" role="img" aria-label="The force of an ideally plucked string on the bridge over two periods, plucked a fifth of the way along: a rectangular wave, a short strong pull one way once per period and a weaker pull the other way the rest of the time. A thin line shows the sum of its first 12 partials, which overshoots next to each jump.">
@@ -372,7 +372,7 @@ with sizes proportional to $nB_n \propto \sin(n\pi x_0/L)/n$, at the frequencies
 The frequencies are whole-number multiples, $f_n = n f_1$, so in this lossless model the force, and the sound it drives, repeats with period $1/f_1$: we hear the pitch $f_1$ ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)). Section 12 adds the fading. Three things follow from the formula:
 
 - **Brightness.** Plucked near an end, $\sin(n\pi x_0/L)/n \approx \pi x_0/L$ for $n$ well below $L/x_0$: many partials start equally strong, and the sound is bright. Plucked at the middle, the even partials are missing, and the sound is hollow.
-- **Mellowness.** A fingertip makes a rounded start instead of a sharp corner, and a rounder start makes the high partials smaller, so the sound is mellower than with a pick.
+- **Mellowness.** A fingertip makes a rounded start instead of a sharp corner. Without a corner, integrating by parts as in the fold of section 10 shows that the coefficients fall faster than $1/n^2$: the high partials are smaller, and the sound is mellower than with a pick.
 - **Mersenne's law.** $f_1 = \dfrac{1}{2L}\sqrt{\dfrac{T}{\mu}}$: the pitch is inversely proportional to the length, rises with the square root of the tension and falls with the square root of the mass per length, as M. Mersenne stated in 1636.
 
 ```{=html}
@@ -387,7 +387,7 @@ The frequencies are whole-number multiples, $f_n = n f_1$, so in this lossless m
   <div class="controls"><button type="button" id="tcPluck" class="primary">Pluck</button></div>
   <svg class="spec" id="tcSpec" viewBox="0 0 320 96" style="max-width:520px" aria-label="The size of each partial in the force on the bridge, a quarter second after the pluck"></svg>
   <div class="readout" id="tcRead"></div>
-  <p class="cap">Slowed for the eye. Stems: the size of each partial in the force on the bridge, which is what the sound is made from, a quarter of a second after the pluck. The touch positions are measured from the left end. The fading rates are an illustrative choice, not measured; the finger adds a drain proportional to how much each mode moves under it (section 12).</p>
+  <p class="cap">Slowed for the eye. Stems: the size of each partial in the force on the bridge, which is what the sound is made from, a quarter of a second after the pluck, on the scale of the strongest partial at the pluck. The touch positions are measured from the left end. The fading rates are an illustrative choice, not measured; the finger adds a drain proportional to how much each mode moves under it (section 12).</p>
 </div>
 </div>
 ```
@@ -396,7 +396,7 @@ The frequencies are whole-number multiples, $f_n = n f_1$, so in this lossless m
 
 Friction makes the modes fade. Friction that acts the same everywhere along the string is split by the same sines, so each mode still fades on its own; friction at one point is not, and that is how a light touch picks out an octave.
 
-**Uniform friction.** Add a drag proportional to the velocity: $u_{tt} + \gamma u_t = c^2u_{xx}$, with $\gamma > 0$. Testing against $X_n$ as in Proposition 3 gives $q_n'' + \gamma q_n' + \lambda_nq_n = 0$: still one equation per mode. For $\gamma < 2\omega_n$ its solutions are $e^{-\gamma t/2}$ times a swing at angular frequency $\sqrt{\lambda_n - \gamma^2/4}$, that is, at frequency $\sqrt{\lambda_n - \gamma^2/4}/2\pi$, a shade below $f_n$. Real strings lose more at high frequencies, through the string's internal friction, the bridge and the air. Losses that grow with frequency, such as those in A. Chaigne and A. Askenfelt's model of a piano string, are still split by the sines, so each partial fades at its own rate. Those rates are measured or chosen, not derived here, and the demos label theirs as illustrative.
+**Uniform friction.** Add a drag proportional to the velocity: $u_{tt} + \gamma u_t = c^2u_{xx}$, with $\gamma > 0$, in the weak sense $\frac{d^2}{dt^2}\langle u, \varphi\rangle + \gamma\frac{d}{dt}\langle u, \varphi\rangle = -\langle u, A\varphi\rangle$. Testing against $X_n$ as in Proposition 3 gives $q_n'' + \gamma q_n' + \lambda_nq_n = 0$: still one equation per mode. For $\gamma < 2\omega_n$ its solutions are $e^{-\gamma t/2}$ times a swing at angular frequency $\sqrt{\lambda_n - \gamma^2/4}$, that is, at frequency $\sqrt{\lambda_n - \gamma^2/4}/2\pi$, a shade below $f_n$. Real strings lose more at high frequencies, through the string's internal friction, the bridge and the air. Losses that grow with frequency, such as those in A. Chaigne and A. Askenfelt's model of a piano string, are still split by the sines, so each partial fades at its own rate. Those rates are measured or chosen, not derived here, and the demos label theirs as illustrative.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Losses that the sines split, and a loss at one point <span class="needs">uses matrices</span></summary>
@@ -413,7 +413,7 @@ A loss term $\alpha u_t + \beta Au_t$ gives $q_n'' + (\alpha + \beta\lambda_n)q_
 Six conditions made every step work. Each is listed with what breaks without it, using the string itself where possible:
 
 - **The string is bounded.** On an infinite string there are no eigenfunctions with finite $\int X^2$, and the sum over $n$ becomes an integral over all wavenumbers, a Fourier integral.
-- **The ends make $A$ symmetric.** A bridge that absorbs energy puts a friction term into the boundary condition at $x = L$, and the boundary term of Proposition 1 no longer vanishes: the modes become complex and no longer orthogonal.
+- **The ends make $A$ symmetric.** A bridge that absorbs energy puts a friction term into the boundary condition at $x = L$, and the boundary term of Proposition 1 no longer vanishes; sound carried away into the air does the same through the object's surface. Either way the modes become complex and no longer orthogonal.
 - **$A$ is positive.** Let both ends slide on frictionless rings, so that $u_x = 0$ there. Then the constant shape has $\lambda = 0$, and the whole string drifts, $q = a + bt$. A negative $\lambda$ would make a coordinate grow exponentially.
 - **No friction, or friction the sines split.** Friction at one point couples the modes (section 12). The light touch keeps only the modes it cannot reach.
 - **Linear: small slopes.** A hard pluck stretches the string, so its tension, and its pitch, rise with the amplitude; as the sound fades, the pitch glides down.
