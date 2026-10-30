@@ -10,7 +10,7 @@
     { id: "electro", name: "Electrophone", inst: "Sine theremin", plain: "an electric circuit", law: "Kirchhoff’s law on", piece: "a coil and a capacitor",
       op: "A = \\frac{1}{LC}", held: "a single number, like a mass on a spring",
       spec: "f = \\frac{1}{2\\pi \\sqrt{LC}}", specNote: "",
-      verdict: "One stem: a pure tone. A real theremin runs two such circuits at radio frequencies, the hand changing C of one, and you hear the difference of their frequencies, with a few overtones.",
+      verdict: "One stem: a pure tone. A real theremin runs two such circuits at radio frequencies, the hand changing C of one, and you hear the difference of their frequencies, with overtones.",
       hue: [120, 230, 170], pan: 0.25, page: "oscillator", where: "The theremin: post 3" },
     { id: "chord", name: "Chordophone", inst: "Piano", plain: "a stiff string", law: "Newton’s law on", piece: "a short piece of stiff steel wire",
       op: "A = -c^2 \\frac{d^2}{dx^2} + \\kappa^2 \\frac{d^4}{dx^4}", held: "ends pinned",
