@@ -1,0 +1,357 @@
+---
+title: "Why instruments sound different"
+subtitle: "The Shape of a Sound · 4"
+date: 2026-11-07T18:00:00
+categories: [math, music, the-shape-of-a-sound]
+description: "The answers to the series' two questions. A string's or an air column's natural frequencies are whole-number multiples of the lowest, so its sound repeats and has a clear pitch; a drum skin's or a bar's are not. The families also differ in which partials are strong and how they fade. With six instruments side by side."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+    reference-location: margin
+resources: [core.js, ins.css]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 3 · Where p(t) comes from](../from-instrument-to-ear/index.qmd) · [5 · Natural frequencies are the spectrum of an operator →](../natural-frequencies/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [page 3](../from-instrument-to-ear/index.qmd). Uses sines; the derivations, in folds, use derivatives. About 15 minutes. Written in collaboration with Claude, Anthropic's AI model.
+:::
+
+::: {.result}
+**Question.** Why does a piano have a pitch you can hum while a drum gives a thud? And why do the families of instruments sound so different?
+
+**Answer.** The frequencies you hear are the instrument's natural frequencies (page 3). A string's or an air column's natural frequencies are whole-number multiples of the lowest, so its sound repeats and has a clear pitch; a drum skin's or a metal bar's are not. The families also differ in which partials are strong and in how they start and fade, set by how the note is started, how the instrument pushes the air, and how it loses energy.
+:::
+
+## Natural frequencies {#natural}
+
+A **natural frequency** of an object is a frequency at which it can swing on its own, once set going and left alone, all of it in one fixed shape, its **mode**. A plucked or struck object swings in a sum of its modes, so by page 3 the frequencies $f_n$ you hear are its natural frequencies. A bowed or blown note is different, and comes up below.
+
+```{=html}
+<style>
+.ins .wyla { font-family: var(--f-ui); font-size: 0.92rem; color: var(--ink); margin: 0; line-height: 1.45; }
+.ins .cgrid { display: grid; grid-template-columns: 8.6rem 1.15fr 1fr; gap: 0.25rem 0.9rem; align-items: center; }
+.ins .cgrid .hd { font-family: var(--f-ui); font-size: 0.8rem; color: var(--muted); }
+.ins .cgrid button { width: 100%; text-align: left; }
+.ins .cgrid canvas { height: 96px; }
+.ins .cgrid .fact { grid-column: 2 / -1; font-family: var(--f-ui); font-size: 0.88rem; line-height: 1.4; color: var(--ink); margin: 0 0 0.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+@media (max-width: 640px) {
+  .ins .cgrid { grid-template-columns: 1fr; }
+  .ins .cgrid .fact { grid-column: 1; }
+  .ins .cgrid .hd { display: none; }
+}
+</style>
+<div class="ins">
+<div class="panel" id="cmp">
+  <p class="wyla"><b>What you're looking at:</b> six instruments, one row each, every one playing middle C. In each row: its first three modes, the shapes it swings in, moving (slowed down a great deal; the higher modes swing faster), each labelled with its natural frequency as a multiple of the lowest; then the partials of its sound, one stem per partial at its frequency as a multiple of the lowest and as tall as its size at the start, against gray lines at whole-number multiples; then one line on what to notice. Press a name to hear it.</p>
+  <div class="cgrid" id="cgrid"><span class="hd hd0"></span><span class="hd">Its first three modes</span><span class="hd">The partials of its sound</span></div>
+  <p class="cap">The modes are those of the ideal object: a flexible string held at both ends; a stiff wire; the air in a tube closed at one end (clarinet) or open at both (flute), drawn as the pressure inside; a bar clamped at one end; a round skin held at its rim, orange rising and blue falling. The shaded band around each moving mode is its outline, the furthest it swings; on the skin, dashed lines mark where it stays still. Partials past 8 times the lowest that fall off the whole numbers are listed above the stems. The sounds are page 1's models; the drum is struck with a stick that stays on the skin for 1.5 ms.</p>
+</div>
+</div>
+```
+
+## Question 1: a clear pitch {#pitch}
+
+Put pages 2 and 3 together. A sound has a clear pitch when its partials sit at whole-number multiples of one frequency, or very nearly; and its partials are the instrument's natural frequencies. So the question is why a string's natural frequencies are whole-number multiples of the lowest and a drum's are not.
+
+**A string.** On a flexible, uniform string, a wave of any shape travels at the same speed, $c = \sqrt{T/\mu}$, where $T$ is the tension and $\mu$ the mass per unit length.[^frstring] A pluck sends waves running both ways. Each runs to an end, flips over, and comes back, and after the time $2L/c$, there and back along the string's length $L$, the whole string is back where it started. So the motion repeats exactly every $2L/c$ seconds, and a motion that repeats every $2L/c$ seconds is a sum of pure tones at whole-number multiples of $c/(2L)$. These are the natural frequencies:
+$$
+f_n = n\,\frac{c}{2L}, \qquad n = 1, 2, 3, \dots
+$$
+Mode $n$ fits $n$ half-waves between the ends, as the string's row in the table shows.
+
+::: {.derive}
+<details><summary><span class="label">Proof</span>The string's motion repeats every $2L/c$ seconds <span class="needs">derivatives, integrals</span></summary>
+
+The string's height $u(x, t)$ satisfies $u_{tt} = c^2u_{xx}$ for $0 < x < L$, with $u = 0$ at both ends (page 5 derives this equation). Let $\phi$ and $\psi$ be the starting height and speed, and let $\Phi$ and $\Psi$ be their extensions to the whole line that are odd about $0$ and repeat with period $2L$. Then d'Alembert's formula
+$$
+u(x, t) = \tfrac12\big(\Phi(x + ct) + \Phi(x - ct)\big) + \frac{1}{2c}\int_{x - ct}^{x + ct}\Psi(y)\,dy
+$$
+solves the equation, matches the start, and is $0$ at both ends because $\Phi$ and $\Psi$ are odd about $0$ and about $L$; it is the only solution (W. A. Strauss, *Partial Differential Equations: An Introduction*, 2nd ed., Wiley, 2008, sections 2.1 and 3.2). Replace $t$ by $t + 2L/c$: the arguments $x \pm ct$ move by $\pm 2L$, one period of $\Phi$, and the integral gains two full periods of $\Psi$, whose integral over a period is $0$ because $\Psi$ is odd. So $u(x, t + 2L/c) = u(x, t)$. A function of $t$ with period $P = 2L/c$ is a sum of sines and cosines of frequencies $k/P = kc/(2L)$, its Fourier series.
+
+The same holds for the air in a tube open at both ends, with $c$ the speed of sound, because the pressure is $0$ at an open end, as the height is at a fixed end of a string. A tube closed at one end, where the pressure's slope is $0$ instead, repeats every $4L/c$ and contains only the odd multiples of $c/(4L)$: 1, 3, 5, …
+
+</details>
+:::
+
+**An air column** works the same way: sound in the tube travels at one speed for every wavelength. A flute, open at both ends, has natural frequencies close to $1 : 2 : 3 : 4$; a clarinet, closed at the reed, close to $1 : 3 : 5 : 7$.[^wolfefc] Odd multiples only, but whole numbers all the same.
+
+**A drum** has no single length for waves to run along and back. Waves spread across the skin in two directions and reflect from a round rim, and the natural frequencies of an ideal round skin come out at $1 : 1.59 : 2.14 : 2.30 : 2.65 : \dots$ times the lowest:[^russell] no whole-number pattern. Page 5 computes them.
+
+**A metal bar**, such as a kalimba's tine, is a single length but resists bending, not stretching, and bending waves are faster the shorter they are. The higher modes, with shorter waves, swing disproportionately fast: $1 : 6.27 : 17.55$ for a bar clamped at one end.[^frbar] A piano wire is a string with a little of this stiffness, which pushes its higher partials slightly sharp: $1 : 2.001 : 3.005 : 4.013$ at middle C.[^fletcher]
+
+::: {.derive}
+<details><summary><span class="label">Derivation</span>Why stiffness spreads the frequencies <span class="needs">derivatives</span></summary>
+
+A wave $\sin(kx - 2\pi f t)$, with $k = 2\pi/\text{wavelength}$, travels at the speed $2\pi f/k$. On a string, $u_{tt} = c^2u_{xx}$ requires $2\pi f = ck$: the same speed $c$ for every $k$. On a bar, the bending equation $u_{tt} = -(EI/\rho S)\,u_{xxxx}$ (with $E$ the steel's Young's modulus, $I$ the second moment of area of its cross-section, $\rho$ its density and $S$ its cross-sectional area) requires $2\pi f = \sqrt{EI/\rho S}\,k^2$: the speed grows in proportion to $k$. A bar clamped at $x = 0$ and free at $x = L$ fits the waves with $kL = \beta_n$, the roots of $\cos\beta\cosh\beta = -1$, which are $1.875, 4.694, 7.855, \dots$, close to $(n - \tfrac12)\pi$. So $f_n \propto \beta_n^2$, in the ratios $1 : 6.27 : 17.55$. A piano wire has both terms, $(2\pi f)^2 = c^2k^2 + (EI/\mu)k^4$, and with $k = n\pi/L$ this gives $f_n = n f_0\sqrt{1 + Bn^2}$, where $f_0 = c/(2L)$ and $B = \pi^2EI/(TL^2)$ is small (Fletcher and Rossing, *The Physics of Musical Instruments*, 2nd ed., 1998, chapter 2; H. Fletcher, *J. Acoust. Soc. Am.* 36 (1964), 203–209).
+
+</details>
+:::
+
+In the table, the piano's stems sit on the gray lines; the drum's fall between them.
+
+### Four ways to a clear pitch {#routes}
+
+Not every instrument with a pitch has whole-number natural frequencies. Instruments get there in four ways.
+
+1. **By nature.** Strings and air columns, as above.
+2. **By design.** A uniform bar's second mode is 2.76 times its first; a marimba bar is cut away underneath until it is 4 times.[^bars]
+3. **By suppression.** Off-line partials can be kept weak. A kalimba tine's overtones, at 6.27 and 17.55 times its lowest, die within a fraction of a second, leaving the fundamental to ring for seconds.[^chapman] A strike at a still point of a mode does not start that mode at all.
+4. **By a repeating drive.** A bow or a breath feeds the motion all the time, and the motion settles into one repeating cycle, so its partials sit at exact whole-number multiples whatever the object's own natural frequencies.[^wolfehh] The natural frequencies then decide which notes the instrument can lock onto and which partials are strong: a clarinet's tube resonates at the odd multiples, so its odd partials are strong and its even ones weak.
+
+A **kettledrum** combines these. The air in its bowl and around it shifts the skin's modes with lines across it close to $2 : 3 : 4 : 5$ times a common base; the round modes, which push net volume and so radiate strongly (page 3), give their energy away fast and die. What rings on is nearly harmonic, and players name the note an octave above that base.[^timp]
+
+## Question 2: why the families sound so different {#families}
+
+Page 2 found three things in $p(t)$ that make timbre, and page 3 traced where each comes from.
+
+**How the $f_n$ are spaced**: the natural frequencies, above. Whole numbers sound smooth (strings, winds); slightly stretched adds a shimmer (piano); far off the lines, a clang (bells, and the first instant of a kalimba note); no pattern at all, a thud (drum).
+
+**Which partials are strong**, the ratios $c_n/c_1$, is a product of three factors, by page 3, $c_n = |H(f_n)| \cdot (\text{route weight of mode } n) \cdot a_n$:
+
+- **How the note is started**, the $a_n$. A pluck or strike at a still point of a mode does not start it: the table's string, plucked a fifth of the way along, has no 5th partial, and the piano, struck an eighth of the way along, no 8th. A harder piano blow starts more high partials, because a fast hammer's felt is stiffer and stays on the string for a shorter time.[^aj]
+- **How the mode pushes the air.** A string pushes the bridge in proportion to its slope there, which grows with $n$; a drum's modes with lines across the skin push no net volume and radiate weakly; a tube passes on most strongly the partials at its natural frequencies, the odd ones for a clarinet.
+- **The body.** Fixed resonances of the body, such as a violin's, favour the same bands of frequency whatever note is played, much as a voice's formants do.[^schleske]
+
+**How the sound starts and fades.** Plucked and struck instruments start suddenly, and each partial then fades at its own rate; bowed and blown instruments build up over tens of milliseconds and hold steady while played. What radiates well dies fast: the kettledrum's round modes, above.
+
+In the table, compare the string with the clarinet: both have whole numbers, but different strong partials and a different start. Compare the piano with the kalimba: both start suddenly, but one has whole numbers and the other has overtones far off the lines that die almost at once.
+
+::: {.result}
+**Takeaway.** The frequencies you hear are the instrument's natural frequencies. Strings and air columns have natural frequencies at whole-number multiples of the lowest, because waves of every length travel along them at one speed, so their sound repeats and has a clear pitch; a drum skin, spread in two directions, and a stiff bar do not. Instruments without whole numbers get a pitch by design, by suppressing the off-line partials, or by a repeating drive. The families also differ in which partials are strong, set by the start, the route to the air and the body, and in how the sound starts and fades.
+:::
+
+## Next {#next}
+
+This page took the natural frequencies as given, except for the string's. [Page 5](../natural-frequencies/index.qmd) shows how to compute them for any instrument: they are the spectrum of an operator.
+
+[^frstring]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 2 (the string: wave speed, d'Alembert's solution and modes); Wikipedia, [d'Alembert's formula](https://en.wikipedia.org/wiki/D%27Alembert%27s_formula).
+[^wolfefc]: J. Wolfe, [Open vs closed pipes (flutes vs clarinets)](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html), UNSW.
+[^russell]: D. A. Russell, [Vibrational mode shapes of a circular membrane](https://www.acs.psu.edu/drussell/Demos/MembraneCircle/Circle.html), Penn State: the modes (1,1), (2,1) and (0,2) at 1.593, 2.135 and 2.295 times the lowest.
+[^frbar]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 2 (bars).
+[^fletcher]: H. Fletcher, ["Normal vibration frequencies of a stiff piano string"](https://doi.org/10.1121/1.1918933), *J. Acoust. Soc. Am.* 36 (1964), 203–209. The numbers here are for a steel wire 1 mm thick and 0.6 m long, tuned to middle C, with $B = 4.4 \times 10^{-4}$.
+[^bars]: HyperPhysics, [Xylophone and marimba](https://hyperphysics.gsu.edu/hbase/Music/xylo.html); Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 19 (bars).
+[^chapman]: D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustics'08 Paris, paper 5aMUf1, Acoustical Society of America, 2008.
+[^wolfehh]: J. Wolfe, [How harmonic are harmonics?](https://newt.phys.unsw.edu.au/jw/harmonics.html), UNSW.
+[^timp]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 18 (kettledrums: air loading and the decay of the round modes); HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), tabulating A. H. Benade, [*Fundamentals of Musical Acoustics*](https://archive.org/details/fundamentalsofmu0000bena), Oxford University Press, 1976.
+[^aj]: A. Askenfelt and E. Jansson, "From touch to string vibrations" ([the nonlinear hammer](https://www.speech.kth.se/music/5_lectures/askenflt/nonlinea.html)), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990.
+[^schleske]: M. Schleske, [Introduction to violin acoustics: sound](https://schleske.de/en/research/introduction-violin-acoustics/introduction/sound.html).
+
+```{=html}
+<script src="core.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = Core, M = C.models, SR = 44100, F = 261.63, PEAK = 0.55;
+
+  // ---------- sounds: page 1's models ----------
+  function synth(parts, dur, attack, release) {
+    var N = Math.floor(dur * SR), d = new Float32Array(N);
+    parts.forEach(function (p) {
+      if (p.f > SR / 2.3 || p.f <= 0 || !p.amp) return;
+      var w = 2 * Math.PI * p.f / SR, c = Math.cos(w), s = Math.sin(w), re = 1, im = 0, e = p.amp;
+      var dec = p.tau ? Math.exp(-1 / (p.tau * SR)) : 1, n1 = p.tau ? Math.min(N, Math.ceil(p.tau * SR * 9)) : N;
+      for (var n = 0; n < n1; n++) { d[n] += e * im; var nr = re * c - im * s; im = re * s + im * c; re = nr; e *= dec; }
+    });
+    var a = Math.max(1, Math.floor(attack * SR)), r = Math.max(1, Math.floor(release * SR));
+    for (var n = 0; n < a && n < N; n++) d[n] *= 0.5 - 0.5 * Math.cos(Math.PI * n / a);
+    for (var m = 0; m < r && m < N; m++) d[N - 1 - m] *= 0.5 - 0.5 * Math.cos(Math.PI * m / r);
+    return d;
+  }
+  function peakOf(d) { var p = 0; for (var i = 0; i < d.length; i++) p = Math.max(p, Math.abs(d[i])); return p; }
+  function rmsOf(d, t0, t1) { var i0 = Math.floor(t0 * SR), i1 = Math.min(d.length, Math.floor(t1 * SR)), s = 0; for (var i = i0; i < i1; i++) s += d[i] * d[i]; return Math.sqrt(s / Math.max(1, i1 - i0)); }
+  var FLV = [0, -4, -10, -16, -22, -28, -33, -38, -43, -48];          // flute harmonic levels, dB below the first (page 1)
+  function flute(f, dur) {
+    var N = Math.floor(dur * SR), d = new Float32Array(N), A = FLV.map(function (v) { return Math.pow(10, v / 20); }), ph = 0, tone = new Float32Array(N), noise = new Float32Array(N);
+    for (var n = 0; n < N; n++) {
+      var t = n / SR, vd = 0.005 * Math.min(1, Math.max(0, (t - 0.25) / 0.3));
+      ph += 2 * Math.PI * f * (1 + vd * Math.sin(2 * Math.PI * 5.2 * t)) / SR;
+      var y = 0;
+      for (var k = 0; k < A.length; k++) { var on = Math.min(1, t / (0.05 + 0.012 * k)); y += A[k] * on * on * (3 - 2 * on) * Math.sin((k + 1) * ph); }
+      tone[n] = y * (1 + 2 * vd * 10 * Math.sin(2 * Math.PI * 5.2 * t + 0.6));
+    }
+    var w0 = 2 * Math.PI * 2500 / SR, al = Math.sin(w0) / (2 * 0.7), a0 = 1 + al, b0 = al / a0, b2 = -al / a0, a1 = -2 * Math.cos(w0) / a0, a2 = (1 - al) / a0;
+    var x1 = 0, x2 = 0, y1 = 0, y2 = 0, seed = 12345;
+    for (var m = 0; m < N; m++) { seed = (seed * 1103515245 + 12345) & 0x7fffffff; var x = seed / 0x3fffffff - 1; var yy = b0 * x + b2 * x2 - a1 * y1 - a2 * y2; x2 = x1; x1 = x; y2 = y1; y1 = yy; noise[m] = yy; }
+    var rt = rmsOf(tone, 0.3, dur - 0.1), rn = rmsOf(noise, 0, dur), rel = Math.floor(0.08 * SR);
+    for (var i = 0; i < N; i++) { var t2 = i / SR, nl = 0.05 + 0.15 * Math.exp(-t2 / 0.05), e = Math.min(1, t2 / 0.03) * (i > N - rel ? (N - i) / rel : 1); d[i] = e * (tone[i] + nl * rt / rn * noise[i]); }
+    return d;
+  }
+  function steady(parts) { return parts.map(function (p) { return { f: p.f, amp: p.amp, tau: 0 }; }); }
+  // The stick stays on the skin for about 1.5 ms (modelled as a half-sine push), too long to start the high modes strongly:
+  // a push of that shape has spectrum |cos(pi f tc)| / |1 - (2 f tc)^2| (1 at f = 0).
+  var TC = 0.0015;
+  function stick(f) { var u = 2 * f * TC; return Math.abs(u - 1) < 1e-9 ? Math.PI / 4 : Math.abs(Math.cos(Math.PI * f * TC) / (1 - u * u)); }
+  function drumParts() { return M.drum.partials({ r: 0.35 }).map(function (p) { return { ratio: p.ratio, amp: p.amp * stick(p.ratio * F), tau: p.tau }; }); }
+  var BP = M.piano.B(60);
+  function pr(n) { return n * Math.sqrt((1 + BP * n * n) / (1 + BP)); }
+
+  // ---------- the six instruments ----------
+  function tine(i) { var sh = C.tineShape(C.KB[i]), mx = 0, j; for (j = 0; j <= 100; j++) mx = Math.max(mx, Math.abs(sh.f(j / 100))); return function (x) { return sh.f(x) / mx; }; }
+  var TINE = [tine(0), tine(1), tine(2)];
+  var INST = {
+    string: { name: "Plucked string", kind: "line", ends: ["fixed", "fixed"], ratios: [1, 2, 3],
+      X: function (n, x) { return Math.sin(n * Math.PI * x); },
+      parts: function () { return M.violin.partials({ pluck: 0.2 }); },
+      make: function () { return synth(C.toHz(M.violin.partials({ pluck: 0.2 }), F), 2.5, 0.002, 0.05); },
+      facts: "Natural frequencies 1 : 2 : 3 : 4 : …, whole numbers. The 5th partial is missing: the string was plucked a fifth of the way along, where mode 5 stands still." },
+    piano: { name: "Piano", kind: "line", ends: ["fixed", "fixed"], ratios: [1, pr(2), pr(3)],
+      X: function (n, x) { return Math.sin(n * Math.PI * x); },
+      parts: function () { return M.piano.partials({ f1: F, B: BP, rolloff: 9 }); },
+      make: function () { return synth(C.toHz(M.piano.partials({ f1: F, B: BP, rolloff: 9 }), F), 2.5, 0.002, 0.05); },
+      facts: "Natural frequencies 1 : " + pr(2).toFixed(3) + " : " + pr(3).toFixed(3) + " : " + pr(4).toFixed(3) + " : …, whole numbers stretched slightly by the wire's stiffness; same shapes as the string. The 8th partial is missing: the hammer strikes an eighth of the way along." },
+    clarinet: { name: "Clarinet", kind: "tube", ends: ["closed", "open"], ratios: [1, 3, 5],
+      X: function (n, x) { return Math.cos((2 * n - 1) * Math.PI * x / 2); },
+      parts: function () { return M.clarinet.partials(); },
+      make: function () { return synth(steady(C.toHz(M.clarinet.partials(), F)), 1.6, 0.04, 0.08); },
+      facts: "The tube's natural frequencies are close to 1 : 3 : 5 : 7. The reed keeps the air going, so the partials sit at exact multiples; the odd ones, where the tube resonates, are strong." },
+    flute: { name: "Flute", kind: "tube", ends: ["open", "open"], ratios: [1, 2, 3],
+      X: function (n, x) { return Math.sin(n * Math.PI * x); },
+      parts: function () { return FLV.map(function (v, i) { return { ratio: i + 1, amp: Math.pow(10, v / 20) }; }); },
+      make: function () { return flute(F, 1.6); },
+      facts: "The tube's natural frequencies are close to 1 : 2 : 3 : 4. The breath keeps the air going, so the partials sit at exact multiples; the 1st and 2nd are strong." },
+    kalimba: { name: "Kalimba", kind: "line", ends: ["clamped", "free"], ratios: [1, C.KM[1].ratio, C.KM[2].ratio],
+      X: function (n, x) { return TINE[n - 1](x); },
+      parts: function () { return M.kalimba.partials({ f1: F }); },
+      make: function () { return synth(C.toHz(M.kalimba.partials({ f1: F }), F), 2.5, 0.002, 0.05); },
+      facts: "Natural frequencies 1 : 6.27 : 17.55 : …, not whole numbers; but the overtones die within a fraction of a second, leaving the fundamental." },
+    drum: { name: "Drum", kind: "disc", ratios: [C.DR[0].ratio, C.DR[1].ratio, C.DR[2].ratio],
+      parts: drumParts,
+      make: function () { return synth(C.toHz(drumParts(), F), 2.5, 0.002, 0.05); },
+      facts: "Natural frequencies 1 : 1.59 : 2.14 : 2.30 : 2.65 : …, no whole-number pattern; the stems fall between the lines." }
+  };
+  var ORDER = ["string", "piano", "clarinet", "flute", "kalimba", "drum"];
+  var built = false;
+  function buildAll() {
+    if (built) return;
+    ORDER.forEach(function (k) { var d = INST[k].make(), r = rmsOf(d, 0.02, 0.52); for (var i = 0; i < d.length; i++) d[i] /= r; INST[k].data = d; });
+    var pk = 0; ORDER.forEach(function (k) { pk = Math.max(pk, peakOf(INST[k].data)); });
+    ORDER.forEach(function (k) { var d = INST[k].data; for (var i = 0; i < d.length; i++) d[i] *= PEAK / pk; });
+    built = true;
+  }
+  var cur = null;
+  function play(d) {
+    var a = C.ac(), t = a.currentTime;
+    if (cur) { cur.g.gain.setTargetAtTime(0, t, 0.006); cur.src.stop(t + 0.06); cur = null; }
+    var b = a.createBuffer(1, d.length, SR); b.getChannelData(0).set(d);
+    var src = a.createBufferSource(), g = a.createGain(); src.buffer = b; src.connect(g); g.connect(C.out); src.start();
+    cur = { src: src, g: g };
+  }
+
+  // ---------- drawing the modes ----------
+  function fmtR(r) { return (Math.abs(r - Math.round(r)) < 0.0005 ? Math.round(r).toString() : r.toFixed(r < 10 ? 3 : 2)) + "×"; }
+  function lab(x, s, px, py, d, al) { x.fillStyle = C.rgb("--muted"); x.font = (10 * d) + "px 'IBM Plex Mono', ui-monospace, monospace"; x.textAlign = al || "left"; x.fillText(s, px, py); }
+  function drawLineModes(x, W, H, d, I, t) {
+    var rh = H / 3, L = 14 * d, R = W - 56 * d, k, m;
+    for (m = 0; m < 3; m++) {
+      var y0 = rh * (m + 0.5), amp = rh * 0.3, ph = Math.cos(2 * Math.PI * 0.45 * Math.pow(I.ratios[m], 0.55) * t), pts = [];
+      for (k = 0; k <= 160; k++) { var s = k / 160; pts.push([L + (R - L) * s, I.X(m + 1, s)]); }
+      if (I.kind === "tube") {
+        x.strokeStyle = C.rgb("--muted"); x.lineWidth = d; x.beginPath();
+        x.moveTo(L, y0 - rh * 0.42); x.lineTo(R, y0 - rh * 0.42); x.moveTo(L, y0 + rh * 0.42); x.lineTo(R, y0 + rh * 0.42); x.stroke();
+        if (I.ends[0] === "closed") { x.lineWidth = 4 * d; x.beginPath(); x.moveTo(L, y0 - rh * 0.42); x.lineTo(L, y0 + rh * 0.42); x.stroke(); }
+      }
+      // the outline: the band between +X and -X, the furthest the mode swings
+      x.fillStyle = C.rgb("--accent", 0.12); x.beginPath();
+      pts.forEach(function (p, i) { var py = y0 - amp * p[1]; if (i) x.lineTo(p[0], py); else x.moveTo(p[0], py); });
+      for (k = pts.length - 1; k >= 0; k--) x.lineTo(pts[k][0], y0 + amp * pts[k][1]);
+      x.closePath(); x.fill();
+      x.strokeStyle = C.rgb("--grid"); x.lineWidth = d; x.beginPath(); x.moveTo(L, y0); x.lineTo(R, y0); x.stroke();
+      // the mode at this instant
+      x.strokeStyle = C.rgb("--accent"); x.lineWidth = 2 * d; x.beginPath();
+      pts.forEach(function (p, i) { var py = y0 - amp * p[1] * ph; if (i) x.lineTo(p[0], py); else x.moveTo(p[0], py); });
+      x.stroke();
+      x.fillStyle = C.rgb("--ink");
+      if (I.kind === "line" && I.ends[0] === "fixed") { x.beginPath(); x.arc(L, y0, 3 * d, 0, 7); x.fill(); x.beginPath(); x.arc(R, y0, 3 * d, 0, 7); x.fill(); }
+      if (I.kind === "line" && I.ends[0] === "clamped") { x.fillStyle = C.rgb("--muted"); x.fillRect(L - 8 * d, y0 - rh * 0.4, 8 * d, rh * 0.8); }
+      lab(x, fmtR(I.ratios[m]), R + 8 * d, y0 + 4 * d, d);
+    }
+  }
+  var discCache = {};
+  function discShape(m, S) {
+    var key = m + ":" + S; if (discCache[key]) return discCache[key];
+    var D = C.DR[m], arr = new Float32Array(S * S), mx = 0, i, j;
+    for (j = 0; j < S; j++) for (i = 0; i < S; i++) {
+      var X = (i + 0.5) / S * 2 - 1, Y = (j + 0.5) / S * 2 - 1, r = Math.hypot(X, Y);
+      var v = r > 1 ? NaN : C.Xd(D, r, Math.atan2(Y, X)); arr[j * S + i] = v; if (r <= 1) mx = Math.max(mx, Math.abs(v));
+    }
+    for (i = 0; i < arr.length; i++) arr[i] /= mx;
+    return (discCache[key] = arr);
+  }
+  function drawDiscs(x, W, H, d, I, t) {
+    var S = Math.max(16, Math.floor(Math.min(W / 3 - 14 * d, H - 22 * d))), pos = C.col["--pos"], neg = C.col["--neg"], pap = C.col["--paper"];
+    for (var m = 0; m < 3; m++) {
+      var arr = discShape(m, S), img = x.createImageData(S, S), ph = Math.cos(2 * Math.PI * 0.45 * Math.pow(I.ratios[m], 0.55) * t);
+      for (var q = 0; q < arr.length; q++) {
+        var v = arr[q] * ph, o = 4 * q;
+        if (isNaN(v)) { img.data[o + 3] = 0; continue; }
+        var c = v >= 0 ? pos : neg, a = Math.pow(Math.min(1, Math.abs(v)), 0.7);
+        img.data[o] = pap[0] + a * (c[0] - pap[0]); img.data[o + 1] = pap[1] + a * (c[1] - pap[1]); img.data[o + 2] = pap[2] + a * (c[2] - pap[2]); img.data[o + 3] = 255;
+      }
+      var cx = W / 3 * (m + 0.5), x0 = Math.round(cx - S / 2), y0 = Math.round(4 * d), cy = y0 + S / 2, r = S / 2, mm = C.DR[m].m;
+      x.putImageData(img, x0, y0);
+      // where the mode stays still: mm diameters (round modes beyond the first would add circles)
+      x.strokeStyle = C.rgb("--ink", 0.7); x.lineWidth = 1.2 * d; x.setLineDash([4 * d, 3 * d]);
+      for (var j = 0; j < mm; j++) { var th = (2 * j + 1) * Math.PI / (2 * mm); x.beginPath(); x.moveTo(cx - r * Math.cos(th), cy - r * Math.sin(th)); x.lineTo(cx + r * Math.cos(th), cy + r * Math.sin(th)); x.stroke(); }
+      x.setLineDash([]);
+      x.strokeStyle = C.rgb("--ink"); x.lineWidth = 1.5 * d; x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke();
+      lab(x, fmtR(I.ratios[m]), cx, y0 + S + 14 * d, d, "center");
+    }
+  }
+  // the partials: stems at multiples of the lowest, against whole-number lines; any past 8x listed above
+  function stems(svg, parts) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var W = 320, H = 104, L = 8, R = W - 12, base = H - 16, top = 24, RM = 8, amax = 0;
+    parts.forEach(function (p) { amax = Math.max(amax, p.amp); }); amax = amax || 1;
+    function xo(r) { return L + (R - L) * r / (RM + 0.3); }
+    for (var k = 1; k <= RM; k++) {
+      el("line", { x1: xo(k), x2: xo(k), y1: top, y2: base, stroke: C.rgb("--grid"), "stroke-width": 1 }, svg);
+      el("text", { x: xo(k), y: H - 3, "text-anchor": "middle", "font-size": 9 }, svg).textContent = k + "×";
+    }
+    el("line", { x1: L, x2: R, y1: base, y2: base, stroke: C.rgb("--muted"), "stroke-width": 1 }, svg);
+    var off = [];
+    parts.forEach(function (p) {
+      var a = p.amp / amax;
+      if (p.ratio > RM + 0.2) { if (a > 0.05 && Math.abs(p.ratio - Math.round(p.ratio)) > 0.02) off.push(p.ratio); return; }
+      if (a < 0.004) return;
+      el("line", { x1: xo(p.ratio), x2: xo(p.ratio), y1: base, y2: base - Math.max(2, (base - top) * a), stroke: C.rgb("--accent"), "stroke-width": 2.5, "stroke-linecap": "round" }, svg);
+    });
+    if (off.length) el("text", { x: R, y: 11, "text-anchor": "end", "font-size": 9, style: "fill:" + C.rgb("--accent") }, svg).textContent = "also, off the scale: " + off.slice(0, 2).map(function (r) { return r.toFixed(2) + "×"; }).join(", ");
+  }
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, at, par) { var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); par.appendChild(e); return e; }
+
+  // ---------- one row per instrument ----------
+  var grid = document.getElementById("cgrid");
+  var rows = ORDER.map(function (k) {
+    var I = INST[k], b = document.createElement("button"), cv = document.createElement("canvas"), sv = document.createElementNS(NS, "svg"), fact = document.createElement("p");
+    b.className = "primary"; b.textContent = "▶ " + I.name;
+    cv.setAttribute("aria-label", I.name + ": its first three modes, moving");
+    sv.setAttribute("class", "spec"); sv.setAttribute("viewBox", "0 0 320 104"); sv.setAttribute("aria-label", I.name + ": the partials of its sound against whole-number multiples of the lowest");
+    fact.className = "fact"; fact.textContent = I.facts;
+    b.addEventListener("click", function () { buildAll(); play(I.data); });
+    grid.appendChild(b); grid.appendChild(cv); grid.appendChild(sv); grid.appendChild(fact);
+    return { k: k, cv: cv, svg: sv };
+  });
+  function frame(row, t) {
+    var cv = row.cv, d = C.fit(cv), W = cv.width, H = cv.height, x = cv.getContext("2d"), I = INST[row.k];
+    x.clearRect(0, 0, W, H);
+    if (I.kind === "disc") drawDiscs(x, W, H, d, I, t); else drawLineModes(x, W, H, d, I, t);
+  }
+  function drawStems() { rows.forEach(function (r) { stems(r.svg, INST[r.k].parts().map(function (p) { return { ratio: p.ratio, amp: Math.abs(p.amp) }; })); }); }
+  drawStems(); rows.forEach(function (r) { frame(r, 0); });
+  var t0 = performance.now(), visible = true;
+  if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(document.getElementById("cmp"));
+  function tick(now) {
+    if (visible) rows.forEach(function (r) { try { frame(r, (now - t0) / 1000); } catch (e) {} });
+    requestAnimationFrame(tick);
+  }
+  if (!C.reduce) requestAnimationFrame(tick);
+  window.addEventListener("resize", function () { discCache = {}; rows.forEach(function (r) { frame(r, 0); }); });
+  C.onTheme(function () { drawStems(); rows.forEach(function (r) { frame(r, 0); }); });
+})();
+</script>
+```

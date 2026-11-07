@@ -1,0 +1,265 @@
+---
+title: "Natural frequencies are the spectrum of an operator"
+subtitle: "The Shape of a Sound · 5"
+date: 2026-11-07T20:00:00
+categories: [math, music, the-shape-of-a-sound]
+description: "How to find any instrument's natural frequencies. Newton's law gives u_tt = −Au for an operator A; its eigenfunctions are the modes and its eigenvalues give the frequencies, f = √λ/2π. Two beads, the string, the condition for the method to work, and the operators of six instruments."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+    reference-location: margin
+aliases: [/posts/one-string-end-to-end/index.html, /posts/where-the-equations-come-from/index.html, /posts/instruments-as-operators/oscillator.html]
+resources: [core.js, ins.css, string.js]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 4 · Why instruments sound different](../why-instruments-differ/index.qmd) · [Appendix · Other instruments, same recipe →](../other-instruments-same-recipe/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [page 4](../why-instruments-differ/index.qmd). Uses derivatives, integrals and a little linear algebra; proofs are in folds you can skip. About 20 minutes. Written in collaboration with Claude, Anthropic's AI model.
+:::
+
+::: {.result}
+**Question.** How do you find an instrument's natural frequencies, whatever its shape?
+
+**Answer.** Newton's law on each small piece of the vibrating object gives an equation $u_{tt} = -Au$, where $A$ is an **operator**: a rule that turns one shape into another, built from derivatives and from how the object is held. Its **eigenfunctions**, the shapes $X$ with $AX = \lambda X$, are the modes, and mode $n$ swings at
+$$
+f_n = \frac{\sqrt{\lambda_n}}{2\pi}.
+$$
+When $A$ has a complete set of perpendicular eigenfunctions, as it does for every instrument here, every motion is a sum of modes. So the natural frequencies are the **spectrum** of $A$, its list of eigenvalues $\lambda_n$.
+:::
+
+## The idea with two beads {#beads}
+
+Start with a matrix instead of an operator. Put two beads on a weightless string, at a third and two thirds of the way along, each of mass $m$, with the string's tension $T$ and spacing $\ell$. Call their heights $u_1$ and $u_2$. Each bead is pulled towards its neighbours, the tied ends counting as neighbours at height zero, so
+$$
+\begin{pmatrix} u_1 \\ u_2 \end{pmatrix}'' = -K \begin{pmatrix} u_1 \\ u_2 \end{pmatrix},
+\qquad
+K = \frac{T}{m\ell}\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}.
+$$
+Each bead's acceleration depends on the other's height: the motion is coupled.
+
+Now measure along two other directions: both beads together, $q_1 = (u_1 + u_2)/\sqrt2$, and the beads opposite, $q_2 = (u_1 - u_2)/\sqrt2$. Adding and subtracting the two equations gives
+$$
+q_1'' = -\frac{T}{m\ell}\,q_1, \qquad q_2'' = -\frac{3T}{m\ell}\,q_2 :
+$$
+two separate springs. These directions work because $K$ only stretches them, $K(1, 1) = \frac{T}{m\ell}(1, 1)$ and $K(1, -1) = \frac{3T}{m\ell}(1, -1)$: they are the **eigenvectors** of $K$, and the stretch factors, its **eigenvalues**, are the springs' stiffnesses. A spring of stiffness $\lambda$ swings at $\sqrt\lambda/2\pi$, so the two natural frequencies are in the ratio $1 : \sqrt3$. In its eigenvector coordinates $K$ is diagonal, and that is the whole point: diagonalising turns a coupled motion into independent springs, one per eigenvector.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <p class="wyla"><b>What you're looking at:</b> left, the two beads on their string, moving (slowed down); right, the same motion as one point in the plane of the two heights, <i>u</i><sub>1</sub> across and <i>u</i><sub>2</sub> up, with the tilted eigenvector directions <i>q</i><sub>1</sub> and <i>q</i><sub>2</sub>. Choose how to start them.</p>
+  <div class="r2wrap" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0.75rem;align-items:center">
+    <canvas id="bdCanvas" style="height:170px" aria-label="Two beads on a string tied at both ends, moving"></canvas>
+    <canvas id="bdPlane" style="height:170px" aria-label="The plane of the two heights u1 and u2, with the tilted q1 and q2 directions and the path of the motion"></canvas>
+  </div>
+  <div class="controls" role="group" aria-label="Start the two beads">
+    <button type="button" id="bdS" aria-pressed="false">Together: q₁ only</button>
+    <button type="button" id="bdD" aria-pressed="false">Opposite: q₂ only</button>
+    <button type="button" id="bdM" aria-pressed="true">A mix</button>
+    <button type="button" id="bdPlay" class="primary">Hear this motion</button>
+  </div>
+  <p class="cap">Slowed down. Right: the plane of the two heights, u₁ across and u₂ up. A mix traces a tangle; started along q₁ or q₂ alone, the motion runs straight along that tilted line. The sound puts the q₁ swing at 196 Hz.</p>
+</div>
+</div>
+
+```
+
+## The string: the same move with infinitely many beads {#string}
+
+Let $u(x, t)$ be the string's height at the point $x$, $0 \le x \le L$, at time $t$; $T$ its tension and $\mu$ its mass per unit length.
+
+```{=html}
+<svg class="fig" viewBox="0 48 420 104" role="img" aria-label="A short piece of string between x and x plus dx on a hump; the tension pulls along the string at each end, and both pulls tilt downward, so the net force pulls the hump back down">
+  <path class="dash" d="M 60 110 Q 210 30 360 100"/>
+  <path class="acc" d="M 120 84 Q 210 54 300 78"/>
+  <circle cx="120" cy="84" r="4" class="fillacc"/><circle cx="300" cy="78" r="4" class="fillacc"/>
+  <path class="neg" d="M 120 84 L 66 102"/><path class="neg" d="M 75.9 103.2 L 66 102 L 73.3 95.1"/>
+  <path class="neg" d="M 300 78 L 356 93"/><path class="neg" d="M 348.3 86.6 L 356 93 L 346.2 94.8"/>
+  <text x="44" y="122">T</text><text x="364" y="110">T</text>
+  <text x="112" y="70">x</text><text x="282" y="64">x + dx</text>
+  <text x="104" y="142">upward part of each pull ≈ T × slope</text>
+</svg>
+```
+
+The piece from $x$ to $x + dx$ is pulled along the string at each end with force $T$, and for a small slope the upward part of each pull is $T$ times the slope $u_x$. So the net upward force is $T u_x(x + dx) - T u_x(x) \approx T u_{xx}\,dx$, and it equals mass times acceleration, $\mu\,dx\,u_{tt}$:[^fr]
+$$
+u_{tt} = c^2 u_{xx}, \qquad c = \sqrt{T/\mu}.
+$$
+That is $u_{tt} = -Au$ with the operator
+$$
+A = -c^2\,\frac{d^2}{dx^2}, \quad \text{acting on shapes on } [0, L] \text{ that are zero at both ends.}
+$$
+The tied ends are part of the operator, as the number of beads was part of $K$.
+
+**Its eigenfunctions.** $AX = \lambda X$ says $X'' = -(\lambda/c^2)X$ with $X(0) = X(L) = 0$. The solutions are combinations of $\cos$ and $\sin$ of $\sqrt\lambda\,x/c$; the end $x = 0$ removes the cosine, and the end $x = L$ needs $\sqrt\lambda\,L/c$ to be a multiple of $\pi$. So
+$$
+X_n(x) = \sin\frac{n\pi x}{L}, \qquad \lambda_n = c^2\Big(\frac{n\pi}{L}\Big)^2, \qquad f_n = \frac{\sqrt{\lambda_n}}{2\pi} = n\,\frac{c}{2L}.
+$$
+These are page 4's whole numbers, now as eigenvalues: two derivatives bring down $(n\pi/L)^2$, and the square root returns $n$.
+
+**They decouple the string.** Measure the string by how much of each mode it contains, $q_n(t) = \frac{2}{L}\int_0^L u(x, t)\,X_n(x)\,dx$, the continuous version of $q_1$ and $q_2$. Integrating by parts twice moves both derivatives from $u$ onto $X_n$, with no boundary terms because both vanish at the ends:
+$$
+q_n'' = \frac{2}{L}\int_0^L c^2 u_{xx}X_n\,dx = \frac{2}{L}\int_0^L c^2 u\,X_n''\,dx = -\lambda_n\,q_n .
+$$
+Each $q_n$ is a separate spring, swinging at $f_n$. Every starting shape is a sum of sines (its Fourier sine series),[^ss] so every motion is a sum of modes:
+$$
+u(x, t) = \sum_{n = 1}^{\infty}\big(a_n\cos 2\pi f_n t + b_n\sin 2\pi f_n t\big)\,X_n(x).
+$$
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <p class="wyla"><b>What you're looking at:</b> a plucked string, released from a triangle, built as the sum of its first <i>N</i> modes (solid) against the exact motion (dashed); below, the stems give each mode's size <i>a<sub>n</sub></i> in the pluck. Add modes and the sum closes in on the exact motion.</p>
+  <canvas id="msCanvas" style="height:190px" aria-label="A plucked string moving: the sum of its first N modes, and the exact motion dashed"></canvas>
+  <div class="slider"><label for="msN">Shapes added, N</label><input type="range" id="msN" min="1" max="40" step="1" value="5"><output id="msNo">5</output></div>
+  <div class="slider"><label for="msX">Pluck point x₀</label><input type="range" id="msX" min="0.05" max="0.5" step="0.01" value="0.2"><output id="msXo">0.20 L</output></div>
+  <div class="controls"><button type="button" id="msRestart">Release again</button><button type="button" id="msPlay" class="primary">Hear the pluck</button></div>
+  <svg class="spec" id="msSpec" viewBox="0 0 320 90" style="max-width:520px" aria-label="How much of each shape the pluck contains"></svg>
+  <div class="readout" id="msRead"></div>
+  <p class="cap">A plucked string, slowed so that one swing of the lowest shape takes 4 seconds. Dashed: the exact motion. Solid: the sum of the first N shapes, which closes in on it as N grows. Stems: how much of each shape the pluck contains. The picture has no friction; the sound fades only so that it stops.</p>
+</div>
+</div>
+
+```
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Decoupling happens exactly in an eigenbasis <span class="needs">inner products, orthonormal bases</span></summary>
+
+Write $\langle u, w\rangle = \int_0^L u\,w\,dx$. (The main text's sines are orthogonal but have $\int X_n^2 = L/2$; normalised, $\sqrt{2/L}\,\sin(n\pi x/L)$, the factor $2/L$ in $q_n$ disappears.) For shapes $u, w$ vanishing at the ends, two integrations by parts give $\langle Au, w\rangle = c^2\!\int u'w' = \langle u, Aw\rangle$: $A$ is symmetric, like $K$. With $w = u$, $\langle Au, u\rangle = c^2\!\int (u')^2 > 0$ unless $u'$ is identically zero, which with $u(0) = 0$ forces $u = 0$; so $A$ is positive, and $AX = \lambda X$ forces $\lambda > 0$. So every eigenvalue is positive.
+
+**Proposition.** Let $\psi_1, \psi_2, \dots$ be an orthonormal basis of square-integrable shapes, each twice differentiable and zero at the ends, and let $q_j = \langle u, \psi_j\rangle$. Then $q_i'' = -\sum_j M_{ij}q_j$ with $M_{ij} = \langle A\psi_j, \psi_i\rangle$, and $M$ is diagonal if and only if every $\psi_j$ is an eigenfunction of $A$.
+
+*Proof.* For a smooth solution, $q_i'' = \langle u_{tt}, \psi_i\rangle = -\langle Au, \psi_i\rangle = -\langle u, A\psi_i\rangle$, by symmetry of $A$; for a pluck, $q_i'' = -\langle u, A\psi_i\rangle$ is the definition of solution in the next fold, with $\varphi = \psi_i$. Expanding $u = \sum_j q_j\psi_j$ gives $q_i'' = -\sum_j q_j\langle\psi_j, A\psi_i\rangle = -\sum_j M_{ij}q_j$. If $A\psi_j = \kappa_j\psi_j$ for every $j$, then $M_{ij} = \kappa_j\langle\psi_j, \psi_i\rangle$ is diagonal. Conversely, $A\psi_j = \sum_i M_{ij}\psi_i$ (expansion in the basis), which is $M_{jj}\psi_j$ when $M$ is diagonal. $\square$
+
+In a basis of polynomials vanishing at the ends (Gram–Schmidt on $x(L - x)x^k$), $M$ has nonzero entries far from the diagonal; with $L = 1$ its top-left entry is $10c^2$, just above $\lambda_1 = \pi^2c^2 \approx 9.87c^2$.
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>What "solution" means for a pluck, and why there is exactly one <span class="needs">integration by parts, Cauchy–Schwarz</span></summary>
+
+The triangle has a corner, where $u_{xx}$ does not exist, so the equation cannot hold there literally. The calculation of $q_n''$ above never needed $u_{xx}$ once the derivatives were moved onto $X_n$, which suggests the definition. *A solution* is a shape $u(t)$ with $\int u^2 < \infty$, changing continuously in mean square, such that for every smooth $\varphi$ vanishing at the ends, $\frac{d^2}{dt^2}\langle u, \varphi\rangle = -\langle u, A\varphi\rangle$, with $\langle u(0), \varphi\rangle = \langle u_0, \varphi\rangle$ and $\frac{d}{dt}\langle u, \varphi\rangle(0) = \langle v_0, \varphi\rangle$, where $v_0$ is the starting velocity (zero for a pluck). Smooth solutions satisfy it (integrate by parts); testing against all such $\varphi$ loses nothing, because they are dense in mean square. (L. C. Evans, [*Partial Differential Equations*](https://bookstore.ams.org/GSM/19.R), 2nd ed., AMS, 2010, section 7.2)
+
+*Uniqueness.* With $\varphi = X_n$, each $q_n$ solves $q_n'' = -\lambda_nq_n$ with given $q_n(0), q_n'(0)$. That has exactly one solution: the difference $r$ of two has $r(0) = r'(0) = 0$, and $E = (r')^2 + \lambda_nr^2$ has $E' = 0$, so $r = 0$. Two solutions with the same start therefore have the same coordinates, so they are equal (the sines are a basis).
+
+*Existence.* The series $\sum_n (a_n\cos\omega_nt + b_n\sin\omega_nt)X_n$, with $\omega_n = \sqrt{\lambda_n}$, $a_n = \frac{2}{L}\int u_0X_n$ and $b_n = \frac{2}{L}\int v_0X_n/\omega_n$, is a solution when the start has finite energy, $\int(u_0')^2 < \infty$ and $\int v_0^2 < \infty$. Integration by parts and Bessel's inequality give $\sum n^2a_n^2 < \infty$, so Cauchy–Schwarz gives $\sum |a_n| + |b_n| < \infty$; the series and its term-by-term time derivatives against $\varphi$ then converge uniformly, and the defining identity holds.
+
+*Counting.* A mass on a spring has one eigenvalue and a two-dimensional space of motions ($\cos$ and $\sin$); two beads have two eigenvalues and four; the string has two dimensions of motion for each eigenvalue.
+
+</details>
+:::
+
+## The recipe, and when it works {#recipe}
+
+For any instrument:
+
+1. **Newton's law** on a small piece of the vibrating part gives $u_{tt} = -Au$.
+2. **How the object is held** gives the boundary conditions, which are part of $A$.
+3. **Solve** $AX = \lambda X$ with those conditions: the modes $X_n$ and the eigenvalues $\lambda_n$.
+4. **The natural frequencies** are $f_n = \sqrt{\lambda_n}/2\pi$.
+
+This needs $A$ to have a complete set of perpendicular eigenfunctions with positive eigenvalues: the operator version of a diagonalisable matrix. Every instrument here passes, for two reasons.
+
+- **$A$ is symmetric and positive.** For shapes $u$ and $w$ that obey the boundary conditions, integration by parts gives $\int (Au)\,w = \int u\,(Aw)$, and $\int (Au)\,u > 0$ unless $u = 0$. For the string, $\int (Au)\,u = c^2\int (u_x)^2$, which is twice the stretching energy divided by $\mu$. A symmetric matrix always has perpendicular eigenvectors, and positivity makes every $\lambda_n > 0$, so every frequency is real.
+- **The object is finite.** On a bounded interval or a bounded skin, $A$ has a compact inverse, and the spectral theorem then gives a complete set of perpendicular eigenfunctions with eigenvalues $\lambda_1 \le \lambda_2 \le \dots$ that grow without bound.[^rs]
+
+**Where it fails.** On an infinitely long string, $A = -c^2\,d^2/dx^2$ on the whole line has no eigenfunctions at all: $\sin kx$ satisfies $AX = c^2k^2X$, but it is not a shape of finite energy, because $\int \sin^2 kx\,dx$ is infinite. The spectrum is the whole half-line $[0, \infty)$, with no gaps. Such a string carries waves of every frequency away and has no natural frequencies. Finite size is what makes an instrument's spectrum a list of separate numbers, and so a set of notes.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The theorem, and the string's operator checked against it <span class="needs">Hilbert spaces</span></summary>
+
+*Theorem.* Let $A$ be a self-adjoint operator on a separable Hilbert space $\mathcal H$, bounded below, with compact resolvent: $(A - \mu)^{-1}$ is compact for some $\mu$ not in the spectrum. Then $\mathcal H$ has an orthonormal basis of eigenvectors of $A$, the eigenvalues have finite multiplicity, and, listed in increasing order with multiplicity, $\lambda_n \to \infty$. (M. Reed and B. Simon, *Methods of Modern Mathematical Physics IV: Analysis of Operators*, Academic Press, 1978, Theorem XIII.64, with the Hilbert–Schmidt theorem for compact self-adjoint operators, vol. I, *Functional Analysis*, 1980, Theorem VI.16; for second-order operators on bounded domains, L. C. Evans, [*Partial Differential Equations*](https://bookstore.ams.org/GSM/19.R), 2nd ed., AMS, 2010, section 6.5.)
+
+*The string.* Take $\mathcal H = L^2(0, L)$ and $A = -c^2\,d^2/dx^2$ on $D(A) = \{u \in H^2(0, L) : u(0) = u(L) = 0\}$. It is symmetric, by two integrations by parts. It is onto: for $f \in L^2$, the function $u = A^{-1}f$, $u(x) = c^{-2}\int_0^L G(x, y)f(y)\,dy$ with $G(x, y) = x(L - y)/L$ for $x \le y$ and $G(x, y) = y(L - x)/L$ for $x \ge y$, lies in $D(A)$ and solves $Au = f$. A symmetric operator that is onto is self-adjoint, and $A^{-1}$ is compact because its kernel $G$ is square-integrable on the square (a Hilbert–Schmidt operator). $A$ is positive: $\langle Au, u\rangle = c^2\int (u')^2 > 0$ for $u \ne 0$ in $D(A)$, since $u' = 0$ and $u(0) = 0$ force $u = 0$. So the theorem applies, with eigenvectors the sines.
+
+*The infinite string.* On $L^2(\mathbb R)$, the same operator is unitarily equivalent, by the Fourier transform, to multiplication by $c^2k^2$. A multiplication operator has an eigenvalue only where its multiplier is constant on a set of positive measure, which $c^2k^2$ never is; so there are no eigenvalues, and the spectrum is the closure of the range, $[0, \infty)$.
+
+</details>
+:::
+
+## The operators of six instruments {#table}
+
+The recipe gives each instrument of this series its operator, its modes and its spectrum:
+
+::: {.optable .column-page}
+
+| Instrument | Operator | Boundary condition | Mode shapes $X_n$ | Frequency ratios |
+|:--|:--|:--|:--|:--|
+| Ideal string (guitar, violin) | $-(T/\mu)\,\partial_x^2$ on $[0, L]$ | $u = 0$ at both ends | $\sin(n\pi x/L)$ <svg class="fig modes" viewBox="0 0 224 34" role="img" aria-label="The string's first four shapes: one, two, three and four arches, zero at both tied ends"><path class="dash" d="M 6.0 17 L 50.0 17"/><path class="acc" d="M 6.0 17.0 L 6.9 16.3 L 7.8 15.6 L 8.8 14.9 L 9.7 14.2 L 10.6 13.5 L 11.5 12.8 L 12.4 12.1 L 13.3 11.5 L 14.2 10.9 L 15.2 10.3 L 16.1 9.7 L 17.0 9.2 L 17.9 8.7 L 18.8 8.3 L 19.8 7.9 L 20.7 7.5 L 21.6 7.1 L 22.5 6.8 L 23.4 6.6 L 24.3 6.4 L 25.2 6.2 L 26.2 6.1 L 27.1 6.0 L 28.0 6.0 L 28.9 6.0 L 29.8 6.1 L 30.8 6.2 L 31.7 6.4 L 32.6 6.6 L 33.5 6.8 L 34.4 7.1 L 35.3 7.5 L 36.2 7.9 L 37.2 8.3 L 38.1 8.7 L 39.0 9.2 L 39.9 9.7 L 40.8 10.3 L 41.8 10.9 L 42.7 11.5 L 43.6 12.1 L 44.5 12.8 L 45.4 13.5 L 46.3 14.2 L 47.2 14.9 L 48.2 15.6 L 49.1 16.3 L 50.0 17.0"/><circle cx="6.0" cy="17" r="1.8" class="fillacc"/><circle cx="50.0" cy="17" r="1.8" class="fillacc"/><path class="dash" d="M 62.0 17 L 106.0 17"/><path class="acc" d="M 62.0 17.0 L 62.9 15.6 L 63.8 14.2 L 64.8 12.8 L 65.7 11.5 L 66.6 10.3 L 67.5 9.2 L 68.4 8.3 L 69.3 7.5 L 70.2 6.8 L 71.2 6.4 L 72.1 6.1 L 73.0 6.0 L 73.9 6.1 L 74.8 6.4 L 75.8 6.8 L 76.7 7.5 L 77.6 8.3 L 78.5 9.2 L 79.4 10.3 L 80.3 11.5 L 81.2 12.8 L 82.2 14.2 L 83.1 15.6 L 84.0 17.0 L 84.9 18.4 L 85.8 19.8 L 86.8 21.2 L 87.7 22.5 L 88.6 23.7 L 89.5 24.8 L 90.4 25.7 L 91.3 26.5 L 92.2 27.2 L 93.2 27.6 L 94.1 27.9 L 95.0 28.0 L 95.9 27.9 L 96.8 27.6 L 97.8 27.2 L 98.7 26.5 L 99.6 25.7 L 100.5 24.8 L 101.4 23.7 L 102.3 22.5 L 103.2 21.2 L 104.2 19.8 L 105.1 18.4 L 106.0 17.0"/><circle cx="62.0" cy="17" r="1.8" class="fillacc"/><circle cx="106.0" cy="17" r="1.8" class="fillacc"/><path class="dash" d="M 118.0 17 L 162.0 17"/><path class="acc" d="M 118.0 17.0 L 118.9 14.9 L 119.8 12.8 L 120.8 10.9 L 121.7 9.2 L 122.6 7.9 L 123.5 6.8 L 124.4 6.2 L 125.3 6.0 L 126.2 6.2 L 127.2 6.8 L 128.1 7.9 L 129.0 9.2 L 129.9 10.9 L 130.8 12.8 L 131.8 14.9 L 132.7 17.0 L 133.6 19.1 L 134.5 21.2 L 135.4 23.1 L 136.3 24.8 L 137.2 26.1 L 138.2 27.2 L 139.1 27.8 L 140.0 28.0 L 140.9 27.8 L 141.8 27.2 L 142.8 26.1 L 143.7 24.8 L 144.6 23.1 L 145.5 21.2 L 146.4 19.1 L 147.3 17.0 L 148.2 14.9 L 149.2 12.8 L 150.1 10.9 L 151.0 9.2 L 151.9 7.9 L 152.8 6.8 L 153.8 6.2 L 154.7 6.0 L 155.6 6.2 L 156.5 6.8 L 157.4 7.9 L 158.3 9.2 L 159.2 10.9 L 160.2 12.8 L 161.1 14.9 L 162.0 17.0"/><circle cx="118.0" cy="17" r="1.8" class="fillacc"/><circle cx="162.0" cy="17" r="1.8" class="fillacc"/><path class="dash" d="M 174.0 17 L 218.0 17"/><path class="acc" d="M 174.0 17.0 L 174.9 14.2 L 175.8 11.5 L 176.8 9.2 L 177.7 7.5 L 178.6 6.4 L 179.5 6.0 L 180.4 6.4 L 181.3 7.5 L 182.2 9.2 L 183.2 11.5 L 184.1 14.2 L 185.0 17.0 L 185.9 19.8 L 186.8 22.5 L 187.8 24.8 L 188.7 26.5 L 189.6 27.6 L 190.5 28.0 L 191.4 27.6 L 192.3 26.5 L 193.2 24.8 L 194.2 22.5 L 195.1 19.8 L 196.0 17.0 L 196.9 14.2 L 197.8 11.5 L 198.8 9.2 L 199.7 7.5 L 200.6 6.4 L 201.5 6.0 L 202.4 6.4 L 203.3 7.5 L 204.2 9.2 L 205.2 11.5 L 206.1 14.2 L 207.0 17.0 L 207.9 19.8 L 208.8 22.5 L 209.8 24.8 L 210.7 26.5 L 211.6 27.6 L 212.5 28.0 L 213.4 27.6 L 214.3 26.5 L 215.2 24.8 L 216.2 22.5 L 217.1 19.8 L 218.0 17.0"/><circle cx="174.0" cy="17" r="1.8" class="fillacc"/><circle cx="218.0" cy="17" r="1.8" class="fillacc"/></svg> | $1 : 2 : 3 : 4$ |
+| Piano wire | $-(T/\mu)\,\partial_x^2 + (EI/\mu)\,\partial_x^4$ | $u = u_{xx} = 0$ at both ends | the same sines <svg class="fig modes" viewBox="0 0 224 34" role="img" aria-label="The piano wire's first four shapes: the same sines as the string's"><path class="dash" d="M 6.0 17 L 50.0 17"/><path class="acc" d="M 6.0 17.0 L 6.9 16.3 L 7.8 15.6 L 8.8 14.9 L 9.7 14.2 L 10.6 13.5 L 11.5 12.8 L 12.4 12.1 L 13.3 11.5 L 14.2 10.9 L 15.2 10.3 L 16.1 9.7 L 17.0 9.2 L 17.9 8.7 L 18.8 8.3 L 19.8 7.9 L 20.7 7.5 L 21.6 7.1 L 22.5 6.8 L 23.4 6.6 L 24.3 6.4 L 25.2 6.2 L 26.2 6.1 L 27.1 6.0 L 28.0 6.0 L 28.9 6.0 L 29.8 6.1 L 30.8 6.2 L 31.7 6.4 L 32.6 6.6 L 33.5 6.8 L 34.4 7.1 L 35.3 7.5 L 36.2 7.9 L 37.2 8.3 L 38.1 8.7 L 39.0 9.2 L 39.9 9.7 L 40.8 10.3 L 41.8 10.9 L 42.7 11.5 L 43.6 12.1 L 44.5 12.8 L 45.4 13.5 L 46.3 14.2 L 47.2 14.9 L 48.2 15.6 L 49.1 16.3 L 50.0 17.0"/><circle cx="6.0" cy="17" r="1.8" class="fillacc"/><circle cx="50.0" cy="17" r="1.8" class="fillacc"/><path class="dash" d="M 62.0 17 L 106.0 17"/><path class="acc" d="M 62.0 17.0 L 62.9 15.6 L 63.8 14.2 L 64.8 12.8 L 65.7 11.5 L 66.6 10.3 L 67.5 9.2 L 68.4 8.3 L 69.3 7.5 L 70.2 6.8 L 71.2 6.4 L 72.1 6.1 L 73.0 6.0 L 73.9 6.1 L 74.8 6.4 L 75.8 6.8 L 76.7 7.5 L 77.6 8.3 L 78.5 9.2 L 79.4 10.3 L 80.3 11.5 L 81.2 12.8 L 82.2 14.2 L 83.1 15.6 L 84.0 17.0 L 84.9 18.4 L 85.8 19.8 L 86.8 21.2 L 87.7 22.5 L 88.6 23.7 L 89.5 24.8 L 90.4 25.7 L 91.3 26.5 L 92.2 27.2 L 93.2 27.6 L 94.1 27.9 L 95.0 28.0 L 95.9 27.9 L 96.8 27.6 L 97.8 27.2 L 98.7 26.5 L 99.6 25.7 L 100.5 24.8 L 101.4 23.7 L 102.3 22.5 L 103.2 21.2 L 104.2 19.8 L 105.1 18.4 L 106.0 17.0"/><circle cx="62.0" cy="17" r="1.8" class="fillacc"/><circle cx="106.0" cy="17" r="1.8" class="fillacc"/><path class="dash" d="M 118.0 17 L 162.0 17"/><path class="acc" d="M 118.0 17.0 L 118.9 14.9 L 119.8 12.8 L 120.8 10.9 L 121.7 9.2 L 122.6 7.9 L 123.5 6.8 L 124.4 6.2 L 125.3 6.0 L 126.2 6.2 L 127.2 6.8 L 128.1 7.9 L 129.0 9.2 L 129.9 10.9 L 130.8 12.8 L 131.8 14.9 L 132.7 17.0 L 133.6 19.1 L 134.5 21.2 L 135.4 23.1 L 136.3 24.8 L 137.2 26.1 L 138.2 27.2 L 139.1 27.8 L 140.0 28.0 L 140.9 27.8 L 141.8 27.2 L 142.8 26.1 L 143.7 24.8 L 144.6 23.1 L 145.5 21.2 L 146.4 19.1 L 147.3 17.0 L 148.2 14.9 L 149.2 12.8 L 150.1 10.9 L 151.0 9.2 L 151.9 7.9 L 152.8 6.8 L 153.8 6.2 L 154.7 6.0 L 155.6 6.2 L 156.5 6.8 L 157.4 7.9 L 158.3 9.2 L 159.2 10.9 L 160.2 12.8 L 161.1 14.9 L 162.0 17.0"/><circle cx="118.0" cy="17" r="1.8" class="fillacc"/><circle cx="162.0" cy="17" r="1.8" class="fillacc"/><path class="dash" d="M 174.0 17 L 218.0 17"/><path class="acc" d="M 174.0 17.0 L 174.9 14.2 L 175.8 11.5 L 176.8 9.2 L 177.7 7.5 L 178.6 6.4 L 179.5 6.0 L 180.4 6.4 L 181.3 7.5 L 182.2 9.2 L 183.2 11.5 L 184.1 14.2 L 185.0 17.0 L 185.9 19.8 L 186.8 22.5 L 187.8 24.8 L 188.7 26.5 L 189.6 27.6 L 190.5 28.0 L 191.4 27.6 L 192.3 26.5 L 193.2 24.8 L 194.2 22.5 L 195.1 19.8 L 196.0 17.0 L 196.9 14.2 L 197.8 11.5 L 198.8 9.2 L 199.7 7.5 L 200.6 6.4 L 201.5 6.0 L 202.4 6.4 L 203.3 7.5 L 204.2 9.2 L 205.2 11.5 L 206.1 14.2 L 207.0 17.0 L 207.9 19.8 L 208.8 22.5 L 209.8 24.8 L 210.7 26.5 L 211.6 27.6 L 212.5 28.0 L 213.4 27.6 L 214.3 26.5 L 215.2 24.8 L 216.2 22.5 L 217.1 19.8 L 218.0 17.0"/><circle cx="174.0" cy="17" r="1.8" class="fillacc"/><circle cx="218.0" cy="17" r="1.8" class="fillacc"/></svg> | $1 : 2.001 : 3.005$ (middle C) |
+| Clarinet ($u$: air pressure in the tube) | $-c_0^2\,\partial_x^2$ on $[0, L]$ | $u_x = 0$ at the reed (closed), $u = 0$ at the open end | ${\cos((2n - 1)\pi x/2L)}$ <svg class="fig modes" viewBox="0 0 224 34" role="img" aria-label="The clarinet's first four pressure shapes: largest at the closed reed end on the left, zero at the open end, with a quarter, three quarters, five quarters and seven quarters of a wave"><path class="dash" d="M 6.0 17 L 50.0 17"/><path class="acc" d="M 6.0 6.0 L 6.9 6.0 L 7.8 6.0 L 8.8 6.1 L 9.7 6.1 L 10.6 6.1 L 11.5 6.2 L 12.4 6.3 L 13.3 6.4 L 14.2 6.5 L 15.2 6.6 L 16.1 6.7 L 17.0 6.8 L 17.9 7.0 L 18.8 7.1 L 19.8 7.3 L 20.7 7.5 L 21.6 7.7 L 22.5 7.9 L 23.4 8.1 L 24.3 8.3 L 25.2 8.5 L 26.2 8.7 L 27.1 9.0 L 28.0 9.2 L 28.9 9.5 L 29.8 9.7 L 30.8 10.0 L 31.7 10.3 L 32.6 10.6 L 33.5 10.9 L 34.4 11.2 L 35.3 11.5 L 36.2 11.8 L 37.2 12.1 L 38.1 12.5 L 39.0 12.8 L 39.9 13.1 L 40.8 13.5 L 41.8 13.8 L 42.7 14.2 L 43.6 14.5 L 44.5 14.9 L 45.4 15.2 L 46.3 15.6 L 47.2 15.9 L 48.2 16.3 L 49.1 16.6 L 50.0 17.0"/><path class="ink" stroke-width="2.5" d="M 5.0 9 L 5.0 25"/><path class="dash" d="M 62.0 17 L 106.0 17"/><path class="acc" d="M 62.0 6.0 L 62.9 6.1 L 63.8 6.2 L 64.8 6.5 L 65.7 6.8 L 66.6 7.3 L 67.5 7.9 L 68.4 8.5 L 69.3 9.2 L 70.2 10.0 L 71.2 10.9 L 72.1 11.8 L 73.0 12.8 L 73.9 13.8 L 74.8 14.9 L 75.8 15.9 L 76.7 17.0 L 77.6 18.1 L 78.5 19.1 L 79.4 20.2 L 80.3 21.2 L 81.2 22.2 L 82.2 23.1 L 83.1 24.0 L 84.0 24.8 L 84.9 25.5 L 85.8 26.1 L 86.8 26.7 L 87.7 27.2 L 88.6 27.5 L 89.5 27.8 L 90.4 27.9 L 91.3 28.0 L 92.2 27.9 L 93.2 27.8 L 94.1 27.5 L 95.0 27.2 L 95.9 26.7 L 96.8 26.1 L 97.8 25.5 L 98.7 24.8 L 99.6 24.0 L 100.5 23.1 L 101.4 22.2 L 102.3 21.2 L 103.2 20.2 L 104.2 19.1 L 105.1 18.1 L 106.0 17.0"/><path class="ink" stroke-width="2.5" d="M 61.0 9 L 61.0 25"/><path class="dash" d="M 118.0 17 L 162.0 17"/><path class="acc" d="M 118.0 6.0 L 118.9 6.1 L 119.8 6.6 L 120.8 7.3 L 121.7 8.3 L 122.6 9.5 L 123.5 10.9 L 124.4 12.5 L 125.3 14.2 L 126.2 15.9 L 127.2 17.7 L 128.1 19.5 L 129.0 21.2 L 129.9 22.8 L 130.8 24.3 L 131.8 25.5 L 132.7 26.5 L 133.6 27.3 L 134.5 27.8 L 135.4 28.0 L 136.3 27.9 L 137.2 27.5 L 138.2 26.9 L 139.1 25.9 L 140.0 24.8 L 140.9 23.4 L 141.8 21.9 L 142.8 20.2 L 143.7 18.4 L 144.6 16.6 L 145.5 14.9 L 146.4 13.1 L 147.3 11.5 L 148.2 10.0 L 149.2 8.7 L 150.1 7.7 L 151.0 6.8 L 151.9 6.3 L 152.8 6.0 L 153.8 6.1 L 154.7 6.4 L 155.6 7.0 L 156.5 7.9 L 157.4 9.0 L 158.3 10.3 L 159.2 11.8 L 160.2 13.5 L 161.1 15.2 L 162.0 17.0"/><path class="ink" stroke-width="2.5" d="M 117.0 9 L 117.0 25"/><path class="dash" d="M 174.0 17 L 218.0 17"/><path class="acc" d="M 174.0 6.0 L 174.9 6.3 L 175.8 7.1 L 176.8 8.5 L 177.7 10.3 L 178.6 12.5 L 179.5 14.9 L 180.4 17.4 L 181.3 19.8 L 182.2 22.2 L 183.2 24.3 L 184.1 25.9 L 185.0 27.2 L 185.9 27.9 L 186.8 28.0 L 187.8 27.5 L 188.7 26.5 L 189.6 25.0 L 190.5 23.1 L 191.4 20.9 L 192.3 18.4 L 193.2 15.9 L 194.2 13.5 L 195.1 11.2 L 196.0 9.2 L 196.9 7.7 L 197.8 6.6 L 198.8 6.1 L 199.7 6.1 L 200.6 6.7 L 201.5 7.9 L 202.4 9.5 L 203.3 11.5 L 204.2 13.8 L 205.2 16.3 L 206.1 18.8 L 207.0 21.2 L 207.9 23.4 L 208.8 25.3 L 209.8 26.7 L 210.7 27.6 L 211.6 28.0 L 212.5 27.8 L 213.4 27.0 L 214.3 25.7 L 215.2 24.0 L 216.2 21.9 L 217.1 19.5 L 218.0 17.0"/><path class="ink" stroke-width="2.5" d="M 173.0 9 L 173.0 25"/></svg> | $1 : 3 : 5 : 7$ (the tube's resonances) |
+| Flute | $-c_0^2\,\partial_x^2$ on $[0, L]$ | $u = 0$ at both open ends | $\sin(n\pi x/L)$ <svg class="fig modes" viewBox="0 0 224 34" role="img" aria-label="The flute's first four pressure shapes: sines, zero at both open ends"><path class="dash" d="M 6.0 17 L 50.0 17"/><path class="acc" d="M 6.0 17.0 L 6.9 16.3 L 7.8 15.6 L 8.8 14.9 L 9.7 14.2 L 10.6 13.5 L 11.5 12.8 L 12.4 12.1 L 13.3 11.5 L 14.2 10.9 L 15.2 10.3 L 16.1 9.7 L 17.0 9.2 L 17.9 8.7 L 18.8 8.3 L 19.8 7.9 L 20.7 7.5 L 21.6 7.1 L 22.5 6.8 L 23.4 6.6 L 24.3 6.4 L 25.2 6.2 L 26.2 6.1 L 27.1 6.0 L 28.0 6.0 L 28.9 6.0 L 29.8 6.1 L 30.8 6.2 L 31.7 6.4 L 32.6 6.6 L 33.5 6.8 L 34.4 7.1 L 35.3 7.5 L 36.2 7.9 L 37.2 8.3 L 38.1 8.7 L 39.0 9.2 L 39.9 9.7 L 40.8 10.3 L 41.8 10.9 L 42.7 11.5 L 43.6 12.1 L 44.5 12.8 L 45.4 13.5 L 46.3 14.2 L 47.2 14.9 L 48.2 15.6 L 49.1 16.3 L 50.0 17.0"/><path class="dash" d="M 62.0 17 L 106.0 17"/><path class="acc" d="M 62.0 17.0 L 62.9 15.6 L 63.8 14.2 L 64.8 12.8 L 65.7 11.5 L 66.6 10.3 L 67.5 9.2 L 68.4 8.3 L 69.3 7.5 L 70.2 6.8 L 71.2 6.4 L 72.1 6.1 L 73.0 6.0 L 73.9 6.1 L 74.8 6.4 L 75.8 6.8 L 76.7 7.5 L 77.6 8.3 L 78.5 9.2 L 79.4 10.3 L 80.3 11.5 L 81.2 12.8 L 82.2 14.2 L 83.1 15.6 L 84.0 17.0 L 84.9 18.4 L 85.8 19.8 L 86.8 21.2 L 87.7 22.5 L 88.6 23.7 L 89.5 24.8 L 90.4 25.7 L 91.3 26.5 L 92.2 27.2 L 93.2 27.6 L 94.1 27.9 L 95.0 28.0 L 95.9 27.9 L 96.8 27.6 L 97.8 27.2 L 98.7 26.5 L 99.6 25.7 L 100.5 24.8 L 101.4 23.7 L 102.3 22.5 L 103.2 21.2 L 104.2 19.8 L 105.1 18.4 L 106.0 17.0"/><path class="dash" d="M 118.0 17 L 162.0 17"/><path class="acc" d="M 118.0 17.0 L 118.9 14.9 L 119.8 12.8 L 120.8 10.9 L 121.7 9.2 L 122.6 7.9 L 123.5 6.8 L 124.4 6.2 L 125.3 6.0 L 126.2 6.2 L 127.2 6.8 L 128.1 7.9 L 129.0 9.2 L 129.9 10.9 L 130.8 12.8 L 131.8 14.9 L 132.7 17.0 L 133.6 19.1 L 134.5 21.2 L 135.4 23.1 L 136.3 24.8 L 137.2 26.1 L 138.2 27.2 L 139.1 27.8 L 140.0 28.0 L 140.9 27.8 L 141.8 27.2 L 142.8 26.1 L 143.7 24.8 L 144.6 23.1 L 145.5 21.2 L 146.4 19.1 L 147.3 17.0 L 148.2 14.9 L 149.2 12.8 L 150.1 10.9 L 151.0 9.2 L 151.9 7.9 L 152.8 6.8 L 153.8 6.2 L 154.7 6.0 L 155.6 6.2 L 156.5 6.8 L 157.4 7.9 L 158.3 9.2 L 159.2 10.9 L 160.2 12.8 L 161.1 14.9 L 162.0 17.0"/><path class="dash" d="M 174.0 17 L 218.0 17"/><path class="acc" d="M 174.0 17.0 L 174.9 14.2 L 175.8 11.5 L 176.8 9.2 L 177.7 7.5 L 178.6 6.4 L 179.5 6.0 L 180.4 6.4 L 181.3 7.5 L 182.2 9.2 L 183.2 11.5 L 184.1 14.2 L 185.0 17.0 L 185.9 19.8 L 186.8 22.5 L 187.8 24.8 L 188.7 26.5 L 189.6 27.6 L 190.5 28.0 L 191.4 27.6 L 192.3 26.5 L 193.2 24.8 L 194.2 22.5 L 195.1 19.8 L 196.0 17.0 L 196.9 14.2 L 197.8 11.5 L 198.8 9.2 L 199.7 7.5 L 200.6 6.4 L 201.5 6.0 L 202.4 6.4 L 203.3 7.5 L 204.2 9.2 L 205.2 11.5 L 206.1 14.2 L 207.0 17.0 L 207.9 19.8 L 208.8 22.5 L 209.8 24.8 L 210.7 26.5 L 211.6 27.6 L 212.5 28.0 L 213.4 27.6 L 214.3 26.5 L 215.2 24.8 L 216.2 22.5 L 217.1 19.8 L 218.0 17.0"/></svg> | $1 : 2 : 3 : 4$ (the tube's resonances) |
+| Kalimba tine | $(EI/\rho S)\,\partial_x^4$ on $[0, L]$ | clamped at $x = 0$ ($u = u_x = 0$), free at $L$ ($u_{xx} = u_{xxx} = 0$) | bar shapes (key below) <svg class="fig modes" viewBox="0 0 224 34" role="img" aria-label="The kalimba tine's first four shapes: clamped flat on the left, free on the right"><path class="dash" d="M 6.0 17 L 50.0 17"/><path class="acc" d="M 6.0 17.0 L 6.9 17.0 L 7.8 17.0 L 8.8 16.9 L 9.7 16.9 L 10.6 16.8 L 11.5 16.7 L 12.4 16.6 L 13.3 16.5 L 14.2 16.4 L 15.2 16.2 L 16.1 16.1 L 17.0 15.9 L 17.9 15.8 L 18.8 15.6 L 19.8 15.4 L 20.7 15.2 L 21.6 15.0 L 22.5 14.7 L 23.4 14.5 L 24.3 14.3 L 25.2 14.0 L 26.2 13.8 L 27.1 13.5 L 28.0 13.3 L 28.9 13.0 L 29.8 12.7 L 30.8 12.4 L 31.7 12.2 L 32.6 11.9 L 33.5 11.6 L 34.4 11.3 L 35.3 11.0 L 36.2 10.7 L 37.2 10.4 L 38.1 10.1 L 39.0 9.8 L 39.9 9.5 L 40.8 9.1 L 41.8 8.8 L 42.7 8.5 L 43.6 8.2 L 44.5 7.9 L 45.4 7.6 L 46.3 7.3 L 47.2 6.9 L 48.2 6.6 L 49.1 6.3 L 50.0 6.0"/><rect class="bar" x="2.0" y="10" width="4" height="14"/><path class="dash" d="M 62.0 17 L 106.0 17"/><path class="acc" d="M 62.0 17.0 L 62.9 16.9 L 63.8 16.8 L 64.8 16.6 L 65.7 16.3 L 66.6 15.9 L 67.5 15.5 L 68.4 15.0 L 69.3 14.5 L 70.2 14.0 L 71.2 13.5 L 72.1 12.9 L 73.0 12.4 L 73.9 11.9 L 74.8 11.4 L 75.8 10.9 L 76.7 10.5 L 77.6 10.1 L 78.5 9.8 L 79.4 9.5 L 80.3 9.3 L 81.2 9.2 L 82.2 9.1 L 83.1 9.1 L 84.0 9.1 L 84.9 9.3 L 85.8 9.5 L 86.8 9.8 L 87.7 10.2 L 88.6 10.6 L 89.5 11.1 L 90.4 11.7 L 91.3 12.4 L 92.2 13.1 L 93.2 13.8 L 94.1 14.6 L 95.0 15.5 L 95.9 16.4 L 96.8 17.4 L 97.8 18.4 L 98.7 19.4 L 99.6 20.4 L 100.5 21.5 L 101.4 22.5 L 102.3 23.6 L 103.2 24.7 L 104.2 25.8 L 105.1 26.9 L 106.0 28.0"/><rect class="bar" x="58.0" y="10" width="4" height="14"/><path class="dash" d="M 118.0 17 L 162.0 17"/><path class="acc" d="M 118.0 17.0 L 118.9 16.9 L 119.8 16.5 L 120.8 15.9 L 121.7 15.2 L 122.6 14.3 L 123.5 13.4 L 124.4 12.5 L 125.3 11.6 L 126.2 10.8 L 127.2 10.1 L 128.1 9.5 L 129.0 9.0 L 129.9 8.8 L 130.8 8.7 L 131.8 8.8 L 132.7 9.1 L 133.6 9.5 L 134.5 10.2 L 135.4 11.0 L 136.3 12.0 L 137.2 13.1 L 138.2 14.3 L 139.1 15.5 L 140.0 16.8 L 140.9 18.0 L 141.8 19.3 L 142.8 20.4 L 143.7 21.5 L 144.6 22.4 L 145.5 23.1 L 146.4 23.7 L 147.3 24.1 L 148.2 24.2 L 149.2 24.2 L 150.1 23.9 L 151.0 23.4 L 151.9 22.7 L 152.8 21.8 L 153.8 20.7 L 154.7 19.4 L 155.6 18.0 L 156.5 16.4 L 157.4 14.8 L 158.3 13.1 L 159.2 11.4 L 160.2 9.6 L 161.1 7.8 L 162.0 6.0"/><rect class="bar" x="114.0" y="10" width="4" height="14"/><path class="dash" d="M 174.0 17 L 218.0 17"/><path class="acc" d="M 174.0 17.0 L 174.9 16.7 L 175.8 16.0 L 176.8 15.0 L 177.7 13.8 L 178.6 12.5 L 179.5 11.3 L 180.4 10.2 L 181.3 9.4 L 182.2 8.9 L 183.2 8.7 L 184.1 8.9 L 185.0 9.5 L 185.9 10.4 L 186.8 11.7 L 187.8 13.2 L 188.7 14.8 L 189.6 16.6 L 190.5 18.4 L 191.4 20.1 L 192.3 21.7 L 193.2 23.0 L 194.2 24.0 L 195.1 24.6 L 196.0 24.8 L 196.9 24.6 L 197.8 24.0 L 198.8 23.0 L 199.7 21.8 L 200.6 20.3 L 201.5 18.6 L 202.4 16.9 L 203.3 15.1 L 204.2 13.5 L 205.2 12.1 L 206.1 11.0 L 207.0 10.2 L 207.9 9.8 L 208.8 9.8 L 209.8 10.3 L 210.7 11.1 L 211.6 12.4 L 212.5 14.1 L 213.4 16.0 L 214.3 18.2 L 215.2 20.5 L 216.2 23.0 L 217.1 25.5 L 218.0 28.0"/><rect class="bar" x="170.0" y="10" width="4" height="14"/></svg> | $1 : 6.27 : 17.55$ |
+| Drum (a membrane on a disc of radius $r_0$) | $-(T/\sigma)\,\Delta$ | $u = 0$ on the rim | ${J_m(j_{mk}r/r_0)\cos m\theta}$ (and $\sin m\theta$), indexed by $(m, k)$ <svg class="fig modes" viewBox="0 0 224 34" role="img" aria-label="The drumhead's first four shapes seen from above, coloured by sign: the (0,1) mode all one sign; (1,1) split into two halves of opposite sign; (2,1) into four quarters; (0,2) a central disc and an outer ring of opposite sign"><circle cx="28.0" cy="17" r="13" class="fillpos"/><circle cx="28.0" cy="17" r="13" class="ink" fill="none"/><path class="fillpos" d="M 84.0 4 A 13 13 0 0 1 84.0 30 Z"/><path class="fillneg" d="M 84.0 4 A 13 13 0 0 0 84.0 30 Z"/><circle cx="84.0" cy="17" r="13" class="ink" fill="none"/><path class="fillpos" d="M 140.0 17 L 149.19 7.81 A 13 13 0 0 1 149.19 26.19 Z"/><path class="fillneg" d="M 140.0 17 L 149.19 26.19 A 13 13 0 0 1 130.81 26.19 Z"/><path class="fillpos" d="M 140.0 17 L 130.81 26.19 A 13 13 0 0 1 130.81 7.81 Z"/><path class="fillneg" d="M 140.0 17 L 130.81 7.81 A 13 13 0 0 1 149.19 7.81 Z"/><circle cx="140.0" cy="17" r="13" class="ink" fill="none"/><circle cx="196.0" cy="17" r="13" class="fillneg"/><circle cx="196.0" cy="17" r="5.66" class="fillpos"/><circle cx="196.0" cy="17" r="13" class="ink" fill="none"/></svg> | $1 : 1.59 : 2.14 : 2.30$ |
+
+:::
+
+
+Here $\partial_x^2 = d^2/dx^2$; $c_0$ is the speed of sound; $E$ is the Young's modulus of the steel, $I$ the second moment of area of the cross-section, and $\rho S$ a bar's mass per unit length; $\sigma$ is the skin's mass per unit area, $T$ its tension per unit length, $r_0$ its radius and $\Delta$ the Laplacian, $\partial_r^2 + r^{-1}\partial_r + r^{-2}\partial_\theta^2$ in polar coordinates $(r, \theta)$; $J_m$ is a Bessel function and $j_{mk}$ its $k$-th zero. The tine's shapes are $\cosh\beta_nx - \cos\beta_nx - \gamma_n(\sinh\beta_nx - \sin\beta_nx)$, with $\gamma_n = (\cosh\beta_nL + \cos\beta_nL)/(\sinh\beta_nL + \sin\beta_nL)$. The drum's shapes are drawn from above, coloured by sign.[^frtab]
+
+**What the table shows.** The string and the flute have the same kind of operator and the same end conditions, so the same ratios. The clarinet has the same kind of operator with one end condition changed, and that alone turns $1 : 2 : 3$ into $1 : 3 : 5$. Whole-number ratios need $\sqrt{\lambda_n}$ proportional to whole numbers, and a second derivative on an interval gives exactly that: equally spaced $\sqrt{\lambda_n}$, page 4's "one speed for every wavelength". A fourth-derivative term (the piano wire, the tine) or a two-dimensional domain (the drum) breaks the equal spacing. For a bowed or blown note, the eigenvalues decide which notes can sound and which partials are strong, while the player's drive holds the partials at exact multiples (page 4).
+
+::: {.derive}
+<details><summary><span class="label">Derivation</span>The drum's eigenvalues: Bessel zeros <span class="needs">separation of variables</span></summary>
+
+On a skin of radius $r_0$, $AX = \lambda X$ reads $X_{rr} + X_r/r + X_{\theta\theta}/r^2 = -\kappa^2X$ with $\kappa^2 = \lambda\sigma/T$, and $X = 0$ on the rim. Try $X = R(r)\cos m\theta$, with $m = 0, 1, 2, \dots$ so that $X$ returns to itself around the drum. Then $R'' + R'/r + (\kappa^2 - m^2/r^2)R = 0$, Bessel's equation, whose solution that stays finite at the centre is $J_m(\kappa r)$. The rim needs $J_m(\kappa r_0) = 0$, so $\kappa r_0 = j_{mk}$, and
+$$
+f_{mk} = \frac{j_{mk}}{2\pi r_0}\sqrt{\frac{T}{\sigma}} .
+$$
+With $j_{01} = 2.405$, $j_{11} = 3.832$, $j_{21} = 5.136$ and $j_{02} = 5.520$, the ratios are $1 : 1.593 : 2.136 : 2.295$. The zeros of Bessel functions are not equally spaced, so no whole-number pattern appears. Nothing is missed: the products $J_m(j_{mk}r/r_0)\cos m\theta$ and $J_m(j_{mk}r/r_0)\sin m\theta$ already form a complete perpendicular set, because $\cos m\theta$ and $\sin m\theta$ do around the circle, and for each $m$ the functions $J_m(j_{mk}r/r_0)$, $k = 1, 2, \dots$, do on $[0, r_0]$ with the weight $r$ (Fourier–Bessel series). (N. H. Fletcher and T. D. Rossing, *The Physics of Musical Instruments*, 2nd ed., 1998, chapter 3; Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane).)
+
+</details>
+:::
+
+::: {.derive}
+<details><summary><span class="label">Derivation</span>The tine's eigenvalues: $\cos\beta L\cosh\beta L = -1$ <span class="needs">derivatives</span></summary>
+
+$AX = \lambda X$ reads $X'''' = \beta^4X$ with $\beta^4 = \lambda\rho S/(EI)$, whose solutions are combinations of $\cosh\beta x$, $\sinh\beta x$, $\cos\beta x$ and $\sin\beta x$. The clamp at $x = 0$, $X = X' = 0$, leaves $X = \cosh\beta x - \cos\beta x - \gamma(\sinh\beta x - \sin\beta x)$. The free end at $x = L$, $X'' = X''' = 0$, gives two linear conditions on $(1, \gamma)$, which have a solution only when their determinant vanishes; using $\cosh^2 - \sinh^2 = 1$ and $\cos^2 + \sin^2 = 1$, that is $\cos\beta L\cosh\beta L = -1$. Its roots are $\beta L = 1.875, 4.694, 7.855, \dots$, and $f \propto \sqrt\lambda \propto \beta^2$ gives $1 : 6.27 : 17.55$. (Fletcher and Rossing, chapter 2.)
+
+</details>
+:::
+
+::: {.result}
+**Takeaway.** An instrument's natural frequencies are the spectrum of its operator. Newton's law on a small piece gives $u_{tt} = -Au$, with how the object is held built into $A$; the eigenfunctions of $A$ are the modes, and $f_n = \sqrt{\lambda_n}/2\pi$. In eigenfunction coordinates the motion splits into independent springs, one per mode. It works because $A$ is symmetric and positive and the object is finite; an infinitely long string has no natural frequencies at all.
+:::
+
+## The series in one line {#chain}
+
+What you hear is
+$$
+p(t) = \sum_n c_n\,e^{-t/\tau_n}\sin(2\pi f_n t + \varphi_n),
+$$
+heard as pitch, loudness, timbre and duration ([page 2](../what-you-hear/index.qmd)). Its frequencies are the spectrum of the instrument's operator, $f_n = \sqrt{\lambda_n}/2\pi$ (this page); its sizes are $c_n = |H(f_n)| \cdot (\text{route weight of mode } n) \cdot a_n$, from the body, the route to the air and the start ([page 3](../from-instrument-to-ear/index.qmd)); and whether the $f_n$ fall on whole numbers decides whether you can hum it ([page 4](../why-instruments-differ/index.qmd)).
+
+[^fr]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 2 (the vibrating string). The model assumes a perfectly flexible string, small slopes and no friction.
+[^ss]: E. M. Stein and R. Shakarchi, [*Fourier Analysis: An Introduction*](https://press.princeton.edu/books/hardcover/9780691113845/fourier-analysis), Princeton University Press, 2003, chapters 2 and 3.
+[^rs]: M. Reed and B. Simon, *Methods of Modern Mathematical Physics IV: Analysis of Operators*, Academic Press, 1978, Theorem XIII.64; L. C. Evans, [*Partial Differential Equations*](https://bookstore.ams.org/GSM/19.R), 2nd ed., AMS, 2010, section 6.5. The fold below states the theorem.
+[^frtab]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapters 2 (strings and bars), 3 (membranes) and 8 (pipes).
+
+```{=html}
+<style>
+svg.fig.modes { width: 12.5rem; max-width: none; margin: 0.35rem 0 0; }
+main .optable table { display: block; overflow-x: auto; }
+@media (max-width: 700px) {
+  main .optable table { overflow-x: visible; }
+  main .optable table, main .optable tbody, main .optable tr, main .optable td { display: block; width: 100%; }
+  main .optable thead { display: none; }
+  main .optable tr { border-bottom: 1px solid var(--rule, #ddd); padding: 0.6rem 0; }
+  main .optable td { border: 0; padding: 0.15rem 0; white-space: normal; }
+  main .optable td:first-child { font-weight: 600; }
+  main .optable td:nth-child(2)::before { content: "Operator: "; color: var(--muted, #666); }
+  main .optable td:nth-child(3)::before { content: "Boundary: "; color: var(--muted, #666); }
+  main .optable td:nth-child(4)::before { content: "Modes: "; color: var(--muted, #666); }
+  main .optable td:nth-child(5)::before { content: "Ratios: "; color: var(--muted, #666); }
+}
+</style>
+<style>
+.ins .wyla { font-family: var(--f-ui); font-size: 0.92rem; color: var(--ink); margin: 0; line-height: 1.45; }
+</style>
+<script src="core.js"></script>
+<script src="string.js"></script>
+```

@@ -1,6 +1,6 @@
 ---
 title: "Why does a light touch make a string jump an octave?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · Appendix · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/violin.html, /posts/instruments-as-ope
 :::
 
 ::: {.pageinfo}
-A deep dive from [the violin's entry](index.qmd#violin) in post 3, on [post 2](../one-string-end-to-end/index.qmd)'s string. Derivations are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from [the violin's entry](index.qmd#violin) in the appendix, on [page 5](../natural-frequencies/index.qmd)'s string. Derivations are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -45,7 +45,7 @@ Touch a vibrating string lightly at its exact middle, without pressing it down, 
 </div>
 ```
 
-[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. Once the body's own ring at the start has died away, the body and the room keep those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
+[]{#what-we-hear}What you hear works as in [page 2](../what-you-hear/index.qmd#read): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. Once the body's own ring at the start has died away, the body and the room keep those frequencies ([page 3](../from-instrument-to-ear/index.qmd#taps)).
 
 ## How the sound reaches the air {#body}
 
@@ -53,7 +53,7 @@ Touch a vibrating string lightly at its exact middle, without pressing it down, 
 
 ## The string's shapes {#operator}
 
-**The string's frequencies are the frequencies of its own shapes.** With mass $\mu$ per unit length, Newton's law gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation) of [post 2](../one-string-end-to-end/index.qmd#newton),[^fr2]
+**The string's frequencies are the frequencies of its own shapes.** With mass $\mu$ per unit length, Newton's law gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation) of [page 5](../natural-frequencies/index.qmd#string),[^fr2]
 $$
 \begin{gathered}
 u_{tt} = -Au, \qquad Au = -c^2u_{xx}, \\
@@ -76,7 +76,7 @@ Shape $n$ has $n$ arches and swings at exactly $n$ times the lowest frequency. F
 
 Solve $AX = \lambda X$, that is $-c^2X'' = \lambda X$ with $X(0) = X(L) = 0$. Writing $\lambda = c^2k^2$ with $k > 0$, the solutions of $X'' = -k^2X$ are $a\cos kx + b\sin kx$. The nut, $X(0) = 0$, forces $a = 0$; the bridge, $X(L) = 0$, then needs $\sin kL = 0$, so $k = n\pi/L$ for $n = 1, 2, 3, \dots$ This gives $\lambda_n = (n\pi c/L)^2$ and $f_n = \sqrt{\lambda_n}/2\pi = nc/2L$.
 
-No zero or negative $\lambda$ occurs. Multiply $-c^2X'' = \lambda X$ by $X$ and integrate by parts; the boundary term vanishes because $X = 0$ at both ends, which leaves $\lambda\int_0^L X^2\,dx = c^2\int_0^L (X')^2\,dx$. A $\lambda \le 0$ would force $X' = 0$, so $X$ would be a constant vanishing at the ends, that is $X = 0$. Each $\lambda_n$ has [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity) 1, since the nut removed the cosine. Post 2 [shows](../one-string-end-to-end/index.qmd#decoupling) that measured along these shapes the string falls apart into independent springs, and that every starting shape is a sum of them.
+No zero or negative $\lambda$ occurs. Multiply $-c^2X'' = \lambda X$ by $X$ and integrate by parts; the boundary term vanishes because $X = 0$ at both ends, which leaves $\lambda\int_0^L X^2\,dx = c^2\int_0^L (X')^2\,dx$. A $\lambda \le 0$ would force $X' = 0$, so $X$ would be a constant vanishing at the ends, that is $X = 0$. Each $\lambda_n$ has [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity) 1, since the nut removed the cosine. Page 5 [shows](../natural-frequencies/index.qmd#string) that measured along these shapes the string falls apart into independent springs, and that every starting shape is a sum of them.
 
 </details>
 :::
@@ -90,7 +90,7 @@ The start sets the amounts $a_n$. The fading rates are measured, not derived, an
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the equation comes from <span class="needs">partial derivatives</span></summary>
 
-Take the piece of string from $x$ to $x + dx$, of mass $\mu\,dx$. The tension $T$ pulls along the string at both ends; for a small slope, the sideways part of each pull is $T$ times the slope $u_x$. The net sideways force is therefore $T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx$, and Newton's law sets it equal to mass times acceleration, $\mu\,dx\,u_{tt}$. Dividing by $\mu\,dx$ gives $u_{tt} = c^2u_{xx}$ with $c^2 = T/\mu$. The nut and the bridge hold the ends still, $u(0, t) = u(L, t) = 0$. The model assumes a perfectly flexible string, small slopes, no air and no friction; [post 2](../one-string-end-to-end/index.qmd#newton) draws the forces.
+Take the piece of string from $x$ to $x + dx$, of mass $\mu\,dx$. The tension $T$ pulls along the string at both ends; for a small slope, the sideways part of each pull is $T$ times the slope $u_x$. The net sideways force is therefore $T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx$, and Newton's law sets it equal to mass times acceleration, $\mu\,dx\,u_{tt}$. Dividing by $\mu\,dx$ gives $u_{tt} = c^2u_{xx}$ with $c^2 = T/\mu$. The nut and the bridge hold the ends still, $u(0, t) = u(L, t) = 0$. The model assumes a perfectly flexible string, small slopes, no air and no friction; [page 5](../natural-frequencies/index.qmd#string) draws the forces.
 
 </details>
 :::
@@ -112,7 +112,7 @@ At the middle, $X_n(L/2) = \sin(n\pi/2)$ is zero exactly when $n$ is even. The s
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Why the drain rate is $X_n(x_f)^2$ <span class="needs">matrices</span></summary>
 
-A friction force $-r\,u_t(x_f, t)$ at the one point $x_f$ turns post 2's separate springs into $q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0$ with $C_{nm} \propto r\,X_n(x_f)X_m(x_f)$ ([post 2](../one-string-end-to-end/index.qmd#fading)). A shape with $X_n(x_f) = 0$ has a zero row and column in $C$, so it rings on untouched. For a light touch $C$ is small, its off-diagonal entries matter only to second order, and each other shape drains at the rate $C_{nn} \propto X_n(x_f)^2$, the rule the [piano page](piano.qmd) uses for felt dampers. The demo adds 45 per second times $X_n(x_f)^2$ to each shape's own fading rate.
+A friction force $-r\,u_t(x_f, t)$ at the one point $x_f$ turns page 5's separate springs into $q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0$ with $C_{nm} \propto r\,X_n(x_f)X_m(x_f)$ ([page 5](../natural-frequencies/index.qmd#string)). A shape with $X_n(x_f) = 0$ has a zero row and column in $C$, so it rings on untouched. For a light touch $C$ is small, its off-diagonal entries matter only to second order, and each other shape drains at the rate $C_{nn} \propto X_n(x_f)^2$, the rule the [piano page](piano.qmd) uses for felt dampers. The demo adds 45 per second times $X_n(x_f)^2$ to each shape's own fading rate.
 
 </details>
 :::
@@ -123,7 +123,7 @@ A friction force $-r\,u_t(x_f, t)$ at the one point $x_f$ turns post 2's separat
 $$
 a_n = \frac{2u_0(x_0)\,L^2}{\pi^2 x_0(L - x_0)}\cdot\frac{\sin(n\pi x_0/L)}{n^2},
 $$
-post 2's [pluck formula](../one-string-end-to-end/index.qmd#the-solution). Shape $n$ pushes the bridge with $a_n$ times the chain's bridge weight, that is, in proportion to $\sin(n\pi x_0/L)/n$.
+page 5's [pluck formula](../natural-frequencies/index.qmd#string). Shape $n$ pushes the bridge with $a_n$ times the chain's bridge weight, that is, in proportion to $\sin(n\pi x_0/L)/n$.
 
 Near the bridge, $x_0 \approx L$ and $|\sin(n\pi x_0/L)| \approx n\pi(L - x_0)/L$ for the first several shapes, so they push the bridge about equally hard: a bright sound. At the middle, the even shapes stand still where you pulled and are missing, and the rest fall off like $1/n$: a hollow sound.
 
@@ -175,7 +175,7 @@ An [open string](../instruments-as-operators/glossary.qmd#open-string) is one no
 
 ## The bow: one repeating cycle {#sustained}
 
-**A bowed string repeats one cycle exactly, so its partials sit exactly on the whole-number lines** ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)). The bow grips the string, drags it until it tears free, and grips it again, once per cycle. Hermann von Helmholtz saw the result in 1860:[^helm1860] two straight pieces joined by one sharp corner, which races between bridge and finger and back, [Helmholtz motion](../instruments-as-operators/glossary.qmd#helmholtz-motion). The corner runs at the wave speed $c$, so the round trip of $2L$ takes $2L/c = 1/f_1$ seconds. As a sum of the string's shapes,
+**A bowed string repeats one cycle exactly, so its partials sit exactly on the whole-number lines** ([page 2](../what-you-hear/index.qmd#pitch)). The bow grips the string, drags it until it tears free, and grips it again, once per cycle. Hermann von Helmholtz saw the result in 1860:[^helm1860] two straight pieces joined by one sharp corner, which races between bridge and finger and back, [Helmholtz motion](../instruments-as-operators/glossary.qmd#helmholtz-motion). The corner runs at the wave speed $c$, so the round trip of $2L$ takes $2L/c = 1/f_1$ seconds. As a sum of the string's shapes,
 $$
 u(x, t) \propto \sum_{n \ge 1} \frac{1}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(2\pi n f_1 t) .
 $$
