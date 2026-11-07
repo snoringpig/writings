@@ -19,14 +19,14 @@ aliases: [/posts/instruments-case-by-case/kalimba.html, /posts/instruments-as-op
 :::
 
 ::: {.pageinfo}
-A deep dive from the [kalimba entry](index.qmd#kalimba) of post 3. Builds on [post 2, One string, end to end](../one-string-end-to-end/index.qmd). Uses derivatives, and cosh and sinh (explained); proofs and fine print are in folds you can skip. About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from the [kalimba entry](index.qmd#kalimba) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd). Proofs and fine print are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
 A kalimba tine's first [overtone](../instruments-as-operators/glossary.qmd#partial) sits at about 6.3 times its [fundamental](../instruments-as-operators/glossary.qmd#fundamental), far off the whole numbers, and overtones off the whole numbers are what make a bell clang.[^inh] So why does a kalimba sound like a clean note?
 :::
 
-A kalimba sounds clean because its off-line overtone dies within a fraction of a second, and the fundamental rings on alone. Tap a tine; then tick the box, which keeps the overtones ringing, and tap it again.
+**A kalimba sounds clean because its off-line overtone dies within a fraction of a second, and the fundamental rings on alone.** Where the overtone sits follows from Newton's law; how fast it fades is measured. Tap a tine; then tick the box, which keeps the overtones ringing, and tap again.
 
 ```{=html}
 <style>
@@ -53,23 +53,15 @@ A kalimba sounds clean because its off-line overtone dies within a fraction of a
 </div>
 ```
 
-The reason, in one sentence: **a tine springs back by resisting bending, which puts its overtones far off the whole-number lines, and the strongest of them starts loud but fades almost at once.** The first half follows from Newton's law; the second is measured.
-
 ## Where the equation comes from {#newton}
 
-A tine is under no tension: it springs back because steel resists being bent. Let $u(x, t)$ be its height at distance $x$ from the clamp. Bend it, and the steel on the outside of the curve stretches while the inside compresses; together these forces turn each cross-section, a [bending moment](../instruments-as-operators/glossary.qmd#moment) $M = EI\,u_{xx}$ proportional to the curvature ($E$ is steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus), how stiff the material is, and $I$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment), how strongly the cross-section's shape resists bending).
-
-A thin slice of the tine cannot spin, so the moments on its two faces are balanced by a sideways shear force $V = -M_x$, and the difference of the shear forces on its two faces accelerates it. For a slice of density $\rho$ and cross-sectional area $S$, Newton's law gives
+A tine is under no tension; steel's resistance to bending springs it back. Bending needs a turning effect at each cross-section; where that changes along the tine, a sideways force must balance it, and the imbalance of those forces accelerates each slice. Let $u(x, t)$ be the tine's height at distance $x$ from the clamp, and $L$ its length. The turning effect, the [bending moment](../instruments-as-operators/glossary.qmd#moment), is $M = EI\,u_{xx}$, where $u_{xx}$ is the curvature, $E$ steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus), how stiff the material is, and $I$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment), how strongly the cross-section's shape resists bending. The sideways force, the shear force, is $V = -M_x$. For a slice of density $\rho$ and cross-sectional area $S$, Newton's law gives
 $$
 u_{tt} = -\kappa^2 u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho S},
 $$
 the [Euler–Bernoulli beam](../instruments-as-operators/glossary.qmd#beam) equation, with four derivatives where the string had two.[^eb]
 
-The ends complete the problem. The base is [clamped](../instruments-as-operators/glossary.qmd#clamped): it can neither move nor tilt, $u = u_x = 0$. The tip is [free](../instruments-as-operators/glossary.qmd#free-end): no moment and no shear force act there, $u_{xx} = u_{xxx} = 0$. A bar held like this is a [cantilever](../instruments-as-operators/glossary.qmd#cantilever).[^cant] So the equation reads $u_{tt} = -Au$ with
-$$
-A = \kappa^2\,\frac{d^4}{dx^4},
-$$
-acting on shapes with $u = u_x = 0$ at the clamp and $u_{xx} = u_{xxx} = 0$ at the tip. The model assumes small slopes, a uniform bar clamped at exactly one point, and no friction.
+The base is [clamped](../instruments-as-operators/glossary.qmd#clamped): it can neither move nor tilt, $u = u_x = 0$. The tip is [free](../instruments-as-operators/glossary.qmd#free-end): no moment and no shear force act there, $u_{xx} = u_{xxx} = 0$. So the equation reads $u_{tt} = -Au$ with $A = \kappa^2\,d^4/dx^4$, acting on shapes that satisfy these four conditions.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The slice, step by step <span class="needs">an integral over a cross-section</span></summary>
@@ -81,24 +73,22 @@ M = -\int y(-Ey\,u_{xx})\,dA = EI\,u_{xx}, \\
 I = \int y^2\,dA .
 \end{gathered}
 $$
-A thin slice's rotational inertia is negligible, so the turning effects on it balance: $V\,dx + dM = 0$, that is, $V = -M_x = -EI\,u_{xxx}$. The shear forces on the two faces differ by $V_x\,dx$, which accelerates the slice's mass $\rho S\,dx$: $\rho S\,u_{tt} = V_x = -EI\,u_{xxxx}$. A fourth-order equation needs two conditions at each end, which the clamp and the free tip supply. The model ignores the slices' rotational inertia and shear deformation, which matter only for thick bars and high modes (Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory)).
+A thin slice's rotational inertia is negligible, so the turning effects on it balance: $V\,dx + dM = 0$, that is, $V = -M_x = -EI\,u_{xxx}$. The shear forces on the two faces differ by $V_x\,dx$, which accelerates the slice's mass $\rho S\,dx$: $\rho S\,u_{tt} = V_x = -EI\,u_{xxxx}$. A fourth-order equation needs two conditions at each end, which the clamp and the free tip supply. The model assumes small slopes, a uniform bar clamped at exactly one point, and no friction; it ignores the slices' rotational inertia and shear deformation, which matter only for thick bars and high modes (Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory)).
 
 </details>
 :::
 
-**What four derivatives do.** Squeeze a shape into half the length and every rate of change along it doubles. A string's pull depends on two derivatives, so it grows $2 \times 2 = 4$ times; a tine's push depends on four, so it grows $2^4 = 16$ times. Short wiggles are far stiffer in a tine than in a string, and both of the tine's surprises below come from this.
-
 ## The tine's shapes {#spectrum}
 
-As for the string, the shapes that matter are the ones $A$ only stretches, $AX = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4X$. Four functions return to themselves after four derivatives: $\cos\beta x$ and $\sin\beta x$, and $\cosh\beta x$ and $\sinh\beta x$, the [hyperbolic functions](../instruments-as-operators/glossary.qmd#hyperbolic) $\cosh y = (e^y + e^{-y})/2$ and $\sinh y = (e^y - e^{-y})/2$. The four end conditions are four equations for the four coefficients, and they have a solution other than zero exactly when
+**The tine's overtones sit far off the whole-number lines.** Its modes are the shapes $A$ only stretches, $AX = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4X$. Four functions return to themselves after four derivatives: $\cos\beta x$ and $\sin\beta x$, and the [hyperbolic functions](../instruments-as-operators/glossary.qmd#hyperbolic) $\cosh\beta x$ and $\sinh\beta x$, where $\cosh y = (e^y + e^{-y})/2$ and $\sinh y = (e^y - e^{-y})/2$. The four end conditions allow a solution other than zero exactly when
 $$
 \cos\beta L\,\cosh\beta L = -1 .
 $$
-Since $\cosh\beta L$ grows fast, $\cos\beta L$ must be close to 0, so $\beta L$ sits near $(n - \tfrac12)\pi$. Solved numerically, the roots are $\beta_nL = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, and so
+Since $\cosh\beta L$ grows fast, $\beta L$ sits near a zero of the cosine, $(n - \tfrac12)\pi$. The roots are $\beta_nL = 1.8751,\ 4.6941,\ 7.8548,\ 10.9955, \dots$, and so
 $$
 \lambda_n = \kappa^2\beta_n^4, \qquad f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{\kappa\,\beta_n^2}{2\pi},
 $$
-in the ratios $1 : 6.27 : 17.55 : 34.39$, growing like $(2n - 1)^2$: off the whole-number lines.[^fr] The first root is the furthest from its estimate, $\pi/2 \approx 1.571$, and that shift is what breaks the pattern: if every root sat exactly at $(n - \tfrac12)\pi$, the ratios would be the whole numbers $1 : 9 : 25$.
+in the ratios $1 : 6.27 : 17.55 : 34.39$.[^fr] Roots exactly at $(n - \tfrac12)\pi$ would give the whole numbers $1 : 9 : 25$; the clamp and the free tip shift the first root most from $(n - \tfrac12)\pi$, to 1.8751 instead of $\pi/2 \approx 1.571$, and that breaks the pattern.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The mode condition from the four end conditions <span class="needs">a 2×2 determinant</span></summary>
@@ -138,7 +128,7 @@ Yes, for some. A bar held in place at both ends but free to pivot has $u = u_{xx
 </details>
 :::
 
-In the panel, each stem is one $f_n$ on the pitch ruler of [post 1](../what-you-hear/index.qmd), against its gray whole-number lines; 17.55× and 34.39× are off the right edge. A stem's height is how hard that mode pushes on the bridge just after a pluck, the subject of the next section. Tap a stem to see its shape.
+In the panel, each stem is one $f_n$ against the gray whole-number lines, its height the force the mode passes to the box after a pluck (next section); tap a stem to see its shape.
 
 ```{=html}
 <div class="ins">
@@ -153,16 +143,18 @@ In the panel, each stem is one $f_n$ on the pitch ruler of [post 1](../what-you-
 
 ## The pluck: a click {#ringing}
 
-Released at rest from the bent shape a thumb holds it in, the tine moves as a sum of its shapes, each swinging at its own frequency:
+**The first overtone starts strong in the force on the box: that is the click at the start of each note.** Released from a thumb's push, the tine moves as a sum of its shapes, with amounts $a_n$:
 $$
 u(x, t) = \sum_{n = 1}^{\infty} a_n \cos(2\pi f_n t)\,X_n(x) .
 $$
-In how far the tine swings, the first overtone is tiny: $a_2$ is 2.5% of $a_1$, because each mode gives way to the thumb in inverse proportion to its stiffness $\lambda_n$. But the kalimba's body feels the push of the tine on the bridge, not its swing, and in that push the higher modes weigh more. There the first overtone starts at about 55% of the fundamental. That strong start is the click at the beginning of each note.
+In the tine's displacement, the first overtone is tiny: $a_2$ is 2.5% of $a_1$, because each mode gives way to the thumb in inverse proportion to its stiffness $\lambda_n$.
+
+The sound reaches the air through the clamp. There the tine passes the kalimba's box a force, the shear force $V(0, t) = -EI\,u_{xxx}(0, t)$, and a bending moment (a turning push), $M(0, t) = EI\,u_{xx}(0, t)$; the box responds to each as a fixed linear filter and pushes the air. These weigh the higher modes more: in the force, the first overtone starts at about 55% of the fundamental.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>How strongly a pluck at the tip starts each mode <span class="needs">integration by parts</span></summary>
 
-1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still. Inside, nothing pushes, so $EI\,u_0'''' = 0$ and $u_0$ is a cubic. The clamp, the moment-free tip and the tip height $h$ leave $u_0 = h\,x^2(3L - x)/2L^3$, with $u_0'''(L) = -3h/L^3 \ne 0$: the shear force $F = 3EIh/L^3$ of the thumb. The start is smooth, as it must be: a shape with a corner has $u_x$ jumping, so $u_{xx}$ contains a spike and the bending energy $\tfrac12 EI\int (u_{xx})^2$ is infinite, which a finite push cannot store. The start fails the tip condition $u_{xxx}(L) = 0$, but only where the thumb pushed. That is allowed: in post 2's [weak sense of solution](../one-string-end-to-end/index.qmd#decoupling), a solution is tested only against smooth shapes $\varphi$ that satisfy all four end conditions, through $\langle u(t), \varphi\rangle$, so the series needs only a start of finite bending energy with $u_0 = u_0' = 0$ at the clamp; the tip's conditions need not hold.
+1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still. Inside, nothing pushes, so $EI\,u_0'''' = 0$ and $u_0$ is a cubic. The clamp, the moment-free tip and the tip height $u_0(L)$ leave $u_0 = u_0(L)\,x^2(3L - x)/2L^3$, with $u_0'''(L) = -3u_0(L)/L^3 \ne 0$: the shear force $F = 3EI\,u_0(L)/L^3$ of the thumb. The start is smooth, as it must be: a shape with a corner has $u_x$ jumping, so $u_{xx}$ contains a spike and the bending energy $\tfrac12 EI\int (u_{xx})^2$ is infinite, which a finite push cannot store. The start fails the tip condition $u_{xxx}(L) = 0$, but only where the thumb pushed. That is allowed: in post 2's [weak sense of solution](../one-string-end-to-end/index.qmd#decoupling), a solution is tested only against smooth shapes $\varphi$ that satisfy all four end conditions, through $\langle u(t), \varphi\rangle$, so the series needs only a start of finite bending energy with $u_0 = u_0' = 0$ at the clamp; the tip's conditions need not hold.
 2. *Split it into modes.* Write $u_0 = \sum_n a_n X_n$, each mode scaled so that $\int_0^L X_n^2\,dx = L$, and compute $\int_0^L EI\,u_0\,X_n''''\,dx$ in two ways. By the mode equation $EI\,X_n'''' = \rho S\,\omega_n^2X_n$, with $\omega_n = 2\pi f_n$, and because different modes are perpendicular, it equals $\rho SL\,\omega_n^2\,a_n$. Integrating by parts four times instead, every term vanishes except the tip's shear force times $X_n(L)$. So $\rho SL\,\omega_n^2\,a_n = F\,X_n(L)$: mode $n$ is a spring of stiffness proportional to $\omega_n^2$, pushed with a force proportional to its value at the tip.
 3. *Tip values.* In the form of the fold above, $\sigma_1 \approx 0.734$, $\sigma_2 \approx 1.018$, and every mode has $X_n(L) = \pm2$ (a known property of clamped–free modes, easily confirmed numerically). So $a_n \propto 1/\omega_n^2$, and $a_2/a_1 = 1/6.27^2 \approx 2.5\%$.
 4. *Forces on the bridge.* In this model the tine is clamped right at the bridge, so the forces at the clamp are the forces on the bridge. With $X_n''(0) = 2\beta_n^2$ and $X_n'''(0) = -2\sigma_n\beta_n^3$, and $a_n \propto 1/\beta_n^4$, the second mode's bending moment at the clamp is $(\beta_1/\beta_2)^2 \approx 16\%$ of the first's, and its shear force $(\sigma_2/\sigma_1)(\beta_1/\beta_2) \approx 1.39 \times 0.40 \approx 55\%$. These are two measures of the push, not a range of uncertainty; the demo uses the shear force.
@@ -174,15 +166,11 @@ A real tine is held a little behind the bridge and rests on it partway along, ra
 
 ## Fading: the overtone goes first {#fading}
 
-The click is gone within a fraction of a second, while the fundamental rings on. This part is observed, not derived: the model has no friction, so in it every mode rings forever. The acoustician D. M. F. Chapman measured a Hugh Tracey kalimba and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, and found that the off-line overtones die away rapidly.[^chapman]
+**The click is gone within a fraction of a second, while the fundamental rings on.** This is observed, not derived: in the frictionless model every mode rings forever. D. M. F. Chapman measured a Hugh Tracey kalimba and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, and that the off-line overtones die away rapidly.[^chapman] What remains is the fundamental alone, with a clear pitch: the spectrum would clang, as a bell's does, but the fading decides. The demo's fading times are illustrative, chosen to match Chapman's observation.
 
-The demo's sound is made this way. It adds the first five modes at the frequencies above, each starting with its strength in the push on the bridge; the fundamental fades over a couple of seconds and the overtones within a small fraction of that. Those fading times are illustrative, chosen to match Chapman's observation. Tick the box and every mode fades as slowly as the fundamental: the same spectrum then clangs like a bell.
+## Half the length, two octaves up {#what-we-hear}
 
-## What you hear {#what-we-hear}
-
-**A click, then a clean note.** What remains after the click is the fundamental alone, a single partial, and a single partial has a clear pitch at its own frequency. The spectrum alone would clang, as a bell's does; the fading decides. The player sets the loudness by how far the tip is pushed, since every $a_n$ grows in proportion to it.
-
-**Half the length, two octaves up.** The numbers $\beta_nL$ do not depend on the length, so $f_n = \kappa\,(\beta_nL)^2/(2\pi L^2)$: a tine's frequency goes as one over its length squared. Half the length gives four times the frequency, two octaves, where a string rises only one. That is why, in the demo, the low tines are not twice as long as the tines an octave above them. It is also why a small change of length goes a long way when a tine is tuned: its length is measured from where it is held down on the bridge, and longer is lower, shorter higher.[^km]
+**A tine's frequency goes as one over its length squared.** Squeeze a shape into half the length and its fourth derivative grows $2^4 = 16$ times, so $\lambda$ grows 16 times and $f = \sqrt{\lambda}/2\pi$ grows 4 times: two octaves, where a string, with two derivatives, rises one. In the formula, the $\beta_nL$ do not depend on the length, so $f_n = \kappa\,(\beta_nL)^2/(2\pi L^2)$. A tine is tuned by moving the point where it is held down on the bridge: longer is lower, shorter higher,[^km] and a small change goes a long way.
 
 ## Next
 
@@ -190,10 +178,9 @@ A harmonica reed is the same kind of bar, with the same off-line overtones; blow
 
 [^inh]: Wikipedia, [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity): bells and other instruments whose overtones are not whole-number multiples of the fundamental.
 [^eb]: Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory); N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 2 (bars).
-[^cant]: Wikipedia, [Cantilever](https://en.wikipedia.org/wiki/Cantilever): a beam supported at one end only.
-[^fr]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 2: the clamped–free bar's frequencies, in the ratios 1 : 6.27 : 17.55 : 34.39.
+[^fr]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 2: the clamped–free bar's frequencies, in the ratios 1 : 6.27 : 17.55 : 34.39.
 [^chapman]: D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustics'08 Paris, paper 5aMUf1, Acoustical Society of America, 2008: measured on "the Hugh Tracey Pentatonic Kalimba"; "a single overtone (f1) whose frequency ratio f1/f0 is about 5.9-6.8"; "the anharmonic overtones die away rapidly".
-[^km]: Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49): "Making tines longer (from the point where they are held down on the bridge) will lower their pitch, and making them shorter will make their pitch higher."
+[^km]: Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49): "Making tines longer (from the point where they are held down on the bridge) will lower their pitch".
 
 ```{=html}
 <script src="core.js"></script>
