@@ -1,6 +1,6 @@
 ---
 title: "Why does a drum thud?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · Appendix · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/drum.html, /posts/instruments-as-opera
 :::
 
 ::: {.pageinfo}
-A deep dive from the [drums entry](index.qmd#drums) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd). About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from the [drums entry](index.qmd#drums) of the appendix. Builds on [page 5](../natural-frequencies/index.qmd). About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -51,7 +51,7 @@ svg.patch { display: block; width: 100%; max-width: 420px; height: auto; margin:
 </div>
 ```
 
-What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The room keeps those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
+What you hear works as in [page 2](../what-you-hear/index.qmd#read): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The room keeps those frequencies ([page 3](../from-instrument-to-ear/index.qmd#taps)).
 
 ## The whole skin sounds {#fading}
 
@@ -283,7 +283,7 @@ so coarse shapes, with small $k$, slow down most. This is [added mass](../instru
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Which octave the ear names</summary>
 
-The modes above the (1,1) sit a [fifth](../instruments-as-operators/glossary.qmd#octave), an octave and a major tenth (ratio 5 : 2) above it. The pitch rule of post 1 would put the pitch an octave lower, at the base, and HyperPhysics notes that "the missing fundamental effect might then give you the pitch C2" for a drum tuned to C3 (HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html)). Which octave the ear names is one of the [exceptions](../what-you-hear/index.qmd#exceptions) post 1 lists, and this series doesn't settle it.
+The modes above the (1,1) sit a [fifth](../instruments-as-operators/glossary.qmd#octave), an octave and a major tenth (ratio 5 : 2) above it. The pitch rule of page 2 would put the pitch an octave lower, at the base, and HyperPhysics notes that "the missing fundamental effect might then give you the pitch C2" for a drum tuned to C3 (HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html)). Which octave the ear names is one of the [exceptions](../what-you-hear/index.qmd#pitch) page 2 notes, and this series doesn't settle it.
 
 </details>
 :::

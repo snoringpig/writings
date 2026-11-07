@@ -1,6 +1,6 @@
 ---
 title: "Why does a kalimba sound clean?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · Appendix · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/kalimba.html, /posts/instruments-as-op
 :::
 
 ::: {.pageinfo}
-A deep dive from the [kalimba entry](index.qmd#kalimba) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd). Proofs and fine print are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from the [kalimba entry](index.qmd#kalimba) of the appendix. Builds on [page 5](../natural-frequencies/index.qmd). Proofs and fine print are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -53,7 +53,7 @@ A kalimba tine's first [overtone](../instruments-as-operators/glossary.qmd#parti
 </div>
 ```
 
-[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The box and the room keep those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
+[]{#what-we-hear}What you hear works as in [page 2](../what-you-hear/index.qmd#read): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The box and the room keep those frequencies ([page 3](../from-instrument-to-ear/index.qmd#taps)).
 
 ## How the sound gets out {#clamp}
 
@@ -155,7 +155,7 @@ A thin slice's rotational inertia is negligible, so the turning effects on it ba
 ::: {.derive}
 <details><summary><span class="label">Details</span>How strongly a pluck at the tip starts each mode <span class="needs">integration by parts</span></summary>
 
-1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still. Inside, nothing pushes, so $EI\,u_0'''' = 0$ and $u_0$ is a cubic. The clamp, the moment-free tip and the tip height $u_0(L)$ leave $u_0 = u_0(L)\,x^2(3L - x)/2L^3$, with $u_0'''(L) = -3u_0(L)/L^3 \ne 0$: the shear force $F = 3EI\,u_0(L)/L^3$ of the thumb. The start is smooth, as it must be: a shape with a corner has $u_x$ jumping, so $u_{xx}$ contains a spike and the bending energy $\tfrac12 EI\int (u_{xx})^2$ is infinite, which a finite push cannot store. The start fails the tip condition $u_{xxx}(L) = 0$, but only where the thumb pushed. That is allowed: in post 2's [weak sense of solution](../one-string-end-to-end/index.qmd#decoupling), a solution is tested only against smooth shapes $\varphi$ that satisfy all four end conditions, through $\langle u(t), \varphi\rangle$, so the series needs only a start of finite bending energy with $u_0 = u_0' = 0$ at the clamp; the tip's conditions need not hold.
+1. *The pluck shape.* Before release, a push $F$ at the tip holds the tine still. Inside, nothing pushes, so $EI\,u_0'''' = 0$ and $u_0$ is a cubic. The clamp, the moment-free tip and the tip height $u_0(L)$ leave $u_0 = u_0(L)\,x^2(3L - x)/2L^3$, with $u_0'''(L) = -3u_0(L)/L^3 \ne 0$: the shear force $F = 3EI\,u_0(L)/L^3$ of the thumb. The start is smooth, as it must be: a shape with a corner has $u_x$ jumping, so $u_{xx}$ contains a spike and the bending energy $\tfrac12 EI\int (u_{xx})^2$ is infinite, which a finite push cannot store. The start fails the tip condition $u_{xxx}(L) = 0$, but only where the thumb pushed. That is allowed: in page 5's [weak sense of solution](../natural-frequencies/index.qmd#string), a solution is tested only against smooth shapes $\varphi$ that satisfy all four end conditions, through $\langle u(t), \varphi\rangle$, so the series needs only a start of finite bending energy with $u_0 = u_0' = 0$ at the clamp; the tip's conditions need not hold.
 2. *Split it into modes.* Write $u_0 = \sum_n a_n X_n$, each mode scaled so that $\int_0^L X_n^2\,dx = L$, and compute $\int_0^L EI\,u_0\,X_n''''\,dx$ in two ways. By the mode equation $EI\,X_n'''' = \rho S\,\omega_n^2X_n$, with $\omega_n = 2\pi f_n$, and because different modes are perpendicular, it equals $\rho SL\,\omega_n^2\,a_n$. Integrating by parts four times instead, every term vanishes except the tip's shear force times $X_n(L)$. So $\rho SL\,\omega_n^2\,a_n = F\,X_n(L)$: mode $n$ is a spring of stiffness proportional to $\omega_n^2$, pushed with a force proportional to its value at the tip.
 3. *Tip values.* In the form of the fold above, $\sigma_1 \approx 0.734$, $\sigma_2 \approx 1.018$, and every mode has $X_n(L) = \pm2$ (a known property of clamped–free modes, easily confirmed numerically). So $a_n \propto 1/\omega_n^2$, and $a_2/a_1 = 1/6.27^2 \approx 2.5\%$.
 4. *Forces on the bridge.* In this model the tine is clamped right at the bridge, so the forces at the clamp are the forces on the bridge. With $X_n''(0) = 2\beta_n^2$ and $X_n'''(0) = -2\sigma_n\beta_n^3$, and $a_n \propto 1/\beta_n^4$, the second mode's bending moment at the clamp is $(\beta_1/\beta_2)^2 \approx 16\%$ of the first's, and its shear force $(\sigma_2/\sigma_1)(\beta_1/\beta_2) \approx 1.39 \times 0.40 \approx 55\%$. These are two measures of the push, not a range of uncertainty; the demo uses the shear force.

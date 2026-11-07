@@ -1,6 +1,6 @@
 ---
 title: "Why do piano tuners stretch octaves?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · Appendix · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/piano.html, /posts/instruments-as-oper
 :::
 
 ::: {.pageinfo}
-A deep dive from the [piano entry](index.qmd#piano) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd) and on the [kalimba page](kalimba.qmd) for bending. About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from the [piano entry](index.qmd#piano) of the appendix. Builds on [page 5](../natural-frequencies/index.qmd) and on the [kalimba page](kalimba.qmd) for bending. About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -96,7 +96,7 @@ Tuners also listen to other pairs, such as the lower note's fourth partial again
 
 ## What the bridge feels {#bridge}
 
-As in [post 2](../one-string-end-to-end/index.qmd#sound), the sound at your ear is $p = h * F$, with $F$ the force on the bridge and $h$ the tap response, which keeps every frequency. With $u(x, t)$ the wire's sideways displacement at distance $x$ along it, the bridge at $x = L$, $T$ the tension and subscripts for [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative), the force is
+As in [page 3](../from-instrument-to-ear/index.qmd#taps), the sound at your ear is $p = h * F$, with $F$ the force on the bridge and $h$ the tap response, which keeps every frequency. With $u(x, t)$ the wire's sideways displacement at distance $x$ along it, the bridge at $x = L$, $T$ the tension and subscripts for [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative), the force is
 $$
 F(t) = -T\,u_x(L, t) + EI\,u_{xxx}(L, t)
 $$
@@ -161,19 +161,19 @@ $$
 ::: {.derive}
 <details><summary><span class="label">Proof</span>There are no other modes <span class="needs">inner products</span></summary>
 
-The sines already form a basis of shapes on $[0, L]$ (post 2's [Fourier sine series](../one-string-end-to-end/index.qmd#decoupling)). With pinned ends, integrating by parts shows that $A$ is symmetric, $\int (Au)\,w = \int u\,(Aw)$, so eigenfunctions for different eigenvalues are perpendicular. An eigenfunction for any eigenvalue other than the $\lambda_n$ would be perpendicular to every sine, hence zero.
+The sines already form a basis of shapes on $[0, L]$ (page 5's [Fourier sine series](../natural-frequencies/index.qmd#string)). With pinned ends, integrating by parts shows that $A$ is symmetric, $\int (Au)\,w = \int u\,(Aw)$, so eigenfunctions for different eigenvalues are perpendicular. An eigenfunction for any eigenvalue other than the $\lambda_n$ would be perpendicular to every sine, hence zero.
 
 </details>
 :::
 
 ## Where the equation comes from {#newton}
 
-Newton's law on a short piece of piano wire adds two forces, tension's and stiffness's:[^fr1] tension gives $T\,u_{xx}$ per unit length, as on [post 2](../one-string-end-to-end/index.qmd#newton)'s string, and stiffness $-EI\,u_{xxxx}$, as in the [kalimba's tine](kalimba.qmd#newton).
+Newton's law on a short piece of piano wire adds two forces, tension's and stiffness's:[^fr1] tension gives $T\,u_{xx}$ per unit length, as on [page 5](../natural-frequencies/index.qmd#string)'s string, and stiffness $-EI\,u_{xxxx}$, as in the [kalimba's tine](kalimba.qmd#newton).
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The piece of wire, step by step <span class="needs">partial derivatives</span></summary>
 
-Take the piece of wire between $x$ and $x + dx$, of mass $\mu\,dx$. Tension pulls along the wire at both ends; for small slopes the upward part of each pull is $T$ times the slope, so the net upward force is $T u_x(x + dx) - T u_x(x) \approx T\,u_{xx}\,dx$, as for post 2's string. Bending adds the bar's force: a bent wire carries the [bending moment](../instruments-as-operators/glossary.qmd#moment) $M = EI\,u_{xx}$; a thin slice cannot spin, so its turning effects balance and the sideways shear force is $V = -M_x = -EI\,u_{xxx}$; and the shear forces on the two faces differ by $V_x\,dx = -EI\,u_{xxxx}\,dx$ (the [kalimba's fold](kalimba.qmd#newton) has the steps). Newton's law takes the total force, so the two add: $\mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx}$. Small slopes also keep the tension at $T$.
+Take the piece of wire between $x$ and $x + dx$, of mass $\mu\,dx$. Tension pulls along the wire at both ends; for small slopes the upward part of each pull is $T$ times the slope, so the net upward force is $T u_x(x + dx) - T u_x(x) \approx T\,u_{xx}\,dx$, as for page 5's string. Bending adds the bar's force: a bent wire carries the [bending moment](../instruments-as-operators/glossary.qmd#moment) $M = EI\,u_{xx}$; a thin slice cannot spin, so its turning effects balance and the sideways shear force is $V = -M_x = -EI\,u_{xxx}$; and the shear forces on the two faces differ by $V_x\,dx = -EI\,u_{xxxx}\,dx$ (the [kalimba's fold](kalimba.qmd#newton) has the steps). Newton's law takes the total force, so the two add: $\mu\,u_{tt} = T\,u_{xx} - EI\,u_{xxxx}$. Small slopes also keep the tension at $T$.
 
 </details>
 :::
@@ -217,7 +217,7 @@ u = \sum_n q_n(t)\,X_n(x), \qquad q_n(t) = a_n e^{-t/\tau_n}\sin(2\pi f_nt),
 $$
 where $a_n$ is mode $n$'s starting size and $\tau_n$ its fading time.
 
-**The hammer sets the $a_n$.** A blow gives each mode a starting speed proportional to its height at the hammer's point $x_h$, so $a_n \propto X_n(x_h)/f_n$ for a hammer at $x_h$, and a mode with a still point there stays silent, as the 8th and 16th do under the demos' hammer, an eighth of the way along. A heavy blow also makes the note brighter: the felt acts as a hard spring under it, and starts more high partials ([post 1](../what-you-hear/index.qmd#dynamics-and-timbre)).[^russell]
+**The hammer sets the $a_n$.** A blow gives each mode a starting speed proportional to its height at the hammer's point $x_h$, so $a_n \propto X_n(x_h)/f_n$ for a hammer at $x_h$, and a mode with a still point there stays silent, as the 8th and 16th do under the demos' hammer, an eighth of the way along. A heavy blow also makes the note brighter: the felt acts as a hard spring under it, and starts more high partials ([page 4](../why-instruments-differ/index.qmd#families)).[^russell]
 
 **The dampers set the $\tau_n$.** Letting go of a key drops a felt [damper](../instruments-as-operators/glossary.qmd#damper) on its strings, which drains each mode in proportion to how much it moves under the felt. The pedals lift the dampers or soften the blow.[^pedals]
 

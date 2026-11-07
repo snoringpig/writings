@@ -1,6 +1,6 @@
 ---
 title: "Where did the harmonica reed's overtones go?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · Appendix · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/harmonica.html, /posts/instruments-as-
 :::
 
 ::: {.pageinfo}
-A deep dive from [the harmonica's entry](index.qmd#harmonica) in post 3. Builds on [post 2](../one-string-end-to-end/index.qmd) and on [the kalimba page](kalimba.qmd), whose bar this is. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from [the harmonica's entry](index.qmd#harmonica) in the appendix. Builds on [page 5](../natural-frequencies/index.qmd) and on [the kalimba page](kalimba.qmd), whose bar this is. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -52,7 +52,7 @@ A harmonica reed is a little brass bar, fixed at one end and free at the other, 
 </div>
 ```
 
-What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The room keeps those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
+What you hear works as in [page 2](../what-you-hear/index.qmd#read): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The room keeps those frequencies ([page 3](../from-instrument-to-ear/index.qmd#taps)).
 
 ## Blown: how the sound gets out {#sustained}
 
