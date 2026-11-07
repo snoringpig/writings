@@ -1,0 +1,149 @@
+/* Volcano in a Shader: styles for the interactive figures and step boxes.
+   The blog theme (cosmo) is light-only, so these tokens are light-only too; code panels stay dark. */
+:root {
+  --vs-surface: #ffffff;
+  --vs-tint: #f4f6f8;
+  --vs-fg: #1f2933;
+  --vs-muted: #5a6573;
+  --vs-rule: #d5dce4;
+  --vs-accent: #1d5ea8;
+  --vs-scree: #9c4a37;
+  --vs-code-bg: #0e141b;
+  --vs-code-fg: #dbe3ec;
+  --vs-code-dim: #7f8c9a;
+  --vs-add: #3fb950;
+  --vs-del: #f0716a;
+  --vs-mono: SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+.pageinfo { font-size: 0.9rem; color: var(--vs-muted); border-bottom: 1px solid var(--vs-rule); padding-bottom: 0.6rem; margin-bottom: 1.2rem; }
+.pageinfo p { margin: 0; }
+
+.vs-label { font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--vs-muted); margin: 0; }
+
+/* hero: photo and render side by side, then the ten steps as a strip */
+.vs-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin: 1rem 0 0.4rem; }
+.vs-pair figure { margin: 0; min-width: 0; }
+.vs-pair img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
+.vs-pair figcaption { margin-top: 0.3rem; font-size: 0.85rem; color: var(--vs-muted); }
+@media (max-width: 560px) { .vs-pair { grid-template-columns: 1fr; } }
+.vs-strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.4rem; margin: 0.6rem 0 1.2rem; }
+.vs-strip a { color: var(--vs-fg); text-decoration: none; display: grid; gap: 0.2rem; min-width: 0; }
+.vs-strip img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 3px; border: 1px solid var(--vs-rule); }
+.vs-strip a:hover img { border-color: var(--vs-accent); }
+.vs-strip span { font-size: 0.72rem; line-height: 1.25; color: var(--vs-muted); }
+.vs-strip b { color: var(--vs-scree); margin-right: 0.25em; }
+
+/* "Added in this step" box (a Quarto div with a definition list inside) */
+.added { margin: 1rem 0; border: 1px solid var(--vs-rule); background: var(--vs-surface); border-radius: 4px; padding: 0.55rem 1rem 0.4rem; }
+.added .vs-label { color: var(--vs-accent); }
+.added dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 0.9rem; margin: 0.4rem 0 0.2rem; }
+.added dt { font-weight: 600; font-size: 0.9rem; padding-top: 0.1rem; }
+.added dd { margin: 0; min-width: 0; }
+.added dd p { margin: 0; }
+.added .chg { display: inline-flex; flex-wrap: wrap; gap: 0.3rem 0.4rem; }
+.added .chg a { font-family: var(--vs-mono); font-size: 0.78rem; text-decoration: none; border: 1px solid var(--vs-rule); border-radius: 3px; padding: 0.05rem 0.4rem; color: var(--vs-fg); white-space: nowrap; }
+.added .chg a:hover { border-color: var(--vs-accent); color: var(--vs-accent); }
+.added .chg a b { font-weight: 600; color: var(--vs-muted); margin-right: 0.3em; }
+@media (max-width: 480px) { .added dl { grid-template-columns: 1fr; gap: 0.1rem; } .added dd { margin-bottom: 0.4rem; } }
+
+/* rendered figure with the view switch and live render */
+figure.render { margin: 1rem 0 1.2rem; }
+.views { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--vs-rule); border-radius: 4px; overflow: hidden; margin-bottom: 0.4rem; }
+.frame { position: relative; border-radius: 4px; overflow: hidden; background: #000; aspect-ratio: 4 / 3; max-width: 100%; }
+.frame img, .frame canvas { display: block; width: 100%; height: 100%; object-fit: cover; }
+.frame canvas { position: absolute; inset: 0; }
+.frame .tag { position: absolute; left: 8px; top: 8px; font-family: var(--vs-mono); font-size: 0.72rem; color: #fff; background: rgba(0, 0, 0, 0.55); padding: 0.1rem 0.45rem; border-radius: 3px; pointer-events: none; }
+.bar { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--vs-accent); width: 0; transition: width 0.15s linear; }
+figure.render figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.9rem; margin-top: 0.45rem; font-family: var(--vs-mono); font-size: 0.74rem; color: var(--vs-muted); }
+figure.render figcaption .what { flex: 1 1 16rem; min-width: 0; }
+.diffnote { margin: 0.35rem 0 0; font-family: var(--vs-mono); font-size: 0.74rem; color: var(--vs-muted); }
+.ctl { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.vs-btn, .views button, .ctl button, .ctl select, .chunk-head button {
+  font: inherit; font-size: 0.8rem; font-weight: 600; color: var(--vs-fg); background: var(--vs-surface);
+  border: 1px solid var(--vs-rule); border-radius: 4px; padding: 0.32rem 0.65rem; cursor: pointer; line-height: 1.3;
+}
+.views button { border: 0; border-radius: 0; border-right: 1px solid var(--vs-rule); }
+.views button:last-child { border-right: 0; }
+.views button[aria-pressed="true"] { background: var(--vs-accent); color: #fff; }
+.ctl button.primary { background: var(--vs-accent); color: #fff; border-color: var(--vs-accent); }
+.vs-btn:hover, .ctl button:hover, .views button:hover { border-color: var(--vs-accent); }
+.views button:not([aria-pressed="true"]):hover, .ctl button:not(.primary):hover { color: var(--vs-accent); }
+.views button:focus-visible, .ctl button:focus-visible, .ctl select:focus-visible, .chunk-head button:focus-visible, .vs-strip a:focus-visible { outline: 2px solid var(--vs-accent); outline-offset: 2px; }
+.status { font-family: var(--vs-mono); font-size: 0.74rem; color: var(--vs-muted); }
+
+/* claim (statement visible; proof in a fold below it) */
+.claim { margin: 1rem 0 0.4rem; padding: 0.15rem 0 0.15rem 1rem; border-left: 2px solid var(--vs-rule); }
+.claim p:last-child { margin-bottom: 0.3rem; }
+
+/* shortcut box */
+.cut { margin: 1.3rem 0; border: 1px dashed color-mix(in srgb, var(--vs-scree) 60%, var(--vs-rule)); border-radius: 4px; padding: 0.6rem 1rem 0.3rem; background: color-mix(in srgb, var(--vs-scree) 5%, var(--vs-surface)); }
+.cut .vs-label { color: var(--vs-scree); }
+.cut dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 0.9rem; margin: 0.45rem 0 0.2rem; }
+.cut dt { font-weight: 600; font-size: 0.9rem; padding-top: 0.1rem; }
+.cut dd { margin: 0; min-width: 0; }
+.cut dd p { margin: 0; }
+@media (max-width: 480px) { .cut dl { grid-template-columns: 1fr; gap: 0.1rem; } .cut dd { margin-bottom: 0.4rem; } }
+
+/* code chunks, generated by volcano.js */
+.vcode { margin: 1.1rem 0; display: grid; gap: 0.6rem; }
+.chunk { background: var(--vs-code-bg); border-radius: 4px; min-width: 0; }
+.chunk-head { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; padding: 0.45rem 0.8rem 0; font-family: var(--vs-mono); font-size: 0.72rem; color: var(--vs-code-dim); }
+.chunk-head button { background: transparent; color: var(--vs-code-dim); border-color: #2b3642; padding: 0.12rem 0.5rem; font-size: 0.7rem; }
+.chunk-head button:hover { color: var(--vs-code-fg); border-color: var(--vs-code-fg); }
+.chunk-head .lab { min-width: 0; }
+.chunk-head .st { font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.64rem; padding: 0.05rem 0.35rem; border-radius: 3px; margin-right: 0.4rem; color: #0e141b; }
+.chunk-head .st.new { background: var(--vs-add); }
+.chunk-head .st.chg { background: #e3b341; }
+.chunk pre { margin: 0; overflow-x: auto; padding: 0.6rem 0.8rem 0.8rem; background: transparent; border: 0; }
+.chunk pre code { font-family: var(--vs-mono); font-size: 0.76rem; line-height: 1.55; color: var(--vs-code-fg); background: none; padding: 0; white-space: pre; }
+.chunk pre.diff { padding: 0.5rem 0 0.7rem; }
+.chunk pre.diff code { display: inline-block; min-width: 100%; }
+.ln { display: block; padding: 0 0.8rem 0 0.4rem; }
+.ln::before { content: "  "; color: var(--vs-code-dim); }
+.ln.add { background: color-mix(in srgb, var(--vs-add) 17%, transparent); box-shadow: inset 3px 0 var(--vs-add); }
+.ln.add::before { content: "+ "; color: var(--vs-add); }
+.ln.del { background: color-mix(in srgb, var(--vs-del) 13%, transparent); box-shadow: inset 3px 0 var(--vs-del); color: var(--vs-code-dim); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--vs-del) 70%, transparent); }
+.ln.del::before { content: "\2212 "; color: var(--vs-del); }
+.ln.del * { color: inherit !important; }
+.chunk .hljs-comment { color: #7f8c9a; font-style: italic; }
+.chunk .hljs-keyword, .chunk .hljs-meta { color: #f2a07b; }
+.chunk .hljs-type, .chunk .hljs-built_in { color: #86c5ff; }
+.chunk .hljs-number, .chunk .hljs-literal { color: #c7a8ff; }
+.chunk .hljs-title { color: #ffd479; }
+
+details.full { margin: 0.8rem 0; border: 1px solid var(--vs-rule); border-radius: 4px; background: var(--vs-surface); }
+details.full summary { cursor: pointer; padding: 0.5rem 0.8rem; font-weight: 600; font-size: 0.9rem; }
+details.full .inner { padding: 0 0.6rem 0.6rem; display: grid; gap: 0.5rem; }
+
+/* diagrams */
+.diagram { margin: 1.1rem 0; background: var(--vs-surface); border: 1px solid var(--vs-rule); border-radius: 4px; padding: 0.6rem; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; height: auto; min-width: 20rem; }
+.diagram figcaption { font-size: 0.85rem; color: var(--vs-muted); margin-top: 0.3rem; }
+.diagram svg text { font-family: var(--vs-mono); font-size: 11px; fill: var(--vs-muted); }
+.diagram svg .ink { stroke: var(--vs-fg); fill: none; }
+.diagram svg .acc { stroke: var(--vs-accent); fill: none; }
+.diagram svg .scr { stroke: var(--vs-scree); fill: none; }
+.diagram svg .grid { stroke: var(--vs-rule); fill: none; }
+.diagram svg .fillg { fill: color-mix(in srgb, var(--vs-muted) 18%, transparent); stroke: none; }
+.diagram svg .dot { fill: var(--vs-fg); stroke: none; }
+.diagram svg .dota { fill: var(--vs-accent); stroke: none; }
+
+/* wide tables scroll inside themselves */
+.table-scroll { overflow-x: auto; margin: 1rem 0; }
+.table-scroll table { min-width: 40rem; font-size: 0.88rem; }
+.table-scroll td, .table-scroll th { vertical-align: top; }
+
+/* playground */
+.play { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1.1rem; align-items: start; margin: 1rem 0; }
+@media (max-width: 720px) { .play { grid-template-columns: 1fr; } }
+.sliders { display: grid; gap: 0.8rem; }
+.sliders label { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 0.6rem; font-size: 0.88rem; font-weight: 600; }
+.sliders output { font-family: var(--vs-mono); font-size: 0.8rem; color: var(--vs-muted); font-variant-numeric: tabular-nums; }
+.sliders input { grid-column: 1 / -1; width: 100%; accent-color: var(--vs-accent); }
+
+.times { font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .bar { transition: none; } }
+
+/* wide display math scrolls inside itself on narrow screens */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.1rem 0; }
