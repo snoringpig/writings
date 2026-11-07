@@ -55,7 +55,7 @@ Term $n$ is a *partial*: a pure tone, like a tuning fork's, with frequency $f_n$
 
 The four aspects come from these numbers:
 
-- **Pitch**, how high or low the sound is, comes from the $f_n$: the pitch is the largest frequency of which they are all (nearly) whole-number multiples; that is $f_1$ when $f_1$ is itself that frequency.
+- **Pitch**, how high or low the sound is, comes from the $f_n$: the pitch is the largest frequency of which they are all (nearly) whole-number multiples; often $f_1$, but not when the common frequency is missing ([below](#missing-fundamental)).
 - **Loudness**, how strong it seems, comes from the overall size of the $c_n$.
 - **Timbre**, what tells apart two sounds of the same pitch, loudness and length,[^timbredef] comes from three things:
   - the ratios $c_n/c_1$ (bright versus mellow; missing partials);
@@ -310,7 +310,7 @@ Instruments reach a clear pitch by four routes: modes on the whole numbers by na
 
 ## Next
 
-[Post 2](../one-string-end-to-end/index.qmd) derives the modes of the plucked string and their frequencies from Newton's law, and the appendix [*When does an equation have a spectrum?*](../when-an-equation-has-a-spectrum/index.qmd) does so in general. [Post 3](../other-instruments-same-recipe/index.qmd) runs the same recipe on the other instruments.
+As a preview, the $f_n$ and $c_n$ come from the instrument, read back from your ear in three steps. The sound is $p = h \ast F$: copies of $h$, the sound at your ear of one sharp tap on the instrument's body, delayed and scaled by $F(t)$, the force with which the vibrating object pushes the body. The force comes from the object's motion $u$, which obeys $u_{tt} = -Au$, where $u_{tt}$ is its acceleration; the [spectrum](../instruments-as-operators/glossary.qmd#spectrum) of the [operator](../instruments-as-operators/glossary.qmd#operator) $A$ sets the $f_n$. [Post 2](../one-string-end-to-end/index.qmd) works this chain for the plucked string, [post 3](../other-instruments-same-recipe/index.qmd) for the other instruments, and the appendix [*When does an equation have a spectrum?*](../when-an-equation-has-a-spectrum/index.qmd) in general.
 
 [^aspects]: B. C. J. Moore, [*An Introduction to the Psychology of Hearing*](https://auditory.org/postings/2012/87.html), 6th ed., Emerald, Bingley, 2012 (reissued by Brill, Leiden, 2013), chapters 4, 6 and 8 (loudness, pitch, timbre); R. Plomp, [*Aspects of Tone Sensation: A Psychophysical Study*](https://catalog.hathitrust.org/Record/000212840), Academic Press, 1976.
 [^timbredef]: Adapted from the ANSI/ASA definition of timbre (terminology 12.09), which names loudness and pitch, as quoted by Wikipedia, [Timbre](https://en.wikipedia.org/wiki/Timbre).

@@ -29,7 +29,7 @@ An equation's solutions are exactly all combinations of a fixed set of modes $e^
 
 For an object held in a given way, the operator $A$ is the [linear](../instruments-as-operators/glossary.qmd#linear) map that sends a shape the holding allows to minus the acceleration it causes. Newton's law for small motions then reads $u'' = -A\,u$, with $u(t)$ the shape at time $t$ and primes time derivatives. Here $A$ includes its constants, $\lambda$ is an [eigenvalue](../instruments-as-operators/glossary.qmd#eigenvalue) of $A$ and $f = \sqrt{\lambda}/2\pi$.
 
-[Post 2's two beads](../one-string-end-to-end/index.qmd#two-beads), of mass $m$ on a string of tension $T$, spaced $h$ apart and $h$ from the tied ends, have heights $u_1, u_2$ and $A = \frac{T}{mh}\left(\begin{smallmatrix} 2 & -1 \\ -1 & 2 \end{smallmatrix}\right)$, with [eigenvectors](../instruments-as-operators/glossary.qmd#eigenvector) $(1, 1)$ and $(1, -1)$ and eigenvalues $T/mh$ and $3T/mh$. So the sum $S = u_1 + u_2$ and the difference $D = u_1 - u_2$ swing as independent springs, with frequencies in the ratio $1 : \sqrt3$.
+[Post 2's two beads](../one-string-end-to-end/index.qmd#two-beads), of mass $m$ on a string of tension $T$, spaced $\ell$ apart and $\ell$ from the tied ends, have heights $u_1, u_2$ and $A = \frac{T}{m\ell}\left(\begin{smallmatrix} 2 & -1 \\ -1 & 2 \end{smallmatrix}\right)$, with [eigenvectors](../instruments-as-operators/glossary.qmd#eigenvector) $(1, 1)$ and $(1, -1)$ and eigenvalues $T/m\ell$ and $3T/m\ell$. So the sum $S = u_1 + u_2$ and the difference $D = u_1 - u_2$ swing as independent springs, with frequencies in the ratio $1 : \sqrt3$.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The operators of posts 2 and 3, used in the deeper theory</summary>
@@ -63,7 +63,7 @@ Closing post 2's beads into a ring gives a motion that is not a combination of m
 </svg>
 ```
 
-**The two-bead ring: a drift.** Join the string's ends to each other, and each bead has the other as its neighbor on both sides: $A_{\text{ring}} = \frac{T}{mh}\left(\begin{smallmatrix} 2 & -2 \\ -2 & 2 \end{smallmatrix}\right)$. Now $A_{\text{ring}}(1, 1) = 0$: when both beads move up together, nothing pulls them back. Started moving, they drift away silently, $(u_1, u_2) = (1, 1)(a + bt)$ for numbers $a$ and $b$. The other eigenvalue is $4T/mh$.
+**The two-bead ring: a drift.** Join the string's ends to each other, and each bead has the other as its neighbor on both sides: $A_{\text{ring}} = \frac{T}{m\ell}\left(\begin{smallmatrix} 2 & -2 \\ -2 & 2 \end{smallmatrix}\right)$. Now $A_{\text{ring}}(1, 1) = 0$: when both beads move up together, nothing pulls them back. Started moving, they drift away silently, $(u_1, u_2) = (1, 1)(a + bt)$ for numbers $a$ and $b$. The other eigenvalue is $4T/m\ell$.
 
 ```{=html}
 <div class="ins">
@@ -201,7 +201,7 @@ The swing of step 3 is the older notion.[^normalmode]
 **The criterion.** The solutions of an equation are exactly all combinations of a fixed set of modes, with any amounts, when and only when the equation is linear, unchanging in time, and its generator has a full set of eigenvectors.
 :::
 
-**On the two beads.** Their $A$ has two independent eigenvectors and the positive eigenvalues $\lambda_1 = T/mh$ and $\lambda_2 = 3T/mh$, so $B$ has the four eigenvectors $(X, \pm i\omega X)$, and every solution is
+**On the two beads.** Their $A$ has two independent eigenvectors and the positive eigenvalues $\lambda_1 = T/m\ell$ and $\lambda_2 = 3T/m\ell$, so $B$ has the four eigenvectors $(X, \pm i\omega X)$, and every solution is
 $$
 x(t) = \begin{pmatrix}1\\1\end{pmatrix}\big(a_1\cos\omega_1 t + b_1\sin\omega_1 t\big) + \begin{pmatrix}1\\-1\end{pmatrix}\big(a_2\cos\omega_2 t + b_2\sin\omega_2 t\big), \qquad \omega_k = \sqrt{\lambda_k},
 $$
@@ -382,7 +382,7 @@ A numerical check of the full equations $u'' + Cu' + Au = 0$, with $r$ at 2% of 
 $$
 u(t) = \cos\!\big(t\sqrt{A}\big)\,f + \frac{\sin\!\big(t\sqrt{A}\big)}{\sqrt{A}}\,g ,
 $$
-reading $\sin(t\sqrt A)/\sqrt A$ as $t$ on drifts. For a matrix, $\cos(t\sqrt A)f = \sum_i\cos(t\sqrt{\lambda_i})\,(X_i\cdot f)\,X_i$: level 1's formula. The [spectrum](../instruments-as-operators/glossary.qmd#spectrum) is the set of numbers $z$ for which $A - z$ has no bounded inverse; for self-adjoint $A \ge 0$ it lies in $[0, \infty)$.
+reading $\sin(t\sqrt A)/\sqrt A$ as $t$ on drifts. The [spectrum](../instruments-as-operators/glossary.qmd#spectrum) is the set of numbers $z$ for which $A - z$ has no bounded inverse; for self-adjoint $A \ge 0$ it lies in $[0, \infty)$.
 
 **A list of notes exactly when the resolvent is compact.** The [resolvent](../instruments-as-operators/glossary.qmd#resolvent) $(A - z)^{-1}$ solves $Au - zu = f$ for $u$; a [compact](../instruments-as-operators/glossary.qmd#compact-operator) operator is a limit in norm of operators with finite-dimensional range. For self-adjoint $A \ge 0$, $(A + 1)^{-1}$ is compact exactly when the spectrum is a list of eigenvalues $\lambda_1 \le \lambda_2 \le \cdots \to \infty$ of finite [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity) whose eigenvectors form an orthonormal basis (fold). Then the formula is a sum over modes, a list of notes, and for $A > 0$ the system is modal. For continuous objects, this is what "the object is finite" means; in finite dimensions it always holds.
 
@@ -463,7 +463,7 @@ The wide pendulum is nonlinear because $\sin 2x \neq 2\sin x$, so twice a soluti
 $$
 x'' - \varepsilon\,\big(x' - \tfrac13 x'^3\big) + x = 0
 $$
-with a small number $\varepsilon > 0$, the middle term feeds energy in when the motion is slow and takes it out when it is fast. Every motion except rest settles into one repeating cycle, a [limit cycle](../instruments-as-operators/glossary.qmd#limit-cycle).[^limitcycle] It has no modes; being periodic, its partials sit at exact whole-number multiples. *You hear* the steady tone of a bowed string, a reed or a player's lips, exactly harmonic for as long as the player keeps going.
+with a small number $\varepsilon > 0$, the middle term feeds energy in when the motion is slow and takes it out when it is fast. Every motion except rest settles into one repeating cycle, a [limit cycle](../instruments-as-operators/glossary.qmd#limit-cycle).[^limitcycle] It has no modes; being periodic, its partials sit at exact whole-number multiples. *You hear* the steady, exactly harmonic tone of a bowed string, a reed or a player's lips.
 
 **6. The infinite string.** On the whole line, $u_{tt} = c^2u_{xx}$ meets every hypothesis except finite size, and has no allowed eigenvectors ([the deeper theory](#deeper-theory)). *You hear* a click: a pluck splits into two half-height bumps that run apart, and each point falls still once they have passed.
 
@@ -491,20 +491,28 @@ with a small number $\varepsilon > 0$, the middle term feeds energy in when the 
 
 ## Back to what you hear {#back-to-hearing}
 
-Your ear receives every frequency $f_n$ and fading time $\tau_n$ of the modes; only the amounts and phases change. Between the object and your ear sit the instrument's body (a violin's box, a piano's [soundboard](../instruments-as-operators/glossary.qmd#soundboard)), the air and the room, and each is a linear filter that does not change in time; for a room this holds very well at the pressures of music, as long as nothing in it moves.[^masovic] For the reason in [why modes exist](#why-modes), such a filter sends $e^{st}$ to a multiple of $e^{st}$, and it adds its own ringing: the body's resonances and the room's reverberation[^reverb] (fold). So the instrument's part of the sound pressure at your ear is
+For an instrument left to ring, your ear receives every frequency $f_n$ and fading time $\tau_n$ of its modes; only the amounts and phases change. Top down:
+
+**What you hear** is the sound pressure at your ear,
 $$
 p(t) = \sum_n c_n\,e^{-t/\tau_n}\sin(2\pi f_nt + \varphi_n),
 $$
-one term per mode $s = -1/\tau_n \pm 2\pi i f_n$, with amounts $c_n$ and phases $\varphi_n$. The equation of motion, with its friction and radiation, fixes the $f_n$ and $\tau_n$; the playing, the radiation and where you listen fix the $c_n$. [Post 1](../what-you-hear/index.qmd#four-aspects) reads pitch, loudness, timbre and duration off this formula.
+with amounts $c_n$ and phases $\varphi_n$; [post 1](../what-you-hear/index.qmd#four-aspects) reads pitch, loudness, timbre and duration off it.
+
+**$p = h * F$.** The instrument's body (a violin's box, a piano's [soundboard](../instruments-as-operators/glossary.qmd#soundboard)), the air and the room form one linear filter that does not change in time, with [tap response](../instruments-as-operators/glossary.qmd#impulse-response) $h$ and input $F$, so $p(t) = \int h(t - t')F(t')\,dt'$. For the reason in [why modes exist](#why-modes), the filter sends $e^{st}$ to a multiple of $e^{st}$: each partial keeps its $f_n$ and $\tau_n$, and the filter only adds its own ringing, the body's resonances and the room's reverberation[^reverb] (fold).
+
+**$F \leftarrow u$.** The input, such as a string's push on its [bridge](../instruments-as-operators/glossary.qmd#bridge), is read off the motion $u$ at each instant, so it keeps every frequency and weights each mode.
+
+**$u \leftarrow A$.** The motion is a sum of modes, one pair $s = -1/\tau_n \pm 2\pi i f_n$ per eigenvalue of the operator $A$, shifted by friction and radiation. For an instrument left to ring, this is the only step that creates the frequencies; the playing, the route to the air and where you listen fix the $c_n$. Bowed and blown notes differ: the drive locks the motion into one repeating cycle, at exact multiples of the playing frequency.
 
 ::: {.derive}
 <details><summary><span class="label">Proof</span>A filter keeps every exponent and adds its own <span class="needs">uses integrals</span></summary>
 
-A linear filter that is the same at every moment, at rest before the input $v$ starts at $t = 0$, has output $p(t) = \int_0^t h(t - t')\,v(t')\,dt'$, where $h$ is its response to a sudden tap. Take a body with finitely many decaying resonances, $h(t) = \sum_jb_je^{r_jt}$ with $\operatorname{Re} r_j < 0$, and the input $v(t) = e^{st}$ with $s$ different from every $r_j$. Then
+A linear filter that is the same at every moment, at rest before the input $F$ starts at $t = 0$, has output $p(t) = \int_0^t h(t - t')\,F(t')\,dt'$, where $h$ is its response to a sudden tap. Take a body with finitely many decaying resonances, $h(t) = \sum_jb_je^{r_jt}$ with $\operatorname{Re} r_j < 0$, and the input $F(t) = e^{st}$ with $s$ different from every $r_j$. Then
 $$
 p(t) = \sum_j b_je^{r_jt}\int_0^te^{(s - r_j)t'}\,dt' = H(s)\,e^{st} - \sum_j\frac{b_j}{s - r_j}\,e^{r_jt}, \qquad H(s) = \sum_j\frac{b_j}{s - r_j} .
 $$
-The input's exponent $s$, and with it its frequency and fading time, comes out unchanged, multiplied by the number $H(s)$: its size scaled by $|H(s)|$ and its phase shifted by the angle of $H(s)$. The other terms are the filter's own ringing, at its own exponents $r_j$. By linearity a sum of modes passes term by term, and a real input, the sum of a mode and its conjugate, gives a real output. A propagation delay $d$ multiplies $e^{st}$ by $e^{-sd}$, again the same exponent.
+The input's exponent $s$, and with it its frequency and fading time, comes out unchanged, multiplied by the number $H(s)$: its size scaled by $|H(s)|$ and its phase shifted by the angle of $H(s)$. The other terms are the filter's own ringing, at its own exponents $r_j$. By linearity a sum of modes passes term by term, and a real input, the sum of a mode and its conjugate, gives a real output. A propagation delay $d$ multiplies $e^{st}$ by $e^{-sd}$, again the same exponent. A room is such a filter to a very good approximation at the pressures of music, as long as nothing in it moves (D. Masovic, [*Room Acoustics*](https://arxiv.org/abs/2111.01900), lecture notes, TU Berlin, 2021).
 
 </details>
 :::
@@ -543,7 +551,6 @@ Back on the main path, [post 3](../other-instruments-same-recipe/index.qmd) runs
 [^gongs]: Fletcher and Rossing, [*Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), ch. 20; papers in the fold.
 [^rayleigh]: Lord Rayleigh, ["On maintained vibrations"](https://doi.org/10.1080/14786448308627342), *Phil. Mag.* 15 (1883).
 [^limitcycle]: Wikipedia, [Limit cycle](https://en.wikipedia.org/wiki/Limit_cycle).
-[^masovic]: D. Masovic, [*Room Acoustics*](https://arxiv.org/abs/2111.01900), lecture notes, TU Berlin, 2021.
 [^reverb]: Wikipedia, [Reverberation](https://en.wikipedia.org/wiki/Reverberation).
 
 ```{=html}

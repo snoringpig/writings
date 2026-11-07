@@ -53,34 +53,17 @@ A kalimba tine's first [overtone](../instruments-as-operators/glossary.qmd#parti
 </div>
 ```
 
-## Where the equation comes from {#newton}
+[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The box and the room keep those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
 
-A tine is under no tension; steel's resistance to bending springs it back. Bending needs a turning effect at each cross-section; where that changes along the tine, a sideways force must balance it, and the imbalance of those forces accelerates each slice. Let $u(x, t)$ be the tine's height at distance $x$ from the clamp, and $L$ its length. The turning effect, the [bending moment](../instruments-as-operators/glossary.qmd#moment), is $M = EI\,u_{xx}$, where $u_{xx}$ is the curvature, $E$ steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus), how stiff the material is, and $I$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment), how strongly the cross-section's shape resists bending. The sideways force, the shear force, is $V = -M_x$. For a slice of density $\rho$ and cross-sectional area $S$, Newton's law gives
-$$
-u_{tt} = -\kappa^2 u_{xxxx}, \qquad \kappa^2 = \frac{EI}{\rho S},
-$$
-the [Euler–Bernoulli beam](../instruments-as-operators/glossary.qmd#beam) equation, with four derivatives where the string had two.[^eb]
+## How the sound gets out {#clamp}
 
-The base is [clamped](../instruments-as-operators/glossary.qmd#clamped): it can neither move nor tilt, $u = u_x = 0$. The tip is [free](../instruments-as-operators/glossary.qmd#free-end): no moment and no shear force act there, $u_{xx} = u_{xxx} = 0$. So the equation reads $u_{tt} = -Au$ with $A = \kappa^2\,d^4/dx^4$, acting on shapes that satisfy these four conditions.
-
-::: {.derive}
-<details><summary><span class="label">Details</span>The slice, step by step <span class="needs">an integral over a cross-section</span></summary>
-
-Bend the bar, and a middle line, the neutral axis, keeps its length. For small slopes the curvature is $u_{xx}$, and a fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$, so by Hooke's law it carries the force per unit area $-E\,y\,u_{xx}$. Over the cross-section these forces cancel, but their turning effects add up to
-$$
-\begin{gathered}
-M = -\int y(-Ey\,u_{xx})\,dA = EI\,u_{xx}, \\
-I = \int y^2\,dA .
-\end{gathered}
-$$
-A thin slice's rotational inertia is negligible, so the turning effects on it balance: $V\,dx + dM = 0$, that is, $V = -M_x = -EI\,u_{xxx}$. The shear forces on the two faces differ by $V_x\,dx$, which accelerates the slice's mass $\rho S\,dx$: $\rho S\,u_{tt} = V_x = -EI\,u_{xxxx}$. A fourth-order equation needs two conditions at each end, which the clamp and the free tip supply. The model assumes small slopes, a uniform bar clamped at exactly one point, and no friction; it ignores the slices' rotational inertia and shear deformation, which matter only for thick bars and high modes (Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory)).
-
-</details>
-:::
+**The sound reaches the air through the clamp.** There the tine passes the kalimba's box a force, the shear force $V(0, t) = -EI\,u_{xxx}(0, t)$, and a bending moment (a turning push), $M(0, t) = EI\,u_{xx}(0, t)$, where $u(x, t)$ is the tine's height at distance $x$ from the clamp and $EI$ the tine's bending stiffness, its resistance to bending (below); the box pushes the air. Acting at each instant, both keep every frequency and weight each mode by its force and moment at the clamp, which grow fast along the modes: in the force, the first overtone starts at about 55% of the fundamental.
 
 ## The tine's shapes {#spectrum}
 
-**The tine's overtones sit far off the whole-number lines.** Its modes are the shapes $A$ only stretches, $AX = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4X$. Four functions return to themselves after four derivatives: $\cos\beta x$ and $\sin\beta x$, and the [hyperbolic functions](../instruments-as-operators/glossary.qmd#hyperbolic) $\cosh\beta x$ and $\sinh\beta x$, where $\cosh y = (e^y + e^{-y})/2$ and $\sinh y = (e^y - e^{-y})/2$. The four end conditions allow a solution other than zero exactly when
+**The tine's overtones sit far off the whole-number lines.** The tine obeys $u_{tt} = -Au$ with $A = \kappa^2\,d^4/dx^4$ and $\kappa^2 = EI/\rho S$, for density $\rho$ and cross-section area $S$; $L$ is its length. The base is [clamped](../instruments-as-operators/glossary.qmd#clamped): it can neither move nor tilt, $u = u_x = 0$. The tip is [free](../instruments-as-operators/glossary.qmd#free-end): no moment and no shear force act there, $u_{xx} = u_{xxx} = 0$.
+
+Its modes are the shapes $A$ only stretches, $AX = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4X$. Four functions return to themselves after four derivatives: $\cos\beta x$ and $\sin\beta x$, and the [hyperbolic functions](../instruments-as-operators/glossary.qmd#hyperbolic) $\cosh\beta x$ and $\sinh\beta x$, where $\cosh y = (e^y + e^{-y})/2$ and $\sinh y = (e^y - e^{-y})/2$. The four end conditions allow a solution other than zero exactly when
 $$
 \cos\beta L\,\cosh\beta L = -1 .
 $$
@@ -88,7 +71,7 @@ Since $\cosh\beta L$ grows fast, $\beta L$ sits near a zero of the cosine, $(n -
 $$
 \lambda_n = \kappa^2\beta_n^4, \qquad f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{\kappa\,\beta_n^2}{2\pi},
 $$
-in the ratios $1 : 6.27 : 17.55 : 34.39$.[^fr] Roots exactly at $(n - \tfrac12)\pi$ would give the whole numbers $1 : 9 : 25$; the clamp and the free tip shift the first root most from $(n - \tfrac12)\pi$, to 1.8751 instead of $\pi/2 \approx 1.571$, and that breaks the pattern.
+in the ratios $1 : 6.27 : 17.55 : 34.39$.[^fr] Roots exactly at $(n - \tfrac12)\pi$ would give the whole numbers $1 : 9 : 25$; the clamp and the free tip shift the first root most from $(n - \tfrac12)\pi$, to 1.8751 instead of $\pi/2 \approx 1.571$, and that breaks the pattern. For a plucked note this is the only step that creates frequencies.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The mode condition from the four end conditions <span class="needs">a 2×2 determinant</span></summary>
@@ -128,7 +111,7 @@ Yes, for some. A bar held in place at both ends but free to pivot has $u = u_{xx
 </details>
 :::
 
-In the panel, each stem is one $f_n$ against the gray whole-number lines, its height the force the mode passes to the box after a pluck (next section); tap a stem to see its shape.
+In the panel, each stem is one $f_n$ against the gray whole-number lines, its height the force the mode passes to the box after a pluck; tap a stem to see its shape.
 
 ```{=html}
 <div class="ins">
@@ -141,15 +124,33 @@ In the panel, each stem is one $f_n$ against the gray whole-number lines, its he
 </div>
 ```
 
-## The pluck: a click {#ringing}
-
-**The first overtone starts strong in the force on the box: that is the click at the start of each note.** Released from a thumb's push, the tine moves as a sum of its shapes, with amounts $a_n$:
+Released from a thumb's push, the tine moves as a sum of its shapes, with amounts $a_n$:
 $$
 u(x, t) = \sum_{n = 1}^{\infty} a_n \cos(2\pi f_n t)\,X_n(x) .
 $$
-In the tine's displacement, the first overtone is tiny: $a_2$ is 2.5% of $a_1$, because each mode gives way to the thumb in inverse proportion to its stiffness $\lambda_n$.
 
-The sound reaches the air through the clamp. There the tine passes the kalimba's box a force, the shear force $V(0, t) = -EI\,u_{xxx}(0, t)$, and a bending moment (a turning push), $M(0, t) = EI\,u_{xx}(0, t)$; the box responds to each as a fixed linear filter and pushes the air. These weigh the higher modes more: in the force, the first overtone starts at about 55% of the fundamental.
+## Where the equation comes from {#newton}
+
+A tine is under no tension; steel's resistance to bending springs it back. Bending needs a turning effect at each cross-section; where that changes along the tine, a sideways force must balance it, and the imbalance of those forces accelerates each slice. The turning effect, the [bending moment](../instruments-as-operators/glossary.qmd#moment), is $M = EI\,u_{xx}$, where $u_{xx}$ is the curvature, $E$ steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus), how stiff the material is, and $I$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment), how strongly the cross-section's shape resists bending. The sideways force, the shear force, is $V = -M_x$. For a slice, Newton's law gives the equation above, the [Euler–Bernoulli beam](../instruments-as-operators/glossary.qmd#beam) equation, with four derivatives where the string had two.[^eb]
+
+::: {.derive}
+<details><summary><span class="label">Details</span>The slice, step by step <span class="needs">an integral over a cross-section</span></summary>
+
+Bend the bar, and a middle line, the neutral axis, keeps its length. For small slopes the curvature is $u_{xx}$, and a fiber at height $y$ above the neutral axis is stretched by the fraction $-y\,u_{xx}$, so by Hooke's law it carries the force per unit area $-E\,y\,u_{xx}$. Over the cross-section these forces cancel, but their turning effects add up to
+$$
+\begin{gathered}
+M = -\int y(-Ey\,u_{xx})\,dA = EI\,u_{xx}, \\
+I = \int y^2\,dA .
+\end{gathered}
+$$
+A thin slice's rotational inertia is negligible, so the turning effects on it balance: $V\,dx + dM = 0$, that is, $V = -M_x = -EI\,u_{xxx}$. The shear forces on the two faces differ by $V_x\,dx$, which accelerates the slice's mass $\rho S\,dx$: $\rho S\,u_{tt} = V_x = -EI\,u_{xxxx}$. A fourth-order equation needs two conditions at each end, which the clamp and the free tip supply. The model assumes small slopes, a uniform bar clamped at exactly one point, and no friction; it ignores the slices' rotational inertia and shear deformation, which matter only for thick bars and high modes (Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory)).
+
+</details>
+:::
+
+## The pluck: a click {#ringing}
+
+**The first overtone starts strong in the force on the box: that is the click at the start of each note.** In the tine's displacement it is tiny: $a_2$ is 2.5% of $a_1$, because each mode gives way to the thumb in inverse proportion to its stiffness $\lambda_n$.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>How strongly a pluck at the tip starts each mode <span class="needs">integration by parts</span></summary>
@@ -164,13 +165,25 @@ A real tine is held a little behind the bridge and rests on it partway along, ra
 </details>
 :::
 
+## The chain in one line {#chain}
+
+Put together, partial $n$ reaches your ear with the size
+$$
+c_n = |H_1(f_n)\,V_n + H_2(f_n)\,M_n| \cdot |a_n| ,
+$$
+where $V_n = -EI\,X_n'''(0)$ and $M_n = EI\,X_n''(0)$ are mode $n$'s force and moment at the clamp, and $H_1$, $H_2$ the box's factors for each. Pitch traces back to the spectrum of $A$; timbre to the pluck, the clamp's weights, $H_1$, $H_2$ and the off-line spacing; loudness to how far the tip is pushed; duration to the losses, which take the overtone first.
+
 ## Fading: the overtone goes first {#fading}
 
-**The click is gone within a fraction of a second, while the fundamental rings on.** This is observed, not derived: in the frictionless model every mode rings forever. D. M. F. Chapman measured a Hugh Tracey kalimba and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, and that the off-line overtones die away rapidly.[^chapman] What remains is the fundamental alone, with a clear pitch: the spectrum would clang, as a bell's does, but the fading decides. The demo's fading times are illustrative, chosen to match Chapman's observation.
+**The click is gone within a fraction of a second, while the fundamental rings on.** This is observed, not derived: in the frictionless model every mode rings forever. D. M. F. Chapman measured a Hugh Tracey kalimba and found one dominant overtone at 5.9 to 6.8 times the fundamental, near the ideal 6.27, and that the off-line overtones die away rapidly.[^chapman] The demo's fading times are illustrative, chosen to match Chapman's observation.
 
-## Half the length, two octaves up {#what-we-hear}
+::: {.derive}
+<details><summary><span class="label">Details</span>Half the length, two octaves up</summary>
 
-**A tine's frequency goes as one over its length squared.** Squeeze a shape into half the length and its fourth derivative grows $2^4 = 16$ times, so $\lambda$ grows 16 times and $f = \sqrt{\lambda}/2\pi$ grows 4 times: two octaves, where a string, with two derivatives, rises one. In the formula, the $\beta_nL$ do not depend on the length, so $f_n = \kappa\,(\beta_nL)^2/(2\pi L^2)$. A tine is tuned by moving the point where it is held down on the bridge: longer is lower, shorter higher,[^km] and a small change goes a long way.
+A tine's frequency goes as one over its length squared. Squeeze a shape into half the length and its fourth derivative grows $2^4 = 16$ times, so $\lambda$ grows 16 times and $f = \sqrt{\lambda}/2\pi$ grows 4 times: two octaves, where a string, with two derivatives, rises one. In the formula, the $\beta_nL$ do not depend on the length, so $f_n = \kappa\,(\beta_nL)^2/(2\pi L^2)$. A tine is tuned by moving the point where it is held down on the bridge: longer is lower, shorter higher, and a small change goes a long way (Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49): "Making tines longer (from the point where they are held down on the bridge) will lower their pitch").
+
+</details>
+:::
 
 ## Next
 
@@ -180,7 +193,6 @@ A harmonica reed is the same kind of bar, with the same off-line overtones; blow
 [^eb]: Wikipedia, [Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory); N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 2 (bars).
 [^fr]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 2: the clamped–free bar's frequencies, in the ratios 1 : 6.27 : 17.55 : 34.39.
 [^chapman]: D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustics'08 Paris, paper 5aMUf1, Acoustical Society of America, 2008: measured on "the Hugh Tracey Pentatonic Kalimba"; "a single overtone (f1) whose frequency ratio f1/f0 is about 5.9-6.8"; "the anharmonic overtones die away rapidly".
-[^km]: Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49): "Making tines longer (from the point where they are held down on the bridge) will lower their pitch".
 
 ```{=html}
 <script src="core.js"></script>

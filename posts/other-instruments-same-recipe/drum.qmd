@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/drum.html, /posts/instruments-as-opera
 :::
 
 ::: {.pageinfo}
-A deep dive from the [drums entry](index.qmd#drums) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd). Proofs are in folds. About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from the [drums entry](index.qmd#drums) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd). About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -51,35 +51,21 @@ svg.patch { display: block; width: 100%; max-width: 420px; height: auto; margin:
 </div>
 ```
 
-## Where the equation comes from {#newton}
+What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The room keeps those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
 
-A drumhead has mass $\sigma$ per unit area and a tension $T$, a force per unit length of any cut through it. Let $u(x, y, t)$ be the head's height at the point $(x, y)$. The sheet around a small patch pulls along the patch's whole edge, and for small slopes the upward parts of those pulls add up, by the [divergence theorem](../instruments-as-operators/glossary.qmd#divergence-theorem), to $T\,\Delta u$ per unit area. Newton's law gives[^fr3]
-$$
-\sigma\,u_{tt} = T\,\Delta u, \qquad \Delta u = u_{xx} + u_{yy} .
-$$
-The [Laplacian](../instruments-as-operators/glossary.qmd#laplacian) $\Delta u$ measures how far a point sits below the average height of the points around it, so tension pulls each point toward that average.
+## The whole skin sounds {#fading}
 
-The rim is clamped to the shell, so $u = 0$ there. The equation reads $u_{tt} = -Au$ with
-$$
-A = -c^2\,\Delta, \qquad c^2 = \frac{T}{\sigma},
-$$
-acting on shapes that are zero on the rim.
-
-::: {.derive}
-<details><summary><span class="label">Details</span>The patch, step by step <span class="needs">the divergence theorem</span></summary>
-
-A small patch $D$ has mass $\iint_D\sigma\,dA$. A drumhead is a [membrane](../instruments-as-operators/glossary.qmd#membrane): a sheet with no stiffness of its own, stretched with the same tension in every direction, so across each short piece $ds$ of the patch's edge the sheet outside pulls with the force $T\,ds$, along the surface and outward. For small slopes the upward part of that pull is $T\,\partial_nu\,ds$, with $\partial_nu$ the slope outward across the edge. Adding these around the edge, the divergence theorem gives
-$$
-T\oint_{\partial D}\partial_nu\,ds = T\iint_D\Delta u\,dA .
-$$
-So $\iint_D \sigma\,u_{tt}\,dA = T\iint_D\Delta u\,dA$ for every patch, however small, and the integrands agree at every point. In one dimension the same step is $u_x(b) - u_x(a) = \int_a^b u_{xx}\,dx$, the string's. The model assumes small slopes and a uniform tension, and leaves out bending stiffness, damping and the air on both sides of the head; the air comes back for the kettledrum.
-
-</details>
-:::
+**The sound leaves from the whole skin, and the round modes radiate best.** Every point of the head pushes the air with its acceleration $u_{tt}$, where $u(x, y, t)$ is the head's height at the point $(x, y)$, and your ear hears the sum of the pushes, which keeps every frequency. When the drum is small compared with the wavelength, they reach your ear almost together, so a mode $X$ sounds in proportion to the net volume it pushes, $|\iint X\,dA|$. That is zero for every mode with a still line through the center (below). So the round modes, those with no line through the center, pump air like a piston and lose their energy within a fraction of a second, while such a mode pushes the air up on one side as it pulls it down on the other, radiates weakly, and rings longer.[^fr18]
 
 ## The head's shapes {#spectrum}
 
-**A round head's shapes are built from Bessel functions, whose zeros are not whole-number multiples of the first.** The modes are the shapes $A$ only stretches: $-\Delta X = k^2X$ inside the drum, with $X = 0$ on the rim and $\lambda = c^2k^2$. For a round drum of radius $a$, write each shape as a function of the distance $r$ from the center times a function of the angle $\theta$, a [separation of variables](../instruments-as-operators/glossary.qmd#separation-of-variables).
+**A round head's shapes are built from Bessel functions, whose zeros are not whole-number multiples of the first.** A head with tension $T$ per unit length and mass $\sigma$ per unit area obeys $u_{tt} = -Au$ with
+$$
+A = -c^2\,\Delta, \qquad c^2 = \frac{T}{\sigma}, \qquad \Delta u = u_{xx} + u_{yy},
+$$
+acting on shapes that are zero on the rim.
+
+On a round drum of radius $a$, the modes, the shapes $A$ only stretches ($-\Delta X = k^2X$, $X = 0$ on the rim, $\lambda = c^2k^2$), separate into a function of the distance $r$ from the center times a function of the angle $\theta$ ([separation of variables](../instruments-as-operators/glossary.qmd#separation-of-variables)).
 
 - **Around the center**, the shape must come back to itself after a turn, which allows only $\cos m\theta$ and $\sin m\theta$ with $m$ a whole number: $m$ straight still lines through the center, like spokes.
 - **Outward from the center**, the shape is a [Bessel function](../instruments-as-operators/glossary.qmd#bessel) $J_m(kr)$, which plays the sine's part: it wiggles like a cosine whose swings slowly shrink.
@@ -91,7 +77,7 @@ X_{m,n} = J_m\!\Big(\frac{j_{m,n}\,r}{a}\Big)\cos m\theta \ \text{ and } \\ J_m\
 \lambda_{m,n} = \frac{c^2j_{m,n}^2}{a^2}, \qquad f_{m,n} = \frac{c\,j_{m,n}}{2\pi a} .
 \end{gathered}
 $$
-Relative to the lowest, the frequencies are 1, 1.593, 2.136, 2.295, 2.653, 2.917, …, between the lines.[^mem]
+Relative to the lowest, the frequencies are 1, 1.593, 2.136, 2.295, …, between the lines.[^mem] For a struck note this is the only step that creates frequencies.
 
 ```{=html}
 <svg class="fig" viewBox="0 0 420 170" role="img" aria-label="Graphs of the Bessel functions J0 and J1: wiggles like a cosine and a sine whose swings shrink, crossing zero at points that are not whole-number multiples of the first">
@@ -111,7 +97,7 @@ Relative to the lowest, the frequencies are 1, 1.593, 2.136, 2.295, 2.653, 2.917
 </svg>
 ```
 
-**Why the zeros miss the lines.** The zeros of $J_0$, 2.405, 5.520, 8.654, …, come at nearly even steps of about $\pi$, but the first is short, about $0.77\pi$, so the later ones are not multiples of it: 1 : 2.30 : 3.60. Each $m$ gives its own sequence, shifted by a different amount, and the sequences interleave at unrelated places.
+**Why the zeros miss the lines.** The zeros of $J_0$, 2.405, 5.520, 8.654, …, come at nearly even steps of about $\pi$, but the first is short, about $0.77\pi$, so the later ones are not multiples of it: 1 : 2.30 : 3.60.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Separating the mode equation in polar coordinates <span class="needs">the chain rule</span></summary>
@@ -133,7 +119,7 @@ These are all the modes: expanding any mode in a Fourier series in $\theta$ redu
 </details>
 :::
 
-In the panel, each stem is one $j_{m,n}/j_{0,1}$, its height how strongly that mode sounds after your last strike; tap a stem to see and hear the mode.
+In the panel, each stem is one $j_{m,n}/j_{0,1}$, its height how strongly that mode sounds at one point of the head, not in the net volume, after your last strike; tap a stem to see and hear it.
 
 ```{=html}
 <div class="ins">
@@ -145,19 +131,39 @@ In the panel, each stem is one $j_{m,n}/j_{0,1}$, its height how strongly that m
 </div>
 ```
 
-## Where you strike {#strike}
+## Where the equation comes from {#newton}
 
-**A sharp strike starts each mode in proportion to how far that mode moves at the point struck.** Every mode with spokes stands still at the center, so a strike at dead center sounds only the round modes, those with no line through the center.
+The sheet around a small patch pulls along the patch's whole edge, and for small slopes the upward parts of those pulls add up, by the [divergence theorem](../instruments-as-operators/glossary.qmd#divergence-theorem), to $T\,\Delta u$ per unit area. Newton's law gives[^fr3]
+$$
+\sigma\,u_{tt} = T\,\Delta u .
+$$
+The [Laplacian](../instruments-as-operators/glossary.qmd#laplacian) $\Delta u$ measures how far a point sits below the average height of the points around it, so tension pulls each point toward that average.
 
 ::: {.derive}
-<details><summary><span class="label">Details</span>How strongly a strike starts each mode, in this model <span class="needs">integrals over an area</span></summary>
+<details><summary><span class="label">Details</span>The patch, step by step <span class="needs">the divergence theorem</span></summary>
 
-A brief push at a point $p$ gives mode $X_i$ a starting speed in proportion to $X_i(p)$. We model what you hear as the speed of the head at a listening point $q$, which picks up mode $i$ in proportion to $X_i(q)$; dividing by $\iint X_i^2\,dA$ removes the arbitrary size of each shape. So mode $i$ sounds with weight $X_i(p)\,X_i(q)\big/\iint X_i^2\,dA$. A real drum's sound comes from its whole head, which favours the round modes (see below); this model ignores that.
+A small patch $D$ has mass $\iint_D\sigma\,dA$. A drumhead is a [membrane](../instruments-as-operators/glossary.qmd#membrane): a sheet with no stiffness of its own, stretched with the same tension in every direction, so across each short piece $ds$ of the patch's edge the sheet outside pulls with the force $T\,ds$, along the surface and outward. For small slopes the upward part of that pull is $T\,\partial_nu\,ds$, with $\partial_nu$ the slope outward across the edge. Adding these around the edge, the divergence theorem gives
+$$
+T\oint_{\partial D}\partial_nu\,ds = T\iint_D\Delta u\,dA .
+$$
+So $\iint_D \sigma\,u_{tt}\,dA = T\iint_D\Delta u\,dA$ for every patch, however small, and the integrands agree at every point. In one dimension the same step is $u_x(b) - u_x(a) = \int_a^b u_{xx}\,dx$, the string's. The model assumes small slopes and a uniform tension, and leaves out bending stiffness, damping and the air on both sides of the head; the air comes back for the kettledrum.
 
 </details>
 :::
 
-Sand shows a mode's still lines, as Ernst Chladni showed on metal plates in the 1780s:[^chladni] pick a frequency and watch where the sand goes.
+## Where you strike {#strike}
+
+**A sharp strike starts each mode in proportion to how far that mode moves at the point struck.** Every mode with spokes stands still at the center, so a strike at dead center sounds only the round modes.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>How strongly a strike starts each mode, in this model <span class="needs">integrals over an area</span></summary>
+
+A brief push at a point $p$ gives mode $X_i$ a starting speed in proportion to $X_i(p)$. We model what you hear as the speed of the head at a listening point $q$, which picks up mode $i$ in proportion to $X_i(q)$; dividing by $\iint X_i^2\,dA$ removes the arbitrary size of each shape. So mode $i$ sounds with weight $X_i(p)\,X_i(q)\big/\iint X_i^2\,dA$. A real drum's sound comes from its whole head, which favours the round modes (see above); this model ignores that.
+
+</details>
+:::
+
+Sand shows a mode's still lines, as Ernst Chladni showed on metal plates in the 1780s.[^chladni]
 
 ```{=html}
 <div class="ins">
@@ -181,13 +187,15 @@ In 1808 Chladni showed his sand patterns on plates, bowed along their edges, to 
 </details>
 :::
 
-## The whole skin sounds {#fading}
+## The chain in one line {#chain}
 
-**The sound leaves from the whole skin, and the round modes radiate best.** Every point of the head pushes the air, and your ear hears the sum of the pushes. When the drum is small compared with the wavelength, they reach your ear almost together, so a mode $X$ sounds in proportion to the net volume it pushes, $|\iint X\,dA|$. That is zero for every mode with lines through the center ($m \ge 1$), since $\int_0^{2\pi}\cos m\theta\,d\theta = 0$. So the round modes pump air like a piston and lose their energy within a fraction of a second, while a mode with spokes pushes the air up on one side as it pulls it down on the other, radiates weakly, and rings longer.[^fr18]
+To leading (monopole) order, for a drum small compared with the wavelength, a mode $X$ of frequency $f$, started by the strike with the amount $s$, reaches your ear with the size
+$$
+c = |H(f)| \cdot (2\pi f)^2\,\Big|\iint X\,dA\Big| \cdot |s| ,
+$$
+where $H$ is the room's factor. Modes with a still line through the center get nothing at this order; they radiate at the next, as push–pull pairs (a dipole for one line, weaker for more), weaker but long-ringing: on a kettledrum they are the note. A kettledrum is only borderline small ($2\pi af/v \approx 0.8$ near 130 Hz, $v$ the speed of sound in air), and its bowl blocks the underside. Pitch traces back to the spectrum of $A$; timbre to the strike, the net-volume weight, $H$ and the spacing; loudness to the strike; duration to the losses.
 
 ## One drumhead, two drums {#one-drumhead-two-drums}
-
-The same kind of head makes a booming bass drum or a kettledrum's note, depending on where it is struck, what surrounds it, and which modes fade first.
 
 ```{=html}
 <div class="ins">
@@ -246,7 +254,7 @@ The same kind of head makes a booming bass drum or a kettledrum's note, dependin
 ::: {.derive}
 <details><summary><span class="label">Details</span>The toy model, the kettle, and other drums <span class="needs">integrals over an area</span></summary>
 
-*Where each drum is struck.* A concert bass drum is played slightly off center; center playing, punchier and with less sustain, is kept for rhythmic passages (A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017; ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023). There the spoke modes move little, so among the lowest modes the round ones dominate. Timpanists strike between halfway and three-quarters of the way out (HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html)), roughly a third of the way in from the rim (Graham, above). With the weight $|X(p)|\big/\big(\iint X^2\,dA\big)^{1/2}$ for a strike at $p$, on a head of radius 1, the lowest round mode (0,1) has 1.09 at the center, 0.73 at halfway and 0.37 at three-quarters, while the spoke modes (1,1) to (4,1) have between 0.74 and 1.19 anywhere from halfway to three-quarters. Nearer halfway the stick also sits close to the inner still circles of the modes (0,2), (1,2), (2,2) and (3,2), which lie between 0.44 and 0.65 of the radius, which quiets those too. The clear note also relies on the remaining modes being weaker or fading faster, which this page takes from measurements rather than deriving (N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 18).
+*Where each drum is struck.* A concert bass drum is played slightly off center; center playing, punchier and with less sustain, is kept for rhythmic passages (A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017; ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023). There the spoke modes move little, so among the lowest modes the round ones dominate. For the timpani's strike, halfway to three-quarters of the way out (below), with the weight $|X(p)|\big/\big(\iint X^2\,dA\big)^{1/2}$ for a strike at $p$ on a head of radius 1, the lowest round mode (0,1) has 1.09 at the center, 0.73 at halfway and 0.37 at three-quarters, while the spoke modes (1,1) to (4,1) have between 0.74 and 1.19 anywhere from halfway to three-quarters. Nearer halfway the stick also sits close to the inner still circles of the modes (0,2), (1,2), (2,2) and (3,2), which lie between 0.44 and 0.65 of the radius, which quiets those too. The clear note also relies on the remaining modes being weaker or fading faster, which this page takes from measurements rather than deriving (N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 18).
 
 *The air's mass.* Treat the air on both sides of the head as not squeezable, and each mode, locally, as a ripple of wavenumber $k = j_{m,n}/a$, whose crests are about $\pi/k$ apart. The air such a ripple sets moving reaches about $1/k$ from the head on each side, which adds a mass of about $2\rho/k$ per unit area ($\rho \approx 1.2$ kg/m³ for air) to the head's own $\sigma$:
 $$
@@ -266,11 +274,11 @@ so coarse shapes, with small $k$, slow down most. This is [added mass](../instru
 </details>
 :::
 
-## What you hear {#what-we-hear}
+## Two drums, heard {#what-we-hear}
 
-**A bass drum booms with no clear pitch.** Its frequencies sit off the lines, so its sound repeats at no rate we hear as pitch ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)), and struck slightly off center, it starts mostly round modes, which radiate fast; players muffle the head with a leg or a towel for short notes.[^graham]
+**A bass drum booms with no clear pitch.** Struck slightly off center, it starts mostly round modes; players muffle the head with a leg or a towel for short notes.[^graham]
 
-**A kettledrum plays a note: its spectrum, the playing and the fading point the same way.** The air the head drags along moves the spoke modes, those with lines through the center and no still circle inside the rim, near 2 : 3 : 4 : 5 times a base;[^hp1] the stick, about halfway to three-quarters of the way out, starts the lowest round mode weakly;[^hp2] and the round modes die fast. What is left nearly repeats: a note, whose principal tone is the (1,1) mode, with the (2,1) a fifth and the (3,1) an octave above it.[^mdw] Timpanists retune with a pedal that changes the tension.[^hp3]
+**A kettledrum plays a note.** The air the head drags along moves the spoke modes, those with lines through the center and no still circle inside the rim, near 2 : 3 : 4 : 5 times a base;[^hp1] the stick, about halfway to three-quarters of the way out, starts the lowest round mode weakly;[^hp2] and the round modes die fast. What is left nearly repeats: a note, whose principal tone is the (1,1) mode, with the (2,1) a fifth and the (3,1) an octave above it.[^mdw]
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Which octave the ear names</summary>
@@ -287,12 +295,11 @@ Turn the question around: if you could hear every frequency a drum makes, could 
 [^fr3]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 3 (membranes).
 [^mem]: Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane).
 [^chladni]: Wikipedia, [Ernst Chladni](https://en.wikipedia.org/wiki/Ernst_Chladni).
-[^fr18]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 18 (drums).
-[^hp1]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), Georgia State University, tabulating A. H. Benade's measurements ([*Fundamentals of Musical Acoustics*](https://archive.org/details/fundamentalsofmu0000bena), Oxford University Press, 1976, chapter 9, pp. 143–144): modes at 1.504, 2.00, 2.494 and 2.979 times the lowest. Fletcher and Rossing, *The Physics of Musical Instruments*, chapter 18, on the air loading.
+[^fr18]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 18 (drums).
+[^hp1]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), tabulating A. H. Benade's measurements ([*Fundamentals of Musical Acoustics*](https://archive.org/details/fundamentalsofmu0000bena), 1976, chapter 9, pp. 143–144): modes at 1.504, 2.00, 2.494 and 2.979 times the lowest. Fletcher and Rossing, *The Physics of Musical Instruments*, chapter 18, on the air loading.
 [^hp2]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html): "The head is struck about halfway to three quarters of the way out from the center."
-[^graham]: A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017: concert bass drum played slightly off center; ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023: muffling with the leg or a towel.
+[^graham]: A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017; ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023.
 [^mdw]: Institute of Musical Acoustics (Wiener Klangstil), University of Music and Performing Arts Vienna, [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en): "Der Grundton (Mode 11) …, die Quinte (Mode 21) … und die Oktave (Mode 31)".
-[^hp3]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html): "The tension may be altered by means of a footpedal". Viennese timpani use a hand lever instead ([The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), mdw).
 
 ```{=html}
 <script src="core.js"></script>
