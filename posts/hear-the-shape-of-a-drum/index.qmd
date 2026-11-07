@@ -18,10 +18,10 @@ aliases: [/posts/instruments-as-operators/shape.html]
 :::
 
 ::: {.pageinfo}
-Builds on [the drums in post 3](../other-instruments-same-recipe/index.qmd#drums), for the drumhead's equation, and runs the recipe of [post 2](../one-string-end-to-end/index.qmd) backwards. Uses the Laplacian and counting; proofs are in folds. About 20 minutes. Written in collaboration with Claude, Anthropic's AI model.
+Builds on [the drums in post 3](../other-instruments-same-recipe/index.qmd#drums) and runs the recipe of [post 2](../one-string-end-to-end/index.qmd) backwards. Uses the Laplacian; proofs are in folds. About 15 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
-All of a drum's frequencies tell you its area and, for a reasonable rim, the length of its rim, but not always its shape: the two drums below have different shapes and exactly the same frequencies. Play each with every mode equally loud, then click a drum to strike it at a point.
+All of a drum's frequencies tell you its area and, for a reasonable rim, the length of its rim, but not always its shape: the two drums below have different shapes and exactly the same frequencies.
 
 ```{=html}
 <div class="ins">
@@ -45,7 +45,7 @@ All of a drum's frequencies tell you its area and, for a reasonable rim, the len
 </div>
 ```
 
-The reason: **Counting a drum's frequencies reveals its area and its rim. But these two drums are cut from the same seven triangles so that every mode of one can be rebuilt on the other.** In 1966 the mathematician Mark Kac asked whether a perfect ear could work out a drum's shape from its frequencies;[^kac1] for drums in the plane the answer, found in 1992, is no.
+**The reason: counting a drum's frequencies reveals its area and its rim. But these two drums are cut from the same seven triangles so that every mode of one can be rebuilt on the other.** Mark Kac asked in 1966 whether a perfect ear could work out a drum's shape from its frequencies;[^kac1] for drums in the plane the answer, found in 1992, is no.
 
 ## The drum's spectrum
 
@@ -53,49 +53,28 @@ The frequencies of a drum are decided by its shape alone, apart from one overall
 $$
 u_{tt} = c^2\,\Delta u \ \text{ inside } \Omega, \qquad u = 0 \ \text{ on the rim},
 $$
-where $\Delta u = u_{xx} + u_{yy}$ is the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian) and $c^2$ is the tension divided by the mass per unit area. The Laplacian is positive where $u$ sits below the average of $u$ around it, and negative where it sits above, so each point of the head accelerates toward the average height around it. The model assumes, as in post 3, small slopes, a tension that is the same everywhere and does not change as the head moves, no bending stiffness, no air, and no damping.
+where subscripts are [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative), $\Delta u = u_{xx} + u_{yy}$ is the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian), and $c^2$ is the tension divided by the mass per unit area.
 
-In the series' form $u_{tt} = -A\,u$, the [operator](../instruments-as-operators/glossary.qmd#operator) is $A = -c^2\Delta$, acting on shapes that are zero on the rim; the rim condition is part of the operator. A mode is a shape $X$ that $A$ only rescales, $AX = \lambda X$. Writing $\lambda = c^2k^2$,
+In the series' form $u_{tt} = -A\,u$, the [operator](../instruments-as-operators/glossary.qmd#operator) is $A = -c^2\Delta$ on shapes that are zero on the rim. A mode shape $X$ satisfies $AX = \lambda X$; writing $\lambda = c^2k^2$ with $k > 0$,
 $$
 -\Delta X = k^2 X \ \text{ inside } \Omega, \qquad X = 0 \ \text{ on the rim}.
 $$
-The numbers $k^2$ for which this has a solution other than $X = 0$ are the eigenvalues of $-\Delta$ on $\Omega$, and the solutions are its [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction), the mode shapes; both depend only on $\Omega$. List the eigenvalues in order, $k_1^2 \le k_2^2 \le \cdots$, each repeated as often as it occurs (its [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity)). Mode $n$ has the operator's eigenvalue $\lambda_n = c^2k_n^2$ and swings at
+The numbers $k^2$ for which this has a solution $X \ne 0$ are the eigenvalues of $-\Delta$ on $\Omega$, and the solutions are its [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction); both depend only on $\Omega$. List the eigenvalues in order, $k_1^2 \le k_2^2 \le \cdots$, each repeated by its [multiplicity](../instruments-as-operators/glossary.qmd#multiplicity). Mode $n$, with shape $X_n$, has $\lambda_n = c^2k_n^2$ and swings at
 $$
 f_n = \frac{\sqrt{\lambda_n}}{2\pi} = \frac{c\,k_n}{2\pi}.
 $$
 
-**Kac's question, precisely.** Knowing $c$, hearing every frequency means knowing every $k_n^2$. Does the list $k_1^2, k_2^2, \dots$ determine $\Omega$, up to sliding, turning or flipping the drum, which change no frequency? Kac wrote that he had first heard the question posed this way about ten years earlier, from Salomon Bochner.[^kac2]
-
-## Same frequencies, different sound {#what-we-hear}
-
-The two drums at the top share every frequency, but struck at a point they sound different. Their first twelve frequencies, as multiples of the lowest, $k_n/k_1$, are 1×, 1.20×, 1.43×, 1.60×, 1.69×, 1.90×, 2.04×, …, the same for both drums to every digit computed. Like the drum in post 3, they sit off the whole-number lines, so neither drum has a clear pitch.
-
-```{=html}
-<div class="ins">
-<div class="panel">
-  <svg class="spec" id="gS4" viewBox="0 0 320 96" style="max-width:520px" aria-label="The first twelve frequencies shared by both drums, as multiples of the lowest"></svg>
-  <p class="cap">Both drums' first twelve frequencies, as multiples of the lowest, every mode drawn equally tall: drum A and drum B have exactly these stems. Values from T. A. Driscoll, <a href="https://doi.org/10.1137/S0036144595285069">Eigenmodes of isospectral drums</a>, SIAM Review 39 (1997), Table 3.1.</p>
-</div>
-</div>
-```
-
-A struck drum moves as a sum of its modes,
-$$
-u = \sum_n a_n X_n \cos(2\pi f_n t + \phi_n),
-$$
-so its sound is a sum of tones at the frequencies $f_n$, each fading at its own rate, with a strength $a_n$ that depends on where it is struck; what you hear also depends on where you listen. The two drums share the $f_n$ but not the mode shapes $X_n$, so a strike at a given point starts the modes with different strengths, and the [timbre](../instruments-as-operators/glossary.qmd#timbre) differs. Played with every $a_n = 1$, as the "every mode equal" buttons do, the two drums sound identical. What they share is the answer to "which frequencies can this drum make", which is exactly what the spectrum records.
+**Kac's question, precisely.** Knowing $c$, hearing every frequency means knowing every $k_n^2$. Does the list $k_1^2, k_2^2, \dots$ determine $\Omega$, up to sliding, turning or flipping the drum, which change no frequency?
 
 ## What the spectrum knows
 
-**Counting the frequencies gives the area and the rim.** Count the eigenvalues of $-\Delta$ up to a limit $\Lambda$, $N(\Lambda) = \#\{n : k_n^2 \le \Lambda\}$, where $\#$ means "the number of" (a frequency limit $f$ corresponds to $\Lambda = (2\pi f/c)^2$). For a high limit,
+**Counting the frequencies gives the area and the rim.** Count the eigenvalues of $-\Delta$ up to a limit $\Lambda$, $N(\Lambda) = \#\{n : k_n^2 \le \Lambda\}$, where $\#$ means "the number of". For a high limit,
 $$
 N(\Lambda) \approx \frac{|\Omega|}{4\pi}\,\Lambda \;-\; \frac{P}{4\pi}\sqrt{\Lambda},
 $$
-where $|\Omega|$ is the drum's area and $P$ the length of its rim. The number of modes below a high limit grows in proportion to the area, so twice the area gives about twice as many modes; it falls short of the area's share by an amount in proportion to the rim's length, because holding the rim still costs the drum some modes.
+where $|\Omega|$ is the drum's area and $P$ the length of its rim. The count grows in proportion to the area, and falls short of the area's share in proportion to the rim's length, because holding the rim still costs the drum some modes.
 
-The first term is [Weyl's law](../instruments-as-operators/glossary.qmd#weyl): Hermann Weyl proved it in 1911, and later work extended it to every drum,[^weyl] so the area can be heard. The second term is subtler. For the count itself it is proved only for some drums: Victor Ivrii proved it in 1980 for smooth rims on which closed billiard paths are rare (fold below).[^ivrii] For a slightly smoothed version of the count it is proved for every drum whose rim is smooth or made of straight pieces, and that is enough to hear the rim's length.[^heat] Where the second term holds, "$\approx$" means that the error, divided by $\sqrt\Lambda$, shrinks to zero as $\Lambda$ grows.
-
-The demo counts the modes of three drums with the same area. Once the area's share, the same for all three, is taken away, the drum with the longest rim sits lowest.
+The first term is [Weyl's law](../instruments-as-operators/glossary.qmd#weyl), proved by Hermann Weyl in 1911 and later for every drum,[^weyl] so the area can be heard. For the count itself the second term is proved only for some drums: Victor Ivrii proved it in 1980 for smooth rims on which closed billiard paths are rare (fold).[^ivrii] For a smoothed count it is proved for every drum whose rim is smooth or made of straight pieces, which is enough to hear the rim's length.[^heat]
 
 ```{=html}
 <div class="ins">
@@ -107,13 +86,15 @@ The demo counts the modes of three drums with the same area. Once the area's sha
   </div>
   <div class="slider"><label for="wL">Frequency limit</label><input type="range" id="wL" min="40" max="400" step="10" value="400"><output id="wLo"></output></div>
   <div class="readout" id="wRead"></div>
-  <p class="cap">Three drums of equal area: <span style="color:var(--accent)">a disk</span>, <span style="color:var(--pos)">a square</span>, <span style="color:var(--neg)">a long rectangle</span>. Steps: the true counts. Dashed: Weyl's formula, area and rim together. Gray: the area's share alone, the same for all three.</p>
+  <p class="cap">Three drums of equal area: <span style="color:var(--accent)">a disk</span>, <span style="color:var(--pos)">a square</span>, <span style="color:var(--neg)">a long rectangle</span>. Steps: the true counts. Dashed: Weyl's formula, area and rim together. Gray: the area's share alone, the same for all three. Minus the area's share, the longest rim sits lowest.</p>
 </div>
 </div>
 ```
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>What the demo plots, and Ivrii's condition on billiard paths <span class="needs">limits</span></summary>
+
+Where the second term holds, "≈" means that the error, divided by $\sqrt\Lambda$, shrinks to zero as $\Lambda$ grows.
 
 In the demo all three drums have area $|\Omega| = \pi$ (a disk of radius 1, a square, and a rectangle 4 times as long as it is wide), so the area's share is $\Lambda/4$, and "minus the area's share" plots $N(\Lambda) - \Lambda/4$, roughly $-P\sqrt\Lambda/4\pi$: the longer the rim, the lower the curve. The demo's frequency limit is shown as a multiple of the disk's lowest frequency, $\sqrt{\Lambda}/k_1$.
 
@@ -179,15 +160,15 @@ Knowing $Z$, one reads off $|\Omega|$ from the first term and then $P$ from the 
 </details>
 :::
 
-**So a round drum can be heard.** Of all shapes with the same area, the disk has the shortest rim. This is the [isoperimetric inequality](https://en.wikipedia.org/wiki/Isoperimetric_inequality): every drum satisfies
+**So a round drum can be heard.** Every drum satisfies the [isoperimetric inequality](https://en.wikipedia.org/wiki/Isoperimetric_inequality)
 $$
 P^2 \ge 4\pi\,|\Omega|,
 $$
-with equality only for the disk. Both sides can be heard, for a rim that is smooth or made of straight pieces. So a drum with such a rim that has exactly a disk's frequencies has the disk's area and rim length, so $P^2 = 4\pi|\Omega|$, so it is a disk. Kac pointed this out: "By pitch alone one can thus determine whether a drum is circular or not!"[^kac3]
+with equality only for the disk. A drum with a smooth or straight-sided rim and exactly a disk's frequencies has the disk's area and rim length, so equality holds and it is a disk, as Kac pointed out.[^kac3]
 
-**But in general, no.** Two years before Kac's paper, John Milnor had found two different shapes with the same frequencies, and Kac said so; but they were 16-dimensional and had no rim.[^milnor] (They are *flat tori*: 16-dimensional versions of a video-game screen whose edges wrap around, so that leaving on the right brings you back on the left.) For drums in the plane the question stayed open for 26 years. In 1992 Carolyn Gordon, David Webb and Scott Wolpert found two different polygons with exactly the same frequencies, repeats included: the two drums at the top of this page.[^gww] Such drums are called [isospectral](../instruments-as-operators/glossary.qmd#isospectral). Since area and rim length can be heard, they must share them, and they do: each is made of seven copies of the same right triangle, with two short sides of length 1, so each has area 3.5 and rim length $6 + 3\sqrt2$.
+**But in general, no.** In 1964 John Milnor found two different 16-dimensional *flat tori* with the same frequencies: spaces with no rim, whose edges wrap around like a video-game screen's.[^milnor] For drums in the plane the question stayed open until 1992, when Carolyn Gordon, David Webb and Scott Wolpert found two different polygons with exactly the same frequencies, repeats included: the two drums at the top of this page.[^gww] Such drums are called [isospectral](../instruments-as-operators/glossary.qmd#isospectral). Each is made of seven copies of the same right triangle, with short sides of length 1, so both have area 3.5 and rim length $6 + 3\sqrt2$, as they must.
 
-They share every frequency because any mode of drum A can be rebuilt on drum B. Cut each drum into its seven triangles, and fill each of B's triangles with three triangle-shaped pieces of the mode, taken from A's triangles, turned or flipped to fit, some with their signs reversed. With the right choice of pieces and signs, they join smoothly across every seam and stay still on B's rim, so the result is a mode of B at the same frequency.[^bcds] The construction runs backwards too, so the two drums have exactly the same frequencies, with the same number of modes at each.
+They share every frequency because any mode of drum A can be rebuilt on drum B. Fill each of B's seven triangles with three pieces of the mode taken from A's triangles, turned or flipped to fit, some with their signs reversed. With the right choice, the pieces join smoothly across every seam and stay still on B's rim, so they make a mode of B at the same frequency.[^bcds] The construction runs backwards too, so each frequency has the same multiplicity on both drums.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Transplantation: carrying a mode from one drum to the other <span class="needs">the Laplacian (post 3)</span></summary>
@@ -204,7 +185,7 @@ This argument is called *transplantation*. It grew out of work of Peter Buser on
 
 Each drum is covered by a square grid of spacing $h$, and the Laplacian is replaced by its five-point version: at each grid point, the sum of the four neighbors minus four times the point, divided by $h^2$. This is the bead model of [post 2](../one-string-end-to-end/index.qmd#two-beads) in two dimensions. Grid points on the rim are held at zero. The drums' corners sit on grid points, so whether each point is inside, on the rim, or outside is decided with exact whole-number arithmetic.
 
-At $h = 1/40$ and $h = 1/80$ the two drums give the same first twelve eigenvalues $k_n^2$ of $-\Delta$ to a relative difference of $3\times10^{-14}$, which is rounding error. This is expected, as far as I can tell, because the grid lines up with every triangle's edges, so transplantation works for the grid model too; Moler's post transplants grid eigenvectors in the same way (C. Moler, ["Part 2, eigenfunctions"](https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/), Cleve's Corner, 2012). Combining the two grids ([Richardson extrapolation](https://en.wikipedia.org/wiki/Richardson_extrapolation)) gives values within 0.03% of the high-accuracy values in Table 3.1 of Driscoll's paper, after multiplying his by 4: his drums are twice the size of these (T. A. Driscoll, "Eigenmodes of isospectral drums", *SIAM Review* 39 (1997), 1–17, [DOI](https://doi.org/10.1137/S0036144595285069), [PDF](https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf)). That is a check, not a precise computation: Richardson's trick assumes the grid error shrinks like $h^2$, and the drums' inward-pointing corners slow that down. The page uses Driscoll's values.
+At $h = 1/40$ and $h = 1/80$ the two drums give the same first twelve eigenvalues $k_n^2$ of $-\Delta$ to a relative difference of $3\times10^{-14}$, which is rounding error. This is expected: the grid lines up with every triangle's edges, so transplantation works for the grid model too, as Moler's post shows by transplanting grid eigenvectors (C. Moler, ["Part 2, eigenfunctions"](https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/), Cleve's Corner, 2012). Combining the two grids ([Richardson extrapolation](https://en.wikipedia.org/wiki/Richardson_extrapolation)) gives values within 0.03% of the high-accuracy values in Table 3.1 of Driscoll's paper, after multiplying his by 4: his drums are twice the size of these (T. A. Driscoll, "Eigenmodes of isospectral drums", *SIAM Review* 39 (1997), 1–17, [DOI](https://doi.org/10.1137/S0036144595285069), [PDF](https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf)). That is a check, not a precise computation: Richardson's trick assumes the grid error shrinks like $h^2$, and the drums' inward-pointing corners slow that down. The page uses Driscoll's values.
 
 One eigenvalue is known exactly, the ninth, $k_9^2$. Its mode is, on each triangle, that triangle's own lowest mode, $\sin\pi x\,\sin 2\pi y - \sin 2\pi x\,\sin\pi y$ in coordinates where the triangle has corners $(0,0)$, $(1,0)$ and $(1,1)$, with its sign flipping across each seam. Substituting gives $k_9^2 = \pi^2(1 + 4) = 5\pi^2 = 49.348\ldots$, and Driscoll's value agrees to every digit he gives. On the grid, the ninth eigenvalue equals the grid version of this mode's eigenvalue to rounding error, a second check.
 
@@ -213,14 +194,30 @@ The scripts are [gww.py](gww.py) for the eigenvalues and [gww_modes.py](gww_mode
 </details>
 :::
 
-The study of what a spectrum says about the shape behind it is called *spectral geometry*.
+## Same frequencies, different sound {#what-we-hear}
+
+The two drums at the top share every frequency, but struck at a point they sound different. Their frequencies sit off the whole-number lines, so neither drum has a clear pitch.
+
+```{=html}
+<div class="ins">
+<div class="panel">
+  <svg class="spec" id="gS4" viewBox="0 0 320 96" style="max-width:520px" aria-label="The first twelve frequencies shared by both drums, as multiples of the lowest"></svg>
+  <p class="cap">Both drums' first twelve frequencies, as multiples of the lowest, every mode drawn equally tall: drum A and drum B have exactly these stems. Values from T. A. Driscoll, <a href="https://doi.org/10.1137/S0036144595285069">Eigenmodes of isospectral drums</a>, SIAM Review 39 (1997), Table 3.1.</p>
+</div>
+</div>
+```
+
+A struck drum moves as a sum of its modes,
+$$
+u = \sum_n a_n X_n \cos(2\pi f_n t + \varphi_n),
+$$
+with amounts $a_n$ and phases $\varphi_n$ set by where it is struck. The two drums share the $f_n$ but not the shapes $X_n$, so a strike at one point starts their modes with different amounts, and the [timbre](../instruments-as-operators/glossary.qmd#timbre) differs. With every $a_n = 1$, as the "every mode equal" buttons play them, they sound identical.
 
 ## Next
 
-One question is left, and it goes beyond mathematics: did the instruments people built shape the music they made? [*Did instruments shape our scales?* →](../instruments-and-scales/index.qmd)
+Did the instruments people built shape the music they made? [*Did instruments shape our scales?* →](../instruments-and-scales/index.qmd)
 
 [^kac1]: M. Kac, ["Can one hear the shape of a drum?"](https://www.maa.org/programs/maa-awards/writing-awards/can-one-hear-the-shape-of-a-drum), *American Mathematical Monthly* 73 (1966), part II, 1–23.
-[^kac2]: Kac, ["Can one hear the shape of a drum?"](https://www.maa.org/programs/maa-awards/writing-awards/can-one-hear-the-shape-of-a-drum), *American Mathematical Monthly* 73 (1966), part II, 1–23.
 [^weyl]: Wikipedia, [Weyl law](https://en.wikipedia.org/wiki/Weyl_law) (Weyl 1911).
 [^ivrii]: Wikipedia, [Weyl law](https://en.wikipedia.org/wiki/Weyl_law) (Ivrii 1980).
 [^heat]: Å. Pleijel, ["A study of certain Green's functions with applications in the theory of vibrating membranes"](https://doi.org/10.1007/BF02591229), *Arkiv för Matematik* 2 (1954), 553–569, for smooth rims; M. van den Berg and S. Srisatkunarajah, ["Heat equation for a region in R² with a polygonal boundary"](https://doi.org/10.1112/jlms/s2-37.121.119), *Journal of the London Mathematical Society* 37 (1988), 119–127, for polygons.
