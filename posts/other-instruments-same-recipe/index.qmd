@@ -21,7 +21,7 @@ aliases: [/posts/instruments-case-by-case/index.html]
 Builds on [post 2](../one-string-end-to-end/index.qmd) and on [post 1](../what-you-hear/index.qmd)'s pitch ruler. Deep dives hold the equations and derivations. About 20 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
-[]{#orchestra}Struck or plucked and left to ring, most instruments sound at the frequencies of their own eigenvalues: a little sharp of the whole-number lines on a piano, far off them on a kalimba, between them on a drum. Bowed, blown or, like the theremin, kept going by a circuit, they sound exactly on the lines. Below, one instrument from each of the five [Hornbostel–Sachs](../instruments-as-operators/glossary.qmd#hornbostel-sachs) classes, sorted by what makes the sound,[^hs] plays Grieg,[^grieg] every voice built from the spectra on this page.
+[]{#orchestra}Struck or plucked and left to ring, most instruments sound at the frequencies set by their own eigenvalues: a little sharp of whole-number multiples of the fundamental on a piano, far off them on a kalimba, between them on a drum. Bowed, blown or, like the theremin, kept going by a circuit, they sound exactly on whole-number multiples. Below, one instrument from each of the five [Hornbostel–Sachs](../instruments-as-operators/glossary.qmd#hornbostel-sachs) classes[^hs] plays Grieg,[^grieg] every voice built from the spectra on this page.
 
 ```{=html}
 <div class="ins">
@@ -76,11 +76,11 @@ document.querySelectorAll("a[data-t]").forEach(function (a) { a.addEventListener
 </script>
 ```
 
-The reason, in one sentence: **a ringing instrument moves as a sum of its own modes, as the string does, so you hear its spectrum; a bowed or blown one is pushed into one repeating cycle, and a repeating cycle has only whole-number partials.**
+**A ringing instrument moves as a sum of its own modes, as the string does, so you hear its spectrum; a bowed or blown one is pushed into one repeating cycle, and a repeating cycle has only whole-number partials.**
 
 ## The same recipe {#recipe}
 
-Every instrument below is a problem of the same shape as the string's: an equation, how the object is held, and how it starts or is driven. For the ones left to ring, the string's argument carries over to every bounded object here: each has its own shapes, the [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction) of its operator, and every motion is a sum of them, each swinging at $f_n = \sqrt{\lambda_n}/2\pi$, apart from the glockenspiel's two drifts, its slide and tilt, which move as $a + bt$. The exception is the kettledrum: its sound radiates into the unbounded air around it, which takes it outside this argument (see the fold), so its ratios here are measured.[^benade]
+Every instrument below is a problem of the same shape as the string's: an equation $u_{tt} = -Au$, how the object is held, and how it starts or is driven. Here $u$ is the object's shape at time $t$, and the operator $A$ turns a shape into minus the acceleration it causes. For the instruments left to ring, every motion is a sum of the object's own shapes, the [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction) $X_n$ with $AX_n = \lambda_nX_n$, each swinging at $f_n = \sqrt{\lambda_n}/2\pi$. The kettledrum is the exception: it radiates into the unbounded air, which takes it outside this argument (fold), so its ratios here are measured.[^benade]
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>The theorem, and its three names <span class="needs">uses Hilbert spaces</span></summary>
@@ -92,17 +92,58 @@ A *Sturm–Liouville problem* is $-(p\,X')' + q\,X = \lambda\,w\,X$ on a bounded
 </details>
 :::
 
+## How the sound gets out {#sound-out}
+
+The vibrating part pushes on something that moves the air, and the sound at your ear has the same frequencies as the vibration, in different amounts. A string about 1 mm thick is too thin to move the air itself,[^askenfelt] so it pushes the [bridge](../instruments-as-operators/glossary.qmd#bridge), which moves the soundboard, a large thin wooden panel that pushes the air. On a piano or a guitar the bridge is glued to the soundboard; a violin's is a carved maple piece standing on the top plate, held there by the strings' pressure.[^fr10] A kalimba tine pushes its box through the clamp. A drum skin, and the air at a tube's open end, push the air directly.
+
+```{=html}
+<div class="ins">
+<svg class="fig" id="routesFig" style="max-width:560px" viewBox="0 0 420 280" role="img" aria-label="Four ways the sound gets out. Piano, guitar, violin: a string between a support on the frame and a bridge on a soundboard; the string pushes the bridge, which moves the soundboard, which sends sound into the air. Kalimba: a tine clamped on a box; the clamp passes the tine's push to the box, which sends out sound. Drum: a skin over a shell; every point of the skin pushes the air directly. Clarinet: a tube closed at the reed and open at the far end; air flows in and out of the open end and sends out sound."><g transform="translate(0 0)"><text x="8" y="16">piano, guitar, violin</text><rect class="bar" x="12" y="74" width="16" height="44"/><rect class="bar" x="40" y="104" width="160" height="6"/><rect class="bar" x="130" y="74" width="16" height="30"/><path class="acc" d="M 28.0 74.0 L 29.8 73.3 L 31.7 72.6 L 33.5 72.0 L 35.3 71.3 L 37.2 70.6 L 39.0 70.0 L 40.8 69.3 L 42.7 68.7 L 44.5 68.1 L 46.3 67.5 L 48.2 66.9 L 50.0 66.4 L 51.8 65.8 L 53.7 65.3 L 55.5 64.8 L 57.3 64.3 L 59.2 63.9 L 61.0 63.5 L 62.8 63.1 L 64.7 62.7 L 66.5 62.4 L 68.3 62.1 L 70.2 61.9 L 72.0 61.6 L 73.8 61.4 L 75.7 61.3 L 77.5 61.2 L 79.3 61.1 L 81.2 61.0 L 83.0 61.0 L 84.8 61.0 L 86.7 61.1 L 88.5 61.2 L 90.3 61.3 L 92.2 61.4 L 94.0 61.6 L 95.8 61.9 L 97.7 62.1 L 99.5 62.4 L 101.3 62.7 L 103.2 63.1 L 105.0 63.5 L 106.8 63.9 L 108.7 64.3 L 110.5 64.8 L 112.3 65.3 L 114.2 65.8 L 116.0 66.4 L 117.8 66.9 L 119.7 67.5 L 121.5 68.1 L 123.3 68.7 L 125.2 69.3 L 127.0 70.0 L 128.8 70.6 L 130.7 71.3 L 132.5 72.0 L 134.3 72.6 L 136.2 73.3 L 138.0 74.0"/><path class="acc" opacity="0.35" d="M 28.0 74.0 L 29.8 74.7 L 31.7 75.4 L 33.5 76.0 L 35.3 76.7 L 37.2 77.4 L 39.0 78.0 L 40.8 78.7 L 42.7 79.3 L 44.5 79.9 L 46.3 80.5 L 48.2 81.1 L 50.0 81.6 L 51.8 82.2 L 53.7 82.7 L 55.5 83.2 L 57.3 83.7 L 59.2 84.1 L 61.0 84.5 L 62.8 84.9 L 64.7 85.3 L 66.5 85.6 L 68.3 85.9 L 70.2 86.1 L 72.0 86.4 L 73.8 86.6 L 75.7 86.7 L 77.5 86.8 L 79.3 86.9 L 81.2 87.0 L 83.0 87.0 L 84.8 87.0 L 86.7 86.9 L 88.5 86.8 L 90.3 86.7 L 92.2 86.6 L 94.0 86.4 L 95.8 86.1 L 97.7 85.9 L 99.5 85.6 L 101.3 85.3 L 103.2 84.9 L 105.0 84.5 L 106.8 84.1 L 108.7 83.7 L 110.5 83.2 L 112.3 82.7 L 114.2 82.2 L 116.0 81.6 L 117.8 81.1 L 119.7 80.5 L 121.5 79.9 L 123.3 79.3 L 125.2 78.7 L 127.0 78.0 L 128.8 77.4 L 130.7 76.7 L 132.5 76.0 L 134.3 75.4 L 136.2 74.7 L 138.0 74.0"/><path class="pos" d="M 154.0 80.0 L 154.0 100.0"/><path class="pos" d="M 151.1 94.7 L 154.0 100.0 L 156.9 94.7"/><path class="pos" d="M 156.9 85.3 L 154.0 80.0 L 151.1 85.3"/><text x="62" y="52">string</text><text x="160" y="94">bridge</text><path class="dash" d="M 158.5 115.1 L 158.1 115.9 L 157.7 116.7 L 157.1 117.5 L 156.5 118.2 L 155.9 118.8 L 155.2 119.4 L 154.4 119.9 L 153.6 120.3 L 152.7 120.6 L 151.8 120.8 L 150.9 121.0 L 150.0 121.0 L 149.1 121.0 L 148.2 120.8 L 147.3 120.6 L 146.4 120.3 L 145.6 119.9 L 144.8 119.4 L 144.1 118.8 L 143.5 118.2 L 142.9 117.5 L 142.3 116.7 L 141.9 115.9 L 141.5 115.1"/><path class="dash" d="M 166.0 117.8 L 165.3 119.4 L 164.5 120.9 L 163.5 122.3 L 162.4 123.7 L 161.1 124.9 L 159.8 125.9 L 158.3 126.8 L 156.7 127.6 L 155.1 128.2 L 153.4 128.6 L 151.7 128.9 L 150.0 129.0 L 148.3 128.9 L 146.6 128.6 L 144.9 128.2 L 143.3 127.6 L 141.7 126.8 L 140.2 125.9 L 138.9 124.9 L 137.6 123.7 L 136.5 122.3 L 135.5 120.9 L 134.7 119.4 L 134.0 117.8"/><path class="dash" d="M 173.5 120.6 L 172.5 122.9 L 171.3 125.1 L 169.8 127.2 L 168.2 129.2 L 166.3 130.9 L 164.3 132.5 L 162.2 133.8 L 159.9 135.0 L 157.5 135.8 L 155.1 136.5 L 152.5 136.9 L 150.0 137.0 L 147.5 136.9 L 144.9 136.5 L 142.5 135.8 L 140.1 135.0 L 137.8 133.8 L 135.7 132.5 L 133.7 130.9 L 131.8 129.2 L 130.2 127.2 L 128.7 125.1 L 127.5 122.9 L 126.5 120.6"/><text x="40" y="126">soundboard</text></g><g transform="translate(210 0)"><text x="8" y="16">kalimba</text><rect class="bar" x="20" y="96" width="170" height="28"/><rect class="bar" x="38" y="80" width="12" height="16"/><rect class="bar" x="38" y="66" width="12" height="8"/><path class="ink" d="M 30 78 L 50 78"/><path class="acc" d="M 50.0 78.0 L 52.0 78.0 L 54.1 78.0 L 56.1 77.9 L 58.1 77.9 L 60.2 77.9 L 62.2 77.8 L 64.2 77.7 L 66.3 77.6 L 68.3 77.6 L 70.3 77.5 L 72.4 77.4 L 74.4 77.2 L 76.4 77.1 L 78.5 77.0 L 80.5 76.8 L 82.5 76.7 L 84.6 76.5 L 86.6 76.4 L 88.6 76.2 L 90.7 76.0 L 92.7 75.8 L 94.7 75.6 L 96.8 75.4 L 98.8 75.2 L 100.8 75.0 L 102.9 74.8 L 104.9 74.6 L 106.9 74.4 L 109.0 74.2 L 111.0 73.9 L 113.0 73.7 L 115.1 73.5 L 117.1 73.2 L 119.1 73.0 L 121.2 72.7 L 123.2 72.5 L 125.2 72.2 L 127.3 72.0 L 129.3 71.7 L 131.3 71.4 L 133.4 71.2 L 135.4 70.9 L 137.4 70.6 L 139.5 70.4 L 141.5 70.1 L 143.5 69.8 L 145.6 69.6 L 147.6 69.3 L 149.6 69.0 L 151.7 68.7 L 153.7 68.5 L 155.7 68.2 L 157.8 67.9 L 159.8 67.7 L 161.8 67.4 L 163.9 67.1 L 165.9 66.8 L 167.9 66.6 L 170.0 66.3 L 172.0 66.0"/><path class="acc" opacity="0.35" d="M 50.0 78.0 L 52.0 78.0 L 54.1 78.0 L 56.1 78.1 L 58.1 78.1 L 60.2 78.1 L 62.2 78.2 L 64.2 78.3 L 66.3 78.4 L 68.3 78.4 L 70.3 78.5 L 72.4 78.6 L 74.4 78.8 L 76.4 78.9 L 78.5 79.0 L 80.5 79.2 L 82.5 79.3 L 84.6 79.5 L 86.6 79.6 L 88.6 79.8 L 90.7 80.0 L 92.7 80.2 L 94.7 80.4 L 96.8 80.6 L 98.8 80.8 L 100.8 81.0 L 102.9 81.2 L 104.9 81.4 L 106.9 81.6 L 109.0 81.8 L 111.0 82.1 L 113.0 82.3 L 115.1 82.5 L 117.1 82.8 L 119.1 83.0 L 121.2 83.3 L 123.2 83.5 L 125.2 83.8 L 127.3 84.0 L 129.3 84.3 L 131.3 84.6 L 133.4 84.8 L 135.4 85.1 L 137.4 85.4 L 139.5 85.6 L 141.5 85.9 L 143.5 86.2 L 145.6 86.4 L 147.6 86.7 L 149.6 87.0 L 151.7 87.3 L 153.7 87.5 L 155.7 87.8 L 157.8 88.1 L 159.8 88.3 L 161.8 88.6 L 163.9 88.9 L 165.9 89.2 L 167.9 89.4 L 170.0 89.7 L 172.0 90.0"/><path class="pos" d="M 28.0 62.0 L 28.0 84.0"/><path class="pos" d="M 25.1 78.7 L 28.0 84.0 L 30.9 78.7"/><path class="pos" d="M 30.9 67.3 L 28.0 62.0 L 25.1 67.3"/><text x="120" y="48">tine</text><text x="56" y="60">clamp</text><text x="92" y="115">box</text><path class="dash" d="M 113.5 129.1 L 113.1 129.9 L 112.7 130.7 L 112.1 131.5 L 111.5 132.2 L 110.9 132.8 L 110.2 133.4 L 109.4 133.9 L 108.6 134.3 L 107.7 134.6 L 106.8 134.8 L 105.9 135.0 L 105.0 135.0 L 104.1 135.0 L 103.2 134.8 L 102.3 134.6 L 101.4 134.3 L 100.6 133.9 L 99.8 133.4 L 99.1 132.8 L 98.5 132.2 L 97.9 131.5 L 97.3 130.7 L 96.9 129.9 L 96.5 129.1"/><path class="dash" d="M 121.0 131.8 L 120.3 133.4 L 119.5 134.9 L 118.5 136.3 L 117.4 137.7 L 116.1 138.9 L 114.8 139.9 L 113.3 140.8 L 111.7 141.6 L 110.1 142.2 L 108.4 142.6 L 106.7 142.9 L 105.0 143.0 L 103.3 142.9 L 101.6 142.6 L 99.9 142.2 L 98.3 141.6 L 96.7 140.8 L 95.2 139.9 L 93.9 138.9 L 92.6 137.7 L 91.5 136.3 L 90.5 134.9 L 89.7 133.4 L 89.0 131.8"/></g><g transform="translate(0 150)"><text x="8" y="16">drum</text><rect class="bar" x="40" y="78" width="130" height="44"/><path class="acc" d="M 40.0 78.0 L 42.2 77.5 L 44.3 77.0 L 46.5 76.4 L 48.7 75.9 L 50.8 75.3 L 53.0 74.8 L 55.2 74.2 L 57.3 73.7 L 59.5 73.1 L 61.7 72.6 L 63.8 72.0 L 66.0 71.5 L 68.2 71.0 L 70.3 70.5 L 72.5 70.0 L 74.7 69.5 L 76.8 69.0 L 79.0 68.6 L 81.2 68.2 L 83.3 67.9 L 85.5 67.5 L 87.7 67.2 L 89.8 66.9 L 92.0 66.7 L 94.2 66.5 L 96.3 66.3 L 98.5 66.2 L 100.7 66.1 L 102.8 66.0 L 105.0 66.0 L 107.2 66.0 L 109.3 66.1 L 111.5 66.2 L 113.7 66.3 L 115.8 66.5 L 118.0 66.7 L 120.2 66.9 L 122.3 67.2 L 124.5 67.5 L 126.7 67.9 L 128.8 68.2 L 131.0 68.6 L 133.2 69.0 L 135.3 69.5 L 137.5 70.0 L 139.7 70.5 L 141.8 71.0 L 144.0 71.5 L 146.2 72.0 L 148.3 72.6 L 150.5 73.1 L 152.7 73.7 L 154.8 74.2 L 157.0 74.8 L 159.2 75.3 L 161.3 75.9 L 163.5 76.4 L 165.7 77.0 L 167.8 77.5 L 170.0 78.0"/><path class="acc" opacity="0.35" d="M 40.0 78.0 L 42.2 78.5 L 44.3 79.0 L 46.5 79.6 L 48.7 80.1 L 50.8 80.7 L 53.0 81.2 L 55.2 81.8 L 57.3 82.3 L 59.5 82.9 L 61.7 83.4 L 63.8 84.0 L 66.0 84.5 L 68.2 85.0 L 70.3 85.5 L 72.5 86.0 L 74.7 86.5 L 76.8 87.0 L 79.0 87.4 L 81.2 87.8 L 83.3 88.1 L 85.5 88.5 L 87.7 88.8 L 89.8 89.1 L 92.0 89.3 L 94.2 89.5 L 96.3 89.7 L 98.5 89.8 L 100.7 89.9 L 102.8 90.0 L 105.0 90.0 L 107.2 90.0 L 109.3 89.9 L 111.5 89.8 L 113.7 89.7 L 115.8 89.5 L 118.0 89.3 L 120.2 89.1 L 122.3 88.8 L 124.5 88.5 L 126.7 88.1 L 128.8 87.8 L 131.0 87.4 L 133.2 87.0 L 135.3 86.5 L 137.5 86.0 L 139.7 85.5 L 141.8 85.0 L 144.0 84.5 L 146.2 84.0 L 148.3 83.4 L 150.5 82.9 L 152.7 82.3 L 154.8 81.8 L 157.0 81.2 L 159.2 80.7 L 161.3 80.1 L 163.5 79.6 L 165.7 79.0 L 167.8 78.5 L 170.0 78.0"/><path class="pos" d="M 74.0 66.6 L 74.0 56.3"/><path class="pos" d="M 76.9 61.5 L 74.0 56.3 L 71.1 61.5"/><path class="pos" d="M 105.0 63.0 L 105.0 49.0"/><path class="pos" d="M 107.9 54.3 L 105.0 49.0 L 102.1 54.3"/><path class="pos" d="M 136.0 66.6 L 136.0 56.3"/><path class="pos" d="M 138.9 61.5 L 136.0 56.3 L 133.1 61.5"/><path class="dash" d="M 77.8 49.3 L 79.1 46.8 L 80.7 44.4 L 82.4 42.2 L 84.4 40.2 L 86.6 38.3 L 88.9 36.7 L 91.3 35.3 L 93.9 34.1 L 96.6 33.2 L 99.4 32.5 L 102.2 32.1 L 105.0 32.0 L 107.8 32.1 L 110.6 32.5 L 113.4 33.2 L 116.1 34.1 L 118.7 35.3 L 121.1 36.7 L 123.4 38.3 L 125.6 40.2 L 127.6 42.2 L 129.3 44.4 L 130.9 46.8 L 132.2 49.3"/><path class="dash" d="M 68.7 45.1 L 70.5 41.7 L 72.6 38.6 L 74.9 35.6 L 77.6 32.9 L 80.4 30.4 L 83.5 28.3 L 86.8 26.4 L 90.2 24.8 L 93.8 23.6 L 97.5 22.7 L 101.2 22.2 L 105.0 22.0 L 108.8 22.2 L 112.5 22.7 L 116.2 23.6 L 119.8 24.8 L 123.2 26.4 L 126.5 28.3 L 129.6 30.4 L 132.4 32.9 L 135.1 35.6 L 137.4 38.6 L 139.5 41.7 L 141.3 45.1"/><text x="176" y="82">skin</text></g><g transform="translate(210 150)"><text x="8" y="16">clarinet</text><path class="ink" d="M 30 64 L 162 64 M 30 96 L 162 96"/><path class="ink" stroke-width="4" d="M 30 62 L 30 98"/><path class="acc" d="M 30.0 71.0 L 32.2 71.0 L 34.4 71.0 L 36.6 71.0 L 38.8 71.0 L 41.0 71.1 L 43.2 71.1 L 45.4 71.2 L 47.6 71.2 L 49.8 71.2 L 52.0 71.3 L 54.2 71.4 L 56.4 71.4 L 58.6 71.5 L 60.8 71.6 L 63.0 71.7 L 65.2 71.8 L 67.4 71.9 L 69.6 72.0 L 71.8 72.1 L 74.0 72.2 L 76.2 72.3 L 78.4 72.5 L 80.6 72.6 L 82.8 72.7 L 85.0 72.9 L 87.2 73.0 L 89.4 73.2 L 91.6 73.3 L 93.8 73.5 L 96.0 73.6 L 98.2 73.8 L 100.4 74.0 L 102.6 74.2 L 104.8 74.3 L 107.0 74.5 L 109.2 74.7 L 111.4 74.9 L 113.6 75.1 L 115.8 75.3 L 118.0 75.5 L 120.2 75.7 L 122.4 75.9 L 124.6 76.1 L 126.8 76.3 L 129.0 76.6 L 131.2 76.8 L 133.4 77.0 L 135.6 77.2 L 137.8 77.4 L 140.0 77.7 L 142.2 77.9 L 144.4 78.1 L 146.6 78.4 L 148.8 78.6 L 151.0 78.8 L 153.2 79.1 L 155.4 79.3 L 157.6 79.5 L 159.8 79.8 L 162.0 80.0"/><path class="acc" opacity="0.35" d="M 30.0 89.0 L 32.2 89.0 L 34.4 89.0 L 36.6 89.0 L 38.8 89.0 L 41.0 88.9 L 43.2 88.9 L 45.4 88.8 L 47.6 88.8 L 49.8 88.8 L 52.0 88.7 L 54.2 88.6 L 56.4 88.6 L 58.6 88.5 L 60.8 88.4 L 63.0 88.3 L 65.2 88.2 L 67.4 88.1 L 69.6 88.0 L 71.8 87.9 L 74.0 87.8 L 76.2 87.7 L 78.4 87.5 L 80.6 87.4 L 82.8 87.3 L 85.0 87.1 L 87.2 87.0 L 89.4 86.8 L 91.6 86.7 L 93.8 86.5 L 96.0 86.4 L 98.2 86.2 L 100.4 86.0 L 102.6 85.8 L 104.8 85.7 L 107.0 85.5 L 109.2 85.3 L 111.4 85.1 L 113.6 84.9 L 115.8 84.7 L 118.0 84.5 L 120.2 84.3 L 122.4 84.1 L 124.6 83.9 L 126.8 83.7 L 129.0 83.4 L 131.2 83.2 L 133.4 83.0 L 135.6 82.8 L 137.8 82.6 L 140.0 82.3 L 142.2 82.1 L 144.4 81.9 L 146.6 81.6 L 148.8 81.4 L 151.0 81.2 L 153.2 80.9 L 155.4 80.7 L 157.6 80.5 L 159.8 80.2 L 162.0 80.0"/><path class="pos" d="M 166.0 80.0 L 184.0 80.0"/><path class="pos" d="M 178.7 82.9 L 184.0 80.0 L 178.7 77.1"/><path class="pos" d="M 171.3 77.1 L 166.0 80.0 L 171.3 82.9"/><path class="dash" d="M 180.0 58.6 L 181.5 59.9 L 182.9 61.4 L 184.2 63.0 L 185.4 64.6 L 186.4 66.4 L 187.4 68.2 L 188.2 70.0 L 188.8 72.0 L 189.3 73.9 L 189.7 75.9 L 189.9 78.0 L 190.0 80.0 L 189.9 82.0 L 189.7 84.1 L 189.3 86.1 L 188.8 88.0 L 188.2 90.0 L 187.4 91.8 L 186.4 93.6 L 185.4 95.4 L 184.2 97.0 L 182.9 98.6 L 181.5 100.1 L 180.0 101.4"/><path class="dash" d="M 186.4 50.9 L 188.5 52.7 L 190.4 54.7 L 192.1 56.9 L 193.7 59.1 L 195.2 61.5 L 196.4 63.9 L 197.5 66.5 L 198.4 69.1 L 199.1 71.8 L 199.6 74.5 L 199.9 77.2 L 200.0 80.0 L 199.9 82.8 L 199.6 85.5 L 199.1 88.2 L 198.4 90.9 L 197.5 93.5 L 196.4 96.1 L 195.2 98.5 L 193.7 100.9 L 192.1 103.1 L 190.4 105.3 L 188.5 107.3 L 186.4 109.1"/><text x="12" y="118">reed</text><text x="112" y="118">open end</text></g></svg>
+<p class="cap" style="max-width:560px;margin:0 auto 1.25rem">Each vibrating part drawn in its lowest mode, at two moments. Orange: the push that leaves it. Dashed: the sound going out.</p>
+</div>
+```
+
+The table writes the four routes in one format, leaving out fading. In it, $u$ is the vibrating part's motion, $a_n$ and $\varphi_n$ the size and phase of mode $n$, and $\omega_n = 2\pi f_n$; $x$ runs along a string or tube of length $L$, $T$ is the string's tension, and subscripts are [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative), so $u_x$ is the slope and $u_{tt}$ the acceleration.
+
+The second row is the input $F$ that reaches the air. As in [post 2](../one-string-end-to-end/index.qmd#sound), $p = h * F$, with $h$ the tap response: the pressure at your ear after one sharp tap at that place on a silent instrument. The convolution $(h * F)(t) = \int_{-\infty}^{t} h(t - s)\,F(s)\,ds$ adds up delayed, scaled copies of $h$, one for each moment of the input.
+
+::: {.routes .column-page}
+
+| | Piano, guitar, violin | Kalimba | Drum | Clarinet, flute |
+|:--|:--|:--|:--|:--|
+| $u$ | ${\sum a_n\sin(\omega_nt + \varphi_n)\sin(n\pi x/L)}$ | ${\sum a_n\sin(\omega_nt + \varphi_n)\,X_n(x)}$ (the tine's shapes) | ${\sum a_n\sin(\omega_nt + \varphi_n)\,X_n(r, \theta)}$ (the skin's shapes, in polar coordinates $(r, \theta)$) | air pressure in the tube: one repeating cycle, ${\sum a_n\sin(n\omega_1t + \varphi_n)\,X_n(x)}$, shaped by the tube's modes (on a clarinet the odd ones, so even partials are weak) |
+| what reaches the air | bridge force ${F(t) = -T\,u_x(L, t)}$ | shear force $F_1$ and bending moment $F_2$ (a turning push) at the clamp | the acceleration $u_{tt}(y, t)$, $y$ a point of the skin | pressure slope at the open end, ${F(t) = -u_x(L, t)}$ (it sets how fast the outflow changes); for most notes the open end is the first open tone holes |
+| $p$ | $h * F$ | $h_1 * F_1 + h_2 * F_2$, one tap response per input | $\int h(\cdot\,; y) * u_{tt}(y, \cdot)\,dy$, one tap response per point $y$ | $h * F$ |
+
+:::
+
+In every column, once the body's own ring at the start has died away, $p = \sum_n P_n\sin(\omega_nt + \psi_n)$: the same frequencies as $u$ (for the blown clarinet, $\omega_n = n\omega_1$), with different amounts $P_n$ and phases $\psi_n$. The reason is that $h$ is a fixed linear filter, because small motions obey linear equations and nothing changes in time; such a filter turns each sine into a sine of the same frequency, only rescaled and delayed.
+
+::: {.derive}
+<details><summary><span class="label">Details</span>Why the frequencies survive, and the drum, kalimba and clarinet columns</summary>
+
+*A sine stays a sine.* With $H(f) = \int h(s)\,e^{-2\pi i f s}\,ds$, the [Fourier transform](https://en.wikipedia.org/wiki/Fourier_transform) of $h$, a short computation gives $h * \sin(\omega t) = |H(f)|\sin(\omega t + \arg H(f))$ for $\omega = 2\pi f$. So with one input, $P_n$ is the input's amount of mode $n$ times $|H(f_n)|$.
+
+*Drum.* A drum small compared with the wavelength sends out sound in proportion to the net volume each mode sweeps, so for a given swing and frequency $P_n \propto |\iint X_n\,dA|$. A mode with $m \ge 1$ still lines through the center varies around the drum as $\cos m\theta$, so $\iint X_n\,dA = 0$: their sound is zero at this (monopole) order, and they radiate only weakly, as dipoles ($m = 1$) or weaker, while the round modes radiate strongly (N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapters 7 and 18).
+
+*Kalimba.* The clamp, at $x = 0$, passes two things to the box: the bent tine's shear force, $F_1 = V(0, t) = -EI\,u_{xxx}(0, t)$ in the kalimba page's convention, and its bending moment, a turning push, $F_2 = EI\,u_{xx}(0, t)$; here $E$ is steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus) and $I$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment) (derived on the [kalimba page](kalimba.qmd#newton)).
+
+*Clarinet and flute.* The open end is a small source whose strength is the rate at which the outflow changes, and the pressure slope $-u_x(L, t)$ sets that rate. At a distance $R$ in open air, $p(t) = -(S/4\pi R)\,u_x(L, t - R/c_0)$, where $S$ is the area of the opening and $c_0$ the speed of sound. For most notes the "open end" is the first open tone holes, and the bell radiates the lowest notes and the high partials above the tone holes' cutoff; a flute also radiates from its embouchure hole (Fletcher and Rossing, above, chapters 7, 8, 15 and 16).
+
+</details>
+:::
+
 ## Two kinds of entry {#two-kinds}
 
 A *ringing* entry is struck or plucked, then left alone: its partials sit wherever its spectrum falls, each fading at its own rate.
 
-A *self-sustained* entry is kept going by the player, with a bow, an air jet, a reed or an amplifier, whose push depends on the motion itself, not in proportion to it.[^drive] Its motion settles into one repeating cycle, a [self-sustained oscillation](../instruments-as-operators/glossary.qmd#self-sustained), so its partials are exact whole-number multiples ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)), whatever the spectrum of the driven part, the [resonator](../instruments-as-operators/glossary.qmd#resonator); the drive and the resonator decide only which partials are strong.
+A *self-sustained* entry is kept going by a bow, an air jet, a reed or an amplifier, whose push depends on the motion itself, not in proportion to it.[^drive] Its motion settles into one repeating cycle, a [self-sustained oscillation](../instruments-as-operators/glossary.qmd#self-sustained), so its partials are exact whole-number multiples ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)), whatever the spectrum of the driven part, the [resonator](../instruments-as-operators/glossary.qmd#resonator). The drive and the resonator decide only which partials are strong.
 
-In every demo the stems are the sound's partials on the pitch ruler, taller when stronger, and the picture is slowed down and enlarged.
+In every demo the stems are the sound's partials on [post 1](../what-you-hear/index.qmd)'s pitch ruler, whose gray lines are whole-number multiples of one frequency; a stem is taller when its partial is stronger.
 
 ## A piano {#piano}
 
-A piano note is clear, but its upper partials run slightly sharp of the whole-number lines, more so the higher they are, because the steel wire resists bending as well as being pulled straight.[^fr12] So an exact 2 : 1 octave [beats](../instruments-as-operators/glossary.qmd#beats), and tuners widen octaves, most at the keyboard's ends.[^railsback]
+A piano note is clear, but its upper partials run slightly sharp of the whole-number lines, more so the higher they are, because the steel wire resists bending as well as being pulled straight.[^fr12] So an exact 2 : 1 octave [beats](../instruments-as-operators/glossary.qmd#beats), and tuners widen octaves.[^railsback]
 
 ```{=html}
 <div class="ins"><div class="panel gdemo" data-g="piano">
@@ -113,13 +154,13 @@ A piano note is clear, but its upper partials run slightly sharp of the whole-nu
 </div></div>
 ```
 
-The spectrum is $f_n = n f_0\sqrt{1 + Bn^2}$, where $B$ measures the wire's stiffness, about $4.4\times10^{-4}$ for a middle C wire. The player controls the hammer's speed (harder is louder and brighter),[^russell] the dampers and the pedals; none of them moves a frequency ([A Piano](../a-piano/index.qmd)).
+The spectrum is $f_n = n f_0\sqrt{1 + Bn^2}$, where $f_0$ is the lowest frequency the wire would have without stiffness and the small number $B$ measures the stiffness.
 
 **[Deep dive: the piano →](piano.qmd)**
 
 ## A kalimba {#kalimba}
 
-A kalimba tine gives a click, then a clean note: its first overtone, far off the lines and strong at the attack, dies within a fraction of a second.[^chapman] The thumb bends the tine into a smooth curve and lets go.
+A kalimba tine gives a click, then a clean note: its first overtone, far off the lines and strong at the attack, dies within a fraction of a second.[^chapman]
 
 ```{=html}
 <div class="ins"><div class="panel gdemo" data-g="kalimba">
@@ -130,13 +171,13 @@ A kalimba tine gives a click, then a clean note: its first overtone, far off the
 </div></div>
 ```
 
-The spectrum is in the ratios $1 : 6.27 : 17.55$, and $f_1 \propto 1/L^2$: half the length sounds two octaves up.[^fr2] The player sets the loudness by how far the tip is pushed and can stop a tine with a finger; makers tune a tine by sliding it over the bridge.[^kmagic]
+The spectrum is in the ratios $1 : 6.27 : 17.55$, and $f_1 \propto 1/L^2$, where $L$ is the tine's free length: half the length sounds two octaves up.[^fr2] So makers tune a tine by sliding it over the bridge.[^kmagic]
 
 **[Deep dive: the kalimba →](kalimba.qmd)**
 
 ## A glockenspiel {#glockenspiel}
 
-A glockenspiel gives a bright, clear note although its overtones sit off the lines: they are high and die quickly, leaving the fundamental.[^scavone] Its bar is the same kind of steel bar as the kalimba's tine, with both ends [free](../instruments-as-operators/glossary.qmd#free-end); it rests on soft supports and is struck with a mallet.
+A glockenspiel gives a bright, clear note although its overtones sit off the lines: they are high and die quickly, leaving the fundamental.[^scavone] Its bar is the kalimba tine's kind of steel bar with both ends [free](../instruments-as-operators/glossary.qmd#free-end), resting on soft supports and struck with a mallet:
 $$
 \begin{gathered}
 u_{tt} = -\kappa^2u_{xxxx} \quad (0 < x < L), \\
@@ -144,9 +185,9 @@ u_{xx} = u_{xxx} = 0 \ \text{ at } x = 0 \text{ and } x = L, \\
 u(x, 0) = 0, \qquad u_t(x, 0) = v_0(x).
 \end{gathered}
 $$
-Here $\kappa^2$ is the bar's stiffness over its mass, and $v_0$ the mallet's blow (fold).
+Here $u(x, t)$ is the bar's displacement, $L$ its length, $\kappa^2$ its stiffness over its mass, and $v_0$ the mallet's blow (fold).
 
-The spectrum is in the ratios $1 : 2.756 : 5.404$, off the lines, from $\cos\beta L\,\cosh\beta L = 1$.[^fr19a] It also has two eigenvalues 0, the bar sliding or tilting without bending: *drifts*, which move as $a + bt$ instead of swinging and make no sound.
+Writing $\lambda = \kappa^2\beta^4$, the eigenvalues solve $\cos\beta L\,\cosh\beta L = 1$, which puts the frequencies in the ratios $1 : 2.756 : 5.404$, off the lines.[^fr19a] Two eigenvalues are 0: the bar sliding or tilting without bending, *drifts* that move as $a + bt$, for constants $a$ and $b$, and make no sound.
 
 ```{=html}
 <div class="ins"><div class="panel gdemo" data-g="glockenspiel">
@@ -156,8 +197,6 @@ The spectrum is in the ratios $1 : 2.756 : 5.404$, off the lines, from $\cos\bet
   <p class="cap">A bar tuned to C6, 1047 Hz, struck a little off its middle. Computed: the stem positions. Illustrative: the starting strengths and the fading times. The bar is drawn on its two supports, at its fundamental's still points.</p>
 </div></div>
 ```
-
-The supports, at the fundamental's still points $0.224L$ from each end, barely damp it.[^ubc1] Xylophone and marimba bars, unlike glockenspiel bars, are thinned underneath to put the first overtone on a line, 3× and 4×.[^fr19b] The player sets the loudness by the blow, the brightness by the mallet, metal brighter and rubber warmer,[^mallet] and stops a note with a hand; some glockenspiels on a stand have a damper pedal.[^vsl]
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the equation comes from</summary>
@@ -177,7 +216,7 @@ With $\lambda = \kappa^2\beta^4$, $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cos
 
 ## Drums {#drums}
 
-A bass drum booms with no clear pitch; a kettledrum, one of the timpani, plays a note. Both heads are a stretched skin whose ideal frequencies fall between the lines;[^fr3] on the kettledrum the air pulls the spoke modes near 2 : 3 : 4 : 5 times a base, and the round modes radiate away within a fraction of a second.[^hpt1] Step through it:
+A bass drum booms with no clear pitch; a kettledrum, one of the timpani, plays a note. Both heads are a stretched skin whose ideal frequencies fall between the lines.[^fr3] On the kettledrum the air pulls the *spoke modes*, with still lines through the center and no still circle inside the rim, near 2 : 3 : 4 : 5 times a base, and the *round modes*, with no line through the center, radiate away within a fraction of a second.[^hpt1] Step through it:
 
 ```{=html}
 <div class="ins">
@@ -233,13 +272,13 @@ A bass drum booms with no clear pitch; a kettledrum, one of the timpani, plays a
 </div>
 ```
 
-The ideal head's spectrum is in the ratios $1 : 1.593 : 2.136 : 2.295 : \cdots$, from the zeros of [Bessel functions](../instruments-as-operators/glossary.qmd#bessel). The bass drummer strikes slightly off center and shortens the note by muffling the head with a leg or a towel;[^aleo] the timpanist strikes between halfway and three-quarters of the way out, and retunes by changing the head's tension, usually with a pedal.[^hpt3]
+The ideal head's spectrum is in the ratios $1 : 1.593 : 2.136 : 2.295 : \cdots$, from the zeros of [Bessel functions](../instruments-as-operators/glossary.qmd#bessel).
 
 **[Deep dive: the drum →](drum.qmd)**
 
 ## A violin, bowed {#violin}
 
-A bowed string holds a steady note with its partials exactly on the lines: the bow's friction grabs the string and lets it slip once per period, so the string repeats one cycle, which Helmholtz watched through a vibration microscope by 1860.[^helm]
+A bowed string holds a steady note with its partials exactly on the lines: the bow's friction grabs the string and lets it slip once per period, so the string repeats one cycle, as Helmholtz saw through a vibration microscope in 1860.[^helm]
 
 ```{=html}
 <div class="ins"><div class="panel gdemo" data-g="violin">
@@ -250,13 +289,11 @@ A bowed string holds a steady note with its partials exactly on the lines: the b
 </div></div>
 ```
 
-The string's own spectrum is post 2's, $f_n = nf_1$; the bowed sound's partials sit on the same lines, partial $n$ pushing the bridge in proportion to $1/n$ (derived on the violin page). The left hand chooses the length and adds vibrato; the bow's speed, force and distance from the bridge set the loudness and brightness.[^wolfebow2]
-
 **[Deep dive: the violin →](violin.qmd)**
 
 ## A flute {#flute}
 
-A flute plays a steady note on the lines; with every hole closed and an ever faster airstream, it climbs the harmonic series, 1, 2, 3, 4, … times the lowest.[^wolfefl1] It is a tube of air open at both ends, kept going by a jet blown across the embouchure hole.[^fr16] An open end holds room pressure, so the tube's spectrum has the string's numbers, $f_n = nc/2L$, on every line.[^pipes1]
+A flute plays a steady note on the lines. It is a tube of air open at both ends,[^wolfefl1] kept going by a jet blown across the embouchure hole.[^fr16] An open end holds room pressure, so the tube's own spectrum is the string's, $f_n = nc/2L$, with $c$ the speed of sound and $L$ the tube's length: on the lines too.[^pipes1] It overblows to the octave with a faster, narrower airstream.[^wolfefl2]
 
 ```{=html}
 <div class="ins"><div class="panel gdemo" data-g="flute">
@@ -267,13 +304,11 @@ A flute plays a steady note on the lines; with every hole closed and an ever fas
 </div></div>
 ```
 
-The player chooses the length with the keys, the loudness with the breath, and the register with that faster, narrower airstream.[^wolfefl2]
-
 **[Deep dive: the flute, on the clarinet page →](clarinet.qmd)**
 
 ## A clarinet {#clarinet}
 
-A clarinet sounds a hollow note nearly an octave below a flute of the same length. Its tube is closed at the reed, which halves the lowest frequency and leaves only odd multiples of it, so in the low register the odd partials are strong and the even ones weak.[^ovc1]
+A clarinet sounds a hollow note nearly an octave below a flute of the same length. Its tube is closed at the reed, so its spectrum is $f_n = (2n - 1)c/4L$: the odd multiples of $c/4L$, half the flute's lowest frequency.[^pipes2] So in the low register the odd partials are strong and the even ones weak.[^ovc1]
 
 ```{=html}
 <div class="ins"><div class="panel gdemo" data-g="clarinet">
@@ -283,8 +318,6 @@ A clarinet sounds a hollow note nearly an octave below a flute of the same lengt
   <p class="cap">A steady D3, 147 Hz. Stems: the sound's partials, on every line, strong odd and faint even ones; the exact strengths are an illustrative choice after Wolfe's description. Ticks under the axis: the resonator's own frequencies, the tube's modes, on the odd lines only. Picture: the air column, closed at the reed on the left, drawn with the odd partials only; the faint even ones are left out of the picture.</p>
 </div></div>
 ```
-
-The tube's spectrum is $f_n = (2n - 1)c/4L$, the odd multiples of $c/4L$.[^pipes2] The fingers choose the length, the breath the loudness and brightness, and the register key jumps the tube to its next mode, 3 times the lowest: a twelfth up, where a flute overblows an octave.[^wolfecl3]
 
 **[Deep dive: the clarinet →](clarinet.qmd)**
 
@@ -301,19 +334,17 @@ A harmonica reed's own overtones sit far off the lines, yet its note has partial
 </div></div>
 ```
 
-The reed's spectrum is the kalimba tine's, $1 : 6.27 : 17.55$, and it plays somewhat below its lowest mode.[^cott] The breath sets the loudness and the tone while the pitch hardly moves;[^pykett3] on a diatonic harmonica, reshaping mouth and throat bends a note down between the hole's two notes, because the hole's blow and draw reeds both take part.[^bahnson]
-
 **[Deep dive: the harmonica →](harmonica.qmd)**
 
 ## A theremin {#theremin}
 
-A theremin is played without being touched, and its tone glides as the hand moves.[^thm1] It makes the tone with electric circuits, each a coil and a capacitor, an [LC circuit](https://en.wikipedia.org/wiki/LC_circuit), whose charge swings like a mass on a spring:
+A theremin's tone glides as the hand moves, without the instrument being touched.[^thm1] It comes from electric circuits, each a coil and a capacitor, an [LC circuit](https://en.wikipedia.org/wiki/LC_circuit), whose charge swings like a mass on a spring:
 $$
 \ddot q = -\frac{1}{LC}\,q .
 $$
-Here $q$ is the charge, $L$ the coil's [inductance](../instruments-as-operators/glossary.qmd#inductance) and $C$ the [capacitance](../instruments-as-operators/glossary.qmd#capacitance) (fold). An amplifier keeps the circuit swinging at a steady size.[^osc]
+Here $q$ is the charge, $\ddot q$ its second time derivative, $L$ the coil's [inductance](../instruments-as-operators/glossary.qmd#inductance) and $C$ the [capacitance](../instruments-as-operators/glossary.qmd#capacitance) (fold). An amplifier keeps the swing at a steady size.[^osc]
 
-The spectrum is one frequency, $f = 1/(2\pi\sqrt{LC})$, a radio frequency below 500 kHz.[^thm2] The instrument runs two such circuits, one changed by the player's hand, and outputs the difference of their frequencies, which is audible ([heterodyning](../instruments-as-operators/glossary.qmd#heterodyning)).
+The spectrum is one frequency, $f = 1/(2\pi\sqrt{LC})$, a radio frequency below 500 kHz.[^thm2] The instrument runs two such circuits, one changed by the hand, and outputs the difference of their frequencies, which is audible ([heterodyning](../instruments-as-operators/glossary.qmd#heterodyning)).
 
 ```{=html}
 <div class="ins"><div class="panel gdemo" data-g="theremin">
@@ -323,8 +354,6 @@ The spectrum is one frequency, $f = 1/(2\pi\sqrt{LC})$, a radio frequency below 
   <p class="cap">An idealized sine theremin at A4, 440 Hz: one stem. A real theremin's tone is not a pure sine: it has overtones. No resonator ticks: the circuits' own frequencies are radio frequencies, far beyond this ruler, and the tone you hear is the difference of two of them. Picture: one coil-and-capacitor circuit, its charge sloshing between the plates, slowed to about one swing a second.</p>
 </div></div>
 ```
-
-Most players set the pitch with the right hand's distance from one antenna and the loudness with the left hand's from the other. Leon Theremin invented it in 1920 and patented it in 1928.[^thm3]
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the equation comes from</summary>
@@ -342,21 +371,25 @@ A mixer multiplies the two oscillators' signals, and $\sin(2\pi f_1t)\sin(2\pi f
 </details>
 :::
 
-## What each instrument breaks {#breaks}
+## What each instrument breaks, and what the player controls {#breaks}
 
-Post 2's string kept [six conditions](../one-string-end-to-end/index.qmd#conditions); the others break some:
+Post 2's string kept [six conditions](../one-string-end-to-end/index.qmd#conditions); the others break some. The last column says what the player controls.
 
-| Instrument | Which of post 2's conditions it breaks |
-|:----|:--------------|
-| piano | none while the key is down; the damper breaks *friction the sines split* and *unchanging in time* |
-| kalimba | none in the model (its fading is measured) |
-| glockenspiel | *$A$ positive*: the two drifts, which the supports hold |
-| drums | none on the ideal head; the kettledrum's radiation breaks *$A$ symmetric* |
-| violin | *linear*: the bow, which also feeds energy in |
-| flute | *linear*: the jet |
-| clarinet | *linear*: the reed |
-| harmonica | *linear*: the reed's valve |
-| theremin | *linear*: the amplifier; a moving hand changes $C$, breaking *unchanging in time* |
+::: {.aspects}
+
+| Instrument | Which of post 2's conditions it breaks | What the player controls |
+|:----|:--------------|:--------------|
+| piano | none while the key is down; the damper breaks *friction the sines split* and *unchanging in time* | key speed,[^russell] dampers, pedals |
+| kalimba | none in the model (its fading is measured) | pluck strength |
+| glockenspiel | *$A$ positive*: the two drifts, which the supports hold | mallet hardness,[^mallet] a hand to stop the bar[^vsl] |
+| drums | none on the ideal head; the kettledrum's radiation breaks *$A$ symmetric* | where and how hard to strike, mallet, muffling;[^aleo] pedal tuning on timpani[^hpt3] |
+| violin | *linear*: the bow, which also feeds energy in | bow speed, force and contact point; fingers[^wolfebow2] |
+| flute | *linear*: the jet | keys; airstream speed, overblowing to the octave[^wolfefl3] |
+| clarinet | *linear*: the reed | keys and register key; breath, for loudness and brightness[^wolfecl3] |
+| harmonica | *linear*: the reed's valve | breath;[^pykett3] bending[^bahnson] |
+| theremin | *linear*: the amplifier; a moving hand changes $C$, breaking *unchanging in time* | right hand: pitch; left hand: volume[^thm3] |
+
+:::
 
 ## Next
 
@@ -368,37 +401,37 @@ When an equation has a spectrum at all: the optional appendix, [When does an equ
 [^drive]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapters 10 (bowed strings), 15 (woodwind reed instruments) and 16 (flutes).
 [^fr12]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 12 (the piano); Wikipedia, [Inharmonicity](https://en.wikipedia.org/wiki/Inharmonicity).
 [^railsback]: O. L. Railsback, "Scale temperament as applied to piano tuning", *Journal of the Acoustical Society of America* 9 (1938), 274 ([DOI](https://doi.org/10.1121/1.1902056)); Wikipedia, [Piano acoustics](https://en.wikipedia.org/wiki/Piano_acoustics).
-[^russell]: D. A. Russell, [Hammer nonlinearity, dynamics and the piano sound](https://www.acs.psu.edu/drussell/Piano/Dynamics.html), 1997: a heavy blow acts as a hard spring, and loud notes are brighter. A. Askenfelt and E. Jansson, "From touch to string vibrations" ([the nonlinear hammer](https://www.speech.kth.se/music/5_lectures/askenflt/nonlinea.html)), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990: the felt stiffens as it is compressed.
 [^chapman]: D. M. F. Chapman, [The sound of the African thumb piano (kalimba)](https://acoustics.org/pressroom/httpdocs/155th/chapman.htm), Acoustics'08 Paris, paper 5aMUf1, Acoustical Society of America, 2008: one dominant overtone, at 5.9 to 6.8 times the fundamental, dying away quickly after the attack.
 [^fr2]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 2 (strings and bars).
 [^kmagic]: Kalimba Magic, [on tuning tines](https://www.kalimbamagic.com/?p=49).
 [^scavone]: G. P. Scavone, [Percussion instruments](https://ccrma.stanford.edu/CCRMA/Courses/150/percussion.html), course notes, CCRMA, Stanford University, 1999: "All but the lowest transverse mode die out quickly when the bar is struck"; [Fletcher and Rossing](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 19 (mallet percussion).
 [^fr19a]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapters 2 and 19.
-[^ubc1]: [Glockenspiel](https://wiki.ubc.ca/Course:PHYS341/Archive/2016wTerm2/glockenspiel), PHYS 341 course wiki, University of British Columbia, 2017: supports at the nodes.
-[^fr19b]: [Fletcher and Rossing](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 19; [Glockenspiel](https://wiki.ubc.ca/Course:PHYS341/Archive/2016wTerm2/glockenspiel), UBC PHYS 341 course wiki, 2017: glockenspiel bars left uniform.
-[^mallet]: Vienna Symphonic Library, [Glockenspiel](https://www.vsl.co.at/academy/percussion/glockenspiel), Academy: hard mallets brighter. K. Peters, [How to choose the right mallet](https://hub.yamaha.com/music-educators/instruments/perc/choose-the-right-mallet), Yamaha Music Educators Hub, 7 May 2019: metal mallets brighter, rubber warmer.
-[^vsl]: Vienna Symphonic Library, [Glockenspiel](https://www.vsl.co.at/academy/percussion/glockenspiel), Academy: a damper pedal on stand models, none on table models; notes damped by hand.
 [^fr3]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 3 (membranes); Wikipedia, [Vibrations of a circular membrane](https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane).
 [^hpt1]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html), Georgia State University; Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 18 (drums).
-[^aleo]: ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023; A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017.
-[^hpt3]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html): pedal tuning; [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), mdw: the hand lever.
 [^helm]: H. Helmholtz, "On the motion of the strings of a violin", *Proceedings of the Philosophical Society of Glasgow* 5 (1860–64), 17–21, read 19 December 1860 ([archive.org](https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5)).
-[^wolfebow2]: J. Wolfe, [Articulation and vibrato on the violin](https://newt.phys.unsw.edu.au/jw/violinarticulation.html), UNSW: the left hand stops the string and adds vibrato; J. Wolfe, [The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html), UNSW: bow speed, position and force.
-[^wolfefl1]: J. Wolfe, [Flute acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html), UNSW: open at both ends; the harmonic series with every hole closed.
+[^wolfefl1]: J. Wolfe, [Flute acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html), UNSW: open at both ends.
 [^fr16]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 16 (flutes); Wolfe, [Flute acoustics](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html): the jet.
 [^pipes1]: J. Wolfe, [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), UNSW: open and closed ends; [Fletcher and Rossing](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 8 (pipes).
-[^wolfefl2]: Wolfe, [Flute acoustics](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html): registers.
 [^ovc1]: J. Wolfe, [Open vs closed pipes (flutes vs clarinets)](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html), UNSW: a clarinet about an octave below a flute of the same length; J. Wolfe, [Clarinet acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html), UNSW: strong odd harmonics in the low register.
 [^pipes2]: Wolfe, [Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html): a pipe closed at one end.
-[^wolfecl3]: Wolfe, [Clarinet acoustics](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html): louder playing is brighter; the register key and the twelfth; Wolfe, [Open vs closed pipes](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html): overblowing a twelfth.
 [^pykett1]: C. Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm), 2023: the sound comes from the puffs; odd and even harmonics.
-[^cott]: J. Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), *Physics Today* 64(3), 2011, 44–48 ([doi:10.1063/1.3563819](https://doi.org/10.1063/1.3563819)), p. 45: the playing frequency below the reed's own.
-[^pykett3]: Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm): pitch nearly independent of wind pressure, which changes loudness and puff shape.
-[^bahnson]: H. T. Bahnson, J. F. Antaki and Q. C. Beery, ["Acoustical and physical dynamics of the diatonic harmonica"](https://www.cs.bu.edu/fac/snyder/TablatureWeb/Bahnson%20JASA%201998.pdf), *Journal of the Acoustical Society of America* 103 (1998), 2134–2144; Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), on bending.
 [^thm1]: Wikipedia, [Theremin](https://en.wikipedia.org/wiki/Theremin).
 [^osc]: Wikipedia, [Electronic oscillator](https://en.wikipedia.org/wiki/Electronic_oscillator): an amplifier feeding a tuned circuit in phase, its amplitude limited by a nonlinearity.
 [^thm2]: Wikipedia, [Theremin](https://en.wikipedia.org/wiki/Theremin): two radio-frequency oscillators below 500 kHz.
-[^thm3]: Wikipedia, [Theremin](https://en.wikipedia.org/wiki/Theremin): the hands; invented 1920, patented 1928.
+[^russell]: D. A. Russell, [Hammer nonlinearity, dynamics and the piano sound](https://www.acs.psu.edu/drussell/Piano/Dynamics.html), 1997: a heavy blow acts as a hard spring, and loud notes are brighter. A. Askenfelt and E. Jansson, "From touch to string vibrations" ([the nonlinear hammer](https://www.speech.kth.se/music/5_lectures/askenflt/nonlinea.html)), in *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990: the felt stiffens as it is compressed.
+[^mallet]: Vienna Symphonic Library, [Glockenspiel](https://www.vsl.co.at/academy/percussion/glockenspiel), Academy: hard mallets brighter. K. Peters, [How to choose the right mallet](https://hub.yamaha.com/music-educators/instruments/perc/choose-the-right-mallet), Yamaha Music Educators Hub, 7 May 2019: metal mallets brighter, rubber warmer.
+[^vsl]: Vienna Symphonic Library, [Glockenspiel](https://www.vsl.co.at/academy/percussion/glockenspiel), Academy: a damper pedal on stand models, none on table models; notes damped by hand.
+[^aleo]: ["How to play the bass drum properly"](https://www.interlochen.org/stories/how-to-play-bass-drum-properly), with Keith Aleo, Interlochen Center for the Arts, 3 April 2023; A. Graham, ["Proper Playing Areas"](https://theinstrumentalist.com/september-2017/proper-playing-areas/), *The Instrumentalist*, September 2017.
+[^hpt3]: HyperPhysics, [The Timpani](https://hyperphysics.gsu.edu/hbase/Music/timpani.html): pedal tuning; [The Viennese timpani](https://www.mdw.ac.at/iwk/wiener-pauke/?l=en), mdw: the hand lever.
+[^wolfebow2]: J. Wolfe, [Articulation and vibrato on the violin](https://newt.phys.unsw.edu.au/jw/violinarticulation.html), UNSW: the left hand stops the string and adds vibrato; J. Wolfe, [The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html), UNSW: bow speed, position and force.
+[^wolfefl2]: Wolfe, [Flute acoustics](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html): registers.
+[^wolfecl3]: Wolfe, [Clarinet acoustics](https://newt.phys.unsw.edu.au/jw/clarinetacoustics.html): louder playing is brighter; the register key and the twelfth; Wolfe, [Open vs closed pipes](https://newt.phys.unsw.edu.au/jw/flutes.v.clarinets.html): overblowing a twelfth.
+[^pykett3]: Pykett, [The physics of free reeds](https://colinpykett.org.uk/physics-of-free-reed-wind-instruments.htm): pitch nearly independent of wind pressure, which changes loudness and puff shape.
+[^bahnson]: H. T. Bahnson, J. F. Antaki and Q. C. Beery, ["Acoustical and physical dynamics of the diatonic harmonica"](https://www.cs.bu.edu/fac/snyder/TablatureWeb/Bahnson%20JASA%201998.pdf), *Journal of the Acoustical Society of America* 103 (1998), 2134–2144; Cottingham, [Acoustics of free-reed instruments](https://physicstoday.aip.org/features/acoustics-of-free-reed-instruments), on bending.
+[^thm3]: Wikipedia, [Theremin](https://en.wikipedia.org/wiki/Theremin): the right hand sets the pitch, the left the volume.
+[^wolfefl3]: J. Wolfe, [Flute acoustics: an introduction](https://newt.phys.unsw.edu.au/jw/fluteacoustics.html), UNSW: the keys, and the register set by the airstream.
+[^askenfelt]: A. Askenfelt (ed.), *Five Lectures on the Acoustics of the Piano*, Royal Swedish Academy of Music, 1990, ["Introduction"](https://www.speech.kth.se/music/5_lectures/introd/introd.html): "as the thin string cannot radiate a sound wave itself".
+[^fr10]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 10 (bowed string instruments): the violin's bridge.
 
 ```{=html}
 <script src="core.js"></script>
@@ -620,6 +653,9 @@ When an equation has a spectrum at all: the optional appendix, [When does an equ
 <style>
 .gdemo canvas.gsk { height: 130px; }
 .gdemo svg.spec { max-width: 520px; }
+main .routes table { display: block; overflow-x: auto; }
+svg#routesFig text { font-size: 13.5px; }
+@media (max-width: 700px) { main .routes table td, main .routes table th { white-space: normal; min-width: 8.5rem; } main .routes table td:first-child, main .routes table th:first-child { min-width: 5.5rem; } }
 </style>
 <script src="gallery.js"></script>
 ```

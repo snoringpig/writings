@@ -19,14 +19,14 @@ aliases: [/posts/instruments-case-by-case/violin.html, /posts/instruments-as-ope
 :::
 
 ::: {.pageinfo}
-A deep dive from [the violin's entry](index.qmd#violin) in post 3. Builds on [post 2](../one-string-end-to-end/index.qmd), whose string this is. Uses sines and one sum; derivations are in folds. About 15 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from [the violin's entry](index.qmd#violin) in post 3, on [post 2](../one-string-end-to-end/index.qmd)'s string. Derivations are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
-Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an [octave](../instruments-as-operators/glossary.qmd#octave). Touch it a third of the way along and it jumps to three times the frequency. How can a feather-light finger, which does not shorten the string, change the note so much?
+Touch a vibrating string lightly at its exact middle, without pressing it down, and the note jumps up an [octave](../instruments-as-operators/glossary.qmd#octave). Touch it a third of the way along and it jumps to three times the frequency. How can a light finger, which does not shorten the string, change the note so much?
 :::
 
-The finger moves none of the string's frequencies. It silences every shape of the string that moves under it, and the shapes it spares, those standing still at the middle, are exactly the shapes of a note an octave up. Pluck the string, then pick a point to touch and pluck again; string players call these touched notes [harmonics](../instruments-as-operators/glossary.qmd#string-harmonics).[^wolfe-harm]
+**A light touch is a [damper](../instruments-as-operators/glossary.qmd#damper) at one point.** It drains every shape of the string that moves under the finger and spares the shapes that stand still there. At the middle, the spared shapes are exactly the shapes of a note an octave up; no frequency moves. String players call these touched notes [harmonics](../instruments-as-operators/glossary.qmd#string-harmonics).[^wolfe-harm] Pluck the string, then pick a point to touch and pluck again.
 
 ```{=html}
 <div class="ins">
@@ -45,18 +45,16 @@ The finger moves none of the string's frequencies. It silences every shape of th
 </div>
 ```
 
-The reason, in one sentence: **a light touch is a [damper](../instruments-as-operators/glossary.qmd#damper) at one point, and a shape that stands still there gives the damper nothing to grab.** Below, that sentence is built from Newton's law; then the bow keeps the same string going.
-
 ## The string's shapes {#operator}
 
-The violin string is post 2's string. Let it run from the [nut](../instruments-as-operators/glossary.qmd#bridge), near the pegs, at $x = 0$, to the bridge at $x = L$, with tension $T$ and mass $\mu$ per unit length. Newton's law on a short piece of it gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation), derived in [post 2](../one-string-end-to-end/index.qmd#newton):[^fr2]
+Let $u(x, t)$ be the string's height at time $t$, at distance $x$ from the [nut](../instruments-as-operators/glossary.qmd#bridge) near the pegs; the bridge is at $x = L$. With tension $T$ and mass $\mu$ per unit length, Newton's law gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation) of [post 2](../one-string-end-to-end/index.qmd#newton),[^fr2]
 $$
 \begin{gathered}
 u_{tt} = -Au, \qquad Au = -c^2u_{xx}, \\
 c^2 = \frac{T}{\mu},
 \end{gathered}
 $$
-for shapes with $u(0) = u(L) = 0$. In words: each bit of string accelerates in proportion to how sharply it bends, and the tied ends decide which shapes are allowed.
+for shapes with $u(0) = u(L) = 0$. Each bit of string accelerates in proportion to how sharply it bends.
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the equation comes from <span class="needs">partial derivatives</span></summary>
@@ -66,14 +64,14 @@ Take the piece of string from $x$ to $x + dx$, of mass $\mu\,dx$. The tension $T
 </details>
 :::
 
-[]{#spectrum}The shapes that the [operator](../instruments-as-operators/glossary.qmd#operator) $A$ only stretches, its [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction), and their [eigenvalues](../instruments-as-operators/glossary.qmd#eigenvalue), are
+[]{#spectrum}The shapes that the [operator](../instruments-as-operators/glossary.qmd#operator) $A$ only stretches, its [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction), and their [eigenvalues](../instruments-as-operators/glossary.qmd#eigenvalue) are
 $$
 \begin{gathered}
 X_n(x) = \sin\frac{n\pi x}{L}, \qquad \lambda_n = \Big(\frac{n\pi c}{L}\Big)^2, \\
 f_n = \frac{\sqrt{\lambda_n}}{2\pi} = n f_1, \qquad f_1 = \frac{1}{2L}\sqrt{\frac{T}{\mu}} .
 \end{gathered}
 $$
-Shape $n$ has $n$ arches and swings at exactly $n$ times the lowest frequency, so every partial of a free string sits on a whole-number line of the pitch ruler.
+Shape $n$ has $n$ arches and swings at exactly $n$ times the lowest frequency.
 
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>The shapes, step by step, and why there are no others <span class="needs">derivatives, integration by parts</span></summary>
@@ -85,21 +83,41 @@ No zero or negative $\lambda$ occurs. Multiply $-c^2X'' = \lambda X$ by $X$ and 
 </details>
 :::
 
-Released in any shape, the string moves as a sum of these, each shape fading at its own rate $1/\tau_n$:
+Released in any shape, the string moves as a sum of these shapes, each fading at its own rate $1/\tau_n$:
 $$
 u = \sum_n a_n e^{-t/\tau_n} X_n(x)\cos(2\pi f_n t) .
 $$
-The pluck sets the amounts $a_n$. The fading rates are measured, not derived, and the high partials fade first;[^wolfe-fade] the demo's rates are illustrative.
+The start sets the amounts $a_n$. The fading rates are measured, not derived, and the high partials fade first.[^wolfe-fade]
+
+## What the light touch does {#what-we-hear}
+
+**A light touch keeps only the shapes that stand still under the finger.** The finger is soft and lossy: it takes energy from whatever moves under it, but it does not hold the string still, as a new end would. A finger at $x_f$ raises the fading rate of shape $n$ in proportion to $X_n(x_f)^2$, how much that shape moves under it. A shape with a still point, a [node](../instruments-as-operators/glossary.qmd#node), under the finger rings on; every other shape dies within a moment.
+
+At the middle, $X_n(L/2) = \sin(n\pi/2)$ is zero exactly when $n$ is even. The survivors swing at $2f_1, 4f_1, 6f_1, \dots$, all multiples of $2f_1$: the note an octave up. At a third, the survivors are $n = 3, 6, 9, \dots$, multiples of $3f_1$: an octave and a fifth up.
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Why the drain rate is $X_n(x_f)^2$ <span class="needs">matrices</span></summary>
+
+A friction force $-r\,u_t(x_f, t)$ at the one point $x_f$ turns post 2's separate springs into $q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0$ with $C_{nm} \propto r\,X_n(x_f)X_m(x_f)$ ([post 2](../one-string-end-to-end/index.qmd#fading)). A shape with $X_n(x_f) = 0$ has a zero row and column in $C$, so it rings on untouched. For a light touch $C$ is small, its off-diagonal entries matter only to second order, and each other shape drains at the rate $C_{nn} \propto X_n(x_f)^2$, the rule the [piano page](piano.qmd) uses for felt dampers. The demo adds 45 per second times $X_n(x_f)^2$ to each shape's own fading rate.
+
+</details>
+:::
+
+## How the sound reaches the air {#body}
+
+**The sound reaches the air through the bridge.** The string is too thin to push the air itself, so it pushes the [bridge](../instruments-as-operators/glossary.qmd#bridge), a carved maple piece standing on the top plate and held there by the strings' pressure,[^fr10] with the force $F(t) = -T\,u_x(L, t)$; the bridge shakes the wooden body, which pushes the air. The body and the room act on $F$ as a fixed linear filter ([post 2](../one-string-end-to-end/index.qmd#sound)), so, once the body's own ring from the start has died away, the sound has exactly the string's frequencies $f_n$, each scaled by its own amount.
+
+The body's resonances, the same for every note, set those amounts and are part of the violin's [timbre](../instruments-as-operators/glossary.qmd#timbre): an air resonance near 300 Hz, and a bridge that passes vibration to the body best from about 1 to 4 kHz.[^wolfe-violin]
 
 ## Where you pluck sets the brightness {#ringing}
 
-A string pulled aside a height $h$ at the point $x_0$ and let go at rest starts shape $n$ with the amount
+**Plucking near the bridge sounds bright; plucking at the middle sounds hollow.** A string pulled at the point $x_0$ into a triangle $u_0$ of height $u_0(x_0)$ and let go at rest starts shape $n$ with the amount
 $$
-a_n = \frac{2hL^2}{\pi^2 x_0(L - x_0)}\cdot\frac{\sin(n\pi x_0/L)}{n^2},
+a_n = \frac{2u_0(x_0)\,L^2}{\pi^2 x_0(L - x_0)}\cdot\frac{\sin(n\pi x_0/L)}{n^2},
 $$
-post 2's [pluck formula](../one-string-end-to-end/index.qmd#the-solution). You hear the string through its push on the bridge, which is proportional to the string's slope there, so partial $n$ reaches the bridge in proportion to $n a_n$, that is, to $\sin(n\pi x_0/L)/n$.
+post 2's [pluck formula](../one-string-end-to-end/index.qmd#the-solution). Shape $n$ pushes the bridge in proportion to its slope there, $n a_n$, that is, to $\sin(n\pi x_0/L)/n$.
 
-Pluck near the bridge and $\sin(n\pi x_0/L) \approx n\pi x_0/L$ for the first several shapes, so they push the bridge about equally hard: a bright sound. Pluck at the middle and the even shapes are missing, since they stand still where you pulled, and the rest fall off like $1/n$: a mellow, hollow sound. Move the pluck slider in the demo and watch.
+Near the bridge, $x_0 \approx L$ and $|\sin(n\pi x_0/L)| \approx n\pi(L - x_0)/L$ for the first several shapes, so they push the bridge about equally hard: a bright sound. At the middle, the even shapes stand still where you pulled and are missing, and the rest fall off like $1/n$: a hollow sound.
 
 ```{=html}
 <div class="ins">
@@ -113,14 +131,14 @@ Pluck near the bridge and $\sin(n\pi x_0/L) \approx n\pi x_0/L$ for the first se
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the pluck formula comes from <span class="needs">integration by parts</span></summary>
 
-The coefficient is $a_n = \frac{2}{L}\int_0^L u_0\,X_n\,dx$, since the sines are perpendicular: $\int_0^L X_mX_n\,dx = 0$ for $m \ne n$. The plucked triangle $u_0$ is straight on each side of $x_0$, so integrating by parts twice on each piece leaves only the jump in slope at the corner, from $h/x_0$ to $-h/(L - x_0)$, times $X_n(x_0)(L/n\pi)^2$. That is the formula above, and the $1/n^2$ comes from the single corner. Measuring $x_0$ from the bridge instead, as the demo's slider does, only flips the sign of every second $a_n$, because $\sin(n\pi(L - x_0)/L) = \pm\sin(n\pi x_0/L)$; signs do not change how loud a shape is.
+The coefficient is $a_n = \frac{2}{L}\int_0^L u_0\,X_n\,dx$, since the sines are perpendicular: $\int_0^L X_mX_n\,dx = 0$ for $m \ne n$. The plucked triangle $u_0$ is straight on each side of $x_0$, so integrating by parts twice on each piece leaves only the jump in slope at the corner, from $u_0(x_0)/x_0$ to $-u_0(x_0)/(L - x_0)$, times $X_n(x_0)(L/n\pi)^2$. That is the formula above, and the $1/n^2$ comes from the single corner. Measuring $x_0$ from the bridge instead, as the demo's slider does, only flips the sign of every second $a_n$, because $\sin(n\pi(L - x_0)/L) = \pm\sin(n\pi x_0/L)$; signs do not change how loud a shape is.
 
 </details>
 :::
 
 ## Pressing down makes a new end {#stopping}
 
-Pressing a finger firmly onto the fingerboard ties the string down there, which changes the operator itself: only the piece between finger and [bridge](../instruments-as-operators/glossary.qmd#bridge) sounds, and by the formula for $f_1$ a shorter string sounds higher, in inverse proportion to its length. Two thirds of the length sounds a [fifth](../instruments-as-operators/glossary.qmd#octave) up, half the length an octave up, and the [semitone](../instruments-as-operators/glossary.qmd#semitone) positions bunch together toward the bridge. Play a whole violin: press and hold a string to bow it, slide sideways to finger it, or switch to plucking.
+A finger pressed onto the fingerboard ties the string down there. Only the piece between finger and bridge sounds, and by the formula for $f_1$ the pitch rises in inverse proportion to its length: half the length sounds an octave up, two thirds a [fifth](../instruments-as-operators/glossary.qmd#octave) up. Play a whole violin, bowed or plucked:
 
 
 
@@ -149,11 +167,10 @@ An [open string](../instruments-as-operators/glossary.qmd#open-string) is one no
 
 ## The bow: one repeating cycle {#sustained}
 
-A bowed string does not fade: the bow keeps feeding it, and its motion settles into one repeating cycle. The bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per cycle. By 1860 Hermann von Helmholtz had watched the result through a vibration microscope:[^helm1860] two straight pieces joined by one sharp corner, which races between bridge and finger and back, [Helmholtz motion](../instruments-as-operators/glossary.qmd#helmholtz-motion). The corner runs at the wave speed $c$, so the round trip of $2L$ takes $2L/c = 1/f_1$ seconds: the cycle repeats at the string's lowest frequency. As a sum of the string's shapes,
+**A bowed string repeats one cycle exactly, so its partials sit exactly on the whole-number lines** ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)). The bow grips the string, drags it along until the string's pull tears it free, lets it slip back, and grips it again, once per cycle. Hermann von Helmholtz saw the result in 1860:[^helm1860] two straight pieces joined by one sharp corner, which races between bridge and finger and back, [Helmholtz motion](../instruments-as-operators/glossary.qmd#helmholtz-motion). The corner runs at the wave speed $c$, so the round trip of $2L$ takes $2L/c = 1/f_1$ seconds. As a sum of the string's shapes,
 $$
 u(x, t) \propto \sum_{n \ge 1} \frac{1}{n^2}\,\sin\frac{n\pi x}{L}\,\sin(2\pi n f_1 t) .
 $$
-Every partial sits exactly on a line, because the motion repeats exactly ([post 1](../what-you-hear/index.qmd#why-whole-numbers-repeat)), and partial $n$ pushes the bridge in proportion to $1/n$.
 
 ```{=html}
 <div class="ins">
@@ -171,12 +188,12 @@ Every partial sits exactly on a line, because the motion repeats exactly ([post 
 
 A vibration microscope's lens rides on a vibrating tuning fork, so that a bright speck on the string traces a pattern revealing its motion. Helmholtz reported what he saw in 1860 (H. Helmholtz, "On the motion of the strings of a violin", *Proceedings of the Philosophical Society of Glasgow* 5 (1860–64), 17–21, read 19 December 1860, [archive.org](https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5)) and in his 1863 book (H. von Helmholtz, [*On the Sensations of Tone*](https://archive.org/details/onsensationsofto00helmrich/mode/2up), translated by A. J. Ellis, 2nd English ed., Longmans, Green, 1895).
 
-At each moment the string is two straight pieces, like a plucked string, with the corner at some point $x_c$. Helmholtz showed that the corner's height is proportional to $x_c(L - x_c)$, so it traces two arcs of a parabola, the lens in the demo, and that the corner moves at the wave speed $c = 2Lf_1$. Put that height in place of $h$ in the pluck formula with $x_0 = x_c$: the factor $x_c(L - x_c)$ cancels, leaving $a_n \propto \sin(n\pi x_c/L)/n^2$. With $x_c = 2Lf_1t$ this is $\sin(2\pi nf_1t)/n^2$. On the way back the corner runs along the lower arc, and the same formula covers it: for $x_c$ between $L$ and $2L$, $\sin(n\pi x_c/L)$ describes a corner at $2L - x_c$ with negative height. The force on the bridge is proportional to the slope there, and the slope of $\sin(n\pi x/L)$ carries an extra factor $n\pi/L$, so partial $n$ pushes the bridge in proportion to $1/n$.
+At each moment the string is two straight pieces, like a plucked string, with the corner at some point $x_c$. Helmholtz showed that the corner's height is proportional to $x_c(L - x_c)$, so it traces two arcs of a parabola, the lens in the demo, and that the corner moves at the wave speed $c = 2Lf_1$. Put that height in place of $u_0(x_0)$ in the pluck formula with $x_0 = x_c$: the factor $x_c(L - x_c)$ cancels, leaving $a_n \propto \sin(n\pi x_c/L)/n^2$. With $x_c = 2Lf_1t$ this is $\sin(2\pi nf_1t)/n^2$. On the way back the corner runs along the lower arc, and the same formula covers it: for $x_c$ between $L$ and $2L$, $\sin(n\pi x_c/L)$ describes a corner at $2L - x_c$ with negative height. The force on the bridge is proportional to the slope there, and the slope of $\sin(n\pi x/L)$ carries an extra factor $n\pi/L$, so partial $n$ pushes the bridge in proportion to $1/n$.
 
 </details>
 :::
 
-A real string is slightly stiff, so its own frequencies run a little sharp of the lines (the [piano page](piano.qmd)); bowed, its motion is still "nearly exactly periodic", so the bow pulls the partials onto the lines.[^wolfe-bow1] The locking comes from the bow's friction, which is not [linear](../instruments-as-operators/glossary.qmd#linear): a [self-sustained oscillation](../instruments-as-operators/glossary.qmd#self-sustained) ([appendix](../when-an-equation-has-a-spectrum/index.qmd#counterexamples)), not derived here. Faster bowing, or bowing nearer the bridge, makes a larger swing and a louder note; more force makes a brighter tone; and only a limited range of force keeps Helmholtz motion going at all.[^wolfe-bow2]
+A real string is slightly stiff, so its own frequencies run a little sharp of the lines (the [piano page](piano.qmd)). Bowed, its motion is still nearly exactly periodic, so the bow pulls the partials onto the lines.[^wolfe-bow1] The locking comes from the bow's friction, which is not [linear](../instruments-as-operators/glossary.qmd#linear): a [self-sustained oscillation](../instruments-as-operators/glossary.qmd#self-sustained) ([appendix](../when-an-equation-has-a-spectrum/index.qmd#counterexamples)), not derived here. The player shapes the note: faster bowing, or bowing nearer the bridge, makes it louder, more force makes it brighter, and only a limited range of force keeps Helmholtz motion going at all.[^wolfe-bow2]
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>How bow and string lock together</summary>
@@ -186,46 +203,6 @@ The bow adds a friction force at one point, which depends on how fast the string
 </details>
 :::
 
-## What the light touch does {#what-we-hear}
-
-**A light touch keeps only the shapes that stand still under the finger.** The finger is soft and lossy: it takes energy from whatever moves under it, but does not hold the string still, as a new end would. A shape with a still point, a [node](../instruments-as-operators/glossary.qmd#node), under the finger rings on; every other shape loses its energy within a moment. In the model, a finger at $x_f$ drains shape $n$ at a rate proportional to $X_n(x_f)^2$, how much that shape moves under it.
-
-At the middle, $X_n(L/2) = \sin(n\pi/2)$ is zero exactly when $n$ is even. The survivors swing at $2f_1, 4f_1, 6f_1, \dots$, multiples of $2f_1$, so they repeat twice as often: a note an octave up. At a third, the survivors are $n = 3, 6, 9, \dots$, with lowest frequency $3f_1$: an octave and a fifth up, since $2 \times \tfrac32 = 3$. No frequency moved; the finger chose which shapes keep ringing.
-
-::: {.derive}
-<details><summary><span class="label">Precisely</span>Why the drain rate is $X_n(x_f)^2$ <span class="needs">matrices</span></summary>
-
-A friction force $-r\,u_t(x_f, t)$ at the one point $x_f$ turns post 2's separate springs into $q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0$ with $C_{nm} \propto r\,X_n(x_f)X_m(x_f)$ ([post 2](../one-string-end-to-end/index.qmd#fading)). A shape with $X_n(x_f) = 0$ has a zero row and column in $C$, so it rings on untouched. For a light touch $C$ is small, its off-diagonal entries matter only to second order, and each other shape drains at the rate $C_{nn} \propto X_n(x_f)^2$, the rule the [piano page](piano.qmd) uses for felt dampers. The demo adds 45 per second times $X_n(x_f)^2$ to each shape's own fading rate.
-
-</details>
-:::
-
-## The body changes amounts, never frequencies {#body}
-
-The string rocks the bridge, the bridge shakes the wooden body, and the body moves the air. Each step is [linear](../instruments-as-operators/glossary.qmd#linear): shaken at one frequency, it responds at that frequency, louder or quieter. So the body's resonances, the same for every note, change the partials' heights, not their positions, and are part of the violin's [timbre](../instruments-as-operators/glossary.qmd#timbre). Its air resonance sits near 300 Hz, and the bridge passes vibration to the body best from about 1 to 4 kHz.[^wolfe-violin] Toggle the wooden body on the violin above: the stems change height and stay put. (The demo's four body resonances are rough illustrative values.)
-
-[]{#four-aspects}The [four aspects](../what-you-hear/index.qmd#four-aspects) of the string's sound, for both ways of playing it:
-
-::: {.aspects}
-
-| Aspect | Plucked | Bowed |
-|:--|:--|:--|
-| [Pitch](../instruments-as-operators/glossary.qmd#pitch) | $f_1$, set by the stopped length and the tension | the same $f_1$, the bowed cycle's rate |
-| Loudness | how far the string is pulled aside | bow speed and how near the bridge it plays |
-| [Timbre](../instruments-as-operators/glossary.qmd#timbre) | the pluck point; the body's fixed resonances | bow force and position; the body's fixed resonances |
-| Duration | the modes' fading, or a damping finger | as long as the bow moves |
-
-: The violin string's four aspects. {.striped}
-
-:::
-
-```{=html}
-<style>
-/* The four-aspects tables are prose: let them wrap on narrow screens instead of scrolling sideways. */
-@media (max-width: 700px) { main .aspects table { display: table; width: 100%; } main .aspects table td, main .aspects table th { white-space: normal; } main .aspects table a { white-space: normal; } }
-</style>
-```
-
 ## Next
 
 The next page keeps the operator and changes the ends, for the air in a tube: [why is a clarinet almost an octave deeper than a flute?](clarinet.qmd)
@@ -233,10 +210,11 @@ The next page keeps the operator and changes the ends, for the air in a tube: [w
 [^wolfe-harm]: J. Wolfe, [Strings, standing waves and harmonics](https://newt.phys.unsw.edu.au/jw/strings.html), UNSW: touching the string lightly at a point 1/n of its length gives the harmonics.
 [^fr2]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 2 (the vibrating string).
 [^wolfe-fade]: J. Wolfe, [Strings, standing waves and harmonics](https://newt.phys.unsw.edu.au/jw/strings.html), UNSW: high-frequency components "disappear quickly", so a plucked note becomes "more mellow".
-[^helm1860]: H. Helmholtz, "On the motion of the strings of a violin", *Proceedings of the Philosophical Society of Glasgow* 5 (1860–64), 17–21, read 19 December 1860 ([archive.org](https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5)); also H. von Helmholtz, [*On the Sensations of Tone*](https://archive.org/details/onsensationsofto00helmrich/mode/2up), 1863, translated by A. J. Ellis, 2nd English ed., Longmans, Green, 1895.
+[^wolfe-violin]: J. Wolfe, [Violin acoustics: an introduction](https://www.phys.unsw.edu.au/jw/violintro.html), UNSW: the air resonance "at around 300 Hz"; the bridge "is very effective at transmitting power to the body at frequencies from about one to four kHz".
+[^helm1860]: H. Helmholtz, "On the motion of the strings of a violin", *Proceedings of the Philosophical Society of Glasgow* 5 (1860–64), 17–21, read 19 December 1860 ([archive.org](https://archive.org/details/proceedings-of-the-philosophical-society-of-glasgow-vol-5)).
 [^wolfe-bow1]: J. Wolfe, [Bows and strings](https://newt.phys.unsw.edu.au/jw/Bows.html), UNSW: "the motion of the string is nearly exactly periodic", so bowing reduces the inharmonicity that plucking shows.
 [^wolfe-bow2]: J. Wolfe, [Bows and strings](https://newt.phys.unsw.edu.au/jw/Bows.html), UNSW: "if you bow with greater speed, the stick point will travel further and the amplitude will be greater"; the amplitude grows "as you move the bowing point towards the bridge"; "with more applied force, you excite more higher harmonics"; only a range of force sustains Helmholtz motion. See also [Fletcher and Rossing](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 10 (bowed strings).
-[^wolfe-violin]: J. Wolfe, [Violin acoustics: an introduction](https://www.phys.unsw.edu.au/jw/violintro.html), UNSW: the air resonance "at around 300 Hz"; the bridge "is very effective at transmitting power to the body at frequencies from about one to four kHz".
+[^fr10]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 10 (bowed string instruments: the bridge).
 
 ```{=html}
 <script src="core.js"></script>
