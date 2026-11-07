@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-07">
+<meta name="description" content="How to find any instrument’s natural frequencies. Newton’s law gives u_tt = −Au for an operator A; its eigenfunctions are the modes and its eigenvalues give the frequencies, f = √λ/2π. Two beads, the string, the condition for the method to work, and the operators of six instruments.">
+
+<title>Natural frequencies are the spectrum of an operator – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b0bacdaee50ff9abb97ae013f25660d1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="ins.css">
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Natural frequencies are the spectrum of an operator</h1>
+<p class="subtitle lead">The Shape of a Sound · 5</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">music</div>
+    <div class="quarto-category">the-shape-of-a-sound</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    How to find any instrument’s natural frequencies. Newton’s law gives u_tt = −Au for an operator A; its eigenfunctions are the modes and its eigenvalues give the frequencies, f = √λ/2π. Two beads, the string, the condition for the method to work, and the operators of six instruments.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="series-nav slim">
+<p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/why-instruments-differ/index.html">← 4 · Why instruments sound different</a> · <a href="../../posts/other-instruments-same-recipe/index.html">Appendix · Other instruments, same recipe →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
+</div>
+<div class="pageinfo">
+<p>Builds on <a href="../../posts/why-instruments-differ/index.html">page 4</a>. Uses derivatives, integrals and a little linear algebra; proofs are in folds you can skip. About 20 minutes. Written in collaboration with Claude, Anthropic’s AI model.</p>
+</div>
+<div class="result">
+<p><strong>Question.</strong> How do you find an instrument’s natural frequencies, whatever its shape?</p>
+<p><strong>Answer.</strong> Newton’s law on each small piece of the vibrating object gives an equation <span class="math inline">u_{tt} = -Au</span>, where <span class="math inline">A</span> is an <strong>operator</strong>: a rule that turns one shape into another, built from derivatives and from how the object is held. Its <strong>eigenfunctions</strong>, the shapes <span class="math inline">X</span> with <span class="math inline">AX = \lambda X</span>, are the modes, and mode <span class="math inline">n</span> swings at <span class="math display">
+f_n = \frac{\sqrt{\lambda_n}}{2\pi}.
+</span> When <span class="math inline">A</span> has a complete set of perpendicular eigenfunctions, as it does for every instrument here, every motion is a sum of modes. So the natural frequencies are the <strong>spectrum</strong> of <span class="math inline">A</span>, its list of eigenvalues <span class="math inline">\lambda_n</span>.</p>
+</div>
+<section id="beads" class="level2">
+<h2 class="anchored" data-anchor-id="beads">The idea with two beads</h2>
+<p>Start with a matrix instead of an operator. Put two beads on a weightless string, at a third and two thirds of the way along, each of mass <span class="math inline">m</span>, with the string’s tension <span class="math inline">T</span> and spacing <span class="math inline">\ell</span>. Call their heights <span class="math inline">u_1</span> and <span class="math inline">u_2</span>. Each bead is pulled towards its neighbours, the tied ends counting as neighbours at height zero, so <span class="math display">
+\begin{pmatrix} u_1 \\ u_2 \end{pmatrix}'' = -K \begin{pmatrix} u_1 \\ u_2 \end{pmatrix},
+\qquad
+K = \frac{T}{m\ell}\begin{pmatrix} 2 &amp; -1 \\ -1 &amp; 2 \end{pmatrix}.
+</span> Each bead’s acceleration depends on the other’s height: the motion is coupled.</p>
+<p>Now measure along two other directions: both beads together, <span class="math inline">q_1 = (u_1 + u_2)/\sqrt2</span>, and the beads opposite, <span class="math inline">q_2 = (u_1 - u_2)/\sqrt2</span>. Adding and subtracting the two equations gives <span class="math display">
+q_1'' = -\frac{T}{m\ell}\,q_1, \qquad q_2'' = -\frac{3T}{m\ell}\,q_2 :
+</span> two separate springs. These directions work because <span class="math inline">K</span> only stretches them, <span class="math inline">K(1, 1) = \frac{T}{m\ell}(1, 1)</span> and <span class="math inline">K(1, -1) = \frac{3T}{m\ell}(1, -1)</span>: they are the <strong>eigenvectors</strong> of <span class="math inline">K</span>, and the stretch factors, its <strong>eigenvalues</strong>, are the springs’ stiffnesses. A spring of stiffness <span class="math inline">\lambda</span> swings at <span class="math inline">\sqrt\lambda/2\pi</span>, so the two natural frequencies are in the ratio <span class="math inline">1 : \sqrt3</span>. In its eigenvector coordinates <span class="math inline">K</span> is diagonal, and that is the whole point: diagonalising turns a coupled motion into independent springs, one per eigenvector.</p>
+<div class="ins">
+<div class="panel">
+  <p class="wyla"><b>What you're looking at:</b> left, the two beads on their string, moving (slowed down); right, the same motion as one point in the plane of the two heights, <i>u</i><sub>1</sub> across and <i>u</i><sub>2</sub> up, with the tilted eigenvector directions <i>q</i><sub>1</sub> and <i>q</i><sub>2</sub>. Choose how to start them.</p>
+  <div class="r2wrap" style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0.75rem;align-items:center">
+    <canvas id="bdCanvas" style="height:170px" aria-label="Two beads on a string tied at both ends, moving"></canvas>
+    <canvas id="bdPlane" style="height:170px" aria-label="The plane of the two heights u1 and u2, with the tilted q1 and q2 directions and the path of the motion"></canvas>
+  </div>
+  <div class="controls" role="group" aria-label="Start the two beads">
+    <button type="button" id="bdS" aria-pressed="false">Together: q₁ only</button>
+    <button type="button" id="bdD" aria-pressed="false">Opposite: q₂ only</button>
+    <button type="button" id="bdM" aria-pressed="true">A mix</button>
+    <button type="button" id="bdPlay" class="primary">Hear this motion</button>
+  </div>
+  <p class="cap">Slowed down. Right: the plane of the two heights, u₁ across and u₂ up. A mix traces a tangle; started along q₁ or q₂ alone, the motion runs straight along that tilted line. The sound puts the q₁ swing at 196 Hz.</p>
+</div>
+</div>
+
+</section>
+<section id="string" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="string">The string: the same move with infinitely many beads</h2>
+<p>Let <span class="math inline">u(x, t)</span> be the string’s height at the point <span class="math inline">x</span>, <span class="math inline">0 \le x \le L</span>, at time <span class="math inline">t</span>; <span class="math inline">T</span> its tension and <span class="math inline">\mu</span> its mass per unit length.</p>
+<svg class="fig" viewbox="0 48 420 104" role="img" aria-label="A short piece of string between x and x plus dx on a hump; the tension pulls along the string at each end, and both pulls tilt downward, so the net force pulls the hump back down">
+  <path class="dash" d="M 60 110 Q 210 30 360 100"></path>
+  <path class="acc" d="M 120 84 Q 210 54 300 78"></path>
+  <circle cx="120" cy="84" r="4" class="fillacc"></circle><circle cx="300" cy="78" r="4" class="fillacc"></circle>
+  <path class="neg" d="M 120 84 L 66 102"></path><path class="neg" d="M 75.9 103.2 L 66 102 L 73.3 95.1"></path>
+  <path class="neg" d="M 300 78 L 356 93"></path><path class="neg" d="M 348.3 86.6 L 356 93 L 346.2 94.8"></path>
+  <text x="44" y="122">T</text><text x="364" y="110">T</text>
+  <text x="112" y="70">x</text><text x="282" y="64">x + dx</text>
+  <text x="104" y="142">upward part of each pull ≈ T × slope</text>
+</svg>
+<p>The piece from <span class="math inline">x</span> to <span class="math inline">x + dx</span> is pulled along the string at each end with force <span class="math inline">T</span>, and for a small slope the upward part of each pull is <span class="math inline">T</span> times the slope <span class="math inline">u_x</span>. So the net upward force is <span class="math inline">T u_x(x + dx) - T u_x(x) \approx T u_{xx}\,dx</span>, and it equals mass times acceleration, <span class="math inline">\mu\,dx\,u_{tt}</span>:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">
+u_{tt} = c^2 u_{xx}, \qquad c = \sqrt{T/\mu}.
+</span> That is <span class="math inline">u_{tt} = -Au</span> with the operator <span class="math display">
+A = -c^2\,\frac{d^2}{dx^2}, \quad \text{acting on shapes on } [0, L] \text{ that are zero at both ends.}
+</span> The tied ends are part of the operator, as the number of beads was part of <span class="math inline">K</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;N. H. Fletcher and T. D. Rossing, <a href="https://link.springer.com/book/10.1007/978-0-387-21603-4"><em>The Physics of Musical Instruments</em></a>, 2nd ed., Springer, 1998, chapter 2 (the vibrating string). The model assumes a perfectly flexible string, small slopes and no friction.</p></div></div><p><strong>Its eigenfunctions.</strong> <span class="math inline">AX = \lambda X</span> says <span class="math inline">X'' = -(\lambda/c^2)X</span> with <span class="math inline">X(0) = X(L) = 0</span>. The solutions are combinations of <span class="math inline">\cos</span> and <span class="math inline">\sin</span> of <span class="math inline">\sqrt\lambda\,x/c</span>; the end <span class="math inline">x = 0</span> removes the cosine, and the end <span class="math inline">x = L</span> needs <span class="math inline">\sqrt\lambda\,L/c</span> to be a multiple of <span class="math inline">\pi</span>. So <span class="math display">
+X_n(x) = \sin\frac{n\pi x}{L}, \qquad \lambda_n = c^2\Big(\frac{n\pi}{L}\Big)^2, \qquad f_n = \frac{\sqrt{\lambda_n}}{2\pi} = n\,\frac{c}{2L}.
+</span> These are page 4’s whole numbers, now as eigenvalues: two derivatives bring down <span class="math inline">(n\pi/L)^2</span>, and the square root returns <span class="math inline">n</span>.</p>
+<p><strong>They decouple the string.</strong> Measure the string by how much of each mode it contains, <span class="math inline">q_n(t) = \frac{2}{L}\int_0^L u(x, t)\,X_n(x)\,dx</span>, the continuous version of <span class="math inline">q_1</span> and <span class="math inline">q_2</span>. Integrating by parts twice moves both derivatives from <span class="math inline">u</span> onto <span class="math inline">X_n</span>, with no boundary terms because both vanish at the ends: <span class="math display">
+q_n'' = \frac{2}{L}\int_0^L c^2 u_{xx}X_n\,dx = \frac{2}{L}\int_0^L c^2 u\,X_n''\,dx = -\lambda_n\,q_n .
+</span> Each <span class="math inline">q_n</span> is a separate spring, swinging at <span class="math inline">f_n</span>. Every starting shape is a sum of sines (its Fourier sine series),<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> so every motion is a sum of modes: <span class="math display">
+u(x, t) = \sum_{n = 1}^{\infty}\big(a_n\cos 2\pi f_n t + b_n\sin 2\pi f_n t\big)\,X_n(x).
+</span></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;E. M. Stein and R. Shakarchi, <a href="https://press.princeton.edu/books/hardcover/9780691113845/fourier-analysis"><em>Fourier Analysis: An Introduction</em></a>, Princeton University Press, 2003, chapters 2 and 3.</p></div></div><div class="ins">
+<div class="panel">
+  <p class="wyla"><b>What you're looking at:</b> a plucked string, released from a triangle, built as the sum of its first <i>N</i> modes (solid) against the exact motion (dashed); below, the stems give each mode's size <i>a<sub>n</sub></i> in the pluck. Add modes and the sum closes in on the exact motion.</p>
+  <canvas id="msCanvas" style="height:190px" aria-label="A plucked string moving: the sum of its first N modes, and the exact motion dashed"></canvas>
+  <div class="slider"><label for="msN">Shapes added, N</label><input type="range" id="msN" min="1" max="40" step="1" value="5"><output id="msNo">5</output></div>
+  <div class="slider"><label for="msX">Pluck point x₀</label><input type="range" id="msX" min="0.05" max="0.5" step="0.01" value="0.2"><output id="msXo">0.20 L</output></div>
+  <div class="controls"><button type="button" id="msRestart">Release again</button><button type="button" id="msPlay" class="primary">Hear the pluck</button></div>
+  <svg class="spec" id="msSpec" viewbox="0 0 320 90" style="max-width:520px" aria-label="How much of each shape the pluck contains"></svg>
+  <div class="readout" id="msRead"></div>
+  <p class="cap">A plucked string, slowed so that one swing of the lowest shape takes 4 seconds. Dashed: the exact motion. Solid: the sum of the first N shapes, which closes in on it as N grows. Stems: how much of each shape the pluck contains. The picture has no friction; the sound fades only so that it stops.</p>
+</div>
+</div>
+
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>Decoupling happens exactly in an eigenbasis <span class="needs">inner products, orthonormal bases</span>
+</summary>
+<p>Write <span class="math inline">\langle u, w\rangle = \int_0^L u\,w\,dx</span>. (The main text’s sines are orthogonal but have <span class="math inline">\int X_n^2 = L/2</span>; normalised, <span class="math inline">\sqrt{2/L}\,\sin(n\pi x/L)</span>, the factor <span class="math inline">2/L</span> in <span class="math inline">q_n</span> disappears.) For shapes <span class="math inline">u, w</span> vanishing at the ends, two integrations by parts give <span class="math inline">\langle Au, w\rangle = c^2\!\int u'w' = \langle u, Aw\rangle</span>: <span class="math inline">A</span> is symmetric, like <span class="math inline">K</span>. With <span class="math inline">w = u</span>, <span class="math inline">\langle Au, u\rangle = c^2\!\int (u')^2 &gt; 0</span> unless <span class="math inline">u'</span> is identically zero, which with <span class="math inline">u(0) = 0</span> forces <span class="math inline">u = 0</span>; so <span class="math inline">A</span> is positive, and <span class="math inline">AX = \lambda X</span> forces <span class="math inline">\lambda &gt; 0</span>. So every eigenvalue is positive.</p>
+<p><strong>Proposition.</strong> Let <span class="math inline">\psi_1, \psi_2, \dots</span> be an orthonormal basis of square-integrable shapes, each twice differentiable and zero at the ends, and let <span class="math inline">q_j = \langle u, \psi_j\rangle</span>. Then <span class="math inline">q_i'' = -\sum_j M_{ij}q_j</span> with <span class="math inline">M_{ij} = \langle A\psi_j, \psi_i\rangle</span>, and <span class="math inline">M</span> is diagonal if and only if every <span class="math inline">\psi_j</span> is an eigenfunction of <span class="math inline">A</span>.</p>
+<p><em>Proof.</em> For a smooth solution, <span class="math inline">q_i'' = \langle u_{tt}, \psi_i\rangle = -\langle Au, \psi_i\rangle = -\langle u, A\psi_i\rangle</span>, by symmetry of <span class="math inline">A</span>; for a pluck, <span class="math inline">q_i'' = -\langle u, A\psi_i\rangle</span> is the definition of solution in the next fold, with <span class="math inline">\varphi = \psi_i</span>. Expanding <span class="math inline">u = \sum_j q_j\psi_j</span> gives <span class="math inline">q_i'' = -\sum_j q_j\langle\psi_j, A\psi_i\rangle = -\sum_j M_{ij}q_j</span>. If <span class="math inline">A\psi_j = \kappa_j\psi_j</span> for every <span class="math inline">j</span>, then <span class="math inline">M_{ij} = \kappa_j\langle\psi_j, \psi_i\rangle</span> is diagonal. Conversely, <span class="math inline">A\psi_j = \sum_i M_{ij}\psi_i</span> (expansion in the basis), which is <span class="math inline">M_{jj}\psi_j</span> when <span class="math inline">M</span> is diagonal. <span class="math inline">\square</span></p>
+<p>In a basis of polynomials vanishing at the ends (Gram–Schmidt on <span class="math inline">x(L - x)x^k</span>), <span class="math inline">M</span> has nonzero entries far from the diagonal; with <span class="math inline">L = 1</span> its top-left entry is <span class="math inline">10c^2</span>, just above <span class="math inline">\lambda_1 = \pi^2c^2 \approx 9.87c^2</span>.</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>What “solution” means for a pluck, and why there is exactly one <span class="needs">integration by parts, Cauchy–Schwarz</span>
+</summary>
+<p>The triangle has a corner, where <span class="math inline">u_{xx}</span> does not exist, so the equation cannot hold there literally. The calculation of <span class="math inline">q_n''</span> above never needed <span class="math inline">u_{xx}</span> once the derivatives were moved onto <span class="math inline">X_n</span>, which suggests the definition. <em>A solution</em> is a shape <span class="math inline">u(t)</span> with <span class="math inline">\int u^2 &lt; \infty</span>, changing continuously in mean square, such that for every smooth <span class="math inline">\varphi</span> vanishing at the ends, <span class="math inline">\frac{d^2}{dt^2}\langle u, \varphi\rangle = -\langle u, A\varphi\rangle</span>, with <span class="math inline">\langle u(0), \varphi\rangle = \langle u_0, \varphi\rangle</span> and <span class="math inline">\frac{d}{dt}\langle u, \varphi\rangle(0) = \langle v_0, \varphi\rangle</span>, where <span class="math inline">v_0</span> is the starting velocity (zero for a pluck). Smooth solutions satisfy it (integrate by parts); testing against all such <span class="math inline">\varphi</span> loses nothing, because they are dense in mean square. (L. C. Evans, <a href="https://bookstore.ams.org/GSM/19.R"><em>Partial Differential Equations</em></a>, 2nd ed., AMS, 2010, section 7.2)</p>
+<p><em>Uniqueness.</em> With <span class="math inline">\varphi = X_n</span>, each <span class="math inline">q_n</span> solves <span class="math inline">q_n'' = -\lambda_nq_n</span> with given <span class="math inline">q_n(0), q_n'(0)</span>. That has exactly one solution: the difference <span class="math inline">r</span> of two has <span class="math inline">r(0) = r'(0) = 0</span>, and <span class="math inline">E = (r')^2 + \lambda_nr^2</span> has <span class="math inline">E' = 0</span>, so <span class="math inline">r = 0</span>. Two solutions with the same start therefore have the same coordinates, so they are equal (the sines are a basis).</p>
+<p><em>Existence.</em> The series <span class="math inline">\sum_n (a_n\cos\omega_nt + b_n\sin\omega_nt)X_n</span>, with <span class="math inline">\omega_n = \sqrt{\lambda_n}</span>, <span class="math inline">a_n = \frac{2}{L}\int u_0X_n</span> and <span class="math inline">b_n = \frac{2}{L}\int v_0X_n/\omega_n</span>, is a solution when the start has finite energy, <span class="math inline">\int(u_0')^2 &lt; \infty</span> and <span class="math inline">\int v_0^2 &lt; \infty</span>. Integration by parts and Bessel’s inequality give <span class="math inline">\sum n^2a_n^2 &lt; \infty</span>, so Cauchy–Schwarz gives <span class="math inline">\sum |a_n| + |b_n| &lt; \infty</span>; the series and its term-by-term time derivatives against <span class="math inline">\varphi</span> then converge uniformly, and the defining identity holds.</p>
+<p><em>Counting.</em> A mass on a spring has one eigenvalue and a two-dimensional space of motions (<span class="math inline">\cos</span> and <span class="math inline">\sin</span>); two beads have two eigenvalues and four; the string has two dimensions of motion for each eigenvalue.</p>
+</details>
+</div>
+</section>
+<section id="recipe" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="recipe">The recipe, and when it works</h2>
+<p>For any instrument:</p>
+<ol type="1">
+<li><strong>Newton’s law</strong> on a small piece of the vibrating part gives <span class="math inline">u_{tt} = -Au</span>.</li>
+<li><strong>How the object is held</strong> gives the boundary conditions, which are part of <span class="math inline">A</span>.</li>
+<li><strong>Solve</strong> <span class="math inline">AX = \lambda X</span> with those conditions: the modes <span class="math inline">X_n</span> and the eigenvalues <span class="math inline">\lambda_n</span>.</li>
+<li><strong>The natural frequencies</strong> are <span class="math inline">f_n = \sqrt{\lambda_n}/2\pi</span>.</li>
+</ol>
+<p>This needs <span class="math inline">A</span> to have a complete set of perpendicular eigenfunctions with positive eigenvalues: the operator version of a diagonalisable matrix. Every instrument here passes, for two reasons.</p>
+<ul>
+<li><strong><span class="math inline">A</span> is symmetric and positive.</strong> For shapes <span class="math inline">u</span> and <span class="math inline">w</span> that obey the boundary conditions, integration by parts gives <span class="math inline">\int (Au)\,w = \int u\,(Aw)</span>, and <span class="math inline">\int (Au)\,u &gt; 0</span> unless <span class="math inline">u = 0</span>. For the string, <span class="math inline">\int (Au)\,u = c^2\int (u_x)^2</span>, which is twice the stretching energy divided by <span class="math inline">\mu</span>. A symmetric matrix always has perpendicular eigenvectors, and positivity makes every <span class="math inline">\lambda_n &gt; 0</span>, so every frequency is real.</li>
+<li><strong>The object is finite.</strong> On a bounded interval or a bounded skin, <span class="math inline">A</span> has a compact inverse, and the spectral theorem then gives a complete set of perpendicular eigenfunctions with eigenvalues <span class="math inline">\lambda_1 \le \lambda_2 \le \dots</span> that grow without bound.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;M. Reed and B. Simon, <em>Methods of Modern Mathematical Physics IV: Analysis of Operators</em>, Academic Press, 1978, Theorem XIII.64; L. C. Evans, <a href="https://bookstore.ams.org/GSM/19.R"><em>Partial Differential Equations</em></a>, 2nd ed., AMS, 2010, section 6.5. The fold below states the theorem.</p></div></div><p><strong>Where it fails.</strong> On an infinitely long string, <span class="math inline">A = -c^2\,d^2/dx^2</span> on the whole line has no eigenfunctions at all: <span class="math inline">\sin kx</span> satisfies <span class="math inline">AX = c^2k^2X</span>, but it is not a shape of finite energy, because <span class="math inline">\int \sin^2 kx\,dx</span> is infinite. The spectrum is the whole half-line <span class="math inline">[0, \infty)</span>, with no gaps. Such a string carries waves of every frequency away and has no natural frequencies. Finite size is what makes an instrument’s spectrum a list of separate numbers, and so a set of notes.</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Precisely</span>The theorem, and the string’s operator checked against it <span class="needs">Hilbert spaces</span>
+</summary>
+<p><em>Theorem.</em> Let <span class="math inline">A</span> be a self-adjoint operator on a separable Hilbert space <span class="math inline">\mathcal H</span>, bounded below, with compact resolvent: <span class="math inline">(A - \mu)^{-1}</span> is compact for some <span class="math inline">\mu</span> not in the spectrum. Then <span class="math inline">\mathcal H</span> has an orthonormal basis of eigenvectors of <span class="math inline">A</span>, the eigenvalues have finite multiplicity, and, listed in increasing order with multiplicity, <span class="math inline">\lambda_n \to \infty</span>. (M. Reed and B. Simon, <em>Methods of Modern Mathematical Physics IV: Analysis of Operators</em>, Academic Press, 1978, Theorem XIII.64, with the Hilbert–Schmidt theorem for compact self-adjoint operators, vol.&nbsp;I, <em>Functional Analysis</em>, 1980, Theorem VI.16; for second-order operators on bounded domains, L. C. Evans, <a href="https://bookstore.ams.org/GSM/19.R"><em>Partial Differential Equations</em></a>, 2nd ed., AMS, 2010, section 6.5.)</p>
+<p><em>The string.</em> Take <span class="math inline">\mathcal H = L^2(0, L)</span> and <span class="math inline">A = -c^2\,d^2/dx^2</span> on <span class="math inline">D(A) = \{u \in H^2(0, L) : u(0) = u(L) = 0\}</span>. It is symmetric, by two integrations by parts. It is onto: for <span class="math inline">f \in L^2</span>, the function <span class="math inline">u = A^{-1}f</span>, <span class="math inline">u(x) = c^{-2}\int_0^L G(x, y)f(y)\,dy</span> with <span class="math inline">G(x, y) = x(L - y)/L</span> for <span class="math inline">x \le y</span> and <span class="math inline">G(x, y) = y(L - x)/L</span> for <span class="math inline">x \ge y</span>, lies in <span class="math inline">D(A)</span> and solves <span class="math inline">Au = f</span>. A symmetric operator that is onto is self-adjoint, and <span class="math inline">A^{-1}</span> is compact because its kernel <span class="math inline">G</span> is square-integrable on the square (a Hilbert–Schmidt operator). <span class="math inline">A</span> is positive: <span class="math inline">\langle Au, u\rangle = c^2\int (u')^2 &gt; 0</span> for <span class="math inline">u \ne 0</span> in <span class="math inline">D(A)</span>, since <span class="math inline">u' = 0</span> and <span class="math inline">u(0) = 0</span> force <span class="math inline">u = 0</span>. So the theorem applies, with eigenvectors the sines.</p>
+<p><em>The infinite string.</em> On <span class="math inline">L^2(\mathbb R)</span>, the same operator is unitarily equivalent, by the Fourier transform, to multiplication by <span class="math inline">c^2k^2</span>. A multiplication operator has an eigenvalue only where its multiplier is constant on a set of positive measure, which <span class="math inline">c^2k^2</span> never is; so there are no eigenvalues, and the spectrum is the closure of the range, <span class="math inline">[0, \infty)</span>.</p>
+</details>
+</div>
+</section>
+<section id="table" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="table">The operators of six instruments</h2>
+<p>The recipe gives each instrument of this series its operator, its modes and its spectrum:</p>
+<div class="optable column-page">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Instrument</th>
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Boundary condition</th>
+<th style="text-align: left;">Mode shapes <span class="math inline">X_n</span></th>
+<th style="text-align: left;">Frequency ratios</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ideal string (guitar, violin)</td>
+<td style="text-align: left;"><span class="math inline">-(T/\mu)\,\partial_x^2</span> on <span class="math inline">[0, L]</span></td>
+<td style="text-align: left;"><span class="math inline">u = 0</span> at both ends</td>
+<td style="text-align: left;"><span class="math inline">\sin(n\pi x/L)</span> <svg class="fig modes" viewbox="0 0 224 34" role="img" aria-label="The string's first four shapes: one, two, three and four arches, zero at both tied ends"><path class="dash" d="M 6.0 17 L 50.0 17"></path><path class="acc" d="M 6.0 17.0 L 6.9 16.3 L 7.8 15.6 L 8.8 14.9 L 9.7 14.2 L 10.6 13.5 L 11.5 12.8 L 12.4 12.1 L 13.3 11.5 L 14.2 10.9 L 15.2 10.3 L 16.1 9.7 L 17.0 9.2 L 17.9 8.7 L 18.8 8.3 L 19.8 7.9 L 20.7 7.5 L 21.6 7.1 L 22.5 6.8 L 23.4 6.6 L 24.3 6.4 L 25.2 6.2 L 26.2 6.1 L 27.1 6.0 L 28.0 6.0 L 28.9 6.0 L 29.8 6.1 L 30.8 6.2 L 31.7 6.4 L 32.6 6.6 L 33.5 6.8 L 34.4 7.1 L 35.3 7.5 L 36.2 7.9 L 37.2 8.3 L 38.1 8.7 L 39.0 9.2 L 39.9 9.7 L 40.8 10.3 L 41.8 10.9 L 42.7 11.5 L 43.6 12.1 L 44.5 12.8 L 45.4 13.5 L 46.3 14.2 L 47.2 14.9 L 48.2 15.6 L 49.1 16.3 L 50.0 17.0"></path><circle cx="6.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="50.0" cy="17" r="1.8" class="fillacc"></circle><path class="dash" d="M 62.0 17 L 106.0 17"></path><path class="acc" d="M 62.0 17.0 L 62.9 15.6 L 63.8 14.2 L 64.8 12.8 L 65.7 11.5 L 66.6 10.3 L 67.5 9.2 L 68.4 8.3 L 69.3 7.5 L 70.2 6.8 L 71.2 6.4 L 72.1 6.1 L 73.0 6.0 L 73.9 6.1 L 74.8 6.4 L 75.8 6.8 L 76.7 7.5 L 77.6 8.3 L 78.5 9.2 L 79.4 10.3 L 80.3 11.5 L 81.2 12.8 L 82.2 14.2 L 83.1 15.6 L 84.0 17.0 L 84.9 18.4 L 85.8 19.8 L 86.8 21.2 L 87.7 22.5 L 88.6 23.7 L 89.5 24.8 L 90.4 25.7 L 91.3 26.5 L 92.2 27.2 L 93.2 27.6 L 94.1 27.9 L 95.0 28.0 L 95.9 27.9 L 96.8 27.6 L 97.8 27.2 L 98.7 26.5 L 99.6 25.7 L 100.5 24.8 L 101.4 23.7 L 102.3 22.5 L 103.2 21.2 L 104.2 19.8 L 105.1 18.4 L 106.0 17.0"></path><circle cx="62.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="106.0" cy="17" r="1.8" class="fillacc"></circle><path class="dash" d="M 118.0 17 L 162.0 17"></path><path class="acc" d="M 118.0 17.0 L 118.9 14.9 L 119.8 12.8 L 120.8 10.9 L 121.7 9.2 L 122.6 7.9 L 123.5 6.8 L 124.4 6.2 L 125.3 6.0 L 126.2 6.2 L 127.2 6.8 L 128.1 7.9 L 129.0 9.2 L 129.9 10.9 L 130.8 12.8 L 131.8 14.9 L 132.7 17.0 L 133.6 19.1 L 134.5 21.2 L 135.4 23.1 L 136.3 24.8 L 137.2 26.1 L 138.2 27.2 L 139.1 27.8 L 140.0 28.0 L 140.9 27.8 L 141.8 27.2 L 142.8 26.1 L 143.7 24.8 L 144.6 23.1 L 145.5 21.2 L 146.4 19.1 L 147.3 17.0 L 148.2 14.9 L 149.2 12.8 L 150.1 10.9 L 151.0 9.2 L 151.9 7.9 L 152.8 6.8 L 153.8 6.2 L 154.7 6.0 L 155.6 6.2 L 156.5 6.8 L 157.4 7.9 L 158.3 9.2 L 159.2 10.9 L 160.2 12.8 L 161.1 14.9 L 162.0 17.0"></path><circle cx="118.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="162.0" cy="17" r="1.8" class="fillacc"></circle><path class="dash" d="M 174.0 17 L 218.0 17"></path><path class="acc" d="M 174.0 17.0 L 174.9 14.2 L 175.8 11.5 L 176.8 9.2 L 177.7 7.5 L 178.6 6.4 L 179.5 6.0 L 180.4 6.4 L 181.3 7.5 L 182.2 9.2 L 183.2 11.5 L 184.1 14.2 L 185.0 17.0 L 185.9 19.8 L 186.8 22.5 L 187.8 24.8 L 188.7 26.5 L 189.6 27.6 L 190.5 28.0 L 191.4 27.6 L 192.3 26.5 L 193.2 24.8 L 194.2 22.5 L 195.1 19.8 L 196.0 17.0 L 196.9 14.2 L 197.8 11.5 L 198.8 9.2 L 199.7 7.5 L 200.6 6.4 L 201.5 6.0 L 202.4 6.4 L 203.3 7.5 L 204.2 9.2 L 205.2 11.5 L 206.1 14.2 L 207.0 17.0 L 207.9 19.8 L 208.8 22.5 L 209.8 24.8 L 210.7 26.5 L 211.6 27.6 L 212.5 28.0 L 213.4 27.6 L 214.3 26.5 L 215.2 24.8 L 216.2 22.5 L 217.1 19.8 L 218.0 17.0"></path><circle cx="174.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="218.0" cy="17" r="1.8" class="fillacc"></circle></svg></td>
+<td style="text-align: left;"><span class="math inline">1 : 2 : 3 : 4</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Piano wire</td>
+<td style="text-align: left;"><span class="math inline">-(T/\mu)\,\partial_x^2 + (EI/\mu)\,\partial_x^4</span></td>
+<td style="text-align: left;"><span class="math inline">u = u_{xx} = 0</span> at both ends</td>
+<td style="text-align: left;">the same sines <svg class="fig modes" viewbox="0 0 224 34" role="img" aria-label="The piano wire's first four shapes: the same sines as the string's"><path class="dash" d="M 6.0 17 L 50.0 17"></path><path class="acc" d="M 6.0 17.0 L 6.9 16.3 L 7.8 15.6 L 8.8 14.9 L 9.7 14.2 L 10.6 13.5 L 11.5 12.8 L 12.4 12.1 L 13.3 11.5 L 14.2 10.9 L 15.2 10.3 L 16.1 9.7 L 17.0 9.2 L 17.9 8.7 L 18.8 8.3 L 19.8 7.9 L 20.7 7.5 L 21.6 7.1 L 22.5 6.8 L 23.4 6.6 L 24.3 6.4 L 25.2 6.2 L 26.2 6.1 L 27.1 6.0 L 28.0 6.0 L 28.9 6.0 L 29.8 6.1 L 30.8 6.2 L 31.7 6.4 L 32.6 6.6 L 33.5 6.8 L 34.4 7.1 L 35.3 7.5 L 36.2 7.9 L 37.2 8.3 L 38.1 8.7 L 39.0 9.2 L 39.9 9.7 L 40.8 10.3 L 41.8 10.9 L 42.7 11.5 L 43.6 12.1 L 44.5 12.8 L 45.4 13.5 L 46.3 14.2 L 47.2 14.9 L 48.2 15.6 L 49.1 16.3 L 50.0 17.0"></path><circle cx="6.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="50.0" cy="17" r="1.8" class="fillacc"></circle><path class="dash" d="M 62.0 17 L 106.0 17"></path><path class="acc" d="M 62.0 17.0 L 62.9 15.6 L 63.8 14.2 L 64.8 12.8 L 65.7 11.5 L 66.6 10.3 L 67.5 9.2 L 68.4 8.3 L 69.3 7.5 L 70.2 6.8 L 71.2 6.4 L 72.1 6.1 L 73.0 6.0 L 73.9 6.1 L 74.8 6.4 L 75.8 6.8 L 76.7 7.5 L 77.6 8.3 L 78.5 9.2 L 79.4 10.3 L 80.3 11.5 L 81.2 12.8 L 82.2 14.2 L 83.1 15.6 L 84.0 17.0 L 84.9 18.4 L 85.8 19.8 L 86.8 21.2 L 87.7 22.5 L 88.6 23.7 L 89.5 24.8 L 90.4 25.7 L 91.3 26.5 L 92.2 27.2 L 93.2 27.6 L 94.1 27.9 L 95.0 28.0 L 95.9 27.9 L 96.8 27.6 L 97.8 27.2 L 98.7 26.5 L 99.6 25.7 L 100.5 24.8 L 101.4 23.7 L 102.3 22.5 L 103.2 21.2 L 104.2 19.8 L 105.1 18.4 L 106.0 17.0"></path><circle cx="62.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="106.0" cy="17" r="1.8" class="fillacc"></circle><path class="dash" d="M 118.0 17 L 162.0 17"></path><path class="acc" d="M 118.0 17.0 L 118.9 14.9 L 119.8 12.8 L 120.8 10.9 L 121.7 9.2 L 122.6 7.9 L 123.5 6.8 L 124.4 6.2 L 125.3 6.0 L 126.2 6.2 L 127.2 6.8 L 128.1 7.9 L 129.0 9.2 L 129.9 10.9 L 130.8 12.8 L 131.8 14.9 L 132.7 17.0 L 133.6 19.1 L 134.5 21.2 L 135.4 23.1 L 136.3 24.8 L 137.2 26.1 L 138.2 27.2 L 139.1 27.8 L 140.0 28.0 L 140.9 27.8 L 141.8 27.2 L 142.8 26.1 L 143.7 24.8 L 144.6 23.1 L 145.5 21.2 L 146.4 19.1 L 147.3 17.0 L 148.2 14.9 L 149.2 12.8 L 150.1 10.9 L 151.0 9.2 L 151.9 7.9 L 152.8 6.8 L 153.8 6.2 L 154.7 6.0 L 155.6 6.2 L 156.5 6.8 L 157.4 7.9 L 158.3 9.2 L 159.2 10.9 L 160.2 12.8 L 161.1 14.9 L 162.0 17.0"></path><circle cx="118.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="162.0" cy="17" r="1.8" class="fillacc"></circle><path class="dash" d="M 174.0 17 L 218.0 17"></path><path class="acc" d="M 174.0 17.0 L 174.9 14.2 L 175.8 11.5 L 176.8 9.2 L 177.7 7.5 L 178.6 6.4 L 179.5 6.0 L 180.4 6.4 L 181.3 7.5 L 182.2 9.2 L 183.2 11.5 L 184.1 14.2 L 185.0 17.0 L 185.9 19.8 L 186.8 22.5 L 187.8 24.8 L 188.7 26.5 L 189.6 27.6 L 190.5 28.0 L 191.4 27.6 L 192.3 26.5 L 193.2 24.8 L 194.2 22.5 L 195.1 19.8 L 196.0 17.0 L 196.9 14.2 L 197.8 11.5 L 198.8 9.2 L 199.7 7.5 L 200.6 6.4 L 201.5 6.0 L 202.4 6.4 L 203.3 7.5 L 204.2 9.2 L 205.2 11.5 L 206.1 14.2 L 207.0 17.0 L 207.9 19.8 L 208.8 22.5 L 209.8 24.8 L 210.7 26.5 L 211.6 27.6 L 212.5 28.0 L 213.4 27.6 L 214.3 26.5 L 215.2 24.8 L 216.2 22.5 L 217.1 19.8 L 218.0 17.0"></path><circle cx="174.0" cy="17" r="1.8" class="fillacc"></circle><circle cx="218.0" cy="17" r="1.8" class="fillacc"></circle></svg></td>
+<td style="text-align: left;"><span class="math inline">1 : 2.001 : 3.005</span> (middle C)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Clarinet (<span class="math inline">u</span>: air pressure in the tube)</td>
+<td style="text-align: left;"><span class="math inline">-c_0^2\,\partial_x^2</span> on <span class="math inline">[0, L]</span></td>
+<td style="text-align: left;"><span class="math inline">u_x = 0</span> at the reed (closed), <span class="math inline">u = 0</span> at the open end</td>
+<td style="text-align: left;"><span class="math inline">{\cos((2n - 1)\pi x/2L)}</span> <svg class="fig modes" viewbox="0 0 224 34" role="img" aria-label="The clarinet's first four pressure shapes: largest at the closed reed end on the left, zero at the open end, with a quarter, three quarters, five quarters and seven quarters of a wave"><path class="dash" d="M 6.0 17 L 50.0 17"></path><path class="acc" d="M 6.0 6.0 L 6.9 6.0 L 7.8 6.0 L 8.8 6.1 L 9.7 6.1 L 10.6 6.1 L 11.5 6.2 L 12.4 6.3 L 13.3 6.4 L 14.2 6.5 L 15.2 6.6 L 16.1 6.7 L 17.0 6.8 L 17.9 7.0 L 18.8 7.1 L 19.8 7.3 L 20.7 7.5 L 21.6 7.7 L 22.5 7.9 L 23.4 8.1 L 24.3 8.3 L 25.2 8.5 L 26.2 8.7 L 27.1 9.0 L 28.0 9.2 L 28.9 9.5 L 29.8 9.7 L 30.8 10.0 L 31.7 10.3 L 32.6 10.6 L 33.5 10.9 L 34.4 11.2 L 35.3 11.5 L 36.2 11.8 L 37.2 12.1 L 38.1 12.5 L 39.0 12.8 L 39.9 13.1 L 40.8 13.5 L 41.8 13.8 L 42.7 14.2 L 43.6 14.5 L 44.5 14.9 L 45.4 15.2 L 46.3 15.6 L 47.2 15.9 L 48.2 16.3 L 49.1 16.6 L 50.0 17.0"></path><path class="ink" stroke-width="2.5" d="M 5.0 9 L 5.0 25"></path><path class="dash" d="M 62.0 17 L 106.0 17"></path><path class="acc" d="M 62.0 6.0 L 62.9 6.1 L 63.8 6.2 L 64.8 6.5 L 65.7 6.8 L 66.6 7.3 L 67.5 7.9 L 68.4 8.5 L 69.3 9.2 L 70.2 10.0 L 71.2 10.9 L 72.1 11.8 L 73.0 12.8 L 73.9 13.8 L 74.8 14.9 L 75.8 15.9 L 76.7 17.0 L 77.6 18.1 L 78.5 19.1 L 79.4 20.2 L 80.3 21.2 L 81.2 22.2 L 82.2 23.1 L 83.1 24.0 L 84.0 24.8 L 84.9 25.5 L 85.8 26.1 L 86.8 26.7 L 87.7 27.2 L 88.6 27.5 L 89.5 27.8 L 90.4 27.9 L 91.3 28.0 L 92.2 27.9 L 93.2 27.8 L 94.1 27.5 L 95.0 27.2 L 95.9 26.7 L 96.8 26.1 L 97.8 25.5 L 98.7 24.8 L 99.6 24.0 L 100.5 23.1 L 101.4 22.2 L 102.3 21.2 L 103.2 20.2 L 104.2 19.1 L 105.1 18.1 L 106.0 17.0"></path><path class="ink" stroke-width="2.5" d="M 61.0 9 L 61.0 25"></path><path class="dash" d="M 118.0 17 L 162.0 17"></path><path class="acc" d="M 118.0 6.0 L 118.9 6.1 L 119.8 6.6 L 120.8 7.3 L 121.7 8.3 L 122.6 9.5 L 123.5 10.9 L 124.4 12.5 L 125.3 14.2 L 126.2 15.9 L 127.2 17.7 L 128.1 19.5 L 129.0 21.2 L 129.9 22.8 L 130.8 24.3 L 131.8 25.5 L 132.7 26.5 L 133.6 27.3 L 134.5 27.8 L 135.4 28.0 L 136.3 27.9 L 137.2 27.5 L 138.2 26.9 L 139.1 25.9 L 140.0 24.8 L 140.9 23.4 L 141.8 21.9 L 142.8 20.2 L 143.7 18.4 L 144.6 16.6 L 145.5 14.9 L 146.4 13.1 L 147.3 11.5 L 148.2 10.0 L 149.2 8.7 L 150.1 7.7 L 151.0 6.8 L 151.9 6.3 L 152.8 6.0 L 153.8 6.1 L 154.7 6.4 L 155.6 7.0 L 156.5 7.9 L 157.4 9.0 L 158.3 10.3 L 159.2 11.8 L 160.2 13.5 L 161.1 15.2 L 162.0 17.0"></path><path class="ink" stroke-width="2.5" d="M 117.0 9 L 117.0 25"></path><path class="dash" d="M 174.0 17 L 218.0 17"></path><path class="acc" d="M 174.0 6.0 L 174.9 6.3 L 175.8 7.1 L 176.8 8.5 L 177.7 10.3 L 178.6 12.5 L 179.5 14.9 L 180.4 17.4 L 181.3 19.8 L 182.2 22.2 L 183.2 24.3 L 184.1 25.9 L 185.0 27.2 L 185.9 27.9 L 186.8 28.0 L 187.8 27.5 L 188.7 26.5 L 189.6 25.0 L 190.5 23.1 L 191.4 20.9 L 192.3 18.4 L 193.2 15.9 L 194.2 13.5 L 195.1 11.2 L 196.0 9.2 L 196.9 7.7 L 197.8 6.6 L 198.8 6.1 L 199.7 6.1 L 200.6 6.7 L 201.5 7.9 L 202.4 9.5 L 203.3 11.5 L 204.2 13.8 L 205.2 16.3 L 206.1 18.8 L 207.0 21.2 L 207.9 23.4 L 208.8 25.3 L 209.8 26.7 L 210.7 27.6 L 211.6 28.0 L 212.5 27.8 L 213.4 27.0 L 214.3 25.7 L 215.2 24.0 L 216.2 21.9 L 217.1 19.5 L 218.0 17.0"></path><path class="ink" stroke-width="2.5" d="M 173.0 9 L 173.0 25"></path></svg></td>
+<td style="text-align: left;"><span class="math inline">1 : 3 : 5 : 7</span> (the tube’s resonances)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Flute</td>
+<td style="text-align: left;"><span class="math inline">-c_0^2\,\partial_x^2</span> on <span class="math inline">[0, L]</span></td>
+<td style="text-align: left;"><span class="math inline">u = 0</span> at both open ends</td>
+<td style="text-align: left;"><span class="math inline">\sin(n\pi x/L)</span> <svg class="fig modes" viewbox="0 0 224 34" role="img" aria-label="The flute's first four pressure shapes: sines, zero at both open ends"><path class="dash" d="M 6.0 17 L 50.0 17"></path><path class="acc" d="M 6.0 17.0 L 6.9 16.3 L 7.8 15.6 L 8.8 14.9 L 9.7 14.2 L 10.6 13.5 L 11.5 12.8 L 12.4 12.1 L 13.3 11.5 L 14.2 10.9 L 15.2 10.3 L 16.1 9.7 L 17.0 9.2 L 17.9 8.7 L 18.8 8.3 L 19.8 7.9 L 20.7 7.5 L 21.6 7.1 L 22.5 6.8 L 23.4 6.6 L 24.3 6.4 L 25.2 6.2 L 26.2 6.1 L 27.1 6.0 L 28.0 6.0 L 28.9 6.0 L 29.8 6.1 L 30.8 6.2 L 31.7 6.4 L 32.6 6.6 L 33.5 6.8 L 34.4 7.1 L 35.3 7.5 L 36.2 7.9 L 37.2 8.3 L 38.1 8.7 L 39.0 9.2 L 39.9 9.7 L 40.8 10.3 L 41.8 10.9 L 42.7 11.5 L 43.6 12.1 L 44.5 12.8 L 45.4 13.5 L 46.3 14.2 L 47.2 14.9 L 48.2 15.6 L 49.1 16.3 L 50.0 17.0"></path><path class="dash" d="M 62.0 17 L 106.0 17"></path><path class="acc" d="M 62.0 17.0 L 62.9 15.6 L 63.8 14.2 L 64.8 12.8 L 65.7 11.5 L 66.6 10.3 L 67.5 9.2 L 68.4 8.3 L 69.3 7.5 L 70.2 6.8 L 71.2 6.4 L 72.1 6.1 L 73.0 6.0 L 73.9 6.1 L 74.8 6.4 L 75.8 6.8 L 76.7 7.5 L 77.6 8.3 L 78.5 9.2 L 79.4 10.3 L 80.3 11.5 L 81.2 12.8 L 82.2 14.2 L 83.1 15.6 L 84.0 17.0 L 84.9 18.4 L 85.8 19.8 L 86.8 21.2 L 87.7 22.5 L 88.6 23.7 L 89.5 24.8 L 90.4 25.7 L 91.3 26.5 L 92.2 27.2 L 93.2 27.6 L 94.1 27.9 L 95.0 28.0 L 95.9 27.9 L 96.8 27.6 L 97.8 27.2 L 98.7 26.5 L 99.6 25.7 L 100.5 24.8 L 101.4 23.7 L 102.3 22.5 L 103.2 21.2 L 104.2 19.8 L 105.1 18.4 L 106.0 17.0"></path><path class="dash" d="M 118.0 17 L 162.0 17"></path><path class="acc" d="M 118.0 17.0 L 118.9 14.9 L 119.8 12.8 L 120.8 10.9 L 121.7 9.2 L 122.6 7.9 L 123.5 6.8 L 124.4 6.2 L 125.3 6.0 L 126.2 6.2 L 127.2 6.8 L 128.1 7.9 L 129.0 9.2 L 129.9 10.9 L 130.8 12.8 L 131.8 14.9 L 132.7 17.0 L 133.6 19.1 L 134.5 21.2 L 135.4 23.1 L 136.3 24.8 L 137.2 26.1 L 138.2 27.2 L 139.1 27.8 L 140.0 28.0 L 140.9 27.8 L 141.8 27.2 L 142.8 26.1 L 143.7 24.8 L 144.6 23.1 L 145.5 21.2 L 146.4 19.1 L 147.3 17.0 L 148.2 14.9 L 149.2 12.8 L 150.1 10.9 L 151.0 9.2 L 151.9 7.9 L 152.8 6.8 L 153.8 6.2 L 154.7 6.0 L 155.6 6.2 L 156.5 6.8 L 157.4 7.9 L 158.3 9.2 L 159.2 10.9 L 160.2 12.8 L 161.1 14.9 L 162.0 17.0"></path><path class="dash" d="M 174.0 17 L 218.0 17"></path><path class="acc" d="M 174.0 17.0 L 174.9 14.2 L 175.8 11.5 L 176.8 9.2 L 177.7 7.5 L 178.6 6.4 L 179.5 6.0 L 180.4 6.4 L 181.3 7.5 L 182.2 9.2 L 183.2 11.5 L 184.1 14.2 L 185.0 17.0 L 185.9 19.8 L 186.8 22.5 L 187.8 24.8 L 188.7 26.5 L 189.6 27.6 L 190.5 28.0 L 191.4 27.6 L 192.3 26.5 L 193.2 24.8 L 194.2 22.5 L 195.1 19.8 L 196.0 17.0 L 196.9 14.2 L 197.8 11.5 L 198.8 9.2 L 199.7 7.5 L 200.6 6.4 L 201.5 6.0 L 202.4 6.4 L 203.3 7.5 L 204.2 9.2 L 205.2 11.5 L 206.1 14.2 L 207.0 17.0 L 207.9 19.8 L 208.8 22.5 L 209.8 24.8 L 210.7 26.5 L 211.6 27.6 L 212.5 28.0 L 213.4 27.6 L 214.3 26.5 L 215.2 24.8 L 216.2 22.5 L 217.1 19.8 L 218.0 17.0"></path></svg></td>
+<td style="text-align: left;"><span class="math inline">1 : 2 : 3 : 4</span> (the tube’s resonances)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kalimba tine</td>
+<td style="text-align: left;"><span class="math inline">(EI/\rho S)\,\partial_x^4</span> on <span class="math inline">[0, L]</span></td>
+<td style="text-align: left;">clamped at <span class="math inline">x = 0</span> (<span class="math inline">u = u_x = 0</span>), free at <span class="math inline">L</span> (<span class="math inline">u_{xx} = u_{xxx} = 0</span>)</td>
+<td style="text-align: left;">bar shapes (key below) <svg class="fig modes" viewbox="0 0 224 34" role="img" aria-label="The kalimba tine's first four shapes: clamped flat on the left, free on the right"><path class="dash" d="M 6.0 17 L 50.0 17"></path><path class="acc" d="M 6.0 17.0 L 6.9 17.0 L 7.8 17.0 L 8.8 16.9 L 9.7 16.9 L 10.6 16.8 L 11.5 16.7 L 12.4 16.6 L 13.3 16.5 L 14.2 16.4 L 15.2 16.2 L 16.1 16.1 L 17.0 15.9 L 17.9 15.8 L 18.8 15.6 L 19.8 15.4 L 20.7 15.2 L 21.6 15.0 L 22.5 14.7 L 23.4 14.5 L 24.3 14.3 L 25.2 14.0 L 26.2 13.8 L 27.1 13.5 L 28.0 13.3 L 28.9 13.0 L 29.8 12.7 L 30.8 12.4 L 31.7 12.2 L 32.6 11.9 L 33.5 11.6 L 34.4 11.3 L 35.3 11.0 L 36.2 10.7 L 37.2 10.4 L 38.1 10.1 L 39.0 9.8 L 39.9 9.5 L 40.8 9.1 L 41.8 8.8 L 42.7 8.5 L 43.6 8.2 L 44.5 7.9 L 45.4 7.6 L 46.3 7.3 L 47.2 6.9 L 48.2 6.6 L 49.1 6.3 L 50.0 6.0"></path><rect class="bar" x="2.0" y="10" width="4" height="14"></rect><path class="dash" d="M 62.0 17 L 106.0 17"></path><path class="acc" d="M 62.0 17.0 L 62.9 16.9 L 63.8 16.8 L 64.8 16.6 L 65.7 16.3 L 66.6 15.9 L 67.5 15.5 L 68.4 15.0 L 69.3 14.5 L 70.2 14.0 L 71.2 13.5 L 72.1 12.9 L 73.0 12.4 L 73.9 11.9 L 74.8 11.4 L 75.8 10.9 L 76.7 10.5 L 77.6 10.1 L 78.5 9.8 L 79.4 9.5 L 80.3 9.3 L 81.2 9.2 L 82.2 9.1 L 83.1 9.1 L 84.0 9.1 L 84.9 9.3 L 85.8 9.5 L 86.8 9.8 L 87.7 10.2 L 88.6 10.6 L 89.5 11.1 L 90.4 11.7 L 91.3 12.4 L 92.2 13.1 L 93.2 13.8 L 94.1 14.6 L 95.0 15.5 L 95.9 16.4 L 96.8 17.4 L 97.8 18.4 L 98.7 19.4 L 99.6 20.4 L 100.5 21.5 L 101.4 22.5 L 102.3 23.6 L 103.2 24.7 L 104.2 25.8 L 105.1 26.9 L 106.0 28.0"></path><rect class="bar" x="58.0" y="10" width="4" height="14"></rect><path class="dash" d="M 118.0 17 L 162.0 17"></path><path class="acc" d="M 118.0 17.0 L 118.9 16.9 L 119.8 16.5 L 120.8 15.9 L 121.7 15.2 L 122.6 14.3 L 123.5 13.4 L 124.4 12.5 L 125.3 11.6 L 126.2 10.8 L 127.2 10.1 L 128.1 9.5 L 129.0 9.0 L 129.9 8.8 L 130.8 8.7 L 131.8 8.8 L 132.7 9.1 L 133.6 9.5 L 134.5 10.2 L 135.4 11.0 L 136.3 12.0 L 137.2 13.1 L 138.2 14.3 L 139.1 15.5 L 140.0 16.8 L 140.9 18.0 L 141.8 19.3 L 142.8 20.4 L 143.7 21.5 L 144.6 22.4 L 145.5 23.1 L 146.4 23.7 L 147.3 24.1 L 148.2 24.2 L 149.2 24.2 L 150.1 23.9 L 151.0 23.4 L 151.9 22.7 L 152.8 21.8 L 153.8 20.7 L 154.7 19.4 L 155.6 18.0 L 156.5 16.4 L 157.4 14.8 L 158.3 13.1 L 159.2 11.4 L 160.2 9.6 L 161.1 7.8 L 162.0 6.0"></path><rect class="bar" x="114.0" y="10" width="4" height="14"></rect><path class="dash" d="M 174.0 17 L 218.0 17"></path><path class="acc" d="M 174.0 17.0 L 174.9 16.7 L 175.8 16.0 L 176.8 15.0 L 177.7 13.8 L 178.6 12.5 L 179.5 11.3 L 180.4 10.2 L 181.3 9.4 L 182.2 8.9 L 183.2 8.7 L 184.1 8.9 L 185.0 9.5 L 185.9 10.4 L 186.8 11.7 L 187.8 13.2 L 188.7 14.8 L 189.6 16.6 L 190.5 18.4 L 191.4 20.1 L 192.3 21.7 L 193.2 23.0 L 194.2 24.0 L 195.1 24.6 L 196.0 24.8 L 196.9 24.6 L 197.8 24.0 L 198.8 23.0 L 199.7 21.8 L 200.6 20.3 L 201.5 18.6 L 202.4 16.9 L 203.3 15.1 L 204.2 13.5 L 205.2 12.1 L 206.1 11.0 L 207.0 10.2 L 207.9 9.8 L 208.8 9.8 L 209.8 10.3 L 210.7 11.1 L 211.6 12.4 L 212.5 14.1 L 213.4 16.0 L 214.3 18.2 L 215.2 20.5 L 216.2 23.0 L 217.1 25.5 L 218.0 28.0"></path><rect class="bar" x="170.0" y="10" width="4" height="14"></rect></svg></td>
+<td style="text-align: left;"><span class="math inline">1 : 6.27 : 17.55</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Drum (a membrane on a disc of radius <span class="math inline">r_0</span>)</td>
+<td style="text-align: left;"><span class="math inline">-(T/\sigma)\,\Delta</span></td>
+<td style="text-align: left;"><span class="math inline">u = 0</span> on the rim</td>
+<td style="text-align: left;"><span class="math inline">{J_m(j_{mk}r/r_0)\cos m\theta}</span> (and <span class="math inline">\sin m\theta</span>), indexed by <span class="math inline">(m, k)</span> <svg class="fig modes" viewbox="0 0 224 34" role="img" aria-label="The drumhead's first four shapes seen from above, coloured by sign: the (0,1) mode all one sign; (1,1) split into two halves of opposite sign; (2,1) into four quarters; (0,2) a central disc and an outer ring of opposite sign"><circle cx="28.0" cy="17" r="13" class="fillpos"></circle><circle cx="28.0" cy="17" r="13" class="ink" fill="none"></circle><path class="fillpos" d="M 84.0 4 A 13 13 0 0 1 84.0 30 Z"></path><path class="fillneg" d="M 84.0 4 A 13 13 0 0 0 84.0 30 Z"></path><circle cx="84.0" cy="17" r="13" class="ink" fill="none"></circle><path class="fillpos" d="M 140.0 17 L 149.19 7.81 A 13 13 0 0 1 149.19 26.19 Z"></path><path class="fillneg" d="M 140.0 17 L 149.19 26.19 A 13 13 0 0 1 130.81 26.19 Z"></path><path class="fillpos" d="M 140.0 17 L 130.81 26.19 A 13 13 0 0 1 130.81 7.81 Z"></path><path class="fillneg" d="M 140.0 17 L 130.81 7.81 A 13 13 0 0 1 149.19 7.81 Z"></path><circle cx="140.0" cy="17" r="13" class="ink" fill="none"></circle><circle cx="196.0" cy="17" r="13" class="fillneg"></circle><circle cx="196.0" cy="17" r="5.66" class="fillpos"></circle><circle cx="196.0" cy="17" r="13" class="ink" fill="none"></circle></svg></td>
+<td style="text-align: left;"><span class="math inline">1 : 1.59 : 2.14 : 2.30</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here <span class="math inline">\partial_x^2 = d^2/dx^2</span>; <span class="math inline">c_0</span> is the speed of sound; <span class="math inline">E</span> is the Young’s modulus of the steel, <span class="math inline">I</span> the second moment of area of the cross-section, and <span class="math inline">\rho S</span> a bar’s mass per unit length; <span class="math inline">\sigma</span> is the skin’s mass per unit area, <span class="math inline">T</span> its tension per unit length, <span class="math inline">r_0</span> its radius and <span class="math inline">\Delta</span> the Laplacian, <span class="math inline">\partial_r^2 + r^{-1}\partial_r + r^{-2}\partial_\theta^2</span> in polar coordinates <span class="math inline">(r, \theta)</span>; <span class="math inline">J_m</span> is a Bessel function and <span class="math inline">j_{mk}</span> its <span class="math inline">k</span>-th zero. The tine’s shapes are <span class="math inline">\cosh\beta_nx - \cos\beta_nx - \gamma_n(\sinh\beta_nx - \sin\beta_nx)</span>, with <span class="math inline">\gamma_n = (\cosh\beta_nL + \cos\beta_nL)/(\sinh\beta_nL + \sin\beta_nL)</span>. The drum’s shapes are drawn from above, coloured by sign.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Fletcher and Rossing, <a href="https://link.springer.com/book/10.1007/978-0-387-21603-4"><em>The Physics of Musical Instruments</em></a>, chapters 2 (strings and bars), 3 (membranes) and 8 (pipes).</p></div></div><p><strong>What the table shows.</strong> The string and the flute have the same kind of operator and the same end conditions, so the same ratios. The clarinet has the same kind of operator with one end condition changed, and that alone turns <span class="math inline">1 : 2 : 3</span> into <span class="math inline">1 : 3 : 5</span>. Whole-number ratios need <span class="math inline">\sqrt{\lambda_n}</span> proportional to whole numbers, and a second derivative on an interval gives exactly that: equally spaced <span class="math inline">\sqrt{\lambda_n}</span>, page 4’s “one speed for every wavelength”. A fourth-derivative term (the piano wire, the tine) or a two-dimensional domain (the drum) breaks the equal spacing. For a bowed or blown note, the eigenvalues decide which notes can sound and which partials are strong, while the player’s drive holds the partials at exact multiples (page 4).</p>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Derivation</span>The drum’s eigenvalues: Bessel zeros <span class="needs">separation of variables</span>
+</summary>
+<p>On a skin of radius <span class="math inline">r_0</span>, <span class="math inline">AX = \lambda X</span> reads <span class="math inline">X_{rr} + X_r/r + X_{\theta\theta}/r^2 = -\kappa^2X</span> with <span class="math inline">\kappa^2 = \lambda\sigma/T</span>, and <span class="math inline">X = 0</span> on the rim. Try <span class="math inline">X = R(r)\cos m\theta</span>, with <span class="math inline">m = 0, 1, 2, \dots</span> so that <span class="math inline">X</span> returns to itself around the drum. Then <span class="math inline">R'' + R'/r + (\kappa^2 - m^2/r^2)R = 0</span>, Bessel’s equation, whose solution that stays finite at the centre is <span class="math inline">J_m(\kappa r)</span>. The rim needs <span class="math inline">J_m(\kappa r_0) = 0</span>, so <span class="math inline">\kappa r_0 = j_{mk}</span>, and <span class="math display">
+f_{mk} = \frac{j_{mk}}{2\pi r_0}\sqrt{\frac{T}{\sigma}} .
+</span> With <span class="math inline">j_{01} = 2.405</span>, <span class="math inline">j_{11} = 3.832</span>, <span class="math inline">j_{21} = 5.136</span> and <span class="math inline">j_{02} = 5.520</span>, the ratios are <span class="math inline">1 : 1.593 : 2.136 : 2.295</span>. The zeros of Bessel functions are not equally spaced, so no whole-number pattern appears. Nothing is missed: the products <span class="math inline">J_m(j_{mk}r/r_0)\cos m\theta</span> and <span class="math inline">J_m(j_{mk}r/r_0)\sin m\theta</span> already form a complete perpendicular set, because <span class="math inline">\cos m\theta</span> and <span class="math inline">\sin m\theta</span> do around the circle, and for each <span class="math inline">m</span> the functions <span class="math inline">J_m(j_{mk}r/r_0)</span>, <span class="math inline">k = 1, 2, \dots</span>, do on <span class="math inline">[0, r_0]</span> with the weight <span class="math inline">r</span> (Fourier–Bessel series). (N. H. Fletcher and T. D. Rossing, <em>The Physics of Musical Instruments</em>, 2nd ed., 1998, chapter 3; Wikipedia, <a href="https://en.wikipedia.org/wiki/Vibrations_of_a_circular_membrane">Vibrations of a circular membrane</a>.)</p>
+</details>
+</div>
+<div class="derive">
+<details>
+<summary>
+<span class="label">Derivation</span>The tine’s eigenvalues: <span class="math inline">\cos\beta L\cosh\beta L = -1</span> <span class="needs">derivatives</span>
+</summary>
+<p><span class="math inline">AX = \lambda X</span> reads <span class="math inline">X'''' = \beta^4X</span> with <span class="math inline">\beta^4 = \lambda\rho S/(EI)</span>, whose solutions are combinations of <span class="math inline">\cosh\beta x</span>, <span class="math inline">\sinh\beta x</span>, <span class="math inline">\cos\beta x</span> and <span class="math inline">\sin\beta x</span>. The clamp at <span class="math inline">x = 0</span>, <span class="math inline">X = X' = 0</span>, leaves <span class="math inline">X = \cosh\beta x - \cos\beta x - \gamma(\sinh\beta x - \sin\beta x)</span>. The free end at <span class="math inline">x = L</span>, <span class="math inline">X'' = X''' = 0</span>, gives two linear conditions on <span class="math inline">(1, \gamma)</span>, which have a solution only when their determinant vanishes; using <span class="math inline">\cosh^2 - \sinh^2 = 1</span> and <span class="math inline">\cos^2 + \sin^2 = 1</span>, that is <span class="math inline">\cos\beta L\cosh\beta L = -1</span>. Its roots are <span class="math inline">\beta L = 1.875, 4.694, 7.855, \dots</span>, and <span class="math inline">f \propto \sqrt\lambda \propto \beta^2</span> gives <span class="math inline">1 : 6.27 : 17.55</span>. (Fletcher and Rossing, chapter 2.)</p>
+</details>
+</div>
+<div class="result">
+<p><strong>Takeaway.</strong> An instrument’s natural frequencies are the spectrum of its operator. Newton’s law on a small piece gives <span class="math inline">u_{tt} = -Au</span>, with how the object is held built into <span class="math inline">A</span>; the eigenfunctions of <span class="math inline">A</span> are the modes, and <span class="math inline">f_n = \sqrt{\lambda_n}/2\pi</span>. In eigenfunction coordinates the motion splits into independent springs, one per mode. It works because <span class="math inline">A</span> is symmetric and positive and the object is finite; an infinitely long string has no natural frequencies at all.</p>
+</div>
+</section>
+<section id="chain" class="level2">
+<h2 class="anchored" data-anchor-id="chain">The series in one line</h2>
+<p>What you hear is <span class="math display">
+p(t) = \sum_n c_n\,e^{-t/\tau_n}\sin(2\pi f_n t + \varphi_n),
+</span> heard as pitch, loudness, timbre and duration (<a href="../../posts/what-you-hear/index.html">page 2</a>). Its frequencies are the spectrum of the instrument’s operator, <span class="math inline">f_n = \sqrt{\lambda_n}/2\pi</span> (this page); its sizes are <span class="math inline">c_n = |H(f_n)| \cdot (\text{route weight of mode } n) \cdot a_n</span>, from the body, the route to the air and the start (<a href="../../posts/from-instrument-to-ear/index.html">page 3</a>); and whether the <span class="math inline">f_n</span> fall on whole numbers decides whether you can hum it (<a href="../../posts/why-instruments-differ/index.html">page 4</a>).</p>
+<style>
+svg.fig.modes { width: 12.5rem; max-width: none; margin: 0.35rem 0 0; }
+main .optable table { display: block; overflow-x: auto; }
+@media (max-width: 700px) {
+  main .optable table { overflow-x: visible; }
+  main .optable table, main .optable tbody, main .optable tr, main .optable td { display: block; width: 100%; }
+  main .optable thead { display: none; }
+  main .optable tr { border-bottom: 1px solid var(--rule, #ddd); padding: 0.6rem 0; }
+  main .optable td { border: 0; padding: 0.15rem 0; white-space: normal; }
+  main .optable td:first-child { font-weight: 600; }
+  main .optable td:nth-child(2)::before { content: "Operator: "; color: var(--muted, #666); }
+  main .optable td:nth-child(3)::before { content: "Boundary: "; color: var(--muted, #666); }
+  main .optable td:nth-child(4)::before { content: "Modes: "; color: var(--muted, #666); }
+  main .optable td:nth-child(5)::before { content: "Ratios: "; color: var(--muted, #666); }
+}
+</style>
+<style>
+.ins .wyla { font-family: var(--f-ui); font-size: 0.92rem; color: var(--ink); margin: 0; line-height: 1.45; }
+</style>
+<script src="core.js"></script>
+<script src="string.js"></script>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

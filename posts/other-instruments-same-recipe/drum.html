@@ -166,7 +166,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Why does a drum thud?</h1>
-<p class="subtitle lead">The Shape of a Sound · 3 · Deep dive</p>
+<p class="subtitle lead">The Shape of a Sound · Appendix · Deep dive</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">music</div>
@@ -203,7 +203,7 @@ window.Quarto = {
 <p><a href="../../posts/instruments-as-operators/index.html">The Shape of a Sound</a> · <a href="../../posts/other-instruments-same-recipe/piano.html">← Piano</a> · <a href="../../posts/when-an-equation-has-a-spectrum/index.html">Beyond · When does an equation have a spectrum? →</a> · <a href="../../posts/instruments-as-operators/glossary.html">Glossary</a></p>
 </div>
 <div class="pageinfo">
-<p>A deep dive from the <a href="../../posts/other-instruments-same-recipe/index.html#drums">drums entry</a> of post 3. Builds on <a href="../../posts/one-string-end-to-end/index.html">post 2</a>. About 12 minutes. Written in collaboration with Claude, Anthropic’s AI model.</p>
+<p>A deep dive from the <a href="../../posts/other-instruments-same-recipe/index.html#drums">drums entry</a> of the appendix. Builds on <a href="../../posts/natural-frequencies/index.html">page 5</a>. About 12 minutes. Written in collaboration with Claude, Anthropic’s AI model.</p>
 </div>
 <div class="puzzle">
 <p>A drumhead is a sheet pulled tight: a string with a second dimension. Pluck a string and you get a note you could hum; strike a drum and you get a thud. What changes when the string becomes a sheet? And why do some drums, the timpani (kettledrums), play a note after all?</p>
@@ -226,7 +226,7 @@ svg.patch { display: block; width: 100%; max-width: 420px; height: auto; margin:
   <p class="cap" style="padding:0.4rem 0.25rem 0">The motion is the sum of the 40 lowest modes, slowed about 300 times. Dead center sounds only the round modes; a strike on a mode's still line leaves that mode silent.</p>
 </section>
 </div>
-<p>What you hear works as in <a href="../../posts/what-you-hear/index.html#four-aspects">post 1</a>: the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The room keeps those frequencies (<a href="../../posts/one-string-end-to-end/index.html#sound">post 2</a>).</p>
+<p>What you hear works as in <a href="../../posts/what-you-hear/index.html#read">page 2</a>: the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The room keeps those frequencies (<a href="../../posts/from-instrument-to-ear/index.html#taps">page 3</a>).</p>
 <section id="fading" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="fading">The whole skin sounds</h2>
 <p><strong>The sound leaves from the whole skin, and the round modes radiate best.</strong> Every point of the head pushes the air with its acceleration <span class="math inline">u_{tt}</span>, where <span class="math inline">u(x, y, t)</span> is the head’s height at the point <span class="math inline">(x, y)</span>, and your ear hears the sum of the pushes, which keeps every frequency. When the drum is small compared with the wavelength, they reach your ear almost together, so a mode <span class="math inline">X</span> sounds in proportion to the net volume it pushes, <span class="math inline">|\iint X\,dA|</span>. That is zero for every mode with a still line through the center (below). So the round modes, those with no line through the center, pump air like a piston and lose their energy within a fraction of a second, while such a mode pushes the air up on one side as it pulls it down on the other, radiates weakly, and rings longer.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
@@ -423,7 +423,7 @@ f \propto \frac{k}{\sqrt{\sigma + 2\rho/k}} ,
 <summary>
 <span class="label">Precisely</span>Which octave the ear names
 </summary>
-<p>The modes above the (1,1) sit a <a href="../../posts/instruments-as-operators/glossary.html#octave">fifth</a>, an octave and a major tenth (ratio 5 : 2) above it. The pitch rule of post 1 would put the pitch an octave lower, at the base, and HyperPhysics notes that “the missing fundamental effect might then give you the pitch C2” for a drum tuned to C3 (HyperPhysics, <a href="https://hyperphysics.gsu.edu/hbase/Music/timpani.html">The Timpani</a>). Which octave the ear names is one of the <a href="../../posts/what-you-hear/index.html#exceptions">exceptions</a> post 1 lists, and this series doesn’t settle it.</p>
+<p>The modes above the (1,1) sit a <a href="../../posts/instruments-as-operators/glossary.html#octave">fifth</a>, an octave and a major tenth (ratio 5 : 2) above it. The pitch rule of page 2 would put the pitch an octave lower, at the base, and HyperPhysics notes that “the missing fundamental effect might then give you the pitch C2” for a drum tuned to C3 (HyperPhysics, <a href="https://hyperphysics.gsu.edu/hbase/Music/timpani.html">The Timpani</a>). Which octave the ear names is one of the <a href="../../posts/what-you-hear/index.html#pitch">exceptions</a> page 2 notes, and this series doesn’t settle it.</p>
 </details>
 </div>
 </section>
