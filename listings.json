@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/volcano-in-a-shader/index.html",
       "/posts/a-piano/index.html",
       "/posts/instruments-as-operators/index.html",
       "/posts/bicycle-wheel/index.html",

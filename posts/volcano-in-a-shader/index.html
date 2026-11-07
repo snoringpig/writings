@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-07">
+<meta name="description" content="A ray-marched WebGL2 fragment shader that rebuilds a photo of Mount Shasta step by step: the volcano, its gullies, sky light and shadows, rock and snow, a second mountain, a forest, haze, clouds and a film curve, each with its math, its code and a live render.">
+
+<title>Volcano in a Shader – No Man’s Land</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b0bacdaee50ff9abb97ae013f25660d1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="volcano.css">
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">No Man’s Land</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Volcano in a Shader</h1>
+<p class="subtitle lead">A photo of Mount Shasta, rebuilt from formulas in ten steps.</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">graphics</div>
+    <div class="quarto-category">math</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A ray-marched WebGL2 fragment shader that rebuilds a photo of Mount Shasta step by step: the volcano, its gullies, sky light and shadows, rock and snow, a second mountain, a forest, haze, clouds and a film curve, each with its math, its code and a live render.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 7, 2026</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 7, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="pageinfo">
+<p>Uses calculus and vectors; proofs are in folds. About 40 minutes to read, or 5 to look through the ten pictures. Written in collaboration with Claude, Anthropic’s AI model.</p>
+</div>
+<p>The second picture below is not a photograph. A program of about 450 lines draws it: for every pixel it follows the ray from the camera through that pixel into a landscape made of formulas, finds what the ray hits, and works out how much light comes back. The first is my photo of Mount Shasta, which it imitates.</p>
+<div class="vs-pair">
+<figure class="figure"><img src="images/photo.jpg" alt="Photo of Mount Shasta: a snow-covered volcano with a cloud resting on its summit, pink talus slopes, and a forested hill in the foreground." width="960" height="720" class="figure-img"><figcaption>My photo of Mount Shasta</figcaption></figure>
+<figure class="figure"><img src="images/step10.jpg" alt="The final render: the same composition, drawn by the shader." width="960" height="720" class="figure-img"><figcaption>Step 10, rendered by the shader</figcaption></figure>
+</div>
+<nav class="vs-strip" id="vs-strip" aria-label="The ten steps"></nav>
+<p><strong>Seen from kilometres away, a mountain is the graph of a height function, and every pixel can find where its ray meets that graph by taking steps that provably never jump through it, given a bound on how steep the graph can be.</strong> Everything else in the picture is one more small function added to that same per-pixel computation: erosion, sunlight, rock and snow, a forest, haze, clouds. The ten steps below add them one at a time. Each step shows what it adds, on screen and in the code; the buttons above each image switch between that step, the previous step and a map of the pixels that changed, and “Render live” runs the step’s shader on your own device.</p>
+<section id="tool" class="level2">
+<h2 class="anchored" data-anchor-id="tool">Why a shader and not a mesh</h2>
+<p>Graphics tools such as <a href="https://threejs.org/">three.js</a>, <a href="https://p5js.org/">p5.js</a> and <a href="https://www.shadertoy.com/">Shadertoy</a> look like rivals, but the first choice is one level down: how the mountain is stored.</p>
+<ul>
+<li><strong>As a mesh</strong>, a surface made of many small triangles. The graphics processor (GPU) projects every triangle onto the screen and colours the pixels it covers. The cost grows with the number of triangles plus the number of pixels. This is how three.js and game engines work.</li>
+<li><strong>As a height function <span class="math inline">h(x,z)</span></strong>, the height of the ground above each point <span class="math inline">(x,z)</span> of a map (here <span class="math inline">y</span> is the height, so map points are <span class="math inline">(x,z)</span>). For every pixel, a <a href="https://www.khronos.org/opengl/wiki/Fragment_Shader">fragment shader</a>, a small program the GPU runs once per pixel, walks along that pixel’s ray until it meets the surface <span class="math inline">y = h(x,z)</span>. This is called <a href="https://en.wikipedia.org/wiki/Ray_marching">ray marching</a>, and it is the Shadertoy style. The cost grows with pixels × steps × the cost of one evaluation of <span class="math inline">h</span>.</li>
+</ul>
+<p>For one fixed view of natural terrain between 1 and 10 km away, the height function has three advantages. First, precision adapts to distance by itself: the march stops once it is within about half a pixel of the ground, which means a few metres at 8 km and under half a metre at 1 km, while a mesh needs a <a href="https://en.wikipedia.org/wiki/Level_of_detail_(computer_graphics)">level-of-detail</a> scheme to keep its triangles near pixel size at both distances. (The function itself is still evaluated in full detail everywhere, so detail finer than a pixel turns into speckle, which flickers when the camera moves, unless several rays per pixel are averaged; step 7 does that.) Second, one idea covers the whole picture: soft shadows and clouds are more walks along rays, and the haze is an integral along the same ray that happens to have a closed form. Third, the whole scene is about 450 lines of GLSL, the GPU’s programming language, with no dependencies. Meshes win elsewhere: a camera that moves smoothly, scenes you can walk through, geometry you can edit, and trees seen up close.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>For graphics programmers: the comparison in detail
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="table-scroll">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Ray-marched fragment shader</th>
+<th>three.js (triangle meshes)</th>
+<th>p5.js (2D canvas)</th>
+<th>Offline renderer (e.g.&nbsp;Blender)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The mountain is</td>
+<td>a function <span class="math inline">h(x,z)</span>, evaluated per pixel</td>
+<td>a grid of triangles, raised by <span class="math inline">h</span></td>
+<td>2D shapes</td>
+<td>a mesh, traced with physically based light</td>
+</tr>
+<tr class="even">
+<td>Near and far detail</td>
+<td>automatic: stop within a pixel</td>
+<td>needs a level-of-detail scheme</td>
+<td>not applicable</td>
+<td>brute force: a very dense mesh</td>
+</tr>
+<tr class="odd">
+<td>Sky light</td>
+<td>a formula per pixel</td>
+<td>the same formula, built in (<code>HemisphereLight</code>)</td>
+<td>none built in</td>
+<td>physically correct</td>
+</tr>
+<tr class="even">
+<td>Soft shadows</td>
+<td>one extra march toward the sun</td>
+<td><a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow maps</a>, several for a 10 km scene</td>
+<td>none built in</td>
+<td>physically correct, minutes per frame</td>
+</tr>
+<tr class="odd">
+<td>Haze, volumetric clouds</td>
+<td>the same marching code</td>
+<td>a custom ray-marching shader anyway</td>
+<td>impractical</td>
+<td>excellent, slow</td>
+</tr>
+<tr class="even">
+<td>Forest</td>
+<td>cones in the height function; fine beyond about 100 m</td>
+<td><a href="https://en.wikipedia.org/wiki/Geometry_instancing">instanced</a> tree meshes; best up close</td>
+<td>flat sprites</td>
+<td>instanced geometry</td>
+</tr>
+<tr class="odd">
+<td>Moving camera</td>
+<td>stills in seconds; 60 frames per second only at low resolution</td>
+<td>60 frames per second out of the box</td>
+<td>easy in 2D</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>p5.js also has a WEBGL mode, which can run exactly the shader used here; the column describes its default 2D canvas.</p>
+</div>
+</div>
+</div>
+<p>So the mountain here is a ray-marched fragment shader, run by a few lines of plain <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext">WebGL2</a>, the browser’s interface to the GPU. Shadertoy makes a good sketchbook, and every step below exports to it with one click, but a single shader in Shadertoy’s Image tab redraws the whole picture every frame, which wastes work on a still image. The same <span class="math inline">h(x,z)</span> can later raise a three.js mesh if the scene needs to be explored rather than looked at.</p>
+</section>
+<section id="setup" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="setup">The setup</h2>
+<p>Units are kilometres, and <span class="math inline">y</span> points up. The camera stands 0.70 km above the base plane <span class="math inline">y = 0</span> at the origin, looks toward <span class="math inline">-z</span>, and has a 30° vertical field of view (39° across the 4 : 3 frame, about what a standard 50 mm lens sees across a full-frame photo), chosen to match the photo’s framing. The base plane stands for roughly 2 km above sea level; that number matters only for the air density in step 8.</p>
+<p>The shader is assembled from named pieces of GLSL, which we call chunks, glued together in order. Each step adds chunks or replaces earlier ones, and the code under each step is exactly the set of chunks that changed. A few functions connect them: <code>terrain(x)</code> returns the ground height at the map point <code>x</code>; <code>sceneStep(p)</code> returns a step length that cannot jump through the surface, together with the vertical gap to it; <code>groundAlbedo(p, n)</code> says what the ground is made of; <code>shade</code>, <code>atmosphere</code>, <code>marchClouds</code> and <code>post</code> turn that into light and then into pixel values. Each image in this post was rendered from exactly the code shown under it.</p>
+<p>The host is a short JavaScript class that compiles the shader and draws one triangle covering the screen. It draws in horizontal strips of about 35 ms each, because operating systems reset a GPU that stays busy too long (after two seconds by default on Windows<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>), and the browser then loses its connection to the GPU (its WebGL context) and stops drawing.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Microsoft, <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/display/timeout-detection-and-recovery">Timeout detection and recovery (TDR)</a>: “The default timeout period in Windows is two seconds.”</p></div></div><div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The WebGL2 host (renderer.js, complete)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Minimal WebGL2 host for full-screen fragment shaders.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// One shared GL context renders any shader in horizontal tiles (so a heavy shader never</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// blocks the GPU long enough to trip a watchdog), then copies the result to a 2D canvas.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ShaderRenderer {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">constructor</span>() {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">canvas</span> <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">'canvas'</span>)<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> gl <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="at">canvas</span><span class="op">.</span><span class="fu">getContext</span>(<span class="st">'webgl2'</span><span class="op">,</span> { <span class="dt">preserveDrawingBuffer</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">antialias</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> <span class="dt">alpha</span><span class="op">:</span> <span class="kw">false</span> })<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>gl) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">'WebGL2 is not available in this browser.'</span>)<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">gl</span> <span class="op">=</span> gl<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">programs</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">vs</span> <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="fu">_compile</span>(gl<span class="op">.</span><span class="at">VERTEX_SHADER</span><span class="op">,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">'#version 300 es</span><span class="sc">\n</span><span class="st">'</span> <span class="op">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">'void main() {</span><span class="sc">\n</span><span class="st">'</span> <span class="op">+</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">'  // one triangle that covers the whole screen: (-1,-1), (3,-1), (-1,3)</span><span class="sc">\n</span><span class="st">'</span> <span class="op">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">'  vec2 p = vec2((gl_VertexID &lt;&lt; 1) &amp; 2, gl_VertexID &amp; 2);</span><span class="sc">\n</span><span class="st">'</span> <span class="op">+</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">'  gl_Position = vec4(2.0 * p - 1.0, 0.0, 1.0);</span><span class="sc">\n</span><span class="st">'</span> <span class="op">+</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">'}</span><span class="sc">\n</span><span class="st">'</span>)<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">busy</span> <span class="op">=</span> <span class="bu">Promise</span><span class="op">.</span><span class="fu">resolve</span>()<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">_compile</span>(type<span class="op">,</span> src) {</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> gl <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="at">gl</span><span class="op">,</span> s <span class="op">=</span> gl<span class="op">.</span><span class="fu">createShader</span>(type)<span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">shaderSource</span>(s<span class="op">,</span> src)<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">compileShader</span>(s)<span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>gl<span class="op">.</span><span class="fu">getShaderParameter</span>(s<span class="op">,</span> gl<span class="op">.</span><span class="at">COMPILE_STATUS</span>)) {</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> log <span class="op">=</span> gl<span class="op">.</span><span class="fu">getShaderInfoLog</span>(s)<span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>      gl<span class="op">.</span><span class="fu">deleteShader</span>(s)<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>      <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">'Shader compile error:</span><span class="sc">\n</span><span class="st">'</span> <span class="op">+</span> log)<span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s<span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">program</span>(fsSource) {</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">this</span><span class="op">.</span><span class="at">programs</span><span class="op">.</span><span class="fu">has</span>(fsSource)) <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="at">programs</span><span class="op">.</span><span class="fu">get</span>(fsSource)<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> gl <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="at">gl</span><span class="op">,</span> p <span class="op">=</span> gl<span class="op">.</span><span class="fu">createProgram</span>()<span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">attachShader</span>(p<span class="op">,</span> <span class="kw">this</span><span class="op">.</span><span class="at">vs</span>)<span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">attachShader</span>(p<span class="op">,</span> <span class="kw">this</span><span class="op">.</span><span class="fu">_compile</span>(gl<span class="op">.</span><span class="at">FRAGMENT_SHADER</span><span class="op">,</span> fsSource))<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">linkProgram</span>(p)<span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>gl<span class="op">.</span><span class="fu">getProgramParameter</span>(p<span class="op">,</span> gl<span class="op">.</span><span class="at">LINK_STATUS</span>)) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">'Link error:</span><span class="sc">\n</span><span class="st">'</span> <span class="op">+</span> gl<span class="op">.</span><span class="fu">getProgramInfoLog</span>(p))<span class="op">;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">programs</span><span class="op">.</span><span class="fu">set</span>(fsSource<span class="op">,</span> p)<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p<span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Queue renders so only one uses the shared context at a time.</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">render</span>(fsSource<span class="op">,</span> target<span class="op">,</span> opts) {</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> job <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="at">busy</span><span class="op">.</span><span class="fu">then</span>(() <span class="kw">=&gt;</span> <span class="kw">this</span><span class="op">.</span><span class="fu">_render</span>(fsSource<span class="op">,</span> target<span class="op">,</span> opts))<span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">busy</span> <span class="op">=</span> job<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> {})<span class="op">;</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> job<span class="op">;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="kw">async</span> <span class="fu">_render</span>(fsSource<span class="op">,</span> target<span class="op">,</span> { width<span class="op">,</span> height<span class="op">,</span> spp <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> uniforms <span class="op">=</span> {}<span class="op">,</span> onProgress<span class="op">,</span> msPerTile <span class="op">=</span> <span class="dv">35</span> }) {</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> gl <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="at">gl</span><span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">this</span><span class="op">.</span><span class="at">canvas</span><span class="op">.</span><span class="at">width</span> <span class="op">=</span> width<span class="op">;</span> <span class="kw">this</span><span class="op">.</span><span class="at">canvas</span><span class="op">.</span><span class="at">height</span> <span class="op">=</span> height<span class="op">;</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    target<span class="op">.</span><span class="at">width</span> <span class="op">=</span> width<span class="op">;</span> target<span class="op">.</span><span class="at">height</span> <span class="op">=</span> height<span class="op">;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> ctx <span class="op">=</span> target<span class="op">.</span><span class="fu">getContext</span>(<span class="st">'2d'</span>)<span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> prog <span class="op">=</span> <span class="kw">this</span><span class="op">.</span><span class="fu">program</span>(fsSource)<span class="op">;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">useProgram</span>(prog)<span class="op">;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">viewport</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> loc <span class="op">=</span> n <span class="kw">=&gt;</span> gl<span class="op">.</span><span class="fu">getUniformLocation</span>(prog<span class="op">,</span> n)<span class="op">;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">uniform2f</span>(<span class="fu">loc</span>(<span class="st">'uRes'</span>)<span class="op">,</span> width<span class="op">,</span> height)<span class="op">;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">uniform1i</span>(<span class="fu">loc</span>(<span class="st">'uSpp'</span>)<span class="op">,</span> spp)<span class="op">;</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> [k<span class="op">,</span> v] <span class="kw">of</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">entries</span>(uniforms)) {</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> l <span class="op">=</span> <span class="fu">loc</span>(k)<span class="op">;</span> <span class="cf">if</span> (<span class="op">!</span>l) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="bu">Array</span><span class="op">.</span><span class="fu">isArray</span>(v)) gl[<span class="st">'uniform'</span> <span class="op">+</span> v<span class="op">.</span><span class="at">length</span> <span class="op">+</span> <span class="st">'fv'</span>](l<span class="op">,</span> v)<span class="op">;</span> <span class="cf">else</span> gl<span class="op">.</span><span class="fu">uniform1f</span>(l<span class="op">,</span> v)<span class="op">;</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">enable</span>(gl<span class="op">.</span><span class="at">SCISSOR_TEST</span>)<span class="op">;</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> px <span class="op">=</span> <span class="kw">new</span> <span class="bu">Uint8Array</span>(<span class="dv">4</span>)<span class="op">;</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> rows <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> start <span class="op">=</span> <span class="bu">performance</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (y <span class="op">&lt;</span> height) {</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> h <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(rows<span class="op">,</span> height <span class="op">-</span> y)<span class="op">;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> y0 <span class="op">=</span> height <span class="op">-</span> y <span class="op">-</span> h<span class="op">;</span>                 <span class="co">// GL's origin is bottom-left; we render top-down</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>      gl<span class="op">.</span><span class="fu">scissor</span>(<span class="dv">0</span><span class="op">,</span> y0<span class="op">,</span> width<span class="op">,</span> h)<span class="op">;</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> t0 <span class="op">=</span> <span class="bu">performance</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>      gl<span class="op">.</span><span class="fu">drawArrays</span>(gl<span class="op">.</span><span class="at">TRIANGLES</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>      gl<span class="op">.</span><span class="fu">readPixels</span>(<span class="dv">0</span><span class="op">,</span> y0<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> gl<span class="op">.</span><span class="at">RGBA</span><span class="op">,</span> gl<span class="op">.</span><span class="at">UNSIGNED_BYTE</span><span class="op">,</span> px)<span class="op">;</span>   <span class="co">// wait for the tile to finish</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> dt <span class="op">=</span> <span class="bu">performance</span><span class="op">.</span><span class="fu">now</span>() <span class="op">-</span> t0<span class="op">;</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>      y <span class="op">+=</span> h<span class="op">;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>      rows <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">1</span><span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(<span class="dv">256</span><span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(rows <span class="op">*</span> msPerTile <span class="op">/</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(dt<span class="op">,</span> <span class="dv">1</span>))))<span class="op">;</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>      ctx<span class="op">.</span><span class="fu">drawImage</span>(<span class="kw">this</span><span class="op">.</span><span class="at">canvas</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (onProgress) <span class="fu">onProgress</span>(y <span class="op">/</span> height)<span class="op">;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>      <span class="cf">await</span> <span class="kw">new</span> <span class="bu">Promise</span>(r <span class="kw">=&gt;</span> <span class="pp">setTimeout</span>(r<span class="op">,</span> <span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">.</span><span class="fu">disable</span>(gl<span class="op">.</span><span class="at">SCISSOR_TEST</span>)<span class="op">;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">performance</span><span class="op">.</span><span class="fu">now</span>() <span class="op">-</span> start<span class="op">;</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-1">Step 1 · A ray for every pixel</h2>
+<p>A fragment shader is a function from a pixel to a colour. Ours builds the ray through each pixel and, for now, returns the colour of the sky.</p>
+<div class="added" data-step="1">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+Only sky: deep blue at the top of the frame, paler toward the horizon.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="1">
+
+<div class="frame"><img src="images/step1.jpg" alt="A blue sky gradient, darker at the top and paler toward the horizon." width="960" height="720" class="figure-img"><span class="tag">Step 1</span><div class="bar"></div></div>
+
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 2 × 2 rays per pixel</span>
+<span class="ctl"><select id="spp-1" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<p>The GPU runs <code>main()</code> once per pixel, for all pixels in parallel. Every later step answers the same question for each pixel: what does the ray through this pixel see? With an empty world, the answer is the sky, even for rays that point below the horizon; that is why the lower half of the step-1 image is a flat, pale blue.</p>
+<section id="the-camera" class="level3">
+<h3 class="anchored" data-anchor-id="the-camera">The camera</h3>
+<p>From the eye <span class="math inline">E</span>, a target point <span class="math inline">T</span> and the vertical field of view <span class="math inline">\theta</span>, build three perpendicular unit vectors, forward <span class="math inline">f</span>, right <span class="math inline">r</span> and up <span class="math inline">u</span>:</p>
+<p><span class="math display">
+\begin{gathered}
+f = \frac{T-E}{\lVert T-E\rVert},\qquad r = \frac{f\times\hat y}{\lVert f\times\hat y\rVert},\\
+u = r\times f,
+\end{gathered}
+</span></p>
+<p>where <span class="math inline">\hat y</span> is the unit vector pointing straight up. A point <span class="math inline">(i, j)</span> of a <span class="math inline">W\times H</span> image, measured in pixels from its bottom-left corner (pixel centres sit at half-integers), maps to the screen point <span class="math inline">s = \big(2\,(i,j) - (W,H)\big)/H</span>, so <span class="math inline">s_y</span> runs from <span class="math inline">-1</span> at the bottom edge to <span class="math inline">1</span> at the top. The ray through that pixel starts at <span class="math inline">E</span> and has direction</p>
+<p><span class="math display">
+\begin{gathered}
+d = \frac{v}{\lVert v\rVert},\\
+v = f + \tan(\theta/2)\,(s_x\,r + s_y\,u),
+\end{gathered}
+</span></p>
+<p>so its points are <span class="math inline">P(t) = E + t\,d</span> for <span class="math inline">t\ge 0</span>. At the top edge <span class="math inline">s_y = 1</span>, and the ray leans exactly <span class="math inline">\theta/2</span> above the forward direction, as it should.</p>
+</section>
+<section id="the-sky" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-sky">The sky</h3>
+<p>A ray at elevation angle <span class="math inline">\alpha</span> above the horizon crosses a flat layer of air along a path <span class="math inline">m = 1/\sin \alpha</span> times longer than straight up; astronomers call <span class="math inline">m</span> the air mass. On the real, curved Earth the air mass tops out near 38 at the horizon,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and the shader caps <span class="math inline">m</span> at 33 by treating every ray as at least <span class="math inline">\sin\alpha = 0.03</span> above the horizon. Longer paths scatter more light of every colour, which is why the sky whitens toward the horizon. The shader blends a zenith blue into a paler horizon blue with weight <span class="math inline">w = 1 - e^{-\beta(m-1)}</span> (<span class="math inline">\beta = 0.08</span>), which is 0 straight up and about 0.92 at the horizon, and adds a faint glow around the sun.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Air_mass_(astronomy)">Air mass (astronomy)</a>: the plane-parallel air mass is the secant of the zenith angle, and the air mass at the horizon is about 38.</p></div></div></section>
+<section id="linear-light" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="linear-light">Linear light</h3>
+<p>All lighting is computed in linear units, proportional to the amount of light, and only the last line converts to <a href="https://en.wikipedia.org/wiki/SRGB">sRGB</a>, the encoding screens expect. Doing arithmetic on encoded values is a classic error: the sRGB value 0.5 emits <span class="math inline">\big((0.5+0.055)/1.055\big)^{2.4}\approx 0.21</span> of white’s light, not half.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The <code>main()</code> below also averages several rays per pixel, which matters from step 7 on.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/SRGB">sRGB</a>: the transfer function, linear below 0.04045 and <span class="math inline">((C+0.055)/1.055)^{2.4}</span> above.</p></div></div><div class="vcode" data-step="1"></div>
+<details class="full" data-step="1"><summary>Full shader for step 1</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span> Each step ends with a box like this: what the step simplifies, when that is safe, and when it is not.</p>
+<dl>
+<dt>Cut</dt>
+<dd>
+No scattering physics in the sky: one blend parameter and two colours.
+</dd>
+<dt>Safe</dt>
+<dd>
+As a backdrop above mountains; the photo shows sky only well above the horizon.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Sunsets, open horizons, or any scene where the sky must agree with the light on the ground. Those need a physically based sky model, such as <a href="https://diglib7.eg.org/bitstream/handle/10.1111/cgf14050/v39i4pp013-022.pdf">Hillaire’s</a>.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-2" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-2">Step 2 · The first mountain</h2>
+<p>A mountain without overhangs is the graph of a function. We shape one, then find where each ray first meets it.</p>
+<div class="added" data-step="2">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+A smooth grey volcano with a shoulder on the right, a spur in the middle, and a flat ledge on the right where a bowl is cut into the flank. The sun is the only light, so faces turned away from it are black.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="2">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 2</button><button type="button" data-view="prev">Step 1</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step2.jpg" alt="A smooth grey clay volcano lit from the right; faces turned away from the sun are black." width="960" height="720" class="figure-img"><span class="tag">Step 2</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 2 × 2 rays per pixel</span>
+<span class="ctl"><select id="spp-2" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<section id="the-shape" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-shape">The shape</h3>
+<p>Mount Shasta is a <a href="https://en.wikipedia.org/wiki/Stratovolcano">stratovolcano</a>,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> a cone built of layered lava and ash: steep near the top and flattening into a broad apron, so its profile curves upward. An exponential decay does this with a height <span class="math inline">H_0</span> and a decay length <span class="math inline">\lambda</span>:</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Mount_Shasta">Mount Shasta</a>: “a potentially active stratovolcano”.</p></div></div><p><span class="math display">
+\begin{gathered}
+h_0(x,z) = H_0\exp\!\Big(-\sqrt{r^2+a^2}\,\big/\,\lambda\Big),\\
+r = \Big\lVert\Big(\tfrac{x-x_0}{2},\; z-z_0\Big)\Big\rVert,
+\end{gathered}
+</span></p>
+<p>where <span class="math inline">(x_0, z_0)</span> is the summit’s map position, <span class="math inline">H_0 = 3.67</span> km and <span class="math inline">\lambda = 1.64</span> km. The <span class="math inline">\sqrt{r^2+a^2}</span> rounds off the point at the summit over a radius <span class="math inline">a = 0.8</span> km, and dividing <span class="math inline">x - x_0</span> by 2 stretches the cone sideways into the broad massif of the photo. The cone alone peaks at <span class="math inline">H_0e^{-a/\lambda}\approx 2.25</span> km above the base plane, about 4.25 km above sea level, close to Shasta’s 4,322 m.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Three hand-placed landforms follow: a shoulder ridge to the right, a spur running toward the camera, and a flat-floored <a href="https://en.wikipedia.org/wiki/Cirque">cirque</a> (a bowl carved by a glacier) cut into the right flank, which we see almost edge-on, blended in with a smooth minimum, the minimum of two heights with its corner rounded off.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> These three are composition, placed by comparing renders with the photo; nothing about them is simulated.</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Mount_Shasta">Mount Shasta</a>: elevation 14,179 ft (4,322 m).</p></div><div id="fn6"><p><sup>6</sup>&nbsp;I. Quilez, <a href="https://iquilezles.org/articles/smin/">Smooth minimum</a>: the quadratic polynomial smooth minimum used here.</p></div></div><figure class="diagram figure"><svg id="vs-profile" role="img" aria-label="Profile of the base cone along the view axis, drawn to scale, with the camera and the edges of its field of view."></svg>
+<figcaption>The base cone h₀ cut through the summit, drawn to scale, with the local slope angle at four points. The dashed lines are the top and bottom edges of the 30° field of view. The camera stands 0.5 km to the side of this cut, so its position here is approximate.</figcaption></figure>
+</section>
+<section id="where-does-the-ray-hit" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="where-does-the-ray-hit">Where does the ray hit?</h3>
+<p>The ray meets the ground at the smallest <span class="math inline">t&gt;0</span> for which the point <span class="math inline">P(t)</span> lies on the surface, <span class="math inline">P_y = h(P_x, P_z)</span>. Write <span class="math inline">g(p) = p_y - h(p_x,p_z)</span> for the vertical gap between a point <span class="math inline">p</span> and the ground below it, positive above the ground. Stepping forward by the whole gap can jump through a steep slope; the safe step is smaller by a factor that depends only on how steep the terrain can be. “How steep” is measured by a <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">Lipschitz constant</a>: <span class="math inline">h</span> is <span class="math inline">L</span>-Lipschitz if <span class="math inline">|h(u)-h(v)|\le L\,\lVert u-v\rVert</span> for all map points <span class="math inline">u, v</span>, which says no slope anywhere is steeper than <span class="math inline">L</span>.</p>
+<div class="claim">
+<p><strong>Claim (safe step).</strong> Let <span class="math inline">h</span> be <span class="math inline">L</span>-Lipschitz and <span class="math inline">g(p)&gt;0</span>. Then every point <span class="math inline">q</span> on or below the surface satisfies <span class="math inline">\lVert p-q\rVert \ge g(p)/\sqrt{1+L^2}</span>.</p>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Write <span class="math inline">s = \lVert q_{xz} - p_{xz}\rVert</span> for the horizontal distance and <span class="math inline">g = g(p)</span>. Because <span class="math inline">q</span> is on or below the surface and <span class="math inline">h</span> is <span class="math inline">L</span>-Lipschitz, <span class="math inline">q_y \le h(q_{xz}) \le h(p_{xz}) + Ls = p_y - g + Ls</span>, so <span class="math inline">p_y - q_y \ge g - Ls</span>. If <span class="math inline">s\ge g/L</span>, then <span class="math inline">\lVert p-q\rVert \ge s \ge g/L \ge g/\sqrt{1+L^2}</span>. Otherwise <span class="math inline">g - Ls &gt; 0</span>, and by Pythagoras <span class="math inline">\lVert p-q\rVert^2 \ge s^2 + (g-Ls)^2</span>. This quadratic in <span class="math inline">s</span> is smallest at <span class="math inline">s^\ast = Lg/(1+L^2)</span>, where it equals <span class="math inline">g^2/(1+L^2)</span>. <span class="math inline">\blacksquare</span></p>
+</div>
+</div>
+</div>
+<figure class="diagram figure"><svg viewbox="0 0 360 205" role="img" aria-label="A point p above the terrain, its vertical gap g to the ground, the cone of slope L below p that the terrain must stay under, and the largest ball around p that fits above the cone.">
+<path class="fillg" d="M10,190 C50,182 90,160 125,152 C150,146 165,168 180,170 C195,172 215,140 240,132 C270,122 310,150 350,168 L350,205 L10,205 Z"></path>
+<path class="ink" stroke-width="1.6" d="M10,190 C50,182 90,160 125,152 C150,146 165,168 180,170 C195,172 215,140 240,132 C270,122 310,150 350,168"></path>
+<path class="scr" stroke-width="1.2" d="M60,50 L180,170 L300,50"></path>
+<circle class="acc" stroke-width="1.4" cx="180" cy="70" r="70.7"></circle>
+<line class="ink" stroke-dasharray="3 3" x1="180" y1="70" x2="180" y2="170"></line>
+<circle class="dot" cx="180" cy="70" r="3.5"></circle><circle class="dot" cx="180" cy="170" r="2.5"></circle>
+<text x="188" y="66">p</text><text x="186" y="124">g</text>
+<text x="300" y="44" text-anchor="end">slope L</text>
+<text x="252" y="104">safe ball</text>
+<text x="8" y="104" style="font-size:10px">terrain stays</text><text x="8" y="117" style="font-size:10px">below the cone,</text><text x="8" y="130" style="font-size:10px">outside the ball</text>
+</svg><figcaption>No slope is steeper than L, so the terrain stays below the cone of slope L drawn from the ground point under p (here L = 1). The largest ball around p that fits above that cone has radius g/√(1 + L²), so a step of that length cannot reach the ground.</figcaption></figure>
+<p>So the update <span class="math inline">t \leftarrow t + g/\sqrt{1+L^2}</span> never jumps through the ground, provided the terrain really is no steeper than <span class="math inline">L</span>. This is Hart’s sphere tracing<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> specialized to height fields. Allowing slopes up to <span class="math inline">L\approx 1.7</span> (60°) gives the factor 0.5 in <code>sceneStep</code>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;J. C. Hart, <a href="https://link.springer.com/article/10.1007/s003710050084">Sphere tracing: a geometric method for the antialiased ray tracing of implicit surfaces</a>, <em>The Visual Computer</em> 12 (1996), 527–545: stepping by a lower bound on the distance to the surface.</p></div><div id="fn8"><p><sup>8</sup>&nbsp;I. Quilez, <a href="https://iquilezles.org/articles/terrainmarching">Terrain raymarching</a>: the allowed error, and the step, grow linearly with the distance travelled.</p></div></div><p>The march moves by the safe step but stops on the gap itself, once <span class="math inline">|g|</span> is below <span class="math inline">0.0004\,t</span>. One pixel spans <span class="math inline">2\tan 15^\circ/720 \approx 7.4\times10^{-4}</span> radians, so at distance <span class="math inline">t</span> that tolerance is about half a pixel. Detail smaller than a pixel cannot be seen, which is the same reason Quilez lets the marching error grow with distance.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> If a step does land below ground, the gap turns negative and the next step walks back; step 6 shows where our terrain breaks the budget and what that costs.</p>
+</section>
+<section id="the-normal" class="level3">
+<h3 class="anchored" data-anchor-id="the-normal">The normal</h3>
+<p>Shading needs the surface’s normal, the unit vector perpendicular to it. Write <span class="math inline">h_x</span> and <span class="math inline">h_z</span> for the slopes of <span class="math inline">h</span> in the <span class="math inline">x</span> and <span class="math inline">z</span> directions (its partial derivatives). Walking one unit in <span class="math inline">x</span> along the surface moves you by <span class="math inline">(1, h_x, 0)</span>, and one unit in <span class="math inline">z</span> by <span class="math inline">(0, h_z, 1)</span>; the vector <span class="math inline">(-h_x,\,1,\,-h_z)</span> has zero dot product with both, so it is perpendicular to the surface, and dividing by its length gives the normal. The shader estimates each slope from two nearby heights, <span class="math inline">h_x \approx \big(h(x+\varepsilon, z) - h(x-\varepsilon, z)\big)/2\varepsilon</span>, with <span class="math inline">\varepsilon = 0.0005\,t + 0.0002</span> km, about one pixel wide at distance <span class="math inline">t</span>, so detail finer than a pixel does not leak into the shading.</p>
+</section>
+<section id="light-for-now" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="light-for-now">Light, for now</h3>
+<p>For now the sun is the only light. By <a href="https://en.wikipedia.org/wiki/Lambert%27s_cosine_law">Lambert’s cosine law</a>, a face receives sunlight in proportion to <span class="math inline">\max(0,\,n\cdot\ell)</span>, the cosine of the angle between its normal <span class="math inline">n</span> and the direction <span class="math inline">\ell</span> toward the sun. The sun here stands almost exactly to our right, slightly behind us, 30° above the horizon. Faces turned away from it get nothing and come out black. That is what an airless world looks like: shadows on the Moon are nearly black because it has no air to scatter sunlight into them.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Step 4 adds our sky.</p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;S. Braden, <a href="https://www.lroc.asu.edu/images/476">Sunset Boulder</a>, Lunar Reconnaissance Orbiter Camera, Arizona State University (2012): “The Moon has no atmosphere to scatter light, so a shadowed area on the Moon is as dark as night.”</p></div></div><div class="vcode" data-step="2"></div>
+<details class="full" data-step="2"><summary>Full shader for step 2</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+A height field cannot overhang, arch or hollow out. The large forms are placed by hand. The Lipschitz constant is a budget chosen by hand, not checked, and from step 3 on the terrain breaks it in places (step 6).
+</dd>
+<dt>Safe</dt>
+<dd>
+Mountains seen from kilometres away, and any terrain whose cliffs never lean past vertical.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Close-up cliffs, arches, sea stacks. Keep the same loop but march a full 3D signed distance function (the distance to the nearest surface point, negative inside) instead of <span class="math inline">y - h</span>.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-3" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-3">Step 3 · Ridges and gullies</h2>
+<p>Real terrain has detail at every scale, with smaller features lower. Fractal noise supplies that, and lining it up with the downhill direction turns it into gullies.</p>
+<div class="added" data-step="3">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+Ribs and gullies running down from the summit, and fine lumps everywhere. The left side of each rib faces away from the sun and comes out dark.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="3">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 3</button><button type="button" data-view="prev">Step 2</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step3.jpg" alt="The clay volcano now covered in ribs and gullies that run down from the summit; their left sides are dark." width="960" height="720" class="figure-img"><span class="tag">Step 3</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 2 × 2 rays per pixel</span>
+<span class="ctl"><select id="spp-3" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<section id="value-noise" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="value-noise">Value noise</h3>
+<p>Value noise puts a pseudo-random number at every point of an integer grid, computed from the point’s coordinates by a hash function (a formula that turns coordinates into a random-looking but repeatable number),<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> and blends the four corner values <span class="math inline">a, b, c, d</span> of each grid cell. At position <span class="math inline">(\xi, \eta)\in[0,1)^2</span> inside the cell,</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;D. Hoskins, <a href="https://www.shadertoy.com/view/4djSRW">Hash without Sine</a> (Shadertoy): the hash functions <code>hash12</code> and <code>hash22</code> used here.</p></div></div><p><span class="math display">
+n = \big(1-\varphi(\eta)\big)\Big[\big(1-\varphi(\xi)\big)a + \varphi(\xi)\,b\Big] + \varphi(\eta)\Big[\big(1-\varphi(\xi)\big)c + \varphi(\xi)\,d\Big],
+</span></p>
+<p>with the fade curve</p>
+<p><span class="math display">
+\begin{gathered}
+\varphi(t) = 6t^5 - 15t^4 + 10t^3,\\
+\varphi'(t) = 30t^2(t-1)^2,\qquad \varphi''(t) = 60t(2t-1)(t-1).
+\end{gathered}
+</span></p>
+<p>Both derivatives vanish at <span class="math inline">t = 0</span> and <span class="math inline">t = 1</span>, so the noise is twice continuously differentiable across cell borders. The older fade <span class="math inline">3t^2 - 2t^3</span> has a second derivative that jumps at the borders. The normal is built from the first derivative, so such a jump is a sudden change in how fast the shading changes, and the eye sees it as a crease. This quintic is Perlin’s fix.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;K. Perlin, <a href="https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-5-implementing-improved-perlin-noise">Implementing Improved Perlin Noise</a>, <em>GPU Gems</em>, ch.&nbsp;5 (2004): replaces <span class="math inline">3t^2-2t^3</span> by <span class="math inline">6t^5-15t^4+10t^3</span> so the second derivative is continuous.</p></div></div></section>
+<section id="fractal-sums" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="fractal-sums">Fractal sums</h3>
+<p>A fractal sum adds copies of the noise, called octaves, each with double the frequency and half the amplitude of the one before. It imitates the statistics of <a href="https://en.wikipedia.org/wiki/Fractional_Brownian_motion">fractional Brownian motion</a>, a standard random model of rough terrain, and is usually called fBm:</p>
+<p><span class="math display">
+\begin{gathered}
+\operatorname{fbm}(x) = \sum_{i=0}^{N-1} G^{\,i+1}\,\big(2\,n(M^i x) - 1\big),\\
+G = \tfrac12,\qquad M = 2\begin{pmatrix}0.8 &amp; 0.6\\ -0.6 &amp; 0.8\end{pmatrix},
+\end{gathered}
+</span></p>
+<p>where <span class="math inline">n</span> is the value noise, so each term lies in <span class="math inline">[-G^{i+1}, G^{i+1}]</span> and the sum stays within <span class="math inline">[-1, 1]</span>. Halving the amplitude at each doubling of frequency corresponds to a Hurst exponent of 1 (the exponent that sets how fast detail shrinks with scale; fBm proper needs it below 1, so 1 is the limiting case), and Quilez reports that the skylines of real mountains he measured fit that value.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> The matrix <span class="math inline">M</span> also rotates each octave by <span class="math inline">\arctan(3/4)\approx 36.9^\circ</span>, so the grids of different octaves do not line up into a visible pattern. <em>Ridged</em> noise replaces each octave <span class="math inline">n</span> by <span class="math inline">(1 - |2n-1|)^2</span>: folding the noise at its midpoint turns every place where it crosses ½ into a sharp crest.</p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;I. Quilez, <a href="https://iquilezles.org/articles/fbm/">fBm</a>: G = 1/2 “corresponds to H=1”, and from photographed skylines, “mountain profiles follow a -9dB/octave frequency distribution, which corresponds with B=-3 or H=1 or G=0.5”; he calls this “not a rigorous/scientific experiment”.</p></div></div></section>
+<section id="gullies-run-downhill" class="level3">
+<h3 class="anchored" data-anchor-id="gullies-run-downhill">Gullies run downhill</h3>
+<p>Water and debris flow straight downhill. On a round cone downhill points directly away from the summit; ours is stretched sideways, so on its flanks the true downhill direction is up to about 37° off the radial one, but radial lines are close enough for the eye. The shader therefore samples ridged noise in polar coordinates <span class="math inline">(\psi, r)</span> around the summit, with <span class="math inline">r</span> the stretched distance of step 2:</p>
+<p><span class="math display">
+h_{\text{gullies}}(x) = 0.34\,\rho(r)\,\operatorname{ridged}(3.5\,\psi,\ 0.7\,r),
+</span></p>
+<p>where the radial weight <span class="math inline">\rho(r)</span> (<code>fade</code> in the code) is 0 at the summit and dies away on the far apron. That is 3.5 grid cells per radian around the mountain and 0.7 cells per kilometre downhill: each cell is long in the downhill direction and narrow across it, so the crests come out as long radial ribs. These octaves are scaled without rotation, because a rotation would mix <span class="math inline">\psi</span> with <span class="math inline">r</span> and destroy the alignment. The angle is measured so that <span class="math inline">\psi = 0</span> points toward the camera, which hides the seam, where the angle jumps from <span class="math inline">\pi</span> to <span class="math inline">-\pi</span>, behind the summit. A broad seven-octave fBm adds lumps of about 35 m everywhere.</p>
+<div class="vcode" data-step="3"></div>
+<details class="full" data-step="3"><summary>Full shader for step 3</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+This is the look of erosion, not erosion. Real drainage branches and merges downhill and leaves fans of debris at the bottom; these ribs run side by side and only widen with distance. Value noise is also slightly blockier than gradient (Perlin) noise; the octave rotation hides most of it. And the ribs are steeper in places than the march’s slope budget (step 6).
+</dd>
+<dt>Safe</dt>
+<dd>
+Oblique views from a distance, where the eye reads “ribs and gullies”.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Map views and flyovers. Simulate hydraulic erosion once and store the result in a texture.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-4" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-4">Step 4 · Sky light and shadows</h2>
+<p>Steps 2 and 3 had one light, the sun, shining straight through solid rock. Daylight adds the blue sky, which lights every face from above, and a little light bounced off the ground. And terrain blocks the sun, which makes shadows.</p>
+<div class="added" data-step="4">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+The dark faces turn blue-grey, because the sky now lights them, and sunlit faces brighten slightly and turn faintly bluer. Cast shadows are rare in this view; the text explains why.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="4">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 4</button><button type="button" data-view="prev">Step 3</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step4.jpg" alt="The same clay volcano with the dark faces filled by bluish sky light." width="960" height="720" class="figure-img"><span class="tag">Step 4</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 2 × 2 rays per pixel</span>
+<span class="ctl"><select id="spp-4" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<p>The new function <code>shade()</code> sums three terms: sunlight (now slightly yellow, and multiplied by a shadow factor), sky light, and light bounced off the ground. The sky’s blue outweighs the sun’s slight yellow, so even sunlit faces end up faintly bluer. Switch between “Step 4” and “Step 3” above: the change sits in the faces that were dark, which now pick up blue-grey light from the sky. The same term is why snow in shade will look blue in step 5.</p>
+<section id="how-much-sky-does-a-slope-see" class="level3">
+<h3 class="anchored" data-anchor-id="how-much-sky-does-a-slope-see">How much sky does a slope see?</h3>
+<p>A flat patch of ground sees the whole sky; a vertical wall sees half of it. The amount of light arriving per unit area, the <a href="https://en.wikipedia.org/wiki/Irradiance">irradiance</a>, has an exact formula for a uniform sky, in terms of the sky’s radiance <span class="math inline">B</span>, its brightness per unit <a href="https://en.wikipedia.org/wiki/Solid_angle">solid angle</a>.</p>
+<div class="claim">
+<p><strong>Claim (sky view factor).</strong> Under a sky of uniform radiance <span class="math inline">B</span> filling the upper hemisphere, a surface with unit normal <span class="math inline">n</span> receives irradiance <span class="math inline">E = \pi B\,(1+n_y)/2</span>.</p>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Light from direction <span class="math inline">\omega</span> arrives at a slant, so it counts with weight <span class="math inline">\max(0, n\cdot\omega)</span>. Let <span class="math inline">\Omega_{\text{sky}} = \int_{\omega_y&gt;0} \max(0, n\cdot\omega)\,d\omega</span> and <span class="math inline">\Omega_{\text{gnd}} = \int_{\omega_y&lt;0} \max(0, n\cdot\omega)\,d\omega</span> be the weighted solid angles of sky and ground seen by the surface. Together they cover the sphere, so <span class="math inline">\Omega_{\text{sky}} + \Omega_{\text{gnd}} = \int_{S^2}\max(0,n\cdot\omega)\,d\omega = \pi</span>. The substitution <span class="math inline">\omega\mapsto-\omega</span> gives <span class="math inline">\Omega_{\text{gnd}} = \int_{\omega_y&gt;0}\max(0,-n\cdot\omega)\,d\omega</span>, and since <span class="math inline">\max(0,a) - \max(0,-a) = a</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+\Omega_{\text{sky}} - \Omega_{\text{gnd}} &amp;= \int_{\omega_y&gt;0} n\cdot\omega\,d\omega = n\cdot\!\int_{\omega_y&gt;0}\omega\,d\omega\\
+&amp;= n\cdot(\pi\,\hat y) = \pi n_y.
+\end{aligned}
+</span></p>
+<p>The last integral is <span class="math inline">\pi\hat y</span> because the horizontal components cancel by symmetry and <span class="math inline">\int_{\omega_y&gt;0}\omega_y\,d\omega = \pi</span>. Hence <span class="math inline">\Omega_{\text{sky}} = \pi(1+n_y)/2</span> and <span class="math inline">E = B\,\Omega_{\text{sky}}</span>. <span class="math inline">\blacksquare</span></p>
+</div>
+</div>
+</div>
+<p>The same computation gives <span class="math inline">\Omega_{\text{gnd}} = \pi(1-n_y)/2</span>, the weight for light from a uniform ground. So the shader’s <code>0.5 + 0.5*n.y</code> and <code>0.5 - 0.5*n.y</code> are exact for a uniform sky and a uniform ground, with <span class="math inline">\pi</span> folded into the colour constants.</p>
+</section>
+<section id="soft-shadows" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="soft-shadows">Soft shadows</h3>
+<p>To test for shadow, march from the surface point toward the sun. A sample at distance <span class="math inline">t</span> with vertical gap <span class="math inline">g</span> is at least <span class="math inline">b = 0.5\,g</span> from every surface (the safe step of step 2, valid wherever no slope exceeds <span class="math inline">L</span>; see step 6), so the ray clears every obstacle there by an angle of at least about <span class="math inline">b/t</span>. The sun’s disk has an angular radius of about 0.0047 radians, so when that clearance estimate is smaller than the disk, part of the sun may be hidden: the point may be in <a href="https://en.wikipedia.org/wiki/Umbra,_penumbra_and_antumbra">penumbra</a>. Tracking the smallest value of <span class="math inline">k\,b/t</span> along the march gives a cheap penumbra.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> We use <span class="math inline">k = 10</span>: the shadow fades in over clearance angles from 0 to 0.1 radians, about 11 times the sun’s angular diameter of 0.0093 radians. The wide edge crudely stands in for the sky light that a nearby ridge also blocks.</p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;I. Quilez, <a href="https://iquilezles.org/articles/rmshadows/">Soft shadows in raymarched SDFs</a>: the shadow factor min(k·h/t) over the march, with k setting the penumbra’s softness.</p></div></div><p>Cast shadows are rare in this particular view. On a height field, a point is in shadow exactly when the terrain in the sun’s direction rises, as seen from that point, higher than the sun’s elevation, here 30°. Few slopes here rise toward the sun, which is to our right, more steeply than that: about 1 % of the map area between us and the summit. The cone is stretched sideways, so the smooth cone’s slope in that direction stays under about 22°. As a result, fewer than 0.1 % of the pixels get noticeably darker (by more than 15 of 255 levels) from step 3 to step 4: a few gully walls near the summit. The same function makes the shadows that are visible later: every tree casts one in step 7, and the cloud casts one in step 9.</p>
+<div class="vcode" data-step="4"></div>
+<details class="full" data-step="4"><summary>Full shader for step 4</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+No ambient occlusion: a gully floor gets the same sky light as an open ridge. The sky is treated as uniform, though it is brighter near the sun and the horizon. The shadow factor is a heuristic, not an integral over the sun’s disk.
+</dd>
+<dt>Safe</dt>
+<dd>
+Open slopes in daylight.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Deep valleys, forest floors, overhangs: they come out too bright. Add occlusion by tracing a few rays into the sky above each point.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-5" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-5">Step 5 · Rock, grass and snow</h2>
+<p>Colour comes from material, and the material can be read off the geometry: altitude, slope, and whether a spot is a rib or a gully.</p>
+<div class="added" data-step="5">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+Snow above a ragged line, pink talus with red streaks, dark rock on ribs and steep faces, and patches of grass low down.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="5">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 5</button><button type="button" data-view="prev">Step 4</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step5.jpg" alt="The volcano coloured: snow above a ragged line, pink talus with red streaks, dark rock on ribs, patches of grass." width="960" height="720" class="figure-img"><span class="tag">Step 5</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 2 × 2 rays per pixel</span>
+<span class="ctl"><select id="spp-5" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<p>Each material has an <a href="https://en.wikipedia.org/wiki/Albedo">albedo</a>, the fraction of light it reflects, one number per colour channel. Snow reflects 85–92 % here, in line with about 0.8–0.9 for fresh snow;<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a> the rocks reflect from about 6 % (dark lava) to 34 % (the red channel of the pale talus), mottled by up to 25 % either way. The rock colours were tuned by eye against the photo.</p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Albedo">Albedo</a>: fresh snow about 0.80–0.90.</p></div></div><section id="slope-decides-rock" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="slope-decides-rock">Slope decides rock</h3>
+<p>The shader measures steepness by <span class="math inline">1 - n_y</span>, where <span class="math inline">n_y</span> is the cosine of the slope angle: 0 on flat ground, 0.29 at 45°, 0.5 at 60°. Loose broken rock, called scree or talus, comes to rest at or below its angle of repose, the steepest angle at which a pile stays put: about 45° for crushed stone, and as little as 25–30° for rounded gravel mixed with sand.<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> Talus slopes are typically somewhat gentler still.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a> Faces steeper than about 45° therefore shed their loose cover and show bare rock, so the colour moves toward dark rock as <span class="math inline">1 - n_y</span> goes from 0.30 to 0.55 (46° to 63°).</p>
+<div class="no-row-height column-margin column-container"><div id="fn15"><p><sup>15</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Angle_of_repose">Angle of repose</a>, table of materials: “Gravel (crushed stone) 45°”, “Gravel (natural w/ sand) 25–30°”.</p></div><div id="fn16"><p><sup>16</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Scree">Scree</a>: “Scree slopes are often assumed to be close to the angle of repose”, but “most scree slopes are less steep”.</p></div></div></section>
+<section id="shape-decides-snow" class="level3">
+<h3 class="anchored" data-anchor-id="shape-decides-snow">Shape decides snow</h3>
+<p>Snow and debris collect in gullies, while wind clears the ribs. A discrete <a href="https://en.wikipedia.org/wiki/Laplace_operator">Laplacian</a> tells the two apart. For a smooth <span class="math inline">h</span> and a small spacing <span class="math inline">\delta</span>, <a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor expansion</a> gives, with <span class="math inline">\hat\imath</span> a unit vector along one map axis and <span class="math inline">O(\delta^4)</span> standing for terms no bigger than a constant times <span class="math inline">\delta^4</span>,</p>
+<p><span class="math display">
+h(x+\delta\hat\imath) + h(x-\delta\hat\imath) = 2h(x) + \delta^2\,\partial_i^2 h(x) + O(\delta^4),
+</span></p>
+<p>so the convexity</p>
+<p><span class="math display">
+\begin{aligned}
+\kappa(x) &amp;= h(x) - \frac14\sum_{\hat\imath = \hat x,\,\hat z}\big(h(x+\delta\hat\imath) + h(x-\delta\hat\imath)\big)\\
+&amp;= -\frac{\delta^2}{4}\,\Delta h(x) + O(\delta^4)
+\end{aligned}
+</span></p>
+<p>is positive on crests, where <span class="math inline">\Delta h &lt; 0</span>, and negative in gullies. We use <span class="math inline">\delta = 60</span> m. Our ridged crests are kinks rather than smooth, and 60 m is not small, so <span class="math inline">\kappa</span> is really a Laplacian measured at a 60 m scale; it still has the right sign on crests and gullies of that size. The snow line becomes <span class="math inline">y_{\text{snow}} + 0.25\,\operatorname{fbm} + 0.25\,\hat\kappa</span>, where <span class="math inline">\hat\kappa</span> is <span class="math inline">\kappa</span> scaled and clipped to <span class="math inline">[-1, 1]</span>: the line dips down the gullies and rises on the ribs, as in the photo. Snow also needs a face gentle enough to hold it: here it fades out as the slope goes from 40° to 55°.</p>
+</section>
+<section id="the-rest" class="level3">
+<h3 class="anchored" data-anchor-id="the-rest">The rest</h3>
+<p>The reddish rock in the photo streaks downhill like the gullies, so its pattern uses the same polar coordinates, kept to middle altitudes. Ribs, where <span class="math inline">\hat\kappa</span> is large, also expose dark rock. Grass appears only where the ground is low, flat and favoured by the noise.</p>
+<div class="vcode" data-step="5"></div>
+<details class="full" data-step="5"><summary>Full shader for step 5</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+Material depends only on local geometry, not history: no wind, no melting on sun-facing slopes, no avalanche paths.
+</dd>
+<dt>Safe</dt>
+<dd>
+A single sunny view, where those effects are small.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Seasonal or time-lapse scenes. Add a melt term that grows with <span class="math inline">n\cdot\ell</span> and an avalanche term that grows with the area draining into each point.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-6" class="level2">
+<h2 class="anchored" data-anchor-id="step-6">Step 6 · The second mountain</h2>
+<p>Height fields combine by addition: a second bump on the volcano’s apron becomes the <a href="https://en.wikipedia.org/wiki/Butte">butte</a> (an isolated hill) in the foreground. To stand out from the slope behind it, the butte also needs a material of its own.</p>
+<div class="added" data-step="6">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+A second, smaller mountain in the foreground: the butte, covered in brown soil.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="6">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 6</button><button type="button" data-view="prev">Step 5</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step6.jpg" alt="A brown, soil-covered butte now rises in the foreground in front of the snowy volcano." width="960" height="720" class="figure-img"><span class="tag">Step 6</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 2 × 2 rays per pixel</span>
+<span class="ctl"><select id="spp-6" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<p>The butte is a rotated, stretched Gaussian dome, <span class="math inline">h_b(x) = H_b\exp\!\big(-\lVert S^{-1}R\,(x-x_b)\rVert^2\big)</span>, where <span class="math inline">x_b</span> is its centre, <span class="math inline">R</span> a rotation, and <span class="math inline">S</span> a diagonal matrix holding the semi-axes, 1.3 km and 1.15 km; its height is <span class="math inline">H_b = 0.46</span> km. Its lumps are proportional to the dome, so the flat ground around it stays flat:</p>
+<p><span class="math display">
+\begin{aligned}
+h = {}&amp; h_{\text{volcano}} + h_{\text{gullies}}\\
+&amp;+ h_b\,(1 + 0.12\,\operatorname{fbm}) + 0.035\,\operatorname{fbm}.
+\end{aligned}
+</span></p>
+<p>It was placed by projecting candidate positions through the step-1 camera and comparing with the photo, where the butte’s crest sits a little right of centre, just below the middle of the frame.</p>
+<section id="shape-alone-is-not-enough" class="level3">
+<h3 class="anchored" data-anchor-id="shape-alone-is-not-enough">Shape alone is not enough</h3>
+<p>A first version gave the butte the same talus as the slope behind it. Its top lies below the camera, so its outline falls against that slope, and with no change of tone across the outline it vanished: steps 5 and 6 were hard to tell apart. An edge is visible only where tone or colour changes across it. So <code>groundAlbedo</code> gets one new section: wherever the dome <code>butteDome</code> is more than about 40 m high, the ground fades to a weathered brown soil. The model treats the butte as older ground than the fresh talus around it, and step 7 uses the same assumption to grow a denser forest there. That is a modelling choice made to match the photo, not a fact about the real butte.</p>
+<p>The “What changed” map also shows faint speckle on the volcano, about 5 % of its pixels. Most of it is rounding: a changed <code>terrain()</code> compiles to slightly different arithmetic, which moves some hit points by a fraction of a pixel onto a different grain of the fine rock texture. The butte adds a little too, because a Gaussian is never exactly zero: it raises the ground by about 0.6 m 3 km from its centre toward the summit and by 6 cm at 3.5 km, but by only about <span class="math inline">10^{-8}</span> m at the summit, far below the 0.2 mm resolution of the arithmetic at that height, so on the upper volcano only the rounding remains.</p>
+</section>
+<section id="the-cost-of-adding-terrain" class="level3">
+<h3 class="anchored" data-anchor-id="the-cost-of-adding-terrain">The cost of adding terrain</h3>
+<p>Lipschitz constants add: <span class="math inline">\operatorname{Lip}(h_1+h_2)\le\operatorname{Lip}(h_1)+\operatorname{Lip}(h_2)</span>. A Gaussian bump <span class="math inline">H_b e^{-s^2/w^2}</span> has slope <span class="math inline">H_b\,(2s/w^2)\,e^{-s^2/w^2}</span>, largest at <span class="math inline">s = w/\sqrt2</span>, where it equals <span class="math inline">H_b\sqrt2/(w\sqrt e)\approx 0.34</span> for the shorter semi-axis <span class="math inline">w = 1.15</span> km. So the butte fits the budget <span class="math inline">L\approx 1.7</span> easily. The gullies of step 3 do not: with gain ½ each octave has half the amplitude and twice the frequency of the one before, so every octave has the same maximum slope, and the slopes of the six octaves add up. Sampling the terrain on a fine grid finds slopes steeper than 60° on about 10 % of our side of the mountain between 0.5 and 1 km (in the stretched distance of step 2) from the summit, which is the upper snowfield in the picture, and on 0.7 % of the whole camera-facing half; the steepest reach a slope of about 6.5 (81°).</p>
+<p>There a step can overshoot. If it lands below ground, the gap turns negative and the march steps back, which is why the stopping test uses the absolute value of the gap; it then finds a crossing, though not always the first. A step that passes clean through a thin crest is not caught at all. In practice this is rare (see the fold), but it is exactly what library item 1 below would catch: it would flag the gullies today.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Details: how rare
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A simulation of the step-6 march at 320 × 240 pixels, compared with a slow march whose factor 0.12 is safe up to slope 8.3: 0.5 % of the rays that hit the ground overshoot at least once, 0.02 % stop more than 1 % nearer or farther than the slow march, and none more than 5 %.</p>
+</div>
+</div>
+</div>
+<div class="vcode" data-step="6"></div>
+<details class="full" data-step="6"><summary>Full shader for step 6</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+The butte has no geology of its own: no gullies, no relation to the volcano’s lava flows.
+</dd>
+<dt>Safe</dt>
+<dd>
+Once the forest covers it in the next step.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Bare foreground terrain, which needs its own erosion.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-7" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-7">Step 7 · The forest</h2>
+<p>At this distance a conifer is a cone a few pixels wide. Scatter cones on an 11 m grid, keep each one with a probability that depends on where it stands, and add their height to the ground.</p>
+<div class="added" data-step="7">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+Forest over the butte and scattered groves on the apron. Each tree’s unlit side and its cast shadow, which falls on its neighbours and the ground between them, give the forest its dark speckle.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="7">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 7</button><button type="button" data-view="prev">Step 6</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step7.jpg" alt="Dense conifers cover the butte and scattered groves dot the talus apron." width="960" height="720" class="figure-img"><span class="tag">Step 7</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 3 × 3 rays per pixel</span>
+<span class="ctl"><select id="spp-7" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<section id="placing-trees" class="level3">
+<h3 class="anchored" data-anchor-id="placing-trees">Placing trees</h3>
+<p>Divide the map into 11 m cells. Each cell holds at most one tree, and hashes of the cell’s index decide whether the tree exists (with probability equal to the forest density at the cell’s centre, so a tree is either all there or not at all), where its trunk stands in the cell, and how big it is: 13 to 24 m tall, with a crown radius of 3.3 to 5.5 m. The canopy height is the tallest cone over the point, <span class="math inline">C(x) = \max_k H_k\,\big(1 - \lVert x-q_k\rVert/R_k\big)_+</span>, where tree <span class="math inline">k</span> has trunk position <span class="math inline">q_k</span>, height <span class="math inline">H_k</span> and crown radius <span class="math inline">R_k</span>, and <span class="math inline">(\cdot)_+</span> means “or 0 if negative”.</p>
+<div class="claim">
+<p><strong>Claim (four cells suffice).</strong> If every crown radius satisfies <span class="math inline">R_k\le \tfrac12\,\text{CELL}</span>, then a tree covering <span class="math inline">x</span> lies in one of the 2 × 2 cells whose lower-left index is <span class="math inline">\lfloor x/\text{CELL} - \tfrac12\rfloor</span>.</p>
+</div>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Work in one coordinate and write <span class="math inline">u = x_i/\text{CELL}</span>. A tree in cell <span class="math inline">k</span> has its trunk at <span class="math inline">q_{k,i}\in\big[k_i\,\text{CELL},\,(k_i+1)\,\text{CELL}\big)</span>. If it covers <span class="math inline">x</span>, then <span class="math inline">|x_i - q_{k,i}| &lt; R_k \le \text{CELL}/2</span>, so <span class="math inline">k_i \le q_{k,i}/\text{CELL} &lt; u + \tfrac12</span> and <span class="math inline">k_i + 1 &gt; q_{k,i}/\text{CELL} &gt; u - \tfrac12</span>. The integers strictly between <span class="math inline">u - \tfrac32</span> and <span class="math inline">u + \tfrac12</span> lie in <span class="math inline">\{\lfloor u-\tfrac12\rfloor,\ \lfloor u-\tfrac12\rfloor + 1\}</span>. <span class="math inline">\blacksquare</span></p>
+</div>
+</div>
+</div>
+<p>A first version kept each trunk at least <span class="math inline">R_k</span> from its cell’s edge, so that only one cell needed checking. The trees then sat on a visible grid, in rows. Letting trunks roam the whole cell costs four lookups and removes the rows.</p>
+<p>The density is broken into groves and clearings by fBm and raised on the butte, using the step-6 assumption that it carries older soil; that term names the butte explicitly, so it is art direction rather than a rule. Trees also shrink with altitude over the last 0.5 km of ground height below the tree line <span class="math inline">y_{\text{tree}}</span>, reaching zero height at it.</p>
+</section>
+<section id="marching-through-steep-cones" class="level3">
+<h3 class="anchored" data-anchor-id="marching-through-steep-cones">Marching through steep cones</h3>
+<p>The steepest possible cone, 24 m tall with a 3.3 m radius, has slope about 7.3; on top of the ground’s 1.7, the surface’s slope can reach about <span class="math inline">7.3 + 1.7 = 9</span>, since Lipschitz constants add (step 6); shrinking the trees toward the tree line adds at most about 0.12. Feeding that into the step-2 bound would shrink the factor from 0.5 to <span class="math inline">1/\sqrt{1+9^2}\approx 0.11</span>; the code uses 0.1, which leaves a margin, since it is safe up to slope 9.95. Using that factor everywhere would make every ray about five times slower.</p>
+<p>Instead, take the largest of three lower bounds on the distance to the surface, writing <span class="math inline">h</span> for the ground height under <span class="math inline">p</span> and <span class="math inline">H_{\max} = 24</span> m for the tallest tree. First, the surface lies under the envelope <span class="math inline">y = h + H_{\max}</span>, which has the ground’s slope, so the safe step to the envelope is a lower bound. Second, trees grow only where the ground is below the tree line <span class="math inline">y_{\text{tree}}</span>, so every crown lies below the height <span class="math inline">y_{\text{tree}} + H_{\max}</span>. The surface is the bare ground together with the crowns, and the distance to two sets together is the smaller of the distances to each; so the smaller of the ground’s own safe step and the height above <span class="math inline">y_{\text{tree}} + H_{\max}</span> is a lower bound. Third, the steep bound with factor 0.1. The largest of several lower bounds is still a lower bound:</p>
+<p><span class="math display">
+\begin{aligned}
+\operatorname{dist}(p) \;\ge\; \max\Big(&amp;0.5\,\big(p_y - h - H_{\max}\big),\\
+&amp;\min\big(0.5\,(p_y - h),\ p_y - y_{\text{tree}} - H_{\max}\big),\\
+&amp;0.1\,\big(p_y - h - C\big)\Big).
+\end{aligned}
+</span></p>
+<p>Above the canopy the first term wins and above the tree line the second. Within about 30 m of any ground below the tree line, forest or clearing, the 0.1 term takes over and the march slows down. That covers the lower part of the picture, and step 7 costs about 6.4 times as much per ray as step 6 in the render times at the end: the final approach takes many small steps, and every canopy evaluation looks up the density of four cells.</p>
+<p>The shadow march of step 4 moves by the same safe step, so the trees cast shadows with no extra code. With the sun 30° up, a 20 m tree’s shadow is <span class="math inline">20/\tan 30^\circ \approx 35</span> m long, which on the butte, 2 km away, spans about 23 pixels of the 960-pixel-wide image. Its clearance estimate stays <span class="math inline">0.5\,g</span>, though, with <span class="math inline">g</span> now the gap to the canopy. Read as a clearance, the cautious 0.1 step would make every patch of open ground below the tree line look like a near miss and dim its sunlight by up to about half. Near a crown, <span class="math inline">0.5\,g</span> overestimates the clearance, so tree shadows get hard edges; here that is close to the truth, since the sun’s disk blurs the edge of a tree’s shadow by under a metre, well below a pixel (about 1.5 m at 2 km).</p>
+</section>
+<section id="enough-rays-per-pixel" class="level3">
+<h3 class="anchored" data-anchor-id="enough-rays-per-pixel">Enough rays per pixel</h3>
+<p>From this step on, the pre-rendered images average a 3 × 3 grid of rays spread over each pixel’s area (steps 1–6 use 2 × 2), and each ray is a full render, so an image costs 9 times as much as with one ray. With one ray per pixel, a pixel is all tree or all ground depending on where its single ray lands, so trees one or two pixels wide turn into random speckle (and flicker when the camera moves); averaging over the pixel (<a href="https://en.wikipedia.org/wiki/Supersampling">supersampling</a>) blends them into a steady texture. The faint lines along the volcano’s ribs in this step’s change map come from that switch, which resamples sharp edges. The averaging loop in <code>main()</code> has been there since step 1.</p>
+</section>
+<section id="which-pixels-are-trees" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="which-pixels-are-trees">Which pixels are trees?</h3>
+<p>A hit counts as foliage when it lies under a crown, that is, when <span class="math inline">C &gt; 0</span> at its map point. Testing the hit’s height above the ground instead fails at a distance, because the march stops up to <span class="math inline">0.0004\,t</span> above the surface, which is 3 m at 7 km. Each tree gets its own shade of green from a random number. The needle colour is darker than measured whole-forest albedos for conifers, about 0.08–0.15;<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> it was tuned by eye to the photo, and that is a fudge.</p>
+<div class="no-row-height column-margin column-container"><div id="fn17"><p><sup>17</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Albedo">Albedo</a>: coniferous forest about 0.08–0.15.</p></div></div><div class="vcode" data-step="7"></div>
+<details class="full" data-step="7"><summary>Full shader for step 7</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+Trees are cones in a height field: no overhanging branches, no light through the crowns, no trunks, and on slopes they lean with the ground.
+</dd>
+<dt>Safe</dt>
+<dd>
+Beyond about 100 m, where a tree covers a few pixels.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Close-ups. Use instanced tree meshes (three.js) or 3D distance-field trees. Trees narrower than a pixel also turn into speckle unless several rays per pixel are averaged, as in the 3 × 3 images from this step on.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-8" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-8">Step 8 · Air between us and the peak</h2>
+<p>Light from a far slope is partly scattered out of its path and partly replaced by sunlight scattered toward us by the air. Distant things turn bluer and flatter.</p>
+<div class="added" data-step="8">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+A light blue haze over the far slopes, thickest toward the summit. The dark near forest turns visibly bluer too, and in screen values it changes the most (the text explains why).
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="8">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 8</button><button type="button" data-view="prev">Step 7</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step8.jpg" alt="The same scene with a faint blue haze over the distant slopes." width="960" height="720" class="figure-img"><span class="tag">Step 8</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 3 × 3 rays per pixel</span>
+<span class="ctl"><select id="spp-8" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<p>Along a ray, the fraction of light that survives is the transmittance <span class="math inline">T = e^{-\tau}</span>, by the <a href="https://en.wikipedia.org/wiki/Beer%E2%80%93Lambert_law">Beer–Lambert law</a>, where the optical depth <span class="math inline">\tau = \int_0^t \sigma\big(P(s)\big)\,ds</span> adds up the air’s extinction coefficient <span class="math inline">\sigma</span> (the fraction of light lost per kilometre) along the path. Air thins exponentially with height, <span class="math inline">\sigma(y) = \sigma_0 e^{-y/H_{\text{air}}}</span>, where <span class="math inline">\sigma_0</span> is the value at our base plane and the scale height <span class="math inline">H_{\text{air}}</span> is the rise over which the density falls by a factor <span class="math inline">e</span>. Along the ray <span class="math inline">P(s) = o + s\,d</span> the integral has a closed form:</p>
+<p><span class="math display">
+\begin{aligned}
+\tau &amp;= \sigma_0\,e^{-o_y/H_{\text{air}}}\!\int_0^t e^{-s\,d_y/H_{\text{air}}}\,ds\\
+&amp;= \sigma_0\,e^{-o_y/H_{\text{air}}}\;\frac{1 - e^{-t\,d_y/H_{\text{air}}}}{d_y/H_{\text{air}}},
+\end{aligned}
+</span></p>
+<p>which tends to <span class="math inline">\sigma_0 e^{-o_y/H_{\text{air}}}\,t</span> as <span class="math inline">d_y\to 0</span>; the code switches to that form when <span class="math inline">|t\,d_y/H_{\text{air}}|</span> is tiny.</p>
+<p>For air molecules, which scatter by <a href="https://en.wikipedia.org/wiki/Rayleigh_scattering">Rayleigh scattering</a>, the coefficient is <span class="math inline">(5.802,\ 13.558,\ 33.1)\times10^{-6}\ \text{m}^{-1}</span> at sea level for red, green and blue.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> We use a scale height of 8 km, close to Earth’s mean of about 8.5 km;<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a> our base plane is about 2 km up, so <span class="math inline">\sigma_0</span> is the sea-level value times <span class="math inline">e^{-2/8}\approx 0.78</span>. Rayleigh scattering grows as the inverse fourth power of the wavelength, which is why haze is blue. Fine particles in the air, called <a href="https://en.wikipedia.org/wiki/Aerosol">aerosols</a>, get <span class="math inline">0.008\ \text{km}^{-1}</span> with a 1.2 km scale height; that value is a tuning knob, because the amount of aerosol changes from day to day.</p>
+<div class="no-row-height column-margin column-container"><div id="fn18"><p><sup>18</sup>&nbsp;S. Hillaire, <a href="https://diglib7.eg.org/bitstream/handle/10.1111/cgf14050/v39i4pp013-022.pdf">A Scalable and Production Ready Sky and Atmosphere Rendering Technique</a>, <em>Computer Graphics Forum</em> 39(4) (2020), Table 1: Rayleigh scattering coefficients <span class="math inline">(5.802, 13.558, 33.1)\times10^{-6}\,\text{m}^{-1}</span>.</p></div><div id="fn19"><p><sup>19</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Scale_height">Scale height</a>: “The earth atmosphere’s scale height is about 8.5km”.</p></div></div><p>The final colour is <span class="math inline">c_{\text{slope}}\,T + c_{\text{air}}(1-T)</span>, where <span class="math inline">c_{\text{slope}}</span> is the colour leaving the slope and <span class="math inline">c_{\text{air}}</span> the sky colour just above the horizon in that direction. The exact part is one line: if the air scatters the same light <span class="math inline">J</span> per unit of extinction toward us all along the ray, the light added along the way is <span class="math inline">\int_0^t T\,\sigma J\,ds = J\,(1-T)</span>, because <span class="math inline">dT/ds = -\sigma T</span>. So <span class="math inline">J</span> is the colour an infinitely long ray would show (one along which <span class="math inline">\tau</span> grows without bound). Setting <span class="math inline">J</span> to the sky colour near the horizon is the modelling choice.</p>
+<p>Toward the summit, 7.7 km away, <span class="math inline">\tau</span> comes to about 0.18 in blue and 0.05 in red, so the summit’s colour reaches us mixed 83 : 17 with the colour of the air in blue, and 95 : 5 in red. The photo was taken in clear mountain air, so the change from step 7 is deliberately small: slightly bluer shadows and a lower-contrast far mountain. In the “What changed” map the near forest lights up more than the summit, although the haze is thinner there. The forest is so dark that adding a little light raises its screen value a lot, because the sRGB encoding of step 1 is steep near black, while mixing bright snow toward an almost equally bright sky barely changes it.</p>
+<div class="vcode" data-step="8"></div>
+<details class="full" data-step="8"><summary>Full shader for step 8</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+The light scattered toward us is the same all along each ray: the sky’s colour just above the horizon in that direction, which includes the glow around the sun. No shadowed air (crepuscular rays), and no light scattered more than once.
+</dd>
+<dt>Safe</dt>
+<dd>
+With the sun behind or beside the camera, as here.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Looking toward the sun, sunsets, valley fog. Those need a physically based sky and aerial-perspective model like <a href="https://diglib7.eg.org/bitstream/handle/10.1111/cgf14050/v39i4pp013-022.pdf">Hillaire’s</a>.
+</dd>
+</dl>
+</div>
+</section>
+<section id="step-9" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-9">Step 9 · Clouds</h2>
+<p>A cloud is a density field. Light crossing it fades, and every bit of it sends some sunlight toward us; adding both up along the ray gives volumetric clouds.</p>
+<div class="added" data-step="9">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+A bright cloud on the summit’s right shoulder, and its shadow across the snow below and to the left of it. A small cloud at the right edge.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="9">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 9</button><button type="button" data-view="prev">Step 8</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step9.jpg" alt="A bright cloud sits on the right shoulder of the summit and casts a shadow across the snow to its left." width="960" height="720" class="figure-img"><span class="tag">Step 9</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 3 × 3 rays per pixel</span>
+<span class="ctl"><select id="spp-9" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<section id="where-the-cloud-is" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="where-the-cloud-is">Where the cloud is</h3>
+<p>Clouds live in a layer between 1.6 and 3.0 km. The density is a height profile, giving flat bases and rounded tops, times <span class="math inline">\max\!\big(0,\ n_3(p) - 1 + \text{coverage}\big)</span>, where <span class="math inline">n_3</span> is 3D value noise summed in octaves like the fBm of step 3 but kept between 0 and 1, so only the parts of the noise above <span class="math inline">1 - \text{coverage}</span> become cloud. The coverage is <span class="math inline">\texttt{uCloud}\cdot\text{weather}(x,z) + \text{cap}(p)</span>, where <code>uCloud</code> is the cloud-cover setting (0.25 here; a slider at the end of the post changes it). The <em>weather</em> term is 2D noise on a scale of about 3 km that says where clouds cluster. The <em>cap</em> term is an ellipsoidal bump centred on the summit’s right shoulder, just below summit height, roughly where the photo has its cloud: air pushed up a mountain cools and its water condenses,<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> which is why clouds cling to peaks. Shaping noise by a coverage value inside a height profile follows Schneider and Vos.<a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a> The constant <code>WEATHER_OFS</code> picks which patch of the weather noise we see; of four candidates, we kept the one closest to the photo.</p>
+<div class="no-row-height column-margin column-container"><div id="fn20"><p><sup>20</sup>&nbsp;Wikipedia, <a href="https://en.wikipedia.org/wiki/Orographic_lift">Orographic lift</a>: air forced to rise over terrain cools adiabatically, and its moisture can condense into clouds.</p></div><div id="fn21"><p><sup>21</sup>&nbsp;A. Schneider and N. Vos, <a href="https://www.advances.realtimerendering.com/s2015/The%20Real-time%20Volumetric%20Cloudscapes%20of%20Horizon%20-%20Zero%20Dawn%20-%20ARTR.pdf">The Real-time Volumetric Cloudscapes of Horizon: Zero Dawn</a>, SIGGRAPH 2015 course, slide 35: “we build a basic cloud shape by sampling our first 3dTexture and multiplying it by our height signal. The next step is to multiply the result by the coverage”.</p></div></div></section>
+<section id="how-much-light-comes-out" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="how-much-light-comes-out">How much light comes out</h3>
+<p>Assume each bit of light scatters at most once on its way to the eye, and that cloud droplets scatter light without absorbing it (extinction = scattering = <span class="math inline">\sigma</span>). Then the light reaching the eye is</p>
+<p><span class="math display">
+\begin{gathered}
+I = \int_0^{t_1} T(s)\,\sigma(s)\,S(s)\,ds + T(t_1)\,I_{\text{bg}},\\
+T(s) = \exp\!\Big(-\!\int_0^s\sigma\Big),
+\end{gathered}
+</span></p>
+<p>where <span class="math inline">S</span> is the light arriving at the point and redirected toward us (sunlight weighted by the phase function below, plus sky light), <span class="math inline">t_1</span> is where the ray leaves the cloud layer or hits the ground, and <span class="math inline">I_{\text{bg}}</span> is the light from behind the cloud. March in <span class="math inline">N</span> steps; if <span class="math inline">\sigma_i</span> and <span class="math inline">S_i</span> are constant over a step of length <span class="math inline">\Delta</span> that starts with transmittance <span class="math inline">T_i</span>, its contribution is exactly</p>
+<p><span class="math display">
+\int_0^{\Delta} T_i\,e^{-\sigma_i u}\,\sigma_i S_i\,du = T_i\,S_i\,\big(1 - e^{-\sigma_i\Delta}\big).
+</span></p>
+<p>This is the energy-conserving form that Hillaire popularized for real-time volumetrics.<a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a> The naive <span class="math inline">T_i\,\sigma_i S_i\,\Delta</span> always exceeds it, since <span class="math inline">1 - e^{-x} &lt; x</span> for <span class="math inline">x &gt; 0</span>, and when <span class="math inline">\sigma_i\Delta</span> is large it is badly wrong: dense clouds would send out more light than they receive.</p>
+<div class="no-row-height column-margin column-container"><div id="fn22"><p><sup>22</sup>&nbsp;S. Hillaire, <a href="https://www.slideshare.net/DICEStudio/physically-based-and-unified-volumetric-rendering-in-frostbite">Physically Based and Unified Volumetric Rendering in Frostbite</a>, SIGGRAPH 2015, Advances in Real-Time Rendering course, slide 28: “Integrate lighting w.r.t. transmittance over froxel depth D”, as <span class="math inline">(S - S e^{-\sigma_t D})/\sigma_t</span>, in place of a “non energy conservative integration”.</p></div><div id="fn23"><p><sup>23</sup>&nbsp;L. G. Henyey and J. L. Greenstein, <a href="https://articles.adsabs.harvard.edu/pdf/1941ApJ....93...70H">Diffuse radiation in the Galaxy</a>, <em>Astrophysical Journal</em> 93 (1941), 70–83: introduces the phase function with asymmetry parameter g.</p></div></div><p>How a droplet redirects light is described by a phase function, the probability density of scattering into each direction, per unit solid angle. We use the Henyey–Greenstein phase function,<a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a> <span class="math inline">p_\gamma(\mu) = \dfrac{1-\gamma^2}{4\pi\,(1+\gamma^2-2\gamma\mu)^{3/2}}</span>, where <span class="math inline">\mu</span> is the cosine of the angle between the view ray and the sun and the asymmetry <span class="math inline">\gamma</span> (usually written <span class="math inline">g</span>) sets how much light goes forward. Droplets scatter mostly forward (<span class="math inline">\gamma&gt;0</span>), but the sun here is beside and behind us, so pure forward scattering would leave the sunlit faces dim; we mix <span class="math inline">\gamma = 0.6</span> and a backward lobe <span class="math inline">\gamma = -0.25</span> half and half.</p>
+<p>The sunlight reaching a point inside the cloud comes from 6 short steps toward the sun, which give its optical depth <span class="math inline">\tau_{\text{sun}}</span> and the factor <span class="math inline">e^{-\tau_{\text{sun}}} + 0.2\,e^{-0.2\,\tau_{\text{sun}}}</span>. The second term stands in for light scattered many times: deep inside a cloud, light arrives after many bounces and fades far more slowly than light scattered once. It keeps the first two terms of an approximation by Wrenninge, Kulla and Lundqvist, which sums several such terms, scaling the extinction, the weight and the phase function’s asymmetry down by a further factor each time;<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a> we use the factor 0.2 and keep one phase function.</p>
+<div class="no-row-height column-margin column-container"><div id="fn24"><p><sup>24</sup>&nbsp;M. Wrenninge, C. Kulla and V. Lundqvist, <a href="https://fpsunflower.github.io/ckulla/data/oz_volumes.pdf">Oz: The Great and Volumetric</a>, SIGGRAPH 2013 talk: “The main idea is to artificially lower the extinction coefficient σt along the shadow ray … rather than use a fixed scaling factor, we use a summation over several scales.”</p></div></div><p>A similar optical depth, measured from a point on the ground toward the sun through the whole cloud layer (8 samples), gives <code>cloudShadow</code>, which dims the sun in <code>shade()</code>: that is the dark band on the snow below and to the left of the cloud, on the side away from the sun.</p>
+<p>The cloud tops in this image clip to flat white, because brightness above the screen’s maximum is simply cut off. Step 10 fixes that.</p>
+<div class="vcode" data-step="9"></div>
+<details class="full" data-step="9"><summary>Full shader for step 9</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+56 samples per ray with a randomly shifted start (noise instead of banding), a 6-step march toward the sun, no cloud shadowing other clouds’ sky light, a heuristic for multiple scattering, and no haze between us and the clouds.
+</dd>
+<dt>Safe</dt>
+<dd>
+Still images of mid-distance clouds.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Flying through clouds, the sun shining through them, and animation, which needs results reused across frames as in Schneider and Vos’s talk.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="step-10" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="step-10">Step 10 · From light to a photograph</h2>
+<p>The computed light has more range than a screen can show. Compress the highlights with a film curve instead of clipping them, then encode for the display.</p>
+<div class="added" data-step="10">
+<p><span class="vs-label">Added in this step</span></p>
+<dl>
+<dt>On screen</dt>
+<dd>
+The cloud’s flat white top gets its shading back, colours deepen, and the corners darken slightly.
+</dd>
+<dt>In the code</dt>
+<dd>
+<span class="chg"></span>
+</dd>
+</dl>
+</div>
+<figure class="render figure" data-step="10">
+<div class="views" role="group" aria-label="Image to show"><button type="button" data-view="cur">Step 10</button><button type="button" data-view="prev">Step 9</button><button type="button" data-view="diff">What changed</button></div>
+<div class="frame"><img src="images/step10.jpg" alt="Final image after the film curve: deep blue sky, shaped white cloud, pink talus and a dark green forest." width="960" height="720" class="figure-img"><span class="tag">Step 10</span><div class="bar"></div></div>
+<p class="diffnote" hidden=""></p>
+<figcaption><span class="what status">Pre-rendered from the code below · 960 × 720 · 3 × 3 rays per pixel</span>
+<span class="ctl"><select id="spp-10" aria-label="Rays per pixel for the live render"><option value="1" selected="">1 ray</option><option value="2">2 × 2</option><option value="3">3 × 3</option></select><button type="button" class="go primary">Render live</button><button type="button" class="back" hidden="">Show pre-rendered</button></span></figcaption>
+</figure>
+<section id="tone-curve" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="tone-curve">Tone curve</h3>
+<p>Mapping the computed light to screen values is called <a href="https://en.wikipedia.org/wiki/Tone_mapping">tone mapping</a>. We use Narkowicz’s rational fit to the ACES filmic curve, a widely used film response.<a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a> The fit is</p>
+<div class="no-row-height column-margin column-container"><div id="fn25"><p><sup>25</sup>&nbsp;K. Narkowicz, <a href="https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/">ACES Filmic Tone Mapping Curve</a> (2016): the fit <span class="math inline">x(2.51x+0.03)/(x(2.43x+0.59)+0.14)</span>.</p></div></div><p><span class="math display">
+f(x) = \frac{x\,(2.51x + 0.03)}{x\,(2.43x + 0.59) + 0.14}.
+</span></p>
+<p>It has <span class="math inline">f(0)=0</span> and <span class="math inline">f'(0) = 0.03/0.14\approx 0.21</span>, a toe that deepens shadows; <span class="math inline">f(1)\approx 0.80</span>; and <span class="math inline">f(x)\to 2.51/2.43\approx 1.03</span> as <span class="math inline">x\to\infty</span>, so bright snow and cloud tops roll off gradually instead of clipping (the code clamps the last 3 %). Before the curve, all light is multiplied by an exposure of 0.8, like a camera’s exposure setting; the value was chosen by eye. Filmic curves wash out bright colours, so the colours are pushed 10 % away from their grey equivalent (<a href="https://en.wikipedia.org/wiki/Rec._709">Rec. 709</a> luminance). A light vignette then darkens the corners; it multiplies the encoded values, after the sRGB step, on purpose: it is a stylistic darkening, not light.</p>
+<p>ACES is one standard among several: Blender now defaults to AgX,<a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a> and three.js also offers AgX and Khronos PBR Neutral.<a href="#fn27" class="footnote-ref" id="fnref27" role="doc-noteref"><sup>27</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn26"><p><sup>26</sup>&nbsp;BlenderNation, <a href="https://www.blendernation.com/2023/09/05/filmics-successor-new-agx-view-transform-in-blender-4-0/">Filmic’s successor: new AgX view transform in Blender 4.0</a> (2023): “AgX is now the default view transform”.</p></div><div id="fn27"><p><sup>27</sup>&nbsp;three.js documentation, <a href="https://threejs.org/docs/pages/global.html">global constants</a>: <code>ACESFilmicToneMapping</code>, <code>AgXToneMapping</code> and <code>NeutralToneMapping</code>, “based on the Khronos 3D Commerce Group standard tone mapping”.</p></div></div></section>
+<section id="how-close-is-it" class="level3">
+<h3 class="anchored" data-anchor-id="how-close-is-it">How close is it?</h3>
+<p>Matched by eye: the framing, the bands of snow, talus and forest, the snow line following the gullies, the cloud right of the summit, and the colour of the light. Not matched: the gullies run too parallel; the talus band is too uniform; the cirque shows only as a thin ledge, not the broad pale bowl right of centre in the photo, and the rocky ridge on the photo’s far right is missing; the summit is a smooth dome where the real one is a jumble of crags; and the trees are cones.</p>
+<p>The “Full shader” panel below has a “Copy for Shadertoy” button that gives a version for Shadertoy’s Image tab, which renders the same image as the page’s live render (one ray per pixel) to within one grey level; set <code>uSpp = 3</code> at its top to match the pre-rendered image. Shadertoy draws each frame in one go, without this page’s strips, so expect a low frame rate in a large window; on a slow GPU a frame can outlast the operating system’s timeout (see the setup) and make the browser reset the GPU, so start with a small window.</p>
+<div class="vcode" data-step="10"></div>
+<details class="full" data-step="10"><summary>Full shader for step 10</summary><div class="inner"></div></details>
+<div class="cut">
+<p><span class="vs-label">Shortcut taken</span></p>
+<dl>
+<dt>Cut</dt>
+<dd>
+A fixed tone curve and an exposure set by eye; no white balance; no lens effects.
+</dd>
+<dt>Safe</dt>
+<dd>
+Images for viewing.
+</dd>
+<dt>Unsafe</dt>
+<dd>
+Matching a particular camera. Then set the exposure from measured brightness, or from a grey card in the scene.
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<section id="play" class="level2">
+<h2 class="anchored" data-anchor-id="play">Change the weather</h2>
+<p>The final shader with its five parameters exposed. Each change re-renders at 480 × 360 on your device; “Copy for Shadertoy” takes the current settings with it.</p>
+<div class="play">
+<figure class="render figure" style="margin:0">
+<div class="frame" id="play-frame"><img id="play-img" src="images/step10.jpg" alt="Render of the final scene with the chosen weather." width="960" height="720" class="figure-img"><canvas id="play-canvas" hidden=""></canvas><div class="bar" id="play-bar"></div></div>
+<figcaption><span class="what status" id="play-status">Move a slider to render on your device.</span></figcaption>
+</figure>
+<div class="sliders">
+<label for="s-az">Sun direction (0° = behind you, 90° = your right) <output id="o-az"></output><input type="range" id="s-az" min="-80" max="170" step="1"></label>
+<label for="s-el">Sun elevation <output id="o-el"></output><input type="range" id="s-el" min="5" max="70" step="1"></label>
+<label for="s-snow">Snow line <output id="o-snow"></output><input type="range" id="s-snow" min="0.4" max="2.2" step="0.01"></label>
+<label for="s-tree">Tree line <output id="o-tree"></output><input type="range" id="s-tree" min="0.3" max="1.6" step="0.01"></label>
+<label for="s-cloud">Cloud cover <output id="o-cloud"></output><input type="range" id="s-cloud" min="0" max="0.7" step="0.01"></label>
+<div class="ctl"><button type="button" id="play-reset">Reset</button><button type="button" id="play-copy">Copy for Shadertoy</button><span class="status" id="play-copy-status"></span></div>
+</div>
+</div>
+</section>
+<section id="library" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="library">From tutorial to library</h2>
+<p>The chunks are already the seams of a library. What it still lacks, in the order I would add it:</p>
+<ol type="1">
+<li><strong>Checkable bounds.</strong> Every terrain chunk should declare its Lipschitz budget, and a test should sample its slope on a grid and fail if any chunk exceeds it. Step 2 shows why this one number keeps the march correct; today it is a hand-set constant.</li>
+<li><strong>Accumulation across frames.</strong> Render one randomly shifted ray per pixel per frame into a high-precision texture and average. A moving camera then shows a noisy image at interactive rates that sharpens within a second, instead of a blank screen.</li>
+<li><strong>Real elevation data.</strong> Replace the hand-placed volcano with a tile of measured elevations from the USGS 3D Elevation Program,<a href="#fn28" class="footnote-ref" id="fnref28" role="doc-noteref"><sup>28</sup></a> stored as a texture. The march is unchanged except that <span class="math inline">L</span> is read off the data. With the real camera position, the render could then be compared with the photo pixel by pixel instead of by eye.</li>
+<li><strong>Simulated erosion.</strong> Run a hydraulic-erosion simulation once, on the GPU with <a href="https://web.dev/blog/webgpu-supported-major-browsers">WebGPU</a> compute shaders, now available in all major browsers,<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a> store the result in a texture, and keep the noise only for detail finer than the texture.</li>
+<li><strong>A mesh path.</strong> Evaluate the same <code>terrain()</code> in a three.js vertex shader for interactive scenes, and keep the ray-marched path for stills.</li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn28"><p><sup>28</sup>&nbsp;USGS, <a href="https://catalog.data.gov/dataset/1-3rd-arc-second-digital-elevation-models-dems-usgs-national-map-3dep-downloadable-data-co">1/3rd arc-second Digital Elevation Models (DEMs), 3DEP Downloadable Data Collection</a>, data.gov: “a tiled collection of the 3D Elevation Program (3DEP) … 1/3 arc-second (approximately 10 m) resolution”, covering the conterminous United States.</p></div><div id="fn29"><p><sup>29</sup>&nbsp;web.dev, <a href="https://web.dev/blog/webgpu-supported-major-browsers">WebGPU is now supported in major browsers</a> (2025): Chrome, Edge, Firefox and Safari.</p></div></div><p>The pre-rendered images are 960 × 720 and were rendered on a CPU that emulates a GPU (<a href="https://github.com/google/swiftshader">SwiftShader</a>, two cores) in headless Chrome. A phone or laptop GPU is typically tens of times faster.</p>
+<div class="table-scroll">
+<table class="table times caption-top" style="min-width:0">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Step</th>
+<th data-quarto-table-cell-role="th">Rays per pixel</th>
+<th data-quarto-table-cell-role="th">Render time</th>
+</tr>
+</thead>
+<tbody id="vs-times">
+</tbody>
+</table>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/glsl.min.js"></script>
+<script src="shaders.js"></script>
+<script src="renderer.js"></script>
+<script src="volcano.js"></script>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/snoringpig\.github\.io\/writings\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
