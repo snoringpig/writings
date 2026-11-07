@@ -1,6 +1,6 @@
 ---
 title: "Why does a light touch make a string jump an octave?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · 4 · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/violin.html, /posts/instruments-as-ope
 :::
 
 ::: {.pageinfo}
-A deep dive from [the violin's entry](index.qmd#violin) in post 3, on [post 2](../one-string-end-to-end/index.qmd)'s string. Derivations are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from [the violin's entry](index.qmd#violin) in post 3, on [post 3](../one-string-end-to-end/index.qmd)'s string. Derivations are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -45,7 +45,7 @@ Touch a vibrating string lightly at its exact middle, without pressing it down, 
 </div>
 ```
 
-[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. Once the body's own ring at the start has died away, the body and the room keep those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
+[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. Once the body's own ring at the start has died away, the body and the room keep those frequencies ([post 2](../from-instrument-to-ear/index.qmd#sound)).
 
 ## How the sound reaches the air {#body}
 
@@ -53,7 +53,7 @@ Touch a vibrating string lightly at its exact middle, without pressing it down, 
 
 ## The string's shapes {#operator}
 
-**The string's frequencies are the frequencies of its own shapes.** With mass $\mu$ per unit length, Newton's law gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation) of [post 2](../one-string-end-to-end/index.qmd#newton),[^fr2]
+**The string's frequencies are the frequencies of its own shapes.** With mass $\mu$ per unit length, Newton's law gives the [wave equation](../instruments-as-operators/glossary.qmd#wave-equation) of [post 3](../one-string-end-to-end/index.qmd#newton),[^fr2]
 $$
 \begin{gathered}
 u_{tt} = -Au, \qquad Au = -c^2u_{xx}, \\
@@ -90,7 +90,7 @@ The start sets the amounts $a_n$. The fading rates are measured, not derived, an
 ::: {.derive}
 <details><summary><span class="label">Details</span>Where the equation comes from <span class="needs">partial derivatives</span></summary>
 
-Take the piece of string from $x$ to $x + dx$, of mass $\mu\,dx$. The tension $T$ pulls along the string at both ends; for a small slope, the sideways part of each pull is $T$ times the slope $u_x$. The net sideways force is therefore $T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx$, and Newton's law sets it equal to mass times acceleration, $\mu\,dx\,u_{tt}$. Dividing by $\mu\,dx$ gives $u_{tt} = c^2u_{xx}$ with $c^2 = T/\mu$. The nut and the bridge hold the ends still, $u(0, t) = u(L, t) = 0$. The model assumes a perfectly flexible string, small slopes, no air and no friction; [post 2](../one-string-end-to-end/index.qmd#newton) draws the forces.
+Take the piece of string from $x$ to $x + dx$, of mass $\mu\,dx$. The tension $T$ pulls along the string at both ends; for a small slope, the sideways part of each pull is $T$ times the slope $u_x$. The net sideways force is therefore $T\,u_x(x + dx) - T\,u_x(x) \approx T\,u_{xx}\,dx$, and Newton's law sets it equal to mass times acceleration, $\mu\,dx\,u_{tt}$. Dividing by $\mu\,dx$ gives $u_{tt} = c^2u_{xx}$ with $c^2 = T/\mu$. The nut and the bridge hold the ends still, $u(0, t) = u(L, t) = 0$. The model assumes a perfectly flexible string, small slopes, no air and no friction; [post 3](../one-string-end-to-end/index.qmd#newton) draws the forces.
 
 </details>
 :::
@@ -112,7 +112,7 @@ At the middle, $X_n(L/2) = \sin(n\pi/2)$ is zero exactly when $n$ is even. The s
 ::: {.derive}
 <details><summary><span class="label">Precisely</span>Why the drain rate is $X_n(x_f)^2$ <span class="needs">matrices</span></summary>
 
-A friction force $-r\,u_t(x_f, t)$ at the one point $x_f$ turns post 2's separate springs into $q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0$ with $C_{nm} \propto r\,X_n(x_f)X_m(x_f)$ ([post 2](../one-string-end-to-end/index.qmd#fading)). A shape with $X_n(x_f) = 0$ has a zero row and column in $C$, so it rings on untouched. For a light touch $C$ is small, its off-diagonal entries matter only to second order, and each other shape drains at the rate $C_{nn} \propto X_n(x_f)^2$, the rule the [piano page](piano.qmd) uses for felt dampers. The demo adds 45 per second times $X_n(x_f)^2$ to each shape's own fading rate.
+A friction force $-r\,u_t(x_f, t)$ at the one point $x_f$ turns post 3's separate springs into $q_n'' + \sum_m C_{nm}q_m' + \lambda_nq_n = 0$ with $C_{nm} \propto r\,X_n(x_f)X_m(x_f)$ ([post 3](../one-string-end-to-end/index.qmd#fading)). A shape with $X_n(x_f) = 0$ has a zero row and column in $C$, so it rings on untouched. For a light touch $C$ is small, its off-diagonal entries matter only to second order, and each other shape drains at the rate $C_{nn} \propto X_n(x_f)^2$, the rule the [piano page](piano.qmd) uses for felt dampers. The demo adds 45 per second times $X_n(x_f)^2$ to each shape's own fading rate.
 
 </details>
 :::

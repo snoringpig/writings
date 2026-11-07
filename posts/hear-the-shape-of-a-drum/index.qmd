@@ -18,7 +18,7 @@ aliases: [/posts/instruments-as-operators/shape.html]
 :::
 
 ::: {.pageinfo}
-Builds on [the drums in post 3](../other-instruments-same-recipe/index.qmd#drums) and runs the recipe of [post 2](../one-string-end-to-end/index.qmd) backwards. Uses the Laplacian; proofs are in folds. About 15 minutes. Written in collaboration with Claude, Anthropic's AI model.
+Builds on [the drums in post 4](../other-instruments-same-recipe/index.qmd#drums) and runs the recipe of [post 3](../one-string-end-to-end/index.qmd) backwards. Uses the Laplacian; proofs are in folds. About 15 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 All of a drum's frequencies tell you its area and, for a reasonable rim, the length of its rim, but not always its shape: the two drums below have different shapes and exactly the same frequencies.
@@ -49,7 +49,7 @@ All of a drum's frequencies tell you its area and, for a reasonable rim, the len
 
 ## The drum's spectrum
 
-The frequencies of a drum are decided by its shape alone, apart from one overall factor. Let the drumhead be a region $\Omega$ of the plane, in one piece, and $u(x, y, t)$ the height of the head above the point $(x, y)$ at time $t$. Newton's law for a small patch of the head, pulled by the tension in its edges, gives ([the drums in post 3](../other-instruments-same-recipe/index.qmd#drums))
+The frequencies of a drum are decided by its shape alone, apart from one overall factor. Let the drumhead be a region $\Omega$ of the plane, in one piece, and $u(x, y, t)$ the height of the head above the point $(x, y)$ at time $t$. Newton's law for a small patch of the head, pulled by the tension in its edges, gives ([the drums in post 4](../other-instruments-same-recipe/index.qmd#drums))
 $$
 u_{tt} = c^2\,\Delta u \ \text{ inside } \Omega, \qquad u = 0 \ \text{ on the rim},
 $$
@@ -146,7 +146,7 @@ Z(t) = \sum_n e^{-k_n^2 t}.
 $$
 Each eigenvalue adds nearly 1 if $k_n^2$ is much less than $1/t$ and nearly 0 if it is much more, so $Z(t)$ is roughly $N(1/t)$, with the jumps smoothed out. Like $N$, $Z$ is determined by the list of eigenvalues.
 
-$Z$ has a physical meaning. Heat spreading on the drumhead, with the rim held at temperature 0, obeys $v_t = \Delta v$, the drum's equation with one time derivative instead of two, so each mode now decays like $e^{-k_n^2 t}$ instead of oscillating. Start a unit burst of heat at a point $x$ and let it spread for time $t$. The temperature it leaves at $x$ itself, added up over all points $x$ of the drum, is $Z(t)$. (Write the burst as a sum of modes, each scaled so that $\iint X_n^2\,dA = 1$. A burst at $x$ contains mode $n$ in proportion to $X_n(x)$, the same rule as a strike on the [drums in post 3](../other-instruments-same-recipe/index.qmd#drums); after time $t$ that part has shrunk by $e^{-k_n^2 t}$, and its temperature at $x$ is again proportional to $X_n(x)$. So the temperature left at $x$ is $\sum_n e^{-k_n^2 t}X_n(x)^2$, and adding it up over the drum gives $\sum_n e^{-k_n^2 t}$.) In a short time $t$ heat travels a distance of about $\sqrt t$, so a burst only feels the rim if it starts within about that distance of it. Kac called this "not feeling the boundary". Then:
+$Z$ has a physical meaning. Heat spreading on the drumhead, with the rim held at temperature 0, obeys $v_t = \Delta v$, the drum's equation with one time derivative instead of two, so each mode now decays like $e^{-k_n^2 t}$ instead of oscillating. Start a unit burst of heat at a point $x$ and let it spread for time $t$. The temperature it leaves at $x$ itself, added up over all points $x$ of the drum, is $Z(t)$. (Write the burst as a sum of modes, each scaled so that $\iint X_n^2\,dA = 1$. A burst at $x$ contains mode $n$ in proportion to $X_n(x)$, the same rule as a strike on the [drums in post 4](../other-instruments-same-recipe/index.qmd#drums); after time $t$ that part has shrunk by $e^{-k_n^2 t}$, and its temperature at $x$ is again proportional to $X_n(x)$. So the temperature left at $x$ is $\sum_n e^{-k_n^2 t}X_n(x)^2$, and adding it up over the drum gives $\sum_n e^{-k_n^2 t}$.) In a short time $t$ heat travels a distance of about $\sqrt t$, so a burst only feels the rim if it starts within about that distance of it. Kac called this "not feeling the boundary". Then:
 
 1. *Away from the rim*, the burst spreads as on an endless plane, and the temperature it leaves at its starting point is $1/(4\pi t)$. Adding this up over the drum gives $|\Omega|/(4\pi t)$.
 2. *Near a straight piece of rim*, at distance $r$ from it, the rim's condition $v = 0$ is met by adding a mirror-image burst of opposite sign on the far side of the rim; a wave on a string meets a tied end the same way, as if an upside-down mirror image arrived from beyond it. The image is a distance $2r$ away, and lowers the temperature at $x$ by $e^{-r^2/t}/(4\pi t)$. Adding this up over a strip along the rim, using $\int_0^\infty e^{-r^2/t}\,dr = \tfrac12\sqrt{\pi t}$ for each unit of rim length, gives $-P/(8\sqrt{\pi t})$.
@@ -181,9 +181,9 @@ This argument is called *transplantation*. It grew out of work of Peter Buser on
 :::
 
 ::: {.derive}
-<details><summary><span class="label">Details</span>How the numbers on this page were computed <span class="needs">matrices, as for the beads in post 2</span></summary>
+<details><summary><span class="label">Details</span>How the numbers on this page were computed <span class="needs">matrices, as for the beads in post 3</span></summary>
 
-Each drum is covered by a square grid of spacing $h$, and the Laplacian is replaced by its five-point version: at each grid point, the sum of the four neighbors minus four times the point, divided by $h^2$. This is the bead model of [post 2](../one-string-end-to-end/index.qmd#two-beads) in two dimensions. Grid points on the rim are held at zero. The drums' corners sit on grid points, so whether each point is inside, on the rim, or outside is decided with exact whole-number arithmetic.
+Each drum is covered by a square grid of spacing $h$, and the Laplacian is replaced by its five-point version: at each grid point, the sum of the four neighbors minus four times the point, divided by $h^2$. This is the bead model of [post 3](../one-string-end-to-end/index.qmd#two-beads) in two dimensions. Grid points on the rim are held at zero. The drums' corners sit on grid points, so whether each point is inside, on the rim, or outside is decided with exact whole-number arithmetic.
 
 At $h = 1/40$ and $h = 1/80$ the two drums give the same first twelve eigenvalues $k_n^2$ of $-\Delta$ to a relative difference of $3\times10^{-14}$, which is rounding error. This is expected: the grid lines up with every triangle's edges, so transplantation works for the grid model too, as Moler's post shows by transplanting grid eigenvectors (C. Moler, ["Part 2, eigenfunctions"](https://blogs.mathworks.com/cleve/2012/08/13/can-one-hear-the-shape-of-a-drum-part-2-eigenfunctions/), Cleve's Corner, 2012). Combining the two grids ([Richardson extrapolation](https://en.wikipedia.org/wiki/Richardson_extrapolation)) gives values within 0.03% of the high-accuracy values in Table 3.1 of Driscoll's paper, after multiplying his by 4: his drums are twice the size of these (T. A. Driscoll, "Eigenmodes of isospectral drums", *SIAM Review* 39 (1997), 1–17, [DOI](https://doi.org/10.1137/S0036144595285069), [PDF](https://www.math.ucdavis.edu/~saito/courses/ACHA.READ.F03/driscoll-drum.pdf)). That is a check, not a precise computation: Richardson's trick assumes the grid error shrinks like $h^2$, and the drums' inward-pointing corners slow that down. The page uses Driscoll's values.
 

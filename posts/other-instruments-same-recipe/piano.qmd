@@ -1,6 +1,6 @@
 ---
 title: "Why do piano tuners stretch octaves?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · 4 · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/piano.html, /posts/instruments-as-oper
 :::
 
 ::: {.pageinfo}
-A deep dive from the [piano entry](index.qmd#piano) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd) and on the [kalimba page](kalimba.qmd) for bending. About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from the [piano entry](index.qmd#piano) of post 3. Builds on [post 3](../one-string-end-to-end/index.qmd) and on the [kalimba page](kalimba.qmd) for bending. About 12 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -96,7 +96,7 @@ Tuners also listen to other pairs, such as the lower note's fourth partial again
 
 ## What the bridge feels {#bridge}
 
-As in [post 2](../one-string-end-to-end/index.qmd#sound), the sound at your ear is $p = h * F$, with $F$ the force on the bridge and $h$ the tap response, which keeps every frequency. With $u(x, t)$ the wire's sideways displacement at distance $x$ along it, the bridge at $x = L$, $T$ the tension and subscripts for [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative), the force is
+As in [post 2](../from-instrument-to-ear/index.qmd#sound), the sound at your ear is $p = h * F$, with $F$ the force on the bridge and $h$ the tap response, which keeps every frequency. With $u(x, t)$ the wire's sideways displacement at distance $x$ along it, the bridge at $x = L$, $T$ the tension and subscripts for [partial derivatives](../instruments-as-operators/glossary.qmd#partial-derivative), the force is
 $$
 F(t) = -T\,u_x(L, t) + EI\,u_{xxx}(L, t)
 $$
@@ -168,7 +168,7 @@ The sines already form a basis of shapes on $[0, L]$ (post 2's [Fourier sine ser
 
 ## Where the equation comes from {#newton}
 
-Newton's law on a short piece of piano wire adds two forces, tension's and stiffness's:[^fr1] tension gives $T\,u_{xx}$ per unit length, as on [post 2](../one-string-end-to-end/index.qmd#newton)'s string, and stiffness $-EI\,u_{xxxx}$, as in the [kalimba's tine](kalimba.qmd#newton).
+Newton's law on a short piece of piano wire adds two forces, tension's and stiffness's:[^fr1] tension gives $T\,u_{xx}$ per unit length, as on [post 3](../one-string-end-to-end/index.qmd#newton)'s string, and stiffness $-EI\,u_{xxxx}$, as in the [kalimba's tine](kalimba.qmd#newton).
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>The piece of wire, step by step <span class="needs">partial derivatives</span></summary>

@@ -1,0 +1,302 @@
+---
+title: "From the instrument to your ear"
+subtitle: "The Shape of a Sound · 2"
+date: 2026-11-07T12:00:00
+categories: [math, music, the-shape-of-a-sound]
+description: "How the sound at your ear comes from the instrument's motion: the air's wave equation, the vibrating surface as its only source, and why a string instrument needs just one convolution while a drum or a clarinet needs more."
+format:
+  html:
+    html-math-method: katex
+    css: ins.css
+    reference-location: margin
+resources: [core.js, ins.css, three.module.js, OrbitControls.js, ear3d.js, ear3d-fallback.png]
+---
+
+::: {.series-nav .slim}
+[The Shape of a Sound](../instruments-as-operators/index.qmd) · [← 1 · What you hear](../what-you-hear/index.qmd) · [3 · The operator: one string, end to end →](../one-string-end-to-end/index.qmd) · [Glossary](../instruments-as-operators/glossary.qmd)
+:::
+
+::: {.pageinfo}
+Builds on [post 1](../what-you-hear/index.qmd). Uses derivatives and integrals; derivations are in folds you can skip. About 20 minutes. Written in collaboration with Claude, Anthropic's AI model.
+:::
+
+At normal loudness, the sound at your ear depends linearly on the instrument's motion: it is a sum, over every patch of surface that pushes the air, of that patch's tap response convolved with that patch's push. It reduces to one convolution, $p = h * F$, exactly when one scalar input drives everything that pushes the air: one component of a string's force on the bridge (perpendicular to the board on a guitar or piano; across the bridge top on a violin); a small opening's outflow; a small drum's net volume. Several inputs need a sum, as for the kalimba's force and turning push, or a clarinet's open tone holes; and a drum that is not small needs an integral over its skin.
+
+Here $p(t)$ is the change in [air pressure](../instruments-as-operators/glossary.qmd#sound) at your ear from the room's steady pressure, $F(t)$ is an input (a force, a pressure slope, a volume's acceleration), $h(t)$ is what your ear records after one sharp tap of unit strength, and $(h * F)(t) = \int_{-\infty}^{t} h(t - s)\,F(s)\,ds$ is their [convolution](https://en.wikipedia.org/wiki/Convolution): a sum of copies of $h$, one for each moment of the push, delayed and scaled.
+
+## Seeing it in 3D {#view}
+
+The view shows four instruments: the part that vibrates, the surface that pushes the air (highlighted), and the pressure that surface makes on a slice through the air, computed with the formula derived [below](#general).
+
+[]{#view-string}[]{#view-drum}[]{#view-clarinet}[]{#view-kalimba}
+
+```{=html}
+<div class="ins" id="ear3d">
+<div class="panel">
+  <div class="controls e3-live" role="group" aria-label="Instrument" style="display:none">
+    <button type="button" data-e3inst="string" aria-pressed="true">String and soundboard</button>
+    <button type="button" data-e3inst="drum" aria-pressed="false">Drum</button>
+    <button type="button" data-e3inst="clarinet" aria-pressed="false">Clarinet</button>
+    <button type="button" data-e3inst="kalimba" aria-pressed="false">Kalimba</button>
+  </div>
+  <canvas id="e3Canvas" style="display:none;height:clamp(300px,52vw,460px);border-radius:8px;background:var(--paper)" aria-label="Interactive 3D view: the instrument, the surface that pushes the air, and the air pressure on a slice through the air"></canvas>
+  <img class="e3-fallback" src="ear3d-fallback.png" alt="Stills of the four instruments, a string with its soundboard, a kettledrum, a clarinet and a kalimba, each with the coloured pressure on a slice of air above it" style="display:block;width:100%;height:auto;border-radius:8px">
+  <p class="cap e3-note" style="display:none">This browser cannot draw the 3D view, so the picture shows a still of each instrument.</p>
+  <div class="controls e3-live" role="group" aria-label="Mode" style="display:none">
+    <button type="button" data-e3mode="0" aria-pressed="true">mode 1</button>
+    <button type="button" data-e3mode="1" aria-pressed="false">mode 2</button>
+    <button type="button" data-e3mode="2" aria-pressed="false">mode 3</button>
+    <button type="button" class="e3-play">Pause</button>
+  </div>
+  <div class="readout e3-read e3-live" style="display:none"></div>
+  <p class="cap"><span class="e3-live" style="display:none">Drag to turn the scene; scroll or pinch to zoom. </span>Highlighted: the surface that pushes the air. The coloured slice shows the air pressure, orange above the room's steady pressure and blue below, computed as a sum of delayed waves from about 150 points on the highlighted surface, as if each surface were set in a large wall (the Rayleigh integral); the clarinet's open end is one small source. The soundboard's back, the drum's bowl and the body's scattering are ignored. Time is slowed so that every mode takes 1.6 s per swing; sizes and wavelengths are to scale. How the soundboard and the kalimba's box move is illustrative. Colour intensity is compressed and scaled for each mode, except that the drum's three modes share one scale.</p>
+</div>
+</div>
+<script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
+<script type="module" src="ear3d.js"></script>
+```
+
+## The air's equation {#air}
+
+Small pressure changes in air obey the wave equation
+$$
+p_{tt} = c_0^2\,\Delta p ,
+$$
+where $p(\mathbf r, t)$ is now the change in pressure at every point $\mathbf r$ of the room, $c_0 \approx 343$ m/s is the speed of sound, and $\Delta$ is the [Laplacian](../instruments-as-operators/glossary.qmd#laplacian), the sum of the second derivatives in the three directions.[^kin5] The equation is linear, and it is the same at every moment. These two facts, with outgoing waves and air at rest before the note, are all that the general formula uses.
+
+"Small" holds at normal loudness. Even a loud note, about 1 pascal (94 dB), changes the air's pressure of about 100 000 pascals by a hundred-thousandth.
+
+::: {.derive}
+<details><summary><span class="label">Derivation</span>Where the wave equation comes from <span class="needs">vector calculus</span></summary>
+
+Let $\rho$ be the density of still air, $\rho'(\mathbf r, t)$ the small change in density, and $v(\mathbf r, t)$ the air's velocity. Newton's law for a small parcel of air, whose net force is minus the pressure gradient, gives $\rho\,v_t = -\nabla p$ (Euler's equation). Conservation of mass gives $\rho'_t = -\rho\,\nabla\cdot v$. A sound wave squeezes the air too fast for heat to flow, and such a squeeze raises the pressure in proportion to the density, $p = c_0^2\rho'$, with $c_0^2 = \gamma P_0/\rho$, where $P_0$ is the atmospheric pressure and $\gamma = 1.4$ for air; this gives $c_0 = 343$ m/s at 20 °C. Then
+$$
+\begin{aligned}
+p_{tt} &= c_0^2\rho'_{tt} = -c_0^2\rho\,\nabla\cdot v_t\\
+&= c_0^2\,\nabla\cdot\nabla p = c_0^2\,\Delta p .
+\end{aligned}
+$$
+The terms dropped along the way, such as $\rho' v_t$ and $(v\cdot\nabla)v$, are products of two small quantities, smaller than those kept by about the factor $p/P_0 \approx 10^{-5}$. (L. E. Kinsler, A. R. Frey, A. B. Coppens and J. V. Sanders, [*Fundamentals of Acoustics*](https://gov.wiley.com/WileyCDA/WileyTitle/productCd-0471847895,descCd-authorInfo.html), 4th ed., Wiley, 2000, sections 5.2–5.5)
+
+</details>
+:::
+
+## The instrument enters only at its surface {#surface}
+
+The instrument enters this equation only through the surface it moves. The air touching a vibrating surface moves with it in the direction perpendicular to it, and air can accelerate that way only if the pressure falls off that way. So on the surface
+$$
+\partial_\nu p = -\rho\,a ,
+$$
+where $\nu$ is the direction perpendicular to the surface, into the air; $a(\mathbf y, t)$ is the surface's acceleration in that direction at the point $\mathbf y$; $\partial_\nu p$ is the rate of change of $p$ in that direction; and $\rho \approx 1.2$ kg/m³ is the density of air.[^kin5] Away from the surface the air obeys only its own equation, so the surface's acceleration is the instrument's only input to the sound.
+
+Two simplifications are built in. The surface is taken at its rest position, since it moves by far less than a wavelength. And everything else, the walls, the player and your head, stays still: it shapes the response but adds no input.
+
+## The general formula {#general}
+
+An equation that is linear and the same at every moment turns any input into its output by convolution with its response to a tap. For the air this gives
+$$
+p(\mathbf r, \cdot) = \int_S g(\mathbf r, \cdot\,; \mathbf y) * a(\mathbf y, \cdot)\, dA(\mathbf y),
+$$
+where $S$ is the instrument's surface, $dA$ its area element, and $*$ the convolution in time defined above. Here $g(\mathbf r, t; \mathbf y)\,dA$ is the pressure at $\mathbf r$, a time $t$ after the small patch $dA$ at $\mathbf y$ got a unit jump in speed (an impulse of acceleration), with the rest of the surface held still. Every patch contributes its own tap response, convolved with its own push.
+
+::: {.derive}
+<details><summary><span class="label">Derivation</span>The tap response is a Green's function <span class="needs">Fourier transform, Green's identity</span></summary>
+
+The air is at rest before the note, and nothing changes in time, so each signal can be written as a sum of tones $e^{-i\omega t}$ and each frequency treated on its own. The pressure amplitude $P(\mathbf r)$ at angular frequency $\omega$ satisfies $\Delta P + k^2P = 0$ in the air, with $k = \omega/c_0$, and $\partial_\nu P = -\rho A$ on $S$, where $A(\mathbf y)$ is the amplitude of $a$; far away, the waves travel outward. This needs open air, or walls that absorb some sound: a closed room with rigid walls has resonances at which the $G$ below does not exist. Let $G(\mathbf r, \mathbf y)$ be the pressure at $\mathbf r$ of a unit point source at $\mathbf y$, with the instrument's surface held rigid: $\Delta_{\mathbf r} G + k^2G = -\delta(\mathbf r - \mathbf y)$, $\partial_\nu G = 0$ on $S$, outgoing. Green's second identity, $\int_V (G\,\Delta P - P\,\Delta G)\,dV = \oint_{\partial V}(G\,\partial_N P - P\,\partial_N G)\,dA$, applied to $P$ and $G(\cdot, \mathbf r)$ over the air $V$, with $N$ the outward normal of $V$ ($N = -\nu$ on $S$; the far boundary contributes nothing for outgoing waves), gives $P(\mathbf r) = \rho\int_S G(\mathbf y, \mathbf r)\,A(\mathbf y)\,dA(\mathbf y)$. The same identity applied to $G(\cdot, \mathbf r)$ and $G(\cdot, \mathbf r')$ gives reciprocity, $G(\mathbf r, \mathbf y) = G(\mathbf y, \mathbf r)$, so
+$$
+P(\mathbf r) = \rho\int_S G(\mathbf r, \mathbf y)\,A(\mathbf y)\,dA(\mathbf y) .
+$$
+So $g$ is $\rho$ times $G$, taken back from frequencies to time; it vanishes for $t < 0$ because the outgoing $G$ is causal. If the surface is small compared with the wavelength, its own scattering is negligible and $G \approx e^{ikR}/4\pi R$ with $R = |\mathbf r - \mathbf y|$, so $g(\mathbf r, t; \mathbf y) = \rho\,\delta(t - R/c_0)/4\pi R$, a click delayed by the travel time. A flat surface set in a large rigid wall gets twice this, which is the Rayleigh integral below. (Kinsler et al., chapter 7; N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapter 7)
+
+</details>
+:::
+
+**The smallest example.** A sphere much smaller than the wavelength, whose surface moves in and out together, pushes out a volume of air $Q(t)$ per second. At a distance $R$,
+$$
+p(R, t) = \frac{\rho\,\dot Q(t - R/c_0)}{4\pi R} .
+$$
+The pressure follows the rate of change of the volume flow, $\dot Q$; it arrives after the travel time $R/c_0$; and it weakens as $1/R$.[^kin7]
+
+**A flat surface in a wall.** If the vibrating surface is flat and set in a large rigid wall, each patch acts as such a small sphere, doubled by its mirror image in the wall:
+$$
+\begin{gathered}
+p(\mathbf r, t) = \frac{\rho}{2\pi}\int_S \frac{a(\mathbf y, t - R/c_0)}{R}\, dA(\mathbf y),\\
+R = |\mathbf r - \mathbf y| .
+\end{gathered}
+$$
+This is the Rayleigh integral.[^ray] The 3D view adds up such delayed waves from about 150 patches of each highlighted surface.
+
+## Four instruments {#cases}
+
+### String instruments: one input, so $p = h * F$ {#sound}
+
+A string about 1 mm thick cannot move the air itself; the air simply flows around it.[^kth] It drives a soundboard instead, through the bridge. On a piano or guitar the bridge is a hardwood strip glued to the soundboard, a large thin wooden panel; on a violin it is a carved maple piece standing on the top plate, held there by the strings' pressure.[^br] The bridge does move, just much less than the string: too little to change the string's frequencies, which is why [post 3](../one-string-end-to-end/index.qmd#problem) models it as fixed, but enough to drive the soundboard and, over many cycles, to drain the string.
+
+The soundboard is driven only at the bridge, and only by one component of the string's force (perpendicular to the board on a guitar or piano; across the bridge top on a violin). Its acceleration at every point is therefore its response to that one force, $F(t)$, and the surface integral collapses to one convolution:
+$$
+p = h * F .
+$$
+Here $h$ is what a tap test records: on a silent instrument, tap the bridge once, sharply, and record the pressure at your ear, per unit of the tap's strength (force times duration). During a note, the string's push is a continuous run of such taps, each heard as a copy of $h$, delayed and scaled, and $p$ is the sum of the copies.
+
+::: {.derive}
+<details><summary><span class="label">Derivation</span>From the surface integral to one convolution <span class="needs">convolution</span></summary>
+
+The board is linear and the same at every moment, so its acceleration at $\mathbf y$ is $a(\mathbf y, \cdot) = b(\mathbf y, \cdot) * F$, where $b(\mathbf y, t)$ is the board's acceleration at $\mathbf y$ a time $t$ after a unit tap at the bridge, along that component. Put this into the general formula, with $\mathbf r$ at your ear, and use that convolution is associative:
+$$
+\begin{aligned}
+p &= \int_S g(\mathbf r, \cdot\,; \mathbf y) * b(\mathbf y, \cdot) * F\, dA(\mathbf y)\\
+&= h * F,\\
+h &= \int_S g(\mathbf r, \cdot\,; \mathbf y) * b(\mathbf y, \cdot)\, dA(\mathbf y),
+\end{aligned}
+$$
+the tap response of the whole instrument. The string's own small push on the air adds a second term, which is negligible because the string is so thin.
+
+</details>
+:::
+
+Because the map $F \mapsto h * F$ does not change in time, the pure tones $e^{2\pi i f t} = \cos 2\pi f t + i\sin 2\pi f t$ ([Euler's formula](../instruments-as-operators/glossary.qmd#euler-formula)) are its [eigenfunctions](../instruments-as-operators/glossary.qmd#eigenfunction): the map only multiplies them by a number. Substituting $\tau = t - s$,
+$$
+\begin{gathered}
+\int_{-\infty}^{t} h(t - s)\,e^{2\pi i f s}\,ds = H(f)\,e^{2\pi i f t},\\
+H(f) = \int_0^{\infty} h(\tau)\,e^{-2\pi i f \tau}\,d\tau ,
+\end{gathered}
+$$
+so the eigenvalue is $H(f)$, the [Fourier transform](https://en.wikipedia.org/wiki/Fourier_transform) of $h$. Taking real parts, each tone in $F$ keeps its frequency in $p$, multiplied by the size $|H(f)|$ of this complex number and shifted in time, once the board's brief ring at the start has died away (fold).[^lti]
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>The exact shift, and the start of the note <span class="needs">complex numbers, integrals</span></summary>
+
+Since $h$ is real, the real parts say that $\cos 2\pi f t$ comes out as $|H(f)|\cos\big(2\pi f t + \arg H(f)\big)$, where $\arg H(f)$ is the angle of $H(f)$.
+
+$F$ is a sum of tones only from $t = 0$; before, it is the steady pull $F(0)$ of the held string. A steady push makes no sound, $H(0) = \int_0^\infty h = 0$, so $p(t) = \int_0^t h(t - s)\big(F(s) - F(0)\big)\,ds$. This differs from the sum of rescaled tones only by integrals of $h$ over lags longer than $t$, which vanish once the tap's own ring has died away. Until then the board also rings at its own frequencies; after that, $p$ is exactly the sum of rescaled tones.
+
+</details>
+:::
+
+### Where $F$ comes from {#force}
+
+The force on the bridge depends only on the string's slope there:
+$$
+F(t) = -T\,u_x(L, t),
+$$
+where $u(x, t)$ is the string's height at the point $x$ and time $t$, the string runs from $x = 0$ to the bridge at $x = L$, $T$ is its tension and $u_x$ its slope ([post 3](../one-string-end-to-end/index.qmd#problem) sets these up).
+
+The string's motion is $u = \sum_n a_n\cos(2\pi f_n t)\,X_n(x)$, with shapes $X_n(x) = \sin(n\pi x/L)$, frequencies $f_n = nf_1$ and amounts $a_n$ set by the pluck (all derived in [post 3](../one-string-end-to-end/index.qmd#the-solution)), so
+$$
+F(t) = \sum_{n = 1}^{\infty} (-1)^{n+1}\,\frac{n\pi T}{L}\,a_n \cos 2\pi f_n t .
+$$
+The map from $u$ to $F$ acts at each instant, so it keeps every frequency and only weights shape $n$, by $-T X_n'(L) = \pm Tn\pi/L$. So you pluck once, but the string pushes the bridge up and down hundreds of times a second, for seconds (262 times a second for [middle C](../instruments-as-operators/glossary.qmd#note-names)); for a sharp pluck, $F$ is a rectangular wave (the figure's middle row).
+
+```{=html}
+<svg class="fig" viewBox="0 0 420 228" style="max-width:500px" role="img" aria-label="Three rows over the first 30 milliseconds after a pluck, on a shared time axis. Top: the finger's force on the string, steady until the release at t = 0 and zero after it. Middle: the force of the string on the bridge, a rectangular wave that keeps oscillating, a short strong pull down once per period. Bottom: the pressure at the ear, silent for about 4 milliseconds, then a repeating wave with the same period but a different shape.">
+  <path class="dash" d="M 34.0 50 L 410.0 50"/>
+  <path class="acc" d="M 34.0 26 L 57.5 26 L 57.5 50 L 410.0 50"/>
+  <path class="dash" d="M 34.0 92.4 L 410.0 92.4"/>
+  <path class="acc" d="M 34.0 84.0 L 75.5 84.0 L 75.5 126.0 L 84.4 126.0 L 84.4 84.0 L 120.4 84.0 L 120.4 126.0 L 129.4 126.0 L 129.4 84.0 L 165.3 84.0 L 165.3 126.0 L 174.3 126.0 L 174.3 84.0 L 210.2 84.0 L 210.2 126.0 L 219.2 126.0 L 219.2 84.0 L 255.1 84.0 L 255.1 126.0 L 264.1 126.0 L 264.1 84.0 L 300.0 84.0 L 300.0 126.0 L 309.0 126.0 L 309.0 84.0 L 344.9 84.0 L 344.9 126.0 L 353.9 126.0 L 353.9 84.0 L 389.8 84.0 L 389.8 126.0 L 398.8 126.0 L 398.8 84.0 L 410.0 84.0"/>
+  <path class="dash" d="M 34.0 173.0 L 410.0 173.0"/>
+  <path class="acc" d="M 34.0 173.0 L 109.4 173.0 L 110.1 180.1 L 110.8 188.9 L 111.6 193.8 L 112.3 195.1 L 113.0 194.1 L 113.7 191.8 L 114.4 189.4 L 115.1 187.4 L 115.8 186.1 L 116.5 185.4 L 117.2 184.9 L 117.9 184.2 L 118.6 183.1 L 119.3 171.6 L 120.0 161.6 L 120.7 155.3 L 121.4 152.1 L 122.1 151.1 L 122.8 151.5 L 123.5 152.3 L 124.2 153.1 L 124.9 153.7 L 125.7 154.1 L 126.4 154.8 L 127.1 156.0 L 127.8 157.7 L 128.5 160.1 L 129.2 163.1 L 129.9 166.4 L 130.6 169.7 L 131.3 172.8 L 132.0 175.6 L 132.7 177.8 L 133.4 179.4 L 134.1 180.5 L 134.8 181.1 L 135.5 181.4 L 136.2 181.3 L 136.9 181.0 L 137.6 180.5 L 138.3 179.8 L 139.0 178.9 L 139.8 178.0 L 140.5 177.0 L 141.2 175.9 L 141.9 174.8 L 142.6 173.7 L 143.3 172.8 L 144.0 171.9 L 144.7 171.2 L 145.4 170.6 L 146.1 170.2 L 146.8 170.0 L 147.5 169.9 L 148.2 169.9 L 148.9 170.1 L 149.6 170.3 L 150.3 170.6 L 151.0 170.9 L 151.7 171.3 L 152.4 171.7 L 153.1 172.1 L 153.9 172.5 L 154.6 172.9 L 155.3 183.3 L 156.0 191.3 L 156.7 195.2 L 157.4 195.9 L 158.1 194.5 L 158.8 192.2 L 159.5 189.9 L 160.2 188.1 L 160.9 186.9 L 161.6 186.2 L 162.3 185.6 L 163.0 184.7 L 163.7 181.2 L 164.4 168.7 L 165.1 159.6 L 165.8 154.2 L 166.5 151.6 L 167.2 151.0 L 168.0 151.5 L 168.7 152.3 L 169.4 152.9 L 170.1 153.4 L 170.8 153.9 L 171.5 154.7 L 172.2 156.0 L 172.9 158.0 L 173.6 160.6 L 174.3 163.8 L 175.0 167.1 L 175.7 170.5 L 176.4 173.6 L 177.1 176.2 L 177.8 178.3 L 178.5 179.8 L 179.2 180.8 L 179.9 181.3 L 180.6 181.5 L 181.3 181.4 L 182.1 181.0 L 182.8 180.4 L 183.5 179.7 L 184.2 178.8 L 184.9 177.8 L 185.6 176.8 L 186.3 175.7 L 187.0 174.6 L 187.7 173.5 L 188.4 172.5 L 189.1 171.7 L 189.8 171.0 L 190.5 170.5 L 191.2 170.1 L 191.9 169.9 L 192.6 169.8 L 193.3 169.9 L 194.0 170.1 L 194.7 170.3 L 195.4 170.6 L 196.2 171.0 L 196.9 171.4 L 197.6 171.8 L 198.3 172.2 L 199.0 172.6 L 199.7 175.4 L 200.4 186.1 L 201.1 192.8 L 201.8 195.7 L 202.5 195.7 L 203.2 193.9 L 203.9 191.5 L 204.6 189.3 L 205.3 187.7 L 206.0 186.7 L 206.7 186.1 L 207.4 185.4 L 208.1 184.3 L 208.8 177.1 L 209.5 165.6 L 210.3 157.7 L 211.0 153.1 L 211.7 151.3 L 212.4 151.1 L 213.1 151.7 L 213.8 152.5 L 214.5 153.1 L 215.2 153.5 L 215.9 154.1 L 216.6 155.0 L 217.3 156.5 L 218.0 158.7 L 218.7 161.5 L 219.4 164.7 L 220.1 168.2 L 220.8 171.4 L 221.5 174.4 L 222.2 176.9 L 222.9 178.8 L 223.6 180.1 L 224.4 181.0 L 225.1 181.4 L 225.8 181.5 L 226.5 181.3 L 227.2 180.8 L 227.9 180.2 L 228.6 179.4 L 229.3 178.5 L 230.0 177.5 L 230.7 176.4 L 231.4 175.3 L 232.1 174.2 L 232.8 173.2 L 233.5 172.3 L 234.2 171.5 L 234.9 170.8 L 235.6 170.4 L 236.3 170.0 L 237.0 169.9 L 237.7 169.8 L 238.5 169.9 L 239.2 170.1 L 239.9 170.4 L 240.6 170.7 L 241.3 171.1 L 242.0 171.5 L 242.7 171.9 L 243.4 172.3 L 244.1 172.7 L 244.8 179.0 L 245.5 188.6 L 246.2 194.1 L 246.9 196.0 L 247.6 195.3 L 248.3 193.2 L 249.0 190.8 L 249.7 188.7 L 250.4 187.4 L 251.1 186.5 L 251.8 185.9 L 252.6 185.1 L 253.3 183.9 L 254.0 173.3 L 254.7 162.8 L 255.4 156.0 L 256.1 152.3 L 256.8 151.1 L 257.5 151.3 L 258.2 152.0 L 258.9 152.7 L 259.6 153.2 L 260.3 153.7 L 261.0 154.3 L 261.7 155.4 L 262.4 157.1 L 263.1 159.5 L 263.8 162.5 L 264.5 165.8 L 265.2 169.2 L 265.9 172.4 L 266.7 175.2 L 267.4 177.5 L 268.1 179.3 L 268.8 180.4 L 269.5 181.2 L 270.2 181.5 L 270.9 181.4 L 271.6 181.2 L 272.3 180.7 L 273.0 180.0 L 273.7 179.2 L 274.4 178.2 L 275.1 177.2 L 275.8 176.1 L 276.5 175.0 L 277.2 173.9 L 277.9 172.9 L 278.6 172.0 L 279.3 171.3 L 280.0 170.7 L 280.8 170.3 L 281.5 170.0 L 282.2 169.9 L 282.9 169.9 L 283.6 170.0 L 284.3 170.2 L 285.0 170.5 L 285.7 170.8 L 286.4 171.2 L 287.1 171.6 L 287.8 172.0 L 288.5 172.4 L 289.2 172.8 L 289.9 182.3 L 290.6 190.6 L 291.3 195.0 L 292.0 196.0 L 292.7 194.7 L 293.4 192.4 L 294.1 190.1 L 294.9 188.3 L 295.6 187.1 L 296.3 186.3 L 297.0 185.7 L 297.7 184.8 L 298.4 183.0 L 299.1 170.1 L 299.8 160.6 L 300.5 154.6 L 301.2 151.7 L 301.9 151.0 L 302.6 151.4 L 303.3 152.1 L 304.0 152.8 L 304.7 153.3 L 305.4 153.8 L 306.1 154.6 L 306.8 155.8 L 307.5 157.7 L 308.2 160.3 L 309.0 163.3 L 309.7 166.7 L 310.4 170.1 L 311.1 173.2 L 311.8 175.9 L 312.5 178.1 L 313.2 179.7 L 313.9 180.7 L 314.6 181.3 L 315.3 181.5 L 316.0 181.4 L 316.7 181.1 L 317.4 180.5 L 318.1 179.8 L 318.8 178.9 L 319.5 178.0 L 320.2 176.9 L 320.9 175.8 L 321.6 174.7 L 322.3 173.6 L 323.1 172.7 L 323.8 171.8 L 324.5 171.1 L 325.2 170.5 L 325.9 170.2 L 326.6 169.9 L 327.3 169.8 L 328.0 169.9 L 328.7 170.0 L 329.4 170.3 L 330.1 170.6 L 330.8 170.9 L 331.5 171.3 L 332.2 171.7 L 332.9 172.1 L 333.6 172.5 L 334.3 174.2 L 335.0 185.2 L 335.7 192.4 L 336.4 195.6 L 337.2 195.8 L 337.9 194.1 L 338.6 191.7 L 339.3 189.5 L 340.0 187.8 L 340.7 186.8 L 341.4 186.1 L 342.1 185.5 L 342.8 184.5 L 343.5 178.9 L 344.2 166.9 L 344.9 158.4 L 345.6 153.5 L 346.3 151.3 L 347.0 151.0 L 347.7 151.6 L 348.4 152.3 L 349.1 153.0 L 349.8 153.5 L 350.5 154.0 L 351.3 154.9 L 352.0 156.3 L 352.7 158.4 L 353.4 161.1 L 354.1 164.3 L 354.8 167.7 L 355.5 171.0 L 356.2 174.1 L 356.9 176.6 L 357.6 178.6 L 358.3 180.0 L 359.0 180.9 L 359.7 181.4 L 360.4 181.5 L 361.1 181.3 L 361.8 180.9 L 362.5 180.3 L 363.2 179.6 L 363.9 178.7 L 364.6 177.7 L 365.4 176.6 L 366.1 175.5 L 366.8 174.4 L 367.5 173.3 L 368.2 172.4 L 368.9 171.6 L 369.6 170.9 L 370.3 170.4 L 371.0 170.1 L 371.7 169.9 L 372.4 169.8 L 373.1 169.9 L 373.8 170.1 L 374.5 170.3 L 375.2 170.7 L 375.9 171.0 L 376.6 171.4 L 377.3 171.9 L 378.0 172.3 L 378.7 172.6 L 379.5 177.5 L 380.2 187.5 L 380.9 193.6 L 381.6 195.9 L 382.3 195.5 L 383.0 193.5 L 383.7 191.1 L 384.4 189.0 L 385.1 187.5 L 385.8 186.6 L 386.5 186.0 L 387.2 185.3 L 387.9 184.1 L 388.6 175.0 L 389.3 164.0 L 390.0 156.7 L 390.7 152.7 L 391.4 151.2 L 392.1 151.2 L 392.8 151.9 L 393.6 152.6 L 394.3 153.2 L 395.0 153.6 L 395.7 154.2 L 396.4 155.2 L 397.1 156.8 L 397.8 159.1 L 398.5 162.0 L 399.2 165.3 L 399.9 168.7 L 400.6 172.0 L 401.3 174.9 L 402.0 177.2 L 402.7 179.1 L 403.4 180.3 L 404.1 181.1 L 404.8 181.4 L 405.5 181.5 L 406.2 181.2 L 406.9 180.7 L 407.7 180.1 L 408.4 179.3 L 409.1 178.4 L 409.8 177.3"/>
+  <path class="dash" d="M 57.5 18 L 57.5 206"/>
+  <path class="ink" d="M 34.0 206 L 410.0 206" stroke-width="1"/>
+  <path class="ink" d="M 57.5 206 L 57.5 210" stroke-width="1"/>
+  <text x="57.5" y="223" text-anchor="middle">0</text>
+  <path class="ink" d="M 175.0 206 L 175.0 210" stroke-width="1"/>
+  <text x="175.0" y="223" text-anchor="middle">10</text>
+  <path class="ink" d="M 292.5 206 L 292.5 210" stroke-width="1"/>
+  <text x="292.5" y="223" text-anchor="middle">20</text>
+  <path class="ink" d="M 410.0 206 L 410.0 210" stroke-width="1"/>
+  <text x="410.0" y="223" text-anchor="middle">30</text>
+  <text x="410.0" y="223" text-anchor="end" dx="-28">t (ms)</text>
+  <text x="63.5" y="16">finger’s force on the string (N)</text>
+  <text x="63.5" y="76">force on the bridge, F (N)</text>
+  <text x="63.5" y="142">pressure at the ear, p (Pa)</text>
+</svg>
+<p class="cap" style="max-width:640px;margin:0 auto 1.25rem">A string tuned to middle C (f₁&nbsp;=&nbsp;262&nbsp;Hz), plucked a fifth of the way from the nut, over its first 30 ms. Top: the finger lets go once, at t&nbsp;=&nbsp;0. Middle: the force on the bridge, computed from the pluck series; it first changes when the pluck's corner, travelling along the string at its wave speed, reaches the bridge after about 1.5&nbsp;ms, then keeps oscillating. Bottom: the pressure at an ear 1 m away: the same frequencies in a different mix, about 3&nbsp;ms later. Before t&nbsp;=&nbsp;0 the finger holds the bent string still, so the forces are steady. The rows are scaled separately, and the bottom row's mix is illustrative.</p>
+```
+
+::: {.derive}
+<details><summary><span class="label">Precisely</span>Why $F = -T u_x(L, t)$, and why the bridge carries every shape <span class="needs">integrals</span></summary>
+
+The string touches the bridge only at $x = L$, and there the two pull on each other along the string's direction with tension $T$. By the [rule derived in post 3](../one-string-end-to-end/index.qmd#newton), the upward part of the bridge's pull on the string is $T u_x(L, t)$, so by Newton's third law the string pulls the bridge with $F(t) = -T u_x(L, t)$. A check on the sign: a string bulging up near the bridge has $u_x(L, t) < 0$, so $F > 0$, and it pulls the bridge up.
+
+A check that nothing else acts: multiply the string's equation ([post 3](../one-string-end-to-end/index.qmd#newton)) by its mass per unit length $\mu$, giving $\mu u_{tt} = T u_{xx}$, and integrate over the string. The string's total upward momentum, $P(t) = \int_0^L \mu\,u_t\,dx$, then changes at the rate
+$$
+P'(t) = T u_x(L, t) - T u_x(0, t) ,
+$$
+which is exactly the bridge's pull plus the nut's, $-T u_x(0, t)$ by the same rule.
+
+One point of the string, $u(x_1, t)$, misses every shape with a still point at $x_1$: at the middle, every even shape. The bridge misses none, because the slope $X_n'(L) = (-1)^n n\pi/L$ is never zero. So $F$ contains every shape the pluck started.
+
+</details>
+:::
+
+[See the string in 3D](#view-string).
+
+### Drum: one input only if it is small {#drum}
+
+Every point of a drum's skin pushes the air, so in general a drum needs the whole surface integral, with $a = u_{tt}$, where $u(\mathbf y, t)$ is now the skin's height at the point $\mathbf y$. Take a kettledrum, whose skin closes a bowl so that only its outer side faces the room, and suppose it is small compared with the wavelength. Then the travel time from every point of the skin to your ear is nearly the same, so $g(\mathbf r, \cdot\,; \mathbf y)$ is nearly the same function $h$ for every $\mathbf y$, and one input, the net volume, is left:
+$$
+p \approx h * \ddot V, \qquad V(t) = \int_{\text{skin}} u\; dA ,
+$$
+where $V$ is the net volume the skin pushes out. Only the net volume matters.
+
+On a skin of radius $r_0$, the [mode](../instruments-as-operators/glossary.qmd#mode) $(m, k)$ has the shape $X(r, \theta) = J_m(j_{mk}r/r_0)\cos m\theta$, where $J_m$ is a [Bessel function](../instruments-as-operators/glossary.qmd#bessel) and $j_{mk}$ its $k$-th zero ([post 4](../other-instruments-same-recipe/drum.qmd)). Swinging with angular frequency $\omega$, it contributes in proportion to $\omega^2\left|\int X\,dA\right|$. For $m \ge 1$, the modes with nodal lines across the skin, the factor $\cos m\theta$ averages to zero around the drum, so $\int X\,dA = 0$. These modes are silent at this order: one part of the skin pushes while another pulls, and they radiate only weakly, from the small differences in travel time.[^fr7] The round modes push net volume and radiate strongly. That is why a kettledrum's lowest round mode dies away quickly, while the modes with nodal lines ring on and give the drum its pitch.[^fr18]
+
+::: {.derive}
+<details><summary><span class="label">Derivation</span>Why only the net volume counts <span class="needs">Taylor expansion</span></summary>
+
+In the notation of the Green's-function fold, $P(\mathbf r) = \rho\int G(\mathbf r, \mathbf y)A(\mathbf y)\,dA$, with the centre of the skin at $\mathbf 0$. For $|\mathbf y| \le r_0$ with $\omega r_0/c_0 \ll 1$ (the drum small compared with the wavelength), expand $G(\mathbf r, \mathbf y) = G(\mathbf r, \mathbf 0) + \mathbf y\cdot\nabla_{\mathbf y}G(\mathbf r, \mathbf 0) + \dots$, where, far from the drum, the second term is smaller by about $\omega r_0/c_0$. The first term gives $P \approx \rho\,G(\mathbf r, \mathbf 0)\int A\,dA = -\rho\,\omega^2 G(\mathbf r, \mathbf 0)\int \hat u\,dA$, with $\hat u$ the amplitude of $u$: a small sphere with the drum's net volume. When $\int \hat u\,dA = 0$, the second term leads, $\rho\,\nabla_{\mathbf y}G(\mathbf r, \mathbf 0)\cdot\int \mathbf y A\,dA$: a dipole, which for the mode $(1, 1)$ is silent on the vertical plane through its nodal line. A kettledrum is only borderline small: $\omega r_0/c_0 \approx 0.8$ near 130 Hz for $r_0 \approx 0.33$ m, so the cancellation is partial, though the ranking of loud and quiet modes survives. (Fletcher and Rossing, chapters 7 and 18)
+
+</details>
+:::
+
+[See the drum in 3D](#view-drum).
+
+### Clarinet: the open end {#clarinet}
+
+With every tone hole closed, a clarinet's vibrating air reaches the room only through its open end: one small opening, so one input, its outflow. Let the bore run from the reed at $x = 0$ to the open end at $x = L$, and let $p_{\text{in}}(x, t)$ be the pressure inside it. The opening is small compared with the wavelength, so it acts as the small sphere above, with volume flow $U(t) = S\,v(L, t)$: the air's speed at the end times the area $S$ of the opening. Newton's law for the air in the bore, $\rho\,v_t = -\partial_x p_{\text{in}}$, turns the speed into the slope of the inside pressure, so
+$$
+p(R, t) = -\frac{S}{4\pi R}\,\partial_x p_{\text{in}}(L,\, t - R/c_0) ,
+$$
+at a distance $R$: this is $h * F$ with the single input $F(t) = -\partial_x p_{\text{in}}(L, t)$ and $h$ a delayed click. The inside pressure is nearly zero at the open end, which is the boundary condition of the clarinet's operator ([post 3](../one-string-end-to-end/index.qmd)); its slope is not, and the slope is what you hear.[^fr8] With tone holes open, each open hole is another small source with its own input, and $p$ is a sum.
+
+[See the clarinet in 3D](#view-clarinet).
+
+### Kalimba: two inputs at the clamp {#kalimba}
+
+A kalimba's tine touches the box only at its clamp, but there it passes on two inputs: a force, $-EI\,u_{xxx}(0, t)$, and a turning push (a bending moment), $EI\,u_{xx}(0, t)$. Here $u(x, t)$ is the tine's height at distance $x$ from the clamp, $E$ is the steel's [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus) and $I$ the [second moment of area](../instruments-as-operators/glossary.qmd#second-moment) of its cross-section.[^fr2] The box answers a force tap and a turning tap differently, so one point of contact still needs two convolutions:
+$$
+\begin{gathered}
+p = h_1 * F_1 + h_2 * F_2,\\
+F_1 = -EI\,u_{xxx}(0, \cdot),\\
+F_2 = EI\,u_{xx}(0, \cdot),
+\end{gathered}
+$$
+with $h_1$ and $h_2$ the responses to a unit force tap and a unit turning tap at the clamp. Each mode passes on force and turning push in its own ratio, so the box moves in a different pattern for each ([post 4](../other-instruments-same-recipe/kalimba.qmd) has the tine's modes).
+
+[See the kalimba in 3D](#view-kalimba).
+
+## Where it fails {#fails}
+
+The formula rests on three assumptions, and each can fail.
+
+- **Small motion.** Very loud playing breaks linearity. In a trombone played very loudly, the wave in the bore steepens into a shock wave, which adds high partials: the brassy sound.[^hir]
+- **One-way coupling.** The formula still holds from the surface to your ear, but the surface's motion can no longer be worked out from the vibrating part alone when the two push back on each other strongly. A cello string tuned near a strong body resonance trades energy back and forth with the body and stutters: the wolf note.[^fr10] On a piano, the two or three strings of one note couple through the bridge, so the sound decays first fast, then slowly: the aftersound.[^wein]
+- **Nothing moves.** A moving instrument or listener breaks the "same at every moment" assumption, and the frequencies shift: the [Doppler effect](https://en.wikipedia.org/wiki/Doppler_effect).
+
+## Next
+
+[Post 3, The operator: one string, end to end](../one-string-end-to-end/index.qmd), derives the string's motion $u$, the input to all of this.
+
+[^kin5]: L. E. Kinsler, A. R. Frey, A. B. Coppens and J. V. Sanders, [*Fundamentals of Acoustics*](https://gov.wiley.com/WileyCDA/WileyTitle/productCd-0471847895,descCd-authorInfo.html), 4th ed., Wiley, 2000, chapter 5 (the acoustic wave equation, Euler's equation, sound pressure levels).
+[^kin7]: Kinsler et al., [*Fundamentals of Acoustics*](https://gov.wiley.com/WileyCDA/WileyTitle/productCd-0471847895,descCd-authorInfo.html), chapter 7, sections 7.1–7.2 (the pulsating sphere and the simple source).
+[^ray]: J. W. Strutt, Lord Rayleigh, [*The Theory of Sound*](https://www.abebooks.co.uk/9780486602936/Theory-Sound-Rayleigh-0486602931/plp), vol. 2, 2nd ed., Macmillan, 1896, §278 (Dover reprint, 1945); also Kinsler et al., section 7.4.
+[^kth]: A. Askenfelt (ed.), [*Five Lectures on the Acoustics of the Piano*](https://www.speech.kth.se/music/5_lectures/introd/introd.html), Royal Swedish Academy of Music, 1990, "Introduction": "as the thin string cannot radiate a sound wave itself".
+[^br]: N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapters 9 (guitars), 10 (bowed string instruments) and 12 (the piano).
+[^lti]: A. V. Oppenheim and A. S. Willsky, with S. H. Nawab, [*Signals and Systems*](https://www.pearson.com/en-us/subject-catalog/p/signals-and-systems/P200000003155), 2nd ed., Prentice Hall, 1997, sections 2.2 (the convolution integral) and 3.2 (the response of linear time-invariant systems to complex exponentials).
+[^fr7]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 7 (sound radiation: simple sources, dipoles and other multipoles).
+[^fr18]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 18 (drums: the kettledrum's modes and their decay).
+[^fr8]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 8 (pipes and horns: radiation from an open end).
+[^fr2]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 2 (bars: bending moment and shear force).
+[^fr10]: Fletcher and Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), chapter 10 (bowed string instruments: the wolf note).
+[^hir]: A. Hirschberg, J. Gilbert, R. Msallam and A. P. J. Wijnands, ["Shock waves in trombones"](https://hal.archives-ouvertes.fr/hal-01105563), *J. Acoust. Soc. Am.* 99 (1996), 1754–1758.
+[^wein]: G. Weinreich, ["The coupled motion of piano strings"](https://www.speech.kth.se/music/5_lectures/weinreic/weinreic.html), in *Five Lectures on the Acoustics of the Piano*, ed. A. Askenfelt, Royal Swedish Academy of Music, 1990.

@@ -110,19 +110,19 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : The large thin wooden panel of a piano or guitar to which the [bridge](#bridge) is glued. A 1 mm string is too thin to move the air by itself, since air simply flows around it, so the string pushes the bridge, the bridge moves the soundboard, and the soundboard pushes the air. [Wikipedia](https://en.wikipedia.org/wiki/Soundboard_(music))
 
 [Impulse response $h$]{#impulse-response}
-: On a silent instrument, tap the bridge once, sharply, and record the pressure at your ear per unit of the tap's strength (force times duration): that recording is $h(t)$. During a note the string's push $F$ on the [bridge](#bridge) is a continuous run of such taps, each heard as a delayed, scaled copy of $h$, so the pressure is $p(t) = \int_{-\infty}^{t} h(t - s)\,F(s)\,ds$; this filter is fixed and linear because small motions obey linear equations, nothing changes in time, and nothing happens before its cause. So $p$ has the same frequencies $f_n$ as the string, once the board's own ring at the start has died away, each only rescaled, by $|H(f_n)|$ with $H$ the Fourier transform of $h$, and delayed. [Post 2](../one-string-end-to-end/index.qmd#sound), and [Wikipedia](https://en.wikipedia.org/wiki/Impulse_response)
+: On a silent instrument, tap the bridge once, sharply, and record the pressure at your ear per unit of the tap's strength (force times duration): that recording is $h(t)$. During a note the string's push $F$ on the [bridge](#bridge) is a continuous run of such taps, each heard as a delayed, scaled copy of $h$, so the pressure is $p(t) = \int_{-\infty}^{t} h(t - s)\,F(s)\,ds$; this filter is fixed and linear because small motions obey linear equations, nothing changes in time, and nothing happens before its cause. So $p$ has the same frequencies $f_n$ as the string, once the board's own ring at the start has died away, each only rescaled, by $|H(f_n)|$ with $H$ the Fourier transform of $h$, and delayed. [Post 2](../from-instrument-to-ear/index.qmd#sound), and [Wikipedia](https://en.wikipedia.org/wiki/Impulse_response)
 
 [Resonator]{#resonator}
-: An object with resonances: frequencies, near those of its modes, at which it responds strongly when driven. In a bowed or blown instrument it is the string or air column that the bow or breath drives, whose modes decide which partials are strong; a violin's body is a resonator too. [Wikipedia](https://en.wikipedia.org/wiki/Resonator), and [post 3](../other-instruments-same-recipe/index.qmd#two-kinds)
+: An object with resonances: frequencies, near those of its modes, at which it responds strongly when driven. In a bowed or blown instrument it is the string or air column that the bow or breath drives, whose modes decide which partials are strong; a violin's body is a resonator too. [Wikipedia](https://en.wikipedia.org/wiki/Resonator), and [post 4](../other-instruments-same-recipe/index.qmd#two-kinds)
 
 [Open string]{#open-string}
 : A string played with no finger pressing it down, so its whole length between the nut and the bridge vibrates. [Wikipedia](https://en.wikipedia.org/wiki/Open_string_(music))
 
 [Harmonics, on a string]{#string-harmonics}
-: Notes a string player gets by touching the string lightly at a fraction of its length, such as the middle, instead of pressing it down. Only the modes with a still point under the finger keep sounding. [Wikipedia](https://en.wikipedia.org/wiki/String_harmonic), and the [light touch in post 2](../one-string-end-to-end/index.qmd#fading)
+: Notes a string player gets by touching the string lightly at a fraction of its length, such as the middle, instead of pressing it down. Only the modes with a still point under the finger keep sounding. [Wikipedia](https://en.wikipedia.org/wiki/String_harmonic), and the [light touch in post 3](../one-string-end-to-end/index.qmd#fading)
 
 [Overblowing, register key]{#overblow}
-: Making a wind instrument's air column jump to a higher mode. A flutist overblows by blowing faster; a clarinetist presses the register key, which opens a small hole that spoils the lowest mode. [Wikipedia](https://en.wikipedia.org/wiki/Overblowing), and the [clarinet in post 3](../other-instruments-same-recipe/index.qmd#clarinet)
+: Making a wind instrument's air column jump to a higher mode. A flutist overblows by blowing faster; a clarinetist presses the register key, which opens a small hole that spoils the lowest mode. [Wikipedia](https://en.wikipedia.org/wiki/Overblowing), and the [clarinet in post 4](../other-instruments-same-recipe/index.qmd#clarinet)
 
 [Blow, draw]{#draw}
 : On a harmonica, a blow note sounds when you breathe out through a hole, and a draw note when you breathe in; each hole has one reed for each. [Wikipedia](https://en.wikipedia.org/wiki/Harmonica)
@@ -168,7 +168,7 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : Keeping only the terms proportional to a small change and dropping its square and higher powers: for small $\varepsilon$, $(1 + \varepsilon)^3 \approx 1 + 3\varepsilon$. [Wikipedia](https://en.wikipedia.org/wiki/Perturbation_theory)
 
 [Linearization]{#linearization}
-: Replacing a force by its [first-order](#first-order) part, accurate for small motions: a pendulum's restoring force $mg\sin\theta$ becomes $mg\,\theta$. The result is a [linear](#linear) equation, whose frequencies do not depend on the size of the motion. [Wikipedia](https://en.wikipedia.org/wiki/Linearization), and [post 2](../one-string-end-to-end/index.qmd#newton)
+: Replacing a force by its [first-order](#first-order) part, accurate for small motions: a pendulum's restoring force $mg\sin\theta$ becomes $mg\,\theta$. The result is a [linear](#linear) equation, whose frequencies do not depend on the size of the motion. [Wikipedia](https://en.wikipedia.org/wiki/Linearization), and [post 3](../one-string-end-to-end/index.qmd#newton)
 
 [Superposition]{#superposition}
 : Adding solutions of a linear equation to get another solution. The free motion of a [modal](#modal-system) instrument is a superposition, a sum, of its modes. [Wikipedia](https://en.wikipedia.org/wiki/Superposition_principle)
@@ -186,22 +186,22 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : A node is a point of a standing wave that does not move, and an antinode one that moves the most. On a drumhead or a plate a mode stays still along whole curves, its nodal lines, where Chladni's sand collects. [Wikipedia](https://en.wikipedia.org/wiki/Node_(physics))
 
 [Wave equation]{#wave-equation}
-: The equation $u_{tt} = c^2u_{xx}$ for the height $u(x, t)$ of a stretched string, and its relatives for air in a pipe and for a drumhead. The constant $c$ is the speed at which a bump travels. [Wikipedia](https://en.wikipedia.org/wiki/Wave_equation), and [post 2](../one-string-end-to-end/index.qmd#newton)
+: The equation $u_{tt} = c^2u_{xx}$ for the height $u(x, t)$ of a stretched string, and its relatives for air in a pipe and for a drumhead. The constant $c$ is the speed at which a bump travels. [Wikipedia](https://en.wikipedia.org/wiki/Wave_equation), and [post 3](../one-string-end-to-end/index.qmd#newton)
 
 [Membrane]{#membrane}
-: A sheet with no stiffness of its own, stretched with the same tension $T$ per unit length in every direction, like an ideal drumhead. Its small motions obey $u_{tt} = c^2\Delta u$, with $\Delta$ the [Laplacian](#laplacian), $c^2 = T/\sigma$ and $\sigma$ its mass per unit area. [Wikipedia: Vibration of a circular membrane](https://en.wikipedia.org/wiki/Vibration_of_a_circular_membrane), and [post 3](../other-instruments-same-recipe/index.qmd#drums)
+: A sheet with no stiffness of its own, stretched with the same tension $T$ per unit length in every direction, like an ideal drumhead. Its small motions obey $u_{tt} = c^2\Delta u$, with $\Delta$ the [Laplacian](#laplacian), $c^2 = T/\sigma$ and $\sigma$ its mass per unit area. [Wikipedia: Vibration of a circular membrane](https://en.wikipedia.org/wiki/Vibration_of_a_circular_membrane), and [post 4](../other-instruments-same-recipe/index.qmd#drums)
 
 [Boundary condition]{#boundary-condition}
-: A rule for what happens at the edge of a vibrating object, set by how it is held: a tied string end has $u = 0$, a clamped bar end $u = u_x = 0$, and at a pipe's open end the pressure equals room pressure. Each is either [imposed or natural](#natural-bc). [Wikipedia](https://en.wikipedia.org/wiki/Boundary_value_problem), and [post 2](../one-string-end-to-end/index.qmd#problem)
+: A rule for what happens at the edge of a vibrating object, set by how it is held: a tied string end has $u = 0$, a clamped bar end $u = u_x = 0$, and at a pipe's open end the pressure equals room pressure. Each is either [imposed or natural](#natural-bc). [Wikipedia](https://en.wikipedia.org/wiki/Boundary_value_problem), and [post 3](../one-string-end-to-end/index.qmd#problem)
 
 [Dirichlet and Neumann conditions]{#dirichlet} []{#neumann}
 : A Dirichlet condition fixes the value at the edge, such as $u = 0$ at a string's tied end or $p = 0$ at a pipe's open end. A Neumann condition fixes the slope out of the edge, such as $p_x = 0$ at a clarinet's nearly closed reed end, where the air cannot move. [Wikipedia: Dirichlet](https://en.wikipedia.org/wiki/Dirichlet_boundary_condition), [Neumann](https://en.wikipedia.org/wiki/Neumann_boundary_condition)
 
 [Imposed and natural boundary conditions]{#natural-bc} []{#imposed-bc}
-: An *imposed* condition restricts the allowed shapes, and the holder enforces it with whatever force it takes, like a clamp's $u = u_x = 0$. A *natural* condition restricts no shape; the motion obeys it because no force acts where nothing holds the object, like a free bar end's $u_{xx} = u_{xxx} = 0$, and in the energy form, the [Rayleigh quotient](#rayleigh-quotient), only imposed conditions are required. [P. J. Olver, Boundary conditions and null Lagrangians in the calculus of variations and elasticity](https://www-users.cse.umn.edu/~olver/a_/bcvp.pdf), and [post 3](../other-instruments-same-recipe/index.qmd#kalimba)
+: An *imposed* condition restricts the allowed shapes, and the holder enforces it with whatever force it takes, like a clamp's $u = u_x = 0$. A *natural* condition restricts no shape; the motion obeys it because no force acts where nothing holds the object, like a free bar end's $u_{xx} = u_{xxx} = 0$, and in the energy form, the [Rayleigh quotient](#rayleigh-quotient), only imposed conditions are required. [P. J. Olver, Boundary conditions and null Lagrangians in the calculus of variations and elasticity](https://www-users.cse.umn.edu/~olver/a_/bcvp.pdf), and [post 4](../other-instruments-same-recipe/index.qmd#kalimba)
 
 [End correction]{#end-correction}
-: The amount by which an open pipe acts longer than it is, about 0.6 of its radius beyond a bare open end, because the air just outside the end moves with the air inside. Frequencies computed with $p = 0$ exactly at the end come out slightly too high without it. [Wikipedia](https://en.wikipedia.org/wiki/End_correction), [J. Wolfe, UNSW: Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), and [post 3](../other-instruments-same-recipe/index.qmd#clarinet)
+: The amount by which an open pipe acts longer than it is, about 0.6 of its radius beyond a bare open end, because the air just outside the end moves with the air inside. Frequencies computed with $p = 0$ exactly at the end come out slightly too high without it. [Wikipedia](https://en.wikipedia.org/wiki/End_correction), [J. Wolfe, UNSW: Pipes and harmonics](https://newt.phys.unsw.edu.au/jw/pipes.html), and [post 4](../other-instruments-same-recipe/index.qmd#clarinet)
 
 [Damping]{#damping}
 : Friction that drains energy from a vibration, so that it dies away. A term $b\,u_t$ in the equation, proportional to velocity, is the simplest model. [Wikipedia](https://en.wikipedia.org/wiki/Damping)
@@ -210,10 +210,10 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : The friction at which a mass on a spring, released, returns to rest fastest without swinging past it: $\gamma^2 = 4\lambda$ in $u'' + \gamma u' + \lambda u = 0$. Its solutions $(a + bt)\,e^{-\gamma t/2}$ are not combinations of modes, the sign of a [Jordan block](#jordan-block). [Wikipedia: Damping](https://en.wikipedia.org/wiki/Damping), and [the appendix](../when-an-equation-has-a-spectrum/index.qmd#counterexamples)
 
 [Internal friction]{#internal-friction}
-: Energy lost inside a material as it bends or stretches, turned into heat on every swing. With losses to the supports and to [radiation](#radiation), it is one of the three ways a vibrating object loses energy. [Wikipedia: Anelasticity](https://en.wikipedia.org/wiki/Anelasticity), and [post 2](../one-string-end-to-end/index.qmd#fading)
+: Energy lost inside a material as it bends or stretches, turned into heat on every swing. With losses to the supports and to [radiation](#radiation), it is one of the three ways a vibrating object loses energy. [Wikipedia: Anelasticity](https://en.wikipedia.org/wiki/Anelasticity), and [post 3](../one-string-end-to-end/index.qmd#fading)
 
 [Radiation, as a loss]{#radiation}
-: The energy a vibrating object loses to the sound it makes, which is how we hear it and also damps it; shapes that push the air one way over a wide area, like a drumhead's round modes, radiate strongly and fade fast. Because the sound carries energy into unbounded air, radiation makes the problem no longer [self-adjoint](#self-adjoint) ([the appendix](../when-an-equation-has-a-spectrum/index.qmd#levels)). [D. A. Russell, Sound fields radiated by simple sources](https://www.acs.psu.edu/drussell/Demos/rad2/mdq.html); N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapters 7 and 18; the [drums in post 3](../other-instruments-same-recipe/index.qmd#drums)
+: The energy a vibrating object loses to the sound it makes, which is how we hear it and also damps it; shapes that push the air one way over a wide area, like a drumhead's round modes, radiate strongly and fade fast. Because the sound carries energy into unbounded air, radiation makes the problem no longer [self-adjoint](#self-adjoint) ([the appendix](../when-an-equation-has-a-spectrum/index.qmd#levels)). [D. A. Russell, Sound fields radiated by simple sources](https://www.acs.psu.edu/drussell/Demos/rad2/mdq.html); N. H. Fletcher and T. D. Rossing, [*The Physics of Musical Instruments*](https://link.springer.com/book/10.1007/978-0-387-21603-4), 2nd ed., Springer, 1998, chapters 7 and 18; the [drums in post 4](../other-instruments-same-recipe/index.qmd#drums)
 
 [Self-sustained oscillation, limit cycle]{#self-sustained} []{#limit-cycle}
 : An oscillation kept at a steady size by a steady supply of energy, such as a bow drawn at constant speed or a steady breath, through a mechanism that is not linear. It settles into one repeating cycle, a *limit cycle*, from any start near it, and in simple models such as the [van der Pol oscillator](https://en.wikipedia.org/wiki/Van_der_Pol_oscillator) from any start except complete rest. [Wikipedia](https://en.wikipedia.org/wiki/Self-oscillation)
@@ -231,19 +231,19 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : The theory of linear equations whose coefficients repeat in time with some period $P$, such as Mathieu's $x'' = -(1 + \varepsilon\cos 2t)\,x$ with $P = \pi$. Floquet's theorem (1883): when the map from the state at time $0$ to the state at time $P$ has distinct eigenvalues, every solution is a combination of $e^{\mu t}p(t)$ with $p$ of period $P$, and an exponent $\mu$ with positive real part means growth. [Wikipedia](https://en.wikipedia.org/wiki/Floquet_theory), and [the appendix](../when-an-equation-has-a-spectrum/index.qmd#counterexamples)
 
 [Added mass]{#added-mass}
-: The extra inertia of a vibrating surface that must push the surrounding air or water along with it, which lowers its frequencies. On a timpani head it lowers the coarsest shapes the most ([the drums in post 3](../other-instruments-same-recipe/index.qmd#drums)). [Wikipedia](https://en.wikipedia.org/wiki/Added_mass)
+: The extra inertia of a vibrating surface that must push the surrounding air or water along with it, which lowers its frequencies. On a timpani head it lowers the coarsest shapes the most ([the drums in post 4](../other-instruments-same-recipe/index.qmd#drums)). [Wikipedia](https://en.wikipedia.org/wiki/Added_mass)
 
 [Helmholtz motion]{#helmholtz-motion}
 : The way a bowed string moves. The string sticks to the bow, slips back, and sticks again; seen from the side, a single sharp corner races back and forth along the string, one round trip per period. [J. Wolfe, UNSW: The bowed string](https://newt.phys.unsw.edu.au/jw/Bows.html)
 
 [Clamped, free and pinned ends]{#ends} []{#clamped} []{#free-end} []{#pinned}
-: Three ways of holding the end of a bar: a *clamped* end can neither move nor tilt, $u = u_x = 0$ (a kalimba tine's base); a *free* end carries no bending moment or shear force, $u_{xx} = u_{xxx} = 0$ (its tip); a *pinned* end is held in place but free to pivot, $u = u_{xx} = 0$ (close to a piano string's ends). The same bar sounds $1 : 6.27 : 17.55$ clamped at one end and free at the other, and $1 : 2.76 : 5.40$ free at both. [Wikipedia: Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory), and [post 3](../other-instruments-same-recipe/index.qmd#kalimba)
+: Three ways of holding the end of a bar: a *clamped* end can neither move nor tilt, $u = u_x = 0$ (a kalimba tine's base); a *free* end carries no bending moment or shear force, $u_{xx} = u_{xxx} = 0$ (its tip); a *pinned* end is held in place but free to pivot, $u = u_{xx} = 0$ (close to a piano string's ends). The same bar sounds $1 : 6.27 : 17.55$ clamped at one end and free at the other, and $1 : 2.76 : 5.40$ free at both. [Wikipedia: Euler–Bernoulli beam theory](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory), and [post 4](../other-instruments-same-recipe/index.qmd#kalimba)
 
 [Cantilever, clamped bar]{#cantilever}
 : A bar fixed rigidly at one end and free at the other, like a diving board. A kalimba tine, pressed against a bridge near one end, is close to one. [Wikipedia](https://en.wikipedia.org/wiki/Cantilever)
 
 [Neutral axis]{#neutral-axis}
-: The line along a bent bar that keeps its length, between the stretched outside and the compressed inside of the curve. For a bar of one material it runs through the middle of each cross-section. [Wikipedia](https://en.wikipedia.org/wiki/Neutral_axis), and [post 3](../other-instruments-same-recipe/index.qmd#kalimba)
+: The line along a bent bar that keeps its length, between the stretched outside and the compressed inside of the curve. For a bar of one material it runs through the middle of each cross-section. [Wikipedia](https://en.wikipedia.org/wiki/Neutral_axis), and [post 4](../other-instruments-same-recipe/index.qmd#kalimba)
 
 [Euler–Bernoulli beam]{#beam}
 : The standard model of a bending bar under no tension, $\mu u_{tt} = -EI\,u_{xxxx}$, with $\mu$ the mass per unit length, $E$ the [Young's modulus](#youngs-modulus) and $I$ the [second moment of area](#second-moment). Bending is curvature, two derivatives, and balancing forces along the bar adds two more. [Wikipedia](https://en.wikipedia.org/wiki/Euler%E2%80%93Bernoulli_beam_theory)
@@ -264,10 +264,10 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : How hard a material is to compress: the pressure needed, divided by the fraction by which the volume shrinks. A sound wave's squeezes are too quick for heat to flow (adiabatic), which for air gives about $1.4 \times$ atmospheric pressure. [Wikipedia](https://en.wikipedia.org/wiki/Bulk_modulus)
 
 [Capacitance]{#capacitance}
-: How much charge a capacitor holds per volt across it, $C = q/V$, in farads. In a circuit of a coil and a capacitor, $1/C$ plays the part of a spring's stiffness. [Wikipedia](https://en.wikipedia.org/wiki/Capacitance), and [post 3](../other-instruments-same-recipe/index.qmd#theremin)
+: How much charge a capacitor holds per volt across it, $C = q/V$, in farads. In a circuit of a coil and a capacitor, $1/C$ plays the part of a spring's stiffness. [Wikipedia](https://en.wikipedia.org/wiki/Capacitance), and [post 4](../other-instruments-same-recipe/index.qmd#theremin)
 
 [Inductance]{#inductance}
-: How strongly a coil opposes a change in the current through it: $V = L\,dI/dt$, measured in henries. In a circuit of a coil and a capacitor, $L$ plays the part of a mass. [Wikipedia](https://en.wikipedia.org/wiki/Inductance), and [post 3](../other-instruments-same-recipe/index.qmd#theremin)
+: How strongly a coil opposes a change in the current through it: $V = L\,dI/dt$, measured in henries. In a circuit of a coil and a capacitor, $L$ plays the part of a mass. [Wikipedia](https://en.wikipedia.org/wiki/Inductance), and [post 4](../other-instruments-same-recipe/index.qmd#theremin)
 
 ## Matrices and operators
 
@@ -317,7 +317,7 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : $e^{i\theta} = \cos\theta + i\sin\theta$, where $i^2 = -1$. It packs a cosine and a sine into one expression that is easier to multiply and differentiate. [Wikipedia](https://en.wikipedia.org/wiki/Euler%27s_formula)
 
 [Operator]{#operator}
-: For an object held in a given way, the [linear](#linear) map, defined on the shapes the holding allows, that sends a shape to minus the acceleration it causes, so the free motion obeys $u_{tt} = -Au$; for a string of tension $T$ and mass $\mu$ per length, $A = -c^2\,d^2/dx^2$ with $c^2 = T/\mu$, on shapes that are zero at both ends. Each eigenvalue $\lambda$ of $A$ gives a frequency $\sqrt{\lambda}/2\pi$. [Wikipedia](https://en.wikipedia.org/wiki/Operator_(mathematics)), and [post 2](../one-string-end-to-end/index.qmd#decoupling)
+: For an object held in a given way, the [linear](#linear) map, defined on the shapes the holding allows, that sends a shape to minus the acceleration it causes, so the free motion obeys $u_{tt} = -Au$; for a string of tension $T$ and mass $\mu$ per length, $A = -c^2\,d^2/dx^2$ with $c^2 = T/\mu$, on shapes that are zero at both ends. Each eigenvalue $\lambda$ of $A$ gives a frequency $\sqrt{\lambda}/2\pi$. [Wikipedia](https://en.wikipedia.org/wiki/Operator_(mathematics)), and [post 3](../one-string-end-to-end/index.qmd#decoupling)
 
 [Generator]{#generator}
 : For a linear equation $U' = BU$ that does not change in time, the matrix or operator $B$, which turns the state $U$ into its rate of change; for $u'' = -Au$ the state is $U = (u, u')$ and $B = \left(\begin{smallmatrix} 0 & I \\ -A & 0 \end{smallmatrix}\right)$. The solutions are $U(t) = e^{tB}U(0)$, which is why $B$ is said to generate them. [Wikipedia: Matrix exponential](https://en.wikipedia.org/wiki/Matrix_exponential), and [the appendix](../when-an-equation-has-a-spectrum/index.qmd#why-modes)
@@ -350,7 +350,7 @@ Each entry gives a plain definition and a link to a fuller explanation.
 : Looking for solutions that are a fixed shape times a function of time, $u(x, t) = X(x)\,q(t)$. Putting this into $u_{tt} = -Au$ gives $q''X = -q\,AX$, so such a motion exists exactly when $AX = \lambda X$ for a number $\lambda$, and then $q'' = -\lambda q$, a spring. [Wikipedia](https://en.wikipedia.org/wiki/Separation_of_variables)
 
 [Bessel function]{#bessel}
-: The functions $J_m(r)$ that describe how a round drum's modes vary from the center to the rim, as sines do along a string. Their zeros, $2.405, 5.520, 8.654, \dots$ for $J_0$, are not whole-number multiples of the first one, and set the drum's frequencies. [Wikipedia](https://en.wikipedia.org/wiki/Bessel_function), and the [drums in post 3](../other-instruments-same-recipe/index.qmd#drums)
+: The functions $J_m(r)$ that describe how a round drum's modes vary from the center to the rim, as sines do along a string. Their zeros, $2.405, 5.520, 8.654, \dots$ for $J_0$, are not whole-number multiples of the first one, and set the drum's frequencies. [Wikipedia](https://en.wikipedia.org/wiki/Bessel_function), and the [drums in post 4](../other-instruments-same-recipe/index.qmd#drums)
 
 [Divergence theorem]{#divergence-theorem}
 : The total flow out through the boundary of a region equals the sum, over the region, of how much flow is created at each point. It turns forces along the edge of a patch of drumhead into an integral over the patch. [Wikipedia](https://en.wikipedia.org/wiki/Divergence_theorem)

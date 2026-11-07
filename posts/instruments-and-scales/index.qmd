@@ -18,7 +18,7 @@ aliases: [/posts/instruments-as-operators/epilogue.html]
 :::
 
 ::: {.pageinfo}
-Builds on [post 1](../what-you-hear/index.qmd) for partials and beats, and on [the glockenspiel](../other-instruments-same-recipe/index.qmd#glockenspiel) in post 3 for bars. Uses $e^x$; the fold uses cosh, sinh and a determinant. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
+Builds on [post 1](../what-you-hear/index.qmd) for partials and beats, and on [the glockenspiel](../other-instruments-same-recipe/index.qmd#glockenspiel) in post 4 for bars. Uses $e^x$; the fold uses cosh, sinh and a determinant. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 Perhaps in part: two notes sound smooth together when their [partials](../instruments-as-operators/glossary.qmd#partial) line up, so instruments with different partials can favour different intervals, and so different scales: an [octave](../instruments-as-operators/glossary.qmd#octave) is smooth on a string, but on a metal bar a slightly narrower interval is smoother.
@@ -67,14 +67,14 @@ Here $f_1, f_2, \dots$ list the partials of both notes, and $a_i$ is the amplitu
 
 ## The metal bar's spectrum
 
-A glockenspiel bar's frequencies sit at $1 : 2.756 : 5.404 : 8.933$ times the lowest, far from whole numbers, because it is [post 3's bar](../other-instruments-same-recipe/index.qmd#glockenspiel)[^fr1] with both ends free: it rests on soft supports at its lowest mode's still points (fold).[^eb]
+A glockenspiel bar's frequencies sit at $1 : 2.756 : 5.404 : 8.933$ times the lowest, far from whole numbers, because it is [post 4's bar](../other-instruments-same-recipe/index.qmd#glockenspiel)[^fr1] with both ends free: it rests on soft supports at its lowest mode's still points (fold).[^eb]
 
 ::: {.derive}
 <details><summary><span class="label">Details</span>Solving for the free bar's modes <span class="needs">cosh, sinh and a determinant</span></summary>
 
-The free bar's operator is $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $\kappa^2 = EI/\rho S$ for [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus) $E$, [second moment of area](../instruments-as-operators/glossary.qmd#second-moment) $I$, density $\rho$ and cross-section area $S$. A free end carries no [bending moment or shear force](../instruments-as-operators/glossary.qmd#moment), so $X'' = X''' = 0$ at both ends. The spectrum follows the steps of post 3's kalimba fold. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
+The free bar's operator is $A = \kappa^2\,d^4/dx^4$ on $0 \le x \le L$, with $\kappa^2 = EI/\rho S$ for [Young's modulus](../instruments-as-operators/glossary.qmd#youngs-modulus) $E$, [second moment of area](../instruments-as-operators/glossary.qmd#second-moment) $I$, density $\rho$ and cross-section area $S$. A free end carries no [bending moment or shear force](../instruments-as-operators/glossary.qmd#moment), so $X'' = X''' = 0$ at both ends. The spectrum follows the steps of post 4's kalimba fold. A mode is a shape the operator only rescales, $A X = \lambda X$, that is $\kappa^2 X'''' = \lambda X$. Write $\lambda = \kappa^2\beta^4$, so that $X'''' = \beta^4 X$; the mode swings at $\omega = \sqrt{\lambda} = \kappa\beta^2$.
 
-1. **Four candidate shapes.** As for the kalimba in post 3, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
+1. **Four candidate shapes.** As for the kalimba in post 4, every solution of $X'''' = \beta^4 X$ is $X = b_1\cos\beta x + b_2\sin\beta x + b_3\cosh\beta x + b_4\sinh\beta x$. (Each of the four gives $\beta^4$ times itself after four derivatives: $(\cosh y)' = \sinh y$ and $(\sinh y)' = \cosh y$, with no sign changes; also $\cosh^2 y - \sinh^2 y = 1$.)
 2. **The left end is free.** Nothing bends or pushes the bar at $x = 0$: $X''(0) = \beta^2(-b_1 + b_3) = 0$ and $X'''(0) = \beta^3(-b_2 + b_4) = 0$, so $b_3 = b_1$ and $b_4 = b_2$. Then $X = b_1(\cos\beta x + \cosh\beta x) + b_2(\sin\beta x + \sinh\beta x)$.
 3. **The right end is free.** The same two conditions at $x = L$. Dividing by $\beta^2$ and $\beta^3$, and writing $c_1 = \cos\beta L$, $s_1 = \sin\beta L$, $c_2 = \cosh\beta L$, $s_2 = \sinh\beta L$ for short:
 $$

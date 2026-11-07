@@ -1,6 +1,6 @@
 ---
 title: "Why is a clarinet almost an octave deeper than a flute?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · 4 · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/clarinet.html, /posts/instruments-as-o
 :::
 
 ::: {.pageinfo}
-A deep dive from [the clarinet's entry](index.qmd#clarinet) in post 3, which also covers [the flute](index.qmd#flute). Builds on [post 2](../one-string-end-to-end/index.qmd). About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from [the clarinet's entry](index.qmd#clarinet) in post 3, which also covers [the flute](index.qmd#flute). Builds on [post 3](../one-string-end-to-end/index.qmd). About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -52,7 +52,7 @@ A clarinet and a flute are about the same length, yet the clarinet's lowest note
 </div>
 ```
 
-[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, and their sizes the loudness and timbre. The room keeps those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
+[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, and their sizes the loudness and timbre. The room keeps those frequencies ([post 2](../from-instrument-to-ear/index.qmd#sound)).
 
 ## How the sound gets out {#radiation}
 

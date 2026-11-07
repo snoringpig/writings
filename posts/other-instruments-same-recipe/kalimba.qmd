@@ -1,6 +1,6 @@
 ---
 title: "Why does a kalimba sound clean?"
-subtitle: "The Shape of a Sound · 3 · Deep dive"
+subtitle: "The Shape of a Sound · 4 · Deep dive"
 date: 2026-10-29T12:00:00
 draft: false
 categories: [math, music, the-shape-of-a-sound]
@@ -19,7 +19,7 @@ aliases: [/posts/instruments-case-by-case/kalimba.html, /posts/instruments-as-op
 :::
 
 ::: {.pageinfo}
-A deep dive from the [kalimba entry](index.qmd#kalimba) of post 3. Builds on [post 2](../one-string-end-to-end/index.qmd). Proofs and fine print are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
+A deep dive from the [kalimba entry](index.qmd#kalimba) of post 4. Builds on [post 3](../one-string-end-to-end/index.qmd). Proofs and fine print are in folds. About 10 minutes. Written in collaboration with Claude, Anthropic's AI model.
 :::
 
 ::: {.puzzle}
@@ -53,7 +53,7 @@ A kalimba tine's first [overtone](../instruments-as-operators/glossary.qmd#parti
 </div>
 ```
 
-[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The box and the room keep those frequencies ([post 2](../one-string-end-to-end/index.qmd#sound)).
+[]{#what-we-hear}What you hear works as in [post 1](../what-you-hear/index.qmd#four-aspects): the frequencies give the pitch, their sizes the loudness and timbre, and their fading the duration. The box and the room keep those frequencies ([post 2](../from-instrument-to-ear/index.qmd#sound)).
 
 ## How the sound gets out {#clamp}
 
