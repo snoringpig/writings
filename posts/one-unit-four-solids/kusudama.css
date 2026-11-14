@@ -1,0 +1,32 @@
+/* One Unit, Four Solids */
+.pageinfo { font-size: 0.9rem; color: #555; border-left: 3px solid #d9583b; padding: 0.2rem 0 0.2rem 0.8rem; margin: 0 0 1.2rem; }
+.result { background: #f6f3ec; border: 1px solid #e4dccb; border-radius: 6px; padding: 0.8rem 1rem 0.2rem; margin: 1rem 0 1.4rem; }
+.looking { font-size: 0.92rem; color: #444; margin: 0.6rem 0 0.4rem; }
+
+.kusu-fig { margin: 0.6rem 0 1.4rem; border: 1px solid #e4dccb; border-radius: 8px; background: #fbfaf6; padding: 0.6rem; max-width: 720px; }
+.kusu-tabs { display: flex; gap: 0.3rem; margin-bottom: 0.5rem; }
+.kusu-tabs button { flex: 1 1 0; min-width: 0; padding: 0.45rem 0.1rem; border: 1px solid #c9c0ad; border-radius: 6px; background: #fff; color: #222; font: inherit; font-size: 0.9rem; white-space: nowrap; cursor: pointer; }
+.kusu-tabs button[aria-selected="true"] { background: #355c8c; border-color: #355c8c; color: #fff; }
+.kusu-stage { position: relative; width: 100%; min-width: 0; }
+.kusu-stage canvas { display: block; width: 100%; border-radius: 6px; background: #f3efe6; cursor: grab; }
+.kusu-hint { position: absolute; left: 0.5rem; bottom: 0.4rem; font-size: 0.78rem; color: #6b6558; pointer-events: none; }
+.kusu-row { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.55rem; flex-wrap: wrap; }
+.kusu-play { flex: 0 0 auto; padding: 0.4rem 0.7rem; border: 1px solid #355c8c; border-radius: 6px; background: #355c8c; color: #fff; font: inherit; font-size: 0.95rem; cursor: pointer; }
+.kusu-slider { flex: 1 1 3rem; min-width: 0; }
+.kusu-count { flex: 0 0 auto; font-variant-numeric: tabular-nums; font-size: 0.92rem; min-width: 3.6rem; text-align: right; white-space: nowrap; }
+.kusu-opts { font-size: 0.9rem; gap: 0.3rem 1.2rem; }
+.kusu-opts label { display: flex; align-items: center; gap: 0.35rem; margin: 0; }
+.kusu-readout { font-size: 0.92rem; margin: 0.6rem 0 0.1rem; color: #333; }
+.kusu-nogl { padding: 2rem 1rem; text-align: center; color: #666; }
+
+.kusu-unit { display: block; width: 100%; max-width: 520px; height: auto; margin: 0.4rem auto 0.2rem; }
+.kusu-unit text { font-family: inherit; font-size: 13px; fill: #222; }
+figure.kusu-figure { margin: 0.8rem 0 1.2rem; }
+figure.kusu-figure figcaption { font-size: 0.88rem; color: #555; text-align: center; }
+.kusu-hero { display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; border-radius: 8px; }
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.2rem 0; }
+.kusu-heroes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem; max-width: 760px; margin: 0 auto; }
+.kusu-heroes figure { margin: 0; }
+.kusu-heroes img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.kusu-heroes figcaption { text-align: center; font-size: 0.85rem; color: #444; }
+@media (max-width: 520px) { .kusu-heroes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
